@@ -18,7 +18,7 @@ SAFE = '--safe' in sys.argv or bool(os.environ.get('SAFE'))
 DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries',
                             'stream=duration', '-of', 'csv=p=0', 'assets/aroll.mp4'],
                            capture_output=True, encoding='utf-8', errors='replace').stdout.strip().split(',')[0])
-YEL = '#FAE67A'
+YEL = '#D8B26E'   # brand gold (Maé: brown, gold or white, never yellow)
 with open('segments.json', encoding='utf-8') as _f:
     SEG = {s['id']: s for s in json.load(_f)}
 # cut times = exact first frame of each segment, nudged 2ms early so a tl.set lands ON that frame
