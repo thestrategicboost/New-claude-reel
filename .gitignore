@@ -1,2 +1,5 @@
 .claude/skills/video-edit/.platform.json
 .claude/skills/video-edit/.venv/
+clips/*
+!clips/.gitkeep
+reels/*/work/
