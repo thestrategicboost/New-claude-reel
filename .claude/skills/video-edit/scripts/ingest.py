@@ -25,6 +25,14 @@ FF, FP = skillenv.tool('ffmpeg'), skillenv.tool('ffprobe')
 VIDEO_EXT = ('.mp4', '.mov', '.m4v')
 
 
+def _lang():   # config.json "language": "fr" etc. -> multilingual model; default English-only
+    try:
+        with open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'config.json'), encoding='utf-8') as fh:
+            return json.load(fh).get('language', 'en')
+    except (OSError, ValueError):
+        return 'en'
+
+
 def probe(f):
     out = subprocess.run([FP, '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height,r_frame_rate',
                           '-show_entries', 'format=duration', '-of', 'json', f], **skillenv.TEXT).stdout
@@ -73,12 +81,13 @@ def main():
     stack = ['-filter_complex', f'vstack={len(sheets)}'] if len(sheets) > 1 else []
     subprocess.run([FF, '-loglevel', 'error', '-y', *ins, *stack, os.path.join(work, 'sheets.jpg')], check=True)
 
-    m = WhisperModel('small.en', compute_type='int8')
+    lang = _lang()
+    m = WhisperModel('small.en' if lang == 'en' else 'small', compute_type='int8')
     lines = []
     for cid, f in sources.items():
         wav = os.path.join(work, f'{cid}.wav')
         subprocess.run([FF, '-loglevel', 'error', '-y', '-i', f, '-vn', '-ac', '1', '-ar', '16000', wav], check=True)
-        segs, _ = m.transcribe(wav, word_timestamps=True, vad_filter=False)
+        segs, _ = m.transcribe(wav, word_timestamps=True, vad_filter=False, language=lang)
         words = []
         lines.append(f'===== {cid}  {os.path.basename(f)}')
         for s in segs:
