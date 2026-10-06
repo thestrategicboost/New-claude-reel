@@ -28,6 +28,8 @@ T = {k: s['frame'] / 30 - .002 if s['frame'] else 0.0 for k, s in SEG.items()}
 CUTS = [T[k] for k in sorted(T) if T[k] > 0]
 
 BOLD_F = 'contrast(1.07) saturate(.9) brightness(.97)'
+# background only, from bgplate.py (speaker masked out, so no halo): soft blur + warm beige, like her "5 tendances" visuals
+BG_F = 'blur(6px) brightness(.8) contrast(.92) saturate(.85) sepia(.38)'   # plate is already blurred (bgplate.py)
 
 # head top per segment (y in the 1080x1920 frame), from headpos.py when available, else measured by eye
 HEAD = {'s01': 400, 's02': 700, 's03': 420, 's04': 480, 's05': 480, 's06': 480, 's07': 480, 's08': 420,
@@ -134,7 +136,7 @@ def words():
 
 
 def grades():
-    tw = [f"gsap.set('.g',{{filter:'{BOLD_F}'}});"]
+    tw = [f"gsap.set('.g',{{filter:'{BOLD_F}'}});", f"gsap.set('#bgv',{{filter:'{BG_F}'}});"]
     for t in CUTS:
         tw.append(f"tl.fromTo('#stage',{{scale:1.05}},{{scale:1,duration:.32,ease:'power2.out',immediateRender:false}},{t:.3f});")
     return tw
@@ -167,7 +169,8 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
 #stage{{position:absolute;inset:0;transform-origin:50% 45%}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
-#bgv{{z-index:0}}
+#bgv{{z-index:0;transform:scale(1.08)}}   /* scaled so the blur never shows dark edges */
+#bgtone{{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(150,108,62,.34),rgba(110,76,40,.30));mix-blend-mode:multiply}}
 .dw.back{{z-index:3}}
 #cutwrap{{position:absolute;inset:0;z-index:4}}
 .fx{{position:absolute;inset:0;pointer-events:none}}
@@ -188,7 +191,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .md{{font-size:170px}}
 .ms{{font-size:145px}}
 
-.dw.gd{{color:{YEL}}}
+.dw.gd{{color:#fff}}   /* behind-head words in white: gold did not read on the wall */
 /* gold gradient block with white condensed caps (brand "encart") */
 .box .in{{font-family:Anton;font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:1.08;color:#fff;
   padding:.06em .24em .02em;background:linear-gradient(100deg,{GOLD_A} 0%,{GOLD_B} 48%,{GOLD_C} 62%,{GOLD_D} 100%);
@@ -231,7 +234,8 @@ def build():
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
 {nl.join(audio())}
   <div id="stage">
-    <video id="bgv" class="full g" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
+    <video id="bgv" class="full" src="assets/bgplate.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
+    <div id="bgtone"></div>
 {nl.join(back)}
     <div id="cutwrap"><video id="cut" class="full g" src="assets/subject.webm" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="1"></video></div>
   </div>
