@@ -7,3 +7,4 @@ reels/*/assets/*.mp4
 reels/*/assets/*.webm
 reels/*/node_modules/
 reels/*/renders/*-full.mp4
+reels/*/assets/sfx/
