@@ -35,13 +35,13 @@ HEAD = {'s01': 400, 's02': 700, 's03': 420, 's04': 480, 's05': 480, 's06': 480, 
 if os.path.exists('headpos.json'):
     with open('headpos.json', encoding='utf-8') as _f:
         HEAD.update({k: v for k, v in json.load(_f).items() if k in HEAD})
-SIZE = {'xl': 220, 'lg': 180, 'md': 150}
+SIZE = {'xl': 230, 'lg': 200, 'md': 170, 'ms': 145}
 
 
 def BT(seg, cls='xl'):
-    """top for a behind-head word: baseline ~30% of the x-height below the head top (layout.md)"""
+    """top for a behind-head word in Anton caps: only the bottom ~20% of the capitals tucked behind the head"""
     s = SIZE[cls]
-    return C + f'top:{max(225, round(HEAD[seg] - 0.57 * s))}px'
+    return C + f'top:{max(225, round(HEAD[seg] - 0.75 * s))}px'
 
 
 C = 'left:0;right:0;text-align:center;'
@@ -103,12 +103,12 @@ GROUPS = [  # (start, end, [(t, text, classes, style)])
                        (47.12, 'fictives', 'box b1', C + 'top:1330px')]),
     # s10 (punch-in)
     (T['s10'], 49.55, [(47.68, 'par exemple,', 'sm', Z1), (48.14, 'qu’est-ce que je ferais pour', 'sm2', Z2),
-                       (49.06, 'une célébrité', 'lg back gd', BT('s10', 'lg'))]),
+                       (49.06, 'une célébrité', 'ms back gd', BT('s10', 'ms'))]),
     (49.55, 50.55, [(49.60, 'ou bien pour une grande', 'sm2', Z1), (50.20, 'marque', 'xl back gd', BT('s10'))]),
     (50.55, 52.40, [(50.64, 'et tu peux faire des vidéos du type', 'sm2', Z1)]),
     (52.40, T['s11'], [(52.48, '« voici ce que je ferais', 'sm2', Z1), (53.04, 'dans telle situation »', 'sm', Z2)]),
     # s11
-    (T['s11'], 54.70, [(54.02, 'ton', 'sm', L1), (54.06, 'objectif', 'xl back gd', BT('s11'))]),
+    (T['s11'], 54.70, [(54.02, 'ton', 'sm', L1), (54.06, 'objectif', 'lg back gd', BT('s11', 'lg'))]),
     (54.70, 56.90, [(54.74, 'va déterminer le type', 'sm', L1), (55.90, 'de contenu que tu vas créer', 'sm2', C + 'top:1300px')]),
     (56.90, 59.20, [(56.92, 'mais dans la majorité des cas', 'sm2', L1), (58.30, 'la plupart des créateurs', 'sm2', C + 'top:1280px')]),
     (59.20, T['s12'], [(59.26, 'font un', 'sm', L1), (59.58, 'mix des trois', 'box b1', LP)]),
@@ -186,6 +186,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .xl{{font-size:230px}}
 .lg{{font-size:200px}}
 .md{{font-size:170px}}
+.ms{{font-size:145px}}
 
 .dw.gd{{color:{YEL}}}
 /* gold gradient block with white condensed caps (brand "encart") */
