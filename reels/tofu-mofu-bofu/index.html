@@ -11,8 +11,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 #root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
 #stage{position:absolute;inset:0;transform-origin:50% 45%}
 .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-#bgv{z-index:0;transform:scale(1.08)}   /* scaled so the blur never shows dark edges */
-#bgtone{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(150,108,62,.34),rgba(110,76,40,.30));mix-blend-mode:multiply}
+#bgv{z-index:0}
 .dw.back{z-index:3}
 #cutwrap{position:absolute;inset:0;z-index:4}
 .fx{position:absolute;inset:0;pointer-events:none}
@@ -70,8 +69,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="sfx16" src="assets/sfx/whoosh-short.mp3" data-start="60.331" data-duration="0.570" data-track-index="10" data-volume="0.150"></audio>
 <audio id="sfx17" src="assets/sfx/pop.mp3" data-start="61.560" data-duration="0.720" data-track-index="10" data-volume="0.105"></audio>
   <div id="stage">
-    <video id="bgv" class="full" src="assets/bgplate.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="62.833" data-track-index="0"></video>
-    <div id="bgtone"></div>
+    <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="62.833" data-track-index="0"></video>
 <div id="w4-1" class="dw xl back gd" style="left:0;right:0;text-align:center;top:240px"><span class="in">tofu</span></div>
 <div id="w6-1" class="dw xl back gd" style="left:0;right:0;text-align:center;top:304px"><span class="in">large</span></div>
 <div id="w9-1" class="dw xl back gd" style="left:0;right:0;text-align:center;top:284px"><span class="in">tofu</span></div>
@@ -169,7 +167,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <script>
 const tl = gsap.timeline({ paused: true });
 gsap.set('.g',{filter:'contrast(1.07) saturate(.9) brightness(.97)'});
-gsap.set('#bgv',{filter:'blur(6px) brightness(.8) contrast(.92) saturate(.85) sepia(.38)'});
+gsap.set('#bgv',{filter:'contrast(1.07) saturate(.9) brightness(.82)'});
 tl.fromTo('#stage',{scale:1.05},{scale:1,duration:.32,ease:'power2.out',immediateRender:false},0.898);
 tl.fromTo('#stage',{scale:1.05},{scale:1,duration:.32,ease:'power2.out',immediateRender:false},4.065);
 tl.fromTo('#stage',{scale:1.05},{scale:1,duration:.32,ease:'power2.out',immediateRender:false},7.765);

@@ -28,8 +28,8 @@ T = {k: s['frame'] / 30 - .002 if s['frame'] else 0.0 for k, s in SEG.items()}
 CUTS = [T[k] for k in sorted(T) if T[k] > 0]
 
 BOLD_F = 'contrast(1.07) saturate(.9) brightness(.97)'
-# background only, from bgplate.py (speaker masked out, so no halo): soft blur + warm beige, like her "5 tendances" visuals
-BG_F = 'blur(6px) brightness(.8) contrast(.92) saturate(.85) sepia(.38)'   # plate is already blurred (bgplate.py)
+# background: the original footage, just a little darker so the white words read, like her "5 tendances" visuals
+BG_F = 'contrast(1.07) saturate(.9) brightness(.82)'   # same grade as Maé, only darker (no blur: the cutout must not show)
 
 # head top per segment (y in the 1080x1920 frame), from headpos.py when available, else measured by eye
 HEAD = {'s01': 400, 's02': 700, 's03': 420, 's04': 480, 's05': 480, 's06': 480, 's07': 480, 's08': 420,
@@ -169,8 +169,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
 #stage{{position:absolute;inset:0;transform-origin:50% 45%}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
-#bgv{{z-index:0;transform:scale(1.08)}}   /* scaled so the blur never shows dark edges */
-#bgtone{{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(150,108,62,.34),rgba(110,76,40,.30));mix-blend-mode:multiply}}
+#bgv{{z-index:0}}
 .dw.back{{z-index:3}}
 #cutwrap{{position:absolute;inset:0;z-index:4}}
 .fx{{position:absolute;inset:0;pointer-events:none}}
@@ -234,8 +233,7 @@ def build():
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
 {nl.join(audio())}
   <div id="stage">
-    <video id="bgv" class="full" src="assets/bgplate.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
-    <div id="bgtone"></div>
+    <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
 {nl.join(back)}
     <div id="cutwrap"><video id="cut" class="full g" src="assets/subject.webm" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="1"></video></div>
   </div>
