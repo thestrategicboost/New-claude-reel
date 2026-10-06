@@ -15,21 +15,35 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .dw.back{z-index:3}
 #cutwrap{position:absolute;inset:0;z-index:4}
 .fx{position:absolute;inset:0;pointer-events:none}
-#dtone{z-index:7;background:linear-gradient(180deg,rgba(20,55,75,.16),rgba(60,40,20,.08));mix-blend-mode:soft-light}
-#dvig{z-index:7;background:radial-gradient(95% 62% at 50% 46%,rgba(0,0,0,0) 55%,rgba(0,0,0,.42) 100%)}
-#dgrad{z-index:7;background:linear-gradient(180deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 58%,rgba(0,0,0,.30) 100%)}
-.dw{position:absolute;z-index:8;color:#fff;font-family:'Inter Tight';font-weight:900;letter-spacing:-.05em;line-height:.9;
-  text-shadow:0 10px 40px rgba(0,0,0,.55),0 2px 8px rgba(0,0,0,.35);transform-origin:50% 60%;white-space:nowrap}
-.sm{font-size:84px;font-weight:800;letter-spacing:-.04em}
-.sm2{font-size:56px;font-weight:800;letter-spacing:-.03em}
-.sm3{font-size:62px;font-weight:800;letter-spacing:-.03em}
-.mds{font-size:110px}
-.mdm{font-size:130px}
-.md{font-size:150px}
-.lg{font-size:180px}
-.big{font-size:236px}
-.xl{font-size:220px}
-.y{color:#D8B26E}
+#dtone{z-index:7;background:linear-gradient(180deg,rgba(60,45,25,.10),rgba(70,50,25,.10));mix-blend-mode:soft-light}
+#dvig{z-index:7;background:radial-gradient(95% 62% at 50% 46%,rgba(0,0,0,0) 55%,rgba(30,20,10,.38) 100%)}
+#dgrad{z-index:7;background:linear-gradient(180deg,rgba(0,0,0,.30) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 58%,rgba(20,12,5,.32) 100%)}
+
+/* brand type: Poppins for lines, Anton caps for punch words, gold gradient blocks and pills (no yellow) */
+.dw{position:absolute;z-index:8;color:#fff;font-family:Poppins;font-weight:700;line-height:1.05;letter-spacing:-.01em;
+  text-shadow:0 8px 30px rgba(0,0,0,.5),0 2px 6px rgba(0,0,0,.35);transform-origin:50% 60%;white-space:nowrap}
+.dw .in{display:inline-block}
+.sm{font-size:70px}
+.sm2{font-size:50px}
+/* big words behind the head: Anton caps in gold */
+.back{font-family:Anton;font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:.005em}
+.xl{font-size:230px}
+.lg{font-size:200px}
+.md{font-size:170px}
+
+.dw.gd{color:#D8B26E}
+/* gold gradient block with white condensed caps (brand "encart") */
+.box .in{font-family:Anton;font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:1.08;color:#fff;
+  padding:.06em .24em .02em;background:linear-gradient(100deg,#9C7232 0%,#D2AE66 48%,#EBD39A 62%,#B4873F 100%);
+  text-shadow:0 2px 8px rgba(80,50,10,.55);box-shadow:0 16px 40px rgba(0,0,0,.35)}
+.b1{font-size:104px}
+.b2{font-size:86px}
+/* pills: white with brown bold italic, or gold gradient with white bold italic */
+.pillw .in,.pillg .in{font:italic 700 50px Poppins;padding:.16em .75em .18em;border-radius:99px;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.pillw .in{background:#fff;color:#5A3F1F;text-shadow:none}
+.pillg .in{background:linear-gradient(100deg,#9C7232 0%,#D2AE66 48%,#EBD39A 62%,#B4873F 100%);color:#fff;text-shadow:0 2px 6px rgba(80,50,10,.5)}
+/* big white number line ("3 types") */
+.num{font-family:Anton;font-weight:400;font-size:220px;text-transform:uppercase;line-height:.95}
 </style>
 </head>
 <body>
@@ -55,98 +69,98 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="sfx17" src="assets/sfx/pop.mp3" data-start="61.560" data-duration="0.720" data-track-index="10" data-volume="0.105"></audio>
   <div id="stage">
     <video id="bgv" class="full g" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="62.833" data-track-index="0"></video>
-<div id="w4-1" class="dw xl back y" style="left:0;right:0;text-align:center;top:295px">tofu</div>
-<div id="w6-1" class="dw xl back y" style="left:0;right:0;text-align:center;top:355px">large</div>
-<div id="w9-1" class="dw xl back y" style="left:0;right:0;text-align:center;top:355px">tofu</div>
-<div id="w11-1" class="dw xl back y" style="left:0;right:0;text-align:center;top:355px">mofu</div>
-<div id="w16-1" class="dw lg back y" style="left:0;right:0;text-align:center;top:377px">autorité</div>
-<div id="w18-1" class="dw lg back y" style="left:0;right:0;text-align:center;top:377px">éducatif</div>
-<div id="w24-1" class="dw xl back y" style="left:0;right:0;text-align:center;top:295px">bofu</div>
-<div id="w27-3" class="dw xl back y" style="left:0;right:0;text-align:center;top:355px">clients</div>
-<div id="w29-2" class="dw lg back y" style="left:0;right:0;text-align:center;top:347px">une célébrité</div>
-<div id="w30-1" class="dw xl back y" style="left:0;right:0;text-align:center;top:325px">marque</div>
-<div id="w33-1" class="dw xl back y" style="left:0;right:0;text-align:center;top:295px">objectif</div>
-<div id="w37-1" class="dw md back y" style="left:0;right:0;text-align:center;top:364px">abonne-toi</div>
+<div id="w4-1" class="dw xl back gd" style="left:0;right:0;text-align:center;top:295px"><span class="in">tofu</span></div>
+<div id="w6-1" class="dw xl back gd" style="left:0;right:0;text-align:center;top:355px"><span class="in">large</span></div>
+<div id="w9-1" class="dw xl back gd" style="left:0;right:0;text-align:center;top:355px"><span class="in">tofu</span></div>
+<div id="w11-1" class="dw xl back gd" style="left:0;right:0;text-align:center;top:355px"><span class="in">mofu</span></div>
+<div id="w16-1" class="dw lg back gd" style="left:0;right:0;text-align:center;top:377px"><span class="in">autorité</span></div>
+<div id="w18-1" class="dw lg back gd" style="left:0;right:0;text-align:center;top:377px"><span class="in">éducatif</span></div>
+<div id="w24-1" class="dw xl back gd" style="left:0;right:0;text-align:center;top:295px"><span class="in">bofu</span></div>
+<div id="w27-3" class="dw xl back gd" style="left:0;right:0;text-align:center;top:355px"><span class="in">clients</span></div>
+<div id="w29-2" class="dw lg back gd" style="left:0;right:0;text-align:center;top:347px"><span class="in">une célébrité</span></div>
+<div id="w30-1" class="dw xl back gd" style="left:0;right:0;text-align:center;top:325px"><span class="in">marque</span></div>
+<div id="w33-1" class="dw xl back gd" style="left:0;right:0;text-align:center;top:295px"><span class="in">objectif</span></div>
+<div id="w37-1" class="dw md back gd" style="left:0;right:0;text-align:center;top:364px"><span class="in">abonne-toi</span></div>
     <div id="cutwrap"><video id="cut" class="full g" src="assets/subject.webm" muted playsinline data-start="0" data-media-start="0" data-duration="62.833" data-track-index="1"></video></div>
   </div>
   <div id="dtone" class="fx"></div><div id="dvig" class="fx"></div><div id="dgrad" class="fx"></div>
-<div id="w0-0" class="dw mds y" style="left:60px;width:320px;text-align:center;top:1150px">tofu</div>
-<div id="w0-1" class="dw mds y" style="left:380px;width:320px;text-align:center;top:1150px">mofu</div>
-<div id="w0-2" class="dw mds y" style="left:680px;width:300px;text-align:center;top:1150px">bofu</div>
-<div id="w1-0" class="dw sm" style="left:0;right:0;text-align:center;top:290px">il y a</div>
-<div id="w1-1" class="dw big y" style="left:0;right:0;text-align:center;top:370px">3 types</div>
-<div id="w1-2" class="dw sm2" style="left:0;right:0;text-align:center;top:600px">de contenus que tu dois publier</div>
-<div id="w2-0" class="dw mdm y" style="left:35px;width:330px;text-align:center;top:520px;">tofu</div>
-<div id="w2-1" class="dw mdm y" style="left:375px;width:330px;text-align:center;top:520px;">mofu</div>
-<div id="w2-2" class="dw mdm y" style="left:705px;width:330px;text-align:center;top:520px;">bofu</div>
-<div id="w3-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px">premièrement,</div>
-<div id="w3-1" class="dw sm" style="left:0;right:0;text-align:center;top:1290px">dans ta stratégie</div>
-<div id="w4-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1200px">tu dois créer du contenu</div>
-<div id="w5-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px">le</div>
-<div id="w5-1" class="dw mdm y" style="left:0;right:0;text-align:center;top:1290px">top of funnel</div>
-<div id="w6-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px">ça, c’est du contenu</div>
-<div id="w7-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1230px">du coup tu vas toucher</div>
-<div id="w7-1" class="dw sm" style="left:0;right:0;text-align:center;top:1280px">beaucoup plus</div>
-<div id="w7-2" class="dw sm" style="left:0;right:0;text-align:center;top:1365px">de personnes</div>
-<div id="w8-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px">et avoir plus de</div>
-<div id="w8-1" class="dw mdm y" style="left:0;right:0;text-align:center;top:1330px">visibilité.</div>
-<div id="w9-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px">les contenus</div>
-<div id="w9-2" class="dw sm" style="left:0;right:0;text-align:center;top:1290px">qui marchent</div>
-<div id="w10-0" class="dw sm3" style="left:0;right:0;text-align:center;top:1130px">1. classement</div>
-<div id="w10-1" class="dw sm3" style="left:0;right:0;text-align:center;top:1195px">2. notation</div>
-<div id="w10-2" class="dw sm3" style="left:0;right:0;text-align:center;top:1260px">3. liste</div>
-<div id="w10-3" class="dw sm3" style="left:0;right:0;text-align:center;top:1325px">4. questions-réponses</div>
-<div id="w10-4" class="dw sm3 y" style="left:0;right:0;text-align:center;top:1390px">5. storytelling</div>
-<div id="w11-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px">après, on a le contenu</div>
-<div id="w12-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px">ce type de contenu est bien,</div>
-<div id="w13-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px">c’est déjà une base d’abonnés</div>
-<div id="w13-1" class="dw mdm y" style="left:0;right:0;text-align:center;top:1330px">solides</div>
-<div id="w14-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px">et une bonne</div>
-<div id="w14-1" class="dw mdm y" style="left:0;right:0;text-align:center;top:1330px">portée.</div>
-<div id="w15-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px">tu vas créer un lien</div>
-<div id="w15-1" class="dw sm" style="left:0;right:0;text-align:center;top:1340px">avec ton audience</div>
-<div id="w16-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px">et aussi asseoir ton</div>
-<div id="w17-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1200px">là, le contenu que tu vas faire,</div>
-<div id="w18-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px">ça va être du contenu</div>
-<div id="w18-2" class="dw sm" style="left:0;right:0;text-align:center;top:1290px">approfondi</div>
-<div id="w19-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px">des tutoriels</div>
-<div id="w19-1" class="dw mdm y" style="left:0;right:0;text-align:center;top:1290px">pas à pas</div>
-<div id="w20-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px">des vidéos</div>
-<div id="w20-1" class="dw mdm y" style="left:0;right:0;text-align:center;top:1290px">storytelling</div>
-<div id="w21-0" class="dw sm" style="left:0;right:0;text-align:center;top:1180px">tes réussites,</div>
-<div id="w21-1" class="dw sm" style="left:0;right:0;text-align:center;top:1265px">tes échecs,</div>
-<div id="w21-2" class="dw sm2" style="left:0;right:0;text-align:center;top:1360px">tes expériences personnelles</div>
-<div id="w22-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px">et enfin, si tu as</div>
-<div id="w22-1" class="dw sm" style="left:0;right:0;text-align:center;top:1340px">une forte connexion</div>
-<div id="w23-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px">avec ton audience</div>
-<div id="w23-1" class="dw sm" style="left:0;right:0;text-align:center;top:1340px">et une vraie autorité,</div>
-<div id="w24-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px">à ce moment-là, tu vas créer</div>
-<div id="w25-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px">le</div>
-<div id="w25-1" class="dw mds y" style="left:0;right:0;text-align:center;top:1330px">bottom of funnel</div>
-<div id="w26-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1200px">tu vas venir publier des</div>
-<div id="w26-1" class="dw sm" style="left:0;right:0;text-align:center;top:1255px">transformations</div>
-<div id="w26-2" class="dw mdm y" style="left:0;right:0;text-align:center;top:1330px">avant-après</div>
-<div id="w27-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1200px">que ce soit des transformations</div>
-<div id="w27-1" class="dw sm" style="left:0;right:0;text-align:center;top:1270px">personnelles</div>
-<div id="w27-2" class="dw sm2" style="left:0;right:0;text-align:center;top:1365px">ou bien celles de tes</div>
-<div id="w28-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1200px">tu vas aussi faire des</div>
-<div id="w28-1" class="dw sm" style="left:0;right:0;text-align:center;top:1255px">études de cas</div>
-<div id="w28-2" class="dw mdm y" style="left:0;right:0;text-align:center;top:1330px">fictives</div>
-<div id="w29-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px">par exemple,</div>
-<div id="w29-1" class="dw sm2" style="left:0;right:0;text-align:center;top:1340px">qu’est-ce que je ferais pour</div>
-<div id="w30-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px">ou bien pour une grande</div>
-<div id="w31-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px">et tu peux faire des vidéos du type</div>
-<div id="w32-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px">« voici ce que je ferais</div>
-<div id="w32-1" class="dw sm" style="left:0;right:0;text-align:center;top:1340px">dans telle situation »</div>
-<div id="w33-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px">ton</div>
-<div id="w34-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px">va déterminer le type</div>
-<div id="w34-1" class="dw sm2" style="left:0;right:0;text-align:center;top:1300px">de contenu que tu vas créer</div>
-<div id="w35-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1200px">mais dans la majorité des cas</div>
-<div id="w35-1" class="dw sm" style="left:0;right:0;text-align:center;top:1280px">la plupart des créateurs</div>
-<div id="w36-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px">font un</div>
-<div id="w36-1" class="dw mdm y" style="left:0;right:0;text-align:center;top:1290px">mix des trois</div>
-<div id="w37-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px">à toi de jouer !</div>
-<div id="w37-2" class="dw sm" style="left:0;right:0;text-align:center;top:1340px">pour plus de conseils</div>
+<div id="w0-0" class="dw box b2" style="left:60px;width:320px;text-align:center;top:1150px"><span class="in">tofu</span></div>
+<div id="w0-1" class="dw box b2" style="left:380px;width:320px;text-align:center;top:1150px"><span class="in">mofu</span></div>
+<div id="w0-2" class="dw box b2" style="left:680px;width:300px;text-align:center;top:1150px"><span class="in">bofu</span></div>
+<div id="w1-0" class="dw sm" style="left:0;right:0;text-align:center;top:290px"><span class="in">il y a</span></div>
+<div id="w1-1" class="dw num" style="left:0;right:0;text-align:center;top:370px"><span class="in">3 types</span></div>
+<div id="w1-2" class="dw sm2" style="left:0;right:0;text-align:center;top:600px"><span class="in">de contenus que tu dois publier</span></div>
+<div id="w2-0" class="dw box b1" style="left:35px;width:330px;text-align:center;top:520px;"><span class="in">tofu</span></div>
+<div id="w2-1" class="dw box b1" style="left:375px;width:330px;text-align:center;top:520px;"><span class="in">mofu</span></div>
+<div id="w2-2" class="dw box b1" style="left:705px;width:330px;text-align:center;top:520px;"><span class="in">bofu</span></div>
+<div id="w3-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px"><span class="in">premièrement,</span></div>
+<div id="w3-1" class="dw sm" style="left:0;right:0;text-align:center;top:1290px"><span class="in">dans ta stratégie</span></div>
+<div id="w4-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1200px"><span class="in">tu dois créer du contenu</span></div>
+<div id="w5-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px"><span class="in">le</span></div>
+<div id="w5-1" class="dw box b1" style="left:0;right:0;text-align:center;top:1290px"><span class="in">top of funnel</span></div>
+<div id="w6-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px"><span class="in">ça, c’est du contenu</span></div>
+<div id="w7-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1230px"><span class="in">du coup tu vas toucher</span></div>
+<div id="w7-1" class="dw sm" style="left:0;right:0;text-align:center;top:1280px"><span class="in">beaucoup plus</span></div>
+<div id="w7-2" class="dw sm" style="left:0;right:0;text-align:center;top:1365px"><span class="in">de personnes</span></div>
+<div id="w8-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px"><span class="in">et avoir plus de</span></div>
+<div id="w8-1" class="dw box b1" style="left:0;right:0;text-align:center;top:1330px"><span class="in">visibilité</span></div>
+<div id="w9-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px"><span class="in">les contenus</span></div>
+<div id="w9-2" class="dw sm" style="left:0;right:0;text-align:center;top:1290px"><span class="in">qui marchent</span></div>
+<div id="w10-0" class="dw pillw" style="left:0;right:0;text-align:center;top:1130px"><span class="in">1. classement</span></div>
+<div id="w10-1" class="dw pillw" style="left:0;right:0;text-align:center;top:1195px"><span class="in">2. notation</span></div>
+<div id="w10-2" class="dw pillw" style="left:0;right:0;text-align:center;top:1260px"><span class="in">3. liste</span></div>
+<div id="w10-3" class="dw pillw" style="left:0;right:0;text-align:center;top:1325px"><span class="in">4. questions-réponses</span></div>
+<div id="w10-4" class="dw pillg" style="left:0;right:0;text-align:center;top:1390px"><span class="in">5. storytelling</span></div>
+<div id="w11-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px"><span class="in">après, on a le contenu</span></div>
+<div id="w12-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px"><span class="in">ce type de contenu est bien,</span></div>
+<div id="w13-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px"><span class="in">c’est déjà une base d’abonnés</span></div>
+<div id="w13-1" class="dw box b1" style="left:0;right:0;text-align:center;top:1330px"><span class="in">solides</span></div>
+<div id="w14-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px"><span class="in">et une bonne</span></div>
+<div id="w14-1" class="dw box b1" style="left:0;right:0;text-align:center;top:1330px"><span class="in">portée</span></div>
+<div id="w15-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px"><span class="in">tu vas créer un lien</span></div>
+<div id="w15-1" class="dw sm" style="left:0;right:0;text-align:center;top:1340px"><span class="in">avec ton audience</span></div>
+<div id="w16-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px"><span class="in">et aussi asseoir ton</span></div>
+<div id="w17-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1200px"><span class="in">là, le contenu que tu vas faire,</span></div>
+<div id="w18-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px"><span class="in">ça va être du contenu</span></div>
+<div id="w18-2" class="dw sm" style="left:0;right:0;text-align:center;top:1290px"><span class="in">approfondi</span></div>
+<div id="w19-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px"><span class="in">des tutoriels</span></div>
+<div id="w19-1" class="dw box b1" style="left:0;right:0;text-align:center;top:1290px"><span class="in">pas à pas</span></div>
+<div id="w20-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px"><span class="in">des vidéos</span></div>
+<div id="w20-1" class="dw box b1" style="left:0;right:0;text-align:center;top:1290px"><span class="in">storytelling</span></div>
+<div id="w21-0" class="dw sm" style="left:0;right:0;text-align:center;top:1180px"><span class="in">tes réussites,</span></div>
+<div id="w21-1" class="dw sm" style="left:0;right:0;text-align:center;top:1265px"><span class="in">tes échecs,</span></div>
+<div id="w21-2" class="dw sm2" style="left:0;right:0;text-align:center;top:1360px"><span class="in">tes expériences personnelles</span></div>
+<div id="w22-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px"><span class="in">et enfin, si tu as</span></div>
+<div id="w22-1" class="dw sm" style="left:0;right:0;text-align:center;top:1340px"><span class="in">une forte connexion</span></div>
+<div id="w23-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px"><span class="in">avec ton audience</span></div>
+<div id="w23-1" class="dw sm" style="left:0;right:0;text-align:center;top:1340px"><span class="in">et une vraie autorité,</span></div>
+<div id="w24-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px"><span class="in">à ce moment-là, tu vas créer</span></div>
+<div id="w25-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px"><span class="in">le</span></div>
+<div id="w25-1" class="dw box b2" style="left:0;right:0;text-align:center;top:1330px"><span class="in">bottom of funnel</span></div>
+<div id="w26-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1200px"><span class="in">tu vas venir publier des</span></div>
+<div id="w26-1" class="dw sm" style="left:0;right:0;text-align:center;top:1255px"><span class="in">transformations</span></div>
+<div id="w26-2" class="dw box b1" style="left:0;right:0;text-align:center;top:1330px"><span class="in">avant-après</span></div>
+<div id="w27-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1200px"><span class="in">que ce soit des transformations</span></div>
+<div id="w27-1" class="dw sm" style="left:0;right:0;text-align:center;top:1270px"><span class="in">personnelles</span></div>
+<div id="w27-2" class="dw sm2" style="left:0;right:0;text-align:center;top:1365px"><span class="in">ou bien celles de tes</span></div>
+<div id="w28-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1200px"><span class="in">tu vas aussi faire des</span></div>
+<div id="w28-1" class="dw sm" style="left:0;right:0;text-align:center;top:1255px"><span class="in">études de cas</span></div>
+<div id="w28-2" class="dw box b1" style="left:0;right:0;text-align:center;top:1330px"><span class="in">fictives</span></div>
+<div id="w29-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px"><span class="in">par exemple,</span></div>
+<div id="w29-1" class="dw sm2" style="left:0;right:0;text-align:center;top:1340px"><span class="in">qu’est-ce que je ferais pour</span></div>
+<div id="w30-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px"><span class="in">ou bien pour une grande</span></div>
+<div id="w31-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px"><span class="in">et tu peux faire des vidéos du type</span></div>
+<div id="w32-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1250px"><span class="in">« voici ce que je ferais</span></div>
+<div id="w32-1" class="dw sm" style="left:0;right:0;text-align:center;top:1340px"><span class="in">dans telle situation »</span></div>
+<div id="w33-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px"><span class="in">ton</span></div>
+<div id="w34-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px"><span class="in">va déterminer le type</span></div>
+<div id="w34-1" class="dw sm2" style="left:0;right:0;text-align:center;top:1300px"><span class="in">de contenu que tu vas créer</span></div>
+<div id="w35-0" class="dw sm2" style="left:0;right:0;text-align:center;top:1200px"><span class="in">mais dans la majorité des cas</span></div>
+<div id="w35-1" class="dw sm2" style="left:0;right:0;text-align:center;top:1280px"><span class="in">la plupart des créateurs</span></div>
+<div id="w36-0" class="dw sm" style="left:0;right:0;text-align:center;top:1200px"><span class="in">font un</span></div>
+<div id="w36-1" class="dw box b1" style="left:0;right:0;text-align:center;top:1290px"><span class="in">mix des trois</span></div>
+<div id="w37-0" class="dw sm" style="left:0;right:0;text-align:center;top:1250px"><span class="in">à toi de jouer !</span></div>
+<div id="w37-2" class="dw sm" style="left:0;right:0;text-align:center;top:1340px"><span class="in">pour plus de conseils</span></div>
 <div style="position:absolute;inset:0;z-index:99;pointer-events:none"><div style="position:absolute;left:0;right:0;top:0;height:220px;background:rgba(255,0,0,.28)"></div><div style="position:absolute;left:0;right:0;top:1470px;bottom:0;background:rgba(255,0,0,.28)"></div><div style="position:absolute;left:0;width:35px;top:220px;height:1250px;background:rgba(255,0,0,.28)"></div><div style="position:absolute;right:0;width:35px;top:220px;height:935px;background:rgba(255,0,0,.28)"></div><div style="position:absolute;right:0;width:100px;top:1155px;height:315px;background:rgba(255,0,0,.28)"></div></div>
 </div>
 <script>

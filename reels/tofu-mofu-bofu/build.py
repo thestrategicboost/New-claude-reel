@@ -19,6 +19,8 @@ DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error',
                             'stream=duration', '-of', 'csv=p=0', 'assets/aroll.mp4'],
                            capture_output=True, encoding='utf-8', errors='replace').stdout.strip().split(',')[0])
 YEL = '#D8B26E'   # brand gold (Maé: brown, gold or white, never yellow)
+BROWN = '#5A3F1F'
+GOLD_A, GOLD_B, GOLD_C, GOLD_D = '#9C7232', '#D2AE66', '#EBD39A', '#B4873F'   # gold gradient block
 with open('segments.json', encoding='utf-8') as _f:
     SEG = {s['id']: s for s in json.load(_f)}
 # cut times = exact first frame of each segment, nudged 2ms early so a tl.set lands ON that frame
@@ -50,68 +52,68 @@ W3 = 'width:330px;text-align:center;top:520px;'   # wide shot: one word above ea
 
 GROUPS = [  # (start, end, [(t, text, classes, style)])
     # s01 hook: tofu mofu bofu
-    (0.00, T['s02'], [(0.00, 'tofu', 'mds y', 'left:60px;width:320px;text-align:center;top:1150px'),
-                      (0.30, 'mofu', 'mds y', 'left:380px;width:320px;text-align:center;top:1150px'),
-                      (0.60, 'bofu', 'mds y', 'left:680px;width:300px;text-align:center;top:1150px')]),
+    (0.00, T['s02'], [(0.00, 'tofu', 'box b2', 'left:60px;width:320px;text-align:center;top:1150px'),
+                      (0.30, 'mofu', 'box b2', 'left:380px;width:320px;text-align:center;top:1150px'),
+                      (0.60, 'bofu', 'box b2', 'left:680px;width:300px;text-align:center;top:1150px')]),
     # s02 wide shot, three Maé
-    (T['s02'], 2.70, [(1.10, 'il y a', 'sm', C + 'top:290px'), (1.22, '3 types', 'big y', C + 'top:370px'),
+    (T['s02'], 2.70, [(1.10, 'il y a', 'sm', C + 'top:290px'), (1.22, '3 types', 'num', C + 'top:370px'),
                       (1.76, 'de contenus que tu dois publier', 'sm2', C + 'top:600px')]),
-    (2.70, T['s03'], [(2.80, 'tofu', 'mdm y', 'left:35px;' + W3), (3.30, 'mofu', 'mdm y', 'left:375px;' + W3),
-                      (3.70, 'bofu', 'mdm y', 'left:705px;' + W3)]),
+    (2.70, T['s03'], [(2.80, 'tofu', 'box b1', 'left:35px;' + W3), (3.30, 'mofu', 'box b1', 'left:375px;' + W3),
+                      (3.70, 'bofu', 'box b1', 'left:705px;' + W3)]),
     # s03
     (T['s03'], 5.30, [(4.24, 'premièrement,', 'sm', L1), (4.54, 'dans ta stratégie', 'sm', L2)]),
-    (5.30, 6.85, [(5.36, 'tu dois créer du contenu', 'sm2', L1), (6.40, 'tofu', 'xl back y', BT('s03'))]),
-    (6.85, T['s04'], [(6.92, 'le', 'sm', L1), (7.10, 'top of funnel', 'mdm y', LP)]),
+    (5.30, 6.85, [(5.36, 'tu dois créer du contenu', 'sm2', L1), (6.40, 'tofu', 'xl back gd', BT('s03'))]),
+    (6.85, T['s04'], [(6.92, 'le', 'sm', L1), (7.10, 'top of funnel', 'box b1', LP)]),
     # s04 (punch-in)
-    (T['s04'], 9.80, [(7.90, 'ça, c’est du contenu', 'sm', Z1), (8.54, 'large', 'xl back y', BT('s04'))]),
+    (T['s04'], 9.80, [(7.90, 'ça, c’est du contenu', 'sm', Z1), (8.54, 'large', 'xl back gd', BT('s04'))]),
     (9.80, 11.71, [(9.86, 'du coup tu vas toucher', 'sm2', C + 'top:1230px'), (10.86, 'beaucoup plus', 'sm', C + 'top:1280px'),
                    (11.44, 'de personnes', 'sm', C + 'top:1365px')]),
-    (11.71, T['s05'], [(11.66, 'et avoir plus de', 'sm', Z1), (12.38, 'visibilité.', 'mdm y', ZP)]),
+    (11.71, T['s05'], [(11.66, 'et avoir plus de', 'sm', Z1), (12.38, 'visibilité', 'box b1', ZP)]),
     # s05 the tofu list
-    (T['s05'], 14.20, [(12.84, 'les contenus', 'sm', L1), (13.40, 'tofu', 'xl back y', BT('s05')), (13.70, 'qui marchent', 'sm', L2)]),
-    (14.20, T['s06'], [(14.74, '1. classement', 'sm3', C + 'top:1130px'), (15.42, '2. notation', 'sm3', C + 'top:1195px'),
-                       (16.76, '3. liste', 'sm3', C + 'top:1260px'), (17.18, '4. questions-réponses', 'sm3', C + 'top:1325px'),
-                       (18.18, '5. storytelling', 'sm3 y', C + 'top:1390px')]),
+    (T['s05'], 14.20, [(12.84, 'les contenus', 'sm', L1), (13.40, 'tofu', 'xl back gd', BT('s05')), (13.70, 'qui marchent', 'sm', L2)]),
+    (14.20, T['s06'], [(14.74, '1. classement', 'pillw', C + 'top:1130px'), (15.42, '2. notation', 'pillw', C + 'top:1195px'),
+                       (16.76, '3. liste', 'pillw', C + 'top:1260px'), (17.18, '4. questions-réponses', 'pillw', C + 'top:1325px'),
+                       (18.18, '5. storytelling', 'pillg', C + 'top:1390px')]),
     # s06 (punch-in) mofu
-    (T['s06'], 20.45, [(19.00, 'après, on a le contenu', 'sm2', Z1), (20.08, 'mofu', 'xl back y', BT('s06'))]),
+    (T['s06'], 20.45, [(19.00, 'après, on a le contenu', 'sm2', Z1), (20.08, 'mofu', 'xl back gd', BT('s06'))]),
     (20.45, 21.62, [(20.52, 'ce type de contenu est bien,', 'sm2', Z1)]),
-    (21.62, 22.91, [(21.66, 'c’est déjà une base d’abonnés', 'sm2', Z1), (22.64, 'solides', 'mdm y', ZP)]),
-    (22.91, 23.80, [(22.84, 'et une bonne', 'sm', Z1), (23.16, 'portée.', 'mdm y', ZP)]),
+    (21.62, 22.91, [(21.66, 'c’est déjà une base d’abonnés', 'sm2', Z1), (22.64, 'solides', 'box b1', ZP)]),
+    (22.91, 23.80, [(22.84, 'et une bonne', 'sm', Z1), (23.16, 'portée', 'box b1', ZP)]),
     (23.80, 25.90, [(23.88, 'tu vas créer un lien', 'sm', Z1), (25.16, 'avec ton audience', 'sm', Z2)]),
-    (25.90, T['s07'], [(25.94, 'et aussi asseoir ton', 'sm2', Z1), (26.94, 'autorité', 'lg back y', BT('s06', 'lg'))]),
+    (25.90, T['s07'], [(25.94, 'et aussi asseoir ton', 'sm2', Z1), (26.94, 'autorité', 'lg back gd', BT('s06', 'lg'))]),
     # s07
     (T['s07'], 28.55, [(27.52, 'là, le contenu que tu vas faire,', 'sm2', L1)]),
-    (28.55, 30.25, [(28.60, 'ça va être du contenu', 'sm', L1), (29.22, 'éducatif', 'lg back y', BT('s07', 'lg')),
+    (28.55, 30.25, [(28.60, 'ça va être du contenu', 'sm', L1), (29.22, 'éducatif', 'lg back gd', BT('s07', 'lg')),
                     (29.64, 'approfondi', 'sm', L2)]),
-    (30.25, 31.25, [(30.28, 'des tutoriels', 'sm', L1), (30.76, 'pas à pas', 'mdm y', LP)]),
-    (31.25, 32.50, [(31.28, 'des vidéos', 'sm', L1), (31.84, 'storytelling', 'mdm y', LP)]),
+    (30.25, 31.25, [(30.28, 'des tutoriels', 'sm', L1), (30.76, 'pas à pas', 'box b1', LP)]),
+    (31.25, 32.50, [(31.28, 'des vidéos', 'sm', L1), (31.84, 'storytelling', 'box b1', LP)]),
     (32.50, T['s08'], [(32.58, 'tes réussites,', 'sm', C + 'top:1180px'), (33.38, 'tes échecs,', 'sm', C + 'top:1265px'),
                        (33.98, 'tes expériences personnelles', 'sm2', C + 'top:1360px')]),
     # s08 (punch-in) bofu
     (T['s08'], 36.28, [(35.05, 'et enfin, si tu as', 'sm', Z1), (35.86, 'une forte connexion', 'sm', Z2)]),
     (36.28, 38.10, [(36.32, 'avec ton audience', 'sm', Z1), (37.06, 'et une vraie autorité,', 'sm', Z2)]),
-    (38.10, 40.40, [(38.18, 'à ce moment-là, tu vas créer', 'sm2', Z1), (39.96, 'bofu', 'xl back y', BT('s08'))]),
-    (40.40, T['s09'], [(40.46, 'le', 'sm', Z1), (40.84, 'bottom of funnel', 'mds y', ZP)]),
+    (38.10, 40.40, [(38.18, 'à ce moment-là, tu vas créer', 'sm2', Z1), (39.96, 'bofu', 'xl back gd', BT('s08'))]),
+    (40.40, T['s09'], [(40.46, 'le', 'sm', Z1), (40.84, 'bottom of funnel', 'box b2', ZP)]),
     # s09
     (T['s09'], 43.70, [(41.54, 'tu vas venir publier des', 'sm2', L1), (42.48, 'transformations', 'sm', C + 'top:1255px'),
-                       (43.02, 'avant-après', 'mdm y', C + 'top:1330px')]),
+                       (43.02, 'avant-après', 'box b1', C + 'top:1330px')]),
     (43.70, 46.10, [(43.72, 'que ce soit des transformations', 'sm2', L1), (44.66, 'personnelles', 'sm', C + 'top:1270px'),
-                    (45.18, 'ou bien celles de tes', 'sm2', C + 'top:1365px'), (45.74, 'clients', 'xl back y', BT('s09'))]),
+                    (45.18, 'ou bien celles de tes', 'sm2', C + 'top:1365px'), (45.74, 'clients', 'xl back gd', BT('s09'))]),
     (46.10, T['s10'], [(46.12, 'tu vas aussi faire des', 'sm2', L1), (46.66, 'études de cas', 'sm', C + 'top:1255px'),
-                       (47.12, 'fictives', 'mdm y', C + 'top:1330px')]),
+                       (47.12, 'fictives', 'box b1', C + 'top:1330px')]),
     # s10 (punch-in)
     (T['s10'], 49.55, [(47.68, 'par exemple,', 'sm', Z1), (48.14, 'qu’est-ce que je ferais pour', 'sm2', Z2),
-                       (49.06, 'une célébrité', 'lg back y', BT('s10', 'lg'))]),
-    (49.55, 50.55, [(49.60, 'ou bien pour une grande', 'sm2', Z1), (50.20, 'marque', 'xl back y', BT('s10'))]),
+                       (49.06, 'une célébrité', 'lg back gd', BT('s10', 'lg'))]),
+    (49.55, 50.55, [(49.60, 'ou bien pour une grande', 'sm2', Z1), (50.20, 'marque', 'xl back gd', BT('s10'))]),
     (50.55, 52.40, [(50.64, 'et tu peux faire des vidéos du type', 'sm2', Z1)]),
-    (52.40, T['s11'], [(52.48, '« voici ce que je ferais', 'sm', Z1), (53.04, 'dans telle situation »', 'sm', Z2)]),
+    (52.40, T['s11'], [(52.48, '« voici ce que je ferais', 'sm2', Z1), (53.04, 'dans telle situation »', 'sm', Z2)]),
     # s11
-    (T['s11'], 54.70, [(54.02, 'ton', 'sm', L1), (54.06, 'objectif', 'xl back y', BT('s11'))]),
+    (T['s11'], 54.70, [(54.02, 'ton', 'sm', L1), (54.06, 'objectif', 'xl back gd', BT('s11'))]),
     (54.70, 56.90, [(54.74, 'va déterminer le type', 'sm', L1), (55.90, 'de contenu que tu vas créer', 'sm2', C + 'top:1300px')]),
-    (56.90, 59.20, [(56.92, 'mais dans la majorité des cas', 'sm2', L1), (58.30, 'la plupart des créateurs', 'sm', C + 'top:1280px')]),
-    (59.20, T['s12'], [(59.26, 'font un', 'sm', L1), (59.58, 'mix des trois', 'mdm y', LP)]),
+    (56.90, 59.20, [(56.92, 'mais dans la majorité des cas', 'sm2', L1), (58.30, 'la plupart des créateurs', 'sm2', C + 'top:1280px')]),
+    (59.20, T['s12'], [(59.26, 'font un', 'sm', L1), (59.58, 'mix des trois', 'box b1', LP)]),
     # s12 (punch-in) call to action
-    (T['s12'], DUR, [(60.40, 'à toi de jouer !', 'sm', Z1), (61.56, 'abonne-toi', 'md back y', BT('s12', 'md')),
+    (T['s12'], DUR, [(60.40, 'à toi de jouer !', 'sm', Z1), (61.56, 'abonne-toi', 'md back gd', BT('s12', 'md')),
                      (61.80, 'pour plus de conseils', 'sm', Z2)]),
 ]
 
@@ -121,7 +123,7 @@ def words():
     for g, (a, b, ws) in enumerate(GROUPS):
         for k, (t, txt, cls, st) in enumerate(ws):
             wid = f'w{g}-{k}'
-            html.append(f'<div id="{wid}" class="dw {cls}" style="{st}">{txt}</div>')
+            html.append(f'<div id="{wid}" class="dw {cls}" style="{st}"><span class="in">{txt}</span></div>')
             tw.append(f"gsap.set('#{wid}',{{autoAlpha:0}});")
             tw.append(f"tl.fromTo('#{wid}',{{autoAlpha:0,scale:1.22,filter:'blur(22px)'}},{{autoAlpha:1,scale:1,filter:'blur(0px)',"
                       f"duration:.2,ease:'power3.out',immediateRender:false}},{max(a, t - .05):.3f});")
@@ -169,21 +171,35 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .dw.back{{z-index:3}}
 #cutwrap{{position:absolute;inset:0;z-index:4}}
 .fx{{position:absolute;inset:0;pointer-events:none}}
-#dtone{{z-index:7;background:linear-gradient(180deg,rgba(20,55,75,.16),rgba(60,40,20,.08));mix-blend-mode:soft-light}}
-#dvig{{z-index:7;background:radial-gradient(95% 62% at 50% 46%,rgba(0,0,0,0) 55%,rgba(0,0,0,.42) 100%)}}
-#dgrad{{z-index:7;background:linear-gradient(180deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 58%,rgba(0,0,0,.30) 100%)}}
-.dw{{position:absolute;z-index:8;color:#fff;font-family:'Inter Tight';font-weight:900;letter-spacing:-.05em;line-height:.9;
-  text-shadow:0 10px 40px rgba(0,0,0,.55),0 2px 8px rgba(0,0,0,.35);transform-origin:50% 60%;white-space:nowrap}}
-.sm{{font-size:84px;font-weight:800;letter-spacing:-.04em}}
-.sm2{{font-size:56px;font-weight:800;letter-spacing:-.03em}}
-.sm3{{font-size:62px;font-weight:800;letter-spacing:-.03em}}
-.mds{{font-size:110px}}
-.mdm{{font-size:130px}}
-.md{{font-size:150px}}
-.lg{{font-size:180px}}
-.big{{font-size:236px}}
-.xl{{font-size:220px}}
-.y{{color:{YEL}}}
+#dtone{{z-index:7;background:linear-gradient(180deg,rgba(60,45,25,.10),rgba(70,50,25,.10));mix-blend-mode:soft-light}}
+#dvig{{z-index:7;background:radial-gradient(95% 62% at 50% 46%,rgba(0,0,0,0) 55%,rgba(30,20,10,.38) 100%)}}
+#dgrad{{z-index:7;background:linear-gradient(180deg,rgba(0,0,0,.30) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 58%,rgba(20,12,5,.32) 100%)}}
+
+/* brand type: Poppins for lines, Anton caps for punch words, gold gradient blocks and pills (no yellow) */
+.dw{{position:absolute;z-index:8;color:#fff;font-family:Poppins;font-weight:700;line-height:1.05;letter-spacing:-.01em;
+  text-shadow:0 8px 30px rgba(0,0,0,.5),0 2px 6px rgba(0,0,0,.35);transform-origin:50% 60%;white-space:nowrap}}
+.dw .in{{display:inline-block}}
+.sm{{font-size:70px}}
+.sm2{{font-size:50px}}
+/* big words behind the head: Anton caps in gold */
+.back{{font-family:Anton;font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:.005em}}
+.xl{{font-size:230px}}
+.lg{{font-size:200px}}
+.md{{font-size:170px}}
+
+.dw.gd{{color:{YEL}}}
+/* gold gradient block with white condensed caps (brand "encart") */
+.box .in{{font-family:Anton;font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:1.08;color:#fff;
+  padding:.06em .24em .02em;background:linear-gradient(100deg,{GOLD_A} 0%,{GOLD_B} 48%,{GOLD_C} 62%,{GOLD_D} 100%);
+  text-shadow:0 2px 8px rgba(80,50,10,.55);box-shadow:0 16px 40px rgba(0,0,0,.35)}}
+.b1{{font-size:104px}}
+.b2{{font-size:86px}}
+/* pills: white with brown bold italic, or gold gradient with white bold italic */
+.pillw .in,.pillg .in{{font:italic 700 50px Poppins;padding:.16em .75em .18em;border-radius:99px;box-shadow:0 12px 30px rgba(0,0,0,.3)}}
+.pillw .in{{background:#fff;color:{BROWN};text-shadow:none}}
+.pillg .in{{background:linear-gradient(100deg,{GOLD_A} 0%,{GOLD_B} 48%,{GOLD_C} 62%,{GOLD_D} 100%);color:#fff;text-shadow:0 2px 6px rgba(80,50,10,.5)}}
+/* big white number line ("3 types") */
+.num{{font-family:Anton;font-weight:400;font-size:220px;text-transform:uppercase;line-height:.95}}
 '''
 
 SAFE_GUIDE = ('<div style="position:absolute;inset:0;z-index:99;pointer-events:none">'
