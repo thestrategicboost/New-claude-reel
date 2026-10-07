@@ -269,6 +269,43 @@ def zooms():
     return tw
 
 
+# ------------------------------------------------------------------ sound design: one sound per important appearance
+def sfx_list():
+    out = [('impact-bass-1', 0.0, .22)]
+    out += [('pop', t, .3) for t in (0.0, 0.33, 0.60)]                       # hook words
+    out.append(('whoosh-short', HOOK_END, .22))                               # wide shot + badges
+    opens = sorted({a for a, _, _ in FUNNELS} | {a for a, *_ in CARDS})
+    spans = [a for a, _ in BROWN_SPANS] + [40.900]                            # a brown screen opens or swaps
+    for t in opens:
+        out.append(('whoosh-short', t, .28) if any(abs(t - x) < .01 for x in spans) else ('pop', t, .26))
+    for a, b, k in FUNNELS:                                                   # new arrow, new badge
+        out.append(('click-soft', a + .5, .45))
+        if k >= 2:
+            out.append(('pop', a + .6, .2))
+    for a, b, label, title, subs, vids in CARDS:                              # subtitle changes
+        out += [('click-soft', t, .45) for t, _ in subs[1:]]
+    out += [('whoosh-short', a, .18) for a, _ in ZOOMS]
+    out += [('pop', IG_IN, .3), ('sparkle', IG_IN + .85, .16), ('click', IG_IN + 1.05, .6)]
+    return out
+
+
+SFX_LEN = {'whoosh-short': .57, 'pop': .72, 'sparkle': 1.8, 'click': .36, 'click-soft': .36, 'impact-bass-1': 2.1}
+SFX_GAIN = 0.75   # subtle, always under the voice
+
+
+def audio():
+    out, lanes = [], []
+    for k, (name, t, vol) in enumerate(sorted(sfx_list(), key=lambda x: x[1])):
+        d = min(SFX_LEN[name], DUR - t)
+        lane = next((i for i, end in enumerate(lanes) if end <= t), None)
+        if lane is None:
+            lanes.append(0); lane = len(lanes) - 1
+        lanes[lane] = t + d
+        out.append(f'<audio id="sfx{k}" src="assets/sfx/{name}.mp3" data-start="{t:.3f}" data-duration="{d:.3f}" '
+                   f'data-track-index="{40 + lane}" data-volume="{vol * SFX_GAIN:.3f}"></audio>')
+    return out
+
+
 CSS = f'''
 *{{margin:0;padding:0;box-sizing:border-box}}
 html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
@@ -338,6 +375,7 @@ def build():
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR:.3f}" data-width="1080" data-height="1920">
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
+{nl.join(audio())}
   <div id="stage">
     <video id="bgv" class="full" src="assets/aroll_graded.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
 {nl.join(hb)}
