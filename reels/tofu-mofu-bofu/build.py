@@ -180,11 +180,14 @@ def hook():
     wide = []
     for k, (word, x0, x1, badge, bx, bw) in enumerate([('TOFU', 60, 307, '1M', 104, 172), ('MOFU', 393, 656, '100K', 438, 201),
                                                        ('BOFU', 767, 1020, '10K', 782, 233)]):
-        wide.append(f'<div class="anton hook" style="left:{(x0 + x1) / 2 - 200:.0f}px;width:400px;text-align:center;top:398px;'
+        wide.append(f'<div id="wd{k}" class="anton hook" style="left:{(x0 + x1) / 2 - 200:.0f}px;width:400px;text-align:center;top:398px;'
                     f'font-size:151px">{word}</div>')
         wide.append(eye_badge(badge, bx, 596, bw, 68, 44))
     front.append(f'<div id="wide">{"".join(wide)}</div>')
     tw += show('#wide', HOOK_END, WIDE_END)
+    for k, word in enumerate(('tofu', 'mofu', 'bofu')):   # each word above its Maé pulses when she says it
+        t = dict(WIDE_WORDS)[word]
+        tw.append(f"tl.fromTo('#wd{k}',{{scale:1.18}},{{scale:1,duration:.22,ease:'power2.out',immediateRender:false}},{t:.3f});")
     return back, front, tw
 
 
@@ -274,6 +277,9 @@ def sfx_list():
     out = [('impact-bass-1', 0.0, .22)]
     out += [('pop', t, .3) for t in (0.0, 0.33, 0.60)]                       # hook words
     out.append(('whoosh-short', HOOK_END, .22))                               # wide shot + badges
+    ws = dict(WIDE_WORDS)                                                     # "il y a trois types de contenus..."
+    out += [('pop', ws['trois'], .24), ('click-soft', ws['contenus'], .45), ('click-soft', ws['publier'], .45)]
+    out += [('pop', ws[w], .3) for w in ('tofu', 'mofu', 'bofu')]
     opens = sorted({a for a, _, _ in FUNNELS} | {a for a, *_ in CARDS})
     spans = [a for a, _ in BROWN_SPANS] + [40.900]                            # a brown screen opens or swaps
     for t in opens:
