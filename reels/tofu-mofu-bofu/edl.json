@@ -1,14 +1,5 @@
 [
- {"id": "s01", "clip": "c1", "in": 0.00, "out": 0.897, "zoom": 1.0, "line": "tofu, mofu, bofu."},
- {"id": "s02", "clip": "c1", "in": 0.90, "out": 4.06, "zoom": 1.0, "line": "Il y a trois types de contenus que tu dois publier. Le tofu, mofu, bofu."},
- {"id": "s03", "clip": "c1", "in": 4.22, "out": 7.89, "zoom": 1.0, "line": "Premièrement, dans ta stratégie, tu dois créer du contenu tofu, le top of funnel."},
- {"id": "s04", "clip": "c1", "in": 7.95, "out": 12.92, "zoom": 1.18, "cx": 0.5, "cy": 0.42, "line": "Ça, c'est du contenu large... plus de visibilité."},
- {"id": "s05", "clip": "c1", "in": 12.94, "out": 19.10, "zoom": 1.0, "line": "Les types de contenus tofu qui marchent... storytelling."},
- {"id": "s06", "clip": "c1", "in": 19.12, "out": 27.64, "zoom": 1.18, "cx": 0.5, "cy": 0.42, "line": "Après, on a le contenu mofu... asseoir ton autorité."},
- {"id": "s07", "clip": "c1", "in": 27.70, "out": 35.22, "zoom": 1.0, "line": "Là, le contenu que tu vas faire... expériences personnelles."},
- {"id": "s08", "clip": "c1", "in": 35.34, "out": 41.80, "zoom": 1.18, "cx": 0.5, "cy": 0.42, "line": "Et enfin... le bottom of funnel."},
- {"id": "s09", "clip": "c1", "in": 41.82, "out": 47.93, "zoom": 1.0, "line": "Tu vas venir publier des transformations... études de cas fictives."},
- {"id": "s10", "clip": "c1", "in": 47.96, "out": 54.25, "zoom": 1.18, "cx": 0.5, "cy": 0.42, "line": "Par exemple... dans telle situation."},
- {"id": "s11", "clip": "c1", "in": 54.34, "out": 60.62, "zoom": 1.0, "line": "Ton objectif va venir déterminer... un mix des trois."},
- {"id": "s12", "clip": "c1", "in": 60.64, "out": 63.10, "zoom": 1.18, "cx": 0.5, "cy": 0.42, "line": "Alors, à toi de jouer maintenant et abonne-toi pour plus de conseils."}
+ {"id": "a", "clip": "c1", "in": 0.000, "out": 17.163, "zoom": 1.0, "line": "tofu mofu bofu ... vidéos de type liste"},
+ {"id": "b", "clip": "c1", "in": 18.336, "out": 46.494, "zoom": 1.0, "line": "vidéos storytelling ... celles de tes clients"},
+ {"id": "c", "clip": "c1", "in": 51.194, "out": 64.030, "zoom": 1.0, "line": "et tu peux faire des vidéos du type ... abonne-toi"}
 ]

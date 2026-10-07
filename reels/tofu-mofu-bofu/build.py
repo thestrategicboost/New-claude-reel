@@ -1,15 +1,23 @@
 #!/usr/bin/env python3
-"""Reel "tofu mofu bofu" (@thestrategicboost.fr), bold look throughout.
+"""Reel "tofu mofu bofu" v2: Maé's own edit rebuilt (style "pédagogique marron").
 
-Built from the /video-edit template: same machinery (bold words, grade, cut punches, SFX lanes, safe guide),
-content rewritten for this French script. Word times are cut times, measured on words.json (medium) and, for the
-first two shots, on the ingest transcript (medium dropped the opening words).
+Timeline = her cut (edl.json: 3 segments, see her "TOFU bien monté"). Every position below was measured on her
+render (1080x1920):
+  hook          TOFU (behind the head) / MOFU / BOFU in big white Anton, popping on each word
+  wide shot     TOFU MOFU BOFU above the three Maé + view badges (1M / 100K / 10K)
+  captions      one word at a time, white Poppins bold, soft dark glow
+  brown screens #8C5C41 full frame: the funnel that builds up (TOFU, then MOFU, then BOFU) and the
+                "Vidéos de CLASSEMENT" cards with her own example reels (assets/cards, cropped from her edit)
+  zooms         1.3x punch-ins at 9.27-10.03 and 53.80-54.87
+  cta           Instagram card: Follow -> Following with a cursor click
+The grade (brighter, cooler) is baked into assets/aroll_graded.mp4.
 
 PY build.py            writes index.html
-PY build.py --safe     same + red Instagram safe-zone guide (snapshots only, never render with it)
+PY build.py --safe     same + red Instagram safe-zone guide (snapshots only)
 """
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -18,206 +26,305 @@ SAFE = '--safe' in sys.argv or bool(os.environ.get('SAFE'))
 DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries',
                             'stream=duration', '-of', 'csv=p=0', 'assets/aroll.mp4'],
                            capture_output=True, encoding='utf-8', errors='replace').stdout.strip().split(',')[0])
-YEL = '#D8B26E'   # brand gold (Maé: brown, gold or white, never yellow)
-BROWN = '#5A3F1F'
-GOLD_A, GOLD_B, GOLD_C, GOLD_D = '#9C7232', '#D2AE66', '#EBD39A', '#B4873F'   # gold gradient block
-with open('segments.json', encoding='utf-8') as _f:
-    SEG = {s['id']: s for s in json.load(_f)}
-# cut times = exact first frame of each segment, nudged 2ms early so a tl.set lands ON that frame
-T = {k: s['frame'] / 30 - .002 if s['frame'] else 0.0 for k, s in SEG.items()}
-CUTS = [T[k] for k in sorted(T) if T[k] > 0]
+BROWN = '#8C5C41'
+T1, T2, T3 = '#EFE6D7', '#DEBCA0', '#BF9067'          # funnel tiers, light to dark
+HOOK_END, WIDE_END = 0.898, 4.133
+ZOOMS = [(9.267, 10.033), (53.800, 54.867)]
+IG_IN = 55.97
 
-BOLD_F = 'contrast(1.07) saturate(.9) brightness(.97)'
-# background: the original footage, just a little darker so the white words read, like her "5 tendances" visuals
-BG_F = 'contrast(1.07) saturate(.9) brightness(.82)'   # same grade as Maé, only darker (no blur: the cutout must not show)
-
-# head top per segment (y in the 1080x1920 frame), from headpos.py when available, else measured by eye
-HEAD = {'s01': 400, 's02': 700, 's03': 420, 's04': 480, 's05': 480, 's06': 480, 's07': 480, 's08': 420,
-        's09': 480, 's10': 450, 's11': 420, 's12': 450}
-if os.path.exists('headpos.json'):
-    with open('headpos.json', encoding='utf-8') as _f:
-        HEAD.update({k: v for k, v in json.load(_f).items() if k in HEAD})
-SIZE = {'xl': 230, 'lg': 200, 'md': 170, 'ms': 145}
-
-
-def BT(seg, cls='xl'):
-    """top for a behind-head word in Anton caps: only the bottom ~20% of the capitals tucked behind the head"""
-    s = SIZE[cls]
-    return C + f'top:{max(225, round(HEAD[seg] - 0.75 * s))}px'
-
-
-C = 'left:0;right:0;text-align:center;'
-# lead-in lines centred below the chin: wide shots (chin ~1000-1120) and punch-ins (chin ~1160-1200)
-L1, L2, LP = C + 'top:1200px', C + 'top:1290px', C + 'top:1290px'
-Z1, Z2, ZP = C + 'top:1250px', C + 'top:1340px', C + 'top:1330px'
-W3 = 'width:330px;text-align:center;top:520px;'   # wide shot: one word above each of the three Maé
-
-GROUPS = [  # (start, end, [(t, text, classes, style)])
-    # s01 hook: tofu mofu bofu
-    (0.00, T['s02'], [(0.00, 'tofu', 'box b2', 'left:60px;width:320px;text-align:center;top:1150px'),
-                      (0.30, 'mofu', 'box b2', 'left:380px;width:320px;text-align:center;top:1150px'),
-                      (0.60, 'bofu', 'box b2', 'left:680px;width:300px;text-align:center;top:1150px')]),
-    # s02 wide shot, three Maé
-    (T['s02'], 2.70, [(1.10, 'il y a', 'sm', C + 'top:290px'), (1.22, '3 types', 'num', C + 'top:370px'),
-                      (1.76, 'de contenus que tu dois publier', 'sm2', C + 'top:600px')]),
-    (2.70, T['s03'], [(2.80, 'tofu', 'box b1', 'left:35px;' + W3), (3.30, 'mofu', 'box b1', 'left:375px;' + W3),
-                      (3.70, 'bofu', 'box b1', 'left:705px;' + W3)]),
-    # s03
-    (T['s03'], 5.30, [(4.24, 'premièrement,', 'sm', L1), (4.54, 'dans ta stratégie', 'sm', L2)]),
-    (5.30, 6.85, [(5.36, 'tu dois créer du contenu', 'sm2', L1), (6.40, 'tofu', 'xl back gd', BT('s03'))]),
-    (6.85, T['s04'], [(6.92, 'le', 'sm', L1), (7.10, 'top of funnel', 'box b1', LP)]),
-    # s04 (punch-in)
-    (T['s04'], 9.80, [(7.90, 'ça, c’est du contenu', 'sm', Z1), (8.54, 'large', 'xl back gd', BT('s04'))]),
-    (9.80, 11.71, [(9.86, 'du coup tu vas toucher', 'sm2', C + 'top:1230px'), (10.86, 'beaucoup plus', 'sm', C + 'top:1280px'),
-                   (11.44, 'de personnes', 'sm', C + 'top:1365px')]),
-    (11.71, T['s05'], [(11.66, 'et avoir plus de', 'sm', Z1), (12.38, 'visibilité', 'box b1', ZP)]),
-    # s05 the tofu list
-    (T['s05'], 14.20, [(12.84, 'les contenus', 'sm', L1), (13.40, 'tofu', 'xl back gd', BT('s05')), (13.70, 'qui marchent', 'sm', L2)]),
-    (14.20, T['s06'], [(14.74, '1. classement', 'pillw', C + 'top:1130px'), (15.42, '2. notation', 'pillw', C + 'top:1195px'),
-                       (16.76, '3. liste', 'pillw', C + 'top:1260px'), (17.18, '4. questions-réponses', 'pillw', C + 'top:1325px'),
-                       (18.18, '5. storytelling', 'pillg', C + 'top:1390px')]),
-    # s06 (punch-in) mofu
-    (T['s06'], 20.45, [(19.00, 'après, on a le contenu', 'sm2', Z1), (20.08, 'mofu', 'xl back gd', BT('s06'))]),
-    (20.45, 21.62, [(20.52, 'ce type de contenu est bien,', 'sm2', Z1)]),
-    (21.62, 22.91, [(21.66, 'c’est déjà une base d’abonnés', 'sm2', Z1), (22.64, 'solides', 'box b1', ZP)]),
-    (22.91, 23.80, [(22.84, 'et une bonne', 'sm', Z1), (23.16, 'portée', 'box b1', ZP)]),
-    (23.80, 25.90, [(23.88, 'tu vas créer un lien', 'sm', Z1), (25.16, 'avec ton audience', 'sm', Z2)]),
-    (25.90, T['s07'], [(25.94, 'et aussi asseoir ton', 'sm2', Z1), (26.94, 'autorité', 'lg back gd', BT('s06', 'lg'))]),
-    # s07
-    (T['s07'], 28.55, [(27.52, 'là, le contenu que tu vas faire,', 'sm2', L1)]),
-    (28.55, 30.25, [(28.60, 'ça va être du contenu', 'sm', L1), (29.22, 'éducatif', 'lg back gd', BT('s07', 'lg')),
-                    (29.64, 'approfondi', 'sm', L2)]),
-    (30.25, 31.25, [(30.28, 'des tutoriels', 'sm', L1), (30.76, 'pas à pas', 'box b1', LP)]),
-    (31.25, 32.50, [(31.28, 'des vidéos', 'sm', L1), (31.84, 'storytelling', 'box b1', LP)]),
-    (32.50, T['s08'], [(32.58, 'tes réussites,', 'sm', C + 'top:1180px'), (33.38, 'tes échecs,', 'sm', C + 'top:1265px'),
-                       (33.98, 'tes expériences personnelles', 'sm2', C + 'top:1360px')]),
-    # s08 (punch-in) bofu
-    (T['s08'], 36.28, [(35.05, 'et enfin, si tu as', 'sm', Z1), (35.86, 'une forte connexion', 'sm', Z2)]),
-    (36.28, 38.10, [(36.32, 'avec ton audience', 'sm', Z1), (37.06, 'et une vraie autorité,', 'sm', Z2)]),
-    (38.10, 40.40, [(38.18, 'à ce moment-là, tu vas créer', 'sm2', Z1), (39.96, 'bofu', 'xl back gd', BT('s08'))]),
-    (40.40, T['s09'], [(40.46, 'le', 'sm', Z1), (40.84, 'bottom of funnel', 'box b2', ZP)]),
-    # s09
-    (T['s09'], 43.70, [(41.54, 'tu vas venir publier des', 'sm2', L1), (42.48, 'transformations', 'sm', C + 'top:1255px'),
-                       (43.02, 'avant-après', 'box b1', C + 'top:1330px')]),
-    (43.70, 46.10, [(43.72, 'que ce soit des transformations', 'sm2', L1), (44.66, 'personnelles', 'sm', C + 'top:1270px'),
-                    (45.18, 'ou bien celles de tes', 'sm2', C + 'top:1365px'), (45.74, 'clients', 'xl back gd', BT('s09'))]),
-    (46.10, T['s10'], [(46.12, 'tu vas aussi faire des', 'sm2', L1), (46.66, 'études de cas', 'sm', C + 'top:1255px'),
-                       (47.12, 'fictives', 'box b1', C + 'top:1330px')]),
-    # s10 (punch-in)
-    (T['s10'], 49.55, [(47.68, 'par exemple,', 'sm', Z1), (48.14, 'qu’est-ce que je ferais pour', 'sm2', Z2),
-                       (49.06, 'une célébrité', 'ms back gd', BT('s10', 'ms'))]),
-    (49.55, 50.55, [(49.60, 'ou bien pour une grande', 'sm2', Z1), (50.20, 'marque', 'xl back gd', BT('s10'))]),
-    (50.55, 52.40, [(50.64, 'et tu peux faire des vidéos du type', 'sm2', Z1)]),
-    (52.40, T['s11'], [(52.48, '« voici ce que je ferais', 'sm2', Z1), (53.04, 'dans telle situation »', 'sm', Z2)]),
-    # s11
-    (T['s11'], 54.70, [(54.02, 'ton', 'sm', L1), (54.06, 'objectif', 'lg back gd', BT('s11', 'lg'))]),
-    (54.70, 56.90, [(54.74, 'va déterminer le type', 'sm', L1), (55.90, 'de contenu que tu vas créer', 'sm2', C + 'top:1300px')]),
-    (56.90, 59.20, [(56.92, 'mais dans la majorité des cas', 'sm2', L1), (58.30, 'la plupart des créateurs', 'sm2', C + 'top:1280px')]),
-    (59.20, T['s12'], [(59.26, 'font un', 'sm', L1), (59.58, 'mix des trois', 'box b1', LP)]),
-    # s12 (punch-in) call to action
-    (T['s12'], DUR, [(60.40, 'à toi de jouer !', 'sm', Z1), (61.56, 'abonne-toi', 'md back gd', BT('s12', 'md')),
-                     (61.80, 'pour plus de conseils', 'sm', Z2)]),
-]
+with open('words.json', encoding='utf-8') as _f:
+    RAW = json.load(_f)
 
 
 def words():
-    html, tw = [], []
-    for g, (a, b, ws) in enumerate(GROUPS):
-        for k, (t, txt, cls, st) in enumerate(ws):
-            wid = f'w{g}-{k}'
-            html.append(f'<div id="{wid}" class="dw {cls}" style="{st}"><span class="in">{txt}</span></div>')
-            tw.append(f"gsap.set('#{wid}',{{autoAlpha:0}});")
-            tw.append(f"tl.fromTo('#{wid}',{{autoAlpha:0,scale:1.22,filter:'blur(22px)'}},{{autoAlpha:1,scale:1,filter:'blur(0px)',"
-                      f"duration:.2,ease:'power3.out',immediateRender:false}},{max(a, t - .05):.3f});")
-            if b < DUR - .01:
-                tw.append(f"tl.to('#{wid}',{{autoAlpha:0,scale:.96,filter:'blur(16px)',duration:.12,ease:'power2.in'}},{b - .12:.3f});")
-                tw.append(f"tl.set('#{wid}',{{autoAlpha:0}},{b:.3f});")
-    return html, tw
+    """medium words -> caption tokens: merge c + 'est, abonne + -toi; lowercase; no punctuation; spoken fixes"""
+    out = []
+    for w in RAW:
+        t = w['text']
+        if out and (t[:1] in "'’-" and len(t) > 1):
+            out[-1]['text'] += t
+            out[-1]['end'] = w['end']
+            continue
+        out.append(dict(w))
+    for w in out:
+        t = re.sub(r'[.,!?;:«»"]', '', w['text']).strip().lower().replace("'", '’')
+        w['text'] = {'up': 'of', 'list': 'liste', 'étroits': '3', 'd’étroits': '3'}.get(t, t)
+    return [w for w in out if w['text']]
 
 
-def grades():
-    tw = [f"gsap.set('.g',{{filter:'{BOLD_F}'}});", f"gsap.set('#bgv',{{filter:'{BG_F}'}});"]
-    for t in CUTS:
-        tw.append(f"tl.fromTo('#stage',{{scale:1.05}},{{scale:1,duration:.32,ease:'power2.out',immediateRender:false}},{t:.3f});")
+# the wide shot (before 4.2s): medium drifts there and invents "et", so use the ingest (small) timings; the
+# cut starts at source 0, so source time = cut time for these
+WIDE_WORDS = [('il', 1.10), ('y', 1.16), ('a', 1.18), ('trois', 1.22), ('types', 1.42), ('de', 1.60), ('contenus', 1.76),
+              ('que', 2.04), ('tu', 2.12), ('dois', 2.16), ('publier', 2.28), ('le', 2.70), ('tofu', 2.80), ('mofu', 3.40),
+              ('bofu', 3.86)]
+WORDS = [{'text': t, 'start': s, 'end': s + .3} for t, s in WIDE_WORDS] + [w for w in words() if w['start'] >= 4.2]
+
+
+def at(word, after=0.0):
+    """start time of the first caption token equal to `word` after `after`"""
+    return next(w['start'] for w in WORDS if w['text'] == word and w['start'] >= after)
+
+
+# ------------------------------------------------------------------ brown screens
+FUNNELS = [(5.933, 8.033, 1), (18.467, 20.167, 2), (38.300, 40.900, 3)]
+# card screens: (start, end, label, title, [(t, subtitle)], [(t0, t1, video, x, y, w, h)])
+CARDS = [
+    (12.833, 15.233, 'Vidéos de', 'CLASSEMENT', [], [(12.833, 16.167, 'c1', 271, 621, 538, 954)]),
+    (15.233, 16.167, 'Vidéos de', 'NOTATION', [], []),
+    (16.167, 17.133, 'Vidéos de', 'TYPE LISTE', [], [(16.167, 17.133, 'c2', 274, 640, 532, 948)]),
+    (17.133, 18.033, 'Vidéos', 'STORYTELLING', [], [(17.133, 18.033, 'c3', 257, 610, 566, 1004)]),
+    (26.367, 29.267, 'Contenu', 'ÉDUCATIF', [(26.367, 'approfondi')], [(26.367, 29.267, 'c4', 289, 662, 502, 890)]),
+    (29.267, 30.667, 'Vidéos', 'TUTORIEL', [(29.267, 'pas à pas')], [(29.267, 30.667, 'c5', 288, 675, 506, 898)]),
+    (30.667, 34.067, 'Vidéos', 'STORYTELLING', [(30.667, 'sur tes réussites'), (at('échecs', 30) - .05, 'sur tes échecs'),
+                                                  (at('expériences', 30) - .05, 'sur tes expériences personnelles')],
+     [(30.667, 33.400, 'c6', 293, 679, 494, 878), (33.400, 34.067, 'c7', 288, 667, 504, 894)]),
+    (40.900, 45.400, 'Vidéos', 'AVANT/APRÈS', [(40.900, 'personnelles'), (at('celles', 40) - .05, 'de tes clients')],
+     [(40.900, 42.200, 'c8', 218, 746, 644, 696), (42.200, 43.400, 'c9', 304, 712, 474, 850),
+      (43.400, 45.400, 'c10', 302, 700, 476, 846)]),
+    (45.400, 48.633, 'Vidéos', 'VOICI CE QUE JE FERAIS', [], [(45.400, 48.633, 'c11', 272, 662, 538, 958)]),
+]
+BROWN_SPANS = [(a, b) for a, b, _ in FUNNELS] + [(12.833, 18.033), (26.367, 34.067), (40.900, 48.633)]
+
+
+def show(sel, a, b):
+    tw = [f"gsap.set('{sel}',{{autoAlpha:0}});", f"tl.set('{sel}',{{autoAlpha:1}},{a:.3f});"]
+    if b < DUR - .01:
+        tw.append(f"tl.set('{sel}',{{autoAlpha:0}},{b:.3f});")
     return tw
 
 
-SFX = [('whoosh-short', .02, .22), ('pop', 1.22, .16), ('sparkle', 2.80, .2)]
-SFX += [('whoosh-short', t, .2) for t in (T['s05'], T['s06'], T['s08'], T['s11'], T['s12'])]
-SFX += [('pop', t, .14) for t in (6.40, 13.40, 20.08, 39.96, 61.56)]
-SFX += [('click-soft', t, .35) for t in (14.74, 15.42, 16.76, 17.18, 18.18)]
-SFX_LEN = {'whoosh-short': .57, 'pop': .72, 'sparkle': 1.8, 'click': .3, 'click-soft': .37}
-SFX_GAIN = 0.75   # sounds sit 25% under the original levels: subtle, never louder than the voice
+def eye_badge(text, x, y, w, h, fs):
+    """dark view-count badge with an eye icon (as in her funnel and wide shot)"""
+    s = h * .62
+    return (f'<div class="badge" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;font-size:{fs}px">'
+            f'<svg width="{s:.0f}" height="{s:.0f}" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" '
+            f'fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span>{text}</span></div>')
 
 
-def audio():
-    out, lanes = [], []
-    for k, (name, t, vol) in enumerate(sorted(SFX, key=lambda x: x[1])):
-        d = min(SFX_LEN[name], DUR - t)
-        lane = next((i for i, end in enumerate(lanes) if end <= t), None)
-        if lane is None:
-            lanes.append(0); lane = len(lanes) - 1
-        lanes[lane] = t + d
-        out.append(f'<audio id="sfx{k}" src="assets/sfx/{name}.mp3" data-start="{t:.3f}" data-duration="{d:.3f}" '
-                   f'data-track-index="{10 + lane}" data-volume="{vol * SFX_GAIN:.3f}"></audio>')
-    return out
+ARROWS = {   # white hand-drawn arrows: path, arrow head (polyline)
+    1: ('M330 630 C318 545 368 494 440 492', '414 470 443 492 416 512'),
+    2: ('M360 938 C292 922 222 948 192 1010', '176 980 190 1013 222 1004'),
+    3: ('M646 1200 C700 1206 730 1250 733 1306', '712 1285 733 1310 752 1284'),
+}
+
+
+def funnel(k, a, b):
+    fid = f'fun{k}'
+    svg = (f'<svg class="full" viewBox="0 0 1080 1920">'
+           f'<polygon points="270,683 810,683 734,896 346,896" fill="{T1}" stroke="{T1}" stroke-width="22" stroke-linejoin="round"/>'
+           f'<polygon points="346,918 734,918 659,1074 421,1074" fill="{T2}" stroke="{T2}" stroke-width="18" stroke-linejoin="round"/>'
+           f'<polygon points="415,1097 665,1097 600,1199 600,1296 540,1339 480,1296 480,1199" fill="{T3}" stroke="{T3}" '
+           f'stroke-width="14" stroke-linejoin="round"/>')
+    for n in range(1, k + 1):
+        p, head = ARROWS[n]
+        svg += (f'<g id="{fid}a{n}"><path d="{p}" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>'
+                f'<polyline points="{head}" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>')
+    svg += '</svg>'
+    parts = [svg, eye_badge('1M', 432, 730, 216, 97, 56)]
+    labels = [('TOFU', 'Top of Funnel', 486, 745, 421, 566)]
+    if k >= 2:
+        parts.append(f'<div id="{fid}b2">{eye_badge("100K", 443, 950, 194, 76, 46)}</div>')
+        labels.append(('MOFU', 'Middle of Funnel', 76, 350, 1048, 1177))
+    if k >= 3:
+        parts.append(f'<div id="{fid}b3">{eye_badge("10K", 458, 1112, 190, 72, 44)}</div>')
+        labels.append(('BOFU', 'Bottom of Funnel', 566, 810, 1361, 1490))
+    for i, (big, small, x0, x1, ty, sy) in enumerate(labels, 1):
+        cx = (x0 + x1) / 2
+        parts.append(f'<div id="{fid}l{i}"><div class="flab" style="left:{cx - 300:.0f}px;top:{ty - 10}px">{big}</div>'
+                     f'<div class="fsub" style="left:{cx - 300:.0f}px;top:{sy - 8}px">{small}</div></div>')
+    html = f'<div id="{fid}" class="screen">{"".join(parts)}</div>'
+    tw = show(f'#{fid}', a, b)
+    # what is new in this screen pops in: the newest label at once, its arrow and badge a beat later
+    tw.append(f"tl.fromTo('#{fid}l{k}',{{autoAlpha:0,scale:.8}},{{autoAlpha:1,scale:1,duration:.25,ease:'back.out(2)',immediateRender:false}},{a:.3f});")
+    tw.append(f"gsap.set('#{fid}a{k}',{{autoAlpha:0}});")
+    tw.append(f"tl.to('#{fid}a{k}',{{autoAlpha:1,duration:.2}},{a + .5:.3f});")
+    if k >= 2:
+        tw.append(f"gsap.set('#{fid}b{k}',{{autoAlpha:0}});")
+        tw.append(f"tl.fromTo('#{fid}b{k}',{{autoAlpha:0,scale:.6}},{{autoAlpha:1,scale:1,duration:.25,ease:'back.out(2)',immediateRender:false}},{a + .6:.3f});")
+    return [html], tw
+
+
+def title_size(title):
+    return min(134, round(860 / (0.43 * len(title))))
+
+
+def card_screens():
+    html, tw = [], []
+    for k, (a, b, label, title, subs, vids) in enumerate(CARDS):
+        sid = f'cs{k}'
+        fs = title_size(title)
+        sub_html = ''.join(f'<div id="{sid}s{j}" class="csub">{s}</div>' for j, (_, s) in enumerate(subs))
+        html.append(f'<div id="{sid}" class="screen"><div class="tblock" style="top:{352}px"><div class="clab">{label}</div>'
+                    f'<div class="ctit" style="font-size:{fs}px">{title}</div><div class="subs">{sub_html}</div></div></div>')
+        tw += show(f'#{sid}', a, b)
+        for j, (t, _) in enumerate(subs):
+            end = subs[j + 1][0] if j + 1 < len(subs) else b
+            tw += show(f'#{sid}s{j}', t, end)
+        for v0, v1, vid, x, y, w, h in vids:
+            html.append(f'<div id="w{vid}" class="cardv" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px">'
+                        f'<video id="{vid}" src="assets/cards/{vid}.mp4" muted playsinline data-start="{v0:.3f}" data-media-start="0" '
+                        f'data-duration="{v1 - v0:.3f}" data-track-index="{20 + int(vid[1:])}"></video></div>')
+            tw += show(f'#w{vid}', v0, v1)
+    return html, tw
+
+
+# ------------------------------------------------------------------ hook + wide shot
+def hook():
+    back = ['<div id="hk1" class="anton hook" style="left:108px;top:318px;font-size:226px">TOFU</div>']
+    front = ['<div id="hk2" class="anton hook" style="left:578px;top:932px;font-size:226px">MOFU</div>',
+             '<div id="hk3" class="anton hook" style="left:84px;top:1382px;font-size:226px">BOFU</div>']
+    tw = []
+    for k, t in ((1, 0.0), (2, 0.33), (3, 0.60)):
+        tw += show(f'#hk{k}', t, HOOK_END)
+        tw.append(f"tl.fromTo('#hk{k}',{{scale:1.25}},{{scale:1,duration:.16,ease:'power3.out',immediateRender:false}},{t:.3f});")
+    wide = []
+    for k, (word, x0, x1, badge, bx, bw) in enumerate([('TOFU', 60, 307, '1M', 104, 172), ('MOFU', 393, 656, '100K', 438, 201),
+                                                       ('BOFU', 767, 1020, '10K', 782, 233)]):
+        wide.append(f'<div class="anton hook" style="left:{(x0 + x1) / 2 - 200:.0f}px;width:400px;text-align:center;top:398px;'
+                    f'font-size:151px">{word}</div>')
+        wide.append(eye_badge(badge, bx, 596, bw, 68, 44))
+    front.append(f'<div id="wide">{"".join(wide)}</div>')
+    tw += show('#wide', HOOK_END, WIDE_END)
+    return back, front, tw
+
+
+# ------------------------------------------------------------------ captions: one word at a time
+def screen_at(t):
+    for a, b, *_ in CARDS:
+        if a <= t < b:
+            return 'card'
+    for a, b, _ in FUNNELS:
+        if a <= t < b:
+            return 'funnel'
+    return None
+
+
+def cap_y(t):
+    if t >= IG_IN:
+        return 470
+    if t < WIDE_END:
+        return 1340
+    s = screen_at(t)
+    if s == 'funnel':
+        return 1135
+    if s == 'card':
+        for a, b, *_rest, vids in CARDS:
+            if a <= t < b and vids:
+                bottom = max(y + h for v0, v1, _, x, y, w, h in vids if v0 <= t < v1) if any(v0 <= t < v1 for v0, v1, *_ in vids) else 1575
+                return bottom - 20
+        return 1560
+    return 1100
+
+
+def captions():
+    html, tw = [], []
+    ws = [w for w in WORDS if w['start'] >= HOOK_END - .05]
+    for k, w in enumerate(ws):
+        a = max(HOOK_END, w['start'] - .03)
+        b = ws[k + 1]['start'] - .03 if k + 1 < len(ws) else DUR
+        b = min(b, a + 1.2)
+        if b - a < .06:      # words closer than two frames: skip, the next one takes over
+            continue
+        if FUNNELS[2][0] <= a < FUNNELS[2][1]:   # she leaves the full funnel without captions
+            continue
+        html.append(f'<div id="cp{k}" class="cap" style="top:{cap_y(a)}px">{w["text"]}</div>')
+        tw += show(f'#cp{k}', a, b)
+        tw.append(f"tl.fromTo('#cp{k}',{{scale:1.18}},{{scale:1,duration:.1,ease:'power2.out',immediateRender:false}},{a:.3f});")
+    return html, tw
+
+
+# ------------------------------------------------------------------ instagram follow card
+def ig_card():
+    verified = ('<svg width="42" height="42" viewBox="0 0 24 24"><path fill="#1C96F0" d="M12 1.5l2.4 1.8 3-.3 1.2 2.8 2.8 1.2-.3 3 '
+                '1.8 2.4-1.8 2.4.3 3-2.8 1.2-1.2 2.8-3-.3L12 22.5l-2.4-1.8-3 .3-1.2-2.8-2.8-1.2.3-3L1.1 12l1.8-2.4-.3-3 2.8-1.2 '
+                '1.2-2.8 3 .3z"/><path d="M7.6 12.3l3 3 5.8-6" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" '
+                'stroke-linejoin="round"/></svg>')
+    cursor = ('<svg width="52" height="70" viewBox="0 0 26 35"><path d="M2 2v26l7-6 5 11 4-2-5-10h9z" fill="#fff" stroke="#111" '
+              'stroke-width="1.6" stroke-linejoin="round"/></svg>')
+    html = [f'<div id="ig"><div class="igcard"><div class="igav"><img src="assets/avatar.png"/></div>'
+            f'<div class="igname">Instagram</div><div id="ighandle" class="ighandle"><span>@thestrategicboost.fr</span></div>'
+            f'<div id="igver" class="igver">{verified}</div>'
+            f'<div id="igfollow" class="igbtn follow">Follow</div><div id="igfollowing" class="igbtn following">Following</div></div>'
+            f'<div id="igcur" class="igcur">{cursor}</div></div>']
+    tw = show('#ig', IG_IN, DUR)
+    tw += [f"tl.fromTo('#ig .igcard',{{scale:.86,autoAlpha:0}},{{scale:1,autoAlpha:1,duration:.22,ease:'back.out(1.8)',immediateRender:false}},{IG_IN:.3f});",
+           "gsap.set('#ighandle',{clipPath:'inset(0 100% 0 0)'});",
+           f"tl.to('#ighandle',{{clipPath:'inset(0 0% 0 0)',duration:.55,ease:'none'}},{IG_IN + .3:.3f});",
+           "gsap.set('#igver',{autoAlpha:0,scale:.4});",
+           f"tl.to('#igver',{{autoAlpha:1,scale:1,duration:.2,ease:'back.out(2.5)'}},{IG_IN + .85:.3f});",
+           "gsap.set('#igfollowing',{autoAlpha:0});",
+           "gsap.set('#igcur',{autoAlpha:0,x:60,y:110});",
+           f"tl.to('#igcur',{{autoAlpha:1,duration:.1}},{IG_IN + .75:.3f});",
+           f"tl.to('#igcur',{{x:0,y:0,duration:.3,ease:'power2.out'}},{IG_IN + .75:.3f});",
+           f"tl.to('#igcur',{{scale:.82,duration:.06,yoyo:true,repeat:1}},{IG_IN + 1.05:.3f});",
+           f"tl.set('#igfollow',{{autoAlpha:0}},{IG_IN + 1.1:.3f});",
+           f"tl.set('#igfollowing',{{autoAlpha:1}},{IG_IN + 1.1:.3f});"]
+    return html, tw
+
+
+def zooms():
+    tw = []
+    for a, b in ZOOMS:
+        tw += [f"tl.set('#stage',{{scale:1.3}},{a - .002:.3f});", f"tl.set('#stage',{{scale:1}},{b - .002:.3f});"]
+    return tw
 
 
 CSS = f'''
 *{{margin:0;padding:0;box-sizing:border-box}}
 html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
-#stage{{position:absolute;inset:0;transform-origin:50% 45%}}
+#stage{{position:absolute;inset:0;transform-origin:50% 36%}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 #bgv{{z-index:0}}
-.dw.back{{z-index:3}}
 #cutwrap{{position:absolute;inset:0;z-index:4}}
-.fx{{position:absolute;inset:0;pointer-events:none}}
-#dtone{{z-index:7;background:linear-gradient(180deg,rgba(60,45,25,.10),rgba(70,50,25,.10));mix-blend-mode:soft-light}}
-#dvig{{z-index:7;background:radial-gradient(95% 62% at 50% 46%,rgba(0,0,0,0) 55%,rgba(30,20,10,.38) 100%)}}
-#dgrad{{z-index:7;background:linear-gradient(180deg,rgba(0,0,0,.30) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 58%,rgba(20,12,5,.32) 100%)}}
-
-/* brand type: Poppins for lines, Anton caps for punch words, gold gradient blocks and pills (no yellow) */
-.dw{{position:absolute;z-index:8;color:#fff;font-family:Poppins;font-weight:700;line-height:1.05;letter-spacing:-.01em;
-  text-shadow:0 8px 30px rgba(0,0,0,.5),0 2px 6px rgba(0,0,0,.35);transform-origin:50% 60%;white-space:nowrap}}
-.dw .in{{display:inline-block}}
-.sm{{font-size:70px}}
-.sm2{{font-size:50px}}
-/* big words behind the head: Anton caps in gold */
-.back{{font-family:Anton;font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:.005em}}
-.xl{{font-size:230px}}
-.lg{{font-size:200px}}
-.md{{font-size:170px}}
-.ms{{font-size:145px}}
-
-.dw.gd{{color:#fff}}   /* behind-head words in white: gold did not read on the wall */
-/* gold gradient block with white condensed caps (brand "encart") */
-.box .in{{font-family:Anton;font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:1.08;color:#fff;
-  padding:.06em .24em .02em;background:linear-gradient(100deg,{GOLD_A} 0%,{GOLD_B} 48%,{GOLD_C} 62%,{GOLD_D} 100%);
-  text-shadow:0 2px 8px rgba(80,50,10,.55);box-shadow:0 16px 40px rgba(0,0,0,.35)}}
-.b1{{font-size:104px}}
-.b2{{font-size:86px}}
-/* pills: white with brown bold italic, or gold gradient with white bold italic */
-.pillw .in,.pillg .in{{font:italic 700 50px Poppins;padding:.16em .75em .18em;border-radius:99px;box-shadow:0 12px 30px rgba(0,0,0,.3)}}
-.pillw .in{{background:#fff;color:{BROWN};text-shadow:none}}
-.pillg .in{{background:linear-gradient(100deg,{GOLD_A} 0%,{GOLD_B} 48%,{GOLD_C} 62%,{GOLD_D} 100%);color:#fff;text-shadow:0 2px 6px rgba(80,50,10,.5)}}
-/* big white number line ("3 types") */
-.num{{font-family:Anton;font-weight:400;font-size:220px;text-transform:uppercase;line-height:.95}}
+.anton{{font-family:Anton;font-weight:400;line-height:1;white-space:nowrap;color:#fff}}
+.hook{{position:absolute;z-index:6;text-shadow:0 0 38px rgba(0,0,0,.55),0 0 12px rgba(0,0,0,.35);transform-origin:50% 50%}}
+#hk1{{z-index:3}}
+.badge{{position:absolute;z-index:7;display:flex;align-items:center;justify-content:center;gap:.22em;border-radius:6px;
+  background:rgba(40,44,48,.88);color:#fff;font-family:Poppins;font-weight:600;letter-spacing:-.02em}}
+.screen{{position:absolute;inset:0;z-index:10;background:{BROWN}}}
+.flab{{position:absolute;width:600px;text-align:center;font:400 126px/1 Anton;color:#fff}}
+.fsub{{position:absolute;width:600px;text-align:center;font:600 44px/1 Poppins;color:#fff;letter-spacing:-.02em}}
+.tblock{{position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;color:#fff}}
+.clab{{font:600 44px/1 Poppins;letter-spacing:-.02em;align-self:flex-start;margin-left:4px}}
+.ctit{{font-family:Anton;line-height:1.02;white-space:nowrap;letter-spacing:.045em}}
+.subs{{position:relative;height:44px}}
+.csub{{position:absolute;right:2px;top:0;font:600 38px/1 Poppins;letter-spacing:-.02em;white-space:nowrap}}
+.cardv{{position:absolute;z-index:11;overflow:hidden}}
+.cardv video{{width:100%;height:100%;object-fit:cover;display:block}}
+.cap{{position:absolute;left:0;right:0;z-index:20;text-align:center;color:#fff;font:700 78px/1 Poppins;letter-spacing:-.03em;
+  text-shadow:0 0 22px rgba(0,0,0,.55),0 3px 10px rgba(0,0,0,.45);white-space:nowrap;transform-origin:50% 50%}}
+#ig{{position:absolute;inset:0;z-index:15}}
+.igcard{{position:absolute;left:116px;top:1208px;width:848px;height:174px;background:#fff;border-radius:4px;
+  box-shadow:0 18px 50px rgba(0,0,0,.25)}}
+.igav{{position:absolute;left:25px;top:24px;width:128px;height:128px;border-radius:50%;padding:7px;
+  background:conic-gradient(from 200deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5,#feda75)}}
+.igav img{{width:100%;height:100%;border-radius:50%;border:5px solid #fff;object-fit:cover;display:block}}
+.igname{{position:absolute;left:184px;top:22px;font:400 74px/1 Cookie;color:#111}}
+.ighandle{{position:absolute;left:164px;top:106px;font:700 27px/1 Poppins;color:#111;letter-spacing:-.01em}}
+.igver{{position:absolute;left:446px;top:90px}}
+.igbtn{{position:absolute;left:502px;top:57px;width:318px;height:66px;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;font:600 40px/1 Poppins;letter-spacing:-.01em}}
+.follow{{background:#1A8CF1;color:#fff}}
+.following{{background:#E8E9EC;color:#262626}}
+.igcur{{position:absolute;left:660px;top:1310px;z-index:16;filter:drop-shadow(0 2px 4px rgba(0,0,0,.35))}}
 '''
 
 SAFE_GUIDE = ('<div style="position:absolute;inset:0;z-index:99;pointer-events:none">'
               '<div style="position:absolute;left:0;right:0;top:0;height:220px;background:rgba(255,0,0,.28)"></div>'
-              '<div style="position:absolute;left:0;right:0;top:1470px;bottom:0;background:rgba(255,0,0,.28)"></div>'
-              '<div style="position:absolute;left:0;width:35px;top:220px;height:1250px;background:rgba(255,0,0,.28)"></div>'
-              '<div style="position:absolute;right:0;width:35px;top:220px;height:935px;background:rgba(255,0,0,.28)"></div>'
-              '<div style="position:absolute;right:0;width:100px;top:1155px;height:315px;background:rgba(255,0,0,.28)"></div></div>')
+              '<div style="position:absolute;left:0;right:0;top:1470px;bottom:0;background:rgba(255,0,0,.28)"></div></div>')
 
 
 def build():
-    w_html, w_tw = words()
-    back = [h for h in w_html if 'back' in h.split('class="')[1].split('"')[0]]
-    front = [h for h in w_html if h not in back]
-    tweens = grades() + w_tw
+    hb, hf, htw = hook()
+    f_html, f_tw = [], []
+    for k, (a, b, n) in enumerate(FUNNELS):
+        h, t = funnel(n, a, b)
+        f_html += h; f_tw += t
+    c_html, c_tw = card_screens()
+    cap_html, cap_tw = captions()
+    ig_html, ig_tw = ig_card()
+    tweens = zooms() + htw + f_tw + c_tw + cap_tw + ig_tw
     nl = '\n'
     return f'''<!doctype html>
 <html lang="fr" data-resolution="portrait">
@@ -231,14 +338,16 @@ def build():
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR:.3f}" data-width="1080" data-height="1920">
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
-{nl.join(audio())}
   <div id="stage">
-    <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
-{nl.join(back)}
-    <div id="cutwrap"><video id="cut" class="full g" src="assets/subject.webm" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="1"></video></div>
+    <video id="bgv" class="full" src="assets/aroll_graded.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
+{nl.join(hb)}
+    <div id="cutwrap"><video id="cut" class="full" src="assets/subject_hook_g.webm" muted playsinline data-start="0" data-media-start="0" data-duration="{HOOK_END:.3f}" data-track-index="1"></video></div>
+{nl.join(hf)}
   </div>
-  <div id="dtone" class="fx"></div><div id="dvig" class="fx"></div><div id="dgrad" class="fx"></div>
-{nl.join(front)}
+{nl.join(f_html)}
+{nl.join(c_html)}
+{nl.join(ig_html)}
+{nl.join(cap_html)}
 {SAFE_GUIDE if SAFE else ''}
 </div>
 <script>
@@ -254,4 +363,4 @@ window.__timelines["main"] = tl;
 
 with open('index.html', 'w', encoding='utf-8', newline='\n') as _f:
     _f.write(build())
-print(f'wrote index.html {DUR:.3f}s  cuts {[round(c, 3) for c in CUTS]}')
+print(f'wrote index.html {DUR:.3f}s  {len(WORDS)} caption words')
