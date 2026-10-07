@@ -276,9 +276,7 @@ def zooms():
 def sfx_list():
     out = [('impact-bass-1', 0.0, .22)]
     out += [('pop', t, .3) for t in (0.0, 0.33, 0.60)]                       # hook words
-    out.append(('whoosh-short', HOOK_END, .22))                               # wide shot + badges
-    ws = dict(WIDE_WORDS)                                                     # "il y a trois types de contenus..."
-    out += [('pop', ws['trois'], .24), ('click-soft', ws['contenus'], .45), ('click-soft', ws['publier'], .45)]
+    ws = dict(WIDE_WORDS)               # wide shot: sounds only on TOFU MOFU BOFU (Maé: not on "il y a trois types...")
     out += [('pop', ws[w], .3) for w in ('tofu', 'mofu', 'bofu')]
     opens = sorted({a for a, _, _ in FUNNELS} | {a for a, *_ in CARDS})
     spans = [a for a, _ in BROWN_SPANS] + [40.900]                            # a brown screen opens or swaps
