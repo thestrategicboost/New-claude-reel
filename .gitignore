@@ -11,3 +11,6 @@ reels/*/assets/sfx/
 reels/*/snapshots/
 reels/*/renders/work-*/
 reels/*/.transcode-cache/
+reels/*/renders/test-*-full.mp4
+reels/*/renders/test-soustitres-editoriaux.mp4
+reels/*/test-editorial/snapshots/
