@@ -35,20 +35,18 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 16px 36px rgba(0,0,0,.4)}
 .bl{font:400 38px/1 Anton;color:#fff;letter-spacing:.02em}
 .recapCal.hookCal{left:365px;top:1000px;z-index:12}
-/* step titles on video: brown band, gold label block, big gold-white title */
-.gt{background:linear-gradient(180deg,#FFFFFF 0%,#FBEFD2 30%,#E2BF77 55%,#B8873A 78%,#F1D9A0 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding:.12em .04em 0;margin-top:-.12em}
-.stepT{position:absolute;left:0;right:0;top:1040px;z-index:14;text-align:center;color:#fff}
-.stepT .band{position:absolute;left:0;right:0;top:58px;height:236px;background:rgba(140,92,65,.88);border-top:4px solid #E2BF77;border-bottom:4px solid #E2BF77;
-  box-shadow:0 14px 40px rgba(0,0,0,.35)}
-.stepT .sl{position:relative;display:inline-block;font:800 46px/1 Poppins;letter-spacing:.06em;color:#4A3010;background:linear-gradient(160deg,#7A5420 0%,#C99A4E 26%,#F3DFB2 44%,#FFFFFF 51%,#E6C681 60%,#A9792F 84%,#6E4A1B 100%);padding:14px 30px 12px;
-  border-radius:14px;transform:rotate(-3deg);box-shadow:inset 0 3px 0 rgba(255,255,255,.7),0 8px 20px rgba(0,0,0,.35)}
-.stepT .sn{position:relative;font-family:Anton;line-height:1.05;margin-top:8px;white-space:nowrap;filter:drop-shadow(0 6px 0 #5A3F1F) drop-shadow(0 12px 22px rgba(0,0,0,.45))}
+/* step titles: magazine serif behind her head */
+.stepT{position:absolute;left:0;right:0;top:196px;z-index:6;text-align:center;color:#FFF8EE}
+.stepT .inner,.hd .inner{display:inline-block;text-align:left}
+.stepT .sl{font:600 40px/1 Poppins;color:#fff;margin-left:.3em;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+.stepT .sn{font-family:'DM Serif Display';font-weight:400;line-height:.95;letter-spacing:-.01em;white-space:nowrap;margin-top:6px;
+  text-shadow:0 6px 30px rgba(0,0,0,.25)}
+.lt{display:inline-block}
 /* brown screens */
 .screen{position:absolute;inset:0;z-index:20;background:#8C5C41;color:#fff}
-.hd{position:absolute;left:0;right:0;top:300px;text-align:center}
-.hl{display:inline-block;font:800 42px/1 Poppins;letter-spacing:.06em;color:#4A3010;background:linear-gradient(160deg,#7A5420 0%,#C99A4E 26%,#F3DFB2 44%,#FFFFFF 51%,#E6C681 60%,#A9792F 84%,#6E4A1B 100%);padding:12px 26px 10px;border-radius:12px;
-  transform:rotate(-3deg);box-shadow:inset 0 3px 0 rgba(255,255,255,.7),0 8px 18px rgba(0,0,0,.3)}
-.ht{font-family:Anton;line-height:1.05;margin-top:10px;white-space:nowrap;filter:drop-shadow(0 6px 0 #5A3F1F) drop-shadow(0 10px 20px rgba(0,0,0,.35))}
+.hd{position:absolute;left:0;right:0;top:250px;text-align:center}
+.hl{font:600 40px/1 Poppins;margin-left:.3em;opacity:.95}
+.ht{font-family:'DM Serif Display';font-weight:400;line-height:.95;letter-spacing:-.01em;margin-top:6px;white-space:nowrap}
 .tag{display:inline-block;font:400 46px/1 Anton;letter-spacing:.03em;color:#5A3F1F;background:#fff;padding:10px 20px 8px;border-radius:10px}
 .per{font:600 30px/1 Poppins;margin-top:12px}
 .paceCol{position:absolute;top:560px;width:300px;text-align:center}
@@ -168,8 +166,18 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
   <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="48.667" data-track-index="0"></video>
 <div id="wall"><div id="wl0" class="wcol" style="left:-30px"><div class="wc"><img src="assets/reels/r1.jpg"/></div><div class="wc"><img src="assets/reels/r2.jpg"/></div><div class="wc"><img src="assets/reels/r3.jpg"/></div><div class="wc"><img src="assets/reels/r4.jpg"/></div><div class="wc"><img src="assets/reels/r5.jpg"/></div><div class="wc"><img src="assets/reels/r6.jpg"/></div><div class="wc"><img src="assets/reels/r7.jpg"/></div><div class="wc"><img src="assets/reels/r8.jpg"/></div></div><div id="wl1" class="wcol" style="left:245px"><div class="wc"><img src="assets/reels/r4.jpg"/></div><div class="wc"><img src="assets/reels/r5.jpg"/></div><div class="wc"><img src="assets/reels/r6.jpg"/></div><div class="wc"><img src="assets/reels/r7.jpg"/></div><div class="wc"><img src="assets/reels/r8.jpg"/></div><div class="wc"><img src="assets/reels/r9.jpg"/></div><div class="wc"><img src="assets/reels/r10.jpg"/></div><div class="wc"><img src="assets/reels/r1.jpg"/></div></div><div id="wl2" class="wcol" style="left:520px"><div class="wc"><img src="assets/reels/r7.jpg"/></div><div class="wc"><img src="assets/reels/r8.jpg"/></div><div class="wc"><img src="assets/reels/r9.jpg"/></div><div class="wc"><img src="assets/reels/r10.jpg"/></div><div class="wc"><img src="assets/reels/r1.jpg"/></div><div class="wc"><img src="assets/reels/r2.jpg"/></div><div class="wc"><img src="assets/reels/r3.jpg"/></div><div class="wc"><img src="assets/reels/r4.jpg"/></div></div><div id="wl3" class="wcol" style="left:795px"><div class="wc"><img src="assets/reels/r10.jpg"/></div><div class="wc"><img src="assets/reels/r1.jpg"/></div><div class="wc"><img src="assets/reels/r2.jpg"/></div><div class="wc"><img src="assets/reels/r3.jpg"/></div><div class="wc"><img src="assets/reels/r4.jpg"/></div><div class="wc"><img src="assets/reels/r5.jpg"/></div><div class="wc"><img src="assets/reels/r6.jpg"/></div><div class="wc"><img src="assets/reels/r7.jpg"/></div></div></div>
 <div id="gwin"><img id="gstrip" src="assets/guide_strip.jpg"/></div>
+<div id="st0" class="stepT"><div class="inner"><div class="sl">Étape 1</div><div class="sn" style="font-size:250px"><span class="lt">R</span><span class="lt">Y</span><span class="lt">T</span><span class="lt">H</span><span class="lt">M</span><span class="lt">E</span></div></div></div>
+<div id="st1" class="stepT"><div class="inner"><div class="sl">Étape 2</div><div class="sn" style="font-size:195px"><span class="lt">P</span><span class="lt">L</span><span class="lt">A</span><span class="lt">N</span><span class="lt">N</span><span class="lt">I</span><span class="lt">N</span><span class="lt">G</span></div></div></div>
+<div id="st2" class="stepT"><div class="inner"><div class="sl">Étape 3</div><div class="sn" style="font-size:142px"><span class="lt">T</span><span class="lt">H</span><span class="lt">É</span><span class="lt">M</span><span class="lt">A</span><span class="lt">T</span><span class="lt">I</span><span class="lt">Q</span><span class="lt">U</span><span class="lt">E</span><span class="lt">S</span></div></div></div>
+<div id="st3" class="stepT"><div class="inner"><div class="sl">Étape 4 · types de</div><div class="sn" style="font-size:223px"><span class="lt">C</span><span class="lt">O</span><span class="lt">N</span><span class="lt">T</span><span class="lt">E</span><span class="lt">N</span><span class="lt">U</span></div></div></div>
+<div id="st4" class="stepT"><div class="inner"><div class="sl">Étape 5</div><div class="sn" style="font-size:195px"><span class="lt">T</span><span class="lt">O</span><span class="lt">N</span> <span class="lt">M</span><span class="lt">O</span><span class="lt">I</span><span class="lt">S</span></div></div></div>
 <video id="cutH" class="full cut" src="assets/cut_hook.webm" muted playsinline data-start="0.000" data-media-start="0" data-duration="3.556" data-track-index="1"></video>
 <video id="cutC" class="full cut" src="assets/cut_cta.webm" muted playsinline data-start="42.037" data-media-start="0" data-duration="4.186" data-track-index="3"></video>
+<video id="cutS0" class="full cut" src="assets/cut_st0.webm" muted playsinline data-start="5.767" data-media-start="0" data-duration="2.100" data-track-index="4"></video>
+<video id="cutS1" class="full cut" src="assets/cut_st1.webm" muted playsinline data-start="11.300" data-media-start="0" data-duration="1.533" data-track-index="5"></video>
+<video id="cutS2" class="full cut" src="assets/cut_st2.webm" muted playsinline data-start="18.800" data-media-start="0" data-duration="1.867" data-track-index="6"></video>
+<video id="cutS3" class="full cut" src="assets/cut_st3.webm" muted playsinline data-start="23.600" data-media-start="0" data-duration="1.600" data-track-index="7"></video>
+<video id="cutS4" class="full cut" src="assets/cut_st4.webm" muted playsinline data-start="29.033" data-media-start="0" data-duration="1.867" data-track-index="8"></video>
   </div>
 <div id="hook"><div class="hk1">UN MOIS DE CONTENU</div><div id="hk2" class="hk2">en <span class="gd">45 MINUTES</span></div></div>
 <div id="hkW" class="badge" style="left:56px;top:600px"><svg class="ic" width="120" height="120" viewBox="0 0 100 100"><circle cx="50" cy="56" r="34"/><path d="M42 12h16M50 12v10M78 30l5-5"/><line id="swh" x1="50" y1="56" x2="50" y2="34"/></svg><div class="bl">45 MIN</div></div>
@@ -215,25 +223,21 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div class="cd on" style="left:144px;top:660px;width:132px;height:142px"><div class="dn">30</div><div class="tag2" style="background:#F3DFB2;color:#5A3F1F">Story</div><div class="topic">Musculation</div></div>
 </div>
 </div>
-<div id="st0" class="stepT"><div class="band"></div><div class="sl">ÉTAPE 1</div><div class="sn" style="font-size:200px"><span class="gt">RYTHME</span></div></div>
-<div id="st1" class="stepT"><div class="band"></div><div class="sl">ÉTAPE 2</div><div class="sn" style="font-size:200px"><span class="gt">PLANNING</span></div></div>
-<div id="st2" class="stepT"><div class="band"></div><div class="sl">ÉTAPE 3</div><div class="sn" style="font-size:190px"><span class="gt">THÉMATIQUES</span></div></div>
-<div id="st3" class="stepT"><div class="band"></div><div class="sl">ÉTAPE 4</div><div class="sn" style="font-size:130px"><span class="gt">TYPES DE CONTENU</span></div></div>
-<div id="st4" class="stepT"><div class="band"></div><div class="sl">ÉTAPE 5</div><div class="sn" style="font-size:200px"><span class="gt">TON MOIS</span></div></div>
+
 <div id="sRy" class="screen">
-<div class="hd"><div class="hl">ÉTAPE 1</div><div class="ht" style="font-size:170px"><span class="gt">RYTHME</span></div></div>
+<div class="hd"><div class="inner"><div class="hl">Étape 1</div><div class="ht" style="font-size:190px">RYTHME</div></div></div>
 <div id="ry0" class="paceCol" style="left:50px"><div class="tag">CHILL</div><div class="per">3 posts / sem</div><div class="thumbs"><div class="th" id="ry0t0"><img src="assets/reels/r1.jpg"/></div><div class="th" id="ry0t1"><img src="assets/reels/r2.jpg"/></div><div class="th" id="ry0t2"><img src="assets/reels/r3.jpg"/></div></div></div>
 <div id="ry1" class="paceCol" style="left:390px"><div class="tag">MOYEN</div><div class="per">5 posts / sem</div><div class="thumbs"><div class="th" id="ry1t0"><img src="assets/reels/r4.jpg"/></div><div class="th" id="ry1t1"><img src="assets/reels/r5.jpg"/></div><div class="th" id="ry1t2"><img src="assets/reels/r6.jpg"/></div><div class="th" id="ry1t3"><img src="assets/reels/r7.jpg"/></div><div class="th" id="ry1t4"><img src="assets/reels/r8.jpg"/></div></div></div>
 <div id="ry2" class="paceCol" style="left:730px"><div class="tag">INTENSE</div><div class="per">7 posts / sem</div><div class="thumbs"><div class="th" id="ry2t0"><img src="assets/reels/r7.jpg"/></div><div class="th" id="ry2t1"><img src="assets/reels/r8.jpg"/></div><div class="th" id="ry2t2"><img src="assets/reels/r9.jpg"/></div><div class="th" id="ry2t3"><img src="assets/reels/r10.jpg"/></div><div class="th" id="ry2t4"><img src="assets/reels/r1.jpg"/></div><div class="th" id="ry2t5"><img src="assets/reels/r2.jpg"/></div><div class="th" id="ry2t6"><img src="assets/reels/r3.jpg"/></div></div></div>
 </div>
 <div id="sPl" class="screen">
-<div class="hd"><div class="hl">ÉTAPE 2</div><div class="ht" style="font-size:170px"><span class="gt">PLANNING</span></div></div>
+<div class="hd"><div class="inner"><div class="hl">Étape 2</div><div class="ht" style="font-size:190px">PLANNING</div></div></div>
 <div id="pl0" class="plRow" style="top:640px"><div class="tag">CHILL</div><div class="per">3 posts / sem</div><div class="week "><div class="day on">L</div><div class="day">M</div><div class="day on">M</div><div class="day">J</div><div class="day on">V</div><div class="day">S</div><div class="day">D</div></div></div>
 <div id="pl1" class="plRow" style="top:890px"><div class="tag">MOYEN</div><div class="per">5 posts / sem</div><div class="week "><div class="day on">L</div><div class="day on">M</div><div class="day on">M</div><div class="day on">J</div><div class="day on">V</div><div class="day">S</div><div class="day">D</div></div></div>
 <div id="pl2" class="plRow" style="top:1140px"><div class="tag">INTENSE</div><div class="per">7 posts / sem</div><div class="week "><div class="day on">L</div><div class="day on">M</div><div class="day on">M</div><div class="day on">J</div><div class="day on">V</div><div class="day on">S</div><div class="day on">D</div></div></div>
 </div>
 <div id="sTh" class="screen">
-<div class="hd"><div class="hl">ÉTAPE 3</div><div class="ht" style="font-size:170px"><span class="gt">THÉMATIQUES</span></div></div>
+<div class="hd"><div class="inner"><div class="hl">Étape 3</div><div class="ht" style="font-size:142px">THÉMATIQUES</div></div></div>
 <svg class="full" viewBox="0 0 1080 1920"><path id="tha0" d="M540 913 L540 797" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/><path id="tha1" d="M640 980 L760 944" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/><path id="tha2" d="M602 1089 L676 1182" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/><path id="tha3" d="M478 1089 L404 1182" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/><path id="tha4" d="M440 980 L320 944" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/></svg>
 <div id="thc" class="niche" style="left:310px;top:940px"><div class="nl">NICHE</div><div class="nn">COACH SPORTIF</div></div>
 <div id="thn0" class="node" style="left:420px;top:626px"><div class="nodeIc"><svg class="ic" width="74" height="74" viewBox="0 0 100 100"><path d="M14 50h72M24 34v32M34 28v44M66 28v44M76 34v32"/></svg></div><div class="nodeL">Musculation</div></div>
@@ -243,7 +247,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="thn4" class="node" style="left:106px;top:836px"><div class="nodeIc"><svg class="ic" width="74" height="74" viewBox="0 0 100 100"><path d="M64 16a34 34 0 1 0 20 46A28 28 0 0 1 64 16z"/><path d="M30 24l3 6 6 3-6 3-3 6-3-6-6-3 6-3z" stroke-width="3"/></svg></div><div class="nodeL">Récupération</div></div>
 </div>
 <div id="sTy" class="screen">
-<div class="hd"><div class="hl">ÉTAPE 4</div><div class="ht" style="font-size:130px"><span class="gt">TYPES DE CONTENU</span></div></div>
+<div class="hd"><div class="inner"><div class="hl">Étape 4 · types de</div><div class="ht" style="font-size:190px">CONTENU</div></div></div>
 <div class="tbl" style="left:40px;top:600px;width:1000px;height:796px">
 <div class="tc th2" style="left:140px;top:0;width:172px;height:96px">Tutoriel</div>
 <div class="tc th2" style="left:312px;top:0;width:172px;height:96px">Storytelling</div>
@@ -283,7 +287,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 </div>
 </div>
 <div id="sMo" class="screen">
-<div class="hd"><div class="hl">ÉTAPE 5</div><div class="ht" style="font-size:170px"><span class="gt">TON MOIS</span></div></div>
+<div class="hd"><div class="inner"><div class="hl">Étape 5</div><div class="ht" style="font-size:190px">TON MOIS</div></div></div>
 <div class="calwrap">
 <div id="calA" class="cal" style="width:980px;height:806px;transform:scale(1.0)">
 <div class="ch" style="left:0px;width:140px">Lun</div>
@@ -472,38 +476,33 @@ tl.set('#hkM',{autoAlpha:0},3.556);
 gsap.set('#st0',{autoAlpha:0});
 tl.set('#st0',{autoAlpha:1},5.778);
 tl.set('#st0',{autoAlpha:0},7.778);
-tl.fromTo('#st0 .band',{scaleX:0},{scaleX:1,duration:.2,ease:'power3.out',immediateRender:false},5.778);
-tl.fromTo('#st0 .sl',{x:-260,autoAlpha:0},{x:0,autoAlpha:1,duration:.22,ease:'back.out(1.6)',immediateRender:false},5.822);
-tl.fromTo('#st0 .sn',{scale:1.7,autoAlpha:0,filter:'blur(10px)'},{scale:1,autoAlpha:1,filter:'blur(0px)',duration:.26,ease:'power3.out',immediateRender:false},5.844);
-tl.fromTo('#st0 .sn',{y:0},{y:-6,duration:1.400,ease:'none',immediateRender:false},6.133);
+tl.fromTo('#st0 .sl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.25,ease:'power2.out',immediateRender:false},5.778);
+tl.fromTo('#st0 .lt',{autoAlpha:0,y:50,filter:'blur(12px)'},{autoAlpha:1,y:0,filter:'blur(0px)',duration:.32,stagger:.05,ease:'power3.out',immediateRender:false},5.833);
+tl.to('#st0 .inner',{autoAlpha:0,filter:'blur(10px)',duration:.18},7.578);
 gsap.set('#st1',{autoAlpha:0});
 tl.set('#st1',{autoAlpha:1},11.311);
 tl.set('#st1',{autoAlpha:0},12.722);
-tl.fromTo('#st1 .band',{scaleX:0},{scaleX:1,duration:.2,ease:'power3.out',immediateRender:false},11.311);
-tl.fromTo('#st1 .sl',{x:-260,autoAlpha:0},{x:0,autoAlpha:1,duration:.22,ease:'back.out(1.6)',immediateRender:false},11.356);
-tl.fromTo('#st1 .sn',{scale:1.7,autoAlpha:0,filter:'blur(10px)'},{scale:1,autoAlpha:1,filter:'blur(0px)',duration:.26,ease:'power3.out',immediateRender:false},11.378);
-tl.fromTo('#st1 .sn',{y:0},{y:-6,duration:0.870,ease:'none',immediateRender:false},11.667);
+tl.fromTo('#st1 .sl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.25,ease:'power2.out',immediateRender:false},11.311);
+tl.fromTo('#st1 .lt',{autoAlpha:0,y:50,filter:'blur(12px)'},{autoAlpha:1,y:0,filter:'blur(0px)',duration:.32,stagger:.05,ease:'power3.out',immediateRender:false},11.367);
+tl.to('#st1 .inner',{autoAlpha:0,filter:'blur(10px)',duration:.18},12.522);
 gsap.set('#st2',{autoAlpha:0});
 tl.set('#st2',{autoAlpha:1},18.811);
 tl.set('#st2',{autoAlpha:0},20.556);
-tl.fromTo('#st2 .band',{scaleX:0},{scaleX:1,duration:.2,ease:'power3.out',immediateRender:false},18.811);
-tl.fromTo('#st2 .sl',{x:-260,autoAlpha:0},{x:0,autoAlpha:1,duration:.22,ease:'back.out(1.6)',immediateRender:false},18.856);
-tl.fromTo('#st2 .sn',{scale:1.7,autoAlpha:0,filter:'blur(10px)'},{scale:1,autoAlpha:1,filter:'blur(0px)',duration:.26,ease:'power3.out',immediateRender:false},18.878);
-tl.fromTo('#st2 .sn',{y:0},{y:-6,duration:1.170,ease:'none',immediateRender:false},19.167);
+tl.fromTo('#st2 .sl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.25,ease:'power2.out',immediateRender:false},18.811);
+tl.fromTo('#st2 .lt',{autoAlpha:0,y:50,filter:'blur(12px)'},{autoAlpha:1,y:0,filter:'blur(0px)',duration:.32,stagger:.05,ease:'power3.out',immediateRender:false},18.867);
+tl.to('#st2 .inner',{autoAlpha:0,filter:'blur(10px)',duration:.18},20.356);
 gsap.set('#st3',{autoAlpha:0});
 tl.set('#st3',{autoAlpha:1},23.600);
 tl.set('#st3',{autoAlpha:0},25.111);
-tl.fromTo('#st3 .band',{scaleX:0},{scaleX:1,duration:.2,ease:'power3.out',immediateRender:false},23.600);
-tl.fromTo('#st3 .sl',{x:-260,autoAlpha:0},{x:0,autoAlpha:1,duration:.22,ease:'back.out(1.6)',immediateRender:false},23.644);
-tl.fromTo('#st3 .sn',{scale:1.7,autoAlpha:0,filter:'blur(10px)'},{scale:1,autoAlpha:1,filter:'blur(0px)',duration:.26,ease:'power3.out',immediateRender:false},23.667);
-tl.fromTo('#st3 .sn',{y:0},{y:-6,duration:0.960,ease:'none',immediateRender:false},23.956);
+tl.fromTo('#st3 .sl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.25,ease:'power2.out',immediateRender:false},23.600);
+tl.fromTo('#st3 .lt',{autoAlpha:0,y:50,filter:'blur(12px)'},{autoAlpha:1,y:0,filter:'blur(0px)',duration:.32,stagger:.05,ease:'power3.out',immediateRender:false},23.656);
+tl.to('#st3 .inner',{autoAlpha:0,filter:'blur(10px)',duration:.18},24.911);
 gsap.set('#st4',{autoAlpha:0});
 tl.set('#st4',{autoAlpha:1},29.022);
 tl.set('#st4',{autoAlpha:0},30.811);
-tl.fromTo('#st4 .band',{scaleX:0},{scaleX:1,duration:.2,ease:'power3.out',immediateRender:false},29.022);
-tl.fromTo('#st4 .sl',{x:-260,autoAlpha:0},{x:0,autoAlpha:1,duration:.22,ease:'back.out(1.6)',immediateRender:false},29.067);
-tl.fromTo('#st4 .sn',{scale:1.7,autoAlpha:0,filter:'blur(10px)'},{scale:1,autoAlpha:1,filter:'blur(0px)',duration:.26,ease:'power3.out',immediateRender:false},29.089);
-tl.fromTo('#st4 .sn',{y:0},{y:-6,duration:1.210,ease:'none',immediateRender:false},29.378);
+tl.fromTo('#st4 .sl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.25,ease:'power2.out',immediateRender:false},29.022);
+tl.fromTo('#st4 .lt',{autoAlpha:0,y:50,filter:'blur(12px)'},{autoAlpha:1,y:0,filter:'blur(0px)',duration:.32,stagger:.05,ease:'power3.out',immediateRender:false},29.078);
+tl.to('#st4 .inner',{autoAlpha:0,filter:'blur(10px)',duration:.18},30.611);
 gsap.set('#sRy',{autoAlpha:0});
 tl.set('#sRy',{autoAlpha:1},7.778);
 tl.set('#sRy',{autoAlpha:0},9.852);

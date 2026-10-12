@@ -197,26 +197,36 @@ def hook():
 
 
 # ------------------------------------------------------------------ step titles over the explaining Maé
-def fit(title, big=200, width=980):
-    """Anton caps are ~.47em wide: long titles shrink to stay on one line"""
-    return min(big, round(width / (.47 * len(title))))
+def fit(title, big=250, width=1000):
+    """DM Serif Display caps are ~.64em wide: long titles shrink to stay on one line"""
+    return min(big, round(width / (.64 * len(title))))
+
+
+# magazine titles BEHIND her head (Maé's 2nd inspiration): a small plain label, then a huge serif word revealed letter
+# by letter; her cutout (assets/cut_st*.webm) sits on top, so her hair covers the bottom of the letters
+STEP_LABEL = {4: ('types de', 'CONTENU')}
+CUT_ST = [(5.767, 2.100), (11.300, 1.533), (18.800, 1.867), (23.600, 1.600), (29.033, 1.867)]   # slowed clock
 
 
 def step_titles():
     html, tw = [], []
     for k, (a, b, n, title) in enumerate(STEPS):
-        html.append(f'<div id="st{k}" class="stepT"><div class="band"></div><div class="sl">ÉTAPE {n}</div>'
-                    f'<div class="sn" style="font-size:{fit(title)}px"><span class="gt">{title}</span></div></div>')
+        extra, word = STEP_LABEL.get(n, ('', title))
+        letters = ''.join(f'<span class="lt">{c}</span>' if c != ' ' else ' ' for c in word)
+        html.append(f'<div id="st{k}" class="stepT"><div class="inner"><div class="sl">Étape {n}{" · " + extra if extra else ""}</div>'
+                    f'<div class="sn" style="font-size:{fit(word)}px">{letters}</div></div></div>')
         tw += show(f'#st{k}', a, b)
-        tw.append(f"tl.fromTo('#st{k} .band',{{scaleX:0}},{{scaleX:1,duration:.2,ease:'power3.out',immediateRender:false}},{a:.3f});")
-        tw.append(f"tl.fromTo('#st{k} .sl',{{x:-260,autoAlpha:0}},{{x:0,autoAlpha:1,duration:.22,ease:'back.out(1.6)',immediateRender:false}},{a + .04:.3f});")
-        tw.append(f"tl.fromTo('#st{k} .sn',{{scale:1.7,autoAlpha:0,filter:'blur(10px)'}},{{scale:1,autoAlpha:1,filter:'blur(0px)',duration:.26,ease:'power3.out',immediateRender:false}},{a + .06:.3f});")
-        tw.append(f"tl.fromTo('#st{k} .sn',{{y:0}},{{y:-6,duration:{b - a - .4:.3f},ease:'none',immediateRender:false}},{a + .32:.3f});")
+        tw.append(f"tl.fromTo('#st{k} .sl',{{autoAlpha:0,y:12}},{{autoAlpha:1,y:0,duration:.25,ease:'power2.out',immediateRender:false}},{a:.3f});")
+        tw.append(f"tl.fromTo('#st{k} .lt',{{autoAlpha:0,y:50,filter:'blur(12px)'}},{{autoAlpha:1,y:0,filter:'blur(0px)',duration:.32,stagger:.05,"
+                  f"ease:'power3.out',immediateRender:false}},{a + .05:.3f});")
+        tw.append(f"tl.to('#st{k} .inner',{{autoAlpha:0,filter:'blur(10px)',duration:.18}},{b - .18:.3f});")
     return html, tw
 
 
 def header(n, title):
-    return f'<div class="hd"><div class="hl">ÉTAPE {n}</div><div class="ht" style="font-size:{fit(title, 170)}px"><span class="gt">{title}</span></div></div>'
+    extra, word = STEP_LABEL.get(n, ('', title))
+    return (f'<div class="hd"><div class="inner"><div class="hl">Étape {n}{" · " + extra if extra else ""}</div>'
+            f'<div class="ht" style="font-size:{fit(word, 190)}px">{word}</div></div></div>')
 
 
 # ------------------------------------------------------------------ the five brown screens
@@ -442,20 +452,18 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 16px 36px rgba(0,0,0,.4)}}
 .bl{{font:400 38px/1 Anton;color:#fff;letter-spacing:.02em}}
 .recapCal.hookCal{{left:365px;top:1000px;z-index:12}}
-/* step titles on video: brown band, gold label block, big gold-white title */
-.gt{{background:{GRAD_T};-webkit-background-clip:text;background-clip:text;color:transparent;padding:.12em .04em 0;margin-top:-.12em}}
-.stepT{{position:absolute;left:0;right:0;top:1040px;z-index:14;text-align:center;color:#fff}}
-.stepT .band{{position:absolute;left:0;right:0;top:58px;height:236px;background:rgba(140,92,65,.88);border-top:4px solid #E2BF77;border-bottom:4px solid #E2BF77;
-  box-shadow:0 14px 40px rgba(0,0,0,.35)}}
-.stepT .sl{{position:relative;display:inline-block;font:800 46px/1 Poppins;letter-spacing:.06em;color:#4A3010;background:{GRAD};padding:14px 30px 12px;
-  border-radius:14px;transform:rotate(-3deg);box-shadow:inset 0 3px 0 rgba(255,255,255,.7),0 8px 20px rgba(0,0,0,.35)}}
-.stepT .sn{{position:relative;font-family:Anton;line-height:1.05;margin-top:8px;white-space:nowrap;filter:drop-shadow(0 6px 0 #5A3F1F) drop-shadow(0 12px 22px rgba(0,0,0,.45))}}
+/* step titles: magazine serif behind her head */
+.stepT{{position:absolute;left:0;right:0;top:196px;z-index:6;text-align:center;color:#FFF8EE}}
+.stepT .inner,.hd .inner{{display:inline-block;text-align:left}}
+.stepT .sl{{font:600 40px/1 Poppins;color:#fff;margin-left:.3em;text-shadow:0 2px 10px rgba(0,0,0,.35)}}
+.stepT .sn{{font-family:'DM Serif Display';font-weight:400;line-height:.95;letter-spacing:-.01em;white-space:nowrap;margin-top:6px;
+  text-shadow:0 6px 30px rgba(0,0,0,.25)}}
+.lt{{display:inline-block}}
 /* brown screens */
 .screen{{position:absolute;inset:0;z-index:20;background:{BROWN};color:#fff}}
-.hd{{position:absolute;left:0;right:0;top:300px;text-align:center}}
-.hl{{display:inline-block;font:800 42px/1 Poppins;letter-spacing:.06em;color:#4A3010;background:{GRAD};padding:12px 26px 10px;border-radius:12px;
-  transform:rotate(-3deg);box-shadow:inset 0 3px 0 rgba(255,255,255,.7),0 8px 18px rgba(0,0,0,.3)}}
-.ht{{font-family:Anton;line-height:1.05;margin-top:10px;white-space:nowrap;filter:drop-shadow(0 6px 0 #5A3F1F) drop-shadow(0 10px 20px rgba(0,0,0,.35))}}
+.hd{{position:absolute;left:0;right:0;top:250px;text-align:center}}
+.hl{{font:600 40px/1 Poppins;margin-left:.3em;opacity:.95}}
+.ht{{font-family:'DM Serif Display';font-weight:400;line-height:.95;letter-spacing:-.01em;margin-top:6px;white-space:nowrap}}
 .tag{{display:inline-block;font:400 46px/1 Anton;letter-spacing:.03em;color:#5A3F1F;background:#fff;padding:10px 20px 8px;border-radius:10px}}
 .per{{font:600 30px/1 Poppins;margin-top:12px}}
 .paceCol{{position:absolute;top:560px;width:300px;text-align:center}}
@@ -525,13 +533,16 @@ SAFE_GUIDE = ('<div style="position:absolute;inset:0;z-index:99;pointer-events:n
 
 def build():
     hk, ct = hook(), cta()
-    stage = [hk[0].pop(0), ct[0].pop(0)]      # wall + guide window live under the cutouts
+    st = step_titles()
+    stage = [hk[0].pop(0), ct[0].pop(0)] + st[0]      # wall, guide window and step titles live under the cutouts
     (ha, hb), (ca, cb) = CUT_HOOK, CUT_CTA
     cuts = [f'<video id="cutH" class="full cut" src="assets/cut_hook.webm" muted playsinline data-start="{ha * K:.3f}" data-media-start="0" '
             f'data-duration="{(hb - ha) * K:.3f}" data-track-index="1"></video>',
             f'<video id="cutC" class="full cut" src="assets/cut_cta.webm" muted playsinline data-start="{ca * K:.3f}" data-media-start="0" '
             f'data-duration="{(cb - ca) * K:.3f}" data-track-index="3"></video>']
-    parts = [hk, step_titles(), scr_rythme(), scr_planning(), scr_themes(), scr_types(), scr_mois(), recap(), ct, captions()]
+    cuts += [f'<video id="cutS{k}" class="full cut" src="assets/cut_st{k}.webm" muted playsinline data-start="{t:.3f}" data-media-start="0" '
+             f'data-duration="{d:.3f}" data-track-index="{4 + k}"></video>' for k, (t, d) in enumerate(CUT_ST)]
+    parts = [hk, ([], st[1]), scr_rythme(), scr_planning(), scr_themes(), scr_types(), scr_mois(), recap(), ct, captions()]
     html = '\n'.join('\n'.join(h) for h, _ in parts)
     tw = '\n'.join('\n'.join(t) for _, t in parts)
     # stretch every timeline position to the slowed clock (durations stay as they are)
