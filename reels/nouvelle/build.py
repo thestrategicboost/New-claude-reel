@@ -17,9 +17,16 @@ import subprocess
 import sys
 
 SAFE = '--safe' in sys.argv or bool(os.environ.get('SAFE'))
-DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries',
+DUR_S = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries',
                             'stream=duration', '-of', 'csv=p=0', 'assets/aroll.mp4'],
                            capture_output=True, encoding='utf-8', errors='replace').stdout.strip().split(',')[0])
+# the a-roll is slowed to 0.9x (Maé talks fast): every time below is written on the ORIGINAL clock (words.json too)
+# and the timeline is stretched by K at the end; DUR is the original-clock length
+SPEED = 0.9
+K = 1 / SPEED
+DUR = DUR_S * SPEED
+CUT_HOOK = (0.0, 3.2)        # cutouts of her (assets/cut_*.webm) so reels / the guide can scroll behind her head
+CUT_CTA = (37.833, 41.6)
 BROWN = '#8C5C41'
 GRAD_T = 'linear-gradient(180deg,#FFFFFF 0%,#FBEFD2 30%,#E2BF77 55%,#B8873A 78%,#F1D9A0 100%)'   # gold-white text
 GRAD = 'linear-gradient(160deg,#7A5420 0%,#C99A4E 26%,#F3DFB2 44%,#FFFFFF 51%,#E6C681 60%,#A9792F 84%,#6E4A1B 100%)'
@@ -144,31 +151,72 @@ def captions():
     return html, tw
 
 
-# ------------------------------------------------------------------ hook
+# ------------------------------------------------------------------ hook: something moves from frame 0
+WALL_X = [-30, 245, 520, 795]
+
+
 def hook():
-    html = ['<div id="hook"><div class="hk1">UN MOIS DE CONTENU</div><div class="hk2">en <span class="gd">45 minutes</span></div></div>']
-    tw = show('#hook', 0, 3.2) + ["tl.fromTo('#hook',{y:-30,opacity:0},{y:0,opacity:1,duration:.35,ease:'power3.out',immediateRender:false},0);"]
-    # her reels pop on both sides of the asker on "un mois entier de contenu"
-    pos = [(40, 470, -8), (60, 820, 5), (45, 1150, -4), (790, 470, 7), (775, 820, -5), (790, 1150, 4)]
-    for k, (x, y, r) in enumerate(pos):
-        html.append(f'<div id="hr{k}" class="reel" style="left:{x}px;top:{y}px;transform:rotate({r}deg)"><img src="assets/reels/r{k + 1}.jpg"/></div>')
-        tw += pop(f'#hr{k}', 2.38 + k * .09, .3, .4)
-        tw.append(f"tl.set('#hr{k}',{{autoAlpha:0}},3.2);")
+    a, b = CUT_HOOK
+    html, tw = [], []
+    # a wall of her reels scrolling BEHIND her (the cutout video sits on top of it)
+    cols = []
+    for c, x in enumerate(WALL_X):
+        cards = ''.join(f'<div class="wc"><img src="assets/reels/r{(c * 3 + i) % 10 + 1}.jpg"/></div>' for i in range(8))
+        cols.append(f'<div id="wl{c}" class="wcol" style="left:{x}px">{cards}</div>')
+    html.append(f'<div id="wall">{"".join(cols)}</div>')
+    # visible on the very first frame: no hide/show at 0, only hidden at the end of the hook
+    tw += ["gsap.set('#wall',{opacity:.42});", f"tl.set('#wall',{{autoAlpha:0}},{b:.3f});"]
+    tw.append("tl.to('#wall',{opacity:.78,duration:.3},2.30);")
+    for c in range(len(WALL_X)):
+        y0, y1 = (-300, -1500) if c % 2 == 0 else (-1500, -300)
+        tw.append(f"tl.fromTo('#wl{c}',{{y:{y0}}},{{y:{y1},duration:{b - a:.3f},ease:'none',immediateRender:false}},{a:.3f});")
+    # punch-in of the whole picture on frame 0
+    tw.append("tl.fromTo('#stage',{scale:1.14},{scale:1,duration:.45,ease:'power3.out',immediateRender:true},0);")
+    # title already on screen at frame 0, the second line lands on "45 minutes"
+    html.append('<div id="hook"><div class="hk1">UN MOIS DE CONTENU</div><div id="hk2" class="hk2">en <span class="gd">45 MINUTES</span></div></div>')
+    tw.append(f"tl.set('#hook',{{autoAlpha:0}},{b:.3f});")
+    tw.append("tl.fromTo('#hook .hk1',{scale:1.3,filter:'blur(4px)'},{scale:1,filter:'blur(0px)',duration:.3,ease:'power3.out',immediateRender:true},0);")
+    tw += pop('#hk2', .90, .3, .4)
+    # stopwatch on "45 minutes", calendar on "planifier", her month on "un mois entier"
+    html.append('<div id="hkW" class="badge" style="left:56px;top:600px"><svg class="ic" width="120" height="120" viewBox="0 0 100 100">'
+                '<circle cx="50" cy="56" r="34"/><path d="M42 12h16M50 12v10M78 30l5-5"/><line id="swh" x1="50" y1="56" x2="50" y2="34"/></svg>'
+                '<div class="bl">45 MIN</div></div>')
+    tw += pop('#hkW', .94, .3, .4)
+    tw.append("tl.fromTo('#swh',{rotation:0},{rotation:720,svgOrigin:'50 56',duration:2.2,ease:'none',immediateRender:false},.94);")
+    html.append('<div id="hkC" class="badge" style="left:824px;top:600px"><svg class="ic" width="120" height="120" viewBox="0 0 100 100">'
+                '<rect x="16" y="22" width="68" height="62" rx="10"/><path d="M16 40h68M34 14v16M66 14v16"/><path d="M34 60l10 10 20-20"/></svg>'
+                '<div class="bl">PLANIFIER</div></div>')
+    tw += pop('#hkC', 1.68, .3, .4)
+    html += ['<div id="hkM" class="recapCal hookCal">'] + calendar('calH') + ['</div>']
+    tw += pop('#hkM', 2.38, .35, .4)
+    tw.append("gsap.set('#calH .cd.on .tag2, #calH .cd.on .topic',{autoAlpha:0});")
+    tw.append("tl.fromTo('#calH .cd.on .tag2, #calH .cd.on .topic',{autoAlpha:0},{autoAlpha:1,duration:.05,stagger:.012,immediateRender:false},2.50);")
+    for sel in ('#hkW', '#hkC', '#hkM'):
+        tw.append(f"tl.set('{sel}',{{autoAlpha:0}},{b:.3f});")
     return html, tw
 
 
 # ------------------------------------------------------------------ step titles over the explaining Maé
+def fit(title, big=200, width=980):
+    """Anton caps are ~.47em wide: long titles shrink to stay on one line"""
+    return min(big, round(width / (.47 * len(title))))
+
+
 def step_titles():
     html, tw = [], []
     for k, (a, b, n, title) in enumerate(STEPS):
-        html.append(f'<div id="st{k}" class="stepT"><div class="sl">Étape {n}</div><div class="sn">{title}</div></div>')
+        html.append(f'<div id="st{k}" class="stepT"><div class="band"></div><div class="sl">ÉTAPE {n}</div>'
+                    f'<div class="sn" style="font-size:{fit(title)}px"><span class="gt">{title}</span></div></div>')
         tw += show(f'#st{k}', a, b)
-        tw.append(f"tl.fromTo('#st{k}',{{scale:1.25,opacity:0,filter:'blur(10px)'}},{{scale:1,opacity:1,filter:'blur(0px)',duration:.25,ease:'power3.out',immediateRender:false}},{a:.3f});")
+        tw.append(f"tl.fromTo('#st{k} .band',{{scaleX:0}},{{scaleX:1,duration:.2,ease:'power3.out',immediateRender:false}},{a:.3f});")
+        tw.append(f"tl.fromTo('#st{k} .sl',{{x:-260,autoAlpha:0}},{{x:0,autoAlpha:1,duration:.22,ease:'back.out(1.6)',immediateRender:false}},{a + .04:.3f});")
+        tw.append(f"tl.fromTo('#st{k} .sn',{{scale:1.7,autoAlpha:0,filter:'blur(10px)'}},{{scale:1,autoAlpha:1,filter:'blur(0px)',duration:.26,ease:'power3.out',immediateRender:false}},{a + .06:.3f});")
+        tw.append(f"tl.fromTo('#st{k} .sn',{{y:0}},{{y:-6,duration:{b - a - .4:.3f},ease:'none',immediateRender:false}},{a + .32:.3f});")
     return html, tw
 
 
 def header(n, title):
-    return f'<div class="hd"><div class="hl">Étape {n}</div><div class="ht">{title}</div></div>'
+    return f'<div class="hd"><div class="hl">ÉTAPE {n}</div><div class="ht" style="font-size:{fit(title, 170)}px"><span class="gt">{title}</span></div></div>'
 
 
 # ------------------------------------------------------------------ the five brown screens
@@ -306,11 +354,13 @@ def recap():
 
 # ------------------------------------------------------------------ call to action
 def cta():
-    html = ['<div id="guide" class="guide"><div class="gl">GUIDE</div><div class="gg">GRATUIT</div>'
-            '<div class="gs">Ta stratégie de A à Z</div><div class="gb">@thestrategicboost.fr</div></div>']
-    # her raw already shows her own Instagram follow card from 41.7s: the guide leaves before it
-    tw = pop('#guide', 38.26, .35, .5) + ["tl.to('#guide',{autoAlpha:0,scale:.9,duration:.15},41.45);", "tl.set('#guide',{autoAlpha:0},41.6);",
-                                           "tl.fromTo('#guide',{rotation:-10},{rotation:-5,duration:.35,immediateRender:false},38.26);"]
+    # her real guide scrolling behind her head (the cta cutout sits on top), gone before her own IG card at 41.7
+    html = ['<div id="gwin"><img id="gstrip" src="assets/guide_strip.jpg"/></div>',
+            '<div id="gtag"><span class="gbx"><span class="g1">GUIDE</span> <span class="gt">GRATUIT</span></span></div>']
+    tw = pop('#gwin', 38.26, .4, .7) + pop('#gtag', 38.40, .3, .5)
+    tw.append("tl.fromTo('#gwin',{y:160},{y:0,duration:.4,ease:'power3.out',immediateRender:false},38.26);")
+    tw.append("tl.fromTo('#gstrip',{y:0},{y:-4300,duration:3.1,ease:'power1.inOut',immediateRender:false},38.45);")
+    tw += ["tl.to('#gwin, #gtag',{autoAlpha:0,duration:.15},41.45);", "tl.set('#gwin, #gtag',{autoAlpha:0},41.6);"]
     html.append('<div id="cm"><div class="cmav"><img src="assets/avatar.png"/></div><div class="cmbar"><span id="cmtext"></span>'
                 '<span class="caret"></span></div><div id="cmsend" class="cmsend"><svg viewBox="0 0 24 24" width="40" height="40">'
                 '<path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="#2A1E16" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>')
@@ -329,7 +379,8 @@ def cta():
 
 
 def sfx_list():
-    out = [('pop', 0.02, .26)] + [('pop', 2.38 + k * .09, .16) for k in range(0, 6, 2)]
+    out = [('impact-bass-1', 0.0, .32), ('whoosh-short', 0.0, .22), ('pop', .90, .26), ('pop', 1.68, .24),
+           ('whoosh-short', 2.30, .2), ('sparkle', 2.40, .14)]
     out += [('whoosh-short', a, .22) for a, *_ in STEPS]
     out += [('whoosh-short', a, .26) for a, _ in SCREENS.values()]
     out += [('pop', t - .05, .24) for _, _, t, _ in PACES]
@@ -337,20 +388,21 @@ def sfx_list():
     out += [('pop', 19.10, .24)] + [('pop', 19.56 + k * .28, .18) for k in range(5)]
     out += [('click-soft', 23.05 + k * .3, .3) for k in range(5)]
     out += [('click-soft', 28.10 + k * .85, .3) for k in range(5)]
-    out += [('pop', 9.25, .26), ('pop', 15.95, .26), ('pop', 32.80, .28), ('pop', 38.26, .28), ('pop', 41.0, .28)]
+    out += [('pop', 9.25, .26), ('pop', 15.95, .26), ('pop', 32.80, .28), ('whoosh-short', 38.20, .26), ('pop', 38.40, .26), ('pop', 41.0, .28)]
     out += [('click-soft', 41.20 + i * .05 * 2, .2) for i in range(4)]
     out += [('click', 41.66, .45), ('sparkle', 41.98, .16)]
     return out
 
 
-SFX_LEN = {'whoosh-short': .57, 'pop': .72, 'sparkle': 1.8, 'click': .36, 'click-soft': .36}
+SFX_LEN = {'impact-bass-1': 1.2, 'whoosh-short': .57, 'pop': .72, 'sparkle': 1.8, 'click': .36, 'click-soft': .36}
 SFX_GAIN = 0.75
 
 
 def audio():
     out, lanes = [], []
     for k, (name, t, vol) in enumerate(sorted(sfx_list(), key=lambda x: x[1])):
-        d = min(SFX_LEN[name], DUR - t)
+        t *= K
+        d = min(SFX_LEN[name], DUR_S - t)
         lane = next((i for i, end in enumerate(lanes) if end <= t), None)
         if lane is None:
             lanes.append(0); lane = len(lanes) - 1
@@ -376,21 +428,34 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .cap.pill .ci{{display:inline-block;background:#fff;color:#4A3420;padding:10px 26px 12px;border-radius:14px;font-size:40px;text-shadow:none}}
 .cap.pill .gd{{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#A9792F;filter:none}}
 /* hook */
-#hook{{position:absolute;left:0;right:0;top:232px;z-index:12;text-align:center;filter:drop-shadow(0 6px 18px rgba(0,0,0,.45))}}
-.hk1{{font:400 104px/1 Anton;color:#fff}}
-.hk2{{font:700 50px/1.1 Poppins;color:#fff;margin-top:6px}}
-.reel{{position:absolute;z-index:11;width:245px;height:300px;border-radius:22px;overflow:hidden;border:5px solid #fff;
-  box-shadow:0 18px 40px rgba(0,0,0,.4)}}
-.reel img{{width:100%;height:100%;object-fit:cover;display:block}}
-/* step titles on video */
-.stepT{{position:absolute;left:0;right:0;top:1090px;z-index:14;text-align:center;color:#fff;filter:drop-shadow(0 8px 22px rgba(0,0,0,.5))}}
-.stepT .sl{{font:600 46px/1 Poppins;letter-spacing:.02em}}
-.stepT .sn{{font:400 150px/1 Anton;margin-top:4px;white-space:nowrap}}
+#stage{{position:absolute;inset:0;z-index:0;transform-origin:50% 35%}}
+.cut{{z-index:8;filter:contrast(1.03) saturate(.97) brightness(1.02)}}
+#wall{{position:absolute;inset:0;z-index:5;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 62%,transparent 80%);mask-image:linear-gradient(180deg,#000 0%,#000 62%,transparent 80%)}}
+.wcol{{position:absolute;top:0;width:262px;display:flex;flex-direction:column;gap:18px}}
+.wc{{width:262px;height:466px;flex:none;border-radius:22px;overflow:hidden;border:4px solid rgba(255,255,255,.9)}}
+.wc img{{width:100%;height:100%;object-fit:cover;display:block}}
+#hook{{position:absolute;left:0;right:0;top:226px;z-index:12;text-align:center;filter:drop-shadow(0 6px 18px rgba(0,0,0,.55))}}
+.hk1{{font:400 112px/1 Anton;color:#fff}}
+.hk2{{font:italic 800 76px/1.1 Poppins;color:#fff;margin-top:4px}}
+.badge{{position:absolute;z-index:12;width:200px;height:210px;border-radius:28px;background:rgba(140,92,65,.92);border:4px solid #fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 16px 36px rgba(0,0,0,.4)}}
+.bl{{font:400 38px/1 Anton;color:#fff;letter-spacing:.02em}}
+.recapCal.hookCal{{left:365px;top:1000px;z-index:12}}
+/* step titles on video: brown band, gold label block, big gold-white title */
+.gt{{background:{GRAD_T};-webkit-background-clip:text;background-clip:text;color:transparent;padding:.12em .04em 0;margin-top:-.12em}}
+.stepT{{position:absolute;left:0;right:0;top:1040px;z-index:14;text-align:center;color:#fff}}
+.stepT .band{{position:absolute;left:0;right:0;top:58px;height:236px;background:rgba(140,92,65,.88);border-top:4px solid #E2BF77;border-bottom:4px solid #E2BF77;
+  box-shadow:0 14px 40px rgba(0,0,0,.35)}}
+.stepT .sl{{position:relative;display:inline-block;font:800 46px/1 Poppins;letter-spacing:.06em;color:#4A3010;background:{GRAD};padding:14px 30px 12px;
+  border-radius:14px;transform:rotate(-3deg);box-shadow:inset 0 3px 0 rgba(255,255,255,.7),0 8px 20px rgba(0,0,0,.35)}}
+.stepT .sn{{position:relative;font-family:Anton;line-height:1.05;margin-top:8px;white-space:nowrap;filter:drop-shadow(0 6px 0 #5A3F1F) drop-shadow(0 12px 22px rgba(0,0,0,.45))}}
 /* brown screens */
 .screen{{position:absolute;inset:0;z-index:20;background:{BROWN};color:#fff}}
 .hd{{position:absolute;left:0;right:0;top:300px;text-align:center}}
-.hl{{font:600 44px/1 Poppins;opacity:.92}}
-.ht{{font:400 150px/1 Anton;margin-top:6px;white-space:nowrap}}
+.hl{{display:inline-block;font:800 42px/1 Poppins;letter-spacing:.06em;color:#4A3010;background:{GRAD};padding:12px 26px 10px;border-radius:12px;
+  transform:rotate(-3deg);box-shadow:inset 0 3px 0 rgba(255,255,255,.7),0 8px 18px rgba(0,0,0,.3)}}
+.ht{{font-family:Anton;line-height:1.05;margin-top:10px;white-space:nowrap;filter:drop-shadow(0 6px 0 #5A3F1F) drop-shadow(0 10px 20px rgba(0,0,0,.35))}}
 .tag{{display:inline-block;font:400 46px/1 Anton;letter-spacing:.03em;color:#5A3F1F;background:#fff;padding:10px 20px 8px;border-radius:10px}}
 .per{{font:600 30px/1 Poppins;margin-top:12px}}
 .paceCol{{position:absolute;top:560px;width:300px;text-align:center}}
@@ -432,12 +497,12 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   border:4px solid #fff;box-shadow:0 14px 34px rgba(0,0,0,.35);color:#fff}}
 .recapCal .cal{{transform:scale(.33)!important;left:10px;top:12px}}
 /* cta */
-.guide{{position:absolute;z-index:15;left:40px;top:300px;width:280px;height:370px;border-radius:20px;background:{BROWN};border:4px solid #fff;
-  text-align:center;color:#fff;padding-top:46px;box-shadow:0 18px 40px rgba(0,0,0,.4)}}
-.gl{{font:400 64px/1 Anton}}
-.gg{{font:400 64px/1.1 Anton;background:{GRAD_T};-webkit-background-clip:text;background-clip:text;color:transparent;padding-top:.1em}}
-.gs{{font:600 26px/1.2 Poppins;margin-top:16px;padding:0 20px}}
-.gb{{font:600 18px/1 Poppins;margin-top:40px;opacity:.85}}
+#gwin{{position:absolute;z-index:5;left:130px;top:170px;width:820px;height:1180px;border-radius:30px;overflow:hidden;border:6px solid #fff;
+  background:#fff;box-shadow:0 24px 60px rgba(0,0,0,.45)}}
+#gstrip{{display:block;width:808px}}
+#gtag{{position:absolute;left:0;right:0;top:232px;z-index:12;text-align:center;font:400 104px/1 Anton;filter:drop-shadow(0 6px 0 #5A3F1F) drop-shadow(0 12px 24px rgba(0,0,0,.5))}}
+#gtag .g1{{color:#fff}}
+#gtag .gbx{{display:inline-block;background:rgba(140,92,65,.95);border:4px solid #fff;border-radius:24px;padding:14px 36px 4px}}
 #cm{{position:absolute;left:70px;right:70px;top:1160px;z-index:25;height:116px;display:flex;align-items:center;gap:18px}}
 .cmav{{width:104px;height:104px;border-radius:50%;padding:5px;background:#fff;flex:none}}
 .cmav img,.dmav img{{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}}
@@ -459,9 +524,18 @@ SAFE_GUIDE = ('<div style="position:absolute;inset:0;z-index:99;pointer-events:n
 
 
 def build():
-    parts = [hook(), step_titles(), scr_rythme(), scr_planning(), scr_themes(), scr_types(), scr_mois(), recap(), cta(), captions()]
+    hk, ct = hook(), cta()
+    stage = [hk[0].pop(0), ct[0].pop(0)]      # wall + guide window live under the cutouts
+    (ha, hb), (ca, cb) = CUT_HOOK, CUT_CTA
+    cuts = [f'<video id="cutH" class="full cut" src="assets/cut_hook.webm" muted playsinline data-start="{ha * K:.3f}" data-media-start="0" '
+            f'data-duration="{(hb - ha) * K:.3f}" data-track-index="1"></video>',
+            f'<video id="cutC" class="full cut" src="assets/cut_cta.webm" muted playsinline data-start="{ca * K:.3f}" data-media-start="0" '
+            f'data-duration="{(cb - ca) * K:.3f}" data-track-index="3"></video>']
+    parts = [hk, step_titles(), scr_rythme(), scr_planning(), scr_themes(), scr_types(), scr_mois(), recap(), ct, captions()]
     html = '\n'.join('\n'.join(h) for h, _ in parts)
     tw = '\n'.join('\n'.join(t) for _, t in parts)
+    # stretch every timeline position to the slowed clock (durations stay as they are)
+    tw = re.sub(r'\},(\d+(?:\.\d+)?)\);', lambda m: f'}},{float(m.group(1)) * K:.3f});', tw)
     nl = '\n'
     return f'''<!doctype html>
 <html lang="fr" data-resolution="portrait">
@@ -473,17 +547,21 @@ def build():
 <style>{CSS}</style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="{DUR:.3f}" data-width="1080" data-height="1920">
-  <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
+<div id="root" data-composition-id="main" data-start="0" data-duration="{DUR_S:.3f}" data-width="1080" data-height="1920">
+  <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="{DUR_S:.3f}" data-track-index="2" data-volume="1"></audio>
 {nl.join(audio())}
-  <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
+  <div id="stage">
+  <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR_S:.3f}" data-track-index="0"></video>
+{nl.join(stage)}
+{nl.join(cuts)}
+  </div>
 {html}
 {SAFE_GUIDE if SAFE else ''}
 </div>
 <script>
 const tl = gsap.timeline({{ paused: true }});
 {tw}
-tl.set({{}}, {{}}, {DUR:.3f});
+tl.set({{}}, {{}}, {DUR_S:.3f});
 window.__timelines["main"] = tl;
 </script>
 </body>
@@ -493,4 +571,4 @@ window.__timelines["main"] = tl;
 
 with open('index.html', 'w', encoding='utf-8', newline='\n') as _f:
     _f.write(build())
-print(f'wrote index.html {DUR:.3f}s  {len(chunks())} caption chunks')
+print(f'wrote index.html {DUR_S:.3f}s  {len(chunks())} caption chunks')
