@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="fr" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<link rel="stylesheet" href="assets/fonts/fonts.css" />
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#bgv{z-index:0;filter:contrast(1.03) saturate(.97) brightness(1.02)}
+.gd{background:linear-gradient(180deg,#FFFFFF 0%,#FBEFD2 30%,#E2BF77 55%,#B8873A 78%,#F1D9A0 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-top:.12em;margin-top:-.12em}
+.ic{fill:none;stroke:#fff;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+/* captions */
+.cap{position:absolute;left:0;right:0;top:1360px;z-index:30;text-align:center;font:700 58px/1.1 Poppins;color:#fff;letter-spacing:-.01em;
+  text-shadow:0 0 18px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.45);white-space:nowrap}
+.cap .gd{text-shadow:none;filter:drop-shadow(0 2px 3px rgba(40,25,10,.8))}
+.cap.pill{top:1520px}
+.cap.pill .ci{display:inline-block;background:#fff;color:#4A3420;padding:10px 26px 12px;border-radius:14px;font-size:40px;text-shadow:none}
+.cap.pill .gd{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#A9792F;filter:none}
+/* hook */
+#hook{position:absolute;left:0;right:0;top:232px;z-index:12;text-align:center;filter:drop-shadow(0 6px 18px rgba(0,0,0,.45))}
+.hk1{font:400 104px/1 Anton;color:#fff}
+.hk2{font:700 50px/1.1 Poppins;color:#fff;margin-top:6px}
+.reel{position:absolute;z-index:11;width:245px;height:300px;border-radius:22px;overflow:hidden;border:5px solid #fff;
+  box-shadow:0 18px 40px rgba(0,0,0,.4)}
+.reel img{width:100%;height:100%;object-fit:cover;display:block}
+/* step titles on video */
+.stepT{position:absolute;left:0;right:0;top:1090px;z-index:14;text-align:center;color:#fff;filter:drop-shadow(0 8px 22px rgba(0,0,0,.5))}
+.stepT .sl{font:600 46px/1 Poppins;letter-spacing:.02em}
+.stepT .sn{font:400 150px/1 Anton;margin-top:4px;white-space:nowrap}
+/* brown screens */
+.screen{position:absolute;inset:0;z-index:20;background:#8C5C41;color:#fff}
+.hd{position:absolute;left:0;right:0;top:300px;text-align:center}
+.hl{font:600 44px/1 Poppins;opacity:.92}
+.ht{font:400 150px/1 Anton;margin-top:6px;white-space:nowrap}
+.tag{display:inline-block;font:400 46px/1 Anton;letter-spacing:.03em;color:#5A3F1F;background:#fff;padding:10px 20px 8px;border-radius:10px}
+.per{font:600 30px/1 Poppins;margin-top:12px}
+.paceCol{position:absolute;top:560px;width:300px;text-align:center}
+.thumbs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
+.th{width:100px;height:160px;border-radius:12px;overflow:hidden;border:3px solid #fff;box-shadow:0 8px 18px rgba(0,0,0,.3)}
+.th img{width:100%;height:100%;object-fit:cover;display:block}
+.plRow{position:absolute;left:0;right:0;text-align:center}
+.week{display:flex;justify-content:center;gap:12px;margin-top:22px}
+.day{width:104px;height:84px;border-radius:14px;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.5);
+  display:flex;align-items:center;justify-content:center;font:400 40px/1 Anton;color:#fff}
+.day.on{background:linear-gradient(160deg,#7A5420 0%,#C99A4E 26%,#F3DFB2 44%,#FFFFFF 51%,#E6C681 60%,#A9792F 84%,#6E4A1B 100%);color:#5A3F1F;border-color:#fff;box-shadow:inset 0 3px 0 rgba(255,255,255,.7),0 6px 14px rgba(0,0,0,.25)}
+.week.small{gap:7px;margin-top:12px}
+.week.small .day{width:72px;height:60px;font-size:30px;border-radius:10px}
+.niche{position:absolute;width:460px;height:140px;border-radius:24px;background:#fff;color:#5A3F1F;text-align:center;padding-top:14px;
+  box-shadow:0 14px 34px rgba(0,0,0,.3)}
+.nl{font:600 30px/1 Poppins;letter-spacing:.1em}
+.nn{font:400 70px/1.05 Anton}
+.node{position:absolute;width:240px;text-align:center}
+.nodeIc{width:118px;height:118px;margin:0 auto;border-radius:30%;border:3px solid #fff;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center}
+.nodeL{display:inline-block;margin-top:10px;font:700 30px/1 Poppins;background:#fff;color:#5A3F1F;padding:8px 14px;border-radius:10px}
+.tbl{position:absolute}
+.tc{position:absolute;border:2px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;text-align:center;padding:6px}
+.th2{font:400 30px/1.05 Anton;background:#fff;color:#5A3F1F;border-color:#fff}
+.rh{flex-direction:column;gap:6px;font:700 20px/1.1 Poppins}
+.idea span{font:600 22px/1.15 Poppins}
+.calwrap{position:absolute;left:50px;top:560px}
+.cal{position:relative;transform-origin:0 0}
+.ch{position:absolute;top:0;height:48px;text-align:center;font:400 34px/48px Anton}
+.cd{position:absolute;border-radius:12px;background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.35);padding:8px}
+.cd.on{background:rgba(255,255,255,.22)}
+.dn{font:700 22px/1 Poppins;opacity:.85}
+.tag2{display:inline-block;margin-top:12px;font:700 22px/1 Poppins;padding:6px 10px;border-radius:8px}
+.topic{font:600 17px/1.1 Poppins;margin-top:8px}
+/* recaps */
+.recap{position:absolute;z-index:15;width:500px;text-align:center;background:rgba(60,40,26,.82);border:3px solid #fff;border-radius:22px;
+  padding:18px 18px 20px;color:#fff;box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.recap.wide{width:680px}
+.recapCal{position:absolute;z-index:15;left:690px;top:236px;width:350px;height:290px;border-radius:18px;overflow:hidden;background:#8C5C41;
+  border:4px solid #fff;box-shadow:0 14px 34px rgba(0,0,0,.35);color:#fff}
+.recapCal .cal{transform:scale(.33)!important;left:10px;top:12px}
+/* cta */
+.guide{position:absolute;z-index:15;left:40px;top:300px;width:280px;height:370px;border-radius:20px;background:#8C5C41;border:4px solid #fff;
+  text-align:center;color:#fff;padding-top:46px;box-shadow:0 18px 40px rgba(0,0,0,.4)}
+.gl{font:400 64px/1 Anton}
+.gg{font:400 64px/1.1 Anton;background:linear-gradient(180deg,#FFFFFF 0%,#FBEFD2 30%,#E2BF77 55%,#B8873A 78%,#F1D9A0 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-top:.1em}
+.gs{font:600 26px/1.2 Poppins;margin-top:16px;padding:0 20px}
+.gb{font:600 18px/1 Poppins;margin-top:40px;opacity:.85}
+#cm{position:absolute;left:70px;right:70px;top:1160px;z-index:25;height:116px;display:flex;align-items:center;gap:18px}
+.cmav{width:104px;height:104px;border-radius:50%;padding:5px;background:#fff;flex:none}
+.cmav img,.dmav img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.cmbar{flex:1;height:96px;border-radius:48px;background:rgba(30,22,16,.62);border:2px solid rgba(255,255,255,.4);
+  display:flex;align-items:center;padding:0 34px;font:700 50px/1 Poppins;color:#fff;letter-spacing:.02em}
+.caret{display:inline-block;width:4px;height:52px;background:#fff;margin-left:6px}
+.cmsend{position:absolute;right:16px;width:76px;height:76px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
+.dm{position:absolute;z-index:25;left:150px;top:1300px;display:flex;gap:14px;align-items:flex-start}
+.dmav{width:70px;height:70px;border-radius:50%;border:3px solid #fff;overflow:hidden;flex:none}
+.dmb{background:rgba(30,22,16,.8);border:2px solid rgba(255,255,255,.35);border-radius:22px;padding:16px 22px;color:#fff}
+.dmt{font:600 30px/1.2 Poppins}
+.dml{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:linear-gradient(160deg,#7A5420 0%,#C99A4E 26%,#F3DFB2 44%,#FFFFFF 51%,#E6C681 60%,#A9792F 84%,#6E4A1B 100%);color:#5A3F1F;font:700 28px/1 Poppins;
+  padding:10px 18px;border-radius:12px;box-shadow:inset 0 2px 0 rgba(255,255,255,.7)}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="43.800" data-width="1080" data-height="1920">
+  <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="43.800" data-track-index="2" data-volume="1"></audio>
+<audio id="sfx0" src="assets/sfx/pop.mp3" data-start="0.020" data-duration="0.720" data-track-index="10" data-volume="0.195"></audio>
+<audio id="sfx1" src="assets/sfx/pop.mp3" data-start="2.380" data-duration="0.720" data-track-index="10" data-volume="0.120"></audio>
+<audio id="sfx2" src="assets/sfx/pop.mp3" data-start="2.560" data-duration="0.720" data-track-index="11" data-volume="0.120"></audio>
+<audio id="sfx3" src="assets/sfx/pop.mp3" data-start="2.740" data-duration="0.720" data-track-index="12" data-volume="0.120"></audio>
+<audio id="sfx4" src="assets/sfx/whoosh-short.mp3" data-start="5.200" data-duration="0.570" data-track-index="10" data-volume="0.165"></audio>
+<audio id="sfx5" src="assets/sfx/whoosh-short.mp3" data-start="7.000" data-duration="0.570" data-track-index="10" data-volume="0.195"></audio>
+<audio id="sfx6" src="assets/sfx/pop.mp3" data-start="7.250" data-duration="0.720" data-track-index="11" data-volume="0.180"></audio>
+<audio id="sfx7" src="assets/sfx/pop.mp3" data-start="7.830" data-duration="0.720" data-track-index="10" data-volume="0.180"></audio>
+<audio id="sfx8" src="assets/sfx/pop.mp3" data-start="8.550" data-duration="0.720" data-track-index="11" data-volume="0.180"></audio>
+<audio id="sfx9" src="assets/sfx/pop.mp3" data-start="9.250" data-duration="0.720" data-track-index="10" data-volume="0.195"></audio>
+<audio id="sfx10" src="assets/sfx/whoosh-short.mp3" data-start="10.180" data-duration="0.570" data-track-index="10" data-volume="0.165"></audio>
+<audio id="sfx11" src="assets/sfx/whoosh-short.mp3" data-start="11.450" data-duration="0.570" data-track-index="10" data-volume="0.195"></audio>
+<audio id="sfx12" src="assets/sfx/pop.mp3" data-start="11.650" data-duration="0.720" data-track-index="11" data-volume="0.150"></audio>
+<audio id="sfx13" src="assets/sfx/pop.mp3" data-start="12.150" data-duration="0.720" data-track-index="10" data-volume="0.150"></audio>
+<audio id="sfx14" src="assets/sfx/pop.mp3" data-start="12.650" data-duration="0.720" data-track-index="11" data-volume="0.150"></audio>
+<audio id="sfx15" src="assets/sfx/pop.mp3" data-start="15.950" data-duration="0.720" data-track-index="10" data-volume="0.195"></audio>
+<audio id="sfx16" src="assets/sfx/whoosh-short.mp3" data-start="16.930" data-duration="0.570" data-track-index="10" data-volume="0.165"></audio>
+<audio id="sfx17" src="assets/sfx/whoosh-short.mp3" data-start="18.500" data-duration="0.570" data-track-index="10" data-volume="0.195"></audio>
+<audio id="sfx18" src="assets/sfx/pop.mp3" data-start="19.100" data-duration="0.720" data-track-index="10" data-volume="0.180"></audio>
+<audio id="sfx19" src="assets/sfx/pop.mp3" data-start="19.560" data-duration="0.720" data-track-index="11" data-volume="0.135"></audio>
+<audio id="sfx20" src="assets/sfx/pop.mp3" data-start="19.840" data-duration="0.720" data-track-index="10" data-volume="0.135"></audio>
+<audio id="sfx21" src="assets/sfx/pop.mp3" data-start="20.120" data-duration="0.720" data-track-index="12" data-volume="0.135"></audio>
+<audio id="sfx22" src="assets/sfx/pop.mp3" data-start="20.400" data-duration="0.720" data-track-index="11" data-volume="0.135"></audio>
+<audio id="sfx23" src="assets/sfx/pop.mp3" data-start="20.680" data-duration="0.720" data-track-index="10" data-volume="0.135"></audio>
+<audio id="sfx24" src="assets/sfx/whoosh-short.mp3" data-start="21.240" data-duration="0.570" data-track-index="11" data-volume="0.165"></audio>
+<audio id="sfx25" src="assets/sfx/whoosh-short.mp3" data-start="22.600" data-duration="0.570" data-track-index="10" data-volume="0.195"></audio>
+<audio id="sfx26" src="assets/sfx/click-soft.mp3" data-start="23.050" data-duration="0.360" data-track-index="11" data-volume="0.225"></audio>
+<audio id="sfx27" src="assets/sfx/click-soft.mp3" data-start="23.350" data-duration="0.360" data-track-index="10" data-volume="0.225"></audio>
+<audio id="sfx28" src="assets/sfx/click-soft.mp3" data-start="23.650" data-duration="0.360" data-track-index="11" data-volume="0.225"></audio>
+<audio id="sfx29" src="assets/sfx/click-soft.mp3" data-start="23.950" data-duration="0.360" data-track-index="10" data-volume="0.225"></audio>
+<audio id="sfx30" src="assets/sfx/click-soft.mp3" data-start="24.250" data-duration="0.360" data-track-index="11" data-volume="0.225"></audio>
+<audio id="sfx31" src="assets/sfx/whoosh-short.mp3" data-start="26.120" data-duration="0.570" data-track-index="10" data-volume="0.165"></audio>
+<audio id="sfx32" src="assets/sfx/whoosh-short.mp3" data-start="27.733" data-duration="0.570" data-track-index="10" data-volume="0.195"></audio>
+<audio id="sfx33" src="assets/sfx/click-soft.mp3" data-start="28.100" data-duration="0.360" data-track-index="11" data-volume="0.225"></audio>
+<audio id="sfx34" src="assets/sfx/click-soft.mp3" data-start="28.950" data-duration="0.360" data-track-index="10" data-volume="0.225"></audio>
+<audio id="sfx35" src="assets/sfx/click-soft.mp3" data-start="29.800" data-duration="0.360" data-track-index="10" data-volume="0.225"></audio>
+<audio id="sfx36" src="assets/sfx/click-soft.mp3" data-start="30.650" data-duration="0.360" data-track-index="10" data-volume="0.225"></audio>
+<audio id="sfx37" src="assets/sfx/click-soft.mp3" data-start="31.500" data-duration="0.360" data-track-index="10" data-volume="0.225"></audio>
+<audio id="sfx38" src="assets/sfx/pop.mp3" data-start="32.800" data-duration="0.720" data-track-index="10" data-volume="0.210"></audio>
+<audio id="sfx39" src="assets/sfx/pop.mp3" data-start="38.260" data-duration="0.720" data-track-index="10" data-volume="0.210"></audio>
+<audio id="sfx40" src="assets/sfx/pop.mp3" data-start="41.000" data-duration="0.720" data-track-index="10" data-volume="0.210"></audio>
+<audio id="sfx41" src="assets/sfx/click-soft.mp3" data-start="41.200" data-duration="0.360" data-track-index="11" data-volume="0.150"></audio>
+<audio id="sfx42" src="assets/sfx/click-soft.mp3" data-start="41.300" data-duration="0.360" data-track-index="12" data-volume="0.150"></audio>
+<audio id="sfx43" src="assets/sfx/click-soft.mp3" data-start="41.400" data-duration="0.360" data-track-index="13" data-volume="0.150"></audio>
+<audio id="sfx44" src="assets/sfx/click-soft.mp3" data-start="41.500" data-duration="0.360" data-track-index="14" data-volume="0.150"></audio>
+<audio id="sfx45" src="assets/sfx/click.mp3" data-start="41.660" data-duration="0.360" data-track-index="11" data-volume="0.338"></audio>
+<audio id="sfx46" src="assets/sfx/sparkle.mp3" data-start="41.980" data-duration="1.800" data-track-index="10" data-volume="0.120"></audio>
+  <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="43.800" data-track-index="0"></video>
+<div id="hook"><div class="hk1">UN MOIS DE CONTENU</div><div class="hk2">en <span class="gd">45 minutes</span></div></div>
+<div id="hr0" class="reel" style="left:40px;top:470px;transform:rotate(-8deg)"><img src="assets/reels/r1.jpg"/></div>
+<div id="hr1" class="reel" style="left:60px;top:820px;transform:rotate(5deg)"><img src="assets/reels/r2.jpg"/></div>
+<div id="hr2" class="reel" style="left:45px;top:1150px;transform:rotate(-4deg)"><img src="assets/reels/r3.jpg"/></div>
+<div id="hr3" class="reel" style="left:790px;top:470px;transform:rotate(7deg)"><img src="assets/reels/r4.jpg"/></div>
+<div id="hr4" class="reel" style="left:775px;top:820px;transform:rotate(-5deg)"><img src="assets/reels/r5.jpg"/></div>
+<div id="hr5" class="reel" style="left:790px;top:1150px;transform:rotate(4deg)"><img src="assets/reels/r6.jpg"/></div>
+<div id="st0" class="stepT"><div class="sl">Étape 1</div><div class="sn">RYTHME</div></div>
+<div id="st1" class="stepT"><div class="sl">Étape 2</div><div class="sn">PLANNING</div></div>
+<div id="st2" class="stepT"><div class="sl">Étape 3</div><div class="sn">THÉMATIQUES</div></div>
+<div id="st3" class="stepT"><div class="sl">Étape 4</div><div class="sn">TYPES DE CONTENU</div></div>
+<div id="st4" class="stepT"><div class="sl">Étape 5</div><div class="sn">TON MOIS</div></div>
+<div id="sRy" class="screen">
+<div class="hd"><div class="hl">Étape 1</div><div class="ht">RYTHME</div></div>
+<div id="ry0" class="paceCol" style="left:50px"><div class="tag">CHILL</div><div class="per">3 posts / sem</div><div class="thumbs"><div class="th" id="ry0t0"><img src="assets/reels/r1.jpg"/></div><div class="th" id="ry0t1"><img src="assets/reels/r2.jpg"/></div><div class="th" id="ry0t2"><img src="assets/reels/r3.jpg"/></div></div></div>
+<div id="ry1" class="paceCol" style="left:390px"><div class="tag">MOYEN</div><div class="per">5 posts / sem</div><div class="thumbs"><div class="th" id="ry1t0"><img src="assets/reels/r4.jpg"/></div><div class="th" id="ry1t1"><img src="assets/reels/r5.jpg"/></div><div class="th" id="ry1t2"><img src="assets/reels/r6.jpg"/></div><div class="th" id="ry1t3"><img src="assets/reels/r7.jpg"/></div><div class="th" id="ry1t4"><img src="assets/reels/r8.jpg"/></div></div></div>
+<div id="ry2" class="paceCol" style="left:730px"><div class="tag">INTENSE</div><div class="per">7 posts / sem</div><div class="thumbs"><div class="th" id="ry2t0"><img src="assets/reels/r7.jpg"/></div><div class="th" id="ry2t1"><img src="assets/reels/r8.jpg"/></div><div class="th" id="ry2t2"><img src="assets/reels/r9.jpg"/></div><div class="th" id="ry2t3"><img src="assets/reels/r10.jpg"/></div><div class="th" id="ry2t4"><img src="assets/reels/r1.jpg"/></div><div class="th" id="ry2t5"><img src="assets/reels/r2.jpg"/></div><div class="th" id="ry2t6"><img src="assets/reels/r3.jpg"/></div></div></div>
+</div>
+<div id="sPl" class="screen">
+<div class="hd"><div class="hl">Étape 2</div><div class="ht">PLANNING</div></div>
+<div id="pl0" class="plRow" style="top:640px"><div class="tag">CHILL</div><div class="per">3 posts / sem</div><div class="week "><div class="day on">L</div><div class="day">M</div><div class="day on">M</div><div class="day">J</div><div class="day on">V</div><div class="day">S</div><div class="day">D</div></div></div>
+<div id="pl1" class="plRow" style="top:890px"><div class="tag">MOYEN</div><div class="per">5 posts / sem</div><div class="week "><div class="day on">L</div><div class="day on">M</div><div class="day on">M</div><div class="day on">J</div><div class="day on">V</div><div class="day">S</div><div class="day">D</div></div></div>
+<div id="pl2" class="plRow" style="top:1140px"><div class="tag">INTENSE</div><div class="per">7 posts / sem</div><div class="week "><div class="day on">L</div><div class="day on">M</div><div class="day on">M</div><div class="day on">J</div><div class="day on">V</div><div class="day on">S</div><div class="day on">D</div></div></div>
+</div>
+<div id="sTh" class="screen">
+<div class="hd"><div class="hl">Étape 3</div><div class="ht">THÉMATIQUES</div></div>
+<svg class="full" viewBox="0 0 1080 1920"><path id="tha0" d="M540 913 L540 797" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/><path id="tha1" d="M640 980 L760 944" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/><path id="tha2" d="M602 1089 L676 1182" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/><path id="tha3" d="M478 1089 L404 1182" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/><path id="tha4" d="M440 980 L320 944" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/></svg>
+<div id="thc" class="niche" style="left:310px;top:940px"><div class="nl">NICHE</div><div class="nn">COACH SPORTIF</div></div>
+<div id="thn0" class="node" style="left:420px;top:626px"><div class="nodeIc"><svg class="ic" width="74" height="74" viewBox="0 0 100 100"><path d="M14 50h72M24 34v32M34 28v44M66 28v44M76 34v32"/></svg></div><div class="nodeL">Musculation</div></div>
+<div id="thn1" class="node" style="left:734px;top:836px"><div class="nodeIc"><svg class="ic" width="74" height="74" viewBox="0 0 100 100"><path d="M50 34c-8-8-30-6-30 16 0 18 14 32 22 32 4 0 6-2 8-2s4 2 8 2c8 0 22-14 22-32 0-22-22-24-30-16z"/><path d="M50 34c0-10 6-16 14-18"/></svg></div><div class="nodeL">Nutrition</div></div>
+<div id="thn2" class="node" style="left:614px;top:1176px"><div class="nodeIc"><svg class="ic" width="74" height="74" viewBox="0 0 100 100"><path d="M50 80S16 60 16 38c0-12 9-20 19-20 7 0 12 4 15 9 3-5 8-9 15-9 10 0 19 8 19 20 0 22-34 42-34 42z"/><path d="M22 50h16l6-10 8 20 6-10h20"/></svg></div><div class="nodeL">Cardio</div></div>
+<div id="thn3" class="node" style="left:226px;top:1176px"><div class="nodeIc"><svg class="ic" width="74" height="74" viewBox="0 0 100 100"><path d="M50 20v60M50 24c-6-8-20-6-22 4-10 2-12 14-6 20-6 8 0 20 10 20 2 8 12 12 18 6M50 24c6-8 20-6 22 4 10 2 12 14 6 20 6 8 0 20-10 20-2 8-12 12-18 6"/></svg></div><div class="nodeL">Mindset</div></div>
+<div id="thn4" class="node" style="left:106px;top:836px"><div class="nodeIc"><svg class="ic" width="74" height="74" viewBox="0 0 100 100"><path d="M64 16a34 34 0 1 0 20 46A28 28 0 0 1 64 16z"/><path d="M30 24l3 6 6 3-6 3-3 6-3-6-6-3 6-3z" stroke-width="3"/></svg></div><div class="nodeL">Récupération</div></div>
+</div>
+<div id="sTy" class="screen">
+<div class="hd"><div class="hl">Étape 4</div><div class="ht">TYPES DE CONTENU</div></div>
+<div class="tbl" style="left:40px;top:600px;width:1000px;height:796px">
+<div class="tc th2" style="left:140px;top:0;width:172px;height:96px">Tutoriel</div>
+<div class="tc th2" style="left:312px;top:0;width:172px;height:96px">Storytelling</div>
+<div class="tc th2" style="left:484px;top:0;width:172px;height:96px">Avant / Après</div>
+<div class="tc th2" style="left:656px;top:0;width:172px;height:96px">Liste</div>
+<div class="tc th2" style="left:828px;top:0;width:172px;height:96px">Q / R</div>
+<div class="tc rh" style="left:0;top:96px;width:140px;height:140px"><svg class="ic" width="46" height="46" viewBox="0 0 100 100"><path d="M14 50h72M24 34v32M34 28v44M66 28v44M76 34v32"/></svg><span>Musculation</span></div>
+<div class="tc idea" id="tc00" style="left:140px;top:96px;width:172px;height:140px"><span>Le squat parfait</span></div>
+<div class="tc idea" id="tc01" style="left:312px;top:96px;width:172px;height:140px"><span>Mon 1er 100 kg</span></div>
+<div class="tc idea" id="tc02" style="left:484px;top:96px;width:172px;height:140px"><span>6 mois de muscu</span></div>
+<div class="tc idea" id="tc03" style="left:656px;top:96px;width:172px;height:140px"><span>5 erreurs en salle</span></div>
+<div class="tc idea" id="tc04" style="left:828px;top:96px;width:172px;height:140px"><span>Combien de séries ?</span></div>
+<div class="tc rh" style="left:0;top:236px;width:140px;height:140px"><svg class="ic" width="46" height="46" viewBox="0 0 100 100"><path d="M50 34c-8-8-30-6-30 16 0 18 14 32 22 32 4 0 6-2 8-2s4 2 8 2c8 0 22-14 22-32 0-22-22-24-30-16z"/><path d="M50 34c0-10 6-16 14-18"/></svg><span>Nutrition</span></div>
+<div class="tc idea" id="tc10" style="left:140px;top:236px;width:172px;height:140px"><span>Mon bowl protéiné</span></div>
+<div class="tc idea" id="tc11" style="left:312px;top:236px;width:172px;height:140px"><span>Ma relation à la bouffe</span></div>
+<div class="tc idea" id="tc12" style="left:484px;top:236px;width:172px;height:140px"><span>Mon assiette avant / après</span></div>
+<div class="tc idea" id="tc13" style="left:656px;top:236px;width:172px;height:140px"><span>7 snacks healthy</span></div>
+<div class="tc idea" id="tc14" style="left:828px;top:236px;width:172px;height:140px"><span>Faut-il compter ?</span></div>
+<div class="tc rh" style="left:0;top:376px;width:140px;height:140px"><svg class="ic" width="46" height="46" viewBox="0 0 100 100"><path d="M50 80S16 60 16 38c0-12 9-20 19-20 7 0 12 4 15 9 3-5 8-9 15-9 10 0 19 8 19 20 0 22-34 42-34 42z"/><path d="M22 50h16l6-10 8 20 6-10h20"/></svg><span>Cardio</span></div>
+<div class="tc idea" id="tc20" style="left:140px;top:376px;width:172px;height:140px"><span>HIIT en 15 min</span></div>
+<div class="tc idea" id="tc21" style="left:312px;top:376px;width:172px;height:140px"><span>Mon 1er 10 km</span></div>
+<div class="tc idea" id="tc22" style="left:484px;top:376px;width:172px;height:140px"><span>Cardio : J1 vs J30</span></div>
+<div class="tc idea" id="tc23" style="left:656px;top:376px;width:172px;height:140px"><span>3 cardios sans courir</span></div>
+<div class="tc idea" id="tc24" style="left:828px;top:376px;width:172px;height:140px"><span>Cardio à jeun ?</span></div>
+<div class="tc rh" style="left:0;top:516px;width:140px;height:140px"><svg class="ic" width="46" height="46" viewBox="0 0 100 100"><path d="M50 20v60M50 24c-6-8-20-6-22 4-10 2-12 14-6 20-6 8 0 20 10 20 2 8 12 12 18 6M50 24c6-8 20-6 22 4 10 2 12 14 6 20 6 8 0 20-10 20-2 8-12 12-18 6"/></svg><span>Mindset</span></div>
+<div class="tc idea" id="tc30" style="left:140px;top:516px;width:172px;height:140px"><span>Rester motivé</span></div>
+<div class="tc idea" id="tc31" style="left:312px;top:516px;width:172px;height:140px"><span>Le jour où j’ai lâché</span></div>
+<div class="tc idea" id="tc32" style="left:484px;top:516px;width:172px;height:140px"><span>Mon mental avant / après</span></div>
+<div class="tc idea" id="tc33" style="left:656px;top:516px;width:172px;height:140px"><span>4 excuses à bannir</span></div>
+<div class="tc idea" id="tc34" style="left:828px;top:516px;width:172px;height:140px"><span>Comment tenir ?</span></div>
+<div class="tc rh" style="left:0;top:656px;width:140px;height:140px"><svg class="ic" width="46" height="46" viewBox="0 0 100 100"><path d="M64 16a34 34 0 1 0 20 46A28 28 0 0 1 64 16z"/><path d="M30 24l3 6 6 3-6 3-3 6-3-6-6-3 6-3z" stroke-width="3"/></svg><span>Récupération</span></div>
+<div class="tc idea" id="tc40" style="left:140px;top:656px;width:172px;height:140px"><span>Étirements du soir</span></div>
+<div class="tc idea" id="tc41" style="left:312px;top:656px;width:172px;height:140px"><span>Ma blessure</span></div>
+<div class="tc idea" id="tc42" style="left:484px;top:656px;width:172px;height:140px"><span>Sommeil avant / après</span></div>
+<div class="tc idea" id="tc43" style="left:656px;top:656px;width:172px;height:140px"><span>5 clés de récup</span></div>
+<div class="tc idea" id="tc44" style="left:828px;top:656px;width:172px;height:140px"><span>Repos ou pas ?</span></div>
+</div>
+</div>
+<div id="sMo" class="screen">
+<div class="hd"><div class="hl">Étape 5</div><div class="ht">TON MOIS</div></div>
+<div class="calwrap">
+<div id="calA" class="cal" style="width:980px;height:806px;transform:scale(1.0)">
+<div class="ch" style="left:0px;width:140px">Lun</div>
+<div class="ch" style="left:140px;width:140px">Mar</div>
+<div class="ch" style="left:280px;width:140px">Mer</div>
+<div class="ch" style="left:420px;width:140px">Jeu</div>
+<div class="ch" style="left:560px;width:140px">Ven</div>
+<div class="ch" style="left:700px;width:140px">Sam</div>
+<div class="ch" style="left:840px;width:140px">Dim</div>
+<div class="cd on" style="left:4px;top:60px;width:132px;height:142px"><div class="dn">1</div><div class="tag2" style="background:#FFFFFF;color:#5A3F1F">Tuto</div><div class="topic">Musculation</div></div>
+<div class="cd on" style="left:144px;top:60px;width:132px;height:142px"><div class="dn">2</div><div class="tag2" style="background:#F3DFB2;color:#5A3F1F">Story</div><div class="topic">Nutrition</div></div>
+<div class="cd on" style="left:284px;top:60px;width:132px;height:142px"><div class="dn">3</div><div class="tag2" style="background:#E2BF77;color:#4A3010">Av / Ap</div><div class="topic">Cardio</div></div>
+<div class="cd on" style="left:424px;top:60px;width:132px;height:142px"><div class="dn">4</div><div class="tag2" style="background:#C99A4E;color:#FFFFFF">Liste</div><div class="topic">Mindset</div></div>
+<div class="cd on" style="left:564px;top:60px;width:132px;height:142px"><div class="dn">5</div><div class="tag2" style="background:#6E4A1B;color:#FFFFFF">Q / R</div><div class="topic">Récupération</div></div>
+<div class="cd" style="left:704px;top:60px;width:132px;height:142px"><div class="dn">6</div></div>
+<div class="cd" style="left:844px;top:60px;width:132px;height:142px"><div class="dn">7</div></div>
+<div class="cd on" style="left:4px;top:210px;width:132px;height:142px"><div class="dn">8</div><div class="tag2" style="background:#FFFFFF;color:#5A3F1F">Tuto</div><div class="topic">Nutrition</div></div>
+<div class="cd on" style="left:144px;top:210px;width:132px;height:142px"><div class="dn">9</div><div class="tag2" style="background:#F3DFB2;color:#5A3F1F">Story</div><div class="topic">Cardio</div></div>
+<div class="cd on" style="left:284px;top:210px;width:132px;height:142px"><div class="dn">10</div><div class="tag2" style="background:#E2BF77;color:#4A3010">Av / Ap</div><div class="topic">Mindset</div></div>
+<div class="cd on" style="left:424px;top:210px;width:132px;height:142px"><div class="dn">11</div><div class="tag2" style="background:#C99A4E;color:#FFFFFF">Liste</div><div class="topic">Récupération</div></div>
+<div class="cd on" style="left:564px;top:210px;width:132px;height:142px"><div class="dn">12</div><div class="tag2" style="background:#6E4A1B;color:#FFFFFF">Q / R</div><div class="topic">Musculation</div></div>
+<div class="cd" style="left:704px;top:210px;width:132px;height:142px"><div class="dn">13</div></div>
+<div class="cd" style="left:844px;top:210px;width:132px;height:142px"><div class="dn">14</div></div>
+<div class="cd on" style="left:4px;top:360px;width:132px;height:142px"><div class="dn">15</div><div class="tag2" style="background:#FFFFFF;color:#5A3F1F">Tuto</div><div class="topic">Cardio</div></div>
+<div class="cd on" style="left:144px;top:360px;width:132px;height:142px"><div class="dn">16</div><div class="tag2" style="background:#F3DFB2;color:#5A3F1F">Story</div><div class="topic">Mindset</div></div>
+<div class="cd on" style="left:284px;top:360px;width:132px;height:142px"><div class="dn">17</div><div class="tag2" style="background:#E2BF77;color:#4A3010">Av / Ap</div><div class="topic">Récupération</div></div>
+<div class="cd on" style="left:424px;top:360px;width:132px;height:142px"><div class="dn">18</div><div class="tag2" style="background:#C99A4E;color:#FFFFFF">Liste</div><div class="topic">Musculation</div></div>
+<div class="cd on" style="left:564px;top:360px;width:132px;height:142px"><div class="dn">19</div><div class="tag2" style="background:#6E4A1B;color:#FFFFFF">Q / R</div><div class="topic">Nutrition</div></div>
+<div class="cd" style="left:704px;top:360px;width:132px;height:142px"><div class="dn">20</div></div>
+<div class="cd" style="left:844px;top:360px;width:132px;height:142px"><div class="dn">21</div></div>
+<div class="cd on" style="left:4px;top:510px;width:132px;height:142px"><div class="dn">22</div><div class="tag2" style="background:#FFFFFF;color:#5A3F1F">Tuto</div><div class="topic">Mindset</div></div>
+<div class="cd on" style="left:144px;top:510px;width:132px;height:142px"><div class="dn">23</div><div class="tag2" style="background:#F3DFB2;color:#5A3F1F">Story</div><div class="topic">Récupération</div></div>
+<div class="cd on" style="left:284px;top:510px;width:132px;height:142px"><div class="dn">24</div><div class="tag2" style="background:#E2BF77;color:#4A3010">Av / Ap</div><div class="topic">Musculation</div></div>
+<div class="cd on" style="left:424px;top:510px;width:132px;height:142px"><div class="dn">25</div><div class="tag2" style="background:#C99A4E;color:#FFFFFF">Liste</div><div class="topic">Nutrition</div></div>
+<div class="cd on" style="left:564px;top:510px;width:132px;height:142px"><div class="dn">26</div><div class="tag2" style="background:#6E4A1B;color:#FFFFFF">Q / R</div><div class="topic">Cardio</div></div>
+<div class="cd" style="left:704px;top:510px;width:132px;height:142px"><div class="dn">27</div></div>
+<div class="cd" style="left:844px;top:510px;width:132px;height:142px"><div class="dn">28</div></div>
+<div class="cd on" style="left:4px;top:660px;width:132px;height:142px"><div class="dn">29</div><div class="tag2" style="background:#FFFFFF;color:#5A3F1F">Tuto</div><div class="topic">Récupération</div></div>
+<div class="cd on" style="left:144px;top:660px;width:132px;height:142px"><div class="dn">30</div><div class="tag2" style="background:#F3DFB2;color:#5A3F1F">Story</div><div class="topic">Musculation</div></div>
+</div>
+</div>
+</div>
+<div id="rcM" class="recap" style="left:290px;top:236px"><div class="tag">MOYEN</div><div class="per">5 posts / sem</div></div>
+<div id="rcW" class="recap wide" style="left:200px;top:236px"><div class="per">Du lundi au vendredi</div><div class="week small"><div class="day on">L</div><div class="day on">M</div><div class="day on">M</div><div class="day on">J</div><div class="day on">V</div><div class="day">S</div><div class="day">D</div></div></div>
+<div id="rcC" class="recapCal">
+<div id="calB" class="cal" style="width:980px;height:806px;transform:scale(1.0)">
+<div class="ch" style="left:0px;width:140px">Lun</div>
+<div class="ch" style="left:140px;width:140px">Mar</div>
+<div class="ch" style="left:280px;width:140px">Mer</div>
+<div class="ch" style="left:420px;width:140px">Jeu</div>
+<div class="ch" style="left:560px;width:140px">Ven</div>
+<div class="ch" style="left:700px;width:140px">Sam</div>
+<div class="ch" style="left:840px;width:140px">Dim</div>
+<div class="cd on" style="left:4px;top:60px;width:132px;height:142px"><div class="dn">1</div><div class="tag2" style="background:#FFFFFF;color:#5A3F1F">Tuto</div><div class="topic">Musculation</div></div>
+<div class="cd on" style="left:144px;top:60px;width:132px;height:142px"><div class="dn">2</div><div class="tag2" style="background:#F3DFB2;color:#5A3F1F">Story</div><div class="topic">Nutrition</div></div>
+<div class="cd on" style="left:284px;top:60px;width:132px;height:142px"><div class="dn">3</div><div class="tag2" style="background:#E2BF77;color:#4A3010">Av / Ap</div><div class="topic">Cardio</div></div>
+<div class="cd on" style="left:424px;top:60px;width:132px;height:142px"><div class="dn">4</div><div class="tag2" style="background:#C99A4E;color:#FFFFFF">Liste</div><div class="topic">Mindset</div></div>
+<div class="cd on" style="left:564px;top:60px;width:132px;height:142px"><div class="dn">5</div><div class="tag2" style="background:#6E4A1B;color:#FFFFFF">Q / R</div><div class="topic">Récupération</div></div>
+<div class="cd" style="left:704px;top:60px;width:132px;height:142px"><div class="dn">6</div></div>
+<div class="cd" style="left:844px;top:60px;width:132px;height:142px"><div class="dn">7</div></div>
+<div class="cd on" style="left:4px;top:210px;width:132px;height:142px"><div class="dn">8</div><div class="tag2" style="background:#FFFFFF;color:#5A3F1F">Tuto</div><div class="topic">Nutrition</div></div>
+<div class="cd on" style="left:144px;top:210px;width:132px;height:142px"><div class="dn">9</div><div class="tag2" style="background:#F3DFB2;color:#5A3F1F">Story</div><div class="topic">Cardio</div></div>
+<div class="cd on" style="left:284px;top:210px;width:132px;height:142px"><div class="dn">10</div><div class="tag2" style="background:#E2BF77;color:#4A3010">Av / Ap</div><div class="topic">Mindset</div></div>
+<div class="cd on" style="left:424px;top:210px;width:132px;height:142px"><div class="dn">11</div><div class="tag2" style="background:#C99A4E;color:#FFFFFF">Liste</div><div class="topic">Récupération</div></div>
+<div class="cd on" style="left:564px;top:210px;width:132px;height:142px"><div class="dn">12</div><div class="tag2" style="background:#6E4A1B;color:#FFFFFF">Q / R</div><div class="topic">Musculation</div></div>
+<div class="cd" style="left:704px;top:210px;width:132px;height:142px"><div class="dn">13</div></div>
+<div class="cd" style="left:844px;top:210px;width:132px;height:142px"><div class="dn">14</div></div>
+<div class="cd on" style="left:4px;top:360px;width:132px;height:142px"><div class="dn">15</div><div class="tag2" style="background:#FFFFFF;color:#5A3F1F">Tuto</div><div class="topic">Cardio</div></div>
+<div class="cd on" style="left:144px;top:360px;width:132px;height:142px"><div class="dn">16</div><div class="tag2" style="background:#F3DFB2;color:#5A3F1F">Story</div><div class="topic">Mindset</div></div>
+<div class="cd on" style="left:284px;top:360px;width:132px;height:142px"><div class="dn">17</div><div class="tag2" style="background:#E2BF77;color:#4A3010">Av / Ap</div><div class="topic">Récupération</div></div>
+<div class="cd on" style="left:424px;top:360px;width:132px;height:142px"><div class="dn">18</div><div class="tag2" style="background:#C99A4E;color:#FFFFFF">Liste</div><div class="topic">Musculation</div></div>
+<div class="cd on" style="left:564px;top:360px;width:132px;height:142px"><div class="dn">19</div><div class="tag2" style="background:#6E4A1B;color:#FFFFFF">Q / R</div><div class="topic">Nutrition</div></div>
+<div class="cd" style="left:704px;top:360px;width:132px;height:142px"><div class="dn">20</div></div>
+<div class="cd" style="left:844px;top:360px;width:132px;height:142px"><div class="dn">21</div></div>
+<div class="cd on" style="left:4px;top:510px;width:132px;height:142px"><div class="dn">22</div><div class="tag2" style="background:#FFFFFF;color:#5A3F1F">Tuto</div><div class="topic">Mindset</div></div>
+<div class="cd on" style="left:144px;top:510px;width:132px;height:142px"><div class="dn">23</div><div class="tag2" style="background:#F3DFB2;color:#5A3F1F">Story</div><div class="topic">Récupération</div></div>
+<div class="cd on" style="left:284px;top:510px;width:132px;height:142px"><div class="dn">24</div><div class="tag2" style="background:#E2BF77;color:#4A3010">Av / Ap</div><div class="topic">Musculation</div></div>
+<div class="cd on" style="left:424px;top:510px;width:132px;height:142px"><div class="dn">25</div><div class="tag2" style="background:#C99A4E;color:#FFFFFF">Liste</div><div class="topic">Nutrition</div></div>
+<div class="cd on" style="left:564px;top:510px;width:132px;height:142px"><div class="dn">26</div><div class="tag2" style="background:#6E4A1B;color:#FFFFFF">Q / R</div><div class="topic">Cardio</div></div>
+<div class="cd" style="left:704px;top:510px;width:132px;height:142px"><div class="dn">27</div></div>
+<div class="cd" style="left:844px;top:510px;width:132px;height:142px"><div class="dn">28</div></div>
+<div class="cd on" style="left:4px;top:660px;width:132px;height:142px"><div class="dn">29</div><div class="tag2" style="background:#FFFFFF;color:#5A3F1F">Tuto</div><div class="topic">Récupération</div></div>
+<div class="cd on" style="left:144px;top:660px;width:132px;height:142px"><div class="dn">30</div><div class="tag2" style="background:#F3DFB2;color:#5A3F1F">Story</div><div class="topic">Musculation</div></div>
+</div>
+</div>
+<div id="guide" class="guide"><div class="gl">GUIDE</div><div class="gg">GRATUIT</div><div class="gs">Ta stratégie de A à Z</div><div class="gb">@thestrategicboost.fr</div></div>
+<div id="cm"><div class="cmav"><img src="assets/avatar.png"/></div><div class="cmbar"><span id="cmtext"></span><span class="caret"></span></div><div id="cmsend" class="cmsend"><svg viewBox="0 0 24 24" width="40" height="40"><path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="#2A1E16" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+<div id="dm" class="dm"><div class="dmav"><img src="assets/avatar.png"/></div><div class="dmb"><div class="dmt">Je t’ai envoyé le lien</div><div class="dml"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1" fill="none" stroke="#5A3F1F" stroke-width="2.4" stroke-linecap="round"/></svg><span>Guide gratuit</span></div></div></div>
+<div id="cp0" class="cap"><span class="ci"><span class="">Maé</span> <span class="">j’ai</span> <span class="">que</span></span></div>
+<div id="cp1" class="cap"><span class="ci"><span class="gd">45</span> <span class="gd">minutes</span> <span class="">pour</span></span></div>
+<div id="cp2" class="cap"><span class="ci"><span class="">planifier</span> <span class="">un</span> <span class="gd">mois</span></span></div>
+<div id="cp3" class="cap"><span class="ci"><span class="">entier</span> <span class="">de</span> <span class="">contenu</span></span></div>
+<div id="cp4" class="cap"><span class="ci"><span class="">Ok</span> <span class="">je</span> <span class="">te</span></span></div>
+<div id="cp5" class="cap"><span class="ci"><span class="">fais</span> <span class="">ça</span></span></div>
+<div id="cp6" class="cap"><span class="ci"><span class="">Attends</span> <span class="">vraiment</span></span></div>
+<div id="cp7" class="cap"><span class="ci"><span class="">Étape</span> <span class="">1</span> <span class="">tu</span></span></div>
+<div id="cp8" class="cap"><span class="ci"><span class="">choisis</span> <span class="">ton</span> <span class="">rythme</span></span></div>
+<div id="cp9" class="cap"><span class="ci"><span class="">de</span> <span class="">publication</span> <span class="">Plutôt</span></span></div>
+<div id="cp10" class="cap pill"><span class="ci"><span class="gd">chill</span> <span class="">plutôt</span> <span class="gd">moyen</span></span></div>
+<div id="cp11" class="cap pill"><span class="ci"><span class="">ou</span> <span class="">plutôt</span> <span class="gd">intense</span></span></div>
+<div id="cp12" class="cap"><span class="ci"><span class="">Ok</span> <span class="">je</span> <span class="">choisis</span></span></div>
+<div id="cp13" class="cap"><span class="ci"><span class="">le</span> <span class="gd">moyen</span></span></div>
+<div id="cp14" class="cap"><span class="ci"><span class="">Étape</span> <span class="">2</span> <span class="">ton</span></span></div>
+<div id="cp15" class="cap"><span class="ci"><span class="">planning</span> <span class="">de</span> <span class="">publication</span></span></div>
+<div id="cp16" class="cap pill"><span class="ci"><span class="">Là</span> <span class="">tu</span> <span class="">choisis</span></span></div>
+<div id="cp17" class="cap pill"><span class="ci"><span class="">des</span> <span class="">jours</span> <span class="">Parce</span></span></div>
+<div id="cp18" class="cap pill"><span class="ci"><span class="">que</span> <span class="">tu</span> <span class="">le</span></span></div>
+<div id="cp19" class="cap pill"><span class="ci"><span class="">sais</span> <span class="">tu</span> <span class="">dois</span></span></div>
+<div id="cp20" class="cap pill"><span class="ci"><span class="">t’imposer</span> <span class="">une</span> <span class="gd">discipline</span></span></div>
+<div id="cp21" class="cap"><span class="ci"><span class="">La</span> <span class="gd">rigueur</span> <span class="">c’est</span></span></div>
+<div id="cp22" class="cap"><span class="ci"><span class="">la</span> <span class="">clé</span> <span class="">ma</span></span></div>
+<div id="cp23" class="cap"><span class="ci"><span class="">girl</span></span></div>
+<div id="cp24" class="cap"><span class="ci"><span class="">Du</span> <span class="gd">lundi</span> <span class="">au</span></span></div>
+<div id="cp25" class="cap"><span class="ci"><span class="gd">vendredi</span></span></div>
+<div id="cp26" class="cap"><span class="ci"><span class="">Étape</span> <span class="">3</span> <span class="">ta</span></span></div>
+<div id="cp27" class="cap"><span class="ci"><span class="">thématique</span> <span class="">de</span> <span class="">contenu</span></span></div>
+<div id="cp28" class="cap pill"><span class="ci"><span class="">Là</span> <span class="">tu</span> <span class="">écris</span></span></div>
+<div id="cp29" class="cap pill"><span class="ci"><span class="">ta</span> <span class="gd">niche</span> <span class="">et</span></span></div>
+<div id="cp30" class="cap pill"><span class="ci"><span class="">3</span> <span class="">à</span> <span class="">5</span></span></div>
+<div id="cp31" class="cap pill"><span class="ci"><span class="">sujets</span> <span class="">liés</span> <span class="">à</span></span></div>
+<div id="cp32" class="cap pill"><span class="ci"><span class="">cette</span> <span class="">même</span> <span class="gd">niche</span></span></div>
+<div id="cp33" class="cap"><span class="ci"><span class="">Étape</span> <span class="">4</span> <span class="">tes</span></span></div>
+<div id="cp34" class="cap"><span class="ci"><span class="">types</span> <span class="">de</span> <span class="">contenu</span></span></div>
+<div id="cp35" class="cap pill"><span class="ci"><span class="">Là</span> <span class="">tu</span> <span class="">crées</span></span></div>
+<div id="cp36" class="cap pill"><span class="ci"><span class="">un</span> <span class="gd">tableau</span> <span class="">comme</span></span></div>
+<div id="cp37" class="cap pill"><span class="ci"><span class="">celui-ci</span> <span class="">et</span> <span class="">tu</span></span></div>
+<div id="cp38" class="cap pill"><span class="ci"><span class="">le</span> <span class="">remplis</span></span></div>
+<div id="cp39" class="cap"><span class="ci"><span class="">Ok</span> <span class="">ça</span> <span class="">c’est</span></span></div>
+<div id="cp40" class="cap"><span class="ci"><span class="">fait</span> <span class="">Et</span> <span class="">après</span></span></div>
+<div id="cp41" class="cap"><span class="ci"><span class="">étape</span> <span class="">5</span> <span class="">t’as</span></span></div>
+<div id="cp42" class="cap"><span class="ci"><span class="">plus</span> <span class="">qu’à</span> <span class="">planifier</span></span></div>
+<div id="cp43" class="cap"><span class="ci"><span class="">ton</span> <span class="gd">mois</span> <span class="">entier</span></span></div>
+<div id="cp44" class="cap pill"><span class="ci"><span class="">Et</span> <span class="">là</span> <span class="">tu</span></span></div>
+<div id="cp45" class="cap pill"><span class="ci"><span class="">planifies</span> <span class="">ton</span> <span class="gd">mois</span></span></div>
+<div id="cp46" class="cap pill"><span class="ci"><span class="">de</span> <span class="">contenu</span> <span class="">entier</span></span></div>
+<div id="cp47" class="cap pill"><span class="ci"><span class="">en</span> <span class="">utilisant</span> <span class="">tes</span></span></div>
+<div id="cp48" class="cap pill"><span class="ci"><span class="">thématiques</span> <span class="">et</span> <span class="">tes</span></span></div>
+<div id="cp49" class="cap pill"><span class="ci"><span class="">formats</span> <span class="">préférés</span></span></div>
+<div id="cp50" class="cap pill"><span class="ci"><span class="">en</span> <span class="">partant</span> <span class="">du</span></span></div>
+<div id="cp51" class="cap pill"><span class="ci"><span class="gd">tableau</span> <span class="">que</span> <span class="">tu</span></span></div>
+<div id="cp52" class="cap pill"><span class="ci"><span class="">viens</span> <span class="">de</span> <span class="">faire</span></span></div>
+<div id="cp53" class="cap"><span class="ci"><span class="">Here</span> <span class="">you</span> <span class="">go</span></span></div>
+<div id="cp54" class="cap"><span class="ci"><span class="">Et</span> <span class="">là</span> <span class="">t’as</span></span></div>
+<div id="cp55" class="cap"><span class="ci"><span class="">ton</span> <span class="">planning</span> <span class="">de</span></span></div>
+<div id="cp56" class="cap"><span class="ci"><span class="">contenu</span> <span class="">pour</span> <span class="">un</span></span></div>
+<div id="cp57" class="cap"><span class="ci"><span class="gd">mois</span> <span class="">entier</span></span></div>
+<div id="cp58" class="cap"><span class="ci"><span class="">No</span> <span class="">way</span> <span class="">C’est</span></span></div>
+<div id="cp59" class="cap"><span class="ci"><span class="gd">incroyable</span> <span class="">Tu</span> <span class="">as</span></span></div>
+<div id="cp60" class="cap"><span class="ci"><span class="">autre</span> <span class="">chose</span> <span class="">pour</span></span></div>
+<div id="cp61" class="cap"><span class="ci"><span class="">moi</span></span></div>
+<div id="cp62" class="cap"><span class="ci"><span class="">Si</span> <span class="">tu</span> <span class="">veux</span></span></div>
+<div id="cp63" class="cap"><span class="ci"><span class="">mon</span> <span class="">guide</span> <span class="gd">gratuit</span></span></div>
+<div id="cp64" class="cap"><span class="ci"><span class="">pour</span> <span class="">savoir</span> <span class="">comment</span></span></div>
+<div id="cp65" class="cap"><span class="ci"><span class="">créer</span> <span class="">ta</span> <span class="">stratégie</span></span></div>
+<div id="cp66" class="cap"><span class="ci"><span class="">de</span> <span class="">A</span> <span class="">à</span></span></div>
+<div id="cp67" class="cap"><span class="ci"><span class="">Z</span></span></div>
+<div id="cp68" class="cap"><span class="ci"><span class="">Ok</span> <span class="">let’s</span> <span class="">go</span></span></div>
+
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+gsap.set('#hook',{autoAlpha:0});
+tl.set('#hook',{autoAlpha:1},0.000);
+tl.set('#hook',{autoAlpha:0},3.200);
+tl.fromTo('#hook',{y:-30,opacity:0},{y:0,opacity:1,duration:.35,ease:'power3.out',immediateRender:false},0);
+gsap.set('#hr0',{autoAlpha:0});
+tl.fromTo('#hr0',{autoAlpha:0,scale:0.4},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},2.380);
+tl.set('#hr0',{autoAlpha:0},3.2);
+gsap.set('#hr1',{autoAlpha:0});
+tl.fromTo('#hr1',{autoAlpha:0,scale:0.4},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},2.470);
+tl.set('#hr1',{autoAlpha:0},3.2);
+gsap.set('#hr2',{autoAlpha:0});
+tl.fromTo('#hr2',{autoAlpha:0,scale:0.4},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},2.560);
+tl.set('#hr2',{autoAlpha:0},3.2);
+gsap.set('#hr3',{autoAlpha:0});
+tl.fromTo('#hr3',{autoAlpha:0,scale:0.4},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},2.650);
+tl.set('#hr3',{autoAlpha:0},3.2);
+gsap.set('#hr4',{autoAlpha:0});
+tl.fromTo('#hr4',{autoAlpha:0,scale:0.4},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},2.740);
+tl.set('#hr4',{autoAlpha:0},3.2);
+gsap.set('#hr5',{autoAlpha:0});
+tl.fromTo('#hr5',{autoAlpha:0,scale:0.4},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},2.830);
+tl.set('#hr5',{autoAlpha:0},3.2);
+gsap.set('#st0',{autoAlpha:0});
+tl.set('#st0',{autoAlpha:1},5.200);
+tl.set('#st0',{autoAlpha:0},7.000);
+tl.fromTo('#st0',{scale:1.25,opacity:0,filter:'blur(10px)'},{scale:1,opacity:1,filter:'blur(0px)',duration:.25,ease:'power3.out',immediateRender:false},5.200);
+gsap.set('#st1',{autoAlpha:0});
+tl.set('#st1',{autoAlpha:1},10.180);
+tl.set('#st1',{autoAlpha:0},11.450);
+tl.fromTo('#st1',{scale:1.25,opacity:0,filter:'blur(10px)'},{scale:1,opacity:1,filter:'blur(0px)',duration:.25,ease:'power3.out',immediateRender:false},10.180);
+gsap.set('#st2',{autoAlpha:0});
+tl.set('#st2',{autoAlpha:1},16.930);
+tl.set('#st2',{autoAlpha:0},18.500);
+tl.fromTo('#st2',{scale:1.25,opacity:0,filter:'blur(10px)'},{scale:1,opacity:1,filter:'blur(0px)',duration:.25,ease:'power3.out',immediateRender:false},16.930);
+gsap.set('#st3',{autoAlpha:0});
+tl.set('#st3',{autoAlpha:1},21.240);
+tl.set('#st3',{autoAlpha:0},22.600);
+tl.fromTo('#st3',{scale:1.25,opacity:0,filter:'blur(10px)'},{scale:1,opacity:1,filter:'blur(0px)',duration:.25,ease:'power3.out',immediateRender:false},21.240);
+gsap.set('#st4',{autoAlpha:0});
+tl.set('#st4',{autoAlpha:1},26.120);
+tl.set('#st4',{autoAlpha:0},27.730);
+tl.fromTo('#st4',{scale:1.25,opacity:0,filter:'blur(10px)'},{scale:1,opacity:1,filter:'blur(0px)',duration:.25,ease:'power3.out',immediateRender:false},26.120);
+gsap.set('#sRy',{autoAlpha:0});
+tl.set('#sRy',{autoAlpha:1},7.000);
+tl.set('#sRy',{autoAlpha:0},8.867);
+gsap.set('#ry0',{autoAlpha:0});
+tl.fromTo('#ry0',{autoAlpha:0,scale:0.7},{autoAlpha:1,scale:1,duration:0.25,ease:'back.out(1.8)',immediateRender:false},7.250);
+gsap.set('#ry0 .th',{autoAlpha:0});
+tl.fromTo('#ry0 .th',{autoAlpha:0,y:20},{autoAlpha:1,y:0,duration:.2,stagger:.05,ease:'power2.out',immediateRender:false},7.350);
+gsap.set('#ry1',{autoAlpha:0});
+tl.fromTo('#ry1',{autoAlpha:0,scale:0.7},{autoAlpha:1,scale:1,duration:0.25,ease:'back.out(1.8)',immediateRender:false},7.830);
+gsap.set('#ry1 .th',{autoAlpha:0});
+tl.fromTo('#ry1 .th',{autoAlpha:0,y:20},{autoAlpha:1,y:0,duration:.2,stagger:.05,ease:'power2.out',immediateRender:false},7.930);
+gsap.set('#ry2',{autoAlpha:0});
+tl.fromTo('#ry2',{autoAlpha:0,scale:0.7},{autoAlpha:1,scale:1,duration:0.25,ease:'back.out(1.8)',immediateRender:false},8.550);
+gsap.set('#ry2 .th',{autoAlpha:0});
+tl.fromTo('#ry2 .th',{autoAlpha:0,y:20},{autoAlpha:1,y:0,duration:.2,stagger:.05,ease:'power2.out',immediateRender:false},8.650);
+gsap.set('#sPl',{autoAlpha:0});
+tl.set('#sPl',{autoAlpha:1},11.450);
+tl.set('#sPl',{autoAlpha:0},14.500);
+gsap.set('#pl0',{autoAlpha:0});
+tl.fromTo('#pl0',{autoAlpha:0,scale:0.8},{autoAlpha:1,scale:1,duration:0.25,ease:'back.out(1.8)',immediateRender:false},11.650);
+gsap.set('#pl0 .day.on',{backgroundPosition:'0% 0%'});
+tl.fromTo('#pl0 .day.on',{scale:.6,opacity:.3},{scale:1,opacity:1,duration:.18,stagger:.07,ease:'back.out(2)',immediateRender:false},11.850);
+gsap.set('#pl1',{autoAlpha:0});
+tl.fromTo('#pl1',{autoAlpha:0,scale:0.8},{autoAlpha:1,scale:1,duration:0.25,ease:'back.out(1.8)',immediateRender:false},12.150);
+gsap.set('#pl1 .day.on',{backgroundPosition:'0% 0%'});
+tl.fromTo('#pl1 .day.on',{scale:.6,opacity:.3},{scale:1,opacity:1,duration:.18,stagger:.07,ease:'back.out(2)',immediateRender:false},12.350);
+gsap.set('#pl2',{autoAlpha:0});
+tl.fromTo('#pl2',{autoAlpha:0,scale:0.8},{autoAlpha:1,scale:1,duration:0.25,ease:'back.out(1.8)',immediateRender:false},12.650);
+gsap.set('#pl2 .day.on',{backgroundPosition:'0% 0%'});
+tl.fromTo('#pl2 .day.on',{scale:.6,opacity:.3},{scale:1,opacity:1,duration:.18,stagger:.07,ease:'back.out(2)',immediateRender:false},12.850);
+gsap.set('#sTh',{autoAlpha:0});
+tl.set('#sTh',{autoAlpha:1},18.500);
+tl.set('#sTh',{autoAlpha:0},21.200);
+gsap.set('#thc',{autoAlpha:0});
+tl.fromTo('#thc',{autoAlpha:0,scale:0.6},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},19.100);
+gsap.set('#thn0',{autoAlpha:0});
+tl.fromTo('#thn0',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},19.560);
+gsap.set('#tha0',{opacity:0});
+tl.to('#tha0',{opacity:.85,duration:.2},19.460);
+gsap.set('#thn1',{autoAlpha:0});
+tl.fromTo('#thn1',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},19.840);
+gsap.set('#tha1',{opacity:0});
+tl.to('#tha1',{opacity:.85,duration:.2},19.740);
+gsap.set('#thn2',{autoAlpha:0});
+tl.fromTo('#thn2',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},20.120);
+gsap.set('#tha2',{opacity:0});
+tl.to('#tha2',{opacity:.85,duration:.2},20.020);
+gsap.set('#thn3',{autoAlpha:0});
+tl.fromTo('#thn3',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},20.400);
+gsap.set('#tha3',{opacity:0});
+tl.to('#tha3',{opacity:.85,duration:.2},20.300);
+gsap.set('#thn4',{autoAlpha:0});
+tl.fromTo('#thn4',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},20.680);
+gsap.set('#tha4',{opacity:0});
+tl.to('#tha4',{opacity:.85,duration:.2},20.580);
+gsap.set('#sTy',{autoAlpha:0});
+tl.set('#sTy',{autoAlpha:1},22.600);
+tl.set('#sTy',{autoAlpha:0},24.600);
+gsap.set('#sTy .idea span',{autoAlpha:0});
+tl.fromTo('#sTy .idea span',{autoAlpha:0,scale:.7},{autoAlpha:1,scale:1,duration:.12,stagger:.055,ease:'power2.out',immediateRender:false},23.050);
+gsap.set('#sMo',{autoAlpha:0});
+tl.set('#sMo',{autoAlpha:1},27.733);
+tl.set('#sMo',{autoAlpha:0},32.567);
+gsap.set('#calA .cd.on .tag2, #calA .cd.on .topic',{autoAlpha:0});
+tl.fromTo('#calA .cd.on .tag2',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.16,stagger:.17,ease:'back.out(2)',immediateRender:false},28.100);
+tl.fromTo('#calA .cd.on .topic',{autoAlpha:0},{autoAlpha:1,duration:.16,stagger:.17,immediateRender:false},28.160);
+gsap.set('#rcM',{autoAlpha:0});
+tl.fromTo('#rcM',{autoAlpha:0,scale:0.6},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},9.250);
+tl.set('#rcM',{autoAlpha:0},10.067);
+gsap.set('#rcW',{autoAlpha:0});
+tl.fromTo('#rcW',{autoAlpha:0,scale:0.6},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},15.950);
+tl.set('#rcW',{autoAlpha:0},16.933);
+gsap.set('#rcC',{autoAlpha:0});
+tl.fromTo('#rcC',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.35,ease:'back.out(1.8)',immediateRender:false},32.800);
+tl.set('#rcC',{autoAlpha:0},35.333);
+gsap.set('#guide',{autoAlpha:0});
+tl.fromTo('#guide',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.35,ease:'back.out(1.8)',immediateRender:false},38.260);
+tl.to('#guide',{autoAlpha:0,scale:.9,duration:.15},41.45);
+tl.set('#guide',{autoAlpha:0},41.6);
+tl.fromTo('#guide',{rotation:-10},{rotation:-5,duration:.35,immediateRender:false},38.26);
+gsap.set('#cm',{autoAlpha:0});
+tl.set('#cm',{autoAlpha:1},41.000);
+tl.set('#cm',{autoAlpha:0},42.700);
+tl.fromTo('#cm',{y:40,scale:.92},{y:0,scale:1,duration:.3,ease:'back.out(1.7)',immediateRender:false},41.0);
+gsap.set('#cmtext',{textContent:''});
+tl.set('#cmtext',{textContent:'L'},41.200);
+tl.set('#cmtext',{textContent:'LE'},41.250);
+tl.set('#cmtext',{textContent:'LEV'},41.300);
+tl.set('#cmtext',{textContent:'LEVE'},41.350);
+tl.set('#cmtext',{textContent:'LEVEL'},41.400);
+tl.set('#cmtext',{textContent:'LEVEL '},41.450);
+tl.set('#cmtext',{textContent:'LEVEL U'},41.500);
+tl.set('#cmtext',{textContent:'LEVEL UP'},41.550);
+tl.to('#cmsend',{scale:.82,duration:.07,yoyo:true,repeat:1},41.66);
+gsap.set('#dm',{autoAlpha:0});
+tl.fromTo('#dm',{autoAlpha:0,scale:0.6},{autoAlpha:1,scale:1,duration:0.35,ease:'back.out(1.8)',immediateRender:false},41.980);
+tl.set('#dm',{autoAlpha:0},42.700);
+gsap.set('#cp0',{autoAlpha:0});
+tl.set('#cp0',{autoAlpha:1},-0.030);
+tl.set('#cp0',{autoAlpha:0},0.910);
+gsap.set('#cp1',{autoAlpha:0});
+tl.set('#cp1',{autoAlpha:1},0.910);
+tl.set('#cp1',{autoAlpha:0},1.650);
+gsap.set('#cp2',{autoAlpha:0});
+tl.set('#cp2',{autoAlpha:1},1.650);
+tl.set('#cp2',{autoAlpha:0},2.550);
+gsap.set('#cp3',{autoAlpha:0});
+tl.set('#cp3',{autoAlpha:1},2.550);
+tl.set('#cp3',{autoAlpha:0},3.200);
+gsap.set('#cp4',{autoAlpha:0});
+tl.set('#cp4',{autoAlpha:1},3.350);
+tl.set('#cp4',{autoAlpha:0},3.670);
+gsap.set('#cp5',{autoAlpha:0});
+tl.set('#cp5',{autoAlpha:1},3.670);
+tl.set('#cp5',{autoAlpha:0},4.033);
+gsap.set('#cp6',{autoAlpha:0});
+tl.set('#cp6',{autoAlpha:1},4.090);
+tl.set('#cp6',{autoAlpha:0},5.067);
+gsap.set('#cp7',{autoAlpha:0});
+tl.set('#cp7',{autoAlpha:1},5.210);
+tl.set('#cp7',{autoAlpha:0},5.750);
+gsap.set('#cp8',{autoAlpha:0});
+tl.set('#cp8',{autoAlpha:1},5.750);
+tl.set('#cp8',{autoAlpha:0},6.290);
+gsap.set('#cp9',{autoAlpha:0});
+tl.set('#cp9',{autoAlpha:1},6.290);
+tl.set('#cp9',{autoAlpha:0},7.270);
+gsap.set('#cp10',{autoAlpha:0});
+tl.set('#cp10',{autoAlpha:1},7.270);
+tl.set('#cp10',{autoAlpha:0},8.170);
+gsap.set('#cp11',{autoAlpha:0});
+tl.set('#cp11',{autoAlpha:1},8.170);
+tl.set('#cp11',{autoAlpha:0},8.867);
+gsap.set('#cp12',{autoAlpha:0});
+tl.set('#cp12',{autoAlpha:1},9.170);
+tl.set('#cp12',{autoAlpha:0},9.710);
+gsap.set('#cp13',{autoAlpha:0});
+tl.set('#cp13',{autoAlpha:1},9.710);
+tl.set('#cp13',{autoAlpha:0},10.067);
+gsap.set('#cp14',{autoAlpha:0});
+tl.set('#cp14',{autoAlpha:1},10.190);
+tl.set('#cp14',{autoAlpha:0},10.610);
+gsap.set('#cp15',{autoAlpha:0});
+tl.set('#cp15',{autoAlpha:1},10.610);
+tl.set('#cp15',{autoAlpha:0},11.490);
+gsap.set('#cp16',{autoAlpha:0});
+tl.set('#cp16',{autoAlpha:1},11.490);
+tl.set('#cp16',{autoAlpha:0},11.970);
+gsap.set('#cp17',{autoAlpha:0});
+tl.set('#cp17',{autoAlpha:1},11.970);
+tl.set('#cp17',{autoAlpha:0},12.670);
+gsap.set('#cp18',{autoAlpha:0});
+tl.set('#cp18',{autoAlpha:1},12.670);
+tl.set('#cp18',{autoAlpha:0},13.050);
+gsap.set('#cp19',{autoAlpha:0});
+tl.set('#cp19',{autoAlpha:1},13.050);
+tl.set('#cp19',{autoAlpha:0},13.370);
+gsap.set('#cp20',{autoAlpha:0});
+tl.set('#cp20',{autoAlpha:1},13.370);
+tl.set('#cp20',{autoAlpha:0},14.530);
+gsap.set('#cp21',{autoAlpha:0});
+tl.set('#cp21',{autoAlpha:1},14.530);
+tl.set('#cp21',{autoAlpha:0},15.070);
+gsap.set('#cp22',{autoAlpha:0});
+tl.set('#cp22',{autoAlpha:1},15.070);
+tl.set('#cp22',{autoAlpha:0},15.630);
+gsap.set('#cp23',{autoAlpha:0});
+tl.set('#cp23',{autoAlpha:1},15.630);
+tl.set('#cp23',{autoAlpha:0},15.890);
+gsap.set('#cp24',{autoAlpha:0});
+tl.set('#cp24',{autoAlpha:1},15.890);
+tl.set('#cp24',{autoAlpha:0},16.470);
+gsap.set('#cp25',{autoAlpha:0});
+tl.set('#cp25',{autoAlpha:1},16.470);
+tl.set('#cp25',{autoAlpha:0},16.930);
+gsap.set('#cp26',{autoAlpha:0});
+tl.set('#cp26',{autoAlpha:1},16.930);
+tl.set('#cp26',{autoAlpha:0},17.650);
+gsap.set('#cp27',{autoAlpha:0});
+tl.set('#cp27',{autoAlpha:1},17.650);
+tl.set('#cp27',{autoAlpha:0},18.550);
+gsap.set('#cp28',{autoAlpha:0});
+tl.set('#cp28',{autoAlpha:1},18.550);
+tl.set('#cp28',{autoAlpha:0},18.970);
+gsap.set('#cp29',{autoAlpha:0});
+tl.set('#cp29',{autoAlpha:1},18.970);
+tl.set('#cp29',{autoAlpha:0},19.530);
+gsap.set('#cp30',{autoAlpha:0});
+tl.set('#cp30',{autoAlpha:1},19.530);
+tl.set('#cp30',{autoAlpha:0},20.010);
+gsap.set('#cp31',{autoAlpha:0});
+tl.set('#cp31',{autoAlpha:1},20.010);
+tl.set('#cp31',{autoAlpha:0},20.670);
+gsap.set('#cp32',{autoAlpha:0});
+tl.set('#cp32',{autoAlpha:1},20.670);
+tl.set('#cp32',{autoAlpha:0},21.250);
+gsap.set('#cp33',{autoAlpha:0});
+tl.set('#cp33',{autoAlpha:1},21.250);
+tl.set('#cp33',{autoAlpha:0},21.830);
+gsap.set('#cp34',{autoAlpha:0});
+tl.set('#cp34',{autoAlpha:1},21.830);
+tl.set('#cp34',{autoAlpha:0},22.630);
+gsap.set('#cp35',{autoAlpha:0});
+tl.set('#cp35',{autoAlpha:1},22.630);
+tl.set('#cp35',{autoAlpha:0},23.030);
+gsap.set('#cp36',{autoAlpha:0});
+tl.set('#cp36',{autoAlpha:1},23.030);
+tl.set('#cp36',{autoAlpha:0},23.690);
+gsap.set('#cp37',{autoAlpha:0});
+tl.set('#cp37',{autoAlpha:1},23.690);
+tl.set('#cp37',{autoAlpha:0},24.370);
+gsap.set('#cp38',{autoAlpha:0});
+tl.set('#cp38',{autoAlpha:1},24.370);
+tl.set('#cp38',{autoAlpha:0},24.590);
+gsap.set('#cp39',{autoAlpha:0});
+tl.set('#cp39',{autoAlpha:1},24.590);
+tl.set('#cp39',{autoAlpha:0},25.210);
+gsap.set('#cp40',{autoAlpha:0});
+tl.set('#cp40',{autoAlpha:1},25.210);
+tl.set('#cp40',{autoAlpha:0},25.933);
+gsap.set('#cp41',{autoAlpha:0});
+tl.set('#cp41',{autoAlpha:1},26.130);
+tl.set('#cp41',{autoAlpha:0},26.650);
+gsap.set('#cp42',{autoAlpha:0});
+tl.set('#cp42',{autoAlpha:1},26.650);
+tl.set('#cp42',{autoAlpha:0},27.290);
+gsap.set('#cp43',{autoAlpha:0});
+tl.set('#cp43',{autoAlpha:1},27.290);
+tl.set('#cp43',{autoAlpha:0},27.733);
+gsap.set('#cp44',{autoAlpha:0});
+tl.set('#cp44',{autoAlpha:1},27.830);
+tl.set('#cp44',{autoAlpha:0},28.090);
+gsap.set('#cp45',{autoAlpha:0});
+tl.set('#cp45',{autoAlpha:1},28.090);
+tl.set('#cp45',{autoAlpha:0},28.590);
+gsap.set('#cp46',{autoAlpha:0});
+tl.set('#cp46',{autoAlpha:1},28.590);
+tl.set('#cp46',{autoAlpha:0},29.290);
+gsap.set('#cp47',{autoAlpha:0});
+tl.set('#cp47',{autoAlpha:1},29.290);
+tl.set('#cp47',{autoAlpha:0},29.970);
+gsap.set('#cp48',{autoAlpha:0});
+tl.set('#cp48',{autoAlpha:1},29.970);
+tl.set('#cp48',{autoAlpha:0},30.590);
+gsap.set('#cp49',{autoAlpha:0});
+tl.set('#cp49',{autoAlpha:1},30.590);
+tl.set('#cp49',{autoAlpha:0},31.350);
+gsap.set('#cp50',{autoAlpha:0});
+tl.set('#cp50',{autoAlpha:1},31.350);
+tl.set('#cp50',{autoAlpha:0},31.850);
+gsap.set('#cp51',{autoAlpha:0});
+tl.set('#cp51',{autoAlpha:1},31.850);
+tl.set('#cp51',{autoAlpha:0},32.130);
+gsap.set('#cp52',{autoAlpha:0});
+tl.set('#cp52',{autoAlpha:1},32.130);
+tl.set('#cp52',{autoAlpha:0},32.567);
+gsap.set('#cp53',{autoAlpha:0});
+tl.set('#cp53',{autoAlpha:1},32.770);
+tl.set('#cp53',{autoAlpha:0},33.550);
+gsap.set('#cp54',{autoAlpha:0});
+tl.set('#cp54',{autoAlpha:1},33.550);
+tl.set('#cp54',{autoAlpha:0},33.910);
+gsap.set('#cp55',{autoAlpha:0});
+tl.set('#cp55',{autoAlpha:1},33.910);
+tl.set('#cp55',{autoAlpha:0},34.330);
+gsap.set('#cp56',{autoAlpha:0});
+tl.set('#cp56',{autoAlpha:1},34.330);
+tl.set('#cp56',{autoAlpha:0},34.950);
+gsap.set('#cp57',{autoAlpha:0});
+tl.set('#cp57',{autoAlpha:1},34.950);
+tl.set('#cp57',{autoAlpha:0},35.333);
+gsap.set('#cp58',{autoAlpha:0});
+tl.set('#cp58',{autoAlpha:1},35.950);
+tl.set('#cp58',{autoAlpha:0},36.570);
+gsap.set('#cp59',{autoAlpha:0});
+tl.set('#cp59',{autoAlpha:1},36.570);
+tl.set('#cp59',{autoAlpha:0},37.250);
+gsap.set('#cp60',{autoAlpha:0});
+tl.set('#cp60',{autoAlpha:1},37.250);
+tl.set('#cp60',{autoAlpha:0},37.570);
+gsap.set('#cp61',{autoAlpha:0});
+tl.set('#cp61',{autoAlpha:1},37.570);
+tl.set('#cp61',{autoAlpha:0},37.833);
+gsap.set('#cp62',{autoAlpha:0});
+tl.set('#cp62',{autoAlpha:1},37.850);
+tl.set('#cp62',{autoAlpha:0},38.110);
+gsap.set('#cp63',{autoAlpha:0});
+tl.set('#cp63',{autoAlpha:1},38.110);
+tl.set('#cp63',{autoAlpha:0},38.630);
+gsap.set('#cp64',{autoAlpha:0});
+tl.set('#cp64',{autoAlpha:1},38.630);
+tl.set('#cp64',{autoAlpha:0},39.270);
+gsap.set('#cp65',{autoAlpha:0});
+tl.set('#cp65',{autoAlpha:1},39.270);
+tl.set('#cp65',{autoAlpha:0},40.070);
+gsap.set('#cp66',{autoAlpha:0});
+tl.set('#cp66',{autoAlpha:1},40.070);
+tl.set('#cp66',{autoAlpha:0},40.570);
+gsap.set('#cp67',{autoAlpha:0});
+tl.set('#cp67',{autoAlpha:1},40.570);
+tl.set('#cp67',{autoAlpha:0},41.000);
+gsap.set('#cp68',{autoAlpha:0});
+tl.set('#cp68',{autoAlpha:1},42.730);
+tl.set('#cp68',{autoAlpha:0},43.760);
+tl.set({}, {}, 43.800);
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>
