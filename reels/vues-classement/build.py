@@ -199,7 +199,7 @@ CSS = f'''
 html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
-#bgv{{z-index:0}}   /* lavender backdrop grade baked into aroll_graded.mp4 (work/grade.txt), after Maé's reference */
+#bgv{{z-index:0}}   /* natural grade baked into aroll_graded.mp4 (work/grade.txt): a touch brighter and softer, skin as in her own reels */
 #vig{{position:absolute;inset:0;z-index:1;background:radial-gradient(120% 75% at 45% 38%,rgba(20,12,36,0) 50%,rgba(20,12,36,.42) 100%)}}
 #shade{{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(24,16,36,.40) 0%,rgba(24,16,36,0) 30%,rgba(24,16,36,0) 60%,rgba(24,16,36,.30) 100%)}}
 .col{{position:absolute;z-index:5;width:320px;text-align:center;color:#fff;text-shadow:0 4px 18px rgba(0,0,0,.45)}}
