@@ -1,0 +1,98 @@
+[
+ {
+  "id": "t1",
+  "clip": "c1",
+  "in": 3.3,
+  "out": 5.84,
+  "zoom": 1.0,
+  "line": "Poster \u00e0 une heure pr\u00e9cise. 100 vues.",
+  "src_in": 3.3,
+  "src_out": 5.84,
+  "frame": 0,
+  "frames": 77
+ },
+ {
+  "id": "t2",
+  "clip": "c1",
+  "in": 12.16,
+  "out": 19.92,
+  "zoom": 1.0,
+  "line": "Vid\u00e9o courte de 5 secondes. 100 000 vues \u00e0 condition d'avoir un hook textuel banger et de rediriger directement en l\u00e9gende.",
+  "src_in": 12.16,
+  "src_out": 19.92,
+  "frame": 77,
+  "frames": 233
+ },
+ {
+  "id": "t3",
+  "clip": "c1",
+  "in": 26.07,
+  "out": 28.64,
+  "zoom": 1.0,
+  "line": "Vid\u00e9o \u00e9ducative longue. 10 000 vues.",
+  "src_in": 26.07,
+  "src_out": 28.64,
+  "frame": 310,
+  "frames": 79
+ },
+ {
+  "id": "t4",
+  "clip": "c1",
+  "in": 34.04,
+  "out": 39.35,
+  "zoom": 1.0,
+  "line": "Reprendre des reels viraux. 100 000 vues, of course, tu reprends quelque chose qui marche d\u00e9j\u00e0.",
+  "src_in": 34.04,
+  "src_out": 39.35,
+  "frame": 389,
+  "frames": 161
+ },
+ {
+  "id": "t5",
+  "clip": "c1",
+  "in": 44.26,
+  "out": 49.76,
+  "zoom": 1.0,
+  "line": "Audio tendance. Franchement 100 vues, on peut s'en passer...",
+  "src_in": 44.26,
+  "src_out": 49.76,
+  "frame": 550,
+  "frames": 165
+ },
+ {
+  "id": "t6",
+  "clip": "c1",
+  "in": 56.37,
+  "out": 62.52,
+  "zoom": 1.0,
+  "line": "Ajouter ManyChat. \u00c7a c'est 100 000 vues, non n\u00e9gociable...",
+  "src_in": 56.37,
+  "src_out": 62.52,
+  "frame": 715,
+  "frames": 186
+ },
+ {
+  "id": "cta",
+  "clip": "c1",
+  "in": 67.71,
+  "out": 72.47,
+  "zoom": 1.0,
+  "line": "Et commente AVOCADO pour avoir un r\u00e9cap...",
+  "src_in": 67.71,
+  "src_out": 72.47,
+  "frame": 901,
+  "frames": 144
+ },
+ {
+  "id": "bye",
+  "clip": "c1",
+  "in": 74.13,
+  "out": 75.8,
+  "zoom": 1.0,
+  "line": "Tch\u00fcss !",
+  "src_in": 74.13,
+  "src_out": 75.8,
+  "frame": 1045,
+  "frames": 50
+ }
+]

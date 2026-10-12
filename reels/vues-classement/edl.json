@@ -1,0 +1,10 @@
+[
+ {"id": "t1", "clip": "c1", "in": 3.30, "out": 5.84, "zoom": 1.0, "line": "Poster à une heure précise. 100 vues."},
+ {"id": "t2", "clip": "c1", "in": 12.16, "out": 19.92, "zoom": 1.0, "line": "Vidéo courte de 5 secondes. 100 000 vues à condition d'avoir un hook textuel banger et de rediriger directement en légende."},
+ {"id": "t3", "clip": "c1", "in": 26.07, "out": 28.64, "zoom": 1.0, "line": "Vidéo éducative longue. 10 000 vues."},
+ {"id": "t4", "clip": "c1", "in": 34.04, "out": 39.35, "zoom": 1.0, "line": "Reprendre des reels viraux. 100 000 vues, of course, tu reprends quelque chose qui marche déjà."},
+ {"id": "t5", "clip": "c1", "in": 44.26, "out": 49.76, "zoom": 1.0, "line": "Audio tendance. Franchement 100 vues, on peut s'en passer..."},
+ {"id": "t6", "clip": "c1", "in": 56.37, "out": 62.52, "zoom": 1.0, "line": "Ajouter ManyChat. Ça c'est 100 000 vues, non négociable..."},
+ {"id": "cta", "clip": "c1", "in": 67.71, "out": 72.47, "zoom": 1.0, "line": "Et commente AVOCADO pour avoir un récap..."},
+ {"id": "bye", "clip": "c1", "in": 74.13, "out": 75.80, "zoom": 1.0, "line": "Tchüss !"}
+]
