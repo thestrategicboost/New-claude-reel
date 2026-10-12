@@ -34,10 +34,10 @@ CTA_END = 42.70
 
 # step titles over the explaining Maé: (start, end, step, title)
 STEPS = [(5.20, 7.00, 1, 'RYTHME'), (10.18, 11.45, 2, 'PLANNING'), (16.93, 18.50, 3, 'THÉMATIQUES'),
-         (21.24, 22.60, 4, 'TYPES DE CONTENU'), (26.12, 27.73, 5, 'TON MOIS')]
+         (21.24, 22.60, 4, 'TYPES DE CONTENU'), (26.12, 27.40, 5, 'TON MOIS')]
 # full-screen brown infographics
 SCREENS = {'rythme': (7.00, 8.867), 'planning': (11.45, 14.50), 'themes': (18.50, 21.20), 'types': (22.60, 24.600),
-           'mois': (27.733, 32.567)}
+           'mois': (27.40, 32.567)}
 
 PACES = [('CHILL', 3, 7.30, 'LMV'), ('MOYEN', 5, 7.88, 'LMMJV'), ('INTENSE', 7, 8.60, 'LMMJVSD')]
 DAYS = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
@@ -106,8 +106,24 @@ def pop(sel, t, d=.3, s=.6):
             f"tl.fromTo('{sel}',{{autoAlpha:0,scale:{s}}},{{autoAlpha:1,scale:1,duration:{d},ease:'back.out(1.8)',immediateRender:false}},{t:.3f});"]
 
 
+ICONS_F = {   # filled white glyphs (phone app style), 100x100
+    'dumbbell': '<rect x="6" y="38" width="11" height="24" rx="4"/><rect x="19" y="27" width="13" height="46" rx="5"/>'
+                '<rect x="68" y="27" width="13" height="46" rx="5"/><rect x="83" y="38" width="11" height="24" rx="4"/><rect x="30" y="45" width="40" height="10" rx="3"/>',
+    'apple': '<path d="M50 32c-6-6-30-8-30 18 0 20 13 36 21 36 4 0 6-2 9-2s5 2 9 2c8 0 21-16 21-36 0-26-24-24-30-18z"/><path d="M52 28c0-10 7-16 16-17 0 9-7 16-16 17z"/>',
+    'heart': '<path d="M50 86S10 63 10 36c0-13 10-23 22-23 8 0 14 4 18 10 4-6 10-10 18-10 12 0 22 10 22 23 0 27-40 50-40 50z"/>',
+    'brain': '<path d="M50 8c-18 0-30 13-30 29 0 11 6 18 11 23 3 3 4 6 4 9v5h30v-5c0-3 1-6 4-9 5-5 11-12 11-23 0-16-12-29-30-29z"/>'
+             '<rect x="36" y="80" width="28" height="7" rx="3.5"/><rect x="41" y="90" width="18" height="6" rx="3"/>',
+    'moon': '<path d="M60 10a40 40 0 1 0 30 56A33 33 0 0 1 60 10z"/>',
+}
+
+
 def icon(name, size):
-    return f'<svg class="ic" width="{size}" height="{size}" viewBox="0 0 100 100">{ICONS[name]}</svg>'
+    return f'<svg class="icf" width="{size}" height="{size}" viewBox="0 0 100 100">{ICONS_F[name]}</svg>'
+
+
+def app(name, size):
+    """gold app-icon tile with a white glyph"""
+    return f'<div class="app" style="width:{size}px;height:{size}px;border-radius:{size * .26:.0f}px">{icon(name, round(size * .56))}</div>'
 
 
 def in_screen(t):
@@ -259,7 +275,7 @@ def scr_planning():
     h = ['<div id="sPl" class="screen">', header(2, 'PLANNING')]
     tw = show('#sPl', a, b)
     for k, (name, n, _, _) in enumerate(PACES):
-        h.append(f'<div id="pl{k}" class="plRow" style="top:{640 + k * 250}px"><div class="tag">{name}</div>'
+        h.append(f'<div id="pl{k}" class="plRow" style="top:{590 + k * 285}px"><div class="tag">{name}</div>'
                  f'<div class="per">{n} posts / sem</div>{week(name, LIT[name])}</div>')
         t = a + .2 + k * .5
         tw += pop(f'#pl{k}', t, .25, .8)
@@ -281,12 +297,12 @@ def scr_themes():
         pts.append((cx + R * math.cos(ang), cy + R * .92 * math.sin(ang)))
     svg = '<svg class="full" viewBox="0 0 1080 1920">' + ''.join(
         f'<path id="tha{k}" d="M{cx + (x - cx) * .32:.0f} {cy + (y - cy) * .32:.0f} L{cx + (x - cx) * .7:.0f} {cy + (y - cy) * .7:.0f}" '
-        f'stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none" opacity=".85"/>' for k, (x, y) in enumerate(pts)) + '</svg>'
+        f'stroke="#fff" stroke-width="3" stroke-dasharray="2 12" stroke-linecap="round" fill="none" opacity=".85"/>' for k, (x, y) in enumerate(pts)) + '</svg>'
     h.append(svg)
-    h.append(f'<div id="thc" class="niche" style="left:{cx - 230}px;top:{cy - 70}px"><div class="nl">NICHE</div><div class="nn">COACH SPORTIF</div></div>')
+    h.append(f'<div id="thc" class="niche glass" style="left:{cx - 200}px;top:{cy - 78}px"><div class="wl">MA NICHE</div><div class="nn">Coach sportif</div></div>')
     tw += pop('#thc', 19.10, .3, .6)
     for k, ((name, ic), (x, y)) in enumerate(zip(TOPICS, pts)):
-        h.append(f'<div id="thn{k}" class="node" style="left:{x - 120:.0f}px;top:{y - 80:.0f}px"><div class="nodeIc">{icon(ic, 74)}</div>'
+        h.append(f'<div id="thn{k}" class="node" style="left:{x - 120:.0f}px;top:{y - 80:.0f}px">{app(ic, 128)}'
                  f'<div class="nodeL">{name}</div></div>')
         t = 19.56 + k * .28
         tw += pop(f'#thn{k}', t, .3, .5)
@@ -304,7 +320,7 @@ def scr_types():
     for j, t in enumerate(TYPES):
         cells.append(f'<div class="tc th2" style="left:{lw + j * cw}px;top:0;width:{cw}px;height:{hh}px">{t}</div>')
     for i, (name, ic) in enumerate(TOPICS):
-        cells.append(f'<div class="tc rh" style="left:0;top:{hh + i * ch}px;width:{lw}px;height:{ch}px">{icon(ic, 46)}<span>{name}</span></div>')
+        cells.append(f'<div class="tc rh" style="left:0;top:{hh + i * ch}px;width:{lw}px;height:{ch}px">{app(ic, 58)}<span>{name}</span></div>')
         for j in range(5):
             cells.append(f'<div class="tc idea" id="tc{i}{j}" style="left:{lw + j * cw}px;top:{hh + i * ch}px;width:{cw}px;height:{ch}px">'
                          f'<span>{IDEAS[i][j]}</span></div>')
@@ -495,46 +511,57 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   text-shadow:0 6px 30px rgba(0,0,0,.25)}}
 .lt{{display:inline-block}}
 /* brown screens */
-.screen{{position:absolute;inset:0;z-index:20;background:{BROWN};color:#fff}}
+.screen{{position:absolute;inset:0;z-index:20;background:radial-gradient(120% 80% at 50% 38%,#9C6B4E 0%,{BROWN} 55%,#734A33 100%);color:#fff}}
+.glass{{background:rgba(255,255,255,.12);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1.5px solid rgba(255,255,255,.3);
+  box-shadow:0 18px 44px rgba(40,22,10,.3),inset 0 1px 0 rgba(255,255,255,.3)}}
+.app{{margin:0 auto;display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.65),inset 0 -3px 6px rgba(80,45,10,.25),0 12px 26px rgba(40,22,10,.35)}}
+.icf{{fill:#fff;filter:drop-shadow(0 2px 3px rgba(80,45,10,.35))}}
 .hd{{position:absolute;left:0;right:0;top:250px;text-align:center}}
 .hl{{font:600 40px/1 Poppins;margin-left:.3em;opacity:.95}}
 .ht{{font-family:Anton;font-weight:400;line-height:1.05;letter-spacing:.01em;margin-top:6px;white-space:nowrap}}
-.tag{{display:inline-block;font:400 46px/1 Anton;letter-spacing:.03em;color:#5A3F1F;background:#fff;padding:10px 20px 8px;border-radius:10px}}
+.tag{{display:inline-block;font:400 46px/1 Anton;letter-spacing:.03em;color:#5A3F1F;background:#fff;padding:10px 24px 8px;border-radius:40px;box-shadow:0 8px 20px rgba(40,22,10,.25)}}
 .per{{font:600 30px/1 Poppins;margin-top:12px}}
-.paceCol{{position:absolute;top:560px;width:300px;text-align:center}}
+.paceCol{{position:absolute;top:540px;width:310px;height:740px;text-align:center;padding:26px 0 28px;border-radius:40px;background:rgba(255,255,255,.12);
+  border:1.5px solid rgba(255,255,255,.3);box-shadow:0 18px 44px rgba(40,22,10,.3),inset 0 1px 0 rgba(255,255,255,.3)}}
 .thumbs{{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}}
-.th{{width:100px;height:160px;border-radius:12px;overflow:hidden;border:3px solid #fff;box-shadow:0 8px 18px rgba(0,0,0,.3)}}
+.th{{width:100px;height:160px;border-radius:18px;overflow:hidden;border:2px solid rgba(255,255,255,.8);box-shadow:0 8px 18px rgba(0,0,0,.3)}}
 .th img{{width:100%;height:100%;object-fit:cover;display:block}}
-.plRow{{position:absolute;left:0;right:0;text-align:center}}
+.plRow{{position:absolute;left:40px;right:40px;text-align:center;padding:22px 0 26px;border-radius:40px;background:rgba(255,255,255,.12);
+  border:1.5px solid rgba(255,255,255,.3);box-shadow:0 18px 44px rgba(40,22,10,.3),inset 0 1px 0 rgba(255,255,255,.3)}}
 .week{{display:flex;justify-content:center;gap:12px;margin-top:22px}}
-.day{{width:104px;height:84px;border-radius:14px;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.5);
+.day{{width:104px;height:84px;border-radius:26px;background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.3);
   display:flex;align-items:center;justify-content:center;font:400 40px/1 Anton;color:#fff}}
-.day.on{{background:{GRAD};color:#5A3F1F;border-color:#fff;box-shadow:inset 0 3px 0 rgba(255,255,255,.7),0 6px 14px rgba(0,0,0,.25)}}
+.day.on{{background:linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%);color:#fff;border-color:rgba(255,255,255,.6);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.65),0 8px 18px rgba(40,22,10,.3);text-shadow:0 2px 4px rgba(80,45,10,.4)}}
 .week.small{{gap:7px;margin-top:12px}}
-.week.small .day{{width:72px;height:60px;font-size:30px;border-radius:10px}}
-.niche{{position:absolute;width:460px;height:140px;border-radius:24px;background:#fff;color:#5A3F1F;text-align:center;padding-top:14px;
-  box-shadow:0 14px 34px rgba(0,0,0,.3)}}
+.week.small .day{{width:72px;height:60px;font-size:30px;border-radius:20px}}
+.niche{{position:absolute;width:400px;height:156px;border-radius:44px;color:#fff;text-align:center;padding-top:26px}}
 .nl{{font:600 30px/1 Poppins;letter-spacing:.1em}}
-.nn{{font:400 70px/1.05 Anton}}
+.nn{{font:800 54px/1.15 Poppins;letter-spacing:-.02em;margin-top:8px}}
 .node{{position:absolute;width:240px;text-align:center}}
 .nodeIc{{width:118px;height:118px;margin:0 auto;border-radius:30%;border:3px solid #fff;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center}}
-.nodeL{{display:inline-block;margin-top:10px;font:700 30px/1 Poppins;background:#fff;color:#5A3F1F;padding:8px 14px;border-radius:10px}}
+.nodeL{{margin-top:14px;font:600 30px/1 Poppins;color:#fff;text-shadow:0 2px 8px rgba(40,22,10,.35)}}
 .tbl{{position:absolute}}
-.tc{{position:absolute;border:2px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;text-align:center;padding:6px}}
-.th2{{font:400 30px/1.05 Anton;background:#fff;color:#5A3F1F;border-color:#fff}}
-.rh{{flex-direction:column;gap:6px;font:700 20px/1.1 Poppins}}
+.tc{{position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;border-radius:22px;
+  background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.26);box-shadow:inset 0 1px 0 rgba(255,255,255,.25);
+  transform:scale(.94)}}
+.th2{{font:400 30px/1.05 Anton;background:#fff;color:#5A3F1F;border-color:#fff;border-radius:40px;box-shadow:0 8px 18px rgba(40,22,10,.25)}}
+.rh{{flex-direction:column;gap:8px;font:600 19px/1.1 Poppins;background:none;border:none;box-shadow:none}}
 .idea span{{font:600 22px/1.15 Poppins}}
-.calwrap{{position:absolute;left:50px;top:560px}}
+.calwrap{{position:absolute;left:30px;top:540px;padding:20px;border-radius:44px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.28);
+  box-shadow:0 18px 44px rgba(40,22,10,.3),inset 0 1px 0 rgba(255,255,255,.3)}}
 .cal{{position:relative;transform-origin:0 0}}
-.ch{{position:absolute;top:0;height:48px;text-align:center;font:400 34px/48px Anton}}
-.cd{{position:absolute;border-radius:12px;background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.35);padding:8px}}
-.cd.on{{background:rgba(255,255,255,.22)}}
+.ch{{position:absolute;top:0;height:48px;text-align:center;font:600 26px/48px Poppins;opacity:.7}}
+.cd{{position:absolute;border-radius:22px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);padding:10px}}
+.cd.on{{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.3)}}
 .dn{{font:700 22px/1 Poppins;opacity:.85}}
-.tag2{{display:inline-block;margin-top:12px;font:700 22px/1 Poppins;padding:6px 10px;border-radius:8px}}
+.tag2{{display:inline-block;margin-top:12px;font:700 21px/1 Poppins;padding:7px 12px;border-radius:30px;box-shadow:0 4px 10px rgba(40,22,10,.25)}}
 .topic{{font:600 17px/1.1 Poppins;margin-top:8px}}
 /* recaps */
-.recap{{position:absolute;z-index:15;width:500px;text-align:center;background:rgba(60,40,26,.82);border:3px solid #fff;border-radius:22px;
-  padding:18px 18px 20px;color:#fff;box-shadow:0 14px 34px rgba(0,0,0,.35)}}
+.recap{{position:absolute;z-index:15;width:500px;text-align:center;background:rgba(58,38,26,.55);-webkit-backdrop-filter:blur(22px) saturate(1.2);
+  backdrop-filter:blur(22px) saturate(1.2);border:1.5px solid rgba(255,255,255,.35);border-radius:44px;padding:24px 18px 26px;color:#fff;
+  box-shadow:0 20px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25)}}
 .recap.wide{{width:680px}}
 .recapCal{{position:absolute;z-index:15;left:690px;top:236px;width:350px;height:290px;border-radius:18px;overflow:hidden;background:{BROWN};
   border:4px solid #fff;box-shadow:0 14px 34px rgba(0,0,0,.35);color:#fff}}
