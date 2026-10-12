@@ -104,12 +104,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
   border:4px solid #fff;box-shadow:0 14px 34px rgba(0,0,0,.35);color:#fff}
 .recapCal .cal{transform:scale(.33)!important;left:10px;top:12px}
 /* cta */
-#gwin{position:absolute;z-index:5;left:130px;top:170px;width:820px;height:1180px;border-radius:30px;overflow:hidden;border:6px solid #fff;
-  background:#fff;box-shadow:0 24px 60px rgba(0,0,0,.45)}
-#gstrip{display:block;width:808px}
-#gtag{position:absolute;left:0;right:0;top:232px;z-index:12;text-align:center;font:400 104px/1 Anton;filter:drop-shadow(0 6px 0 #5A3F1F) drop-shadow(0 12px 24px rgba(0,0,0,.5))}
-#gtag .g1{color:#fff}
-#gtag .gbx{display:inline-block;background:rgba(140,92,65,.95);border:4px solid #fff;border-radius:24px;padding:14px 36px 4px}
+#gwall{position:absolute;inset:0;z-index:5;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 66%,transparent 84%);mask-image:linear-gradient(180deg,#000 0%,#000 66%,transparent 84%)}
+.gc{width:262px;height:370px;flex:none;border-radius:18px;overflow:hidden;border:4px solid rgba(255,255,255,.9);background:#fff}
+.gc img{width:100%;height:100%;object-fit:cover;display:block}
+#gtag{position:absolute;left:0;right:0;top:232px;z-index:12;text-align:center;font:400 120px/1 Anton;color:#fff;
+  filter:drop-shadow(0 6px 18px rgba(0,0,0,.6))}
 #cm{position:absolute;left:70px;right:70px;top:1160px;z-index:25;height:116px;display:flex;align-items:center;gap:18px}
 .cmav{width:104px;height:104px;border-radius:50%;padding:5px;background:#fff;flex:none}
 .cmav img,.dmav img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
@@ -181,7 +181,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
   <div id="stage">
   <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="48.667" data-track-index="0"></video>
 <div id="wall"><div id="wl0" class="wcol" style="left:-30px"><div class="wc"><img src="assets/reels/r1.jpg"/></div><div class="wc"><img src="assets/reels/r2.jpg"/></div><div class="wc"><img src="assets/reels/r3.jpg"/></div><div class="wc"><img src="assets/reels/r4.jpg"/></div><div class="wc"><img src="assets/reels/r5.jpg"/></div><div class="wc"><img src="assets/reels/r6.jpg"/></div><div class="wc"><img src="assets/reels/r7.jpg"/></div><div class="wc"><img src="assets/reels/r8.jpg"/></div></div><div id="wl1" class="wcol" style="left:245px"><div class="wc"><img src="assets/reels/r4.jpg"/></div><div class="wc"><img src="assets/reels/r5.jpg"/></div><div class="wc"><img src="assets/reels/r6.jpg"/></div><div class="wc"><img src="assets/reels/r7.jpg"/></div><div class="wc"><img src="assets/reels/r8.jpg"/></div><div class="wc"><img src="assets/reels/r9.jpg"/></div><div class="wc"><img src="assets/reels/r10.jpg"/></div><div class="wc"><img src="assets/reels/r1.jpg"/></div></div><div id="wl2" class="wcol" style="left:520px"><div class="wc"><img src="assets/reels/r7.jpg"/></div><div class="wc"><img src="assets/reels/r8.jpg"/></div><div class="wc"><img src="assets/reels/r9.jpg"/></div><div class="wc"><img src="assets/reels/r10.jpg"/></div><div class="wc"><img src="assets/reels/r1.jpg"/></div><div class="wc"><img src="assets/reels/r2.jpg"/></div><div class="wc"><img src="assets/reels/r3.jpg"/></div><div class="wc"><img src="assets/reels/r4.jpg"/></div></div><div id="wl3" class="wcol" style="left:795px"><div class="wc"><img src="assets/reels/r10.jpg"/></div><div class="wc"><img src="assets/reels/r1.jpg"/></div><div class="wc"><img src="assets/reels/r2.jpg"/></div><div class="wc"><img src="assets/reels/r3.jpg"/></div><div class="wc"><img src="assets/reels/r4.jpg"/></div><div class="wc"><img src="assets/reels/r5.jpg"/></div><div class="wc"><img src="assets/reels/r6.jpg"/></div><div class="wc"><img src="assets/reels/r7.jpg"/></div></div></div>
-<div id="gwin"><img id="gstrip" src="assets/guide_strip.jpg"/></div>
+<div id="gwall"><div id="gl0" class="wcol" style="left:-30px"><div class="gc"><img src="assets/gpages/g-01.jpg"/></div><div class="gc"><img src="assets/gpages/g-02.jpg"/></div><div class="gc"><img src="assets/gpages/g-03.jpg"/></div><div class="gc"><img src="assets/gpages/g-04.jpg"/></div><div class="gc"><img src="assets/gpages/g-05.jpg"/></div><div class="gc"><img src="assets/gpages/g-06.jpg"/></div><div class="gc"><img src="assets/gpages/g-07.jpg"/></div><div class="gc"><img src="assets/gpages/g-08.jpg"/></div><div class="gc"><img src="assets/gpages/g-09.jpg"/></div><div class="gc"><img src="assets/gpages/g-10.jpg"/></div></div><div id="gl1" class="wcol" style="left:245px"><div class="gc"><img src="assets/gpages/g-04.jpg"/></div><div class="gc"><img src="assets/gpages/g-05.jpg"/></div><div class="gc"><img src="assets/gpages/g-06.jpg"/></div><div class="gc"><img src="assets/gpages/g-07.jpg"/></div><div class="gc"><img src="assets/gpages/g-08.jpg"/></div><div class="gc"><img src="assets/gpages/g-09.jpg"/></div><div class="gc"><img src="assets/gpages/g-10.jpg"/></div><div class="gc"><img src="assets/gpages/g-11.jpg"/></div><div class="gc"><img src="assets/gpages/g-12.jpg"/></div><div class="gc"><img src="assets/gpages/g-01.jpg"/></div></div><div id="gl2" class="wcol" style="left:520px"><div class="gc"><img src="assets/gpages/g-07.jpg"/></div><div class="gc"><img src="assets/gpages/g-08.jpg"/></div><div class="gc"><img src="assets/gpages/g-09.jpg"/></div><div class="gc"><img src="assets/gpages/g-10.jpg"/></div><div class="gc"><img src="assets/gpages/g-11.jpg"/></div><div class="gc"><img src="assets/gpages/g-12.jpg"/></div><div class="gc"><img src="assets/gpages/g-01.jpg"/></div><div class="gc"><img src="assets/gpages/g-02.jpg"/></div><div class="gc"><img src="assets/gpages/g-03.jpg"/></div><div class="gc"><img src="assets/gpages/g-04.jpg"/></div></div><div id="gl3" class="wcol" style="left:795px"><div class="gc"><img src="assets/gpages/g-10.jpg"/></div><div class="gc"><img src="assets/gpages/g-11.jpg"/></div><div class="gc"><img src="assets/gpages/g-12.jpg"/></div><div class="gc"><img src="assets/gpages/g-01.jpg"/></div><div class="gc"><img src="assets/gpages/g-02.jpg"/></div><div class="gc"><img src="assets/gpages/g-03.jpg"/></div><div class="gc"><img src="assets/gpages/g-04.jpg"/></div><div class="gc"><img src="assets/gpages/g-05.jpg"/></div><div class="gc"><img src="assets/gpages/g-06.jpg"/></div><div class="gc"><img src="assets/gpages/g-07.jpg"/></div></div></div>
 <div id="st0" class="stepT"><div class="inner"><div class="sl">Étape 1</div><div class="sn" style="font-size:270px"><span class="lt">R</span><span class="lt">Y</span><span class="lt">T</span><span class="lt">H</span><span class="lt">M</span><span class="lt">E</span></div></div></div>
 <div id="st1" class="stepT"><div class="inner"><div class="sl">Étape 2</div><div class="sn" style="font-size:270px"><span class="lt">P</span><span class="lt">L</span><span class="lt">A</span><span class="lt">N</span><span class="lt">N</span><span class="lt">I</span><span class="lt">N</span><span class="lt">G</span></div></div></div>
 <div id="st2" class="stepT"><div class="inner"><div class="sl">Étape 3</div><div class="sn" style="font-size:198px"><span class="lt">T</span><span class="lt">H</span><span class="lt">É</span><span class="lt">M</span><span class="lt">A</span><span class="lt">T</span><span class="lt">I</span><span class="lt">Q</span><span class="lt">U</span><span class="lt">E</span><span class="lt">S</span></div></div></div>
@@ -313,7 +313,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="rcC" class="calPos" style="left:690px;top:236px">
 <div id="calB" class="mcal"><div class="wl">OCTOBRE</div><div class="mtt">Mon mois de contenu</div><div class="mgrid"><div class="mh">L</div><div class="mh">M</div><div class="mh">M</div><div class="mh">J</div><div class="mh">V</div><div class="mh">S</div><div class="mh">D</div><div class="md on"><span>1</span><i></i></div><div class="md on"><span>2</span><i></i></div><div class="md on"><span>3</span><i></i></div><div class="md on"><span>4</span><i></i></div><div class="md on"><span>5</span><i></i></div><div class="md"><span>6</span></div><div class="md"><span>7</span></div><div class="md on"><span>8</span><i></i></div><div class="md on"><span>9</span><i></i></div><div class="md on"><span>10</span><i></i></div><div class="md on"><span>11</span><i></i></div><div class="md on"><span>12</span><i></i></div><div class="md"><span>13</span></div><div class="md"><span>14</span></div><div class="md on"><span>15</span><i></i></div><div class="md on"><span>16</span><i></i></div><div class="md on"><span>17</span><i></i></div><div class="md on"><span>18</span><i></i></div><div class="md on"><span>19</span><i></i></div><div class="md"><span>20</span></div><div class="md"><span>21</span></div><div class="md on"><span>22</span><i></i></div><div class="md on"><span>23</span><i></i></div><div class="md on"><span>24</span><i></i></div><div class="md on"><span>25</span><i></i></div><div class="md on"><span>26</span><i></i></div><div class="md"><span>27</span></div><div class="md"><span>28</span></div><div class="md on"><span>29</span><i></i></div><div class="md on"><span>30</span><i></i></div></div></div>
 </div>
-<div id="gtag"><span class="gbx"><span class="g1">GUIDE</span> <span class="gt">GRATUIT</span></span></div>
+<div id="gtag">GUIDE GRATUIT</div>
 <div id="cm"><div class="cmav"><img src="assets/avatar.png"/></div><div class="cmbar"><span id="cmtext"></span><span class="caret"></span></div><div id="cmsend" class="cmsend"><svg viewBox="0 0 24 24" width="40" height="40"><path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="#2A1E16" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 <div id="dm" class="dm"><div class="dmav"><img src="assets/avatar.png"/></div><div class="dmb"><div class="dmt">Je t’ai envoyé le lien</div><div class="dml"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1" fill="none" stroke="#5A3F1F" stroke-width="2.4" stroke-linecap="round"/></svg><span>Guide gratuit</span></div></div></div>
 <div id="cp0" class="cap">Maé</div>
@@ -634,14 +634,16 @@ tl.set('#rcW',{autoAlpha:0},18.814);
 gsap.set('#rcC',{autoAlpha:0});
 tl.fromTo('#rcC',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.35,ease:'back.out(1.8)',immediateRender:false},36.444);
 tl.set('#rcC',{autoAlpha:0},39.259);
-gsap.set('#gwin',{autoAlpha:0});
-tl.fromTo('#gwin',{autoAlpha:0,scale:0.7},{autoAlpha:1,scale:1,duration:0.4,ease:'back.out(1.8)',immediateRender:false},42.511);
+gsap.set('#gwall',{autoAlpha:0});
+tl.fromTo('#gwall',{autoAlpha:0},{autoAlpha:.8,duration:.25,immediateRender:false},42.444);
+tl.fromTo('#gl0',{y:-200},{y:-2600,duration:3.4,ease:'none',immediateRender:false},42.444);
+tl.fromTo('#gl1',{y:-2600},{y:-200,duration:3.4,ease:'none',immediateRender:false},42.444);
+tl.fromTo('#gl2',{y:-200},{y:-2600,duration:3.4,ease:'none',immediateRender:false},42.444);
+tl.fromTo('#gl3',{y:-2600},{y:-200,duration:3.4,ease:'none',immediateRender:false},42.444);
 gsap.set('#gtag',{autoAlpha:0});
-tl.fromTo('#gtag',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},42.667);
-tl.fromTo('#gwin',{y:160},{y:0,duration:.4,ease:'power3.out',immediateRender:false},42.511);
-tl.fromTo('#gstrip',{y:0},{y:-4300,duration:3.1,ease:'power1.inOut',immediateRender:false},42.722);
-tl.to('#gwin, #gtag',{autoAlpha:0,duration:.15},46.056);
-tl.set('#gwin, #gtag',{autoAlpha:0},46.222);
+tl.fromTo('#gtag',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},42.511);
+tl.to('#gwall, #gtag',{autoAlpha:0,duration:.15},46.056);
+tl.set('#gwall, #gtag',{autoAlpha:0},46.222);
 gsap.set('#cm',{autoAlpha:0});
 tl.set('#cm',{autoAlpha:1},45.556);
 tl.set('#cm',{autoAlpha:0},47.444);

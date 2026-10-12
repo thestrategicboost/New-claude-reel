@@ -377,12 +377,19 @@ def recap():
 # ------------------------------------------------------------------ call to action
 def cta():
     # her real guide scrolling behind her head (the cta cutout sits on top), gone before her own IG card at 41.7
-    html = ['<div id="gwin"><img id="gstrip" src="assets/guide_strip.jpg"/></div>',
-            '<div id="gtag"><span class="gbx"><span class="g1">GUIDE</span> <span class="gt">GRATUIT</span></span></div>']
-    tw = pop('#gwin', 38.26, .4, .7) + pop('#gtag', 38.40, .3, .5)
-    tw.append("tl.fromTo('#gwin',{y:160},{y:0,duration:.4,ease:'power3.out',immediateRender:false},38.26);")
-    tw.append("tl.fromTo('#gstrip',{y:0},{y:-4300,duration:3.1,ease:'power1.inOut',immediateRender:false},38.45);")
-    tw += ["tl.to('#gwin, #gtag',{autoAlpha:0,duration:.15},41.45);", "tl.set('#gwin, #gtag',{autoAlpha:0},41.6);"]
+    cols = []
+    for c, x in enumerate(WALL_X):
+        cards = ''.join(f'<div class="gc"><img src="assets/gpages/g-{(c * 3 + i) % 12 + 1:02d}.jpg"/></div>' for i in range(10))
+        cols.append(f'<div id="gl{c}" class="wcol" style="left:{x}px">{cards}</div>')
+    html = [f'<div id="gwall">{"".join(cols)}</div>',
+            '<div id="gtag">GUIDE GRATUIT</div>']
+    tw = ["gsap.set('#gwall',{autoAlpha:0});",
+          "tl.fromTo('#gwall',{autoAlpha:0},{autoAlpha:.8,duration:.25,immediateRender:false},38.20);"]
+    for c in range(len(WALL_X)):
+        y0, y1 = (-200, -2600) if c % 2 == 0 else (-2600, -200)
+        tw.append(f"tl.fromTo('#gl{c}',{{y:{y0}}},{{y:{y1},duration:3.4,ease:'none',immediateRender:false}},38.20);")
+    tw += pop('#gtag', 38.26, .3, .5)
+    tw += ["tl.to('#gwall, #gtag',{autoAlpha:0,duration:.15},41.45);", "tl.set('#gwall, #gtag',{autoAlpha:0},41.6);"]
     html.append('<div id="cm"><div class="cmav"><img src="assets/avatar.png"/></div><div class="cmbar"><span id="cmtext"></span>'
                 '<span class="caret"></span></div><div id="cmsend" class="cmsend"><svg viewBox="0 0 24 24" width="40" height="40">'
                 '<path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="#2A1E16" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>')
@@ -533,12 +540,12 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   border:4px solid #fff;box-shadow:0 14px 34px rgba(0,0,0,.35);color:#fff}}
 .recapCal .cal{{transform:scale(.33)!important;left:10px;top:12px}}
 /* cta */
-#gwin{{position:absolute;z-index:5;left:130px;top:170px;width:820px;height:1180px;border-radius:30px;overflow:hidden;border:6px solid #fff;
-  background:#fff;box-shadow:0 24px 60px rgba(0,0,0,.45)}}
-#gstrip{{display:block;width:808px}}
-#gtag{{position:absolute;left:0;right:0;top:232px;z-index:12;text-align:center;font:400 104px/1 Anton;filter:drop-shadow(0 6px 0 #5A3F1F) drop-shadow(0 12px 24px rgba(0,0,0,.5))}}
-#gtag .g1{{color:#fff}}
-#gtag .gbx{{display:inline-block;background:rgba(140,92,65,.95);border:4px solid #fff;border-radius:24px;padding:14px 36px 4px}}
+#gwall{{position:absolute;inset:0;z-index:5;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 66%,transparent 84%);mask-image:linear-gradient(180deg,#000 0%,#000 66%,transparent 84%)}}
+.gc{{width:262px;height:370px;flex:none;border-radius:18px;overflow:hidden;border:4px solid rgba(255,255,255,.9);background:#fff}}
+.gc img{{width:100%;height:100%;object-fit:cover;display:block}}
+#gtag{{position:absolute;left:0;right:0;top:232px;z-index:12;text-align:center;font:400 120px/1 Anton;color:#fff;
+  filter:drop-shadow(0 6px 18px rgba(0,0,0,.6))}}
 #cm{{position:absolute;left:70px;right:70px;top:1160px;z-index:25;height:116px;display:flex;align-items:center;gap:18px}}
 .cmav{{width:104px;height:104px;border-radius:50%;padding:5px;background:#fff;flex:none}}
 .cmav img,.dmav img{{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}}
