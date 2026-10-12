@@ -177,16 +177,17 @@ def hook():
     tw.append(f"tl.set('#hook',{{autoAlpha:0}},{b:.3f});")
     tw.append("tl.fromTo('#hook .hk1',{scale:1.3,filter:'blur(4px)'},{scale:1,filter:'blur(0px)',duration:.3,ease:'power3.out',immediateRender:true},0);")
     tw += pop('#hk2', .90, .3, .4)
-    # stopwatch on "45 minutes", calendar on "planifier", her month on "un mois entier"
-    html.append('<div id="hkW" class="badge" style="left:56px;top:600px"><svg class="ic" width="120" height="120" viewBox="0 0 100 100">'
-                '<circle cx="50" cy="56" r="34"/><path d="M42 12h16M50 12v10M78 30l5-5"/><line id="swh" x1="50" y1="56" x2="50" y2="34"/></svg>'
-                '<div class="bl">45 MIN</div></div>')
-    tw += pop('#hkW', .94, .3, .4)
-    tw.append("tl.fromTo('#swh',{rotation:0},{rotation:720,svgOrigin:'50 56',duration:2.2,ease:'none',immediateRender:false},.94);")
-    html.append('<div id="hkC" class="badge" style="left:824px;top:600px"><svg class="ic" width="120" height="120" viewBox="0 0 100 100">'
-                '<rect x="16" y="22" width="68" height="62" rx="10"/><path d="M16 40h68M34 14v16M66 14v16"/><path d="M34 60l10 10 20-20"/></svg>'
-                '<div class="bl">PLANIFIER</div></div>')
-    tw += pop('#hkC', 1.68, .3, .4)
+    # phone-widget style cards (frosted brown glass): a timer on "45 minutes", a month on "planifier"
+    html.append('<div id="hkW" class="wdg" style="left:50px;top:590px"><div class="wl">MINUTEUR</div>'
+                '<div class="ring"><svg width="170" height="170" viewBox="0 0 170 170"><circle cx="85" cy="85" r="74" class="rb"/>'
+                '<circle id="rgf" cx="85" cy="85" r="74" class="rf"/></svg><div class="rt">45:00</div></div></div>')
+    tw += pop('#hkW', .94, .3, .6)
+    tw.append("tl.fromTo('#rgf',{strokeDashoffset:0},{strokeDashoffset:300,duration:2.2,ease:'none',immediateRender:false},.94);")
+    dots = ''.join(f'<i id="hd{i}"></i>' for i in range(7))
+    html.append(f'<div id="hkC" class="wdg" style="left:800px;top:590px"><div class="wl">CE MOIS</div><div class="wn">30</div>'
+                f'<div class="ws">jours planifiés</div><div class="wd">{dots}</div></div>')
+    tw += pop('#hkC', 1.68, .3, .6)
+    tw.append("tl.fromTo('#hkC .wd i',{backgroundColor:'rgba(255,255,255,.25)'},{backgroundColor:'#E2BF77',duration:.08,stagger:.08,immediateRender:false},1.85);")
     html += ['<div id="hkM" class="recapCal hookCal">'] + calendar('calH') + ['</div>']
     tw += pop('#hkM', 2.38, .35, .4)
     tw.append("gsap.set('#calH .cd.on .tag2, #calH .cd.on .topic',{autoAlpha:0});")
@@ -198,8 +199,8 @@ def hook():
 
 # ------------------------------------------------------------------ step titles over the explaining Maé
 def fit(title, big=250, width=1000):
-    """DM Serif Display caps are ~.64em wide: long titles shrink to stay on one line"""
-    return min(big, round(width / (.64 * len(title))))
+    """Poppins 800 caps are ~.70em wide: long titles shrink to stay on one line"""
+    return min(big, round(width / (.70 * len(title))))
 
 
 # magazine titles BEHIND her head (Maé's 2nd inspiration): a small plain label, then a huge serif word revealed letter
@@ -448,22 +449,32 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #hook{{position:absolute;left:0;right:0;top:226px;z-index:12;text-align:center;filter:drop-shadow(0 6px 18px rgba(0,0,0,.55))}}
 .hk1{{font:400 112px/1 Anton;color:#fff}}
 .hk2{{font:italic 800 76px/1.1 Poppins;color:#fff;margin-top:4px}}
-.badge{{position:absolute;z-index:12;width:200px;height:210px;border-radius:28px;background:rgba(140,92,65,.92);border:4px solid #fff;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 16px 36px rgba(0,0,0,.4)}}
-.bl{{font:400 38px/1 Anton;color:#fff;letter-spacing:.02em}}
+.wdg{{position:absolute;z-index:12;width:230px;height:250px;border-radius:44px;background:rgba(58,38,26,.55);
+  -webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);border:1.5px solid rgba(255,255,255,.35);
+  box-shadow:0 20px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25);color:#fff;text-align:center;padding-top:22px}}
+.wl{{font:600 20px/1 Poppins;letter-spacing:.14em;color:#E2BF77}}
+.ring{{position:relative;width:170px;height:170px;margin:14px auto 0}}
+.ring svg{{transform:rotate(-90deg)}}
+.rb{{fill:none;stroke:rgba(255,255,255,.18);stroke-width:9}}
+.rf{{fill:none;stroke:#fff;stroke-width:9;stroke-linecap:round;stroke-dasharray:465}}
+.rt{{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 42px/1 Poppins;letter-spacing:-.01em}}
+.wn{{font:800 104px/1 Poppins;letter-spacing:-.04em;margin-top:12px}}
+.ws{{font:600 22px/1 Poppins;opacity:.9;margin-top:6px}}
+.wd{{display:flex;justify-content:center;gap:8px;margin-top:18px}}
+.wd i{{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.25)}}
 .recapCal.hookCal{{left:365px;top:1000px;z-index:12}}
 /* step titles: magazine serif behind her head */
 .stepT{{position:absolute;left:0;right:0;top:196px;z-index:6;text-align:center;color:#FFF8EE}}
 .stepT .inner,.hd .inner{{display:inline-block;text-align:left}}
 .stepT .sl{{font:600 40px/1 Poppins;color:#fff;margin-left:.3em;text-shadow:0 2px 10px rgba(0,0,0,.35)}}
-.stepT .sn{{font-family:'DM Serif Display';font-weight:400;line-height:.95;letter-spacing:-.01em;white-space:nowrap;margin-top:6px;
+.stepT .sn{{font-family:Poppins;font-weight:800;line-height:1;letter-spacing:-.03em;white-space:nowrap;margin-top:6px;
   text-shadow:0 6px 30px rgba(0,0,0,.25)}}
 .lt{{display:inline-block}}
 /* brown screens */
 .screen{{position:absolute;inset:0;z-index:20;background:{BROWN};color:#fff}}
 .hd{{position:absolute;left:0;right:0;top:250px;text-align:center}}
 .hl{{font:600 40px/1 Poppins;margin-left:.3em;opacity:.95}}
-.ht{{font-family:'DM Serif Display';font-weight:400;line-height:.95;letter-spacing:-.01em;margin-top:6px;white-space:nowrap}}
+.ht{{font-family:Poppins;font-weight:800;line-height:1;letter-spacing:-.03em;margin-top:6px;white-space:nowrap}}
 .tag{{display:inline-block;font:400 46px/1 Anton;letter-spacing:.03em;color:#5A3F1F;background:#fff;padding:10px 20px 8px;border-radius:10px}}
 .per{{font:600 30px/1 Poppins;margin-top:12px}}
 .paceCol{{position:absolute;top:560px;width:300px;text-align:center}}
