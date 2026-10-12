@@ -120,7 +120,7 @@ def comment():
     a = 30.30
     html = [f'<div id="cm"><div class="cmav"><img src="assets/avatar.png"/></div><div class="cmbar"><span id="cmtext"></span>'
             f'<span id="cmcaret" class="caret"></span></div><div id="cmsend" class="cmsend"><svg viewBox="0 0 24 24" width="40" height="40">'
-            f'<path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>']
+            f'<path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="#2A1E36" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>']
     tw = show('#cm', a, SEG['bye'])
     tw.append(f"tl.fromTo('#cm',{{y:40,scale:.92}},{{y:0,scale:1,duration:.3,ease:'back.out(1.7)',immediateRender:false}},{a:.3f});")
     word = 'AVOCADO'
@@ -200,29 +200,27 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 #bgv{{z-index:0}}   /* lavender backdrop grade baked into aroll_graded.mp4 (work/grade.txt), after Maé's reference */
-#glow{{position:absolute;inset:0;z-index:1;background:radial-gradient(60% 34% at 50% 30%,rgba(255,244,255,.22),rgba(255,244,255,0) 70%);mix-blend-mode:screen}}
 #vig{{position:absolute;inset:0;z-index:1;background:radial-gradient(120% 75% at 45% 38%,rgba(20,12,36,0) 50%,rgba(20,12,36,.42) 100%)}}
 #shade{{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(24,16,36,.40) 0%,rgba(24,16,36,0) 30%,rgba(24,16,36,0) 60%,rgba(24,16,36,.30) 100%)}}
 .col{{position:absolute;z-index:5;width:320px;text-align:center;color:#fff;text-shadow:0 4px 18px rgba(0,0,0,.45)}}
-.num{{padding-top:.14em;margin-top:-.14em;font:400 120px/1 Anton;letter-spacing:.01em;display:inline-block;transform-origin:50% 60%;background:{GRAD_T};-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 rgba(90,60,20,.75)) drop-shadow(0 10px 18px rgba(0,0,0,.45))}}
+.num{{font:400 120px/1 Anton;letter-spacing:.01em;display:inline-block;transform-origin:50% 60%;color:#fff;filter:drop-shadow(0 3px 0 rgba(30,20,40,.45)) drop-shadow(0 10px 18px rgba(0,0,0,.4))}}
 .vues{{font:700 30px/1 Poppins;letter-spacing:.24em;margin-top:2px;padding-left:.24em}}
 .title{{position:absolute;left:0;right:0;top:226px;z-index:6;text-align:center;font:600 56px/1 Caveat;color:#fff;
   text-shadow:0 3px 14px rgba(0,0,0,.5)}}
-.icon{{position:absolute;left:0;top:0;z-index:7;border-radius:26%;background:{GRAD};border:4px solid #FFF8EA;
-  box-shadow:inset 0 4px 0 rgba(255,255,255,.75),inset 0 -6px 0 rgba(90,60,20,.45),0 14px 34px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center}}
+.icon{{position:absolute;left:0;top:0;z-index:7;border-radius:26%;background:rgba(24,16,36,.38);border:3px solid rgba(255,255,255,.9);box-shadow:0 12px 30px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center}}
 .icon svg{{width:74%;height:74%;fill:none;stroke:#fff;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;
-  filter:drop-shadow(0 2px 3px rgba(80,50,10,.45))}}
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}}
 .cap{{position:absolute;left:0;right:0;bottom:452px;z-index:9;text-align:center;transform-origin:50% 100%}}
 .cl{{font-family:Anton;font-weight:400;line-height:.92;letter-spacing:.005em;text-transform:uppercase;white-space:nowrap}}
 .cl.w{{color:#fff;filter:drop-shadow(0 3px 0 rgba(40,25,10,.55)) drop-shadow(0 10px 22px rgba(0,0,0,.55))}}
 .cl.g{{padding-top:.16em;margin-top:-.16em;background:{GRAD_T};-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 rgba(90,60,20,.85)) drop-shadow(0 12px 22px rgba(0,0,0,.55))}}
 #cm{{position:absolute;left:70px;right:70px;top:1100px;z-index:8;height:116px;display:flex;align-items:center;gap:18px}}
-.cmav{{width:104px;height:104px;border-radius:50%;padding:5px;background:{GRAD};flex:none}}
+.cmav{{width:104px;height:104px;border-radius:50%;padding:5px;background:#fff;flex:none}}
 .cmav img{{width:100%;height:100%;border-radius:50%;border:4px solid #fff;object-fit:cover;display:block}}
 .cmbar{{flex:1;height:96px;border-radius:48px;background:rgba(30,22,16,.62);border:2px solid rgba(255,255,255,.35);
   display:flex;align-items:center;padding:0 34px;font:700 50px/1 Poppins;color:#fff;letter-spacing:.02em}}
-.caret{{display:inline-block;width:4px;height:52px;background:{GOLD};margin-left:6px}}
-.cmsend{{position:absolute;right:16px;width:76px;height:76px;border-radius:50%;background:{GRAD};display:flex;align-items:center;justify-content:center}}
+.caret{{display:inline-block;width:4px;height:52px;background:#fff;margin-left:6px}}
+.cmsend{{position:absolute;right:16px;width:76px;height:76px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}}
 '''
 
 SAFE_GUIDE = ('<div style="position:absolute;inset:0;z-index:99;pointer-events:none">'
@@ -252,7 +250,7 @@ def build():
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
 {nl.join(audio())}
   <video id="bgv" class="full" src="assets/aroll_graded.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
-  <div id="glow"></div><div id="vig"></div><div id="shade"></div>
+  <div id="vig"></div><div id="shade"></div>
 {nl.join(b_html)}
 {nl.join(t_html)}
 {nl.join(i_html)}
