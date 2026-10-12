@@ -121,6 +121,12 @@ def icon(name, size):
     return f'<svg class="icf" width="{size}" height="{size}" viewBox="0 0 100 100">{ICONS_F[name]}</svg>'
 
 
+def photo(name, size):
+    """real photo tile (Unsplash, assets/topics/) in a rounded frame"""
+    return (f'<div class="pho" style="width:{size}px;height:{size}px;border-radius:{size * .26:.0f}px">'
+            f'<img src="assets/topics/{name}.jpg"/></div>')
+
+
 def app(name, size):
     """gold app-icon tile with a white glyph"""
     return f'<div class="app" style="width:{size}px;height:{size}px;border-radius:{size * .26:.0f}px">{icon(name, round(size * .56))}</div>'
@@ -294,7 +300,7 @@ def scr_themes():
     pts = []
     for k in range(5):
         ang = -math.pi / 2 + k * 2 * math.pi / 5
-        pts.append((cx + R * math.cos(ang), cy + R * .92 * math.sin(ang)))
+        pts.append((cx + R * 1.14 * math.cos(ang), cy + R * .95 * math.sin(ang)))
     svg = '<svg class="full" viewBox="0 0 1080 1920">' + ''.join(
         f'<path id="tha{k}" d="M{cx + (x - cx) * .32:.0f} {cy + (y - cy) * .32:.0f} L{cx + (x - cx) * .7:.0f} {cy + (y - cy) * .7:.0f}" '
         f'stroke="#fff" stroke-width="3" stroke-dasharray="2 12" stroke-linecap="round" fill="none" opacity=".85"/>' for k, (x, y) in enumerate(pts)) + '</svg>'
@@ -302,7 +308,7 @@ def scr_themes():
     h.append(f'<div id="thc" class="niche glass" style="left:{cx - 200}px;top:{cy - 78}px"><div class="wl">MA NICHE</div><div class="nn">Coach sportif</div></div>')
     tw += pop('#thc', 19.10, .3, .6)
     for k, ((name, ic), (x, y)) in enumerate(zip(TOPICS, pts)):
-        h.append(f'<div id="thn{k}" class="node" style="left:{x - 120:.0f}px;top:{y - 80:.0f}px">{app(ic, 128)}'
+        h.append(f'<div id="thn{k}" class="node" style="left:{x - 120:.0f}px;top:{y - 105:.0f}px">{photo(ic, 170)}'
                  f'<div class="nodeL">{name}</div></div>')
         t = 19.56 + k * .28
         tw += pop(f'#thn{k}', t, .3, .5)
@@ -320,7 +326,7 @@ def scr_types():
     for j, t in enumerate(TYPES):
         cells.append(f'<div class="tc th2" style="left:{lw + j * cw}px;top:0;width:{cw}px;height:{hh}px">{t}</div>')
     for i, (name, ic) in enumerate(TOPICS):
-        cells.append(f'<div class="tc rh" style="left:0;top:{hh + i * ch}px;width:{lw}px;height:{ch}px">{app(ic, 58)}<span>{name}</span></div>')
+        cells.append(f'<div class="tc rh" style="left:0;top:{hh + i * ch}px;width:{lw}px;height:{ch}px">{photo(ic, 72)}<span>{name}</span></div>')
         for j in range(5):
             cells.append(f'<div class="tc idea" id="tc{i}{j}" style="left:{lw + j * cw}px;top:{hh + i * ch}px;width:{cw}px;height:{ch}px">'
                          f'<span>{IDEAS[i][j]}</span></div>')
@@ -514,6 +520,8 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .screen{{position:absolute;inset:0;z-index:20;background:radial-gradient(120% 80% at 50% 38%,#9C6B4E 0%,{BROWN} 55%,#734A33 100%);color:#fff}}
 .glass{{background:rgba(255,255,255,.12);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1.5px solid rgba(255,255,255,.3);
   box-shadow:0 18px 44px rgba(40,22,10,.3),inset 0 1px 0 rgba(255,255,255,.3)}}
+.pho{{margin:0 auto;overflow:hidden;border:3px solid rgba(255,255,255,.9);box-shadow:0 14px 30px rgba(40,22,10,.4)}}
+.pho img{{width:100%;height:100%;object-fit:cover;display:block}}
 .app{{margin:0 auto;display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%);
   box-shadow:inset 0 2px 0 rgba(255,255,255,.65),inset 0 -3px 6px rgba(80,45,10,.25),0 12px 26px rgba(40,22,10,.35)}}
 .icf{{fill:#fff;filter:drop-shadow(0 2px 3px rgba(80,45,10,.35))}}
