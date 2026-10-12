@@ -52,7 +52,7 @@ CAPS = [(0.00, 'POSTER À UNE'), (0.80, 'HEURE PRÉCISE'), (2.26, '*100 VUES'),
         (23.22, 'TU MONTRES'),
         (23.88, 'AJOUTEZ MANYCHAT'), (25.38, 'ÇA C’EST'), (26.00, '*100 000 VUES'), (26.86, 'C’EST JUSTE UN'),
         (27.54, '*NON NÉGOCIABLE'), (28.28, 'POUR ENVOYER'), (28.84, 'TOUTES TES RESSOURCES'), (29.38, 'GRATUITES'),
-        (30.12, 'ET COMMENTE'), (30.72, '*AVOCADO'), (31.16, 'POUR AVOIR'), (31.58, 'UN RÉCAP'), (32.02, 'DE TOUS LES'),
+        (30.12, 'ET COMMENTE'), (31.16, 'POUR AVOIR'), (31.58, 'UN RÉCAP'), (32.02, 'DE TOUS LES'),
         (32.74, 'CONTENUS'), (33.00, 'QUE TU DOIS FAIRE'), (33.54, 'POUR CRÉER'), (33.96, 'TA STRATÉGIE'),
         (35.00, '*TCHUS !')]
 
