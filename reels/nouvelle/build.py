@@ -135,19 +135,21 @@ def chunks():
 
 
 def captions():
+    """one word at a time (as on her TOFU MOFU BOFU reel): white Poppins, black shadow, a quick pop on each word"""
     html, tw = [], []
-    cs = chunks()
-    for k, c in enumerate(cs):
-        a = c[0]['start'] - .03
-        b = cs[k + 1][0]['start'] - .03 if k + 1 < len(cs) else DUR
-        b = min(b, c[-1]['end'] + .5)
+    ws = [w for w in WORDS if not 41.0 <= w['start'] < CTA_END]     # the comment bar carries the CTA
+    for k, w in enumerate(ws):
+        a = w['start'] - .03
+        b = ws[k + 1]['start'] - .03 if k + 1 < len(ws) else DUR
+        b = min(b, a + 1.2, next((x for x in CUTS if a + .05 < x), DUR))
         if a < 41.0 < b:
             b = 41.0
-        b = min(b, next((x for x in CUTS if a + .05 < x), DUR))
-        spans = ' '.join(f'<span class="{"gd" if w["text"].lower() in GOLD_WORDS or w["text"] in GOLD_WORDS else ""}">{w["text"]}</span>' for w in c)
-        cls = 'cap pill' if in_screen(a + .05) else 'cap'
-        html.append(f'<div id="cp{k}" class="{cls}"><span class="ci">{spans}</span></div>')
+        if b - a < .06:      # words closer than two frames: skip, the next one takes over
+            continue
+        cls = 'cap low' if in_screen(a + .05) else 'cap'
+        html.append(f'<div id="cp{k}" class="{cls}">{w["text"]}</div>')
         tw += show(f'#cp{k}', a, b)
+        tw.append(f"tl.fromTo('#cp{k}',{{scale:1.3,y:10}},{{scale:1,y:0,duration:.14,ease:'back.out(2.2)',immediateRender:false}},{a:.3f});")
     return html, tw
 
 
@@ -188,19 +190,19 @@ def hook():
                 f'<div class="ws">jours planifiés</div><div class="wd">{dots}</div></div>')
     tw += pop('#hkC', 1.68, .3, .6)
     tw.append("tl.fromTo('#hkC .wd i',{backgroundColor:'rgba(255,255,255,.25)'},{backgroundColor:'#E2BF77',duration:.08,stagger:.08,immediateRender:false},1.85);")
-    html += ['<div id="hkM" class="recapCal hookCal">'] + calendar('calH') + ['</div>']
-    tw += pop('#hkM', 2.38, .35, .4)
-    tw.append("gsap.set('#calH .cd.on .tag2, #calH .cd.on .topic',{autoAlpha:0});")
-    tw.append("tl.fromTo('#calH .cd.on .tag2, #calH .cd.on .topic',{autoAlpha:0},{autoAlpha:1,duration:.05,stagger:.012,immediateRender:false},2.50);")
+    html += ['<div id="hkM" class="calPos" style="left:340px;top:960px">'] + mini_cal('calH') + ['</div>']
+    tw += pop('#hkM', 2.38, .35, .5)
+    tw += ["gsap.set('#calH .md i',{scale:0});",
+           "tl.to('#calH .md i',{scale:1,duration:.08,stagger:.025,ease:'back.out(3)'},2.50);"]
     for sel in ('#hkW', '#hkC', '#hkM'):
         tw.append(f"tl.set('{sel}',{{autoAlpha:0}},{b:.3f});")
     return html, tw
 
 
 # ------------------------------------------------------------------ step titles over the explaining Maé
-def fit(title, big=250, width=1000):
-    """Poppins 800 caps are ~.70em wide: long titles shrink to stay on one line"""
-    return min(big, round(width / (.70 * len(title))))
+def fit(title, big=270, width=1000):
+    """Anton caps are ~.46em wide: long titles shrink to stay on one line"""
+    return min(big, round(width / (.46 * len(title))))
 
 
 # magazine titles BEHIND her head (Maé's 2nd inspiration): a small plain label, then a huge serif word revealed letter
@@ -314,6 +316,15 @@ def scr_types():
     return h, tw
 
 
+def mini_cal(cid):
+    """phone-widget month (frosted brown glass): Mon-Fri content days get a gold dot"""
+    cells = ''.join(f'<div class="mh">{d}</div>' for d in 'LMMJVSD')
+    for day in range(1, 31):
+        on = (day - 1) % 7 < 5
+        cells += f'<div class="md{" on" if on else ""}"><span>{day}</span>{"<i></i>" if on else ""}</div>'
+    return [f'<div id="{cid}" class="mcal"><div class="wl">OCTOBRE</div><div class="mtt">Mon mois de contenu</div><div class="mgrid">{cells}</div></div>']
+
+
 def calendar(cid, scale=1.0):
     """month grid Mon-Sun x 5 weeks, Mon-Fri filled with a content-type tag (cycles through the 5 types)"""
     cw, ch = 140, 150
@@ -358,7 +369,7 @@ def recap():
     html.append(f'<div id="rcW" class="recap wide" style="left:200px;top:236px"><div class="per">Du lundi au vendredi</div>{week("MOYEN", LIT["MOYEN"], "small")}</div>')
     tw += pop('#rcW', 15.95, .3, .6) + ["tl.set('#rcW',{autoAlpha:0},16.933);"]
     # "here you go": her month, beside her head
-    html += ['<div id="rcC" class="recapCal">'] + calendar('calB') + ['</div>']
+    html += ['<div id="rcC" class="calPos" style="left:690px;top:236px">'] + mini_cal('calB') + ['</div>']
     tw += pop('#rcC', 32.80, .35, .5) + ["tl.set('#rcC',{autoAlpha:0},35.333);"]
     return html, tw
 
@@ -432,12 +443,9 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .gd{{background:{GRAD_T};-webkit-background-clip:text;background-clip:text;color:transparent;padding-top:.12em;margin-top:-.12em}}
 .ic{{fill:none;stroke:#fff;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}}
 /* captions */
-.cap{{position:absolute;left:0;right:0;top:1360px;z-index:30;text-align:center;font:700 58px/1.1 Poppins;color:#fff;letter-spacing:-.01em;
-  text-shadow:0 0 18px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.45);white-space:nowrap}}
-.cap .gd{{text-shadow:none;filter:drop-shadow(0 2px 3px rgba(40,25,10,.8))}}
-.cap.pill{{top:1520px}}
-.cap.pill .ci{{display:inline-block;background:#fff;color:#4A3420;padding:10px 26px 12px;border-radius:14px;font-size:40px;text-shadow:none}}
-.cap.pill .gd{{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#A9792F;filter:none}}
+.cap{{position:absolute;left:0;right:0;top:1350px;z-index:30;text-align:center;font:700 82px/1.1 Poppins;color:#fff;letter-spacing:-.03em;
+  text-shadow:0 0 24px rgba(0,0,0,.6),0 4px 12px rgba(0,0,0,.55),0 1px 3px rgba(0,0,0,.5);white-space:nowrap;transform-origin:50% 50%}}
+.cap.low{{top:1500px}}
 /* hook */
 #stage{{position:absolute;inset:0;z-index:0;transform-origin:50% 35%}}
 .cut{{z-index:8;filter:contrast(1.03) saturate(.97) brightness(1.02)}}
@@ -462,19 +470,28 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .ws{{font:600 22px/1 Poppins;opacity:.9;margin-top:6px}}
 .wd{{display:flex;justify-content:center;gap:8px;margin-top:18px}}
 .wd i{{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.25)}}
-.recapCal.hookCal{{left:365px;top:1000px;z-index:12}}
+.calPos{{position:absolute;z-index:15}}
+.mcal{{width:360px;padding:24px 22px 20px;border-radius:44px;background:rgba(58,38,26,.55);-webkit-backdrop-filter:blur(22px) saturate(1.2);
+  backdrop-filter:blur(22px) saturate(1.2);border:1.5px solid rgba(255,255,255,.35);box-shadow:0 20px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25);color:#fff}}
+.mcal .wl{{text-align:left;padding-left:6px}}
+.mtt{{font:700 26px/1.2 Poppins;margin:6px 0 12px 6px}}
+.mgrid{{display:grid;grid-template-columns:repeat(7,1fr);row-gap:6px;text-align:center}}
+.mh{{font:600 15px/1 Poppins;opacity:.6;padding-bottom:4px}}
+.md{{position:relative;height:38px;font:600 19px/30px Poppins}}
+.md i{{position:absolute;left:50%;bottom:2px;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:#E2BF77}}
+
 /* step titles: magazine serif behind her head */
 .stepT{{position:absolute;left:0;right:0;top:196px;z-index:6;text-align:center;color:#FFF8EE}}
 .stepT .inner,.hd .inner{{display:inline-block;text-align:left}}
 .stepT .sl{{font:600 40px/1 Poppins;color:#fff;margin-left:.3em;text-shadow:0 2px 10px rgba(0,0,0,.35)}}
-.stepT .sn{{font-family:Poppins;font-weight:800;line-height:1;letter-spacing:-.03em;white-space:nowrap;margin-top:6px;
+.stepT .sn{{font-family:Anton;font-weight:400;line-height:1.05;letter-spacing:.01em;white-space:nowrap;margin-top:6px;
   text-shadow:0 6px 30px rgba(0,0,0,.25)}}
 .lt{{display:inline-block}}
 /* brown screens */
 .screen{{position:absolute;inset:0;z-index:20;background:{BROWN};color:#fff}}
 .hd{{position:absolute;left:0;right:0;top:250px;text-align:center}}
 .hl{{font:600 40px/1 Poppins;margin-left:.3em;opacity:.95}}
-.ht{{font-family:Poppins;font-weight:800;line-height:1;letter-spacing:-.03em;margin-top:6px;white-space:nowrap}}
+.ht{{font-family:Anton;font-weight:400;line-height:1.05;letter-spacing:.01em;margin-top:6px;white-space:nowrap}}
 .tag{{display:inline-block;font:400 46px/1 Anton;letter-spacing:.03em;color:#5A3F1F;background:#fff;padding:10px 20px 8px;border-radius:10px}}
 .per{{font:600 30px/1 Poppins;margin-top:12px}}
 .paceCol{{position:absolute;top:560px;width:300px;text-align:center}}
