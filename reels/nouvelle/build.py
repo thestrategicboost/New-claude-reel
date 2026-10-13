@@ -169,10 +169,7 @@ def captions():
         if b - a < .06:      # words closer than two frames: skip, the next one takes over
             continue
         cls = 'cap low' if in_screen(a + .05) else 'cap'
-        if any(ch.isdigit() for ch in w['text']):      # numbers sit in a brown brand box so they stand out
-            html.append(f'<div id="cp{k}" class="{cls}"><span class="num">{w["text"]}</span></div>')
-        else:
-            html.append(f'<div id="cp{k}" class="{cls}">{w["text"]}</div>')
+        html.append(f'<div id="cp{k}" class="{cls}">{w["text"]}</div>')
         tw += show(f'#cp{k}', a, b)
         tw.append(f"tl.fromTo('#cp{k}',{{scale:1.3,y:10}},{{scale:1,y:0,duration:.14,ease:'back.out(2.2)',immediateRender:false}},{a:.3f});")
     return html, tw
@@ -478,8 +475,6 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .cap{{position:absolute;left:0;right:0;top:1350px;z-index:30;text-align:center;font:700 82px/1.1 Poppins;color:#fff;letter-spacing:-.03em;
   text-shadow:0 0 24px rgba(0,0,0,.6),0 4px 12px rgba(0,0,0,.55),0 1px 3px rgba(0,0,0,.5);white-space:nowrap;transform-origin:50% 50%}}
 .cap.low{{top:1500px}}
-.cap .num{{display:inline-block;min-width:1.7em;text-align:center;font-size:96px;background:{BROWN};color:#fff;padding:4px 30px 10px;border-radius:26px;border:3px solid rgba(255,255,255,.85);
-  text-shadow:none;box-shadow:0 12px 30px rgba(0,0,0,.4),inset 0 2px 0 rgba(255,255,255,.25)}}
 /* hook */
 #stage{{position:absolute;inset:0;z-index:0;transform-origin:50% 35%}}
 .cut{{z-index:8;filter:contrast(1.03) saturate(.97) brightness(1.02)}}
