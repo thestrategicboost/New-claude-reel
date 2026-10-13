@@ -75,7 +75,7 @@ def zones():
     html, tw = [], []
     stage = ZONES_IN_STAGE
     # 1. strategic (safe) zone
-    html.append('<div id="zSafe" class="zone g" style="left:70px;top:230px;width:850px;height:1230px"></div>')
+    html.append('<div id="zSafe" class="zone g" style="left:70px;top:230px;width:850px;height:1390px"></div>')
     tw += [f"tl.fromTo('#zSafe',{{scale:1.08}},{{scale:1,duration:.4,ease:'power3.out',immediateRender:true}},0);",
            "gsap.set('#zSafe',{autoAlpha:1});", "tl.to('#zSafe',{autoAlpha:0,duration:.2},3.0);", "tl.set('#zSafe',{autoAlpha:0},3.2);"]
     h, t = label('lSafe', 'ZONE STRATÉGIQUE', 110, 270, 0.0, 3.2)
@@ -84,12 +84,12 @@ def zones():
     # 2. zones to avoid (top, bottom, Instagram buttons column)
     html.append('<div id="zRed">'
                 '<div class="zone r" style="left:0;top:0;width:1080px;height:220px"></div>'
-                '<div class="zone r" style="left:0;top:1470px;width:1080px;height:450px"></div>'
-                '<div id="zRight" class="zone r" style="left:940px;top:220px;width:140px;height:1250px"></div></div>')
+                '<div class="zone r" style="left:0;top:1640px;width:1080px;height:280px"></div>'
+                '<div id="zRight" class="zone r" style="left:940px;top:220px;width:140px;height:1420px"></div></div>')
     tw += fade('#zRed', 3.22, 8.25)
     tw.append("tl.fromTo('#zRight',{backgroundColor:'rgba(235,55,55,.36)'},{backgroundColor:'rgba(235,55,55,.62)',duration:.25,yoyo:true,repeat:3,immediateRender:false},5.50);")
     h, t = label('lRed', 'ZONE À ÉVITER', 340, 520, 3.30, 8.25, 64)
-    arrows = [('arUp', 492, 300, 0), ('arDn', 492, 1290, 180), ('arRt', 790, 840, 90)]   # point at the top, bottom and side bands
+    arrows = [('arUp', 492, 300, 0), ('arDn', 492, 1480, 180), ('arRt', 790, 840, 90)]   # point at the top, bottom and side bands
     for aid, x, y, rot in arrows:
         h.append(f'<div id="{aid}" class="arw" style="left:{x}px;top:{y}px;transform:rotate({rot}deg)">{ARROW}</div>')
         t += pop(f'#{aid}', 3.55, .3, .4) + [f"tl.set('#{aid}',{{autoAlpha:0}},8.25);"]
@@ -229,7 +229,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .mk.tr{{right:140px;top:230px;border-top-width:10px;border-right-width:10px}}
 .mk.bl{{left:70px;top:1340px;border-bottom-width:10px;border-left-width:10px}}
 .mk.br{{right:140px;top:1340px;border-bottom-width:10px;border-right-width:10px}}
-.cap{{position:absolute;left:0;right:0;top:{CAP_Y - 52}px;z-index:20;text-align:center;font:700 84px/1.1 Poppins;color:#fff;letter-spacing:-.03em;
+.cap{{position:absolute;left:0;right:0;text-transform:lowercase;top:{CAP_Y - 52}px;z-index:20;text-align:center;font:700 84px/1.1 Poppins;color:#fff;letter-spacing:-.03em;
   text-shadow:0 0 24px rgba(0,0,0,.6),0 4px 12px rgba(0,0,0,.55),0 1px 3px rgba(0,0,0,.5);white-space:nowrap;transform-origin:50% 50%}}
 #fol{{position:absolute;z-index:15;left:110px;top:1240px;width:830px;height:150px;background:#fff;border-radius:28px;display:flex;align-items:center;
   gap:22px;padding:0 26px;box-shadow:0 18px 50px rgba(0,0,0,.3)}}
