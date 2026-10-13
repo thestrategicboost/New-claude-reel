@@ -75,7 +75,7 @@ def zones():
     html, tw = [], []
     stage = ZONES_IN_STAGE
     # 1. strategic (safe) zone
-    html.append('<div id="zSafe" class="zone g" style="left:70px;top:230px;width:850px;height:1390px"></div>')
+    html.append('<div id="zSafe" class="zone g" style="left:70px;top:250px;width:830px;height:1440px"></div>')
     tw += [f"tl.fromTo('#zSafe',{{scale:1.08}},{{scale:1,duration:.4,ease:'power3.out',immediateRender:true}},0);",
            "gsap.set('#zSafe',{autoAlpha:1});", "tl.to('#zSafe',{autoAlpha:0,duration:.2},3.0);", "tl.set('#zSafe',{autoAlpha:0},3.2);"]
     h, t = label('lSafe', 'ZONE STRATÉGIQUE', 110, 270, 0.0, 3.2)
@@ -83,13 +83,15 @@ def zones():
     tw += t + ["tl.set('#lSafe',{autoAlpha:1,scale:1},0);"]
     # 2. zones to avoid (top, bottom, Instagram buttons column)
     html.append('<div id="zRed">'
-                '<div class="zone r" style="left:0;top:0;width:1080px;height:220px"></div>'
-                '<div class="zone r" style="left:0;top:1640px;width:1080px;height:280px"></div>'
-                '<div id="zRight" class="zone r" style="left:940px;top:220px;width:140px;height:1420px"></div></div>')
+                # measured on Maé's own Instagram screenshot (status bar + camera, side buttons, note bubble, name + caption)
+                '<div class="zone r" style="left:0;top:0;width:1080px;height:240px"></div>'
+                '<div class="zone r" style="left:0;top:1700px;width:1080px;height:220px"></div>'
+                '<div class="zone r" style="left:0;top:1460px;width:320px;height:240px"></div>'
+                '<div id="zRight" class="zone r" style="left:920px;top:1000px;width:160px;height:700px"></div></div>')
     tw += fade('#zRed', 3.22, 8.25)
     tw.append("tl.fromTo('#zRight',{backgroundColor:'rgba(235,55,55,.36)'},{backgroundColor:'rgba(235,55,55,.62)',duration:.25,yoyo:true,repeat:3,immediateRender:false},5.50);")
     h, t = label('lRed', 'ZONE À ÉVITER', 340, 520, 3.30, 8.25, 64)
-    arrows = [('arUp', 492, 300, 0), ('arDn', 492, 1480, 180), ('arRt', 790, 840, 90)]   # point at the top, bottom and side bands
+    arrows = [('arUp', 492, 300, 0), ('arDn', 492, 1550, 180), ('arRt', 790, 1240, 90)]   # point at the top, bottom and side bands
     for aid, x, y, rot in arrows:
         h.append(f'<div id="{aid}" class="arw" style="left:{x}px;top:{y}px;transform:rotate({rot}deg)">{ARROW}</div>')
         t += pop(f'#{aid}', 3.55, .3, .4) + [f"tl.set('#{aid}',{{autoAlpha:0}},8.25);"]
@@ -216,7 +218,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #zRed{{position:absolute;inset:0;z-index:5}}
 .lbl{{position:absolute;z-index:12;font-family:Anton;letter-spacing:.02em;color:#fff;background:{BLOCK};padding:6px 22px 4px;
   box-shadow:0 10px 26px rgba(0,0,0,.3)}}
-#igcol{{position:absolute;z-index:9;left:968px;top:1130px;display:flex;flex-direction:column;gap:38px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}}
+#igcol{{position:absolute;z-index:9;left:968px;top:1060px;display:flex;flex-direction:column;gap:38px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}}
 #eyeG{{position:absolute;inset:0;z-index:6}}
 .arw{{position:absolute;z-index:11;filter:drop-shadow(0 3px 8px rgba(0,0,0,.55))}}
 #badTxt{{position:absolute;z-index:8;left:520px;top:1300px;font:800 64px/1.05 Poppins;color:#fff;width:520px;
