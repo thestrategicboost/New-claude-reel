@@ -64,7 +64,7 @@ NOTE = ('<svg viewBox="0 0 24 24" width="40" height="40"><path d="M9 18V5l11-2v1
 
 # ------------------------------------------------------------------ header + one pill / sound card per section
 def header():
-    html = ['<div id="hdr"><div class="hcol"><div class="hb">POUR ÇA</div></div><div class="hcol"><div class="hb">UTILISE ÇA</div></div></div>']
+    html = ['<div id="hdr"><div class="hcol"><div class="hb">UTILISE ÇA</div></div><div class="hcol"><div class="hb">POUR ÇA</div></div></div>']
     tw = ["gsap.set('#hdr',{autoAlpha:1});", "tl.fromTo('#hdr',{y:-40},{y:0,duration:.35,ease:'power3.out',immediateRender:true},0);",
           "tl.to('#hdr',{autoAlpha:0,y:-20,duration:.2},13.80);", "tl.set('#hdr',{autoAlpha:0},14.0);"]   # the follow ask is not a sound tip
     for k, (a, b, cat, name, _f, ln) in enumerate(SECTIONS):
@@ -176,9 +176,9 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #hdr{{position:absolute;left:40px;right:40px;top:250px;z-index:12;display:flex}}
 .hcol{{flex:1;text-align:center}}
 .hb{{display:inline-block;font:400 66px/1 Anton;letter-spacing:.02em;color:#fff;background:{BLOCK};padding:8px 26px 6px;box-shadow:0 10px 26px rgba(0,0,0,.3)}}
-.pill{{position:absolute;z-index:12;left:40px;width:500px;top:372px;text-align:center}}
+.pill{{position:absolute;z-index:12;left:540px;width:500px;top:372px;text-align:center}}
 .pin{{display:inline-block;background:#fff;color:{BLOCK};font:700 40px/1 Poppins;padding:20px 34px;border-radius:40px;box-shadow:0 12px 28px rgba(0,0,0,.25)}}
-.card{{position:absolute;z-index:12;left:560px;top:350px;width:440px;height:126px;border-radius:30px;display:flex;align-items:center;gap:16px;
+.card{{position:absolute;z-index:12;left:70px;top:350px;width:440px;height:126px;border-radius:30px;display:flex;align-items:center;gap:16px;
   padding:0 20px;background:rgba(58,38,26,.55);-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
   border:1.5px solid rgba(255,255,255,.35);box-shadow:0 18px 44px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.25);color:#fff}}
 .ctile{{width:84px;height:84px;border-radius:22px;flex:none;display:flex;align-items:center;justify-content:center;
