@@ -56,15 +56,16 @@ CAPS = [(0.00, 'POSTER À UNE'), (0.80, 'HEURE PRÉCISE'), (2.26, '*100 VUES'),
         (32.74, 'CONTENUS'), (33.00, 'QUE TU DOIS FAIRE'), (33.54, 'POUR CRÉER'), (33.96, 'TA STRATÉGIE'),
         (35.00, '*TCHUS !')]
 
-ICONS = {   # white line icons on the gold card, 100x100 viewBox
-    'clock': '<circle cx="50" cy="54" r="30"/><path d="M50 54V36M50 54l13 9M42 16h16M50 16v8"/>',
-    'short': '<rect x="30" y="14" width="40" height="72" rx="8"/><text x="50" y="60" text-anchor="middle" '
-             'font-family="Anton" font-size="26" fill="#fff" stroke="none">5s</text>',
-    'long': '<rect x="12" y="24" width="76" height="48" rx="8"/><path d="M44 38v20l16-10z" fill="#fff"/><path d="M12 84h76"/>'
-            '<path d="M12 84h60" stroke-width="9"/>',
-    'viral': '<path d="M50 20a30 30 0 1 1-27 17"/><path d="M14 30l9 8 9-9"/><path d="M44 38v24l19-12z" fill="#fff"/>',
-    'music': '<path d="M40 70V24l34-8v46"/><circle cx="31" cy="70" r="10" fill="#fff"/><circle cx="65" cy="62" r="10" fill="#fff"/>',
-    'dm': '<path d="M16 22h68v44H46L30 80V66H16z"/><path d="M54 30l-12 18h12l-6 14 14-20H50z" fill="#fff" stroke-width="2"/>',
+ICONS = {   # white Instagram-style glyphs on an Instagram-gradient tile (as on her own reels), 100x100 viewBox
+    'clock': '<circle cx="50" cy="55" r="29"/><path d="M50 55V39M50 55l12 8M41 15h18M50 15v11"/>',
+    'short': '<rect x="30" y="14" width="40" height="72" rx="10"/><text x="50" y="61" text-anchor="middle" '
+             'font-family="Poppins" font-weight="800" font-size="22" fill="#fff" stroke="none">5s</text>',
+    'long': '<rect x="16" y="16" width="68" height="68" rx="18"/><path d="M16 36h68M38 16l10 20M58 16l10 20"/>'
+            '<path d="M43 47v24l20-12z" fill="#fff" stroke-linejoin="round"/>',
+    'viral': '<path d="M24 46V40a10 10 0 0 1 10-10h40"/><path d="M64 20l10 10-10 10"/><path d="M76 54v6a10 10 0 0 1-10 10H26"/>'
+             '<path d="M36 80L26 70l10-10"/>',
+    'music': '<path d="M40 68V26l34-8v42" /><circle cx="31" cy="68" r="10" fill="#fff"/><circle cx="65" cy="60" r="10" fill="#fff"/>',
+    'dm': '<path d="M86 14L12 42l30 12 10 30z" stroke-linejoin="round"/><path d="M42 54L86 14"/>',
 }
 
 
@@ -213,8 +214,9 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .vues{{font:700 30px/1 Poppins;letter-spacing:.24em;margin-top:2px;padding-left:.24em}}
 .title{{position:absolute;left:0;right:0;top:226px;z-index:6;text-align:center;font:600 56px/1 Caveat;color:#fff;
   text-shadow:0 3px 14px rgba(0,0,0,.5)}}
-.icon{{position:absolute;left:0;top:0;z-index:7;border-radius:26%;background:rgba(24,16,36,.38);border:3px solid rgba(255,255,255,.9);box-shadow:0 12px 30px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center}}
-.icon svg{{width:74%;height:74%;fill:none;stroke:#fff;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;
+.icon{{position:absolute;left:0;top:0;z-index:7;border-radius:24%;background:linear-gradient(225deg,#4F5BD5 0%,#962FBF 28%,#D62976 55%,#FA7E1E 80%,#FEDA75 100%);
+  box-shadow:0 12px 28px rgba(60,20,60,.35),inset 0 2px 0 rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center}}
+.icon svg{{width:70%;height:70%;fill:none;stroke:#fff;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;
   filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}}
 .cap{{position:absolute;left:0;right:0;bottom:452px;z-index:9;text-align:center;transform-origin:50% 100%}}
 .cl{{font-family:Anton;font-weight:400;line-height:.92;letter-spacing:.005em;text-transform:uppercase;white-space:nowrap}}
