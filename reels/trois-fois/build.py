@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""Reel "3 fois": once a day / once a week / once a month, said three times, each time with a new set of Instagram
-habits, edited like the "3 fois modèle" reference (stacked "every day / week / month" headers with small picture
-tiles under them) in Maé's branding (dark-brown Anton blocks, Instagram-gradient tiles, white Poppins labels).
+"""Reel "3 fois": "une fois par jour, une fois par semaine, une fois par mois", said three times. Each time she says a
+frequency, ONE habit appears as a small motion-design scene on a frosted card (story ring filling, reels fanning out,
+a month filling up, DMs arriving, stats climbing, an arrow hitting a target, notes writing themselves, clips stacking,
+a profile ticking), under a dark-brown Anton header that spells the frequency out. Maé's branding: brown / gold /
+white, Instagram-style touches.
 
 PY build.py    writes index.html
 """
@@ -11,96 +13,102 @@ import subprocess
 DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of',
                             'csv=p=0', 'assets/aroll.mp4'], capture_output=True, text=True).stdout.strip())
 BLOCK = '#573307'
-ROWS = [('PAR JOUR', 240), ('PAR SEMAINE', 462), ('PAR MOIS', 684)]     # header block, top y
-TILE = 92
+GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
+IG = 'linear-gradient(225deg,#4F5BD5 0%,#962FBF 28%,#D62976 55%,#FA7E1E 80%,#FEDA75 100%)'
+FREQ = {'j': 'UNE FOIS PAR JOUR', 's': 'UNE FOIS PAR SEMAINE', 'm': 'UNE FOIS PAR MOIS'}
 
-# when she says "jour", "semaine", "mois" in each of the three rounds (round 3 from the silences, whisper skipped it)
-ROUNDS = [(0.00, 1.54, 2.66, 3.45), (3.50, 4.90, 6.04, 7.20), (7.33, 8.49, 9.64, None)]
-# items per round: (day x3, week x2, month x2) as (icon, label)
-ITEMS = [
-    [[('story', 'Poster une story'), ('comment', 'Répondre aux coms'), ('dm', 'Engager en DM')],
-     [('reel', 'Publier 3 réels'), ('chart', 'Lire ses stats')],
-     [('calendar', 'Planifier son mois'), ('profile', 'Revoir sa bio')]],
-    [[('bulb', 'Noter ses idées'), ('camera', 'S’entraîner face cam'), ('heart', '15 min d’interactions')],
-     [('batch', 'Filmer en batch'), ('pen', 'Écrire ses scripts')],
-     [('target', 'Fixer ses objectifs'), ('test', 'Tester un format')]],
-    [[('story', 'Story coulisses'), ('dm', 'Répondre aux DM'), ('search', 'Faire sa veille')],
-     [('live', 'Un live ou une collab'), ('recycle', 'Recycler un contenu')],
-     [('offer', 'Lancer une offre'), ('audit', 'Auditer son profil')]],
-]
-
-G = {   # white glyphs, 24x24
-    'story': '<circle cx="12" cy="12" r="8.5" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 2.2"/><path d="M12 8v8M8 12h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>',
-    'comment': '<path d="M20 11.5a8 8 0 1 1-3.2-6.4 8 8 0 0 1 3.2 6.4zM20 20l-2-4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>',
-    'dm': '<path d="M21 3L3 10l7 3 3 7zM10 13L21 3" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>',
-    'reel': '<rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="#fff" stroke-width="2"/><path d="M3.5 8.5h17M9 3.5l2.5 5M14.5 3.5l2.5 5" stroke="#fff" stroke-width="2"/><path d="M10 11.5v6l5-3z" fill="#fff"/>',
-    'chart': '<path d="M5 20V12M10 20V6M15 20v-9M20 20V9" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>',
-    'calendar': '<rect x="3.5" y="5" width="17" height="15" rx="3" fill="none" stroke="#fff" stroke-width="2"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M8 14.5l2.5 2.5 5-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>',
-    'profile': '<circle cx="12" cy="9" r="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M4.5 20c1.2-3.6 4-5.2 7.5-5.2s6.3 1.6 7.5 5.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>',
-    'bulb': '<path d="M12 3a6 6 0 0 0-3.6 10.8c.8.6 1.1 1.3 1.1 2.2h5c0-.9.3-1.6 1.1-2.2A6 6 0 0 0 12 3z" fill="none" stroke="#fff" stroke-width="2"/><path d="M9.5 19.5h5M10.5 22h3" stroke="#fff" stroke-width="2" stroke-linecap="round"/>',
-    'camera': '<rect x="3" y="7" width="13" height="11" rx="3" fill="none" stroke="#fff" stroke-width="2"/><path d="M16 11l5-3v9l-5-3z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>',
-    'heart': '<path d="M12 21s-7.5-4.6-9.5-9.2C1 8.4 3.2 5 6.6 5c2.1 0 3.4 1.2 4.4 2.5C12 6.2 13.3 5 15.4 5 18.8 5 21 8.4 19.5 11.8 17.5 16.4 12 21 12 21z" fill="#fff"/>',
-    'batch': '<rect x="3" y="6" width="11" height="13" rx="2" fill="none" stroke="#fff" stroke-width="2"/><path d="M17 8v11a2 2 0 0 1-2 2H7M20.5 10v10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>',
-    'pen': '<path d="M4 20l1-4L16 5l3 3L8 19z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M14 7l3 3" stroke="#fff" stroke-width="2"/>',
-    'target': '<circle cx="12" cy="12" r="8.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="1.6" fill="#fff"/>',
-    'test': '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>',
-    'search': '<circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M15.5 15.5L21 21" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>',
-    'live': '<circle cx="12" cy="12" r="3" fill="#fff"/><path d="M7 7a7 7 0 0 0 0 10M17 7a7 7 0 0 1 0 10M4.2 4.2a11 11 0 0 0 0 15.6M19.8 4.2a11 11 0 0 1 0 15.6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>',
-    'recycle': '<path d="M5 11V9a3 3 0 0 1 3-3h11M16 3l3 3-3 3M19 13v2a3 3 0 0 1-3 3H5M8 21l-3-3 3-3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
-    'offer': '<circle cx="12" cy="12" r="9" fill="none" stroke="#fff" stroke-width="2"/><path d="M14.8 9.2c-.6-.8-1.6-1.2-2.8-1.2-1.7 0-2.8.9-2.8 2 0 2.8 5.6 1.4 5.6 4.2 0 1.1-1.2 2-2.8 2-1.3 0-2.4-.5-3-1.4M12 6.5v11" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>',
-    'audit': '<rect x="5" y="3.5" width="14" height="17" rx="2.5" fill="none" stroke="#fff" stroke-width="2"/><path d="M8.5 9h7M8.5 13h7M8.5 17h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>',
-}
+# (start, frequency, scene, label) - when she says "une fois par ..." (round 3 from the silences: whisper skipped it)
+MOMENTS = [(0.00, 'j', 'story', 'Poster une story'), (1.54, 's', 'reels', 'Publier 3 réels'), (2.66, 'm', 'month', 'Planifier ton mois'),
+           (3.50, 'j', 'dm', 'Répondre à tes DM'), (4.90, 's', 'stats', 'Analyser tes stats'), (6.04, 'm', 'goal', 'Fixer tes objectifs'),
+           (7.33, 'j', 'ideas', 'Noter tes idées'), (8.49, 's', 'batch', 'Filmer en batch'), (9.64, 'm', 'audit', 'Auditer ton profil')]
 
 
-def tile_row(rid, items, y, a, b):
-    """a row of Instagram-gradient tiles with their labels, popping in one after the other"""
-    html, tw = [], []
-    n = len(items)
-    gap = 300
-    x0 = 540 - (n - 1) * gap / 2
-    for i, (ic, lab) in enumerate(items):
-        tid = f'{rid}i{i}'
-        html.append(f'<div id="{tid}" class="it" style="left:{x0 + i * gap - 150:.0f}px;top:{y}px"><div class="tl">'
-                    f'<svg viewBox="0 0 24 24" width="{TILE * .56:.0f}" height="{TILE * .56:.0f}">{G[ic]}</svg></div><div class="lb">{lab}</div></div>')
-        t = a + .12 + i * .14
-        tw += [f"gsap.set('#{tid}',{{autoAlpha:0}});",
-               f"tl.fromTo('#{tid}',{{autoAlpha:0,scale:.4,y:20}},{{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false}},{t:.3f});"]
-        if b is not None:
-            tw += [f"tl.to('#{tid}',{{autoAlpha:0,scale:.7,duration:.12}},{b - .12:.3f});", f"tl.set('#{tid}',{{autoAlpha:0}},{b:.3f});"]
-    return html, tw
+def scene(k, kind, t):
+    """inner html of the card + its animation, all relative to the moment start t"""
+    s = f'#c{k}'
+    a = t + .12
+    if kind == 'story':
+        bars = ''.join(f'<div class="sbar"><i></i></div>' for _ in range(3))
+        h = (f'<div class="phone"><div class="sbars">{bars}</div><div class="ring"><div class="ringin"><img src="assets/img/avatar.png"/></div></div>'
+             f'<div class="plus">+</div></div>')
+        w = [f"tl.fromTo('{s} .ring',{{scale:0,rotation:-90}},{{scale:1,rotation:0,duration:.4,ease:'back.out(1.7)',immediateRender:false}},{a:.3f});",
+             f"tl.fromTo('{s} .sbar i',{{scaleX:0}},{{scaleX:1,duration:.3,stagger:.3,ease:'none',immediateRender:false}},{a + .1:.3f});",
+             f"tl.fromTo('{s} .plus',{{scale:0}},{{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false}},{a + .35:.3f});"]
+    elif kind == 'reels':
+        cards = ''.join(f'<div class="rc" style="--r:{r}deg"><img src="assets/img/r{n}.jpg"/><div class="play">▶</div></div>'
+                        for r, n in ((-14, 1), (0, 3), (14, 5)))
+        h = f'<div class="fan">{cards}</div>'
+        w = [f"tl.fromTo('{s} .rc',{{rotation:0,y:60,autoAlpha:0}},{{rotation:(i,el)=>[-14,0,14][i],y:0,autoAlpha:1,duration:.35,stagger:.1,ease:'back.out(1.6)',immediateRender:false}},{a:.3f});"]
+    elif kind == 'month':
+        cells = ''.join(f'<div class="mc{" on" if d % 7 in (0, 2, 4) else ""}"><span>{d + 1}</span></div>' for d in range(28))
+        h = f'<div class="mhd">OCTOBRE</div><div class="mgrid">{cells}</div>'
+        w = [f"tl.fromTo('{s} .mc',{{autoAlpha:0,scale:.5}},{{autoAlpha:1,scale:1,duration:.15,stagger:.012,immediateRender:false}},{a:.3f});",
+             f"tl.fromTo('{s} .mc.on',{{background:'rgba(255,255,255,.12)'}},{{background:'#D6AE66',duration:.12,stagger:.035,immediateRender:false}},{a + .3:.3f});"]
+    elif kind == 'dm':
+        h = ('<div class="chat"><div class="bub l">Hello ! Ton offre m’intéresse</div><div class="bub r">Avec plaisir, je t’explique</div>'
+             '<div class="bub l typing"><i></i><i></i><i></i></div></div>')
+        w = [f"tl.fromTo('{s} .bub',{{autoAlpha:0,y:24,scale:.8}},{{autoAlpha:1,y:0,scale:1,duration:.25,stagger:.25,ease:'back.out(2)',immediateRender:false}},{a:.3f});",
+             f"tl.fromTo('{s} .typing i',{{y:0}},{{y:-8,duration:.15,stagger:.08,yoyo:true,repeat:5,immediateRender:false}},{a + .55:.3f});"]
+    elif kind == 'stats':
+        bars = ''.join(f'<div class="bar" style="height:{v}px"></div>' for v in (60, 90, 80, 130, 175))
+        h = f'<div class="chart">{bars}<svg class="trend" viewBox="0 0 400 200"><path d="M10 170 L100 130 L190 140 L280 80 L390 25" /></svg></div><div class="kpi">+38 %</div>'
+        w = [f"tl.fromTo('{s} .bar',{{scaleY:0}},{{scaleY:1,duration:.3,stagger:.07,ease:'power3.out',immediateRender:false}},{a:.3f});",
+             f"tl.fromTo('{s} .trend path',{{strokeDashoffset:520}},{{strokeDashoffset:0,duration:.5,ease:'power2.out',immediateRender:false}},{a + .15:.3f});",
+             f"tl.fromTo('{s} .kpi',{{scale:0}},{{scale:1,duration:.3,ease:'back.out(2.5)',immediateRender:false}},{a + .45:.3f});"]
+    elif kind == 'goal':
+        h = ('<div class="target"><i class="t1"></i><i class="t2"></i><i class="t3"></i></div>'
+             '<svg class="arrow" viewBox="0 0 200 40"><path d="M0 20H170M150 6l24 14-24 14" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+        w = [f"tl.fromTo('{s} .target i',{{scale:0}},{{scale:1,duration:.3,stagger:.06,ease:'back.out(2)',immediateRender:false}},{a:.3f});",
+             f"tl.fromTo('{s} .arrow',{{x:-320,autoAlpha:0}},{{x:0,autoAlpha:1,duration:.3,ease:'power3.in',immediateRender:false}},{a + .25:.3f});",
+             f"tl.fromTo('{s} .target',{{x:0}},{{x:8,duration:.05,yoyo:true,repeat:3,immediateRender:false}},{a + .55:.3f});"]
+    elif kind == 'ideas':
+        h = ('<div class="note"><div class="nl" style="width:78%"></div><div class="nl" style="width:62%"></div><div class="nl" style="width:70%"></div>'
+             '<div class="nl" style="width:45%"></div></div><div class="bulb"><svg viewBox="0 0 24 24" width="70" height="70"><path d="M12 3a6 6 0 0 0-3.6 10.8c.8.6 1.1 1.3 1.1 2.2h5c0-.9.3-1.6 1.1-2.2A6 6 0 0 0 12 3z" fill="#fff"/><path d="M9.5 19.5h5M10.5 22h3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>')
+        w = [f"tl.fromTo('{s} .nl',{{scaleX:0}},{{scaleX:1,duration:.22,stagger:.12,ease:'power2.out',immediateRender:false}},{a:.3f});",
+             f"tl.fromTo('{s} .bulb',{{scale:0,rotation:-20}},{{scale:1,rotation:0,duration:.35,ease:'back.out(2.5)',immediateRender:false}},{a + .35:.3f});",
+             f"tl.fromTo('{s} .bulb',{{boxShadow:'0 0 0 rgba(243,223,178,0)'}},{{boxShadow:'0 0 60px rgba(243,223,178,.9)',duration:.3,yoyo:true,repeat:1,immediateRender:false}},{a + .6:.3f});"]
+    elif kind == 'batch':
+        clips = ''.join(f'<div class="clip" style="--i:{i}"><b>Vidéo {i + 1}</b><span>0:{15 + i * 7:02d}</span></div>' for i in range(4))
+        h = f'<div class="rec"><i></i>REC</div><div class="clips">{clips}</div>'
+        w = [f"tl.fromTo('{s} .clip',{{x:260,autoAlpha:0}},{{x:0,autoAlpha:1,duration:.25,stagger:.12,ease:'power3.out',immediateRender:false}},{a + .05:.3f});",
+             f"tl.fromTo('{s} .rec i',{{opacity:1}},{{opacity:.2,duration:.2,yoyo:true,repeat:5,immediateRender:false}},{a:.3f});"]
+    else:   # audit
+        rows = ''.join(f'<div class="ar"><i class="ck">✓</i><span>{x}</span></div>' for x in ('Photo de profil', 'Bio claire', 'Lien en bio'))
+        h = (f'<div class="prof"><div class="pav"><img src="assets/img/avatar.png"/></div><div class="pnm">@thestrategicboost.fr'
+             f'<div class="pst">Stratégie Instagram</div></div></div><div class="audit">{rows}</div>')
+        w = [f"tl.fromTo('{s} .prof',{{y:30,autoAlpha:0}},{{y:0,autoAlpha:1,duration:.25,ease:'power3.out',immediateRender:false}},{a:.3f});",
+             f"tl.fromTo('{s} .ar',{{autoAlpha:0,x:-20}},{{autoAlpha:1,x:0,duration:.18,stagger:.14,immediateRender:false}},{a + .18:.3f});",
+             f"tl.fromTo('{s} .ck',{{scale:0}},{{scale:1,duration:.2,stagger:.14,ease:'back.out(3)',immediateRender:false}},{a + .25:.3f});"]
+    return h, w
 
 
 def board():
     html, tw = [], []
-    firsts = ROUNDS[0][:3]
-    for (title, y), t in zip(ROWS, firsts):      # headers land on their first mention and stay
-        hid = f'h{y}'
-        html.append(f'<div class="hrow" style="top:{y}px"><span id="{hid}" class="hb">{title}</span></div>')
-        tw += [f"gsap.set('#{hid}',{{autoAlpha:0}});",
-               f"tl.fromTo('#{hid}',{{autoAlpha:0,scale:.5}},{{autoAlpha:1,scale:1,duration:.26,ease:'back.out(2)',immediateRender:{'true' if t == 0 else 'false'}}},{t:.3f});"]
-    for r, (tj, ts, tm, end) in enumerate(ROUNDS):
-        end = end if end is not None else None
-        for k, (t, (_, y)) in enumerate(zip((tj, ts, tm), ROWS)):
-            h, w = tile_row(f'r{r}k{k}', ITEMS[r][k], y + 74, t, end)
-            html += h
-            tw += w
-        if r:                                    # each new round: the headers pulse
-            for (_, y), t in zip(ROWS, (tj, ts, tm)):
-                tw.append(f"tl.fromTo('#h{y}',{{scale:1.15}},{{scale:1,duration:.22,ease:'power2.out',immediateRender:false}},{t:.3f});")
+    for k, (t, f, kind, label) in enumerate(MOMENTS):
+        b = MOMENTS[k + 1][0] if k + 1 < len(MOMENTS) else DUR
+        inner, anim = scene(k, kind, t)
+        html.append(f'<div id="h{k}" class="hrow"><span class="hb">{FREQ[f]}</span></div>')
+        html.append(f'<div id="c{k}" class="card"><div class="stagebox">{inner}</div><div class="lbl">{label}</div></div>')
+        first = 'true' if t == 0 else 'false'
+        tw += [f"gsap.set('#h{k}, #c{k}',{{autoAlpha:0}});",
+               f"tl.fromTo('#h{k}',{{autoAlpha:0,y:-30}},{{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:{first}}},{t:.3f});",
+               f"tl.fromTo('#c{k}',{{autoAlpha:0,scale:.82,y:30}},{{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:{first}}},{t + .04:.3f});",
+               f"tl.fromTo('#c{k} .lbl',{{autoAlpha:0,y:12}},{{autoAlpha:1,y:0,duration:.2,immediateRender:false}},{t + .2:.3f});"]
+        tw += anim
+        if b < DUR - .01:
+            tw += [f"tl.to('#h{k}, #c{k}',{{autoAlpha:0,duration:.1}},{b - .1:.3f});", f"tl.set('#h{k}, #c{k}',{{autoAlpha:0}},{b:.3f});"]
     return html, tw
 
 
 def sfx_list():
     out = []
-    for r, (tj, ts, tm, _e) in enumerate(ROUNDS):
-        for k, t in enumerate((tj, ts, tm)):
-            out.append(('click-soft', t, .35))
-            for i in range(len(ITEMS[r][k])):
-                out.append(('pop', t + .12 + i * .14, .18))
+    for t, _f, kind, _l in MOMENTS:
+        out.append(('whoosh-short', max(0.0, t - .02), .22))
+        out.append(('pop', t + .3, .2))
     return out
 
 
-SFX_LEN = {'pop': .72, 'click-soft': .36}
+SFX_LEN = {'pop': .72, 'whoosh-short': .57}
 
 
 def audio():
@@ -122,13 +130,77 @@ CSS = f'''
 html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
-#shade{{position:absolute;left:0;right:0;top:0;height:900px;z-index:1;background:linear-gradient(180deg,rgba(40,20,40,.22),rgba(40,20,40,0))}}
-.hrow{{position:absolute;left:0;right:0;z-index:12;text-align:center}}
-.hb{{display:inline-block;font:400 54px/1 Anton;letter-spacing:.02em;color:#fff;background:{BLOCK};padding:7px 24px 5px;box-shadow:0 10px 24px rgba(0,0,0,.28)}}
-.it{{position:absolute;z-index:11;width:300px;text-align:center}}
-.tl{{width:{TILE}px;height:{TILE}px;margin:0 auto;border-radius:27px;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(225deg,#4F5BD5 0%,#962FBF 28%,#D62976 55%,#FA7E1E 80%,#FEDA75 100%);box-shadow:0 12px 26px rgba(60,20,60,.35)}}
-.lb{{margin-top:8px;font:700 25px/1.1 Poppins;color:#fff;text-shadow:0 0 14px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.5);white-space:nowrap}}
+.hrow{{position:absolute;left:0;right:0;top:240px;z-index:12;text-align:center}}
+.hb{{display:inline-block;font:400 66px/1 Anton;letter-spacing:.02em;color:#fff;background:{BLOCK};padding:8px 26px 6px;box-shadow:0 10px 24px rgba(0,0,0,.28)}}
+.card{{position:absolute;z-index:11;left:250px;top:345px;width:580px;height:400px;border-radius:44px;overflow:hidden;
+  background:rgba(58,38,26,.55);-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
+  border:1.5px solid rgba(255,255,255,.35);box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25);color:#fff}}
+.stagebox{{position:absolute;left:0;right:0;top:0;height:320px;display:flex;align-items:center;justify-content:center}}
+.lbl{{position:absolute;left:0;right:0;bottom:24px;text-align:center;font:700 38px/1 Poppins;letter-spacing:-.01em}}
+/* story */
+.phone{{position:relative;width:160px;height:280px;border:5px solid #fff;border-radius:32px;margin-top:14px}}
+.sbars{{position:absolute;left:14px;right:14px;top:14px;display:flex;gap:6px}}
+.sbar{{flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.3);overflow:hidden}}
+.sbar i{{display:block;height:100%;background:#fff;transform-origin:0 50%}}
+.ring{{position:absolute;left:23px;top:70px;width:104px;height:104px;border-radius:50%;padding:6px;background:{IG}}}
+.ringin{{width:100%;height:100%;border-radius:50%;border:4px solid #3a261a;overflow:hidden}}
+.ringin img,.pav img{{width:100%;height:100%;object-fit:cover;display:block}}
+.plus{{position:absolute;left:95px;top:148px;width:40px;height:40px;border-radius:50%;background:#0095F6;border:3px solid #fff;
+  font:800 30px/32px Poppins;text-align:center;color:#fff}}
+/* reels */
+.fan{{position:relative;width:420px;height:290px;margin-top:20px}}
+.rc{{position:absolute;left:135px;top:0;width:150px;height:260px;border-radius:20px;overflow:hidden;border:4px solid #fff;
+  box-shadow:0 14px 30px rgba(0,0,0,.35);transform-origin:50% 120%}}
+.rc:nth-child(1){{left:40px}} .rc:nth-child(3){{left:230px}}
+.rc img{{width:100%;height:100%;object-fit:cover;display:block}}
+.play{{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.5)}}
+/* month */
+.mhd{{position:absolute;top:24px;left:0;right:0;text-align:center;font:600 22px/1 Poppins;letter-spacing:.18em;color:#E2BF77}}
+.mgrid{{display:grid;grid-template-columns:repeat(7,58px);gap:8px;margin-top:40px}}
+.mc{{height:52px;border-radius:14px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font:600 20px/1 Poppins}}
+/* dm */
+.chat{{width:470px;display:flex;flex-direction:column;gap:14px;margin-top:6px}}
+.bub{{max-width:360px;padding:16px 22px;border-radius:26px;font:600 24px/1.2 Poppins}}
+.bub.l{{align-self:flex-start;background:rgba(255,255,255,.2);border-bottom-left-radius:8px}}
+.bub.r{{align-self:flex-end;background:{GOLD};color:#3a261a;border-bottom-right-radius:8px}}
+.typing{{display:flex;gap:8px;padding:20px 24px}}
+.typing i{{width:12px;height:12px;border-radius:50%;background:#fff;display:block}}
+/* stats */
+.chart{{position:relative;width:420px;height:200px;display:flex;align-items:flex-end;gap:26px;padding:0 20px;margin-top:30px}}
+.bar{{flex:1;border-radius:12px 12px 4px 4px;background:{GOLD};transform-origin:50% 100%}}
+.trend{{position:absolute;inset:0;width:100%;height:100%;overflow:visible}}
+.trend path{{fill:none;stroke:#fff;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:520}}
+.kpi{{position:absolute;right:46px;top:30px;font:800 40px/1 Poppins;color:#fff;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.4);
+  border-radius:20px;padding:8px 16px}}
+/* goal */
+.target{{position:relative;width:230px;height:230px}}
+.target i{{position:absolute;border-radius:50%;display:block}}
+.t1{{inset:0;background:rgba(255,255,255,.18);border:6px solid #fff}}
+.t2{{inset:44px;background:{GOLD}}}
+.t3{{inset:88px;background:#fff}}
+.arrow{{position:absolute;left:150px;top:132px;width:200px;height:40px}}
+/* ideas */
+.note{{width:320px;height:230px;border-radius:22px;background:#FFF8EC;padding:34px 30px;display:flex;flex-direction:column;gap:22px;transform:rotate(-3deg);
+  box-shadow:0 14px 30px rgba(0,0,0,.3)}}
+.nl{{height:14px;border-radius:7px;background:#B88A4E;transform-origin:0 50%}}
+.bulb{{position:absolute;right:92px;top:30px;width:110px;height:110px;border-radius:32px;background:{GOLD};display:flex;align-items:center;justify-content:center}}
+/* batch */
+.rec{{position:absolute;top:26px;left:40px;display:flex;align-items:center;gap:10px;font:700 24px/1 Poppins}}
+.rec i{{width:18px;height:18px;border-radius:50%;background:#FF3B30;display:block}}
+.clips{{display:flex;flex-direction:column;gap:12px;width:440px;margin-top:40px}}
+.clip{{display:flex;justify-content:space-between;align-items:center;height:52px;border-radius:16px;padding:0 22px;
+  background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.3);font:600 24px/1 Poppins}}
+.clip b{{font-weight:700}}
+.clip span{{opacity:.8}}
+/* audit */
+.prof{{position:absolute;top:30px;left:40px;right:40px;display:flex;align-items:center;gap:18px}}
+.pav{{width:96px;height:96px;border-radius:50%;padding:4px;background:{IG};flex:none;overflow:hidden}}
+.pav img{{border-radius:50%;border:3px solid #3a261a}}
+.pnm{{font:700 28px/1.2 Poppins}}
+.pst{{font:500 22px/1.3 Poppins;opacity:.85}}
+.audit{{position:absolute;top:150px;left:60px;display:flex;flex-direction:column;gap:12px}}
+.ar{{display:flex;align-items:center;gap:14px;font:600 28px/1 Poppins}}
+.ck{{width:40px;height:40px;border-radius:50%;background:#34C759;font:800 26px/40px Poppins;text-align:center;font-style:normal;display:block}}
 '''
 
 
@@ -149,7 +221,6 @@ def build():
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
 {nl.join(audio())}
   <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
-  <div id="shade"></div>
 {nl.join(h)}
 </div>
 <script>

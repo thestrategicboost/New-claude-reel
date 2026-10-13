@@ -10,159 +10,196 @@
 html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 #root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
 .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-#shade{position:absolute;left:0;right:0;top:0;height:900px;z-index:1;background:linear-gradient(180deg,rgba(40,20,40,.22),rgba(40,20,40,0))}
-.hrow{position:absolute;left:0;right:0;z-index:12;text-align:center}
-.hb{display:inline-block;font:400 54px/1 Anton;letter-spacing:.02em;color:#fff;background:#573307;padding:7px 24px 5px;box-shadow:0 10px 24px rgba(0,0,0,.28)}
-.it{position:absolute;z-index:11;width:300px;text-align:center}
-.tl{width:92px;height:92px;margin:0 auto;border-radius:27px;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(225deg,#4F5BD5 0%,#962FBF 28%,#D62976 55%,#FA7E1E 80%,#FEDA75 100%);box-shadow:0 12px 26px rgba(60,20,60,.35)}
-.lb{margin-top:8px;font:700 25px/1.1 Poppins;color:#fff;text-shadow:0 0 14px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.5);white-space:nowrap}
+.hrow{position:absolute;left:0;right:0;top:240px;z-index:12;text-align:center}
+.hb{display:inline-block;font:400 66px/1 Anton;letter-spacing:.02em;color:#fff;background:#573307;padding:8px 26px 6px;box-shadow:0 10px 24px rgba(0,0,0,.28)}
+.card{position:absolute;z-index:11;left:250px;top:345px;width:580px;height:400px;border-radius:44px;overflow:hidden;
+  background:rgba(58,38,26,.55);-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
+  border:1.5px solid rgba(255,255,255,.35);box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25);color:#fff}
+.stagebox{position:absolute;left:0;right:0;top:0;height:320px;display:flex;align-items:center;justify-content:center}
+.lbl{position:absolute;left:0;right:0;bottom:24px;text-align:center;font:700 38px/1 Poppins;letter-spacing:-.01em}
+/* story */
+.phone{position:relative;width:160px;height:280px;border:5px solid #fff;border-radius:32px;margin-top:14px}
+.sbars{position:absolute;left:14px;right:14px;top:14px;display:flex;gap:6px}
+.sbar{flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.3);overflow:hidden}
+.sbar i{display:block;height:100%;background:#fff;transform-origin:0 50%}
+.ring{position:absolute;left:23px;top:70px;width:104px;height:104px;border-radius:50%;padding:6px;background:linear-gradient(225deg,#4F5BD5 0%,#962FBF 28%,#D62976 55%,#FA7E1E 80%,#FEDA75 100%)}
+.ringin{width:100%;height:100%;border-radius:50%;border:4px solid #3a261a;overflow:hidden}
+.ringin img,.pav img{width:100%;height:100%;object-fit:cover;display:block}
+.plus{position:absolute;left:95px;top:148px;width:40px;height:40px;border-radius:50%;background:#0095F6;border:3px solid #fff;
+  font:800 30px/32px Poppins;text-align:center;color:#fff}
+/* reels */
+.fan{position:relative;width:420px;height:290px;margin-top:20px}
+.rc{position:absolute;left:135px;top:0;width:150px;height:260px;border-radius:20px;overflow:hidden;border:4px solid #fff;
+  box-shadow:0 14px 30px rgba(0,0,0,.35);transform-origin:50% 120%}
+.rc:nth-child(1){left:40px} .rc:nth-child(3){left:230px}
+.rc img{width:100%;height:100%;object-fit:cover;display:block}
+.play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+/* month */
+.mhd{position:absolute;top:24px;left:0;right:0;text-align:center;font:600 22px/1 Poppins;letter-spacing:.18em;color:#E2BF77}
+.mgrid{display:grid;grid-template-columns:repeat(7,58px);gap:8px;margin-top:40px}
+.mc{height:52px;border-radius:14px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font:600 20px/1 Poppins}
+/* dm */
+.chat{width:470px;display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.bub{max-width:360px;padding:16px 22px;border-radius:26px;font:600 24px/1.2 Poppins}
+.bub.l{align-self:flex-start;background:rgba(255,255,255,.2);border-bottom-left-radius:8px}
+.bub.r{align-self:flex-end;background:linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%);color:#3a261a;border-bottom-right-radius:8px}
+.typing{display:flex;gap:8px;padding:20px 24px}
+.typing i{width:12px;height:12px;border-radius:50%;background:#fff;display:block}
+/* stats */
+.chart{position:relative;width:420px;height:200px;display:flex;align-items:flex-end;gap:26px;padding:0 20px;margin-top:30px}
+.bar{flex:1;border-radius:12px 12px 4px 4px;background:linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%);transform-origin:50% 100%}
+.trend{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.trend path{fill:none;stroke:#fff;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:520}
+.kpi{position:absolute;right:46px;top:30px;font:800 40px/1 Poppins;color:#fff;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.4);
+  border-radius:20px;padding:8px 16px}
+/* goal */
+.target{position:relative;width:230px;height:230px}
+.target i{position:absolute;border-radius:50%;display:block}
+.t1{inset:0;background:rgba(255,255,255,.18);border:6px solid #fff}
+.t2{inset:44px;background:linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)}
+.t3{inset:88px;background:#fff}
+.arrow{position:absolute;left:150px;top:132px;width:200px;height:40px}
+/* ideas */
+.note{width:320px;height:230px;border-radius:22px;background:#FFF8EC;padding:34px 30px;display:flex;flex-direction:column;gap:22px;transform:rotate(-3deg);
+  box-shadow:0 14px 30px rgba(0,0,0,.3)}
+.nl{height:14px;border-radius:7px;background:#B88A4E;transform-origin:0 50%}
+.bulb{position:absolute;right:92px;top:30px;width:110px;height:110px;border-radius:32px;background:linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%);display:flex;align-items:center;justify-content:center}
+/* batch */
+.rec{position:absolute;top:26px;left:40px;display:flex;align-items:center;gap:10px;font:700 24px/1 Poppins}
+.rec i{width:18px;height:18px;border-radius:50%;background:#FF3B30;display:block}
+.clips{display:flex;flex-direction:column;gap:12px;width:440px;margin-top:40px}
+.clip{display:flex;justify-content:space-between;align-items:center;height:52px;border-radius:16px;padding:0 22px;
+  background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.3);font:600 24px/1 Poppins}
+.clip b{font-weight:700}
+.clip span{opacity:.8}
+/* audit */
+.prof{position:absolute;top:30px;left:40px;right:40px;display:flex;align-items:center;gap:18px}
+.pav{width:96px;height:96px;border-radius:50%;padding:4px;background:linear-gradient(225deg,#4F5BD5 0%,#962FBF 28%,#D62976 55%,#FA7E1E 80%,#FEDA75 100%);flex:none;overflow:hidden}
+.pav img{border-radius:50%;border:3px solid #3a261a}
+.pnm{font:700 28px/1.2 Poppins}
+.pst{font:500 22px/1.3 Poppins;opacity:.85}
+.audit{position:absolute;top:150px;left:60px;display:flex;flex-direction:column;gap:12px}
+.ar{display:flex;align-items:center;gap:14px;font:600 28px/1 Poppins}
+.ck{width:40px;height:40px;border-radius:50%;background:#34C759;font:800 26px/40px Poppins;text-align:center;font-style:normal;display:block}
 </style>
 </head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="12.167" data-width="1080" data-height="1920">
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="12.167" data-track-index="2" data-volume="1"></audio>
-<audio id="sfx0" src="assets/sfx/click-soft.mp3" data-start="0.000" data-duration="0.360" data-track-index="10" data-volume="0.350"></audio>
-<audio id="sfx1" src="assets/sfx/pop.mp3" data-start="0.120" data-duration="0.720" data-track-index="11" data-volume="0.180"></audio>
-<audio id="sfx2" src="assets/sfx/pop.mp3" data-start="0.260" data-duration="0.720" data-track-index="12" data-volume="0.180"></audio>
-<audio id="sfx3" src="assets/sfx/pop.mp3" data-start="0.400" data-duration="0.720" data-track-index="10" data-volume="0.180"></audio>
-<audio id="sfx4" src="assets/sfx/click-soft.mp3" data-start="1.540" data-duration="0.360" data-track-index="10" data-volume="0.350"></audio>
-<audio id="sfx5" src="assets/sfx/pop.mp3" data-start="1.660" data-duration="0.720" data-track-index="11" data-volume="0.180"></audio>
-<audio id="sfx6" src="assets/sfx/pop.mp3" data-start="1.800" data-duration="0.720" data-track-index="12" data-volume="0.180"></audio>
-<audio id="sfx7" src="assets/sfx/click-soft.mp3" data-start="2.660" data-duration="0.360" data-track-index="10" data-volume="0.350"></audio>
-<audio id="sfx8" src="assets/sfx/pop.mp3" data-start="2.780" data-duration="0.720" data-track-index="11" data-volume="0.180"></audio>
-<audio id="sfx9" src="assets/sfx/pop.mp3" data-start="2.920" data-duration="0.720" data-track-index="12" data-volume="0.180"></audio>
-<audio id="sfx10" src="assets/sfx/click-soft.mp3" data-start="3.500" data-duration="0.360" data-track-index="10" data-volume="0.350"></audio>
-<audio id="sfx11" src="assets/sfx/pop.mp3" data-start="3.620" data-duration="0.720" data-track-index="11" data-volume="0.180"></audio>
-<audio id="sfx12" src="assets/sfx/pop.mp3" data-start="3.760" data-duration="0.720" data-track-index="12" data-volume="0.180"></audio>
-<audio id="sfx13" src="assets/sfx/pop.mp3" data-start="3.900" data-duration="0.720" data-track-index="10" data-volume="0.180"></audio>
-<audio id="sfx14" src="assets/sfx/click-soft.mp3" data-start="4.900" data-duration="0.360" data-track-index="10" data-volume="0.350"></audio>
-<audio id="sfx15" src="assets/sfx/pop.mp3" data-start="5.020" data-duration="0.720" data-track-index="11" data-volume="0.180"></audio>
-<audio id="sfx16" src="assets/sfx/pop.mp3" data-start="5.160" data-duration="0.720" data-track-index="12" data-volume="0.180"></audio>
-<audio id="sfx17" src="assets/sfx/click-soft.mp3" data-start="6.040" data-duration="0.360" data-track-index="10" data-volume="0.350"></audio>
-<audio id="sfx18" src="assets/sfx/pop.mp3" data-start="6.160" data-duration="0.720" data-track-index="11" data-volume="0.180"></audio>
-<audio id="sfx19" src="assets/sfx/pop.mp3" data-start="6.300" data-duration="0.720" data-track-index="12" data-volume="0.180"></audio>
-<audio id="sfx20" src="assets/sfx/click-soft.mp3" data-start="7.330" data-duration="0.360" data-track-index="10" data-volume="0.350"></audio>
-<audio id="sfx21" src="assets/sfx/pop.mp3" data-start="7.450" data-duration="0.720" data-track-index="11" data-volume="0.180"></audio>
-<audio id="sfx22" src="assets/sfx/pop.mp3" data-start="7.590" data-duration="0.720" data-track-index="12" data-volume="0.180"></audio>
-<audio id="sfx23" src="assets/sfx/pop.mp3" data-start="7.730" data-duration="0.720" data-track-index="10" data-volume="0.180"></audio>
-<audio id="sfx24" src="assets/sfx/click-soft.mp3" data-start="8.490" data-duration="0.360" data-track-index="10" data-volume="0.350"></audio>
-<audio id="sfx25" src="assets/sfx/pop.mp3" data-start="8.610" data-duration="0.720" data-track-index="11" data-volume="0.180"></audio>
-<audio id="sfx26" src="assets/sfx/pop.mp3" data-start="8.750" data-duration="0.720" data-track-index="12" data-volume="0.180"></audio>
-<audio id="sfx27" src="assets/sfx/click-soft.mp3" data-start="9.640" data-duration="0.360" data-track-index="10" data-volume="0.350"></audio>
-<audio id="sfx28" src="assets/sfx/pop.mp3" data-start="9.760" data-duration="0.720" data-track-index="11" data-volume="0.180"></audio>
-<audio id="sfx29" src="assets/sfx/pop.mp3" data-start="9.900" data-duration="0.720" data-track-index="12" data-volume="0.180"></audio>
+<audio id="sfx0" src="assets/sfx/whoosh-short.mp3" data-start="0.000" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx1" src="assets/sfx/pop.mp3" data-start="0.300" data-duration="0.720" data-track-index="11" data-volume="0.200"></audio>
+<audio id="sfx2" src="assets/sfx/whoosh-short.mp3" data-start="1.520" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx3" src="assets/sfx/pop.mp3" data-start="1.840" data-duration="0.720" data-track-index="11" data-volume="0.200"></audio>
+<audio id="sfx4" src="assets/sfx/whoosh-short.mp3" data-start="2.640" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx5" src="assets/sfx/pop.mp3" data-start="2.960" data-duration="0.720" data-track-index="11" data-volume="0.200"></audio>
+<audio id="sfx6" src="assets/sfx/whoosh-short.mp3" data-start="3.480" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx7" src="assets/sfx/pop.mp3" data-start="3.800" data-duration="0.720" data-track-index="11" data-volume="0.200"></audio>
+<audio id="sfx8" src="assets/sfx/whoosh-short.mp3" data-start="4.880" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx9" src="assets/sfx/pop.mp3" data-start="5.200" data-duration="0.720" data-track-index="11" data-volume="0.200"></audio>
+<audio id="sfx10" src="assets/sfx/whoosh-short.mp3" data-start="6.020" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx11" src="assets/sfx/pop.mp3" data-start="6.340" data-duration="0.720" data-track-index="11" data-volume="0.200"></audio>
+<audio id="sfx12" src="assets/sfx/whoosh-short.mp3" data-start="7.310" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx13" src="assets/sfx/pop.mp3" data-start="7.630" data-duration="0.720" data-track-index="11" data-volume="0.200"></audio>
+<audio id="sfx14" src="assets/sfx/whoosh-short.mp3" data-start="8.470" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx15" src="assets/sfx/pop.mp3" data-start="8.790" data-duration="0.720" data-track-index="11" data-volume="0.200"></audio>
+<audio id="sfx16" src="assets/sfx/whoosh-short.mp3" data-start="9.620" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx17" src="assets/sfx/pop.mp3" data-start="9.940" data-duration="0.720" data-track-index="11" data-volume="0.200"></audio>
   <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="12.167" data-track-index="0"></video>
-  <div id="shade"></div>
-<div class="hrow" style="top:240px"><span id="h240" class="hb">PAR JOUR</span></div>
-<div class="hrow" style="top:462px"><span id="h462" class="hb">PAR SEMAINE</span></div>
-<div class="hrow" style="top:684px"><span id="h684" class="hb">PAR MOIS</span></div>
-<div id="r0k0i0" class="it" style="left:90px;top:314px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><circle cx="12" cy="12" r="8.5" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 2.2"/><path d="M12 8v8M8 12h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div><div class="lb">Poster une story</div></div>
-<div id="r0k0i1" class="it" style="left:390px;top:314px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><path d="M20 11.5a8 8 0 1 1-3.2-6.4 8 8 0 0 1 3.2 6.4zM20 20l-2-4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div><div class="lb">Répondre aux coms</div></div>
-<div id="r0k0i2" class="it" style="left:690px;top:314px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><path d="M21 3L3 10l7 3 3 7zM10 13L21 3" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></div><div class="lb">Engager en DM</div></div>
-<div id="r0k1i0" class="it" style="left:240px;top:536px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="#fff" stroke-width="2"/><path d="M3.5 8.5h17M9 3.5l2.5 5M14.5 3.5l2.5 5" stroke="#fff" stroke-width="2"/><path d="M10 11.5v6l5-3z" fill="#fff"/></svg></div><div class="lb">Publier 3 réels</div></div>
-<div id="r0k1i1" class="it" style="left:540px;top:536px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><path d="M5 20V12M10 20V6M15 20v-9M20 20V9" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></div><div class="lb">Lire ses stats</div></div>
-<div id="r0k2i0" class="it" style="left:240px;top:758px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><rect x="3.5" y="5" width="17" height="15" rx="3" fill="none" stroke="#fff" stroke-width="2"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M8 14.5l2.5 2.5 5-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div><div class="lb">Planifier son mois</div></div>
-<div id="r0k2i1" class="it" style="left:540px;top:758px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><circle cx="12" cy="9" r="4" fill="none" stroke="#fff" stroke-width="2"/><path d="M4.5 20c1.2-3.6 4-5.2 7.5-5.2s6.3 1.6 7.5 5.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div><div class="lb">Revoir sa bio</div></div>
-<div id="r1k0i0" class="it" style="left:90px;top:314px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><path d="M12 3a6 6 0 0 0-3.6 10.8c.8.6 1.1 1.3 1.1 2.2h5c0-.9.3-1.6 1.1-2.2A6 6 0 0 0 12 3z" fill="none" stroke="#fff" stroke-width="2"/><path d="M9.5 19.5h5M10.5 22h3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div><div class="lb">Noter ses idées</div></div>
-<div id="r1k0i1" class="it" style="left:390px;top:314px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><rect x="3" y="7" width="13" height="11" rx="3" fill="none" stroke="#fff" stroke-width="2"/><path d="M16 11l5-3v9l-5-3z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></div><div class="lb">S’entraîner face cam</div></div>
-<div id="r1k0i2" class="it" style="left:690px;top:314px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><path d="M12 21s-7.5-4.6-9.5-9.2C1 8.4 3.2 5 6.6 5c2.1 0 3.4 1.2 4.4 2.5C12 6.2 13.3 5 15.4 5 18.8 5 21 8.4 19.5 11.8 17.5 16.4 12 21 12 21z" fill="#fff"/></svg></div><div class="lb">15 min d’interactions</div></div>
-<div id="r1k1i0" class="it" style="left:240px;top:536px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><rect x="3" y="6" width="11" height="13" rx="2" fill="none" stroke="#fff" stroke-width="2"/><path d="M17 8v11a2 2 0 0 1-2 2H7M20.5 10v10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div><div class="lb">Filmer en batch</div></div>
-<div id="r1k1i1" class="it" style="left:540px;top:536px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><path d="M4 20l1-4L16 5l3 3L8 19z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M14 7l3 3" stroke="#fff" stroke-width="2"/></svg></div><div class="lb">Écrire ses scripts</div></div>
-<div id="r1k2i0" class="it" style="left:240px;top:758px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><circle cx="12" cy="12" r="8.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="1.6" fill="#fff"/></svg></div><div class="lb">Fixer ses objectifs</div></div>
-<div id="r1k2i1" class="it" style="left:540px;top:758px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></div><div class="lb">Tester un format</div></div>
-<div id="r2k0i0" class="it" style="left:90px;top:314px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><circle cx="12" cy="12" r="8.5" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 2.2"/><path d="M12 8v8M8 12h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div><div class="lb">Story coulisses</div></div>
-<div id="r2k0i1" class="it" style="left:390px;top:314px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><path d="M21 3L3 10l7 3 3 7zM10 13L21 3" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></div><div class="lb">Répondre aux DM</div></div>
-<div id="r2k0i2" class="it" style="left:690px;top:314px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M15.5 15.5L21 21" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg></div><div class="lb">Faire sa veille</div></div>
-<div id="r2k1i0" class="it" style="left:240px;top:536px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><circle cx="12" cy="12" r="3" fill="#fff"/><path d="M7 7a7 7 0 0 0 0 10M17 7a7 7 0 0 1 0 10M4.2 4.2a11 11 0 0 0 0 15.6M19.8 4.2a11 11 0 0 1 0 15.6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div><div class="lb">Un live ou une collab</div></div>
-<div id="r2k1i1" class="it" style="left:540px;top:536px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><path d="M5 11V9a3 3 0 0 1 3-3h11M16 3l3 3-3 3M19 13v2a3 3 0 0 1-3 3H5M8 21l-3-3 3-3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="lb">Recycler un contenu</div></div>
-<div id="r2k2i0" class="it" style="left:240px;top:758px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><circle cx="12" cy="12" r="9" fill="none" stroke="#fff" stroke-width="2"/><path d="M14.8 9.2c-.6-.8-1.6-1.2-2.8-1.2-1.7 0-2.8.9-2.8 2 0 2.8 5.6 1.4 5.6 4.2 0 1.1-1.2 2-2.8 2-1.3 0-2.4-.5-3-1.4M12 6.5v11" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div><div class="lb">Lancer une offre</div></div>
-<div id="r2k2i1" class="it" style="left:540px;top:758px"><div class="tl"><svg viewBox="0 0 24 24" width="52" height="52"><rect x="5" y="3.5" width="14" height="17" rx="2.5" fill="none" stroke="#fff" stroke-width="2"/><path d="M8.5 9h7M8.5 13h7M8.5 17h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div><div class="lb">Auditer son profil</div></div>
+<div id="h0" class="hrow"><span class="hb">UNE FOIS PAR JOUR</span></div>
+<div id="c0" class="card"><div class="stagebox"><div class="phone"><div class="sbars"><div class="sbar"><i></i></div><div class="sbar"><i></i></div><div class="sbar"><i></i></div></div><div class="ring"><div class="ringin"><img src="assets/img/avatar.png"/></div></div><div class="plus">+</div></div></div><div class="lbl">Poster une story</div></div>
+<div id="h1" class="hrow"><span class="hb">UNE FOIS PAR SEMAINE</span></div>
+<div id="c1" class="card"><div class="stagebox"><div class="fan"><div class="rc" style="--r:-14deg"><img src="assets/img/r1.jpg"/><div class="play">▶</div></div><div class="rc" style="--r:0deg"><img src="assets/img/r3.jpg"/><div class="play">▶</div></div><div class="rc" style="--r:14deg"><img src="assets/img/r5.jpg"/><div class="play">▶</div></div></div></div><div class="lbl">Publier 3 réels</div></div>
+<div id="h2" class="hrow"><span class="hb">UNE FOIS PAR MOIS</span></div>
+<div id="c2" class="card"><div class="stagebox"><div class="mhd">OCTOBRE</div><div class="mgrid"><div class="mc on"><span>1</span></div><div class="mc"><span>2</span></div><div class="mc on"><span>3</span></div><div class="mc"><span>4</span></div><div class="mc on"><span>5</span></div><div class="mc"><span>6</span></div><div class="mc"><span>7</span></div><div class="mc on"><span>8</span></div><div class="mc"><span>9</span></div><div class="mc on"><span>10</span></div><div class="mc"><span>11</span></div><div class="mc on"><span>12</span></div><div class="mc"><span>13</span></div><div class="mc"><span>14</span></div><div class="mc on"><span>15</span></div><div class="mc"><span>16</span></div><div class="mc on"><span>17</span></div><div class="mc"><span>18</span></div><div class="mc on"><span>19</span></div><div class="mc"><span>20</span></div><div class="mc"><span>21</span></div><div class="mc on"><span>22</span></div><div class="mc"><span>23</span></div><div class="mc on"><span>24</span></div><div class="mc"><span>25</span></div><div class="mc on"><span>26</span></div><div class="mc"><span>27</span></div><div class="mc"><span>28</span></div></div></div><div class="lbl">Planifier ton mois</div></div>
+<div id="h3" class="hrow"><span class="hb">UNE FOIS PAR JOUR</span></div>
+<div id="c3" class="card"><div class="stagebox"><div class="chat"><div class="bub l">Hello ! Ton offre m’intéresse</div><div class="bub r">Avec plaisir, je t’explique</div><div class="bub l typing"><i></i><i></i><i></i></div></div></div><div class="lbl">Répondre à tes DM</div></div>
+<div id="h4" class="hrow"><span class="hb">UNE FOIS PAR SEMAINE</span></div>
+<div id="c4" class="card"><div class="stagebox"><div class="chart"><div class="bar" style="height:60px"></div><div class="bar" style="height:90px"></div><div class="bar" style="height:80px"></div><div class="bar" style="height:130px"></div><div class="bar" style="height:175px"></div><svg class="trend" viewBox="0 0 400 200"><path d="M10 170 L100 130 L190 140 L280 80 L390 25" /></svg></div><div class="kpi">+38 %</div></div><div class="lbl">Analyser tes stats</div></div>
+<div id="h5" class="hrow"><span class="hb">UNE FOIS PAR MOIS</span></div>
+<div id="c5" class="card"><div class="stagebox"><div class="target"><i class="t1"></i><i class="t2"></i><i class="t3"></i></div><svg class="arrow" viewBox="0 0 200 40"><path d="M0 20H170M150 6l24 14-24 14" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="lbl">Fixer tes objectifs</div></div>
+<div id="h6" class="hrow"><span class="hb">UNE FOIS PAR JOUR</span></div>
+<div id="c6" class="card"><div class="stagebox"><div class="note"><div class="nl" style="width:78%"></div><div class="nl" style="width:62%"></div><div class="nl" style="width:70%"></div><div class="nl" style="width:45%"></div></div><div class="bulb"><svg viewBox="0 0 24 24" width="70" height="70"><path d="M12 3a6 6 0 0 0-3.6 10.8c.8.6 1.1 1.3 1.1 2.2h5c0-.9.3-1.6 1.1-2.2A6 6 0 0 0 12 3z" fill="#fff"/><path d="M9.5 19.5h5M10.5 22h3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div></div><div class="lbl">Noter tes idées</div></div>
+<div id="h7" class="hrow"><span class="hb">UNE FOIS PAR SEMAINE</span></div>
+<div id="c7" class="card"><div class="stagebox"><div class="rec"><i></i>REC</div><div class="clips"><div class="clip" style="--i:0"><b>Vidéo 1</b><span>0:15</span></div><div class="clip" style="--i:1"><b>Vidéo 2</b><span>0:22</span></div><div class="clip" style="--i:2"><b>Vidéo 3</b><span>0:29</span></div><div class="clip" style="--i:3"><b>Vidéo 4</b><span>0:36</span></div></div></div><div class="lbl">Filmer en batch</div></div>
+<div id="h8" class="hrow"><span class="hb">UNE FOIS PAR MOIS</span></div>
+<div id="c8" class="card"><div class="stagebox"><div class="prof"><div class="pav"><img src="assets/img/avatar.png"/></div><div class="pnm">@thestrategicboost.fr<div class="pst">Stratégie Instagram</div></div></div><div class="audit"><div class="ar"><i class="ck">✓</i><span>Photo de profil</span></div><div class="ar"><i class="ck">✓</i><span>Bio claire</span></div><div class="ar"><i class="ck">✓</i><span>Lien en bio</span></div></div></div><div class="lbl">Auditer ton profil</div></div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
-gsap.set('#h240',{autoAlpha:0});
-tl.fromTo('#h240',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.26,ease:'back.out(2)',immediateRender:true},0.000);
-gsap.set('#h462',{autoAlpha:0});
-tl.fromTo('#h462',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.26,ease:'back.out(2)',immediateRender:false},1.540);
-gsap.set('#h684',{autoAlpha:0});
-tl.fromTo('#h684',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.26,ease:'back.out(2)',immediateRender:false},2.660);
-gsap.set('#r0k0i0',{autoAlpha:0});
-tl.fromTo('#r0k0i0',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},0.120);
-tl.to('#r0k0i0',{autoAlpha:0,scale:.7,duration:.12},3.330);
-tl.set('#r0k0i0',{autoAlpha:0},3.450);
-gsap.set('#r0k0i1',{autoAlpha:0});
-tl.fromTo('#r0k0i1',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},0.260);
-tl.to('#r0k0i1',{autoAlpha:0,scale:.7,duration:.12},3.330);
-tl.set('#r0k0i1',{autoAlpha:0},3.450);
-gsap.set('#r0k0i2',{autoAlpha:0});
-tl.fromTo('#r0k0i2',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},0.400);
-tl.to('#r0k0i2',{autoAlpha:0,scale:.7,duration:.12},3.330);
-tl.set('#r0k0i2',{autoAlpha:0},3.450);
-gsap.set('#r0k1i0',{autoAlpha:0});
-tl.fromTo('#r0k1i0',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},1.660);
-tl.to('#r0k1i0',{autoAlpha:0,scale:.7,duration:.12},3.330);
-tl.set('#r0k1i0',{autoAlpha:0},3.450);
-gsap.set('#r0k1i1',{autoAlpha:0});
-tl.fromTo('#r0k1i1',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},1.800);
-tl.to('#r0k1i1',{autoAlpha:0,scale:.7,duration:.12},3.330);
-tl.set('#r0k1i1',{autoAlpha:0},3.450);
-gsap.set('#r0k2i0',{autoAlpha:0});
-tl.fromTo('#r0k2i0',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},2.780);
-tl.to('#r0k2i0',{autoAlpha:0,scale:.7,duration:.12},3.330);
-tl.set('#r0k2i0',{autoAlpha:0},3.450);
-gsap.set('#r0k2i1',{autoAlpha:0});
-tl.fromTo('#r0k2i1',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},2.920);
-tl.to('#r0k2i1',{autoAlpha:0,scale:.7,duration:.12},3.330);
-tl.set('#r0k2i1',{autoAlpha:0},3.450);
-gsap.set('#r1k0i0',{autoAlpha:0});
-tl.fromTo('#r1k0i0',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},3.620);
-tl.to('#r1k0i0',{autoAlpha:0,scale:.7,duration:.12},7.080);
-tl.set('#r1k0i0',{autoAlpha:0},7.200);
-gsap.set('#r1k0i1',{autoAlpha:0});
-tl.fromTo('#r1k0i1',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},3.760);
-tl.to('#r1k0i1',{autoAlpha:0,scale:.7,duration:.12},7.080);
-tl.set('#r1k0i1',{autoAlpha:0},7.200);
-gsap.set('#r1k0i2',{autoAlpha:0});
-tl.fromTo('#r1k0i2',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},3.900);
-tl.to('#r1k0i2',{autoAlpha:0,scale:.7,duration:.12},7.080);
-tl.set('#r1k0i2',{autoAlpha:0},7.200);
-gsap.set('#r1k1i0',{autoAlpha:0});
-tl.fromTo('#r1k1i0',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},5.020);
-tl.to('#r1k1i0',{autoAlpha:0,scale:.7,duration:.12},7.080);
-tl.set('#r1k1i0',{autoAlpha:0},7.200);
-gsap.set('#r1k1i1',{autoAlpha:0});
-tl.fromTo('#r1k1i1',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},5.160);
-tl.to('#r1k1i1',{autoAlpha:0,scale:.7,duration:.12},7.080);
-tl.set('#r1k1i1',{autoAlpha:0},7.200);
-gsap.set('#r1k2i0',{autoAlpha:0});
-tl.fromTo('#r1k2i0',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},6.160);
-tl.to('#r1k2i0',{autoAlpha:0,scale:.7,duration:.12},7.080);
-tl.set('#r1k2i0',{autoAlpha:0},7.200);
-gsap.set('#r1k2i1',{autoAlpha:0});
-tl.fromTo('#r1k2i1',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},6.300);
-tl.to('#r1k2i1',{autoAlpha:0,scale:.7,duration:.12},7.080);
-tl.set('#r1k2i1',{autoAlpha:0},7.200);
-tl.fromTo('#h240',{scale:1.15},{scale:1,duration:.22,ease:'power2.out',immediateRender:false},3.500);
-tl.fromTo('#h462',{scale:1.15},{scale:1,duration:.22,ease:'power2.out',immediateRender:false},4.900);
-tl.fromTo('#h684',{scale:1.15},{scale:1,duration:.22,ease:'power2.out',immediateRender:false},6.040);
-gsap.set('#r2k0i0',{autoAlpha:0});
-tl.fromTo('#r2k0i0',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},7.450);
-gsap.set('#r2k0i1',{autoAlpha:0});
-tl.fromTo('#r2k0i1',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},7.590);
-gsap.set('#r2k0i2',{autoAlpha:0});
-tl.fromTo('#r2k0i2',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},7.730);
-gsap.set('#r2k1i0',{autoAlpha:0});
-tl.fromTo('#r2k1i0',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},8.610);
-gsap.set('#r2k1i1',{autoAlpha:0});
-tl.fromTo('#r2k1i1',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},8.750);
-gsap.set('#r2k2i0',{autoAlpha:0});
-tl.fromTo('#r2k2i0',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},9.760);
-gsap.set('#r2k2i1',{autoAlpha:0});
-tl.fromTo('#r2k2i1',{autoAlpha:0,scale:.4,y:20},{autoAlpha:1,scale:1,y:0,duration:.28,ease:'back.out(1.8)',immediateRender:false},9.900);
-tl.fromTo('#h240',{scale:1.15},{scale:1,duration:.22,ease:'power2.out',immediateRender:false},7.330);
-tl.fromTo('#h462',{scale:1.15},{scale:1,duration:.22,ease:'power2.out',immediateRender:false},8.490);
-tl.fromTo('#h684',{scale:1.15},{scale:1,duration:.22,ease:'power2.out',immediateRender:false},9.640);
+gsap.set('#h0, #c0',{autoAlpha:0});
+tl.fromTo('#h0',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:true},0.000);
+tl.fromTo('#c0',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:true},0.040);
+tl.fromTo('#c0 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},0.200);
+tl.fromTo('#c0 .ring',{scale:0,rotation:-90},{scale:1,rotation:0,duration:.4,ease:'back.out(1.7)',immediateRender:false},0.120);
+tl.fromTo('#c0 .sbar i',{scaleX:0},{scaleX:1,duration:.3,stagger:.3,ease:'none',immediateRender:false},0.220);
+tl.fromTo('#c0 .plus',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},0.470);
+tl.to('#h0, #c0',{autoAlpha:0,duration:.1},1.440);
+tl.set('#h0, #c0',{autoAlpha:0},1.540);
+gsap.set('#h1, #c1',{autoAlpha:0});
+tl.fromTo('#h1',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},1.540);
+tl.fromTo('#c1',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},1.580);
+tl.fromTo('#c1 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},1.740);
+tl.fromTo('#c1 .rc',{rotation:0,y:60,autoAlpha:0},{rotation:(i,el)=>[-14,0,14][i],y:0,autoAlpha:1,duration:.35,stagger:.1,ease:'back.out(1.6)',immediateRender:false},1.660);
+tl.to('#h1, #c1',{autoAlpha:0,duration:.1},2.560);
+tl.set('#h1, #c1',{autoAlpha:0},2.660);
+gsap.set('#h2, #c2',{autoAlpha:0});
+tl.fromTo('#h2',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},2.660);
+tl.fromTo('#c2',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},2.700);
+tl.fromTo('#c2 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},2.860);
+tl.fromTo('#c2 .mc',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.15,stagger:.012,immediateRender:false},2.780);
+tl.fromTo('#c2 .mc.on',{background:'rgba(255,255,255,.12)'},{background:'#D6AE66',duration:.12,stagger:.035,immediateRender:false},3.080);
+tl.to('#h2, #c2',{autoAlpha:0,duration:.1},3.400);
+tl.set('#h2, #c2',{autoAlpha:0},3.500);
+gsap.set('#h3, #c3',{autoAlpha:0});
+tl.fromTo('#h3',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},3.500);
+tl.fromTo('#c3',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},3.540);
+tl.fromTo('#c3 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},3.700);
+tl.fromTo('#c3 .bub',{autoAlpha:0,y:24,scale:.8},{autoAlpha:1,y:0,scale:1,duration:.25,stagger:.25,ease:'back.out(2)',immediateRender:false},3.620);
+tl.fromTo('#c3 .typing i',{y:0},{y:-8,duration:.15,stagger:.08,yoyo:true,repeat:5,immediateRender:false},4.170);
+tl.to('#h3, #c3',{autoAlpha:0,duration:.1},4.800);
+tl.set('#h3, #c3',{autoAlpha:0},4.900);
+gsap.set('#h4, #c4',{autoAlpha:0});
+tl.fromTo('#h4',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},4.900);
+tl.fromTo('#c4',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},4.940);
+tl.fromTo('#c4 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},5.100);
+tl.fromTo('#c4 .bar',{scaleY:0},{scaleY:1,duration:.3,stagger:.07,ease:'power3.out',immediateRender:false},5.020);
+tl.fromTo('#c4 .trend path',{strokeDashoffset:520},{strokeDashoffset:0,duration:.5,ease:'power2.out',immediateRender:false},5.170);
+tl.fromTo('#c4 .kpi',{scale:0},{scale:1,duration:.3,ease:'back.out(2.5)',immediateRender:false},5.470);
+tl.to('#h4, #c4',{autoAlpha:0,duration:.1},5.940);
+tl.set('#h4, #c4',{autoAlpha:0},6.040);
+gsap.set('#h5, #c5',{autoAlpha:0});
+tl.fromTo('#h5',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},6.040);
+tl.fromTo('#c5',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},6.080);
+tl.fromTo('#c5 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},6.240);
+tl.fromTo('#c5 .target i',{scale:0},{scale:1,duration:.3,stagger:.06,ease:'back.out(2)',immediateRender:false},6.160);
+tl.fromTo('#c5 .arrow',{x:-320,autoAlpha:0},{x:0,autoAlpha:1,duration:.3,ease:'power3.in',immediateRender:false},6.410);
+tl.fromTo('#c5 .target',{x:0},{x:8,duration:.05,yoyo:true,repeat:3,immediateRender:false},6.710);
+tl.to('#h5, #c5',{autoAlpha:0,duration:.1},7.230);
+tl.set('#h5, #c5',{autoAlpha:0},7.330);
+gsap.set('#h6, #c6',{autoAlpha:0});
+tl.fromTo('#h6',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},7.330);
+tl.fromTo('#c6',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},7.370);
+tl.fromTo('#c6 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},7.530);
+tl.fromTo('#c6 .nl',{scaleX:0},{scaleX:1,duration:.22,stagger:.12,ease:'power2.out',immediateRender:false},7.450);
+tl.fromTo('#c6 .bulb',{scale:0,rotation:-20},{scale:1,rotation:0,duration:.35,ease:'back.out(2.5)',immediateRender:false},7.800);
+tl.fromTo('#c6 .bulb',{boxShadow:'0 0 0 rgba(243,223,178,0)'},{boxShadow:'0 0 60px rgba(243,223,178,.9)',duration:.3,yoyo:true,repeat:1,immediateRender:false},8.050);
+tl.to('#h6, #c6',{autoAlpha:0,duration:.1},8.390);
+tl.set('#h6, #c6',{autoAlpha:0},8.490);
+gsap.set('#h7, #c7',{autoAlpha:0});
+tl.fromTo('#h7',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},8.490);
+tl.fromTo('#c7',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},8.530);
+tl.fromTo('#c7 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},8.690);
+tl.fromTo('#c7 .clip',{x:260,autoAlpha:0},{x:0,autoAlpha:1,duration:.25,stagger:.12,ease:'power3.out',immediateRender:false},8.660);
+tl.fromTo('#c7 .rec i',{opacity:1},{opacity:.2,duration:.2,yoyo:true,repeat:5,immediateRender:false},8.610);
+tl.to('#h7, #c7',{autoAlpha:0,duration:.1},9.540);
+tl.set('#h7, #c7',{autoAlpha:0},9.640);
+gsap.set('#h8, #c8',{autoAlpha:0});
+tl.fromTo('#h8',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},9.640);
+tl.fromTo('#c8',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},9.680);
+tl.fromTo('#c8 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},9.840);
+tl.fromTo('#c8 .prof',{y:30,autoAlpha:0},{y:0,autoAlpha:1,duration:.25,ease:'power3.out',immediateRender:false},9.760);
+tl.fromTo('#c8 .ar',{autoAlpha:0,x:-20},{autoAlpha:1,x:0,duration:.18,stagger:.14,immediateRender:false},9.940);
+tl.fromTo('#c8 .ck',{scale:0},{scale:1,duration:.2,stagger:.14,ease:'back.out(3)',immediateRender:false},10.010);
 tl.set({}, {}, 12.167);
 window.__timelines["main"] = tl;
 </script>
