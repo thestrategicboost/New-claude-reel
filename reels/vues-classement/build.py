@@ -203,8 +203,8 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 #bgv{{z-index:0}}   /* natural grade baked into aroll_graded.mp4 (work/grade.txt): a touch brighter and softer, skin as in her own reels */
-#vig{{position:absolute;inset:0;z-index:1;background:radial-gradient(120% 75% at 45% 38%,rgba(20,12,36,0) 50%,rgba(20,12,36,.42) 100%)}}
-#shade{{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(24,16,36,.40) 0%,rgba(24,16,36,0) 30%,rgba(24,16,36,0) 60%,rgba(24,16,36,.30) 100%)}}
+#vig{{position:absolute;inset:0;z-index:1;background:radial-gradient(120% 75% at 45% 38%,rgba(20,12,36,0) 50%,rgba(40,20,40,.18) 100%)}}
+#shade{{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(40,20,40,.16) 0%,rgba(40,20,40,0) 30%,rgba(40,20,40,0) 60%,rgba(40,20,40,.14) 100%)}}
 .col{{position:absolute;z-index:5;width:320px;text-align:center;color:#fff}}
 .col .box{{display:inline-block;padding:8px 26px 2px;background:#573307}}
 .chip{{display:flex;width:fit-content;align-items:center;gap:8px;margin:10px auto 0;padding:6px 14px 6px 12px;background:rgba(60,64,66,.62);
@@ -255,7 +255,7 @@ def build():
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR:.3f}" data-width="1080" data-height="1920">
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
 {nl.join(audio())}
-  <video id="bgv" class="full" src="assets/aroll_graded.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
+  <video id="bgv" class="full" src="assets/aroll_pink.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
   <div id="vig"></div><div id="shade"></div>
 {nl.join(b_html)}
 {nl.join(t_html)}
