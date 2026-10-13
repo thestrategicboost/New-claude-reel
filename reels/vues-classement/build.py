@@ -255,7 +255,7 @@ def build():
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR:.3f}" data-width="1080" data-height="1920">
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
 {nl.join(audio())}
-  <video id="bgv" class="full" src="assets/aroll_pink.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
+  <video id="bgv" class="full" src="assets/aroll_lilac.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
   <div id="vig"></div><div id="shade"></div>
 {nl.join(b_html)}
 {nl.join(t_html)}
