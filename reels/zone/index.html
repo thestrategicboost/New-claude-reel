@@ -66,7 +66,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
   <div id="stage"><video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="26.469" data-track-index="0"></video>
 <div id="eyeG"><div id="zEye" class="zone g" style="left:110px;top:717px;width:830px;height:110px"></div><div id="eyeLine" style="top:772px"></div><div id="lEye" class="lbl" style="left:110px;top:622px;font-size:48px">LIGNE DES YEUX</div></div></div>
 <div id="zSafe" class="zone g" style="left:70px;top:250px;width:830px;height:1440px"></div>
-<div id="lSafe" class="lbl" style="left:110px;top:270px;font-size:56px">ZONE STRATÉGIQUE</div>
+<div style="position:absolute;left:70px;width:830px;top:290px;z-index:12;text-align:center"><span id="lSafe" class="lbl" style="position:relative;display:inline-block;font-size:64px">ZONE STRATÉGIQUE</span></div>
 <div id="zRed"><div class="zone r" style="left:0;top:0;width:1080px;height:240px"></div><div class="zone r" style="left:0;top:1700px;width:1080px;height:220px"></div><div class="zone r" style="left:0;top:1460px;width:320px;height:240px"></div><div id="zRight" class="zone r" style="left:920px;top:1000px;width:160px;height:700px"></div></div>
 <div id="lRed" class="lbl" style="left:340px;top:520px;font-size:64px">ZONE À ÉVITER</div>
 <div id="arUp" class="arw" style="left:492px;top:300px;transform:rotate(0deg)"><svg viewBox="0 0 100 140" width="96" height="134"><path d="M50 132V24M14 58L50 14l36 44" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -201,7 +201,7 @@ tl.to('#zSafe',{autoAlpha:0,duration:.2},3.0);
 tl.set('#zSafe',{autoAlpha:0},3.2);
 gsap.set('#lSafe',{autoAlpha:0});
 tl.fromTo('#lSafe',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.28,ease:'back.out(1.8)',immediateRender:false},0.000);
-tl.set('#lSafe',{autoAlpha:0},3.200);
+tl.set('#lSafe',{autoAlpha:0},3.2);
 tl.set('#lSafe',{autoAlpha:1,scale:1},0);
 gsap.set('#zRed',{autoAlpha:0});
 tl.fromTo('#zRed',{autoAlpha:0},{autoAlpha:1,duration:0.25,immediateRender:false},3.220);

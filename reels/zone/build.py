@@ -78,7 +78,10 @@ def zones():
     html.append('<div id="zSafe" class="zone g" style="left:70px;top:250px;width:830px;height:1440px"></div>')
     tw += [f"tl.fromTo('#zSafe',{{scale:1.08}},{{scale:1,duration:.4,ease:'power3.out',immediateRender:true}},0);",
            "gsap.set('#zSafe',{autoAlpha:1});", "tl.to('#zSafe',{autoAlpha:0,duration:.2},3.0);", "tl.set('#zSafe',{autoAlpha:0},3.2);"]
-    h, t = label('lSafe', 'ZONE STRATÉGIQUE', 110, 270, 0.0, 3.2)
+    # centred in the green zone
+    h = ['<div style="position:absolute;left:70px;width:830px;top:290px;z-index:12;text-align:center">'
+         '<span id="lSafe" class="lbl" style="position:relative;display:inline-block;font-size:64px">ZONE STRATÉGIQUE</span></div>']
+    t = pop('#lSafe', 0.0, .28, .5) + ["tl.set('#lSafe',{autoAlpha:0},3.2);"]
     html += h
     tw += t + ["tl.set('#lSafe',{autoAlpha:1,scale:1},0);"]
     # 2. zones to avoid (top, bottom, Instagram buttons column)
