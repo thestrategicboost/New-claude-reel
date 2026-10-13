@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lilac wall (Maé's "Ton rythme de publi" look) without touching her skin: the blue-grey wall is found by colour
+"""Lilac look of Maé's "Ton rythme de publi" reel: the blue-grey wall is found by colour
 (blue above red), relit and re-tinted to her lilac (#B5A0DD, pinker on the right), everything warm stays as shot.
 
 PY lilac.py in.mp4 out.mp4          (PY lilac.py --frame in.png out.png for a test still)
@@ -16,6 +16,7 @@ LEFT = np.array([0.99, 0.94, 1.30], np.float32)  # lilac chroma (rgb / luma), bl
 RIGHT = np.array([1.12, 0.91, 1.17], np.float32)  # ... pinker on the right
 X = np.linspace(0, 1, W, dtype=np.float32)[None, :, None]
 TINT = LEFT * (1 - X) + RIGHT * X
+SUBJ = np.array([0.94, 0.87, 1.16], np.float32)       # skin a touch rosier, the white top lavender-white
 
 
 def grade(rgb):
@@ -24,7 +25,8 @@ def grade(rgb):
     m = np.clip((b - r - 4) / 22, 0, 1)[..., None]           # wall = blue above red; skin / hair / cream top are warm
     luma = (0.299 * r + 0.587 * g + 0.114 * b)[..., None]
     wall = np.clip(luma * LIFT, 0, 245) * TINT
-    out = f * (1 - m) + wall * m
+    subj = f * SUBJ                                           # her: the same cool-pink light as in her reel
+    out = subj * (1 - m) + wall * m
     return np.clip(out, 0, 255).astype(np.uint8)
 
 
