@@ -68,6 +68,9 @@ ICONS = {   # white line icons on the gold card, 100x100 viewBox
 }
 
 
+EYE = ('<svg width="30" height="30" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" '
+       'stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.2" fill="#fff"/></svg>')   # views eye, as on her own reels
+
 def show(sel, a, b):
     tw = [f"gsap.set('{sel}',{{autoAlpha:0}});", f"tl.set('{sel}',{{autoAlpha:1}},{a:.3f});"]
     if b < DUR - .01:
@@ -78,8 +81,8 @@ def show(sel, a, b):
 def board():
     html = ['<div id="board">']
     for k, (label, cx) in enumerate(COLS):
-        html.append(f'<div id="col{k}" class="col" style="left:{cx - 160}px;top:{NUM_TOP + 6}px"><div class="box"><div class="num">{label}</div>'
-                    f'<div class="vues">VUES</div></div></div>')
+        html.append(f'<div id="col{k}" class="col" style="left:{cx - 160}px;top:{NUM_TOP + 6}px"><div class="box"><div class="num">{label}</div></div>'
+                    f'<div class="chip">{EYE}<span>vues</span></div></div>')
     html.append('</div>')
     tw = ["gsap.set('#board',{autoAlpha:0});", "tl.fromTo('#board',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.35,ease:'power3.out',immediateRender:false},0);"]
     return html, tw
@@ -203,8 +206,9 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #vig{{position:absolute;inset:0;z-index:1;background:radial-gradient(120% 75% at 45% 38%,rgba(20,12,36,0) 50%,rgba(20,12,36,.42) 100%)}}
 #shade{{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(24,16,36,.40) 0%,rgba(24,16,36,0) 30%,rgba(24,16,36,0) 60%,rgba(24,16,36,.30) 100%)}}
 .col{{position:absolute;z-index:5;width:320px;text-align:center;color:#fff}}
-.col .box{{display:inline-block;min-width:240px;padding:12px 24px 12px;border-radius:30px;background:#8C5C41;border:3px solid rgba(255,255,255,.9);
-  box-shadow:0 14px 34px rgba(0,0,0,.35),inset 0 2px 0 rgba(255,255,255,.25)}}
+.col .box{{display:inline-block;padding:8px 26px 2px;background:#573307}}
+.chip{{display:flex;width:fit-content;align-items:center;gap:8px;margin:10px auto 0;padding:6px 14px 6px 12px;background:rgba(60,64,66,.62);
+  font:600 26px/1 Poppins;color:#fff}}
 .num{{font:400 92px/1 Anton;letter-spacing:.01em;display:inline-block;transform-origin:50% 60%;color:#fff}}
 .vues{{font:700 30px/1 Poppins;letter-spacing:.24em;margin-top:2px;padding-left:.24em}}
 .title{{position:absolute;left:0;right:0;top:226px;z-index:6;text-align:center;font:600 56px/1 Caveat;color:#fff;

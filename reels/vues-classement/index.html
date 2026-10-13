@@ -14,8 +14,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 #vig{position:absolute;inset:0;z-index:1;background:radial-gradient(120% 75% at 45% 38%,rgba(20,12,36,0) 50%,rgba(20,12,36,.42) 100%)}
 #shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(24,16,36,.40) 0%,rgba(24,16,36,0) 30%,rgba(24,16,36,0) 60%,rgba(24,16,36,.30) 100%)}
 .col{position:absolute;z-index:5;width:320px;text-align:center;color:#fff}
-.col .box{display:inline-block;min-width:240px;padding:12px 24px 12px;border-radius:30px;background:#8C5C41;border:3px solid rgba(255,255,255,.9);
-  box-shadow:0 14px 34px rgba(0,0,0,.35),inset 0 2px 0 rgba(255,255,255,.25)}
+.col .box{display:inline-block;padding:8px 26px 2px;background:#573307}
+.chip{display:flex;width:fit-content;align-items:center;gap:8px;margin:10px auto 0;padding:6px 14px 6px 12px;background:rgba(60,64,66,.62);
+  font:600 26px/1 Poppins;color:#fff}
 .num{font:400 92px/1 Anton;letter-spacing:.01em;display:inline-block;transform-origin:50% 60%;color:#fff}
 .vues{font:700 30px/1 Poppins;letter-spacing:.24em;margin-top:2px;padding-left:.24em}
 .title{position:absolute;left:0;right:0;top:226px;z-index:6;text-align:center;font:600 56px/1 Caveat;color:#fff;
@@ -77,9 +78,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
   <video id="bgv" class="full" src="assets/aroll_graded.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="36.500" data-track-index="0"></video>
   <div id="vig"></div><div id="shade"></div>
 <div id="board">
-<div id="col0" class="col" style="left:40px;top:288px"><div class="box"><div class="num">100</div><div class="vues">VUES</div></div></div>
-<div id="col1" class="col" style="left:380px;top:288px"><div class="box"><div class="num">10K</div><div class="vues">VUES</div></div></div>
-<div id="col2" class="col" style="left:720px;top:288px"><div class="box"><div class="num">100K</div><div class="vues">VUES</div></div></div>
+<div id="col0" class="col" style="left:40px;top:288px"><div class="box"><div class="num">100</div></div><div class="chip"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.2" fill="#fff"/></svg><span>vues</span></div></div>
+<div id="col1" class="col" style="left:380px;top:288px"><div class="box"><div class="num">10K</div></div><div class="chip"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.2" fill="#fff"/></svg><span>vues</span></div></div>
+<div id="col2" class="col" style="left:720px;top:288px"><div class="box"><div class="num">100K</div></div><div class="chip"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.2" fill="#fff"/></svg><span>vues</span></div></div>
 </div>
 <div id="tt0" class="title">Poster à une heure précise</div>
 <div id="tt1" class="title">Vidéos courtes (5s)</div>
