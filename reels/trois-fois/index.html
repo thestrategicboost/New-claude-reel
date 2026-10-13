@@ -10,13 +10,16 @@
 html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 #root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
 .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hrow{position:absolute;left:0;right:0;top:240px;z-index:12;text-align:center}
-.hb{display:inline-block;font:400 66px/1 Anton;letter-spacing:.02em;color:#fff;background:#573307;padding:8px 26px 6px;box-shadow:0 10px 24px rgba(0,0,0,.28)}
-.card{position:absolute;z-index:11;left:250px;top:345px;width:580px;height:400px;border-radius:44px;overflow:hidden;
+.hcol{position:absolute;top:236px;width:340px;z-index:12;text-align:center;transform-origin:50% 50%}
+.hb{display:inline-block;font:400 50px/1 Anton;letter-spacing:.02em;color:#fff;background:#573307;padding:8px 20px 6px;box-shadow:0 10px 24px rgba(0,0,0,.28)}
+.hb small{display:block;font-size:28px;letter-spacing:.08em;opacity:.85;margin-bottom:2px}
+.card{position:absolute;z-index:11;top:372px;width:330px;height:262px;border-radius:32px;overflow:hidden;
   background:rgba(58,38,26,.55);-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
   border:1.5px solid rgba(255,255,255,.35);box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25);color:#fff}
+.scaler{position:absolute;left:0;top:0;width:580px;height:320px;transform:scale(.569);transform-origin:0 0}
+.scaler{position:absolute;left:0;top:0;width:580px;height:320px;transform:scale(.569);transform-origin:0 0}
 .stagebox{position:absolute;left:0;right:0;top:0;height:320px;display:flex;align-items:center;justify-content:center}
-.lbl{position:absolute;left:0;right:0;bottom:24px;text-align:center;font:700 38px/1 Poppins;letter-spacing:-.01em}
+.lbl{position:absolute;left:0;right:0;bottom:22px;text-align:center;font:700 26px/1 Poppins;letter-spacing:-.01em}
 /* story */
 .phone{position:relative;width:160px;height:280px;border:5px solid #fff;border-radius:32px;margin-top:14px}
 .sbars{position:absolute;left:14px;right:14px;top:14px;display:flex;gap:6px}
@@ -105,101 +108,95 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="sfx16" src="assets/sfx/whoosh-short.mp3" data-start="9.620" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
 <audio id="sfx17" src="assets/sfx/pop.mp3" data-start="9.940" data-duration="0.720" data-track-index="11" data-volume="0.200"></audio>
   <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="12.167" data-track-index="0"></video>
-<div id="h0" class="hrow"><span class="hb">UNE FOIS PAR JOUR</span></div>
-<div id="c0" class="card"><div class="stagebox"><div class="phone"><div class="sbars"><div class="sbar"><i></i></div><div class="sbar"><i></i></div><div class="sbar"><i></i></div></div><div class="ring"><div class="ringin"><img src="assets/img/avatar.png"/></div></div><div class="plus">+</div></div></div><div class="lbl">Poster une story</div></div>
-<div id="h1" class="hrow"><span class="hb">UNE FOIS PAR SEMAINE</span></div>
-<div id="c1" class="card"><div class="stagebox"><div class="fan"><div class="rc" style="--r:-14deg"><img src="assets/img/r1.jpg"/><div class="play">▶</div></div><div class="rc" style="--r:0deg"><img src="assets/img/r3.jpg"/><div class="play">▶</div></div><div class="rc" style="--r:14deg"><img src="assets/img/r5.jpg"/><div class="play">▶</div></div></div></div><div class="lbl">Publier 3 réels</div></div>
-<div id="h2" class="hrow"><span class="hb">UNE FOIS PAR MOIS</span></div>
-<div id="c2" class="card"><div class="stagebox"><div class="mhd">OCTOBRE</div><div class="mgrid"><div class="mc on"><span>1</span></div><div class="mc"><span>2</span></div><div class="mc on"><span>3</span></div><div class="mc"><span>4</span></div><div class="mc on"><span>5</span></div><div class="mc"><span>6</span></div><div class="mc"><span>7</span></div><div class="mc on"><span>8</span></div><div class="mc"><span>9</span></div><div class="mc on"><span>10</span></div><div class="mc"><span>11</span></div><div class="mc on"><span>12</span></div><div class="mc"><span>13</span></div><div class="mc"><span>14</span></div><div class="mc on"><span>15</span></div><div class="mc"><span>16</span></div><div class="mc on"><span>17</span></div><div class="mc"><span>18</span></div><div class="mc on"><span>19</span></div><div class="mc"><span>20</span></div><div class="mc"><span>21</span></div><div class="mc on"><span>22</span></div><div class="mc"><span>23</span></div><div class="mc on"><span>24</span></div><div class="mc"><span>25</span></div><div class="mc on"><span>26</span></div><div class="mc"><span>27</span></div><div class="mc"><span>28</span></div></div></div><div class="lbl">Planifier ton mois</div></div>
-<div id="h3" class="hrow"><span class="hb">UNE FOIS PAR JOUR</span></div>
-<div id="c3" class="card"><div class="stagebox"><div class="chat"><div class="bub l">Hello ! Ton offre m’intéresse</div><div class="bub r">Avec plaisir, je t’explique</div><div class="bub l typing"><i></i><i></i><i></i></div></div></div><div class="lbl">Répondre à tes DM</div></div>
-<div id="h4" class="hrow"><span class="hb">UNE FOIS PAR SEMAINE</span></div>
-<div id="c4" class="card"><div class="stagebox"><div class="chart"><div class="bar" style="height:60px"></div><div class="bar" style="height:90px"></div><div class="bar" style="height:80px"></div><div class="bar" style="height:130px"></div><div class="bar" style="height:175px"></div><svg class="trend" viewBox="0 0 400 200"><path d="M10 170 L100 130 L190 140 L280 80 L390 25" /></svg></div><div class="kpi">+38 %</div></div><div class="lbl">Analyser tes stats</div></div>
-<div id="h5" class="hrow"><span class="hb">UNE FOIS PAR MOIS</span></div>
-<div id="c5" class="card"><div class="stagebox"><div class="target"><i class="t1"></i><i class="t2"></i><i class="t3"></i></div><svg class="arrow" viewBox="0 0 200 40"><path d="M0 20H170M150 6l24 14-24 14" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="lbl">Fixer tes objectifs</div></div>
-<div id="h6" class="hrow"><span class="hb">UNE FOIS PAR JOUR</span></div>
-<div id="c6" class="card"><div class="stagebox"><div class="note"><div class="nl" style="width:78%"></div><div class="nl" style="width:62%"></div><div class="nl" style="width:70%"></div><div class="nl" style="width:45%"></div></div><div class="bulb"><svg viewBox="0 0 24 24" width="70" height="70"><path d="M12 3a6 6 0 0 0-3.6 10.8c.8.6 1.1 1.3 1.1 2.2h5c0-.9.3-1.6 1.1-2.2A6 6 0 0 0 12 3z" fill="#fff"/><path d="M9.5 19.5h5M10.5 22h3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div></div><div class="lbl">Noter tes idées</div></div>
-<div id="h7" class="hrow"><span class="hb">UNE FOIS PAR SEMAINE</span></div>
-<div id="c7" class="card"><div class="stagebox"><div class="rec"><i></i>REC</div><div class="clips"><div class="clip" style="--i:0"><b>Vidéo 1</b><span>0:15</span></div><div class="clip" style="--i:1"><b>Vidéo 2</b><span>0:22</span></div><div class="clip" style="--i:2"><b>Vidéo 3</b><span>0:29</span></div><div class="clip" style="--i:3"><b>Vidéo 4</b><span>0:36</span></div></div></div><div class="lbl">Filmer en batch</div></div>
-<div id="h8" class="hrow"><span class="hb">UNE FOIS PAR MOIS</span></div>
-<div id="c8" class="card"><div class="stagebox"><div class="prof"><div class="pav"><img src="assets/img/avatar.png"/></div><div class="pnm">@thestrategicboost.fr<div class="pst">Stratégie Instagram</div></div></div><div class="audit"><div class="ar"><i class="ck">✓</i><span>Photo de profil</span></div><div class="ar"><i class="ck">✓</i><span>Bio claire</span></div><div class="ar"><i class="ck">✓</i><span>Lien en bio</span></div></div></div><div class="lbl">Auditer ton profil</div></div>
+<div id="hdj" class="hcol" style="left:20px"><span class="hb"><small>UNE FOIS</small>PAR JOUR</span></div>
+<div id="hds" class="hcol" style="left:370px"><span class="hb"><small>UNE FOIS</small>PAR SEMAINE</span></div>
+<div id="hdm" class="hcol" style="left:720px"><span class="hb"><small>UNE FOIS</small>PAR MOIS</span></div>
+<div id="c0" class="card" style="left:25px"><div class="scaler"><div class="stagebox"><div class="phone"><div class="sbars"><div class="sbar"><i></i></div><div class="sbar"><i></i></div><div class="sbar"><i></i></div></div><div class="ring"><div class="ringin"><img src="assets/img/avatar.png"/></div></div><div class="plus">+</div></div></div></div><div class="lbl">Poster une story</div></div>
+<div id="c1" class="card" style="left:375px"><div class="scaler"><div class="stagebox"><div class="fan"><div class="rc" style="--r:-14deg"><img src="assets/img/r1.jpg"/><div class="play">▶</div></div><div class="rc" style="--r:0deg"><img src="assets/img/r3.jpg"/><div class="play">▶</div></div><div class="rc" style="--r:14deg"><img src="assets/img/r5.jpg"/><div class="play">▶</div></div></div></div></div><div class="lbl">Publier 3 réels</div></div>
+<div id="c2" class="card" style="left:725px"><div class="scaler"><div class="stagebox"><div class="mhd">OCTOBRE</div><div class="mgrid"><div class="mc on"><span>1</span></div><div class="mc"><span>2</span></div><div class="mc on"><span>3</span></div><div class="mc"><span>4</span></div><div class="mc on"><span>5</span></div><div class="mc"><span>6</span></div><div class="mc"><span>7</span></div><div class="mc on"><span>8</span></div><div class="mc"><span>9</span></div><div class="mc on"><span>10</span></div><div class="mc"><span>11</span></div><div class="mc on"><span>12</span></div><div class="mc"><span>13</span></div><div class="mc"><span>14</span></div><div class="mc on"><span>15</span></div><div class="mc"><span>16</span></div><div class="mc on"><span>17</span></div><div class="mc"><span>18</span></div><div class="mc on"><span>19</span></div><div class="mc"><span>20</span></div><div class="mc"><span>21</span></div><div class="mc on"><span>22</span></div><div class="mc"><span>23</span></div><div class="mc on"><span>24</span></div><div class="mc"><span>25</span></div><div class="mc on"><span>26</span></div><div class="mc"><span>27</span></div><div class="mc"><span>28</span></div></div></div></div><div class="lbl">Planifier ton mois</div></div>
+<div id="c3" class="card" style="left:25px"><div class="scaler"><div class="stagebox"><div class="chat"><div class="bub l">Hello ! Ton offre m’intéresse</div><div class="bub r">Avec plaisir, je t’explique</div><div class="bub l typing"><i></i><i></i><i></i></div></div></div></div><div class="lbl">Répondre à tes DM</div></div>
+<div id="c4" class="card" style="left:375px"><div class="scaler"><div class="stagebox"><div class="chart"><div class="bar" style="height:60px"></div><div class="bar" style="height:90px"></div><div class="bar" style="height:80px"></div><div class="bar" style="height:130px"></div><div class="bar" style="height:175px"></div><svg class="trend" viewBox="0 0 400 200"><path d="M10 170 L100 130 L190 140 L280 80 L390 25" /></svg></div><div class="kpi">+38 %</div></div></div><div class="lbl">Analyser tes stats</div></div>
+<div id="c5" class="card" style="left:725px"><div class="scaler"><div class="stagebox"><div class="target"><i class="t1"></i><i class="t2"></i><i class="t3"></i></div><svg class="arrow" viewBox="0 0 200 40"><path d="M0 20H170M150 6l24 14-24 14" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div><div class="lbl">Fixer tes objectifs</div></div>
+<div id="c6" class="card" style="left:25px"><div class="scaler"><div class="stagebox"><div class="note"><div class="nl" style="width:78%"></div><div class="nl" style="width:62%"></div><div class="nl" style="width:70%"></div><div class="nl" style="width:45%"></div></div><div class="bulb"><svg viewBox="0 0 24 24" width="70" height="70"><path d="M12 3a6 6 0 0 0-3.6 10.8c.8.6 1.1 1.3 1.1 2.2h5c0-.9.3-1.6 1.1-2.2A6 6 0 0 0 12 3z" fill="#fff"/><path d="M9.5 19.5h5M10.5 22h3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div></div></div><div class="lbl">Noter tes idées</div></div>
+<div id="c7" class="card" style="left:375px"><div class="scaler"><div class="stagebox"><div class="rec"><i></i>REC</div><div class="clips"><div class="clip" style="--i:0"><b>Vidéo 1</b><span>0:15</span></div><div class="clip" style="--i:1"><b>Vidéo 2</b><span>0:22</span></div><div class="clip" style="--i:2"><b>Vidéo 3</b><span>0:29</span></div><div class="clip" style="--i:3"><b>Vidéo 4</b><span>0:36</span></div></div></div></div><div class="lbl">Filmer en batch</div></div>
+<div id="c8" class="card" style="left:725px"><div class="scaler"><div class="stagebox"><div class="prof"><div class="pav"><img src="assets/img/avatar.png"/></div><div class="pnm">@thestrategicboost.fr<div class="pst">Stratégie Instagram</div></div></div><div class="audit"><div class="ar"><i class="ck">✓</i><span>Photo de profil</span></div><div class="ar"><i class="ck">✓</i><span>Bio claire</span></div><div class="ar"><i class="ck">✓</i><span>Lien en bio</span></div></div></div></div><div class="lbl">Auditer ton profil</div></div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
-gsap.set('#h0, #c0',{autoAlpha:0});
-tl.fromTo('#h0',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:true},0.000);
-tl.fromTo('#c0',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:true},0.040);
-tl.fromTo('#c0 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},0.200);
+gsap.set('#hdj',{autoAlpha:.45});
+gsap.set('#hds',{autoAlpha:.45});
+gsap.set('#hdm',{autoAlpha:.45});
+gsap.set('#c0',{autoAlpha:0});
+tl.fromTo('#c0',{autoAlpha:0,scale:.7,y:-30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:true},0.020);
+tl.to('#hdj',{autoAlpha:1,scale:1.08,duration:.15},0.000);
+tl.to('#hdj',{autoAlpha:.45,scale:1,duration:.15},1.490);
 tl.fromTo('#c0 .ring',{scale:0,rotation:-90},{scale:1,rotation:0,duration:.4,ease:'back.out(1.7)',immediateRender:false},0.120);
 tl.fromTo('#c0 .sbar i',{scaleX:0},{scaleX:1,duration:.3,stagger:.3,ease:'none',immediateRender:false},0.220);
 tl.fromTo('#c0 .plus',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},0.470);
-tl.to('#h0, #c0',{autoAlpha:0,duration:.1},1.440);
-tl.set('#h0, #c0',{autoAlpha:0},1.540);
-gsap.set('#h1, #c1',{autoAlpha:0});
-tl.fromTo('#h1',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},1.540);
-tl.fromTo('#c1',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},1.580);
-tl.fromTo('#c1 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},1.740);
+tl.to('#c0',{autoAlpha:0,scale:.85,duration:.12},3.380);
+tl.set('#c0',{autoAlpha:0},3.500);
+gsap.set('#c1',{autoAlpha:0});
+tl.fromTo('#c1',{autoAlpha:0,scale:.7,y:-30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},1.560);
+tl.to('#hds',{autoAlpha:1,scale:1.08,duration:.15},1.540);
+tl.to('#hds',{autoAlpha:.45,scale:1,duration:.15},2.610);
 tl.fromTo('#c1 .rc',{rotation:0,y:60,autoAlpha:0},{rotation:(i,el)=>[-14,0,14][i],y:0,autoAlpha:1,duration:.35,stagger:.1,ease:'back.out(1.6)',immediateRender:false},1.660);
-tl.to('#h1, #c1',{autoAlpha:0,duration:.1},2.560);
-tl.set('#h1, #c1',{autoAlpha:0},2.660);
-gsap.set('#h2, #c2',{autoAlpha:0});
-tl.fromTo('#h2',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},2.660);
-tl.fromTo('#c2',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},2.700);
-tl.fromTo('#c2 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},2.860);
+tl.to('#c1',{autoAlpha:0,scale:.85,duration:.12},4.780);
+tl.set('#c1',{autoAlpha:0},4.900);
+gsap.set('#c2',{autoAlpha:0});
+tl.fromTo('#c2',{autoAlpha:0,scale:.7,y:-30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},2.680);
+tl.to('#hdm',{autoAlpha:1,scale:1.08,duration:.15},2.660);
+tl.to('#hdm',{autoAlpha:.45,scale:1,duration:.15},3.450);
 tl.fromTo('#c2 .mc',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.15,stagger:.012,immediateRender:false},2.780);
 tl.fromTo('#c2 .mc.on',{background:'rgba(255,255,255,.12)'},{background:'#D6AE66',duration:.12,stagger:.035,immediateRender:false},3.080);
-tl.to('#h2, #c2',{autoAlpha:0,duration:.1},3.400);
-tl.set('#h2, #c2',{autoAlpha:0},3.500);
-gsap.set('#h3, #c3',{autoAlpha:0});
-tl.fromTo('#h3',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},3.500);
-tl.fromTo('#c3',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},3.540);
-tl.fromTo('#c3 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},3.700);
+tl.to('#c2',{autoAlpha:0,scale:.85,duration:.12},5.920);
+tl.set('#c2',{autoAlpha:0},6.040);
+gsap.set('#c3',{autoAlpha:0});
+tl.fromTo('#c3',{autoAlpha:0,scale:.7,y:-30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},3.520);
+tl.to('#hdj',{autoAlpha:1,scale:1.08,duration:.15},3.500);
+tl.to('#hdj',{autoAlpha:.45,scale:1,duration:.15},4.850);
 tl.fromTo('#c3 .bub',{autoAlpha:0,y:24,scale:.8},{autoAlpha:1,y:0,scale:1,duration:.25,stagger:.25,ease:'back.out(2)',immediateRender:false},3.620);
 tl.fromTo('#c3 .typing i',{y:0},{y:-8,duration:.15,stagger:.08,yoyo:true,repeat:5,immediateRender:false},4.170);
-tl.to('#h3, #c3',{autoAlpha:0,duration:.1},4.800);
-tl.set('#h3, #c3',{autoAlpha:0},4.900);
-gsap.set('#h4, #c4',{autoAlpha:0});
-tl.fromTo('#h4',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},4.900);
-tl.fromTo('#c4',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},4.940);
-tl.fromTo('#c4 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},5.100);
+tl.to('#c3',{autoAlpha:0,scale:.85,duration:.12},7.210);
+tl.set('#c3',{autoAlpha:0},7.330);
+gsap.set('#c4',{autoAlpha:0});
+tl.fromTo('#c4',{autoAlpha:0,scale:.7,y:-30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},4.920);
+tl.to('#hds',{autoAlpha:1,scale:1.08,duration:.15},4.900);
+tl.to('#hds',{autoAlpha:.45,scale:1,duration:.15},5.990);
 tl.fromTo('#c4 .bar',{scaleY:0},{scaleY:1,duration:.3,stagger:.07,ease:'power3.out',immediateRender:false},5.020);
 tl.fromTo('#c4 .trend path',{strokeDashoffset:520},{strokeDashoffset:0,duration:.5,ease:'power2.out',immediateRender:false},5.170);
 tl.fromTo('#c4 .kpi',{scale:0},{scale:1,duration:.3,ease:'back.out(2.5)',immediateRender:false},5.470);
-tl.to('#h4, #c4',{autoAlpha:0,duration:.1},5.940);
-tl.set('#h4, #c4',{autoAlpha:0},6.040);
-gsap.set('#h5, #c5',{autoAlpha:0});
-tl.fromTo('#h5',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},6.040);
-tl.fromTo('#c5',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},6.080);
-tl.fromTo('#c5 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},6.240);
+tl.to('#c4',{autoAlpha:0,scale:.85,duration:.12},8.370);
+tl.set('#c4',{autoAlpha:0},8.490);
+gsap.set('#c5',{autoAlpha:0});
+tl.fromTo('#c5',{autoAlpha:0,scale:.7,y:-30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},6.060);
+tl.to('#hdm',{autoAlpha:1,scale:1.08,duration:.15},6.040);
+tl.to('#hdm',{autoAlpha:.45,scale:1,duration:.15},7.280);
 tl.fromTo('#c5 .target i',{scale:0},{scale:1,duration:.3,stagger:.06,ease:'back.out(2)',immediateRender:false},6.160);
 tl.fromTo('#c5 .arrow',{x:-320,autoAlpha:0},{x:0,autoAlpha:1,duration:.3,ease:'power3.in',immediateRender:false},6.410);
 tl.fromTo('#c5 .target',{x:0},{x:8,duration:.05,yoyo:true,repeat:3,immediateRender:false},6.710);
-tl.to('#h5, #c5',{autoAlpha:0,duration:.1},7.230);
-tl.set('#h5, #c5',{autoAlpha:0},7.330);
-gsap.set('#h6, #c6',{autoAlpha:0});
-tl.fromTo('#h6',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},7.330);
-tl.fromTo('#c6',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},7.370);
-tl.fromTo('#c6 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},7.530);
+tl.to('#c5',{autoAlpha:0,scale:.85,duration:.12},9.520);
+tl.set('#c5',{autoAlpha:0},9.640);
+gsap.set('#c6',{autoAlpha:0});
+tl.fromTo('#c6',{autoAlpha:0,scale:.7,y:-30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},7.350);
+tl.to('#hdj',{autoAlpha:1,scale:1.08,duration:.15},7.330);
+tl.to('#hdj',{autoAlpha:.45,scale:1,duration:.15},8.440);
 tl.fromTo('#c6 .nl',{scaleX:0},{scaleX:1,duration:.22,stagger:.12,ease:'power2.out',immediateRender:false},7.450);
 tl.fromTo('#c6 .bulb',{scale:0,rotation:-20},{scale:1,rotation:0,duration:.35,ease:'back.out(2.5)',immediateRender:false},7.800);
 tl.fromTo('#c6 .bulb',{boxShadow:'0 0 0 rgba(243,223,178,0)'},{boxShadow:'0 0 60px rgba(243,223,178,.9)',duration:.3,yoyo:true,repeat:1,immediateRender:false},8.050);
-tl.to('#h6, #c6',{autoAlpha:0,duration:.1},8.390);
-tl.set('#h6, #c6',{autoAlpha:0},8.490);
-gsap.set('#h7, #c7',{autoAlpha:0});
-tl.fromTo('#h7',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},8.490);
-tl.fromTo('#c7',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},8.530);
-tl.fromTo('#c7 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},8.690);
+gsap.set('#c7',{autoAlpha:0});
+tl.fromTo('#c7',{autoAlpha:0,scale:.7,y:-30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},8.510);
+tl.to('#hds',{autoAlpha:1,scale:1.08,duration:.15},8.490);
+tl.to('#hds',{autoAlpha:.45,scale:1,duration:.15},9.590);
 tl.fromTo('#c7 .clip',{x:260,autoAlpha:0},{x:0,autoAlpha:1,duration:.25,stagger:.12,ease:'power3.out',immediateRender:false},8.660);
 tl.fromTo('#c7 .rec i',{opacity:1},{opacity:.2,duration:.2,yoyo:true,repeat:5,immediateRender:false},8.610);
-tl.to('#h7, #c7',{autoAlpha:0,duration:.1},9.540);
-tl.set('#h7, #c7',{autoAlpha:0},9.640);
-gsap.set('#h8, #c8',{autoAlpha:0});
-tl.fromTo('#h8',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:false},9.640);
-tl.fromTo('#c8',{autoAlpha:0,scale:.82,y:30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},9.680);
-tl.fromTo('#c8 .lbl',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,immediateRender:false},9.840);
+gsap.set('#c8',{autoAlpha:0});
+tl.fromTo('#c8',{autoAlpha:0,scale:.7,y:-30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},9.660);
+tl.to('#hdm',{autoAlpha:1,scale:1.08,duration:.15},9.640);
+tl.to('#hdm',{autoAlpha:.45,scale:1,duration:.15},12.117);
 tl.fromTo('#c8 .prof',{y:30,autoAlpha:0},{y:0,autoAlpha:1,duration:.25,ease:'power3.out',immediateRender:false},9.760);
 tl.fromTo('#c8 .ar',{autoAlpha:0,x:-20},{autoAlpha:1,x:0,duration:.18,stagger:.14,immediateRender:false},9.940);
 tl.fromTo('#c8 .ck',{scale:0},{scale:1,duration:.2,stagger:.14,ease:'back.out(3)',immediateRender:false},10.010);
+tl.set('#hdj',{autoAlpha:1,scale:1.08},0);
 tl.set({}, {}, 12.167);
 window.__timelines["main"] = tl;
 </script>

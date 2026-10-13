@@ -82,21 +82,36 @@ def scene(k, kind, t):
     return h, w
 
 
+COLS = {'j': 190, 's': 540, 'm': 890}          # the three frequencies on one line, left to right as she points
+
+
+COLS = {'j': 190, 's': 540, 'm': 890}          # the three frequencies on one line, left to right as she points
+
+
 def board():
     html, tw = [], []
+    # one fixed line of three titles; the one she is saying lights up
+    for f, cx in COLS.items():
+        word = FREQ[f].split(' PAR ')[1]
+        html.append(f'<div id="hd{f}" class="hcol" style="left:{cx - 170}px"><span class="hb"><small>UNE FOIS</small>PAR {word}</span></div>')
+        tw.append(f"gsap.set('#hd{f}',{{autoAlpha:.45}});")
     for k, (t, f, kind, label) in enumerate(MOMENTS):
-        b = MOMENTS[k + 1][0] if k + 1 < len(MOMENTS) else DUR
+        same = [m[0] for m in MOMENTS[k + 1:] if m[1] == f]
+        b = same[0] if same else DUR                      # a card stays until the next card of its column
+        nxt = MOMENTS[k + 1][0] if k + 1 < len(MOMENTS) else DUR
         inner, anim = scene(k, kind, t)
-        html.append(f'<div id="h{k}" class="hrow"><span class="hb">{FREQ[f]}</span></div>')
-        html.append(f'<div id="c{k}" class="card"><div class="stagebox">{inner}</div><div class="lbl">{label}</div></div>')
+        cx = COLS[f]
+        html.append(f'<div id="c{k}" class="card" style="left:{cx - 165}px"><div class="scaler"><div class="stagebox">{inner}</div></div>'
+                    f'<div class="lbl">{label}</div></div>')
         first = 'true' if t == 0 else 'false'
-        tw += [f"gsap.set('#h{k}, #c{k}',{{autoAlpha:0}});",
-               f"tl.fromTo('#h{k}',{{autoAlpha:0,y:-30}},{{autoAlpha:1,y:0,duration:.22,ease:'power3.out',immediateRender:{first}}},{t:.3f});",
-               f"tl.fromTo('#c{k}',{{autoAlpha:0,scale:.82,y:30}},{{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:{first}}},{t + .04:.3f});",
-               f"tl.fromTo('#c{k} .lbl',{{autoAlpha:0,y:12}},{{autoAlpha:1,y:0,duration:.2,immediateRender:false}},{t + .2:.3f});"]
+        tw += [f"gsap.set('#c{k}',{{autoAlpha:0}});",
+               f"tl.fromTo('#c{k}',{{autoAlpha:0,scale:.7,y:-30}},{{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:{first}}},{t + .02:.3f});",
+               f"tl.to('#hd{f}',{{autoAlpha:1,scale:1.08,duration:.15}},{t:.3f});",
+               f"tl.to('#hd{f}',{{autoAlpha:.45,scale:1,duration:.15}},{nxt - .05:.3f});"]
         tw += anim
         if b < DUR - .01:
-            tw += [f"tl.to('#h{k}, #c{k}',{{autoAlpha:0,duration:.1}},{b - .1:.3f});", f"tl.set('#h{k}, #c{k}',{{autoAlpha:0}},{b:.3f});"]
+            tw += [f"tl.to('#c{k}',{{autoAlpha:0,scale:.85,duration:.12}},{b - .12:.3f});", f"tl.set('#c{k}',{{autoAlpha:0}},{b:.3f});"]
+    tw.append(f"tl.set('#hd{MOMENTS[0][1]}',{{autoAlpha:1,scale:1.08}},0);")
     return html, tw
 
 
@@ -130,13 +145,15 @@ CSS = f'''
 html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
-.hrow{{position:absolute;left:0;right:0;top:240px;z-index:12;text-align:center}}
-.hb{{display:inline-block;font:400 66px/1 Anton;letter-spacing:.02em;color:#fff;background:{BLOCK};padding:8px 26px 6px;box-shadow:0 10px 24px rgba(0,0,0,.28)}}
-.card{{position:absolute;z-index:11;left:250px;top:345px;width:580px;height:400px;border-radius:44px;overflow:hidden;
+.hcol{{position:absolute;top:236px;width:340px;z-index:12;text-align:center;transform-origin:50% 50%}}
+.hb{{display:inline-block;font:400 50px/1 Anton;letter-spacing:.02em;color:#fff;background:{BLOCK};padding:8px 20px 6px;box-shadow:0 10px 24px rgba(0,0,0,.28)}}
+.hb small{{display:block;font-size:28px;letter-spacing:.08em;opacity:.85;margin-bottom:2px}}
+.card{{position:absolute;z-index:11;top:372px;width:330px;height:262px;border-radius:32px;overflow:hidden;
   background:rgba(58,38,26,.55);-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
   border:1.5px solid rgba(255,255,255,.35);box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25);color:#fff}}
-.stagebox{{position:absolute;left:0;right:0;top:0;height:320px;display:flex;align-items:center;justify-content:center}}
-.lbl{{position:absolute;left:0;right:0;bottom:24px;text-align:center;font:700 38px/1 Poppins;letter-spacing:-.01em}}
+.scaler{{position:absolute;left:0;top:0;width:580px;height:320px;transform:scale(.569);transform-origin:0 0}}
+.scaler{{position:absolute;left:0;top:0;width:580px;height:320px;transform:scale(.569);transform-origin:0 0}}\n.stagebox{{position:absolute;left:0;right:0;top:0;height:320px;display:flex;align-items:center;justify-content:center}}
+.lbl{{position:absolute;left:0;right:0;bottom:22px;text-align:center;font:700 26px/1 Poppins;letter-spacing:-.01em}}
 /* story */
 .phone{{position:relative;width:160px;height:280px;border:5px solid #fff;border-radius:32px;margin-top:14px}}
 .sbars{{position:absolute;left:14px;right:14px;top:14px;display:flex;gap:6px}}
