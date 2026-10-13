@@ -15,10 +15,12 @@ DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error',
 BLOCK = '#573307'
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
 IG = 'linear-gradient(225deg,#4F5BD5 0%,#962FBF 28%,#D62976 55%,#FA7E1E 80%,#FEDA75 100%)'
+import os
+THEME = os.environ.get('THEME', 'brown')        # card colour: 'brown' or 'gold'
 FREQ = {'j': 'UNE FOIS PAR JOUR', 's': 'UNE FOIS PAR SEMAINE', 'm': 'UNE FOIS PAR MOIS'}
 
 # (start, frequency, scene, label) - when she says "une fois par ..." (round 3 from the silences: whisper skipped it)
-MOMENTS = [(0.00, 'j', 'story', 'Poster une story'), (1.54, 's', 'reels', 'Publier 3 réels'), (2.66, 'm', 'month', 'Planifier ton mois'),
+MOMENTS = [(0.00, 'j', 'story', 'Poster une story'), (1.54, 's', 'script', 'Écrire tes scripts'), (2.66, 'm', 'month', 'Planifier ton mois'),
            (3.50, 'j', 'dm', 'Répondre à tes DM'), (4.90, 's', 'stats', 'Analyser tes stats'), (6.04, 'm', 'goal', 'Fixer tes objectifs'),
            (7.33, 'j', 'ideas', 'Noter tes idées'), (8.49, 's', 'batch', 'Filmer en batch'), (9.64, 'm', 'audit', 'Auditer ton profil')]
 
@@ -34,6 +36,13 @@ def scene(k, kind, t):
         w = [f"tl.fromTo('{s} .ring',{{scale:0,rotation:-90}},{{scale:1,rotation:0,duration:.4,ease:'back.out(1.7)',immediateRender:false}},{a:.3f});",
              f"tl.fromTo('{s} .sbar i',{{scaleX:0}},{{scaleX:1,duration:.3,stagger:.3,ease:'none',immediateRender:false}},{a + .1:.3f});",
              f"tl.fromTo('{s} .plus',{{scale:0}},{{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false}},{a + .35:.3f});"]
+    elif kind == 'script':
+        lines = ''.join(f'<div class="sl"><b>{h}</b><i style="width:{w}%"></i></div>' for h, w in (('HOOK', 70), ('VALEUR', 82), ('CTA', 55)))
+        h = (f'<div class="script"><div class="sth">SCRIPT · RÉEL</div>{lines}</div>'
+             '<svg class="pen" viewBox="0 0 24 24" width="74" height="74"><path d="M4 20l1-4L16 5l3 3L8 19z" fill="#fff" stroke="#3a261a" stroke-width="1.2" stroke-linejoin="round"/></svg>')
+        w = [f"tl.fromTo('{s} .sl',{{autoAlpha:0,x:-16}},{{autoAlpha:1,x:0,duration:.15,stagger:.18,immediateRender:false}},{a:.3f});",
+             f"tl.fromTo('{s} .sl i',{{scaleX:0}},{{scaleX:1,duration:.22,stagger:.18,ease:'power1.out',immediateRender:false}},{a + .06:.3f});",
+             f"tl.fromTo('{s} .pen',{{x:-150,y:-60,rotation:-8}},{{x:30,y:40,rotation:6,duration:.7,ease:'none',immediateRender:false}},{a:.3f});"]
     elif kind == 'reels':
         cards = ''.join(f'<div class="rc" style="--r:{r}deg"><img src="assets/img/r{n}.jpg"/><div class="play">▶</div></div>'
                         for r, n in ((-14, 1), (0, 3), (14, 5)))
@@ -140,6 +149,7 @@ def audio():
     return out
 
 
+CARD_BG = 'linear-gradient(160deg,#9A6A4A 0%,#7A4E33 55%,#5E3A24 100%)' if THEME == 'brown' else GOLD
 CSS = f'''
 *{{margin:0;padding:0;box-sizing:border-box}}
 html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
@@ -149,11 +159,18 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .hb{{display:inline-block;font:400 50px/1 Anton;letter-spacing:.02em;color:#fff;background:{BLOCK};padding:8px 20px 6px;box-shadow:0 10px 24px rgba(0,0,0,.28)}}
 .hb small{{display:block;font-size:28px;letter-spacing:.08em;opacity:.85;margin-bottom:2px}}
 .card{{position:absolute;z-index:11;top:372px;width:330px;height:262px;border-radius:32px;overflow:hidden;
-  background:rgba(58,38,26,.55);-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
+  background:{CARD_BG};-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
   border:1.5px solid rgba(255,255,255,.35);box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25);color:#fff}}
 .scaler{{position:absolute;left:0;top:0;width:580px;height:320px;transform:scale(.569);transform-origin:0 0}}
 .scaler{{position:absolute;left:0;top:0;width:580px;height:320px;transform:scale(.569);transform-origin:0 0}}\n.stagebox{{position:absolute;left:0;right:0;top:0;height:320px;display:flex;align-items:center;justify-content:center}}
-.lbl{{position:absolute;left:0;right:0;bottom:22px;text-align:center;font:700 26px/1 Poppins;letter-spacing:-.01em}}
+.lbl{{position:absolute;left:0;right:0;bottom:22px;text-align:center;font:700 26px/1 Poppins;letter-spacing:-.01em;color:{'#fff' if THEME == 'brown' else '#3a261a'}}}
+/* script */
+.script{{position:relative;width:360px;height:250px;border-radius:22px;background:#FFF8EC;padding:24px 26px;box-shadow:0 14px 30px rgba(0,0,0,.3);color:#3a261a}}
+.sth{{font:700 20px/1 Poppins;letter-spacing:.14em;color:#B88A4E;margin-bottom:22px}}
+.sl{{display:flex;align-items:center;gap:14px;margin-bottom:22px}}
+.sl b{{width:92px;font:800 22px/1 Poppins}}
+.sl i{{display:block;height:13px;border-radius:7px;background:#B88A4E;transform-origin:0 50%}}
+.pen{{position:absolute;left:330px;top:120px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}}
 /* story */
 .phone{{position:relative;width:160px;height:280px;border:5px solid #fff;border-radius:32px;margin-top:14px}}
 .sbars{{position:absolute;left:14px;right:14px;top:14px;display:flex;gap:6px}}

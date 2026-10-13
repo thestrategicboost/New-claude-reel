@@ -14,12 +14,19 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .hb{display:inline-block;font:400 50px/1 Anton;letter-spacing:.02em;color:#fff;background:#573307;padding:8px 20px 6px;box-shadow:0 10px 24px rgba(0,0,0,.28)}
 .hb small{display:block;font-size:28px;letter-spacing:.08em;opacity:.85;margin-bottom:2px}
 .card{position:absolute;z-index:11;top:372px;width:330px;height:262px;border-radius:32px;overflow:hidden;
-  background:rgba(58,38,26,.55);-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
+  background:linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%);-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
   border:1.5px solid rgba(255,255,255,.35);box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25);color:#fff}
 .scaler{position:absolute;left:0;top:0;width:580px;height:320px;transform:scale(.569);transform-origin:0 0}
 .scaler{position:absolute;left:0;top:0;width:580px;height:320px;transform:scale(.569);transform-origin:0 0}
 .stagebox{position:absolute;left:0;right:0;top:0;height:320px;display:flex;align-items:center;justify-content:center}
-.lbl{position:absolute;left:0;right:0;bottom:22px;text-align:center;font:700 26px/1 Poppins;letter-spacing:-.01em}
+.lbl{position:absolute;left:0;right:0;bottom:22px;text-align:center;font:700 26px/1 Poppins;letter-spacing:-.01em;color:#3a261a}
+/* script */
+.script{position:relative;width:360px;height:250px;border-radius:22px;background:#FFF8EC;padding:24px 26px;box-shadow:0 14px 30px rgba(0,0,0,.3);color:#3a261a}
+.sth{font:700 20px/1 Poppins;letter-spacing:.14em;color:#B88A4E;margin-bottom:22px}
+.sl{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.sl b{width:92px;font:800 22px/1 Poppins}
+.sl i{display:block;height:13px;border-radius:7px;background:#B88A4E;transform-origin:0 50%}
+.pen{position:absolute;left:330px;top:120px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
 /* story */
 .phone{position:relative;width:160px;height:280px;border:5px solid #fff;border-radius:32px;margin-top:14px}
 .sbars{position:absolute;left:14px;right:14px;top:14px;display:flex;gap:6px}
@@ -112,7 +119,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="hds" class="hcol" style="left:370px"><span class="hb"><small>UNE FOIS</small>PAR SEMAINE</span></div>
 <div id="hdm" class="hcol" style="left:720px"><span class="hb"><small>UNE FOIS</small>PAR MOIS</span></div>
 <div id="c0" class="card" style="left:25px"><div class="scaler"><div class="stagebox"><div class="phone"><div class="sbars"><div class="sbar"><i></i></div><div class="sbar"><i></i></div><div class="sbar"><i></i></div></div><div class="ring"><div class="ringin"><img src="assets/img/avatar.png"/></div></div><div class="plus">+</div></div></div></div><div class="lbl">Poster une story</div></div>
-<div id="c1" class="card" style="left:375px"><div class="scaler"><div class="stagebox"><div class="fan"><div class="rc" style="--r:-14deg"><img src="assets/img/r1.jpg"/><div class="play">▶</div></div><div class="rc" style="--r:0deg"><img src="assets/img/r3.jpg"/><div class="play">▶</div></div><div class="rc" style="--r:14deg"><img src="assets/img/r5.jpg"/><div class="play">▶</div></div></div></div></div><div class="lbl">Publier 3 réels</div></div>
+<div id="c1" class="card" style="left:375px"><div class="scaler"><div class="stagebox"><div class="script"><div class="sth">SCRIPT · RÉEL</div><div class="sl"><b>HOOK</b><i style="width:70%"></i></div><div class="sl"><b>VALEUR</b><i style="width:82%"></i></div><div class="sl"><b>CTA</b><i style="width:55%"></i></div></div><svg class="pen" viewBox="0 0 24 24" width="74" height="74"><path d="M4 20l1-4L16 5l3 3L8 19z" fill="#fff" stroke="#3a261a" stroke-width="1.2" stroke-linejoin="round"/></svg></div></div><div class="lbl">Écrire tes scripts</div></div>
 <div id="c2" class="card" style="left:725px"><div class="scaler"><div class="stagebox"><div class="mhd">OCTOBRE</div><div class="mgrid"><div class="mc on"><span>1</span></div><div class="mc"><span>2</span></div><div class="mc on"><span>3</span></div><div class="mc"><span>4</span></div><div class="mc on"><span>5</span></div><div class="mc"><span>6</span></div><div class="mc"><span>7</span></div><div class="mc on"><span>8</span></div><div class="mc"><span>9</span></div><div class="mc on"><span>10</span></div><div class="mc"><span>11</span></div><div class="mc on"><span>12</span></div><div class="mc"><span>13</span></div><div class="mc"><span>14</span></div><div class="mc on"><span>15</span></div><div class="mc"><span>16</span></div><div class="mc on"><span>17</span></div><div class="mc"><span>18</span></div><div class="mc on"><span>19</span></div><div class="mc"><span>20</span></div><div class="mc"><span>21</span></div><div class="mc on"><span>22</span></div><div class="mc"><span>23</span></div><div class="mc on"><span>24</span></div><div class="mc"><span>25</span></div><div class="mc on"><span>26</span></div><div class="mc"><span>27</span></div><div class="mc"><span>28</span></div></div></div></div><div class="lbl">Planifier ton mois</div></div>
 <div id="c3" class="card" style="left:25px"><div class="scaler"><div class="stagebox"><div class="chat"><div class="bub l">Hello ! Ton offre m’intéresse</div><div class="bub r">Avec plaisir, je t’explique</div><div class="bub l typing"><i></i><i></i><i></i></div></div></div></div><div class="lbl">Répondre à tes DM</div></div>
 <div id="c4" class="card" style="left:375px"><div class="scaler"><div class="stagebox"><div class="chart"><div class="bar" style="height:60px"></div><div class="bar" style="height:90px"></div><div class="bar" style="height:80px"></div><div class="bar" style="height:130px"></div><div class="bar" style="height:175px"></div><svg class="trend" viewBox="0 0 400 200"><path d="M10 170 L100 130 L190 140 L280 80 L390 25" /></svg></div><div class="kpi">+38 %</div></div></div><div class="lbl">Analyser tes stats</div></div>
@@ -139,7 +146,9 @@ gsap.set('#c1',{autoAlpha:0});
 tl.fromTo('#c1',{autoAlpha:0,scale:.7,y:-30},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},1.560);
 tl.to('#hds',{autoAlpha:1,scale:1.08,duration:.15},1.540);
 tl.to('#hds',{autoAlpha:.45,scale:1,duration:.15},2.610);
-tl.fromTo('#c1 .rc',{rotation:0,y:60,autoAlpha:0},{rotation:(i,el)=>[-14,0,14][i],y:0,autoAlpha:1,duration:.35,stagger:.1,ease:'back.out(1.6)',immediateRender:false},1.660);
+tl.fromTo('#c1 .sl',{autoAlpha:0,x:-16},{autoAlpha:1,x:0,duration:.15,stagger:.18,immediateRender:false},1.660);
+tl.fromTo('#c1 .sl i',{scaleX:0},{scaleX:1,duration:.22,stagger:.18,ease:'power1.out',immediateRender:false},1.720);
+tl.fromTo('#c1 .pen',{x:-150,y:-60,rotation:-8},{x:30,y:40,rotation:6,duration:.7,ease:'none',immediateRender:false},1.660);
 tl.to('#c1',{autoAlpha:0,scale:.85,duration:.12},4.780);
 tl.set('#c1',{autoAlpha:0},4.900);
 gsap.set('#c2',{autoAlpha:0});
