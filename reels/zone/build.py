@@ -73,6 +73,7 @@ def label(lid, text, x, y, t, b, size=56):
 # ------------------------------------------------------------------ the zones, in the order she points at them
 def zones():
     html, tw = [], []
+    stage = ZONES_IN_STAGE
     # 1. strategic (safe) zone
     html.append('<div id="zSafe" class="zone g" style="left:70px;top:230px;width:850px;height:1230px"></div>')
     tw += [f"tl.fromTo('#zSafe',{{scale:1.08}},{{scale:1,duration:.4,ease:'power3.out',immediateRender:true}},0);",
@@ -87,7 +88,12 @@ def zones():
                 '<div id="zRight" class="zone r" style="left:940px;top:220px;width:140px;height:1250px"></div></div>')
     tw += fade('#zRed', 3.22, 8.25)
     tw.append("tl.fromTo('#zRight',{backgroundColor:'rgba(235,55,55,.36)'},{backgroundColor:'rgba(235,55,55,.62)',duration:.25,yoyo:true,repeat:3,immediateRender:false},5.50);")
-    h, t = label('lRed', 'ZONE À ÉVITER', 300, 80, 3.30, 8.25)
+    h, t = label('lRed', 'ZONE À ÉVITER', 340, 520, 3.30, 8.25, 64)
+    arrows = [('arUp', 492, 300, 0), ('arDn', 492, 1290, 180), ('arRt', 790, 840, 90)]   # point at the top, bottom and side bands
+    for aid, x, y, rot in arrows:
+        h.append(f'<div id="{aid}" class="arw" style="left:{x}px;top:{y}px;transform:rotate({rot}deg)">{ARROW}</div>')
+        t += pop(f'#{aid}', 3.55, .3, .4) + [f"tl.set('#{aid}',{{autoAlpha:0}},8.25);"]
+    t.append("tl.to('#arUp',{y:-14,duration:.3,yoyo:true,repeat:5,ease:'sine.inOut'},3.9);")
     html += h
     tw += t
     # fake Instagram buttons + a text that hides under them
@@ -96,19 +102,18 @@ def zones():
     tw += pop('#igcol', 5.55, .3, .7) + ["tl.set('#igcol',{autoAlpha:0},8.25);"]
     tw += ["gsap.set('#igcol .igi',{autoAlpha:0});",
            "tl.fromTo('#igcol .igi',{autoAlpha:0,x:30},{autoAlpha:1,x:0,duration:.18,stagger:.07,immediateRender:false},5.60);"]
-    html.append('<div id="badTxt">Mon super texte ici</div>')
-    tw += pop('#badTxt', 6.55, .25, .7) + ["tl.set('#badTxt',{autoAlpha:0},8.25);"]
-    html.append('<div id="badX"><svg viewBox="0 0 100 100" width="150" height="150"><circle cx="50" cy="50" r="44" fill="#E53935"/>'
-                '<path d="M32 32l36 36M68 32L32 68" stroke="#fff" stroke-width="11" stroke-linecap="round"/></svg></div>')
-    tw += pop('#badX', 7.40, .3, .3) + ["tl.set('#badX',{autoAlpha:0},8.25);"]
     # 3. eye line, stays put while the picture zooms in and out
-    html.append(f'<div id="zEye" class="zone g" style="left:110px;top:{EYE_Y - 55}px;width:830px;height:110px"></div>'
-                f'<div id="eyeLine" style="top:{EYE_Y}px"></div>')
+    stage.append(f'<div id="eyeG"><div id="zEye" class="zone g" style="left:110px;top:{EYE_Y - 55}px;width:830px;height:110px"></div>'
+                 f'<div id="eyeLine" style="top:{EYE_Y}px"></div>'
+                 f'<div id="lEye" class="lbl" style="left:110px;top:{EYE_Y - 150}px;font-size:48px">LIGNE DES YEUX</div></div>')
+    with open('work/eyes.json') as f:
+        eyes = json.load(f)                               # tracked eye line (eyes.py): the guide rides on her eyes
+    tw.append(f"gsap.set('#eyeG',{{y:{eyes[0][1] - EYE_Y:.1f}}});")
+    for (t0, y0), (t1, y1) in zip(eyes, eyes[1:]):
+        tw.append(f"tl.to('#eyeG',{{y:{y1 - EYE_Y:.1f},duration:{t1 - t0:.3f},ease:'none'}},{t0:.3f});")
     tw += fade('#zEye', 8.70, 13.85) + fade('#eyeLine', 8.70, 13.85)
     tw.append("tl.fromTo('#eyeLine',{scaleX:0},{scaleX:1,duration:.4,ease:'power2.out',immediateRender:false},8.70);")
-    h, t = label('lEye', 'LIGNE DES YEUX', 110, EYE_Y - 150, 8.75, 13.85, 48)
-    html += h
-    tw += t
+    tw += pop('#lEye', 8.75, .28, .5) + ["tl.set('#lEye',{autoAlpha:0},13.85);"]
     # 4. captions zone, the real captions sit inside it
     html.append(f'<div id="zCap" class="zone g" style="left:120px;top:{CAP_Y - 70}px;width:840px;height:140px"></div>')
     tw += fade('#zCap', 14.24, 17.60)
@@ -136,6 +141,9 @@ def zones():
     return html, tw
 
 
+ZONES_IN_STAGE = []
+ARROW = ('<svg viewBox="0 0 100 140" width="96" height="134"><path d="M50 132V24M14 58L50 14l36 44" fill="none" stroke="#fff" '
+         'stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 IG_ICONS = [   # white Instagram-style side buttons
     '<svg viewBox="0 0 24 24" width="62" height="62"><path d="M12 21s-7.5-4.6-9.5-9.2C1 8.4 3.2 5 6.6 5c2.1 0 3.4 1.2 4.4 2.5C12 6.2 13.3 5 15.4 5 18.8 5 21 8.4 19.5 11.8 17.5 16.4 12 21 12 21z" fill="none" stroke="#fff" stroke-width="2"/></svg>',
     '<svg viewBox="0 0 24 24" width="62" height="62"><path d="M20.5 11.5a8.5 8.5 0 1 1-3.4-6.8 8.4 8.4 0 0 1 3.4 6.8zM20.5 20.5l-2-4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>',
@@ -209,6 +217,8 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .lbl{{position:absolute;z-index:12;font-family:Anton;letter-spacing:.02em;color:#fff;background:{BLOCK};padding:6px 22px 4px;
   box-shadow:0 10px 26px rgba(0,0,0,.3)}}
 #igcol{{position:absolute;z-index:9;left:968px;top:1130px;display:flex;flex-direction:column;gap:38px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}}
+#eyeG{{position:absolute;inset:0;z-index:6}}
+.arw{{position:absolute;z-index:11;filter:drop-shadow(0 3px 8px rgba(0,0,0,.55))}}
 #badTxt{{position:absolute;z-index:8;left:520px;top:1300px;font:800 64px/1.05 Poppins;color:#fff;width:520px;
   text-shadow:0 0 18px rgba(0,0,0,.6),0 3px 8px rgba(0,0,0,.5)}}
 #badX{{position:absolute;z-index:11;left:690px;top:1270px}}
@@ -250,7 +260,8 @@ def build():
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR:.3f}" data-width="1080" data-height="1920">
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
 {nl.join(audio())}
-  <div id="stage"><video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video></div>
+  <div id="stage"><video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
+{nl.join(ZONES_IN_STAGE)}</div>
 {html}
 </div>
 <script>

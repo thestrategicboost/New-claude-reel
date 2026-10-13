@@ -18,6 +18,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .lbl{position:absolute;z-index:12;font-family:Anton;letter-spacing:.02em;color:#fff;background:#573307;padding:6px 22px 4px;
   box-shadow:0 10px 26px rgba(0,0,0,.3)}
 #igcol{position:absolute;z-index:9;left:968px;top:1130px;display:flex;flex-direction:column;gap:38px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
+#eyeG{position:absolute;inset:0;z-index:6}
+.arw{position:absolute;z-index:11;filter:drop-shadow(0 3px 8px rgba(0,0,0,.55))}
 #badTxt{position:absolute;z-index:8;left:520px;top:1300px;font:800 64px/1.05 Poppins;color:#fff;width:520px;
   text-shadow:0 0 18px rgba(0,0,0,.6),0 3px 8px rgba(0,0,0,.5)}
 #badX{position:absolute;z-index:11;left:690px;top:1270px}
@@ -61,16 +63,16 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="sfx15" src="assets/sfx/pop.mp3" data-start="24.300" data-duration="0.720" data-track-index="10" data-volume="0.180"></audio>
 <audio id="sfx16" src="assets/sfx/click.mp3" data-start="25.200" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
 <audio id="sfx17" src="assets/sfx/sparkle.mp3" data-start="25.350" data-duration="1.119" data-track-index="11" data-volume="0.105"></audio>
-  <div id="stage"><video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="26.469" data-track-index="0"></video></div>
+  <div id="stage"><video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="26.469" data-track-index="0"></video>
+<div id="eyeG"><div id="zEye" class="zone g" style="left:110px;top:717px;width:830px;height:110px"></div><div id="eyeLine" style="top:772px"></div><div id="lEye" class="lbl" style="left:110px;top:622px;font-size:48px">LIGNE DES YEUX</div></div></div>
 <div id="zSafe" class="zone g" style="left:70px;top:230px;width:850px;height:1230px"></div>
 <div id="lSafe" class="lbl" style="left:110px;top:270px;font-size:56px">ZONE STRATÉGIQUE</div>
 <div id="zRed"><div class="zone r" style="left:0;top:0;width:1080px;height:220px"></div><div class="zone r" style="left:0;top:1470px;width:1080px;height:450px"></div><div id="zRight" class="zone r" style="left:940px;top:220px;width:140px;height:1250px"></div></div>
-<div id="lRed" class="lbl" style="left:300px;top:80px;font-size:56px">ZONE À ÉVITER</div>
+<div id="lRed" class="lbl" style="left:340px;top:520px;font-size:64px">ZONE À ÉVITER</div>
+<div id="arUp" class="arw" style="left:492px;top:300px;transform:rotate(0deg)"><svg viewBox="0 0 100 140" width="96" height="134"><path d="M50 132V24M14 58L50 14l36 44" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div id="arDn" class="arw" style="left:492px;top:1290px;transform:rotate(180deg)"><svg viewBox="0 0 100 140" width="96" height="134"><path d="M50 132V24M14 58L50 14l36 44" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div id="arRt" class="arw" style="left:790px;top:840px;transform:rotate(90deg)"><svg viewBox="0 0 100 140" width="96" height="134"><path d="M50 132V24M14 58L50 14l36 44" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 <div id="igcol"><div class="igi"><svg viewBox="0 0 24 24" width="62" height="62"><path d="M12 21s-7.5-4.6-9.5-9.2C1 8.4 3.2 5 6.6 5c2.1 0 3.4 1.2 4.4 2.5C12 6.2 13.3 5 15.4 5 18.8 5 21 8.4 19.5 11.8 17.5 16.4 12 21 12 21z" fill="none" stroke="#fff" stroke-width="2"/></svg></div><div class="igi"><svg viewBox="0 0 24 24" width="62" height="62"><path d="M20.5 11.5a8.5 8.5 0 1 1-3.4-6.8 8.4 8.4 0 0 1 3.4 6.8zM20.5 20.5l-2-4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div><div class="igi"><svg viewBox="0 0 24 24" width="62" height="62"><path d="M21 3L3 10l7 3 3 7z M10 13L21 3" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></div><div class="igi"><svg viewBox="0 0 24 24" width="62" height="62"><circle cx="5" cy="12" r="2" fill="#fff"/><circle cx="12" cy="12" r="2" fill="#fff"/><circle cx="19" cy="12" r="2" fill="#fff"/></svg></div></div>
-<div id="badTxt">Mon super texte ici</div>
-<div id="badX"><svg viewBox="0 0 100 100" width="150" height="150"><circle cx="50" cy="50" r="44" fill="#E53935"/><path d="M32 32l36 36M68 32L32 68" stroke="#fff" stroke-width="11" stroke-linecap="round"/></svg></div>
-<div id="zEye" class="zone g" style="left:110px;top:717px;width:830px;height:110px"></div><div id="eyeLine" style="top:772px"></div>
-<div id="lEye" class="lbl" style="left:110px;top:622px;font-size:48px">LIGNE DES YEUX</div>
 <div id="zCap" class="zone g" style="left:120px;top:995px;width:840px;height:140px"></div>
 <div id="lCap" class="lbl" style="left:120px;top:900px;font-size:48px">SOUS-TITRES</div>
 <div id="zHook" class="zone g" style="left:120px;top:240px;width:840px;height:170px"></div>
@@ -208,17 +210,115 @@ tl.fromTo('#zRight',{backgroundColor:'rgba(235,55,55,.36)'},{backgroundColor:'rg
 gsap.set('#lRed',{autoAlpha:0});
 tl.fromTo('#lRed',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.28,ease:'back.out(1.8)',immediateRender:false},3.300);
 tl.set('#lRed',{autoAlpha:0},8.250);
+gsap.set('#arUp',{autoAlpha:0});
+tl.fromTo('#arUp',{autoAlpha:0,scale:0.4},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},3.550);
+tl.set('#arUp',{autoAlpha:0},8.25);
+gsap.set('#arDn',{autoAlpha:0});
+tl.fromTo('#arDn',{autoAlpha:0,scale:0.4},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},3.550);
+tl.set('#arDn',{autoAlpha:0},8.25);
+gsap.set('#arRt',{autoAlpha:0});
+tl.fromTo('#arRt',{autoAlpha:0,scale:0.4},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},3.550);
+tl.set('#arRt',{autoAlpha:0},8.25);
+tl.to('#arUp',{y:-14,duration:.3,yoyo:true,repeat:5,ease:'sine.inOut'},3.9);
 gsap.set('#igcol',{autoAlpha:0});
 tl.fromTo('#igcol',{autoAlpha:0,scale:0.7},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},5.550);
 tl.set('#igcol',{autoAlpha:0},8.25);
 gsap.set('#igcol .igi',{autoAlpha:0});
 tl.fromTo('#igcol .igi',{autoAlpha:0,x:30},{autoAlpha:1,x:0,duration:.18,stagger:.07,immediateRender:false},5.60);
-gsap.set('#badTxt',{autoAlpha:0});
-tl.fromTo('#badTxt',{autoAlpha:0,scale:0.7},{autoAlpha:1,scale:1,duration:0.25,ease:'back.out(1.8)',immediateRender:false},6.550);
-tl.set('#badTxt',{autoAlpha:0},8.25);
-gsap.set('#badX',{autoAlpha:0});
-tl.fromTo('#badX',{autoAlpha:0,scale:0.3},{autoAlpha:1,scale:1,duration:0.3,ease:'back.out(1.8)',immediateRender:false},7.400);
-tl.set('#badX',{autoAlpha:0},8.25);
+gsap.set('#eyeG',{y:19.0});
+tl.to('#eyeG',{y:18.6,duration:0.067,ease:'none'},8.000);
+tl.to('#eyeG',{y:9.7,duration:0.066,ease:'none'},8.067);
+tl.to('#eyeG',{y:0.8,duration:0.067,ease:'none'},8.133);
+tl.to('#eyeG',{y:-8.1,duration:0.067,ease:'none'},8.200);
+tl.to('#eyeG',{y:-16.8,duration:0.066,ease:'none'},8.267);
+tl.to('#eyeG',{y:-24.8,duration:0.067,ease:'none'},8.333);
+tl.to('#eyeG',{y:-32.7,duration:0.067,ease:'none'},8.400);
+tl.to('#eyeG',{y:-40.4,duration:0.066,ease:'none'},8.467);
+tl.to('#eyeG',{y:-39.5,duration:0.067,ease:'none'},8.533);
+tl.to('#eyeG',{y:-38.6,duration:0.067,ease:'none'},8.600);
+tl.to('#eyeG',{y:-37.7,duration:0.066,ease:'none'},8.667);
+tl.to('#eyeG',{y:-36.8,duration:0.067,ease:'none'},8.733);
+tl.to('#eyeG',{y:-36.2,duration:0.067,ease:'none'},8.800);
+tl.to('#eyeG',{y:-35.4,duration:0.066,ease:'none'},8.867);
+tl.to('#eyeG',{y:-33.9,duration:0.067,ease:'none'},8.933);
+tl.to('#eyeG',{y:-31.6,duration:0.067,ease:'none'},9.000);
+tl.to('#eyeG',{y:-28.8,duration:0.066,ease:'none'},9.067);
+tl.to('#eyeG',{y:-26.1,duration:0.067,ease:'none'},9.133);
+tl.to('#eyeG',{y:-23.4,duration:0.067,ease:'none'},9.200);
+tl.to('#eyeG',{y:-20.9,duration:0.066,ease:'none'},9.267);
+tl.to('#eyeG',{y:-18.9,duration:0.067,ease:'none'},9.333);
+tl.to('#eyeG',{y:-17.9,duration:0.067,ease:'none'},9.400);
+tl.to('#eyeG',{y:-18.5,duration:0.066,ease:'none'},9.467);
+tl.to('#eyeG',{y:-20.9,duration:0.067,ease:'none'},9.533);
+tl.to('#eyeG',{y:-23.9,duration:0.067,ease:'none'},9.600);
+tl.to('#eyeG',{y:-26.8,duration:0.066,ease:'none'},9.667);
+tl.to('#eyeG',{y:-29.7,duration:0.067,ease:'none'},9.733);
+tl.to('#eyeG',{y:-32.6,duration:0.067,ease:'none'},9.800);
+tl.to('#eyeG',{y:-35.0,duration:0.066,ease:'none'},9.867);
+tl.to('#eyeG',{y:-36.4,duration:0.067,ease:'none'},9.933);
+tl.to('#eyeG',{y:-36.0,duration:0.067,ease:'none'},10.000);
+tl.to('#eyeG',{y:-35.1,duration:0.066,ease:'none'},10.067);
+tl.to('#eyeG',{y:-34.3,duration:0.067,ease:'none'},10.133);
+tl.to('#eyeG',{y:-33.4,duration:0.067,ease:'none'},10.200);
+tl.to('#eyeG',{y:-32.6,duration:0.066,ease:'none'},10.267);
+tl.to('#eyeG',{y:-31.9,duration:0.067,ease:'none'},10.333);
+tl.to('#eyeG',{y:-31.7,duration:0.067,ease:'none'},10.400);
+tl.to('#eyeG',{y:-31.8,duration:0.066,ease:'none'},10.467);
+tl.to('#eyeG',{y:-29.7,duration:0.067,ease:'none'},10.533);
+tl.to('#eyeG',{y:-27.6,duration:0.067,ease:'none'},10.600);
+tl.to('#eyeG',{y:-25.6,duration:0.066,ease:'none'},10.667);
+tl.to('#eyeG',{y:-23.4,duration:0.067,ease:'none'},10.733);
+tl.to('#eyeG',{y:-21.6,duration:0.067,ease:'none'},10.800);
+tl.to('#eyeG',{y:-19.8,duration:0.066,ease:'none'},10.867);
+tl.to('#eyeG',{y:-18.1,duration:0.067,ease:'none'},10.933);
+tl.to('#eyeG',{y:-18.9,duration:0.067,ease:'none'},11.000);
+tl.to('#eyeG',{y:-20.1,duration:0.066,ease:'none'},11.067);
+tl.to('#eyeG',{y:-21.4,duration:0.067,ease:'none'},11.133);
+tl.to('#eyeG',{y:-22.7,duration:0.067,ease:'none'},11.200);
+tl.to('#eyeG',{y:-23.7,duration:0.066,ease:'none'},11.267);
+tl.to('#eyeG',{y:-23.9,duration:0.067,ease:'none'},11.333);
+tl.to('#eyeG',{y:-24.0,duration:0.067,ease:'none'},11.400);
+tl.to('#eyeG',{y:-23.9,duration:0.066,ease:'none'},11.467);
+tl.to('#eyeG',{y:-23.1,duration:0.067,ease:'none'},11.533);
+tl.to('#eyeG',{y:-23.3,duration:0.067,ease:'none'},11.600);
+tl.to('#eyeG',{y:-23.9,duration:0.066,ease:'none'},11.667);
+tl.to('#eyeG',{y:-24.6,duration:0.067,ease:'none'},11.733);
+tl.to('#eyeG',{y:-25.9,duration:0.067,ease:'none'},11.800);
+tl.to('#eyeG',{y:-27.3,duration:0.066,ease:'none'},11.867);
+tl.to('#eyeG',{y:-27.5,duration:0.067,ease:'none'},11.933);
+tl.to('#eyeG',{y:-27.0,duration:0.067,ease:'none'},12.000);
+tl.to('#eyeG',{y:-25.6,duration:0.066,ease:'none'},12.067);
+tl.to('#eyeG',{y:-23.8,duration:0.067,ease:'none'},12.133);
+tl.to('#eyeG',{y:-21.9,duration:0.067,ease:'none'},12.200);
+tl.to('#eyeG',{y:-20.2,duration:0.066,ease:'none'},12.267);
+tl.to('#eyeG',{y:-18.5,duration:0.067,ease:'none'},12.333);
+tl.to('#eyeG',{y:-18.1,duration:0.067,ease:'none'},12.400);
+tl.to('#eyeG',{y:-18.7,duration:0.066,ease:'none'},12.467);
+tl.to('#eyeG',{y:-19.6,duration:0.067,ease:'none'},12.533);
+tl.to('#eyeG',{y:-20.4,duration:0.067,ease:'none'},12.600);
+tl.to('#eyeG',{y:-22.4,duration:0.066,ease:'none'},12.667);
+tl.to('#eyeG',{y:-25.4,duration:0.067,ease:'none'},12.733);
+tl.to('#eyeG',{y:-28.8,duration:0.067,ease:'none'},12.800);
+tl.to('#eyeG',{y:-32.0,duration:0.066,ease:'none'},12.867);
+tl.to('#eyeG',{y:-34.9,duration:0.067,ease:'none'},12.933);
+tl.to('#eyeG',{y:-37.5,duration:0.067,ease:'none'},13.000);
+tl.to('#eyeG',{y:-38.4,duration:0.066,ease:'none'},13.067);
+tl.to('#eyeG',{y:-35.2,duration:0.067,ease:'none'},13.133);
+tl.to('#eyeG',{y:-30.9,duration:0.067,ease:'none'},13.200);
+tl.to('#eyeG',{y:-26.1,duration:0.066,ease:'none'},13.267);
+tl.to('#eyeG',{y:-21.4,duration:0.067,ease:'none'},13.333);
+tl.to('#eyeG',{y:-16.8,duration:0.067,ease:'none'},13.400);
+tl.to('#eyeG',{y:-12.4,duration:0.066,ease:'none'},13.467);
+tl.to('#eyeG',{y:-9.6,duration:0.067,ease:'none'},13.533);
+tl.to('#eyeG',{y:-11.3,duration:0.067,ease:'none'},13.600);
+tl.to('#eyeG',{y:-13.2,duration:0.066,ease:'none'},13.667);
+tl.to('#eyeG',{y:-15.3,duration:0.067,ease:'none'},13.733);
+tl.to('#eyeG',{y:-17.5,duration:0.067,ease:'none'},13.800);
+tl.to('#eyeG',{y:-19.7,duration:0.066,ease:'none'},13.867);
+tl.to('#eyeG',{y:-22.0,duration:0.067,ease:'none'},13.933);
+tl.to('#eyeG',{y:-24.4,duration:0.067,ease:'none'},14.000);
+tl.to('#eyeG',{y:-25.4,duration:0.066,ease:'none'},14.067);
+tl.to('#eyeG',{y:-26.1,duration:0.067,ease:'none'},14.133);
 gsap.set('#zEye',{autoAlpha:0});
 tl.fromTo('#zEye',{autoAlpha:0},{autoAlpha:1,duration:0.25,immediateRender:false},8.700);
 tl.to('#zEye',{autoAlpha:0,duration:.2},13.650);
@@ -228,7 +328,7 @@ tl.to('#eyeLine',{autoAlpha:0,duration:.2},13.650);
 tl.fromTo('#eyeLine',{scaleX:0},{scaleX:1,duration:.4,ease:'power2.out',immediateRender:false},8.70);
 gsap.set('#lEye',{autoAlpha:0});
 tl.fromTo('#lEye',{autoAlpha:0,scale:0.5},{autoAlpha:1,scale:1,duration:0.28,ease:'back.out(1.8)',immediateRender:false},8.750);
-tl.set('#lEye',{autoAlpha:0},13.850);
+tl.set('#lEye',{autoAlpha:0},13.85);
 gsap.set('#zCap',{autoAlpha:0});
 tl.fromTo('#zCap',{autoAlpha:0},{autoAlpha:1,duration:0.25,immediateRender:false},14.240);
 tl.to('#zCap',{autoAlpha:0,duration:.2},17.400);
