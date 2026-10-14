@@ -26,6 +26,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .tile{width:104px;height:104px;border-radius:28px;display:flex;align-items:center;justify-content:center;font-family:Poppins;font-weight:800;
   letter-spacing:-.03em;box-shadow:0 10px 22px rgba(0,0,0,.3),inset 0 0 0 2px rgba(255,255,255,.18)}
 .logo{max-width:290px;height:130px;display:flex;align-items:center;justify-content:center}
+.logo.two{flex-direction:column;gap:6px;height:150px}
+.logo.two img{max-height:70px!important}
 .logo img{max-width:290px;max-height:130px;object-fit:contain;border-radius:16px;display:block;box-shadow:0 8px 20px rgba(0,0,0,.3)}
 .nm{font:700 28px/1.1 Poppins;text-align:center;padding:0 14px;white-space:nowrap}
 .tag{position:absolute;top:-18px;right:-14px;min-width:84px;height:56px;padding:0 14px;border-radius:28px;font:800 28px/56px Poppins;text-align:center;
@@ -35,52 +37,50 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="22.700" data-width="1080" data-height="1920">
-  <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="22.700" data-track-index="2" data-volume="1"></audio>
-<audio id="sfx0" src="assets/sfx/whoosh-short.mp3" data-start="0.000" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx1" src="assets/sfx/pop.mp3" data-start="1.710" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx2" src="assets/sfx/pop.mp3" data-start="2.220" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx3" src="assets/sfx/click-soft.mp3" data-start="2.460" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
-<audio id="sfx4" src="assets/sfx/whoosh-short.mp3" data-start="3.110" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx5" src="assets/sfx/pop.mp3" data-start="5.170" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx6" src="assets/sfx/pop.mp3" data-start="5.740" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx7" src="assets/sfx/click-soft.mp3" data-start="5.980" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
-<audio id="sfx8" src="assets/sfx/whoosh-short.mp3" data-start="6.630" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx9" src="assets/sfx/pop.mp3" data-start="8.310" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx10" src="assets/sfx/pop.mp3" data-start="9.120" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx11" src="assets/sfx/click-soft.mp3" data-start="9.360" data-duration="0.360" data-track-index="11" data-volume="0.300"></audio>
-<audio id="sfx12" src="assets/sfx/whoosh-short.mp3" data-start="10.010" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx13" src="assets/sfx/pop.mp3" data-start="11.780" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx14" src="assets/sfx/pop.mp3" data-start="12.400" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx15" src="assets/sfx/click-soft.mp3" data-start="12.640" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
-<audio id="sfx16" src="assets/sfx/whoosh-short.mp3" data-start="13.290" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx17" src="assets/sfx/pop.mp3" data-start="16.350" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx18" src="assets/sfx/pop.mp3" data-start="16.920" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx19" src="assets/sfx/click-soft.mp3" data-start="17.160" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
-<audio id="sfx20" src="assets/sfx/whoosh-short.mp3" data-start="17.810" data-duration="0.570" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx21" src="assets/sfx/pop.mp3" data-start="21.030" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx22" src="assets/sfx/pop.mp3" data-start="21.540" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx23" src="assets/sfx/click-soft.mp3" data-start="21.780" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
-  <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="22.700" data-track-index="0"></video>
+<div id="root" data-composition-id="main" data-start="0" data-duration="19.200" data-width="1080" data-height="1920">
+  <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="19.200" data-track-index="2" data-volume="1"></audio>
+<audio id="vo0" src="assets/vo/t0.wav" data-start="0.330" data-duration="1.300" data-track-index="30" data-volume="0.9"></audio>
+<audio id="vo1" src="assets/vo/t1.wav" data-start="3.580" data-duration="1.180" data-track-index="31" data-volume="0.9"></audio>
+<audio id="vo2" src="assets/vo/t2.wav" data-start="7.040" data-duration="1.180" data-track-index="32" data-volume="0.9"></audio>
+<audio id="vo3" src="assets/vo/t3.wav" data-start="11.720" data-duration="1.060" data-track-index="33" data-volume="0.9"></audio>
+<audio id="vo4" src="assets/vo/t4.wav" data-start="15.970" data-duration="1.500" data-track-index="34" data-volume="0.9"></audio>
+<audio id="sfx0" src="assets/sfx/whoosh-short.mp3" data-start="0.330" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
+<audio id="sfx1" src="assets/sfx/pop.mp3" data-start="1.670" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx2" src="assets/sfx/pop.mp3" data-start="2.240" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
+<audio id="sfx3" src="assets/sfx/click-soft.mp3" data-start="2.480" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
+<audio id="sfx4" src="assets/sfx/whoosh-short.mp3" data-start="3.580" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
+<audio id="sfx5" src="assets/sfx/pop.mp3" data-start="4.810" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx6" src="assets/sfx/pop.mp3" data-start="5.620" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx7" src="assets/sfx/click-soft.mp3" data-start="5.860" data-duration="0.360" data-track-index="11" data-volume="0.300"></audio>
+<audio id="sfx8" src="assets/sfx/whoosh-short.mp3" data-start="7.040" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
+<audio id="sfx9" src="assets/sfx/pop.mp3" data-start="8.280" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx10" src="assets/sfx/pop.mp3" data-start="8.900" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
+<audio id="sfx11" src="assets/sfx/click-soft.mp3" data-start="9.140" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
+<audio id="sfx12" src="assets/sfx/whoosh-short.mp3" data-start="11.720" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
+<audio id="sfx13" src="assets/sfx/pop.mp3" data-start="12.850" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx14" src="assets/sfx/pop.mp3" data-start="13.420" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
+<audio id="sfx15" src="assets/sfx/click-soft.mp3" data-start="13.660" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
+<audio id="sfx16" src="assets/sfx/whoosh-short.mp3" data-start="15.970" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
+<audio id="sfx17" src="assets/sfx/pop.mp3" data-start="17.530" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx18" src="assets/sfx/pop.mp3" data-start="18.040" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
+<audio id="sfx19" src="assets/sfx/click-soft.mp3" data-start="18.280" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
+  <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="19.200" data-track-index="0"></video>
 <div id="hdr"><div class="hc" style="left:100px"><span id="hP" class="hb pay">PAYANT</span></div><div class="hc" style="left:580px"><span id="hG" class="hb free">GRATUIT</span></div></div>
-<div id="t0" class="topic"><span class="tb">Trouver tes idées</span></div>
+<div id="t0" class="topic"><span class="tb">Trouver tes idées de contenu</span></div>
 <div id="cp0" class="card p" style="left:130px"><div class="logo"><img src="assets/logos/answerthepublic.png"/></div><div class="tag p">€</div></div>
 <div id="cg0" class="card g" style="left:610px"><div class="logo"><img src="assets/logos/googletrends.png"/></div><div class="tag g">0 €</div></div>
-<div id="t1" class="topic"><span class="tb">Monter tes vidéos</span></div>
+<div id="t1" class="topic"><span class="tb">Faire ton montage vidéo</span></div>
 <div id="cp1" class="card p" style="left:130px"><div class="logo"><img src="assets/logos/premiere.png"/></div><div class="nm">Premiere Pro</div><div class="tag p">€</div></div>
-<div id="cg1" class="card g" style="left:610px"><div class="logo"><img src="assets/logos/edits.png"/></div><div class="tag g">0 €</div></div>
-<div id="t2" class="topic"><span class="tb">Programmer ton contenu</span></div>
+<div id="cg1" class="card g" style="left:610px"><div class="logo two"><img src="assets/logos/edits.png"/><img src="assets/logos/capcut.png"/></div><div class="tag g">0 €</div></div>
+<div id="t2" class="topic"><span class="tb">Pour programmer ton contenu</span></div>
 <div id="cp2" class="card p" style="left:130px"><div class="logo"><img src="assets/logos/metricool.png"/></div><div class="tag p">€</div></div>
 <div id="cg2" class="card g" style="left:610px"><div class="logo"><img src="assets/logos/meta.png"/></div><div class="tag g">0 €</div></div>
-<div id="t3" class="topic"><span class="tb">Créer tes visuels</span></div>
+<div id="t3" class="topic"><span class="tb">Pour créer tes visuels</span></div>
 <div id="cp3" class="card p" style="left:130px"><div class="logo"><img src="assets/logos/photoshop.png"/></div><div class="nm">Photoshop</div><div class="tag p">€</div></div>
 <div id="cg3" class="card g" style="left:610px"><div class="logo"><img src="assets/logos/canva.png"/></div><div class="tag g">0 €</div></div>
-<div id="t4" class="topic"><span class="tb">Étudier ta concurrence</span></div>
+<div id="t4" class="topic"><span class="tb">Pour étudier ta concurrence</span></div>
 <div id="cp4" class="card p" style="left:130px"><div class="logo"><img src="assets/logos/sortfeed.png"/></div><div class="tag p">€</div></div>
 <div id="cg4" class="card g" style="left:610px"><div class="logo"><img src="assets/logos/socialblade.png"/></div><div class="tag g">0 €</div></div>
-<div id="t5" class="topic"><span class="tb">Ajouter tes sous-titres</span></div>
-<div id="cp5" class="card p" style="left:130px"><div class="tile" style="background:#111;color:#C6FF3D;font-size:64px">S</div><div class="nm">Submagic</div><div class="tag p">€</div></div>
-<div id="cg5" class="card g" style="left:610px"><div class="logo"><img src="assets/logos/capcut.png"/></div><div class="tag g">0 €</div></div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
@@ -88,108 +88,90 @@ gsap.set('#hdr',{autoAlpha:1});
 tl.fromTo('#hdr',{y:-40},{y:0,duration:.35,ease:'power3.out',immediateRender:true},0);
 gsap.set('#hP, #hG',{opacity:.6});
 gsap.set('#t0',{autoAlpha:0});
-tl.fromTo('#t0',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:true},0.000);
+tl.fromTo('#t0',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},0.330);
 gsap.set('#cp0',{autoAlpha:0});
-tl.fromTo('#cp0',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},1.710);
-tl.fromTo('#cp0 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},1.950);
-tl.to('#hP',{opacity:1,scale:1.1,duration:.15},1.710);
-tl.to('#hP',{opacity:.6,scale:1,duration:.2},2.200);
-tl.to('#cp0',{autoAlpha:0,rotationY:90,duration:.18},2.930);
-tl.set('#cp0',{autoAlpha:0},3.110);
+tl.fromTo('#cp0',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},1.670);
+tl.fromTo('#cp0 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},1.910);
+tl.to('#hP',{opacity:1,scale:1.1,duration:.15},1.670);
+tl.to('#hP',{opacity:.6,scale:1,duration:.2},2.160);
+tl.to('#cp0',{autoAlpha:0,rotationY:90,duration:.18},3.400);
+tl.set('#cp0',{autoAlpha:0},3.580);
 gsap.set('#cg0',{autoAlpha:0});
-tl.fromTo('#cg0',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},2.220);
-tl.fromTo('#cg0 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},2.460);
-tl.to('#hG',{opacity:1,scale:1.1,duration:.15},2.220);
-tl.to('#hG',{opacity:.6,scale:1,duration:.2},2.710);
-tl.to('#cg0',{autoAlpha:0,rotationY:90,duration:.18},2.930);
-tl.set('#cg0',{autoAlpha:0},3.110);
-tl.to('#t0',{autoAlpha:0,y:-16,duration:.15},2.960);
-tl.set('#t0',{autoAlpha:0},3.110);
+tl.fromTo('#cg0',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},2.240);
+tl.fromTo('#cg0 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},2.480);
+tl.to('#hG',{opacity:1,scale:1.1,duration:.15},2.240);
+tl.to('#hG',{opacity:.6,scale:1,duration:.2},2.730);
+tl.to('#cg0',{autoAlpha:0,rotationY:90,duration:.18},3.400);
+tl.set('#cg0',{autoAlpha:0},3.580);
+tl.to('#t0',{autoAlpha:0,y:-16,duration:.15},3.430);
+tl.set('#t0',{autoAlpha:0},3.580);
 gsap.set('#t1',{autoAlpha:0});
-tl.fromTo('#t1',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},3.110);
+tl.fromTo('#t1',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},3.580);
 gsap.set('#cp1',{autoAlpha:0});
-tl.fromTo('#cp1',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},5.170);
-tl.fromTo('#cp1 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},5.410);
-tl.to('#hP',{opacity:1,scale:1.1,duration:.15},5.170);
-tl.to('#hP',{opacity:.6,scale:1,duration:.2},5.660);
-tl.to('#cp1',{autoAlpha:0,rotationY:90,duration:.18},6.450);
-tl.set('#cp1',{autoAlpha:0},6.630);
+tl.fromTo('#cp1',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},4.810);
+tl.fromTo('#cp1 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},5.050);
+tl.to('#hP',{opacity:1,scale:1.1,duration:.15},4.810);
+tl.to('#hP',{opacity:.6,scale:1,duration:.2},5.300);
+tl.to('#cp1',{autoAlpha:0,rotationY:90,duration:.18},6.860);
+tl.set('#cp1',{autoAlpha:0},7.040);
 gsap.set('#cg1',{autoAlpha:0});
-tl.fromTo('#cg1',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},5.740);
-tl.fromTo('#cg1 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},5.980);
-tl.to('#hG',{opacity:1,scale:1.1,duration:.15},5.740);
-tl.to('#hG',{opacity:.6,scale:1,duration:.2},6.230);
-tl.to('#cg1',{autoAlpha:0,rotationY:90,duration:.18},6.450);
-tl.set('#cg1',{autoAlpha:0},6.630);
-tl.to('#t1',{autoAlpha:0,y:-16,duration:.15},6.480);
-tl.set('#t1',{autoAlpha:0},6.630);
+tl.fromTo('#cg1',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},5.620);
+tl.fromTo('#cg1 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},5.860);
+tl.to('#hG',{opacity:1,scale:1.1,duration:.15},5.620);
+tl.to('#hG',{opacity:.6,scale:1,duration:.2},6.110);
+tl.to('#cg1',{autoAlpha:0,rotationY:90,duration:.18},6.860);
+tl.set('#cg1',{autoAlpha:0},7.040);
+tl.to('#t1',{autoAlpha:0,y:-16,duration:.15},6.890);
+tl.set('#t1',{autoAlpha:0},7.040);
 gsap.set('#t2',{autoAlpha:0});
-tl.fromTo('#t2',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},6.630);
+tl.fromTo('#t2',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},7.040);
 gsap.set('#cp2',{autoAlpha:0});
-tl.fromTo('#cp2',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},8.310);
-tl.fromTo('#cp2 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},8.550);
-tl.to('#hP',{opacity:1,scale:1.1,duration:.15},8.310);
-tl.to('#hP',{opacity:.6,scale:1,duration:.2},8.800);
-tl.to('#cp2',{autoAlpha:0,rotationY:90,duration:.18},9.830);
-tl.set('#cp2',{autoAlpha:0},10.010);
+tl.fromTo('#cp2',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},8.280);
+tl.fromTo('#cp2 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},8.520);
+tl.to('#hP',{opacity:1,scale:1.1,duration:.15},8.280);
+tl.to('#hP',{opacity:.6,scale:1,duration:.2},8.770);
+tl.to('#cp2',{autoAlpha:0,rotationY:90,duration:.18},11.540);
+tl.set('#cp2',{autoAlpha:0},11.720);
 gsap.set('#cg2',{autoAlpha:0});
-tl.fromTo('#cg2',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},9.120);
-tl.fromTo('#cg2 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},9.360);
-tl.to('#hG',{opacity:1,scale:1.1,duration:.15},9.120);
-tl.to('#hG',{opacity:.6,scale:1,duration:.2},9.610);
-tl.to('#cg2',{autoAlpha:0,rotationY:90,duration:.18},9.830);
-tl.set('#cg2',{autoAlpha:0},10.010);
-tl.to('#t2',{autoAlpha:0,y:-16,duration:.15},9.860);
-tl.set('#t2',{autoAlpha:0},10.010);
+tl.fromTo('#cg2',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},8.900);
+tl.fromTo('#cg2 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},9.140);
+tl.to('#hG',{opacity:1,scale:1.1,duration:.15},8.900);
+tl.to('#hG',{opacity:.6,scale:1,duration:.2},9.390);
+tl.to('#cg2',{autoAlpha:0,rotationY:90,duration:.18},11.540);
+tl.set('#cg2',{autoAlpha:0},11.720);
+tl.to('#t2',{autoAlpha:0,y:-16,duration:.15},11.570);
+tl.set('#t2',{autoAlpha:0},11.720);
 gsap.set('#t3',{autoAlpha:0});
-tl.fromTo('#t3',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},10.010);
+tl.fromTo('#t3',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},11.720);
 gsap.set('#cp3',{autoAlpha:0});
-tl.fromTo('#cp3',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},11.780);
-tl.fromTo('#cp3 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},12.020);
-tl.to('#hP',{opacity:1,scale:1.1,duration:.15},11.780);
-tl.to('#hP',{opacity:.6,scale:1,duration:.2},12.270);
-tl.to('#cp3',{autoAlpha:0,rotationY:90,duration:.18},13.110);
-tl.set('#cp3',{autoAlpha:0},13.290);
+tl.fromTo('#cp3',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},12.850);
+tl.fromTo('#cp3 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},13.090);
+tl.to('#hP',{opacity:1,scale:1.1,duration:.15},12.850);
+tl.to('#hP',{opacity:.6,scale:1,duration:.2},13.340);
+tl.to('#cp3',{autoAlpha:0,rotationY:90,duration:.18},15.790);
+tl.set('#cp3',{autoAlpha:0},15.970);
 gsap.set('#cg3',{autoAlpha:0});
-tl.fromTo('#cg3',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},12.400);
-tl.fromTo('#cg3 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},12.640);
-tl.to('#hG',{opacity:1,scale:1.1,duration:.15},12.400);
-tl.to('#hG',{opacity:.6,scale:1,duration:.2},12.890);
-tl.to('#cg3',{autoAlpha:0,rotationY:90,duration:.18},13.110);
-tl.set('#cg3',{autoAlpha:0},13.290);
-tl.to('#t3',{autoAlpha:0,y:-16,duration:.15},13.140);
-tl.set('#t3',{autoAlpha:0},13.290);
+tl.fromTo('#cg3',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},13.420);
+tl.fromTo('#cg3 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},13.660);
+tl.to('#hG',{opacity:1,scale:1.1,duration:.15},13.420);
+tl.to('#hG',{opacity:.6,scale:1,duration:.2},13.910);
+tl.to('#cg3',{autoAlpha:0,rotationY:90,duration:.18},15.790);
+tl.set('#cg3',{autoAlpha:0},15.970);
+tl.to('#t3',{autoAlpha:0,y:-16,duration:.15},15.820);
+tl.set('#t3',{autoAlpha:0},15.970);
 gsap.set('#t4',{autoAlpha:0});
-tl.fromTo('#t4',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},13.290);
+tl.fromTo('#t4',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},15.970);
 gsap.set('#cp4',{autoAlpha:0});
-tl.fromTo('#cp4',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},16.350);
-tl.fromTo('#cp4 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},16.590);
-tl.to('#hP',{opacity:1,scale:1.1,duration:.15},16.350);
-tl.to('#hP',{opacity:.6,scale:1,duration:.2},16.840);
-tl.to('#cp4',{autoAlpha:0,rotationY:90,duration:.18},17.630);
-tl.set('#cp4',{autoAlpha:0},17.810);
+tl.fromTo('#cp4',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},17.530);
+tl.fromTo('#cp4 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},17.770);
+tl.to('#hP',{opacity:1,scale:1.1,duration:.15},17.530);
+tl.to('#hP',{opacity:.6,scale:1,duration:.2},18.020);
 gsap.set('#cg4',{autoAlpha:0});
-tl.fromTo('#cg4',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},16.920);
-tl.fromTo('#cg4 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},17.160);
-tl.to('#hG',{opacity:1,scale:1.1,duration:.15},16.920);
-tl.to('#hG',{opacity:.6,scale:1,duration:.2},17.410);
-tl.to('#cg4',{autoAlpha:0,rotationY:90,duration:.18},17.630);
-tl.set('#cg4',{autoAlpha:0},17.810);
-tl.to('#t4',{autoAlpha:0,y:-16,duration:.15},17.660);
-tl.set('#t4',{autoAlpha:0},17.810);
-gsap.set('#t5',{autoAlpha:0});
-tl.fromTo('#t5',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},17.810);
-gsap.set('#cp5',{autoAlpha:0});
-tl.fromTo('#cp5',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},21.030);
-tl.fromTo('#cp5 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},21.270);
-tl.to('#hP',{opacity:1,scale:1.1,duration:.15},21.030);
-tl.to('#hP',{opacity:.6,scale:1,duration:.2},21.520);
-gsap.set('#cg5',{autoAlpha:0});
-tl.fromTo('#cg5',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},21.540);
-tl.fromTo('#cg5 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},21.780);
-tl.to('#hG',{opacity:1,scale:1.1,duration:.15},21.540);
-tl.to('#hG',{opacity:.6,scale:1,duration:.2},22.030);
-tl.set({}, {}, 22.700);
+tl.fromTo('#cg4',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},18.040);
+tl.fromTo('#cg4 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},18.280);
+tl.to('#hG',{opacity:1,scale:1.1,duration:.15},18.040);
+tl.to('#hG',{opacity:.6,scale:1,duration:.2},18.530);
+tl.set({}, {}, 19.200);
 window.__timelines["main"] = tl;
 </script>
 </body>

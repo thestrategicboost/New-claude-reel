@@ -16,28 +16,29 @@ RED, GREEN = '#E5262B', '#22B83A'      # payant / gratuit: red and green catch t
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
 
 # when she says "payant" / "gratuit" (raw trimmed from 3.3 s)
-P = [1.75, 5.21, 8.35, 11.82, 16.39, 21.07]
-G = [2.26, 5.78, 9.16, 12.44, 16.96, 21.58]
+P = [1.71, 4.85, 8.32, 12.89, 17.57]
+G = [2.28, 5.66, 8.94, 13.46, 18.08]
+# her own voice reading each topic (cut from her first edit, assets/vo/t*.wav), placed in the pause before 'payant'
+VO = [(0.33, 1.30), (3.58, 1.18), (7.04, 1.18), (11.72, 1.06), (15.97, 1.50)]
 # topic, (paid tool, monogram, tile colours), (free tool, monogram, tile colours)
-ROUNDS = [   # topic, paid (name, logo file cropped from Maé's own first edit, show name?), free (same)
-    ('Trouver tes idées', ('AnswerThePublic', 'answerthepublic', False), ('Google Trends', 'googletrends', False)),
-    ('Monter tes vidéos', ('Premiere Pro', 'premiere', True), ('Edits', 'edits', False)),
-    ('Programmer ton contenu', ('Metricool', 'metricool', False), ('Meta Business Suite', 'meta', False)),
-    ('Créer tes visuels', ('Photoshop', 'photoshop', True), ('Canva', 'canva', False)),
-    ('Étudier ta concurrence', ('Sort Feed', 'sortfeed', False), ('Social Blade', 'socialblade', False)),
-    ('Ajouter tes sous-titres', ('Submagic', None, True), ('CapCut', 'capcut', False)),
+ROUNDS = [   # topic as she says it, paid (name, logo, show name?), free (name, logo(s), show name?) - exactly as in her first edit
+    ('Trouver tes idées de contenu', ('AnswerThePublic', 'answerthepublic', False), ('Google Trends', 'googletrends', False)),
+    ('Faire ton montage vidéo', ('Premiere Pro', 'premiere', True), ('Edits · CapCut', ('edits', 'capcut'), False)),
+    ('Pour programmer ton contenu', ('Metricool', 'metricool', False), ('Meta Business Suite', 'meta', False)),
+    ('Pour créer tes visuels', ('Photoshop', 'photoshop', True), ('Canva', 'canva', False)),
+    ('Pour étudier ta concurrence', ('Sort Feed', 'sortfeed', False), ('Social Blade', 'socialblade', False)),
 ]
 LEFT, RIGHT = 300, 780      # card centres
 
 
 def starts():
     """topic k shows from here: at once for the first, then a beat after the previous 'gratuit'"""
-    return [0.0] + [g + .85 for g in G[:-1]]
+    return [v[0] for v in VO]
 
 
 def tile(name, logo):
-    if logo is None:     # no logo in her edit: a plain monogram tile
-        return '<div class="tile" style="background:#111;color:#C6FF3D;font-size:64px">S</div>'
+    if isinstance(logo, tuple):      # two free tools stacked
+        return '<div class="logo two">' + ''.join(f'<img src="assets/logos/{l}.png"/>' for l in logo) + '</div>'
     return f'<div class="logo"><img src="assets/logos/{logo}.png"/></div>'
 
 
@@ -74,7 +75,7 @@ def board():
 def sfx_list():
     out = []
     for k, a in enumerate(starts()):
-        out.append(('whoosh-short', a, .22))
+        out.append(('whoosh-short', a, .12))
         out.append(('pop', P[k] - .04, .22))
         out.append(('pop', G[k] - .04, .22))
         out.append(('click-soft', G[k] + .2, .3))
@@ -85,7 +86,8 @@ SFX_LEN = {'pop': .72, 'whoosh-short': .57, 'click-soft': .36}
 
 
 def audio():
-    out, lanes = [], []
+    out, lanes = [f'<audio id="vo{k}" src="assets/vo/t{k}.wav" data-start="{t:.3f}" data-duration="{d:.3f}" data-track-index="{30 + k}" data-volume="0.9"></audio>'
+                  for k, (t, d) in enumerate(VO)], []
     for k, (name, t, vol) in enumerate(sorted(sfx_list(), key=lambda x: x[1])):
         d = min(SFX_LEN[name], DUR - t)
         lane = next((i for i, end in enumerate(lanes) if end <= t), None)
@@ -119,6 +121,8 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .tile{{width:104px;height:104px;border-radius:28px;display:flex;align-items:center;justify-content:center;font-family:Poppins;font-weight:800;
   letter-spacing:-.03em;box-shadow:0 10px 22px rgba(0,0,0,.3),inset 0 0 0 2px rgba(255,255,255,.18)}}
 .logo{{max-width:290px;height:130px;display:flex;align-items:center;justify-content:center}}
+.logo.two{{flex-direction:column;gap:6px;height:150px}}
+.logo.two img{{max-height:70px!important}}
 .logo img{{max-width:290px;max-height:130px;object-fit:contain;border-radius:16px;display:block;box-shadow:0 8px 20px rgba(0,0,0,.3)}}
 .nm{{font:700 28px/1.1 Poppins;text-align:center;padding:0 14px;white-space:nowrap}}
 .tag{{position:absolute;top:-18px;right:-14px;min-width:84px;height:56px;padding:0 14px;border-radius:28px;font:800 28px/56px Poppins;text-align:center;
