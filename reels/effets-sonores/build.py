@@ -120,7 +120,16 @@ def demos():
     html.append('<div id="fol"><div class="fav"><img src="assets/avatar.png"/></div><div class="fnm">thestrategicboost.fr'
                 '<div class="fsub">Stratégie Instagram</div></div><div id="fbtn" class="fbtn">S’abonner</div><div id="fbtn2" class="fbtn on">Abonné</div></div>')
     tw += pop('#fol', 14.20, .35, .7) + show('#fbtn2', 14.62, DUR) + ["tl.to('#fbtn',{scale:.85,duration:.08,yoyo:true,repeat:1},14.46);",
-                                                                    "tl.set('#fbtn',{autoAlpha:0},14.62);"]
+                                                                    "tl.set('#fbtn',{autoAlpha:0},14.62);",
+                                                                    "tl.to('#fol',{autoAlpha:0,y:20,duration:.15},15.05);", "tl.set('#fol',{autoAlpha:0},15.2);"]
+    # 7. comment CTA: the keyword types itself, then sent
+    html.append('<div id="cta"><div class="ctl">Commente</div><div class="cbar"><div class="cav"><img src="assets/avatar.png"/></div>'
+                '<span id="ctxt"></span><span class="caret"></span><div id="csend" class="csend"><svg viewBox="0 0 24 24" width="34" height="34">'
+                '<path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div>')
+    tw += pop('#cta', 15.15, .3, .7) + ["gsap.set('#ctxt',{textContent:''});"]
+    for i in range(1, 6):
+        tw.append(f"tl.set('#ctxt',{{textContent:'{'CARBO'[:i]}'}},{15.40 + (i - 1) * .07:.3f});")
+    tw.append("tl.to('#csend',{scale:.8,duration:.07,yoyo:true,repeat:1},15.85);")
     return html, tw
 
 
@@ -143,7 +152,7 @@ def captions():
 def sfx_list():
     out = [('whoosh-short', 1.28, .5), ('whoosh-short', 1.70, .45), ('click', 3.36, .5), ('pop', 4.20, .45), ('pop', 4.66, .45),
            ('riser01-soft', 6.00, .32), ('shutter2', 10.36, .6), ('shutter2', 10.62, .55), ('shutter2', 10.94, .55), ('shutter2', 11.10, .5),
-           ('glitch2', 12.92, .8), ('pop', 14.20, .3), ('click', 14.46, .45)]
+           ('glitch2', 12.92, .8), ('pop', 14.20, .3), ('click', 14.46, .45), ('pop', 15.15, .3)] + [('click-soft', 15.40 + i * .07, .25) for i in range(0, 5, 2)] + [('click', 15.85, .45)]
     for k, (a, *_r) in enumerate(SECTIONS):                 # soft tick when each new card lands
         if k:
             out.append(('click-soft', a + .12, .25))
@@ -198,6 +207,14 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .gl.b{{background:rgba(0,200,255,.35);clip-path:polygon(0 44%,100% 44%,100% 50%,0 50%,0 74%,100% 74%,100% 79%,0 79%)}}
 .cap{{position:absolute;left:0;right:0;top:{CAP_Y - 52}px;z-index:20;text-align:center;text-transform:lowercase;font:700 84px/1.1 Poppins;color:#fff;
   letter-spacing:-.03em;text-shadow:0 0 24px rgba(0,0,0,.6),0 4px 12px rgba(0,0,0,.55),0 1px 3px rgba(0,0,0,.5);white-space:nowrap;transform-origin:50% 50%}}
+#cta{{position:absolute;z-index:16;left:90px;right:90px;top:1360px;text-align:center}}
+.ctl{{display:inline-block;font:400 60px/1 Anton;letter-spacing:.02em;color:#fff;background:{BLOCK};padding:8px 26px 6px;margin-bottom:16px;box-shadow:0 10px 24px rgba(0,0,0,.28)}}
+.cbar{{position:relative;height:110px;border-radius:55px;background:rgba(58,38,26,.6);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  border:1.5px solid rgba(255,255,255,.4);display:flex;align-items:center;gap:20px;padding:0 16px;font:800 54px/1 Poppins;color:#fff;letter-spacing:.04em}}
+.cav{{width:80px;height:80px;border-radius:50%;overflow:hidden;border:3px solid #fff;flex:none}}
+.cav img{{width:100%;height:100%;object-fit:cover;display:block}}
+.caret{{display:inline-block;width:4px;height:56px;background:#fff;margin-left:-14px}}
+.csend{{position:absolute;right:16px;width:78px;height:78px;border-radius:50%;background:#0095F6;display:flex;align-items:center;justify-content:center}}
 #fol{{position:absolute;z-index:15;left:110px;top:1400px;width:830px;height:150px;background:#fff;border-radius:28px;display:flex;align-items:center;
   gap:22px;padding:0 26px;box-shadow:0 18px 50px rgba(0,0,0,.3)}}
 .fav{{width:100px;height:100px;border-radius:50%;padding:4px;background:linear-gradient(45deg,#FEDA75,#FA7E1E,#D62976,#962FBF);flex:none}}
