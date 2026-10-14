@@ -7,6 +7,7 @@ white, Instagram-style touches.
 
 PY build.py    writes index.html
 """
+import os
 import shutil
 import subprocess
 
@@ -14,15 +15,19 @@ DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error',
                             'csv=p=0', 'assets/aroll.mp4'], capture_output=True, text=True).stdout.strip())
 BLOCK = '#573307'
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
+ACCENT = '#D6AE66' if os.environ.get('THEME', 'brown') != 'gold' else '#573307'
 IG = 'linear-gradient(225deg,#4F5BD5 0%,#962FBF 28%,#D62976 55%,#FA7E1E 80%,#FEDA75 100%)'
 import os
-THEME = os.environ.get('THEME', 'brown')        # card colour: 'brown' or 'gold'
+THEME = os.environ.get('THEME', 'brown')        # card colour: 'brown', 'white' or 'gold'
+HEAD = os.environ.get('HEAD', 'block')          # title style: 'block' (brown box) or 'frame' (brown outline, black text shadow)
+SPEED = 1.12                                    # the a-roll is played 12 % faster (assets/aroll.mp4 built from work/aroll_1x.mp4)
 FREQ = {'j': 'UNE FOIS PAR JOUR', 's': 'UNE FOIS PAR SEMAINE', 'm': 'UNE FOIS PAR MOIS'}
 
 # (start, frequency, scene, label) - when she says "une fois par ..." (round 3 from the silences: whisper skipped it)
-MOMENTS = [(0.00, 'j', 'story', 'Poster une story'), (1.54, 's', 'script', 'Écrire tes scripts'), (2.66, 'm', 'month', 'Planifier ton mois'),
+MOMENTS_1X = [(0.00, 'j', 'story', 'Poster une story'), (1.54, 's', 'script', 'Écrire tes scripts'), (2.66, 'm', 'month', 'Planifier ton mois'),
            (3.50, 'j', 'dm', 'Répondre à tes DM'), (4.90, 's', 'stats', 'Analyser tes stats'), (6.04, 'm', 'goal', 'Fixer tes objectifs'),
            (7.33, 'j', 'ideas', 'Noter tes idées'), (8.49, 's', 'batch', 'Filmer en batch'), (9.64, 'm', 'audit', 'Auditer ton profil')]
+MOMENTS = [(t / SPEED, f, k, l) for t, f, k, l in MOMENTS_1X]
 
 
 def scene(k, kind, t):
@@ -52,7 +57,7 @@ def scene(k, kind, t):
         cells = ''.join(f'<div class="mc{" on" if d % 7 in (0, 2, 4) else ""}"><span>{d + 1}</span></div>' for d in range(28))
         h = f'<div class="mhd">OCTOBRE</div><div class="mgrid">{cells}</div>'
         w = [f"tl.fromTo('{s} .mc',{{autoAlpha:0,scale:.5}},{{autoAlpha:1,scale:1,duration:.15,stagger:.012,immediateRender:false}},{a:.3f});",
-             f"tl.fromTo('{s} .mc.on',{{background:'rgba(255,255,255,.12)'}},{{background:'#D6AE66',duration:.12,stagger:.035,immediateRender:false}},{a + .3:.3f});"]
+             f"tl.fromTo('{s} .mc.on',{{background:'rgba(255,255,255,.12)'}},{{background:'{ACCENT}',duration:.12,stagger:.035,immediateRender:false}},{a + .3:.3f});"]
     elif kind == 'dm':
         h = ('<div class="chat"><div class="bub l">Hello ! Ton offre m’intéresse</div><div class="bub r">Avec plaisir, je t’explique</div>'
              '<div class="bub l typing"><i></i><i></i><i></i></div></div>')
@@ -149,7 +154,17 @@ def audio():
     return out
 
 
-CARD_BG = 'linear-gradient(160deg,#9A6A4A 0%,#7A4E33 55%,#5E3A24 100%)' if THEME == 'brown' else GOLD
+CARD_BG = {'brown': 'linear-gradient(160deg,#9A6A4A 0%,#7A4E33 55%,#5E3A24 100%)', 'white': '#FFFFFF', 'gold': GOLD}[THEME]
+HEAD_CSS = ('.hb{background:none!important;border:4px solid #573307;box-shadow:none!important;'
+            'text-shadow:0 3px 0 #000,0 0 18px rgba(0,0,0,.75),0 4px 14px rgba(0,0,0,.6)}' if HEAD == 'frame' else '')
+INK_CSS = '' if THEME == 'brown' else (
+    '.card{color:#3a261a}.lbl{color:#3a261a!important}.phone{border-color:#3a261a}.sbar{background:rgba(58,38,26,.2)}'
+    '.sbar i,.typing i{background:#3a261a}.trend path{stroke:#3a261a}.t1{border-color:#3a261a;background:rgba(58,38,26,.1)}'
+    '.arrow path{stroke:#3a261a}.kpi{color:#3a261a;background:rgba(58,38,26,.1);border-color:rgba(58,38,26,.3)}'
+    '.mc{background:rgba(58,38,26,.1)}.clip{background:rgba(58,38,26,.08);border-color:rgba(58,38,26,.25)}'
+    '.bub.l{background:rgba(58,38,26,.12)}.mhd{color:#9E6E33}.pav img{border-color:#fff}'
+    + ('.bar,.t2,.bulb{background:#573307!important}.bub.r{background:#573307!important;color:#fff!important}.mhd{color:#573307}' if THEME == 'gold' else '')
+    + ('.card{box-shadow:0 22px 50px rgba(0,0,0,.25)!important}' if THEME == 'white' else ''))
 CSS = f'''
 *{{margin:0;padding:0;box-sizing:border-box}}
 html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
@@ -157,6 +172,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 .hcol{{position:absolute;top:236px;width:340px;z-index:12;text-align:center;transform-origin:50% 50%}}
 .hb{{display:inline-block;font:400 50px/1 Anton;letter-spacing:.02em;color:#fff;background:{BLOCK};padding:8px 20px 6px;box-shadow:0 10px 24px rgba(0,0,0,.28)}}
+{HEAD_CSS}
 .hb small{{display:block;font-size:28px;letter-spacing:.08em;opacity:.85;margin-bottom:2px}}
 .card{{position:absolute;z-index:11;top:372px;width:330px;height:262px;border-radius:32px;overflow:hidden;
   background:{CARD_BG};-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
@@ -235,6 +251,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .audit{{position:absolute;top:150px;left:60px;display:flex;flex-direction:column;gap:12px}}
 .ar{{display:flex;align-items:center;gap:14px;font:600 28px/1 Poppins}}
 .ck{{width:40px;height:40px;border-radius:50%;background:#34C759;font:800 26px/40px Poppins;text-align:center;font-style:normal;display:block}}
+{INK_CSS}
 '''
 
 
