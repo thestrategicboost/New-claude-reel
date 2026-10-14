@@ -15,10 +15,10 @@ DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error',
                             'csv=p=0', 'assets/aroll.mp4'], capture_output=True, text=True).stdout.strip())
 BLOCK = '#573307'
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
-ACCENT = '#D6AE66' if os.environ.get('THEME', 'brown') != 'gold' else '#573307'
+ACCENT = '#D6AE66' if os.environ.get('THEME', 'white') != 'gold' else '#573307'
 IG = 'linear-gradient(225deg,#4F5BD5 0%,#962FBF 28%,#D62976 55%,#FA7E1E 80%,#FEDA75 100%)'
 import os
-THEME = os.environ.get('THEME', 'brown')        # card colour: 'brown', 'white' or 'gold'
+THEME = os.environ.get('THEME', 'white')        # card colour: 'brown', 'white' or 'gold'
 HEAD = os.environ.get('HEAD', 'block')          # title style: 'block' (brown box) or 'frame' (brown outline, black text shadow)
 SPEED = 1.12                                    # the a-roll is played 12 % faster (assets/aroll.mp4 built from work/aroll_1x.mp4)
 FREQ = {'j': 'UNE FOIS PAR JOUR', 's': 'UNE FOIS PAR SEMAINE', 'm': 'UNE FOIS PAR MOIS'}
@@ -27,7 +27,19 @@ FREQ = {'j': 'UNE FOIS PAR JOUR', 's': 'UNE FOIS PAR SEMAINE', 'm': 'UNE FOIS PA
 MOMENTS_1X = [(0.00, 'j', 'story', 'Poster une story'), (1.54, 's', 'script', 'Écrire tes scripts'), (2.66, 'm', 'month', 'Planifier ton mois'),
            (3.50, 'j', 'dm', 'Répondre à tes DM'), (4.90, 's', 'stats', 'Analyser tes stats'), (6.04, 'm', 'goal', 'Fixer tes objectifs'),
            (7.33, 'j', 'ideas', 'Noter tes idées'), (8.49, 's', 'batch', 'Filmer en batch'), (9.64, 'm', 'audit', 'Auditer ton profil')]
-MOMENTS = [(t / SPEED, f, k, l) for t, f, k, l in MOMENTS_1X]
+CUTS_1X = [(3.20, 3.66), (6.62, 7.25)]        # dead pauses removed after the 1st and 2nd "mois" (the a-roll also ends at 10.85 s, before she walks to the camera)
+
+
+def cut_time(t):
+    for a, b in CUTS_1X:
+        if t >= b:
+            t -= b - a
+        elif t > a:
+            t = a
+    return t
+
+
+MOMENTS = [(cut_time(t) / SPEED, f, k, l) for t, f, k, l in MOMENTS_1X]
 
 
 def scene(k, kind, t):
