@@ -142,15 +142,15 @@ def captions():
 
 def sfx_list():
     out = [('whoosh-short', 1.28, .5), ('whoosh-short', 1.70, .45), ('click', 3.36, .5), ('pop', 4.20, .45), ('pop', 4.66, .45),
-           ('riser01-soft', 6.00, .32), ('shutter', 10.36, .6), ('shutter', 10.62, .55), ('shutter', 10.94, .55), ('shutter', 11.10, .5),
-           ('glitch', 12.92, .55), ('pop', 14.20, .3), ('click', 14.46, .45)]
+           ('riser01-soft', 6.00, .32), ('shutter2', 10.36, .6), ('shutter2', 10.62, .55), ('shutter2', 10.94, .55), ('shutter2', 11.10, .5),
+           ('glitch2', 12.92, .8), ('pop', 14.20, .3), ('click', 14.46, .45)]
     for k, (a, *_r) in enumerate(SECTIONS):                 # soft tick when each new card lands
         if k:
             out.append(('click-soft', a + .12, .25))
     return out
 
 
-SFX_LEN = {'whoosh-short': .57, 'pop': .72, 'sparkle': 1.8, 'click': .36, 'click-soft': .36, 'riser01-soft': 3.05, 'shutter': .35, 'glitch': .55}
+SFX_LEN = {'whoosh-short': .57, 'pop': .72, 'sparkle': 1.8, 'click': .36, 'click-soft': .36, 'riser01-soft': 3.05, 'shutter2': .45, 'glitch2': .70}
 
 
 def audio():
