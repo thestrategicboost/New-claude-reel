@@ -12,19 +12,20 @@ import subprocess
 DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of',
                             'csv=p=0', 'assets/aroll.mp4'], capture_output=True, text=True).stdout.strip())
 BLOCK = '#573307'
+RED, GREEN = '#E5262B', '#22B83A'      # payant / gratuit: red and green catch the eye (as in her first edit)
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
 
 # when she says "payant" / "gratuit" (raw trimmed from 3.3 s)
 P = [1.75, 5.21, 8.35, 11.82, 16.39, 21.07]
 G = [2.26, 5.78, 9.16, 12.44, 16.96, 21.58]
 # topic, (paid tool, monogram, tile colours), (free tool, monogram, tile colours)
-ROUNDS = [
-    ('Trouver tes idées', ('AnswerThePublic', 'AtP', '#1F2A44', '#4C6FFF'), ('Google Trends', 'GT', '#FFFFFF', '#1A73E8')),
-    ('Monter tes vidéos', ('Premiere Pro', 'Pr', '#00005B', '#9999FF'), ('CapCut', 'CC', '#111111', '#FFFFFF')),
-    ('Programmer ton contenu', ('Metricool', 'M', '#1C1C3C', '#6C63FF'), ('Meta Business Suite', 'Meta', '#FFFFFF', '#0866FF')),
-    ('Créer tes visuels', ('Photoshop', 'Ps', '#001E36', '#31A8FF'), ('Canva', 'Canva', '#7D2AE8', '#FFFFFF')),
-    ('Étudier ta concurrence', ('Sort Feed', 'SF', '#FFFFFF', '#E1306C'), ('Social Blade', 'SB', '#B22222', '#FFFFFF')),
-    ('Ajouter tes sous-titres', ('Submagic', 'S', '#111111', '#C6FF3D'), ('Edits', 'Ed', '#FFFFFF', '#111111')),
+ROUNDS = [   # topic, paid (name, logo file cropped from Maé's own first edit, show name?), free (same)
+    ('Trouver tes idées', ('AnswerThePublic', 'answerthepublic', False), ('Google Trends', 'googletrends', False)),
+    ('Monter tes vidéos', ('Premiere Pro', 'premiere', True), ('Edits', 'edits', False)),
+    ('Programmer ton contenu', ('Metricool', 'metricool', False), ('Meta Business Suite', 'meta', False)),
+    ('Créer tes visuels', ('Photoshop', 'photoshop', True), ('Canva', 'canva', False)),
+    ('Étudier ta concurrence', ('Sort Feed', 'sortfeed', False), ('Social Blade', 'socialblade', False)),
+    ('Ajouter tes sous-titres', ('Submagic', None, True), ('CapCut', 'capcut', False)),
 ]
 LEFT, RIGHT = 300, 780      # card centres
 
@@ -34,9 +35,10 @@ def starts():
     return [0.0] + [g + .85 for g in G[:-1]]
 
 
-def tile(mono, bg, fg):
-    fs = 64 if len(mono) <= 2 else (44 if len(mono) == 3 else 36)
-    return f'<div class="tile" style="background:{bg};color:{fg};font-size:{fs}px">{mono}</div>'
+def tile(name, logo):
+    if logo is None:     # no logo in her edit: a plain monogram tile
+        return '<div class="tile" style="background:#111;color:#C6FF3D;font-size:64px">S</div>'
+    return f'<div class="logo"><img src="assets/logos/{logo}.png"/></div>'
 
 
 def board():
@@ -44,7 +46,7 @@ def board():
     html.append('<div id="hdr"><div class="hc" style="left:' + str(LEFT - 200) + 'px"><span id="hP" class="hb pay">PAYANT</span></div>'
                 '<div class="hc" style="left:' + str(RIGHT - 200) + 'px"><span id="hG" class="hb free">GRATUIT</span></div></div>')
     tw += ["gsap.set('#hdr',{autoAlpha:1});", "tl.fromTo('#hdr',{y:-40},{y:0,duration:.35,ease:'power3.out',immediateRender:true},0);",
-           "gsap.set('#hP, #hG',{opacity:.55});"]
+           "gsap.set('#hP, #hG',{opacity:.6});"]
     st = starts()
     for k, (topic, paid, free) in enumerate(ROUNDS):
         a = st[k]
@@ -53,15 +55,15 @@ def board():
         html.append(f'<div id="t{k}" class="topic"><span class="tb">{topic}</span></div>')
         tw += [f"gsap.set('#t{k}',{{autoAlpha:0}});",
                f"tl.fromTo('#t{k}',{{autoAlpha:0,y:-24,scale:.9}},{{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:{first}}},{a:.3f});"]
-        for side, (name, mono, bg, fg), t, cx, tag in (('p', paid, P[k], LEFT, '€'), ('g', free, G[k], RIGHT, '0 €')):
+        for side, (name, logo, show_name), t, cx, tag in (('p', paid, P[k], LEFT, '€'), ('g', free, G[k], RIGHT, '0 €')):
             cid = f'c{side}{k}'
-            html.append(f'<div id="{cid}" class="card {side}" style="left:{cx - 170}px">{tile(mono, bg, fg)}<div class="nm">{name}</div>'
+            html.append(f'<div id="{cid}" class="card {side}" style="left:{cx - 170}px">{tile(name, logo)}{f'<div class="nm">{name}</div>' if show_name else ''}'
                         f'<div class="tag {side}">{tag}</div></div>')
             tw += [f"gsap.set('#{cid}',{{autoAlpha:0}});",
                    f"tl.fromTo('#{cid}',{{autoAlpha:0,rotationY:-90,scale:.8}},{{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false}},{t - .04:.3f});",
                    f"tl.fromTo('#{cid} .tag',{{scale:0}},{{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false}},{t + .2:.3f});"]
             hid = '#hP' if side == 'p' else '#hG'
-            tw += [f"tl.to('{hid}',{{opacity:1,scale:1.1,duration:.15}},{t - .04:.3f});", f"tl.to('{hid}',{{opacity:.55,scale:1,duration:.2}},{t + .45:.3f});"]
+            tw += [f"tl.to('{hid}',{{opacity:1,scale:1.1,duration:.15}},{t - .04:.3f});", f"tl.to('{hid}',{{opacity:.6,scale:1,duration:.2}},{t + .45:.3f});"]
             if b < DUR - .01:
                 tw += [f"tl.to('#{cid}',{{autoAlpha:0,rotationY:90,duration:.18}},{b - .18:.3f});", f"tl.set('#{cid}',{{autoAlpha:0}},{b:.3f});"]
         if b < DUR - .01:
@@ -104,21 +106,25 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .topic{{position:absolute;left:0;right:0;top:250px;z-index:12;text-align:center}}
 .tb{{display:inline-block;font:400 64px/1 Anton;letter-spacing:.02em;color:#fff;background:{BLOCK};padding:10px 28px 8px;text-transform:uppercase;
   box-shadow:0 12px 28px rgba(0,0,0,.3)}}
-#hdr{{position:absolute;left:0;right:0;top:362px;z-index:12}}
+#hdr{{position:absolute;left:0;right:0;top:352px;z-index:12}}
 .hc{{position:absolute;width:400px;text-align:center}}
-.hb{{display:inline-block;font:700 34px/1 Poppins;letter-spacing:.14em;padding:12px 26px;border-radius:40px;transform-origin:50% 50%}}
-.hb.pay{{background:rgba(58,38,26,.75);color:#fff;border:1.5px solid rgba(255,255,255,.5)}}
-.hb.free{{background:#fff;color:{BLOCK}}}
-.card{{position:absolute;z-index:11;top:440px;width:340px;height:200px;border-radius:36px;display:flex;flex-direction:column;align-items:center;
+.hb{{display:inline-block;font:400 54px/1 Anton;letter-spacing:.04em;padding:8px 26px 6px;transform-origin:50% 50%;color:#fff;box-shadow:0 10px 24px rgba(0,0,0,.3)}}
+.hb.pay{{background:{RED}}}
+.hb.free{{background:{GREEN}}}
+.card.p{{border-color:{RED}!important;box-shadow:0 22px 50px rgba(0,0,0,.35),0 0 0 3px {RED},0 0 34px rgba(229,38,43,.45)!important}}
+.card.g{{border-color:{GREEN}!important;box-shadow:0 22px 50px rgba(0,0,0,.35),0 0 0 3px {GREEN},0 0 34px rgba(34,184,58,.45)!important}}
+.card{{position:absolute;z-index:11;top:448px;width:340px;height:200px;border-radius:36px;display:flex;flex-direction:column;align-items:center;
   justify-content:center;gap:12px;background:rgba(58,38,26,.55);-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
   border:1.5px solid rgba(255,255,255,.35);box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25);color:#fff;transform-style:preserve-3d}}
 .tile{{width:104px;height:104px;border-radius:28px;display:flex;align-items:center;justify-content:center;font-family:Poppins;font-weight:800;
   letter-spacing:-.03em;box-shadow:0 10px 22px rgba(0,0,0,.3),inset 0 0 0 2px rgba(255,255,255,.18)}}
+.logo{{max-width:290px;height:130px;display:flex;align-items:center;justify-content:center}}
+.logo img{{max-width:290px;max-height:130px;object-fit:contain;border-radius:16px;display:block;box-shadow:0 8px 20px rgba(0,0,0,.3)}}
 .nm{{font:700 28px/1.1 Poppins;text-align:center;padding:0 14px;white-space:nowrap}}
 .tag{{position:absolute;top:-18px;right:-14px;min-width:84px;height:56px;padding:0 14px;border-radius:28px;font:800 28px/56px Poppins;text-align:center;
   box-shadow:0 8px 18px rgba(0,0,0,.3)}}
-.tag.p{{background:{BLOCK};color:#fff;border:2px solid #fff}}
-.tag.g{{background:{GOLD};color:#3a261a;border:2px solid #fff}}
+.tag.p{{background:{RED};color:#fff;border:2px solid #fff}}
+.tag.g{{background:{GREEN};color:#fff;border:2px solid #fff}}
 '''
 
 
