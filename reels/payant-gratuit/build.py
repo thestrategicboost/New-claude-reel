@@ -105,7 +105,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 .topic{{position:absolute;left:0;right:0;top:250px;z-index:12;text-align:center}}
 .tb{{display:inline-block;font:400 76px/1 Anton;letter-spacing:.02em;color:#fff;text-transform:uppercase;
-  text-shadow:0 4px 0 {BLOCK},0 0 22px rgba(87,51,7,.85),0 6px 18px rgba(40,20,5,.7)}}
+  text-shadow:0 4px 0 #000,0 0 22px rgba(0,0,0,.75),0 6px 18px rgba(0,0,0,.6)}}
 #hdr{{position:absolute;left:0;right:0;top:352px;z-index:12}}
 .hc{{position:absolute;width:400px;text-align:center}}
 .hb{{display:inline-block;font:400 54px/1 Anton;letter-spacing:.04em;padding:8px 26px 6px;transform-origin:50% 50%;color:#fff;box-shadow:0 10px 24px rgba(0,0,0,.3)}}
