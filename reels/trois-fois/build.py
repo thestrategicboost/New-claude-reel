@@ -49,10 +49,11 @@ def scene(k, kind, t):
     if kind == 'story':
         bars = ''.join(f'<div class="sbar"><i></i></div>' for _ in range(3))
         h = (f'<div class="phone"><div class="sbars">{bars}</div><div class="ring"><div class="ringin"><img src="assets/img/avatar.png"/></div></div>'
-             f'<div class="plus">+</div></div>')
-        w = [f"tl.fromTo('{s} .ring',{{scale:0,rotation:-90}},{{scale:1,rotation:0,duration:.4,ease:'back.out(1.7)',immediateRender:false}},{a:.3f});",
+             f'<div class="plus">+</div><div class="stag">Ta story</div></div>')
+        w = [f"tl.fromTo('{s} .phone',{{y:40,scale:.85}},{{y:0,scale:1,duration:.3,ease:'back.out(1.6)',immediateRender:false}},{a:.3f});",
+             f"tl.fromTo('{s} .ring',{{scale:0,rotation:-90}},{{scale:1,rotation:0,duration:.4,ease:'back.out(1.7)',immediateRender:false}},{a + .05:.3f});",
              f"tl.fromTo('{s} .sbar i',{{scaleX:0}},{{scaleX:1,duration:.3,stagger:.3,ease:'none',immediateRender:false}},{a + .1:.3f});",
-             f"tl.fromTo('{s} .plus',{{scale:0}},{{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false}},{a + .35:.3f});"]
+             f"tl.fromTo('{s} .plus, {s} .stag',{{scale:0}},{{scale:1,duration:.25,stagger:.1,ease:'back.out(3)',immediateRender:false}},{a + .3:.3f});"]
     elif kind == 'script':
         lines = ''.join(f'<div class="sl"><b>{h}</b><i style="width:{w}%"></i></div>' for h, w in (('HOOK', 70), ('VALEUR', 82), ('CTA', 55)))
         h = (f'<div class="script"><div class="sth">SCRIPT · RÉEL</div>{lines}</div>'
@@ -108,10 +109,10 @@ def scene(k, kind, t):
     return h, w
 
 
-COLS = {'j': 190, 's': 540, 'm': 890}          # the three frequencies on one line, left to right as she points
+COLS = {'j': 228, 's': 540, 'm': 852}          # the three frequencies on one line, left to right as she points
 
 
-COLS = {'j': 190, 's': 540, 'm': 890}          # the three frequencies on one line, left to right as she points
+COLS = {'j': 228, 's': 540, 'm': 852}          # the three frequencies on one line, left to right as she points
 
 
 def board():
@@ -119,7 +120,7 @@ def board():
     # one fixed line of three titles; the one she is saying lights up
     for f, cx in COLS.items():
         word = FREQ[f].split(' PAR ')[1]
-        html.append(f'<div id="hd{f}" class="hcol" style="left:{cx - 170}px"><span class="hb"><small>UNE FOIS</small>PAR {word}</span></div>')
+        html.append(f'<div id="hd{f}" class="hcol" style="left:{cx - 150}px"><span class="hb"><small>UNE FOIS</small>PAR {word}</span></div>')
         tw.append(f"gsap.set('#hd{f}',{{autoAlpha:.45}});")
     for k, (t, f, kind, label) in enumerate(MOMENTS):
         same = [m[0] for m in MOMENTS[k + 1:] if m[1] == f]
@@ -127,7 +128,7 @@ def board():
         nxt = MOMENTS[k + 1][0] if k + 1 < len(MOMENTS) else DUR
         inner, anim = scene(k, kind, t)
         cx = COLS[f]
-        html.append(f'<div id="c{k}" class="card" style="left:{cx - 165}px"><div class="scaler"><div class="stagebox">{inner}</div></div>'
+        html.append(f'<div id="c{k}" class="card" style="left:{cx - 140}px"><div class="scaler"><div class="stagebox">{inner}</div></div>'
                     f'<div class="lbl">{label}</div></div>')
         first = 'true' if t == 0 else 'false'
         tw += [f"gsap.set('#c{k}',{{autoAlpha:0}});",
@@ -182,15 +183,15 @@ CSS = f'''
 html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
-.hcol{{position:absolute;top:236px;width:340px;z-index:12;text-align:center;transform-origin:50% 50%}}
-.hb{{display:inline-block;font:400 50px/1 Anton;letter-spacing:.02em;color:#fff;background:{BLOCK};padding:8px 20px 6px;box-shadow:0 10px 24px rgba(0,0,0,.28)}}
+.hcol{{position:absolute;top:300px;width:300px;z-index:12;text-align:center;transform-origin:50% 50%}}
+.hb{{display:inline-block;font:400 44px/1 Anton;letter-spacing:.02em;color:#fff;background:{BLOCK};padding:8px 20px 6px;box-shadow:0 10px 24px rgba(0,0,0,.28)}}
 {HEAD_CSS}
 .hb small{{display:block;font-size:28px;letter-spacing:.08em;opacity:.85;margin-bottom:2px}}
-.card{{position:absolute;z-index:11;top:372px;width:330px;height:262px;border-radius:32px;overflow:hidden;
+.card{{position:absolute;z-index:11;top:428px;width:280px;height:224px;border-radius:32px;overflow:hidden;
   background:{CARD_BG};-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
   border:1.5px solid rgba(255,255,255,.35);box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25);color:#fff}}
-.scaler{{position:absolute;left:0;top:0;width:580px;height:320px;transform:scale(.569);transform-origin:0 0}}
-.scaler{{position:absolute;left:0;top:0;width:580px;height:320px;transform:scale(.569);transform-origin:0 0}}\n.stagebox{{position:absolute;left:0;right:0;top:0;height:320px;display:flex;align-items:center;justify-content:center}}
+.scaler{{position:absolute;left:0;top:0;width:580px;height:320px;transform:scale(.483);transform-origin:0 0}}
+.scaler{{position:absolute;left:0;top:0;width:580px;height:320px;transform:scale(.483);transform-origin:0 0}}\n.stagebox{{position:absolute;left:0;right:0;top:0;height:320px;display:flex;align-items:center;justify-content:center}}
 .lbl{{position:absolute;left:0;right:0;bottom:22px;text-align:center;font:700 26px/1 Poppins;letter-spacing:-.01em;color:{'#fff' if THEME == 'brown' else '#3a261a'}}}
 /* script */
 .script{{position:relative;width:360px;height:250px;border-radius:22px;background:#FFF8EC;padding:24px 26px;box-shadow:0 14px 30px rgba(0,0,0,.3);color:#3a261a}}
@@ -200,15 +201,17 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .sl i{{display:block;height:13px;border-radius:7px;background:#B88A4E;transform-origin:0 50%}}
 .pen{{position:absolute;left:330px;top:120px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}}
 /* story */
-.phone{{position:relative;width:160px;height:280px;border:5px solid #fff;border-radius:32px;margin-top:14px}}
+.phone{{position:relative;width:200px;height:300px;border:7px solid #3a261a;border-radius:36px;margin-top:6px;overflow:hidden;
+  background:linear-gradient(225deg,#4F5BD5 0%,#962FBF 28%,#D62976 55%,#FA7E1E 80%,#FEDA75 100%);box-shadow:0 14px 30px rgba(0,0,0,.3)}}
 .sbars{{position:absolute;left:14px;right:14px;top:14px;display:flex;gap:6px}}
-.sbar{{flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.3);overflow:hidden}}
-.sbar i{{display:block;height:100%;background:#fff;transform-origin:0 50%}}
-.ring{{position:absolute;left:23px;top:70px;width:104px;height:104px;border-radius:50%;padding:6px;background:{IG}}}
-.ringin{{width:100%;height:100%;border-radius:50%;border:4px solid #3a261a;overflow:hidden}}
+.sbar{{flex:1;height:7px;border-radius:4px;background:rgba(255,255,255,.4)!important;overflow:hidden}}
+.sbar i{{display:block;height:100%;background:#fff!important;transform-origin:0 50%}}
+.ring{{position:absolute;left:32px;top:52px;width:122px;height:122px;border-radius:50%;padding:6px;background:#fff}}
+.ringin{{width:100%;height:100%;border-radius:50%;border:4px solid #fff;overflow:hidden}}
 .ringin img,.pav img{{width:100%;height:100%;object-fit:cover;display:block}}
-.plus{{position:absolute;left:95px;top:148px;width:40px;height:40px;border-radius:50%;background:#0095F6;border:3px solid #fff;
-  font:800 30px/32px Poppins;text-align:center;color:#fff}}
+.plus{{position:absolute;left:118px;top:138px;width:50px;height:50px;border-radius:50%;background:#0095F6;border:4px solid #fff;
+  font:800 38px/40px Poppins;text-align:center;color:#fff}}
+.stag{{position:absolute;left:20px;right:20px;bottom:30px;height:56px;border-radius:28px;background:#fff;color:#3a261a;font:800 30px/56px Poppins;text-align:center}}
 /* reels */
 .fan{{position:relative;width:420px;height:290px;margin-top:20px}}
 .rc{{position:absolute;left:135px;top:0;width:150px;height:260px;border-radius:20px;overflow:hidden;border:4px solid #fff;
