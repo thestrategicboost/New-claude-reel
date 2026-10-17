@@ -10,7 +10,9 @@ round is a ~2 minute re-render.
 
 Read before building: `references/looks.md` (the three looks, exact values), `references/layout.md` (safe zone,
 placement, behind-head formula), `references/gotchas.md` (every trap already hit once). Read
-`references/overlays.md` when the script calls for an animated insert.
+`references/overlays.md` when the script calls for an animated insert. Read `references/effects.md` when the user
+names an effect (Kinetic hook, Gravity drop, Icon strike, Jiggle delete, Grade slider, Comment drop...) or wants
+more motion design: 18 named effects with recipes.
 
 Works on macOS, Linux and Windows. setup.py detects the machine at the start of every run and every command below
 comes from that record, so never guess paths or shells: see "This machine" right after Step 0.
