@@ -12,29 +12,36 @@ import subprocess
 DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of',
                             'csv=p=0', 'assets/music.m4a'], capture_output=True, text=True).stdout.strip())
 BROWN, DARK = '#8C5C41', '#573307'
-WAVE = '#EBD5BC'
+WAVE = '#D9AF88'      # caramel waveform on the brown clip
+HEAD = '#5C3A25'      # darker header band
 # (song, vibe, start, end) on the music clock (cut from the inspi's audio)
 SOUNDS = [('Now or Never', 'Motivant', 0.0, 4.3), ('Good Man With a<br/>Broken Heart', 'Cinématique', 4.3, 7.9),
           ('Runaway', 'Dramatique', 7.9, 11.9), ('Timeless', 'Puissant', 11.9, DUR)]
 PX = 175          # timeline pixels per second
 PLAY_X = 390      # fixed playhead
 STRIP_Y = 770
-CLIP_H = 104
+CLIP_H = 92
+HEAD_H = 26
 GAP = 14
-ENV = json.load(open('work/env.json'))     # 20 loudness values per second
+ENV = json.load(open('work/env60.json'))   # 60 loudness values per second
 
 
 def clip(k, name, vibe, a, b):
+    """an editing-app audio clip: dark header band with the note / fx marks, dense filled waveform, fade handles"""
     x, w = a * PX, (b - a) * PX - GAP
-    bars, n = [], int((b - a) * 20)
+    hh, wh = HEAD_H, CLIP_H - HEAD_H
+    n = int((b - a) * 60)
+    pts = [(0, wh)]
     for i in range(n):
-        v = ENV[min(int(a * 20) + i, len(ENV) - 1)]
-        h = max(6, v * (CLIP_H - 30))
-        bars.append(f'<rect x="{i * PX / 20 + 2:.1f}" y="{(CLIP_H - 6 - h):.1f}" width="{PX / 20 - 2.6:.1f}" height="{h:.1f}" rx="1.5"/>')
+        v = ENV[min(int(a * 60) + i, len(ENV) - 1)]
+        pts.append((round(i * w / n, 1), round(wh - max(.06, v) * (wh - 6), 1)))
+    pts += [(w, pts[-1][1]), (w, wh)]
+    path = 'M' + ' L'.join(f'{px} {py}' for px, py in pts) + ' Z'
     two = ' two' if '<br/>' in name else ''
     return (f'<div class="lab{two}" style="left:{x}px;width:{w}px"><div class="nm">{name}</div><div class="vb">{vibe}</div></div>'
-            f'<div class="clip" style="left:{x}px;width:{w}px"><span class="note">♪</span>'
-            f'<svg width="{w}" height="{CLIP_H}" viewBox="0 0 {w} {CLIP_H}"><g fill="{WAVE}">{"".join(bars)}</g></svg></div>')
+            f'<div class="clip" style="left:{x}px;width:{w}px"><div class="hb"><span class="note">♫</span><span class="fx">fx</span></div>'
+            f'<svg class="wv" width="{w}" height="{wh}" viewBox="0 0 {w} {wh}" preserveAspectRatio="none"><path d="{path}" fill="{WAVE}"/></svg>'
+            f'<span class="fh l"></span><span class="fh r"></span></div>')
 
 
 def build():
@@ -47,15 +54,23 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #shade{{position:absolute;left:0;right:0;top:0;height:1000px;z-index:5;
   background:linear-gradient(180deg,rgba(25,14,6,.35) 0%,rgba(25,14,6,.4) 60%,rgba(25,14,6,0) 100%)}}
 #strip{{position:absolute;left:0;top:{STRIP_Y - 112}px;height:{CLIP_H + 112}px;z-index:10;will-change:transform}}
-.clip{{position:absolute;top:112px;height:{CLIP_H}px;border-radius:12px;background:{BROWN};border:2px solid {DARK};overflow:hidden;
-  box-shadow:0 10px 26px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.18)}}
-.clip svg{{position:absolute;left:0;top:0}}
-.note{{position:absolute;right:10px;top:4px;font:700 22px/1 Poppins;color:{WAVE}}}
+.clip{{position:absolute;top:112px;height:{CLIP_H}px;border-radius:5px;background:{BROWN};overflow:hidden;
+  box-shadow:0 8px 22px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.14)}}
+.hb{{position:absolute;left:0;right:0;top:0;height:{HEAD_H}px;background:{HEAD}}}
+.note{{position:absolute;right:46px;top:1px;font:700 21px/24px Poppins;color:#F3E2CF}}
+.fx{{position:absolute;right:12px;top:1px;font:italic 400 19px/24px Georgia,serif;color:rgba(243,226,207,.45)}}
+.wv{{position:absolute;left:0;bottom:0}}
+.fh{{position:absolute;bottom:8px;width:22px;height:22px;border-radius:4px;background:rgba(60,36,20,.55);border:1.5px solid rgba(255,255,255,.55)}}
+.fh.l{{left:8px}}
+.fh.r{{right:8px}}
+.fh:after{{content:'';position:absolute;inset:4px;background:rgba(255,255,255,.75)}}
+.fh.l:after{{clip-path:polygon(100% 0,100% 100%,0 100%)}}
+.fh.r:after{{clip-path:polygon(0 0,100% 100%,0 100%)}}
 .lab{{position:absolute;top:22px;text-align:center;overflow:hidden;white-space:nowrap;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6)}}
 .lab.two{{top:-14px}}
-.nm{{font:700 34px/1.08 Poppins;padding:0 10px}}
+.nm{{font:700 34px/1.08 Poppins;letter-spacing:-.01em;padding:0 10px}}
 .lab.two .nm{{font-size:31px}}
-.vb{{font:600 italic 27px/1.2 Poppins;opacity:.88;margin-top:4px}}
+.vb{{font:italic 400 28px/1.2 Inter,Poppins;opacity:.92;margin-top:4px}}
 #ph{{position:absolute;left:{PLAY_X - 3}px;top:{STRIP_Y - 8}px;width:6px;height:{CLIP_H + 30}px;background:#fff;z-index:12;border-radius:3px;
   box-shadow:0 0 12px rgba(0,0,0,.45)}}
 #ph:before{{content:'';position:absolute;left:-11px;top:-14px;border-left:14px solid transparent;border-right:14px solid transparent;
