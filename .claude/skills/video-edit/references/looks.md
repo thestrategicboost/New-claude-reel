@@ -35,3 +35,23 @@ Add more with the Google Fonts CSS2 API + a Chrome user agent, keep only the `/*
 
 ## Avoid (they looked worse every time)
 Orange captions, Anton / condensed poster caps, black and white grades, @handle watermarks in the corner, date stamps.
+
+## Look "DA pro" (Maé's references "Exemple DA1" / "Exemple DA2", Drive)
+Editorial, calm, magazine-like: reads as a pro editor, not an AI template. The footage carries it; graphics are rare
+and typographic. Rules:
+- **Two text levels only.** (1) Small lowercase serif subtitle, one short phrase at a time (2-4 words), white, ~34px,
+  centered at chest height (y ~1000-1100), soft shadow only, no box, no pop animation (plain cut or 0.1 s fade).
+  (2) On 1-3 key words per reel: a short lead-in in white Poppins SemiBold ~48px (words appearing one by one), then the
+  KEY WORD huge in condensed Anton 200-300px, uppercase, brand colour, full width, tight line-height .9; often placed
+  BEHIND her head (cutout on top, behind-head formula in layout.md). Lands with a fast scale 1.08→1 / no bounce.
+- **Hand-drawn accents**, sparingly: a marker circle around a number ("Étape ①"), a curved arrow pointing to a word,
+  a strike-through on the wrong word with the right word written above in a brush script (draw with SVG
+  stroke-dashoffset, 0.3 s). Same brand colour.
+- **Lists**: numbered lines stacked top-right ("1. son âge", "2. …"), each line appearing on its word, staying until
+  the list ends. Step titles "Étape" white + circled number + subtitle line.
+- **Camera / cut**: change angle or framing every few seconds (wide, top-down, close-up, lean-in), punch-ins 1.15-1.3
+  on emphasis, natural warm grade, no glow/grain gimmicks, no stickers, no emoji, no SFX on every word (only a soft
+  whoosh on the big words).
+- **Brand mapping for Maé**: the source lime → her gold (#D6AE66) or white for the huge words (test both), the
+  marker accents in gold, lead-ins white, subtitles white serif → keep Poppins Light italic if no serif is wanted.
+  Her lilac grade stays.
