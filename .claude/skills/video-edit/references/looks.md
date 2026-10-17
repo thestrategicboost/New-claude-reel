@@ -55,3 +55,17 @@ and typographic. Rules:
 - **Brand mapping for Maé**: the source lime → her gold (#D6AE66) or white for the huge words (test both), the
   marker accents in gold, lead-ins white, subtitles white serif → keep Poppins Light italic if no serif is wanted.
   Her lilac grade stays.
+- **Brown explainer screens (Maé loves these, mix them into the DA pro look)**: when she explains something
+  (steps, a method, a planning, a comparison), cut to a full-screen brown background and explain it with type and
+  widgets, her voice continuing underneath. Reference build: `reels/nouvelle/build.py` (reel "planifier ton contenu en
+  45 min", FINAL v6; preview `reels/nouvelle/renders/apercu-v6.jpg`).
+  - Background: `radial-gradient(120% 80% at 50% 38%,#9C6B4E 0%,#8C5C41 55%,#734A33 100%)` (`.screen` class there).
+  - Header: small "Étape 1" Poppins 600 40px + huge white Anton title (fit to width, `fit()` helper) at top ~250px.
+  - Content: frosted glass cards (rgba(255,255,255,.12), white 1.5px border, radius 40), white pill tags in Anton
+    with dark-brown text, gold gradient tiles/buttons for highlights, real photos/reel thumbnails, a calendar, a
+    table, a mind-map; elements pop in on her words. Captions keep running at the bottom (white, one word).
+  - Variant "video in front": the same brown screen with HER VIDEO in a rounded framed card (white 3-4px border,
+    radius 36-44, soft shadow) next to or under the explanation, or a small recap card of the screen above her head
+    when the shot goes back to her (`.recap` / `.recapCal` there).
+  - Rhythm with the DA pro look: talking shots with the subtle editorial text, then a brown screen for each "how",
+    then back to her; 1 screen every 5-10 s at most so it still feels edited, not a slideshow.
