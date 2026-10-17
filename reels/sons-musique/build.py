@@ -18,7 +18,7 @@ SOUNDS = [('Now or Never', 'Motivant', 0.0, 4.3), ('Good Man With a<br/>Broken H
           ('Runaway', 'Dramatique', 7.9, 11.9), ('Timeless', 'Puissant', 11.9, DUR)]
 PX = 175          # timeline pixels per second
 PLAY_X = 390      # fixed playhead
-STRIP_Y = 600
+STRIP_Y = 770
 CLIP_H = 104
 GAP = 14
 ENV = json.load(open('work/env.json'))     # 20 loudness values per second
@@ -44,10 +44,8 @@ def build():
 html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
-#shade{{position:absolute;left:0;right:0;top:0;height:900px;z-index:5;
-  background:linear-gradient(180deg,rgba(25,14,6,.62) 0%,rgba(25,14,6,.42) 55%,rgba(25,14,6,0) 100%)}}
-#title{{position:absolute;left:80px;right:80px;top:262px;z-index:10;text-align:center;color:#fff;font:800 56px/1.12 Poppins;
-  letter-spacing:-.01em;text-shadow:0 3px 14px rgba(0,0,0,.55)}}
+#shade{{position:absolute;left:0;right:0;top:0;height:1000px;z-index:5;
+  background:linear-gradient(180deg,rgba(25,14,6,.35) 0%,rgba(25,14,6,.4) 60%,rgba(25,14,6,0) 100%)}}
 #strip{{position:absolute;left:0;top:{STRIP_Y - 112}px;height:{CLIP_H + 112}px;z-index:10;will-change:transform}}
 .clip{{position:absolute;top:112px;height:{CLIP_H}px;border-radius:12px;background:{BROWN};border:2px solid {DARK};overflow:hidden;
   box-shadow:0 10px 26px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.18)}}
@@ -63,8 +61,14 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #ph:before{{content:'';position:absolute;left:-11px;top:-14px;border-left:14px solid transparent;border-right:14px solid transparent;
   border-top:18px solid #fff}}
 '''
-    tw = ["tl.fromTo('#title',{autoAlpha:0,y:-20},{autoAlpha:1,y:0,duration:.35,ease:'power3.out',immediateRender:true},0);",
-          f"tl.fromTo('#strip',{{x:{PLAY_X}}},{{x:{PLAY_X - DUR * PX:.1f},duration:{DUR:.3f},ease:'none',immediateRender:true}},0);",
+    # zooms on her (origin on her face): slow push / punch-in on each new sound / zoom out
+    zoom = [(0.0, 1.0, 1.12, 4.25, 'sine.inOut'), (4.3, 1.28, 1.28, .01, 'none'), (4.32, 1.28, 1.05, 3.5, 'power2.out'),
+            (7.9, 1.05, 1.0, .01, 'none'), (7.92, 1.0, 1.18, 3.9, 'sine.inOut'), (11.9, 1.34, 1.34, .01, 'none'),
+            (11.92, 1.34, 1.0, DUR - 11.92, 'power1.inOut')]
+    tw = ["gsap.set('#bgv',{transformOrigin:'42% 34%'});"]
+    tw += [f"tl.fromTo('#bgv',{{scale:{a}}},{{scale:{b},duration:{d:.2f},ease:'{e}',immediateRender:{'true' if t == 0 else 'false'}}},{t:.2f});"
+           for t, a, b, d, e in zoom]
+    tw += [          f"tl.fromTo('#strip',{{x:{PLAY_X}}},{{x:{PLAY_X - DUR * PX:.1f},duration:{DUR:.3f},ease:'none',immediateRender:true}},0);",
           "tl.fromTo('#ph',{scaleY:0,transformOrigin:'50% 0%'},{scaleY:1,duration:.3,ease:'power2.out',immediateRender:true},0);"]
     return f'''<!doctype html>
 <html lang="fr" data-resolution="portrait">
@@ -80,7 +84,6 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   <audio id="music" src="assets/music.m4a" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
   <video id="bgv" class="full" src="assets/broll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
   <div id="shade"></div>
-  <div id="title">Mes sons viraux les plus utilisés,<br/>classés par « vibe »</div>
   <div id="strip">{strip}</div>
   <div id="ph"></div>
 </div>
