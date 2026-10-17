@@ -1,4 +1,4 @@
-# Effects library (18 named effects + recipes)
+# Effects library (32 named effects + recipes)
 
 Source: the "Les effets Claude" reel (Drive, 20 s, 18 effects named on screen in a running checklist). Each effect
 below says what it looks like, when to use it, and how to build it in HyperFrames/GSAP. Ask for an effect by its
@@ -144,3 +144,111 @@ pill and the counter ticking. For Maé, use it on list reels (tips, tools, steps
 - Brown glass panel 260px wide, left of x 920 (never under the IG buttons), from y 260, Poppins 22px items with
   "01" numbers in gold, active item white pill with dark text, `tl.to` the pill's `y` at each item's word time.
 - A final gold tag ("+40 effets" style) only if her script says it.
+
+# Second batch (reel "17 video effects claude can create", Drive 1bL21vorgOFQiUccVdxGEH4TMlASAGZhN)
+
+Already covered above, so not repeated here: "phone mockup" is close to 13 Title card and 04 Prompt bar, "checklist"
+to the Running checklist (see the variant below), "pull-back reveal" to 16 Video card (variant below), and the
+end "comment STUDIO" to 17 Comment CTA. Most of these effects need her cut out (`$HF remove-background` →
+transparent WebM layered over the background). Each name works as a request ("fais un Orbit sur l'intro").
+
+### 19 Orbit
+Small reel cards (real covers) circle around her, passing behind her body and then in front.
+- Cutout on top of the A-roll; cards in two layers: `z-index` below the cutout during the back half of the orbit and
+  above it during the front half (swap with `tl.set` at each half turn).
+- Position on an ellipse: `x = cx + R*cos(a)`, `y = cy + r*sin(a)`, scale .7 at the back and 1 at the front; drive `a`
+  with a proxy object `tl.to(o,{a:Math.PI*2,duration:2.4,ease:'none',onUpdate})`. 3-4 cards, 150×260, radius 16.
+
+### 20 Couch wall
+The wall behind her becomes a mosaic of her own reel screenshots, popping in tile by tile. Use for "j'ai fait des
+dizaines de vidéos", proof or social proof.
+- Cutout in front; behind it a grid of 6-9 real screenshots slightly rotated, `stagger:{each:.04,from:'center'}`,
+  `scale .6→1`, darkened 15% so she stays the focus. Wall fades back to the real room after 1.5-2 s.
+
+### 21 UI world
+Her real background is replaced by a clean app world (soft white/cream gradient), with a prompt bar typing above her
+head. Use when she talks about a tool, an AI or "dans l'appli".
+- Cutout over a cream gradient (#F6EFE6 → #E9DCCB for her), Prompt bar (04) at the top, small app name above it.
+- Crossfade room → UI world .2 s; she stays the same size and place, only the world changes.
+
+### 22 Frame break
+The video shrinks into a rounded phone-like frame on a dark blurred backdrop, and she leans out of the frame (her
+head and hands go over the border). Use for a surprise beat or "sors de ta zone de confort".
+- Layer order: blurred darkened A-roll (backdrop) → framed A-roll (rounded 40px, white 3px border) → cutout on top,
+  clipped so only the part outside the frame shows above the top edge (`clip-path` on the cutout: inset to keep the
+  part above the frame's top line and below its bottom).
+- Frame `fromTo(scale:1→.62)` .4 s 'power3.inOut'.
+
+### 23 Digital zoom
+A punch-in on the face (scale 1→1.35) on a key word, held, then a cut back. The classic emphasis.
+- Use the 4K source when available (crop, not upscale). `tl.to('#bgv',{scale:1.35,duration:.12,ease:'power2.out'})`,
+  `transform-origin` on her face (eyes.json from eyes.py gives the point). Reset with a hard `tl.set` on the next cut.
+
+### 24 Headline wall
+Press-style clippings (paper cut-outs, a tweet card, a search bar "can claude edit videos") pin onto the wall around
+her. Use for "tout le monde en parle", news, trends.
+- 4-6 cards, each a different style: serif paper clipping, white notification card, search bar typing; gentle
+  rotations -6..6, `from({scale:1.3,autoAlpha:0})` .2 s each, staggered .15 s. Real headlines only.
+- Keep them in the side columns, clear of her face and of the IG right buttons.
+
+### 25 Zoom-through cut
+A transition: the camera pushes fast into a dark area (her jacket, a shadow) until the screen is black, and the next
+shot starts from that darkness. Use between two parts of the reel.
+- Shot A: `scale 1→4` in .25 s 'power3.in' toward a dark point + motion blur (a few semi-transparent copies or a
+  pre-rendered ffmpeg `tblend`). Shot B starts at `scale 1.4→1` .3 s 'power3.out'. SFX: whoosh-short.
+
+### 26 Chart grow
+A glowing line chart draws itself behind her and shoots up at the end, with dots popping on each point. Use for
+growth, stats, "+300 abonnées".
+- SVG polyline over the room, behind the cutout; draw with `strokeDashoffset`, points `scale 0→1` as the line reaches
+  them, last point gets a halo ring pulsing. Gold line (#D6AE66) with a soft glow (`drop-shadow`), thin white grid.
+- Real numbers from her script only.
+
+### 27 Green screen
+She is cut out and stands in front of a different shot (a screenshot, another clip, a place), shown as a framed card
+above her or full screen. Use to "show" what she talks about while she keeps talking.
+- Backdrop dark brown or blurred; the other clip in a rounded card in the upper half; cutout in the lower half in
+  front. Card `from({y:-60,autoAlpha:0})` .3 s.
+
+### 28 Paper cut
+Scrapbook collage: she becomes a sticker (white outline), on a background of paper scraps, tape, scribbles, with a
+ransom-note title (letters cut from different papers). Use for a playful or "DIY" beat.
+- Outline: dilate the cutout's alpha (ffmpeg `alphaextract`, `dilation` ×6, colour white) and stack under the cutout.
+- Title: one `<span>` per letter, each with its own paper colour (cream, brown #8C5C41, gold, white), font (Anton /
+  Poppins) and tilt; letters `from({scale:0,rotation:random(-30,30)},{stagger:.05,ease:'back.out(2)'})`.
+- Background: real paper/tape textures (Unsplash), not drawn shapes.
+
+### 29 Doodle boil
+A hand-drawn white line traces around her body and "boils" (jitters like a cartoon), with small doodles (heart,
+sparkles) next to her. Use for a light, fun moment.
+- Same outline as Paper cut but as a thin stroke; boil = 3 slightly different versions (displace each with
+  `feTurbulence` seeds 1/2/3) switched every 0.08 s (`tl.set` loop). Doodles in white or gold, same 3-frame boil.
+
+### 30 Vertigo
+Dolly zoom: she stays the same size while the room behind her stretches away (or rushes in). Use on a shock line
+("et là, tout a changé").
+- Needs the cutout: background layer `scale 1→1.5` while the cutout stays at scale 1 (or background 1.5→1). 1-1.5 s,
+  'power1.inOut'. Works best with a deep room; slight blur on the background sells it.
+
+### 31 Cover story
+Her shot becomes a magazine cover: a huge serif masthead behind her head (e.g. "STUDIO"), small cover lines in the
+corners, thin border. Use for a launch, a "nouvelle" or her own offer.
+- Masthead behind the cutout (head overlaps it, behind-head formula in layout.md). For her use Anton (no serif), white,
+  letter-spacing .05em, 220px; cover lines Poppins 18px uppercase. Letters reveal with `clip-path` from the bottom.
+
+### 32 Glass type
+A big 3D glass word sits behind her head: transparent letters with bevel highlights and the room refracted
+through them. Use for one brand word ("CONTENU", "STRATÉGIE").
+- Behind the cutout. Letters: Anton 200px, `color: transparent`, `-webkit-text-stroke: 2px rgba(255,255,255,.7)`,
+  a white→transparent gradient fill with `background-clip:text` at 25% opacity, plus `backdrop-filter: blur(6px)` on a
+  text-shaped mask for the frosted look. Fade + slow `y:20→0`.
+
+## Bonus moves seen in this reel
+- **Blur-in caption line**: the key part of a sentence appears big under the small line, going from `filter:blur(14px)`
+  to sharp in .25 s, and the line blurs out at the end. For her: white Poppins, bigger, no yellow.
+- **Profile follow card**: her real IG profile card (photo, counters, grid) slides up, a finger taps "Suivre" which
+  turns into "Abonné(e)". Use on "abonne-toi". Real screenshot of her profile, just animate the button.
+- **Checklist (variant of the running checklist)**: a small dark glass widget "3 étapes" whose items tick one by one
+  (empty circle → gold check) on the words. Good for 3-step tips.
+- **Pull-back reveal (variant of Video card)**: the video pulls back into an app window with a side panel "En cours"
+  ticking tasks and a progress bar. For "voici comment je fais".
