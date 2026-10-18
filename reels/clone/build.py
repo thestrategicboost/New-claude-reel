@@ -16,6 +16,7 @@ DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error',
 PLAN = json.load(open('work/plan.json'))
 WORDS = json.load(open('work/words_tl.json'))
 DARK = '#573307'
+RED, GREEN = '#E5262B', '#22B83A'   # 100 followers / 100 000 followers
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
 X = {'f': 230, 's': 770}   # centre of each Maé (tags + captions)
 ZOOM_AT = 35.35            # the 100-followers Maé is out of frame: the other slides to the centre and we push in
@@ -57,14 +58,23 @@ def tags():
 
 
 def captions():
+    """one word at a time; a word shorter than 0.14 s is shown together with the next one (never two on screen)"""
+    groups = []
+    for w in WORDS:
+        if groups and groups[-1]['who'] == w['who'] and w['s'] - groups[-1]['s'] < .14:
+            groups[-1]['w'] += ' ' + w['w']
+            groups[-1]['e'] = w['e']
+        else:
+            groups.append(dict(w))
     html, tw = [], []
-    for k, w in enumerate(WORDS):
-        end = WORDS[k + 1]['s'] if k + 1 < len(WORDS) and WORDS[k + 1]['s'] - w['e'] < .5 else w['e'] + .25
-        end = min(end, DUR)
+    for k, w in enumerate(groups):
+        nxt = groups[k + 1]['s'] if k + 1 < len(groups) else DUR
+        end = min(nxt if nxt - w['e'] < .5 else w['e'] + .25, nxt, DUR)
         cx = 540 if w['s'] >= ZOOM_AT + .4 else X[w['who']]
         html.append(f'<div id="w{k}" class="cap" style="left:{cx - 300}px">{w["w"]}</div>')
         tw += [f"gsap.set('#w{k}',{{autoAlpha:0}});",
-               f"tl.fromTo('#w{k}',{{autoAlpha:1,scale:.82}},{{autoAlpha:1,scale:1,duration:.12,ease:'back.out(2.5)',immediateRender:false}},{w['s']:.3f});",
+               f"tl.set('#w{k}',{{autoAlpha:1}},{w['s']:.3f});",
+               f"tl.fromTo('#w{k}',{{scale:.82}},{{scale:1,duration:{min(.12, end - w['s']):.3f},ease:'back.out(2.5)',immediateRender:false}},{w['s']:.3f});",
                f"tl.set('#w{k}',{{autoAlpha:0}},{end:.3f});"]
     return html, tw
 
@@ -88,8 +98,8 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .tl{{font:600 32px/1 Poppins;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.55);margin-bottom:10px}}
 .tb{{display:inline-block;white-space:nowrap;font:400 44px/1 Anton;letter-spacing:.03em;color:#fff;padding:12px 26px 10px;border-radius:14px;
   box-shadow:0 12px 28px rgba(0,0,0,.3)}}
-.tb.f{{background:{DARK}}}
-.tb.s{{background:{GOLD};text-shadow:0 2px 6px rgba(80,45,10,.45)}}
+.tb.f{{background:{RED}}}
+.tb.s{{background:{GREEN}}}
 #fol{{position:absolute;z-index:15;left:190px;top:236px;width:700px;border-radius:30px;overflow:hidden;background:#fff;
   box-shadow:0 18px 44px rgba(0,0,0,.3)}}
 #fol img{{width:100%;display:block}}
