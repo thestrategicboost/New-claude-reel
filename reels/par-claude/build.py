@@ -176,7 +176,7 @@ def scenes():
               f"tl.to('#lg{k} img',{{opacity:.5,duration:.15}},{ct(hit):.3f});",
               f"tl.to('#lg{k}',{{y:1300,rotation:{-25 + 50 * k},duration:.55,ease:'power2.in'}},{ct(6.62):.3f});",
               f"tl.set('#lg{k}',{{autoAlpha:0}},{ct(6.62) + .55:.3f});"]
-        S += [('pop', ct(at), .3), ('click', ct(hit), .45)]
+        S += [('pop', ct(at), .3)]
     # (the icons fall away silently on "juste Claude")
     # "juste Claude": a huge Claude logo behind her (no sound)
     H.append(f'<div id="clbig" class="clbig">{CLAUDE.format(s=820)}</div>')
@@ -202,7 +202,7 @@ def scenes():
               f"tl.set('#pw',{{autoAlpha:1}},{ct(send) + .12:.3f});", f"tl.set('#pt',{{color:'#9A9087'}},{ct(send) + .12:.3f});",
               f"tl.to('#pw',{{rotation:'+=540',duration:.6,ease:'none'}},{ct(send) + .12:.3f});",
               f"tl.to('#pb',{{autoAlpha:0,y:-20,duration:.15}},{ct(end) - .15:.3f});"]
-        S += [('click-soft', ct(a), .2), ('click-soft', (ct(a) + ct(b)) / 2, .2), ('click', ct(send), .5)]
+        S += [('click', ct(send), .5)]          # only the visible tap on the send button
 
     # "et là toute la vidéo est montée": quick blur cut, then an NLE timeline (V2 / V1 / A1 / A2) slides up and fills itself
     T += [f"tl.fromTo('#cam',{{filter:'blur(0px)'}},{{filter:'blur(14px)',duration:.1,yoyo:true,repeat:1,immediateRender:false}},{ct(17.30):.3f});"]
@@ -227,7 +227,7 @@ def scenes():
           f"tl.fromTo('#tl .wv i',{{scaleY:0}},{{scaleY:1,duration:.3,stagger:.003,ease:'power2.out',immediateRender:false}},{a + .2:.3f});",
           f"tl.fromTo('#phd',{{x:0}},{{x:800,duration:{b - a:.2f},ease:'none',immediateRender:false}},{a:.3f});"]
     T += setseq('#tlc', 'textContent', [f'00:00:{s:02d}:{(s * 7) % 30:02d}' for s in range(0, 36, 2)], a, (b - a) / 18)
-    S += [('whoosh-short', a, .35), ('pop', ct(17.46), .25), ('click-soft', a + .4, .25), ('click-soft', a + .8, .25)]
+    S += [('whoosh-short', a, .35)]
 
     # 4. "un peu plus de rose, hop" -> before / after slider sweeps, the lilac look stays
     H.append('<div id="sl" class="sl"><div class="sll"></div><div class="slh">‹ ›</div></div>'
@@ -284,7 +284,7 @@ def scenes():
     T += setseq('#flv', 'textContent', ['1:13', '1:02', '0:51', '0:43', '0:38', '0:34'], a + .1, .09)
     T += [f"tl.set('#fll',{{textContent:'RÉEL MONTÉ'}},{a + .55:.3f});"] + \
          [f"tl.fromTo('#flv',{{rotationX:-80}},{{rotationX:0,duration:.08,immediateRender:false}},{a + .1 + i * .09:.3f});" for i in range(6)]
-    S += [('click-soft', a + .1 + i * .09, .25) for i in range(0, 6, 2)] + [('sparkle', a + .55, .25)]
+    S += [('sparkle', a + .55, .25)]
 
     # 8. "mettre du TEXTE derrière" -> giant word behind her head; "changer d'ambiance comme ça" -> moody look
     H.append('<div id="texte" class="bht">TEXTE</div>')
@@ -313,13 +313,11 @@ def scenes():
           f"tl.set('#cam',{{scale:1}},{ct(56.10):.3f});"]
     H.append('<div id="fls" class="fls"></div>')
     T += ["gsap.set('#fls',{autoAlpha:0});"] + [f"tl.fromTo('#fls',{{autoAlpha:.7}},{{autoAlpha:0,duration:.1,immediateRender:false}},{ct(t):.3f});" for t in (55.62, 55.82)]
-    S += [('click', ct(55.62), .4), ('click', ct(55.82), .4)]
     # "en deux secondes" -> flip timer 0:02
     H.append('<div id="f2" class="flip sm"><div class="fll">MODIFICATION</div><div id="f2v" class="flv">0:00</div></div>')
     a = ct(56.70)
     T += show('#f2', a, ct(57.20) + .3, "{autoAlpha:0,scale:.8}", .18)
     T += setseq('#f2v', 'textContent', ['0:00', '0:01', '0:02'], a + .08, .1)
-    S += [('click-soft', a + .1, .3), ('click-soft', a + .2, .3)]
 
     # 10. CTA: her guide as a video card, then "Commente MONTAGE" with the comment typed, the DM
     H.append('<div id="vcd" class="vcd"><div class="vimg"><img src="assets/guide.png"/><div class="play">▶</div></div>'
