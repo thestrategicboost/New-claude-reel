@@ -19,14 +19,19 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 #fol{position:absolute;z-index:15;left:190px;top:236px;width:700px;border-radius:30px;overflow:hidden;background:#fff;
   box-shadow:0 18px 44px rgba(0,0,0,.3)}
 #fol img{width:100%;display:block}
-.tag{width:420px}
-#blk{position:absolute;z-index:16;left:200px;top:270px;width:680px;padding:34px 34px 18px;border-radius:30px;background:#fff;text-align:center;
-  box-shadow:0 24px 60px rgba(0,0,0,.35)}
-.bt{font:700 40px/1.2 Poppins;color:#111}
-.bs{font:500 26px/1.35 Poppins;color:#777;margin-top:12px}
-.bb{margin-top:26px;height:84px;border-radius:18px;background:#ED4956;color:#fff;font:700 32px/84px Poppins}
-.bb.done{position:absolute;left:34px;right:34px;top:auto;margin-top:0;transform:translateY(-84px);background:#EFEFEF;color:#111}
-.bc{margin-top:12px;height:64px;font:600 28px/64px Poppins;color:#111}
+.tag{width:420px;top:492px}
+.pn{position:absolute;z-index:12;top:236px;width:400px;height:236px;border-radius:24px;overflow:hidden;background:#fff;border:4px solid #fff;
+  box-shadow:0 16px 40px rgba(0,0,0,.3)}
+.pn img{width:100%;height:100%;object-fit:cover;display:block}
+.vw{padding:38px 34px}
+.vl{font:600 30px/1 Poppins;color:#555}
+.vn{font:800 104px/1.1 Poppins;color:#111;letter-spacing:-.02em;margin-top:10px}
+.ep{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;font:600 30px/1 Poppins;color:#111}
+.bk{padding:22px 24px;text-align:center;position:relative;height:100%}
+.bt{font:700 30px/1.2 Poppins;color:#111}
+.bs{font:500 21px/1.3 Poppins;color:#777;margin-top:8px}
+.bb{margin-top:18px;height:66px;border-radius:14px;background:#ED4956;color:#fff;font:700 28px/66px Poppins}
+.bb.done{position:absolute;left:24px;right:24px;bottom:22px;margin:0;background:#EFEFEF;color:#111}
 .cap{position:absolute;top:1180px;width:600px;text-align:center;z-index:11;font:700 70px/1 Poppins;color:#fff;
   text-shadow:0 4px 0 rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.6);white-space:nowrap}
 </style>
@@ -36,15 +41,24 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="39.600" data-track-index="2" data-volume="1"></audio>
   <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="39.600" data-track-index="0"></video>
 <audio id="sfx0" src="assets/sfx/whoosh-short.mp3" data-start="0.000" data-duration="0.570" data-track-index="10" data-volume="0.3"></audio>
-<audio id="sfx1" src="assets/sfx/pop.mp3" data-start="28.450" data-duration="0.720" data-track-index="11" data-volume="0.45"></audio>
-<audio id="sfx2" src="assets/sfx/click.mp3" data-start="30.240" data-duration="0.360" data-track-index="12" data-volume="0.6"></audio>
-<audio id="sfx3" src="assets/sfx/impact-bass-1.mp3" data-start="30.340" data-duration="2.100" data-track-index="13" data-volume="0.35"></audio>
-<audio id="sfx4" src="assets/sfx/whoosh-short.mp3" data-start="35.350" data-duration="0.570" data-track-index="14" data-volume="0.4"></audio>
-<audio id="sfx5" src="assets/sfx/pop.mp3" data-start="37.500" data-duration="0.720" data-track-index="15" data-volume="0.45"></audio>
-<audio id="sfx6" src="assets/sfx/sparkle.mp3" data-start="37.800" data-duration="1.800" data-track-index="16" data-volume="0.22"></audio>
-<div id="tf" class="tag" style="left:20px"><div class="tl">Entrepreneuse à</div><div class="tb f">100 FOLLOWERS</div></div>
-<div id="ts" class="tag" style="left:560px"><div class="tl">Entrepreneuse à</div><div class="tb s">100 000 FOLLOWERS</div></div>
-<div id="blk"><div class="bt">Bloquer ce compte ?</div><div class="bs">Cette personne ne pourra plus voir ton profil ni te contacter.</div><div id="bb" class="bb">Bloquer</div><div id="bd" class="bb done">Compte bloqué</div><div class="bc">Annuler</div></div>
+<audio id="sfx1" src="assets/sfx/pop.mp3" data-start="6.700" data-duration="0.720" data-track-index="11" data-volume="0.3"></audio>
+<audio id="sfx2" src="assets/sfx/pop.mp3" data-start="15.800" data-duration="0.720" data-track-index="12" data-volume="0.3"></audio>
+<audio id="sfx3" src="assets/sfx/pop.mp3" data-start="21.250" data-duration="0.720" data-track-index="13" data-volume="0.3"></audio>
+<audio id="sfx4" src="assets/sfx/click.mp3" data-start="30.240" data-duration="0.360" data-track-index="14" data-volume="0.6"></audio>
+<audio id="sfx5" src="assets/sfx/impact-bass-1.mp3" data-start="30.340" data-duration="2.100" data-track-index="15" data-volume="0.35"></audio>
+<audio id="sfx6" src="assets/sfx/whoosh-short.mp3" data-start="35.350" data-duration="0.570" data-track-index="16" data-volume="0.4"></audio>
+<audio id="sfx7" src="assets/sfx/pop.mp3" data-start="37.500" data-duration="0.720" data-track-index="17" data-volume="0.45"></audio>
+<audio id="sfx8" src="assets/sfx/sparkle.mp3" data-start="37.800" data-duration="1.800" data-track-index="18" data-volume="0.22"></audio>
+<div id="tf" class="tag" style="left:70px"><div class="tb f">0 FOLLOWERS</div></div>
+<div id="ts" class="tag" style="left:590px"><div class="tb s">10K FOLLOWERS</div></div>
+<div id="pf0" class="pn" style="left:80px"><img src="assets/photos/camescope.jpg"/></div>
+<div id="ps0" class="pn" style="left:600px"><img src="assets/photos/telephone.jpg"/></div>
+<div id="pf1" class="pn" style="left:80px"><div class="vw"><div class="vl">Vues de la vidéo</div><div class="vn">500</div></div></div>
+<div id="ps1" class="pn" style="left:600px"><img src="assets/photos/public.jpg"/></div>
+<div id="pf2" class="pn" style="left:80px"><img src="assets/photos/stress.jpg"/></div>
+<div id="ps2" class="pn" style="left:600px"><img src="assets/photos/tournage.jpg"/></div>
+<div id="pf3" class="pn" style="left:80px"><div class="ep"><svg viewBox="0 0 24 24" width="74" height="74" fill="none" stroke="#111" stroke-width="1.4"><circle cx="12" cy="12" r="11"/><rect x="6" y="8.5" width="12" height="8.5" rx="1.6"/><circle cx="12" cy="12.7" r="2.6"/><path d="M9.5 8.5l1-1.6h3l1 1.6"/></svg><div>Aucune publication</div></div></div>
+<div id="ps3" class="pn" style="left:600px"><div class="bk"><div class="bt">Bloquer ce compte ?</div><div class="bs">Cette personne ne pourra plus te contacter.</div><div id="bb" class="bb">Bloquer</div><div id="bd" class="bb done">Compte bloqué</div></div></div>
 <div id="fol"><img src="assets/profil.png"/></div>
 <div id="w0" class="cap" style="left:-70px">non</div>
 <div id="w1" class="cap" style="left:-70px">mais</div>
@@ -192,13 +206,43 @@ tl.to('#ts',{opacity:.5,scale:.94,duration:.2,ease:'power2.out'},30.93);
 tl.to('#ts',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},34.48);
 tl.to('#tf',{opacity:.5,scale:.94,duration:.2,ease:'power2.out'},34.48);
 tl.to('#tf',{autoAlpha:0,y:-20,duration:.35},35.0);
-tl.fromTo('#bgv',{scale:1,x:0,y:0},{scale:1.45,x:0,y:250,duration:.9,ease:'power2.inOut',immediateRender:false},35.35);
-gsap.set('#blk, #bd',{autoAlpha:0});
-tl.fromTo('#blk',{autoAlpha:0,scale:.8},{autoAlpha:1,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},28.45);
+gsap.set('#pf0',{autoAlpha:0});
+tl.fromTo('#pf0',{autoAlpha:0,scale:.85,y:-20},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.7)',immediateRender:true},0.00);
+tl.to('#pf0',{autoAlpha:0,scale:.92,duration:.15},6.55);
+tl.set('#pf0',{autoAlpha:0},6.70);
+gsap.set('#ps0',{autoAlpha:0});
+tl.fromTo('#ps0',{autoAlpha:0,scale:.85,y:-20},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.7)',immediateRender:false},0.08);
+tl.to('#ps0',{autoAlpha:0,scale:.92,duration:.15},6.55);
+tl.set('#ps0',{autoAlpha:0},6.70);
+gsap.set('#pf1',{autoAlpha:0});
+tl.fromTo('#pf1',{autoAlpha:0,scale:.85,y:-20},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.7)',immediateRender:false},6.70);
+tl.to('#pf1',{autoAlpha:0,scale:.92,duration:.15},15.65);
+tl.set('#pf1',{autoAlpha:0},15.80);
+gsap.set('#ps1',{autoAlpha:0});
+tl.fromTo('#ps1',{autoAlpha:0,scale:.85,y:-20},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.7)',immediateRender:false},6.78);
+tl.to('#ps1',{autoAlpha:0,scale:.92,duration:.15},15.65);
+tl.set('#ps1',{autoAlpha:0},15.80);
+gsap.set('#pf2',{autoAlpha:0});
+tl.fromTo('#pf2',{autoAlpha:0,scale:.85,y:-20},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.7)',immediateRender:false},15.80);
+tl.to('#pf2',{autoAlpha:0,scale:.92,duration:.15},21.10);
+tl.set('#pf2',{autoAlpha:0},21.25);
+gsap.set('#ps2',{autoAlpha:0});
+tl.fromTo('#ps2',{autoAlpha:0,scale:.85,y:-20},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.7)',immediateRender:false},15.88);
+tl.to('#ps2',{autoAlpha:0,scale:.92,duration:.15},21.10);
+tl.set('#ps2',{autoAlpha:0},21.25);
+gsap.set('#pf3',{autoAlpha:0});
+tl.fromTo('#pf3',{autoAlpha:0,scale:.85,y:-20},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.7)',immediateRender:false},21.25);
+tl.to('#pf3',{autoAlpha:0,scale:.92,duration:.15},30.78);
+tl.set('#pf3',{autoAlpha:0},30.93);
+gsap.set('#ps3',{autoAlpha:0});
+tl.fromTo('#ps3',{autoAlpha:0,scale:.85,y:-20},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.7)',immediateRender:false},21.33);
+tl.to('#ps3',{autoAlpha:0,scale:.92,duration:.15},30.78);
+tl.set('#ps3',{autoAlpha:0},30.93);
+gsap.set('#bd',{autoAlpha:0});
 tl.to('#bb',{scale:.9,duration:.08,yoyo:true,repeat:1},30.24);
 tl.set('#bb',{autoAlpha:0},30.40);
 tl.set('#bd',{autoAlpha:1},30.40);
-tl.to('#blk',{autoAlpha:0,scale:.9,duration:.25},31.54);
+tl.fromTo('#bgv',{scale:1,x:0,y:0},{scale:1.45,x:0,y:250,duration:.9,ease:'power2.inOut',immediateRender:false},35.35);
 gsap.set('#fol',{autoAlpha:0});
 tl.to('#ts',{autoAlpha:0,y:-20,duration:.2},37.30);
 tl.fromTo('#fol',{autoAlpha:0,y:-40,scale:.85},{autoAlpha:1,y:0,scale:1,duration:.4,ease:'back.out(1.7)',immediateRender:false},37.50);

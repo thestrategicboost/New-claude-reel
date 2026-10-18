@@ -28,6 +28,9 @@ def run(*a):
     subprocess.run(a, check=True)
 
 
+# listening windows of the success Maé that replace the default (the camera hunted focus there): line index -> start
+LISTEN_FIX = {0: 21.90, 6: 115.50}
+
 plan, t = [], 0.0
 segs1, segs2 = [], []          # (src_start, dur, audio?) per track
 for k, (who, parts) in enumerate(LINES):
@@ -37,6 +40,7 @@ for k, (who, parts) in enumerate(LINES):
             segs1.append((a, b - a, True))
         nxt = LINES[k + 1][1][0][0] if k + 1 < len(LINES) else None
         s_from = (nxt - dur) if nxt else LINES[k - 1][1][-1][1]       # success listens just before her reply
+        s_from = LISTEN_FIX.get(k, s_from)
         segs2.append((s_from, dur, False))
     else:
         for a, b in parts:
