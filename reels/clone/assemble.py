@@ -20,7 +20,7 @@ LINES = [
     ('f', [(55.05, 57.75), (64.95, 65.98)]),       # je trouve ça super gênant de poster, en plus on va me juger
     ('s', [(107.20, 113.15)]),                     # moi non plus je suis pas super à l'aise...
     ('f', [(75.95, 79.50)]),                       # je sais pas quoi poster, ça me saoule alors j'abandonne
-    ('s', [(134.30, 135.72), (140.80, 144.40)]),   # mais non tu vois moi je reste focus ... Strategic Boost
+    ('s', [(139.85, 144.40)]),                    # non tu vois moi, je reste focus ... Strategic Boost (one take, no jump)
 ]
 
 
@@ -29,7 +29,7 @@ def run(*a):
 
 
 # listening windows of the success Maé that replace the default (the camera hunted focus there): line index -> start
-LISTEN_FIX = {0: 21.90, 6: 115.50}
+LISTEN_FIX = {0: 21.90, 6: 115.50, 8: 130.75}
 
 plan, t = [], 0.0
 segs1, segs2 = [], []          # (src_start, dur, audio?) per track
