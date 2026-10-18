@@ -33,7 +33,7 @@ DARK = '#573307'
 RED, GREEN = '#EE1F1F', '#02BB04'   # 0 followers / 10K followers (her reference capture)
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
 X = {'f': 230, 's': 770}   # centre of each Maé (tags + captions)
-ZOOM_AT = ct(35.35)           # the 100-followers Maé is out of frame: the other slides to the centre and we push in
+ZOOM_AT = 30.62               # measured: first frame of her jump cut (+ re-centring) in assets/aroll.mp4 is 30.633 s; hard cut to the close-up there
 ZOOM = (1.45, 0, 250)      # scale, x, y of the a-roll (she is centred in the plate by then)
 BLOCK = (ct(21.25), ct(30.24))    # block dialog panel from the 'juge' exchange, 'Bloquer' is tapped on 'bloque'
 IG_AT = ct(37.50)             # 'parce que je suis Maé de The Strategic Boost': her Instagram profile over her head
@@ -82,8 +82,8 @@ def tags():
                    f"tl.to('#{pid}',{{autoAlpha:0,scale:.92,duration:.15}},{b - .15:.2f});", f"tl.set('#{pid}',{{autoAlpha:0}},{b:.2f});"]
     tw += ["gsap.set('#bd',{autoAlpha:0});", f"tl.to('#bb',{{scale:.9,duration:.08,yoyo:true,repeat:1}},{BLOCK[1]:.2f});",
            f"tl.set('#bb',{{autoAlpha:0}},{BLOCK[1] + .16:.2f});", f"tl.set('#bd',{{autoAlpha:1}},{BLOCK[1] + .16:.2f});"]
-    tw.append(f"tl.to('#ts',{{autoAlpha:0,y:-20,duration:.25}},{ZOOM_AT:.2f});")   # alone and centred: no more tag
-    tw.append(f"tl.fromTo('#bgv',{{scale:1,x:0,y:0}},{{scale:{ZOOM[0]},x:{ZOOM[1]},y:{ZOOM[2]},duration:.9,ease:'power2.inOut',immediateRender:false}},{ZOOM_AT:.2f});")
+    tw.append(f"tl.set('#ts',{{autoAlpha:0}},{ZOOM_AT:.3f});")   # alone and centred: no more tag
+    tw.append(f"tl.set('#bgv',{{scale:{ZOOM[0]},x:{ZOOM[1]},y:{ZOOM[2]}}},{ZOOM_AT:.3f});")   # hard cut to the close-up on her jump cut
     # her real Instagram profile (her screenshot) above the heads
     html.append('<div id="fol"><img src="assets/profil.png"/></div>')
     tw += ["gsap.set('#fol',{autoAlpha:0});",
@@ -105,10 +105,12 @@ def captions():
     for k, w in enumerate(groups):
         nxt = groups[k + 1]['s'] if k + 1 < len(groups) else DUR
         end = min(nxt if nxt - w['e'] < .5 else w['e'] + .25, nxt, DUR)
-        cx = 540 if w['s'] >= ZOOM_AT + .4 else X[w['who']]
+        if w['s'] < ZOOM_AT < end:
+            end = ZOOM_AT   # the close-up cut moves her: the word does not stay where she was
+        cx = 540 if w['s'] >= ZOOM_AT else X[w['who']]
         half = len(w['w']) * CAP_PX * .3 + 10          # rough half width of the text (Poppins bold)
         cx = min(max(cx, 80 + half), 1000 - half)     # never out of frame (80px side margins)
-        top = 1300 if w['s'] >= ZOOM_AT + .4 else CAP_Y   # zoomed in at the end: her chest is lower
+        top = 1300 if w['s'] >= ZOOM_AT else CAP_Y   # zoomed in at the end: her chest is lower
         html.append(f'<div id="w{k}" class="cap" style="left:{cx - 300}px;top:{top}px">{w["w"]}</div>')
         tw += [f"gsap.set('#w{k}',{{autoAlpha:0}});",
                f"tl.set('#w{k}',{{autoAlpha:1}},{w['s']:.3f});",
