@@ -6,7 +6,7 @@ import subprocess
 
 SEGS = [(1.68, 4.08), (4.18, 6.32), (6.58, 7.50),     # tu vois cette vidéo... pas de CapCut, pas de logiciel... juste Claude
         (15.74, 21.20),                                # je lui ai envoyé mon prompt... un peu plus de rose, hop, il met du rose
-        (21.38, 23.62), (25.42, 27.50),                # si je lui demande un mur de réel derrière moi | hop, il met un mur de réel derrière moi
+        (21.38, 23.62), (25.80, 27.50),                # si je lui demande un mur de réel derrière moi | (snap) hop, il met un mur de réel derrière moi
         (38.46, 45.52),                                # et franchement j'y connais rien... il me fait ça tout seul
         (47.64, 51.36), (51.44, 57.20),                # texte derrière, ambiance... sous-titres, plan large, serré, cuts... deux secondes
         (65.30, 72.30)]                                # si toi aussi... commente montage... adios

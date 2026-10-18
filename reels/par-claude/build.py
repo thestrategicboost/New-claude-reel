@@ -34,7 +34,7 @@ def ct(t):
 
 
 # ------------------------------------------------------------------ captions: one word at a time, lowercase
-FIX = {'bleu': 'bla', '-bleu': '-bla', '-bleu,': '-bla', 'à grandir': 'agrandir', 'grandir': 'agrandir'}
+FIX = {'adios': 'tchuss', 'Adios': 'tchuss', 'bleu': 'bla', '-bleu': '-bla', '-bleu,': '-bla', 'à grandir': 'agrandir', 'grandir': 'agrandir'}
 
 
 def words():
@@ -108,14 +108,19 @@ CLAUDE = ('<svg viewBox="0 0 100 100" width="120" height="120"><g fill="#D97757"
 def scenes():
     html, tw, sfx = [], [], []
 
-    # 1. hook: big two-line title while she says "tu vois cette vidéo, c'est Claude qui l'a montée"
-    html.append('<div id="hook" class="hook"><div class="h1">CETTE VIDÉO</div><div class="h2">MONTÉE PAR <span>CLAUDE</span></div></div>')
-    a, b = ct(1.74), ct(4.40)
-    tw += ["gsap.set('#hook',{autoAlpha:1});",
-           "tl.fromTo('#hook .h1',{y:60,scaleY:1.4,autoAlpha:0},{y:0,scaleY:1,autoAlpha:1,duration:.3,ease:'expo.out',immediateRender:true},0);",
-           f"tl.fromTo('#hook .h2',{{y:60,scaleY:1.4,autoAlpha:0}},{{y:0,scaleY:1,autoAlpha:1,duration:.3,ease:'expo.out',immediateRender:true}},{ct(3.14):.3f});",
-           f"tl.to('#hook',{{autoAlpha:0,y:-30,duration:.2}},{b - .2:.3f});", f"tl.set('#hook',{{autoAlpha:0}},{b:.3f});"]
-    sfx += [('whoosh-short', 0.0, .35), ('pop', ct(3.14), .35)]
+    # 1. hook on a brown wall (she is cut out in front, like the green wall of the inspiration):
+    #    "tu vois cette vidéo" -> CETTE VIDÉO behind her head; "c'est Claude qui l'a montée" -> MONTÉE behind her head
+    html.append('<div id="bw1" class="bwall"></div>')
+    html.append('<div id="hk1" class="bht"><div class="bs1">tu vois</div>CETTE<br/>VIDÉO</div>')
+    html.append('<div id="hk2" class="bht"><div class="bs1">c\'est Claude qui l\'a</div>MONTÉE</div>')
+    tw += ["gsap.set('#bw1',{autoAlpha:1});",
+           f"tl.to('#bw1',{{clipPath:'inset(0 0 100% 0)',duration:.35,ease:'power3.inOut'}},{ct(7.50) - .35:.3f});",
+           f"tl.set('#bw1',{{autoAlpha:0}},{ct(7.50):.3f});",
+           "tl.fromTo('#hk1',{autoAlpha:0,scale:1.3},{autoAlpha:1,scale:1,duration:.3,ease:'expo.out',immediateRender:true},0);",
+           f"tl.to('#hk1',{{autoAlpha:0,duration:.12}},{ct(2.86):.3f});",
+           f"tl.fromTo('#hk2',{{autoAlpha:0,y:80}},{{autoAlpha:1,y:0,duration:.3,ease:'expo.out',immediateRender:false}},{ct(2.92):.3f});",
+           f"tl.to('#hk2',{{autoAlpha:0,duration:.15}},{ct(4.40):.3f});"]
+    sfx += [('whoosh-short', 0.0, .35), ('pop', ct(2.92), .35)]
 
     # 2. "pas de CapCut, pas de logiciel de montage" -> struck out; "juste Claude" -> Claude
     for k, (logo, name, at, hit) in enumerate((('capcut', 'CapCut', 4.48, 4.80), ('premiere', 'Logiciel de montage', 5.46, 5.98))):
@@ -126,7 +131,10 @@ def scenes():
                f"tl.to('#lg{k} .strike path',{{strokeDashoffset:0,duration:.22,ease:'power2.out'}},{ct(hit):.3f});",
                f"tl.to('#lg{k} img',{{opacity:.45,duration:.2}},{ct(hit):.3f});"]
         sfx += [('pop', ct(at), .3), ('click', ct(hit), .45)]
-    html.append(f'<div id="cl" class="cl">{CLAUDE}<div class="cn">Claude</div></div>')
+    html.append(f'<div id="cl" class="cl">{CLAUDE}</div>')
+    html.append('<div id="cl2" class="bht gold">Claude.</div>')
+    tw += [f"tl.fromTo('#cl2',{{autoAlpha:0,scale:1.25}},{{autoAlpha:1,scale:1,duration:.3,ease:'expo.out',immediateRender:false}},{ct(6.70):.3f});",
+           f"tl.set('#cl2',{{autoAlpha:0}},{ct(7.50):.3f});"]
     tw += show('#cl', ct(6.70), ct(7.50) + .3, "{autoAlpha:0,scale:.5}", .35)
     tw += [f"tl.fromTo('#cl svg',{{rotation:-90}},{{rotation:0,duration:.6,ease:'power3.out',immediateRender:false}},{ct(6.70):.3f});"]
     sfx += [('sparkle', ct(6.70), .3)]
@@ -154,15 +162,22 @@ def scenes():
     tw += ["gsap.set('#bgl',{opacity:0});", f"tl.to('#bgl',{{opacity:1,duration:.3,ease:'power1.inOut'}},{ct(20.22):.3f});"]
     sfx += [('sparkle', ct(20.22), .3)]
 
-    # 5. "hop, il met un mur de réel derrière moi" -> a wall of her real reels behind her (cut-out on top)
+    # 5. "(snap) hop, il met un mur de réel derrière moi" -> brown wall + her real reels in 3D, columns sliding up and down
     reels = [f'assets/reels/r{i}.jpg' for i in range(1, 17)]
-    cells = ''.join(f'<div class="rc"><img src="{r}"/></div>' for r in reels)
-    html.append(f'<div id="wall" class="wall">{cells}</div>')
-    a, b = ct(25.44), ct(27.50)
+    cols = ''
+    for c in range(4):
+        imgs = [reels[(c * 4 + j) % 16] for j in range(7)]
+        cols += f'<div class="col c{c}">' + ''.join(f'<div class="rc"><img src="{r}"/></div>' for r in imgs) + '</div>'
+    html.append(f'<div id="wall" class="wall"><div class="wallin">{cols}</div></div>')
+    a, b = ct(25.85), ct(27.50)
     tw += ["gsap.set('#wall',{autoAlpha:0});", f"tl.set('#wall',{{autoAlpha:1}},{a:.3f});",
-           f"tl.fromTo('#wall .rc',{{scale:.4,autoAlpha:0}},{{scale:1,autoAlpha:1,duration:.3,ease:'back.out(1.6)',stagger:{{each:.025,from:'center'}},immediateRender:false}},{a:.3f});",
-           f"tl.to('#wall',{{autoAlpha:0,duration:.2}},{b - .2:.3f});", f"tl.set('#wall',{{autoAlpha:0}},{b:.3f});"]
-    sfx += [('whoosh-short', a, .4)]
+           f"tl.fromTo('#wall .wallin',{{rotationY:-70,scale:.7}},{{rotationY:-24,scale:1,duration:.55,ease:'power3.out',immediateRender:false}},{a:.3f});",
+           f"tl.fromTo('#wall .rc',{{autoAlpha:0,z:-300}},{{autoAlpha:1,z:0,duration:.35,ease:'back.out(1.4)',stagger:{{each:.012,from:'random'}},immediateRender:false}},{a:.3f});"]
+    for c in range(4):
+        d = -1 if c % 2 == 0 else 1
+        tw.append(f"tl.fromTo('#wall .c{c}',{{y:{-250 if d > 0 else 0}}},{{y:{0 if d > 0 else -250},duration:{b - a:.2f},ease:'none',immediateRender:false}},{a:.3f});")
+    tw += [f"tl.to('#wall',{{autoAlpha:0,duration:.2}},{b - .2:.3f});", f"tl.set('#wall',{{autoAlpha:0}},{b:.3f});"]
+    sfx += [('whoosh-short', a, .45), ('sparkle', a + .1, .25)]
 
     # 6. "la vidéo brute de décoffrage avec tous mes bugs ... et hop il me fait ça tout seul"
     html.append('<div id="fd" class="fd"><div class="fz">⇩ Dépose ta vidéo brute</div><div id="ff" class="ff"><div class="fth"></div>'
@@ -177,16 +192,22 @@ def scenes():
     sfx += [('whoosh-short', ct(41.04), .35), ('glitch2', ct(43.04), .25), ('sparkle', ct(44.62), .3)]
 
     # 7. "mettre du texte derrière" -> a giant word behind her head (cut-out on top)
-    html.append('<div id="tb" class="tbh">TEXTE</div>')
+    html.append('<div id="tb" class="tbh"><div class="bwall in"></div><div class="tbt">TEXTE</div></div>')
     a, b = ct(49.28), ct(50.80)
     tw += ["gsap.set('#tb',{autoAlpha:0});",
-           f"tl.fromTo('#tb',{{autoAlpha:0,scale:1.25}},{{autoAlpha:1,scale:1,duration:.3,ease:'power3.out',immediateRender:false}},{a:.3f});",
+           f"tl.set('#tb',{{autoAlpha:1}},{a:.3f});",
+           f"tl.fromTo('#tb .tbt',{{autoAlpha:0,scale:1.25}},{{autoAlpha:1,scale:1,duration:.3,ease:'power3.out',immediateRender:false}},{a:.3f});",
            f"tl.to('#tb',{{autoAlpha:0,duration:.15}},{b - .15:.3f});", f"tl.set('#tb',{{autoAlpha:0}},{b:.3f});"]
     sfx += [('pop', a, .35)]
 
     # 8. "changer d'ambiance comme ça" -> warm film look until the end of that take
     tw += ["gsap.set('#bga',{opacity:0});", f"tl.set('#bga',{{opacity:1}},{ct(50.80):.3f});", f"tl.set('#bga',{{opacity:0}},{ct(51.36):.3f});"]
     sfx += [('whoosh-short', ct(50.80), .35)]
+
+    # "agrandir les sous-titres": a brown block like the inspiration's "BIGGER captions"
+    html.append('<div id="bg2" class="bigc"><div class="bc1">SOUS-TITRES</div><div class="bc2">plus grands.</div></div>')
+    tw += show('#bg2', ct(52.84), ct(54.10), "{autoAlpha:0,scale:.8}", .25)
+    sfx += [('pop', ct(52.84), .35)]
 
     # 9. "un plan plus large, plus serré, faire des cuts"
     tw += [f"tl.set('#cam',{{scale:1.18}},{ct(51.44):.3f});",
@@ -267,9 +288,6 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .ok{{position:absolute;left:0;right:0;top:{TOP + 170}px;z-index:20;text-align:center}}
 .ok{{font:400 50px/1 Anton;letter-spacing:.04em;color:#fff}}
 #ok1{{width:420px;left:330px;padding:16px 0 12px;background:{DARK};box-shadow:0 12px 28px rgba(0,0,0,.3)}}
-.wall{{position:absolute;left:-20px;right:-20px;top:120px;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:0 10px}}
-.rc{{aspect-ratio:9/16;border-radius:16px;overflow:hidden;border:3px solid rgba(255,255,255,.85);box-shadow:0 10px 24px rgba(0,0,0,.35)}}
-.rc img{{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85)}}
 .cut{{z-index:3}}
 .fd{{position:absolute;left:110px;right:110px;top:{TOP}px;height:210px;z-index:20;border-radius:34px;border:3px dashed rgba(255,255,255,.85);
   background:rgba(58,38,26,.55);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);box-shadow:0 18px 44px rgba(0,0,0,.3)}}
@@ -280,8 +298,6 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .fn{{font:700 32px/1.1 Poppins;color:#111}}
 .fs{{font:500 24px/1.3 Poppins;color:#777}}
 .fok{{position:absolute;left:0;right:0;top:86px;text-align:center;font:400 64px/1 Anton;letter-spacing:.04em;color:#fff;text-shadow:0 4px 18px rgba(0,0,0,.4)}}
-.tbh{{position:absolute;left:0;right:0;top:{TOP + 150}px;z-index:2;text-align:center;font:400 340px/1 Anton;letter-spacing:.02em;color:#fff;
-  text-shadow:0 10px 40px rgba(0,0,0,.3)}}
 .fl{{position:absolute;inset:0;z-index:30;background:#fff}}
 .tm{{position:absolute;left:340px;width:400px;top:{TOP + 20}px;z-index:20;height:120px;border-radius:60px;background:{DARK};display:flex;align-items:center;
   justify-content:center;gap:20px;font:400 72px/1 Anton;color:#fff;box-shadow:0 14px 30px rgba(0,0,0,.3)}}
@@ -301,10 +317,29 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .dm img{{width:84px;height:84px;border-radius:50%;object-fit:cover}}
 .dt{{font:700 30px/1.2 Poppins;color:#111}}
 .ds{{font:500 28px/1.2 Poppins;color:#555}}
+.bwall{{position:absolute;inset:0;z-index:2;background:radial-gradient(110% 70% at 50% 35%,#9C6B4E 0%,{BROWN} 45%,{DARK} 100%)}}
+.bht{{position:absolute;left:0;right:0;top:300px;z-index:2;text-align:center;font:400 250px/.9 Anton;color:#fff;letter-spacing:.01em;
+  text-shadow:0 10px 40px rgba(0,0,0,.25)}}
+.bht.gold{{top:330px;font-size:280px;background:{GOLD};-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}}
+.bs1{{font:italic 600 58px/1 Poppins;letter-spacing:0;margin-bottom:14px;color:#F3DFB2}}
+.wall{{position:absolute;inset:0;z-index:2;background:radial-gradient(110% 70% at 50% 35%,#9C6B4E 0%,{BROWN} 45%,{DARK} 100%);perspective:1300px;overflow:hidden}}
+.wallin{{position:absolute;left:-60px;right:-60px;top:-260px;bottom:-260px;display:flex;gap:22px;justify-content:center;transform-style:preserve-3d}}
+.col{{display:flex;flex-direction:column;gap:22px;width:250px}}
+.wall .rc{{width:250px;height:444px;flex:none;border-radius:20px;overflow:hidden;border:3px solid #E9C98F;box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 24px rgba(214,174,102,.35)}}
+.wall .rc img{{width:100%;height:100%;object-fit:cover;display:block}}
+.tbh .bwall.in{{z-index:0}}
+.tbh{{position:absolute;inset:0;z-index:2}}
+.tbt{{position:absolute;left:0;right:0;top:{TOP + 150}px;text-align:center;font:400 340px/1 Anton;letter-spacing:.02em;color:#fff;text-shadow:0 10px 40px rgba(0,0,0,.3)}}
+.bigc{{position:absolute;left:150px;right:150px;top:{TOP + 10}px;z-index:20;background:{DARK};padding:22px 0 26px;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.35)}}
+.bc1{{font:400 104px/1 Anton;color:#fff;letter-spacing:.02em}}
+.bc2{{font:italic 600 54px/1.1 Poppins;color:#F3DFB2;margin-top:6px}}
 .cap{{position:absolute;left:90px;right:90px;top:1380px;z-index:25;text-align:center;font:700 62px/1 Poppins;color:#fff;
   text-shadow:0 4px 0 rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.6)}}
 .cap.big{{font-size:118px;top:1330px}}
 '''
+
+
+BEHIND = ('bw1', 'hk1', 'hk2', 'cl2', 'wall', 'tb')   # drawn between the video and her cut-out
 
 
 def build():
@@ -313,8 +348,8 @@ def build():
     nl = '\n'
     vid = lambda i, src, ti, extra='': (f'<video id="{i}" class="full {extra}" src="{src}" muted playsinline data-start="0" data-media-start="0" '
                                         f'data-duration="{DUR:.3f}" data-track-index="{ti}"></video>')
-    wall_a = 12.9   # cut-outs (lilac look) rendered for these two windows of the edit (cut.py clock)
-    text_a = 23.7
+    wall_a = 13.1   # cut-outs (lilac look) rendered for these two windows of the edit (cut.py clock)
+    text_a = 23.4
     return f'''<!doctype html>
 <html lang="fr" data-resolution="portrait">
 <head>
@@ -332,11 +367,12 @@ def build():
     {vid('bgn', 'assets/aroll_nat.mp4', 0)}
     {vid('bgl', 'assets/aroll_lilac.mp4', 1)}
     {vid('bga', 'assets/aroll_amb.mp4', 3)}
-{nl.join(h for h in sh if 'id="wall"' in h or 'id="tb"' in h)}
-    <video id="cw" class="full cut" src="assets/wall_cut.webm" muted playsinline data-start="{wall_a}" data-media-start="0" data-duration="2.45" data-track-index="4"></video>
-    <video id="ctx" class="full cut" src="assets/text_cut.webm" muted playsinline data-start="{text_a}" data-media-start="0" data-duration="1.9" data-track-index="5"></video>
+{nl.join(h for h in sh if any(f'id="{i}"' in h for i in BEHIND))}
+    <video id="ci" class="full cut" src="assets/intro_cut.webm" muted playsinline data-start="0" data-media-start="0" data-duration="5.6" data-track-index="6"></video>
+    <video id="cw" class="full cut" src="assets/wall_cut.webm" muted playsinline data-start="{wall_a}" data-media-start="0" data-duration="1.85" data-track-index="4"></video>
+    <video id="ctx" class="full cut" src="assets/text_cut.webm" muted playsinline data-start="{text_a}" data-media-start="0" data-duration="1.8" data-track-index="5"></video>
   </div>
-{nl.join(h for h in sh if 'id="wall"' not in h and 'id="tb"' not in h)}
+{nl.join(h for h in sh if not any(f'id="{i}"' in h for i in BEHIND))}
 {nl.join(ch)}
 </div>
 <script>
