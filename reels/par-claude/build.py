@@ -20,7 +20,7 @@ BROWN, DARK, INK = '#8C5C41', '#573307', '#2A1A10'
 CREAM = '#F4EEE6'
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
 TOP = 262        # top band for the inserts (Instagram UI above 240)
-CUTS = {'wall': (11.45, 1.75), 'rien': (13.9, 0.95), 'text': (20.9, 1.6)}   # cut-out windows (edit clock), see cut.py
+CUTS = {'intro': (0.9, 2.2), 'wall': (12.36, 1.75), 'rien': (14.81, 0.95), 'text': (21.81, 1.6)}   # cut-out windows (edit clock), see cut.py
 
 
 def ct(t):
@@ -122,16 +122,44 @@ SEND = ('<svg viewBox="0 0 24 24" width="30" height="30"><path d="M12 19V5M5 12l
 def scenes():
     H, T, S = [], [], []      # html, tweens, sfx
 
-    # 1. hook: kinetic words at the top + a running timecode (she "didn't edit a second": the clock runs)
-    H.append('<div id="hk" class="hk"><div id="hkw" class="hkw"></div><div id="tc" class="tc">00:00:00:00</div></div>')
+    # 1. kinetic hook: two stacked Anton lines slam in, the second one uncovered by a dark-brown block wiping off,
+    #    a timecode running under them ("tu vois cette vidéo" / "c'est Claude qui l'a montée")
+    H.append('<div id="hk" class="hk"><div id="kh1" class="kl">TU VOIS</div><div id="kh2" class="kl k2"><span>CETTE VIDÉO ?</span><i id="kb1" class="kb"></i></div>'
+             '<div id="kh3" class="kl">C\'EST CLAUDE</div><div id="kh4" class="kl k2"><span>QUI L\'A MONTÉE</span><i id="kb2" class="kb"></i></div>'
+             '<div id="tc" class="tc">00:00:00:00</div></div>')
     a0, a1 = ct(1.74), ct(4.10)
-    T += ["gsap.set('#hk',{autoAlpha:1});", f"tl.set('#hk',{{autoAlpha:0}},{a1:.3f});"]
-    for txt, t, cls in (('TU VOIS', 1.74, 'w1'), ('CETTE VIDÉO ?', 2.24, 'w1'), ('Claude', 3.10, 'w2'), ("Claude l'a <b>montée.</b>", 3.46, 'w2')):
-        T += [f"tl.set('#hkw',{{innerHTML:{json.dumps(txt)},className:'hkw {cls}'}},{ct(t):.3f});",
-              f"tl.fromTo('#hkw',{{scale:1.25,autoAlpha:0}},{{scale:1,autoAlpha:1,duration:.16,ease:'expo.out',immediateRender:false}},{ct(t):.3f});"]
-        S.append(('whoosh-short', ct(t), .22))
+    T += ["gsap.set('#hk',{autoAlpha:1});", "gsap.set('#kh2, #kh3, #kh4',{autoAlpha:0});", f"tl.set('#hk',{{autoAlpha:0}},{a1:.3f});"]
+    for l1, l2, blk, t1, t2, out in (('#kh1', '#kh2', '#kb1', 1.74, 2.24, 2.90), ('#kh3', '#kh4', '#kb2', 2.92, 3.30, None)):
+        for sel, t in ((l1, t1), (l2, t2)):
+            T.append(f"tl.fromTo('{sel}',{{y:80,scaleY:1.4,autoAlpha:0}},{{y:0,scaleY:1,autoAlpha:1,duration:.28,ease:'expo.out',immediateRender:{'true' if t == 1.74 else 'false'}}},{max(0, ct(t) - .05):.3f});")
+            S.append(('whoosh-short', max(0, ct(t) - .05), .25))
+        T += [f"gsap.set('{blk}',{{scaleX:1,transformOrigin:'100% 50%'}});",
+              f"tl.to('{blk}',{{scaleX:0,duration:.25,ease:'power3.inOut'}},{ct(t2) + .15:.3f});"]
+        S.append(('pop', ct(t2) + .15, .3))
+        if out:
+            T += [f"tl.to('{l1}, {l2}',{{autoAlpha:0,y:-30,duration:.12}},{ct(out) - .12:.3f});"]
     n = int((a1 - a0) * 30)
     T += [f"tl.set('#tc',{{textContent:'00:00:{i // 30:02d}:{i % 30:02d}'}},{a0 + i / 30:.3f});" for i in range(0, n, 2)]
+
+    # "c'est Claude qui l'a montée": Claude logos in orbit around her (behind her on the back half, in front on the front half)
+    a, b = ct(2.92), ct(4.10)
+    for k in range(6):
+        for side in ('bk', 'fr'):
+            H.append(f'<div id="ob{side}{k}" class="orb {side}">{CLAUDE.format(s=130)}</div>')
+    T.append("gsap.set('.orb',{autoAlpha:0});")
+    steps = 24
+    for i in range(steps + 1):
+        t = a + (b - a) * i / steps
+        for k in range(6):
+            import math
+            ang = 2 * math.pi * (k / 6 + .9 * i / steps)
+            x, y, z = 540 + 440 * math.cos(ang) - 65, 960 + 340 * math.sin(ang) - 65, math.sin(ang)
+            sc = .65 + .4 * (z + 1) / 2
+            front = z > 0
+            T.append(f"tl.set('#obfr{k}',{{x:{x:.0f},y:{y:.0f},scale:{sc:.2f},rotation:{i * 9 + k * 30},autoAlpha:{1 if front else 0}}},{t:.3f});")
+            T.append(f"tl.set('#obbk{k}',{{x:{x:.0f},y:{y:.0f},scale:{sc:.2f},rotation:{i * 9 + k * 30},autoAlpha:{0 if front else .9}}},{t:.3f});")
+    T.append(f"tl.set('.orb',{{autoAlpha:0}},{b + .05:.3f});")
+    S += [('whoosh-short', a, .35), ('sparkle', a + .1, .3)]
 
     # 2. "pas de CapCut, pas de logiciel de montage" -> app icons struck; "juste Claude" -> they fall, Claude stays
     for k, (logo, name, at, hit) in enumerate((('capcut', 'CapCut', 4.48, 4.80), ('premiere', 'Premiere', 5.46, 5.98))):
@@ -154,7 +182,7 @@ def scenes():
     H.append(f'<div id="pb" class="pb"><div id="pl" class="pl">À CLAUDE</div><div id="pt" class="pt"></div><div id="ps" class="ps">{SEND}</div>'
              '<div id="pw" class="pw"></div></div>')
     T += ["gsap.set('#pb, #pw',{autoAlpha:0});"]
-    for txt, a, b, send, end in (('Monte ma vidéo dans ma charte', 15.80, 16.60, 16.86, 17.40),
+    for txt, a, b, send, end in (('Monte ma vidéo dans ma charte', 15.80, 16.50, 16.62, 16.86),
                                  ('Mets un peu plus de rose', 18.72, 19.90, 20.06, 20.40),
                                  ('Fais un mur de réels derrière moi', 21.40, 23.10, 23.36, 23.62)):
         T += [f"tl.fromTo('#pb',{{autoAlpha:0,y:-30}},{{autoAlpha:1,y:0,duration:.2,ease:'power3.out',immediateRender:false}},{ct(a) - .12:.3f});",
@@ -168,21 +196,30 @@ def scenes():
               f"tl.to('#pb',{{autoAlpha:0,y:-20,duration:.15}},{ct(end) - .15:.3f});"]
         S += [('click-soft', ct(a), .2), ('click-soft', (ct(a) + ct(b)) / 2, .2), ('click', ct(send), .5)]
 
-    # "et là toute la vidéo est montée": quick blur cut, the editing studio timeline fills itself
+    # "et là toute la vidéo est montée": quick blur cut, then an NLE timeline (V2 / V1 / A1 / A2) slides up and fills itself
     T += [f"tl.fromTo('#cam',{{filter:'blur(0px)'}},{{filter:'blur(14px)',duration:.1,yoyo:true,repeat:1,immediateRender:false}},{ct(17.30):.3f});"]
-    clips = ''.join(f'<div class="vc" style="left:{x}px;width:{w}px"><img src="assets/thumbs/t{i % 6}.jpg"/></div>'
-                    for i, (x, w) in enumerate([(0, 120), (124, 90), (218, 150), (372, 70), (446, 130), (580, 100), (684, 120)]))
-    gold = ''.join(f'<div class="tc2" style="left:{x}px;width:{w}px"></div>' for x, w in [(30, 90), (220, 110), (430, 80), (600, 140)])
-    wave = ''.join(f'<i style="height:{6 + (i * 37) % 26}px"></i>' for i in range(96))
-    H.append(f'<div id="tl" class="tlp"><div class="th"><span>Montage</span><span id="tlc">00:00:00:00</span><span class="dots">● ● ●</span></div>'
-             f'<div class="tr"><b>T1</b><div class="trk">{gold}</div></div><div class="tr"><b>V1</b><div class="trk">{clips}</div></div>'
-             f'<div class="tr"><b>A1</b><div class="trk wv">{wave}</div></div><div id="phd" class="phd"></div></div>')
-    a, b = ct(17.46), ct(18.62)
-    T += show('#tl', a, b, "{autoAlpha:0,y:-40,scale:.95}", .25, 'power3.out')
-    T += [f"tl.fromTo('#tl .vc, #tl .tc2',{{scaleX:0}},{{scaleX:1,duration:.12,stagger:.04,ease:'power2.out',immediateRender:false}},{a + .05:.3f});",
-          f"tl.fromTo('#phd',{{x:0}},{{x:780,duration:{b - a:.2f},ease:'none',immediateRender:false}},{a:.3f});"]
-    T += setseq('#tlc', 'textContent', [f'00:00:{s:02d}:00' for s in range(0, 39, 3)], a, (b - a) / 13)
-    S += [('whoosh-short', ct(17.30), .35), ('pop', a, .25)]
+    ruler = ''.join(f'<i style="left:{x}px" class="{"lg" if x % 100 == 0 else ""}"></i>' for x in range(0, 820, 20))
+    labels = ''.join(f'<em style="left:{x}px">00:{x // 25:02d}</em>' for x in range(0, 800, 200))
+    v1 = ''.join(f'<div class="vc" style="left:{x}px;width:{w}px"><img src="assets/thumbs/t{i % 6}.jpg"/><img src="assets/thumbs/t{(i + 2) % 6}.jpg"/></div>'
+                 for i, (x, w) in enumerate([(0, 150), (154, 110), (268, 170), (442, 96), (542, 140), (686, 120)]))
+    v2 = ''.join(f'<div class="vc v2" style="left:{x}px;width:{w}px"><img src="assets/reels/r{i + 3}.jpg"/></div>'
+                 for i, (x, w) in enumerate([(120, 80), (400, 90), (640, 70)]))
+    tx = ''.join(f'<div class="tc2" style="left:{x}px;width:{w}px">{t}</div>' for x, w, t in [(10, 120, 'HOOK'), (210, 130, 'PROMPT'), (430, 110, 'ROSE'), (610, 150, 'MUR')])
+    wave = ''.join(f'<i style="height:{8 + (i * 37) % 36}px"></i>' for i in range(118))
+    mus = ''.join(f'<i style="height:{6 + (i * 23) % 18}px"></i>' for i in range(118))
+    H.append(f'<div id="tl" class="tlp"><div class="th"><span>● ● ●</span><span class="ttl">Montage · réel_claude.mp4</span><span id="tlc">00:00:00:00</span></div>'
+             f'<div class="rul"><div class="ruli">{ruler}{labels}</div></div>'
+             f'<div class="tr"><b>T1</b><div class="trk">{tx}</div></div><div class="tr"><b>V2</b><div class="trk">{v2}</div></div>'
+             f'<div class="tr tall"><b>V1</b><div class="trk">{v1}</div></div>'
+             f'<div class="tr"><b>A1</b><div class="trk wv">{wave}</div></div><div class="tr"><b>A2</b><div class="trk wv mu">{mus}</div></div>'
+             f'<div id="phd" class="phd"><span></span></div></div>')
+    a, b = ct(16.86), ct(18.66)
+    T += show('#tl', a, b, "{autoAlpha:0,y:160}", .35, 'power3.out')
+    T += [f"tl.fromTo('#tl .vc, #tl .tc2',{{scaleX:0}},{{scaleX:1,duration:.14,stagger:.05,ease:'power2.out',immediateRender:false}},{a + .15:.3f});",
+          f"tl.fromTo('#tl .wv i',{{scaleY:0}},{{scaleY:1,duration:.3,stagger:.003,ease:'power2.out',immediateRender:false}},{a + .2:.3f});",
+          f"tl.fromTo('#phd',{{x:0}},{{x:800,duration:{b - a:.2f},ease:'none',immediateRender:false}},{a:.3f});"]
+    T += setseq('#tlc', 'textContent', [f'00:00:{s:02d}:{(s * 7) % 30:02d}' for s in range(0, 36, 2)], a, (b - a) / 18)
+    S += [('whoosh-short', a, .35), ('pop', ct(17.46), .25), ('click-soft', a + .4, .25), ('click-soft', a + .8, .25)]
 
     # 4. "un peu plus de rose, hop" -> before / after slider sweeps, the lilac look stays
     H.append('<div id="sl" class="sl"><div class="sll"></div><div class="slh">‹ ›</div></div>'
@@ -322,12 +359,17 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #cam{{position:absolute;inset:0;transform-origin:50% 40%}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 .cut{{z-index:5}}
-.hk{{position:absolute;left:60px;right:60px;top:{TOP + 10}px;z-index:20;text-align:center}}
-.hkw{{display:inline-block;color:#fff;text-shadow:0 4px 0 rgba(0,0,0,.25),0 0 30px rgba(0,0,0,.4)}}
-.hkw.w1{{font:400 150px/1 Anton;letter-spacing:.01em}}
-.hkw.w2{{font:italic 600 92px/1.05 Poppins;letter-spacing:-.02em}}
-.hkw b{{font-weight:600;background:{GOLD};-webkit-background-clip:text;background-clip:text;color:transparent}}
-.tc{{margin-top:14px;font:500 26px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:rgba(255,255,255,.85)}}
+.hk{{position:absolute;left:60px;right:60px;top:{TOP}px;z-index:20;text-align:center}}
+.kl{{font:400 150px/.92 Anton;color:#fff;letter-spacing:.01em;text-shadow:0 5px 0 rgba(0,0,0,.25),0 0 30px rgba(0,0,0,.35);transform-origin:50% 100%}}
+#kh3,#kh4{{position:absolute;left:0;right:0}}
+#kh3{{top:0}}
+#kh4{{top:138px}}
+.k2{{position:relative;display:inline-block;font-size:128px}}
+.kb{{position:absolute;left:-14px;right:-14px;top:-4px;bottom:4px;background:{DARK}}}
+.tc{{position:absolute;left:0;right:0;top:290px;font:500 26px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:rgba(255,255,255,.85)}}
+.orb{{position:absolute;left:0;top:0;width:110px;height:110px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}}
+.orb.bk{{z-index:4}}
+.orb.fr{{z-index:19}}
 .lg{{position:absolute;top:{TOP + 20}px;width:200px;text-align:center;z-index:20}}
 .lg img{{width:150px;height:150px;border-radius:34px;box-shadow:0 14px 30px rgba(0,0,0,.35);display:block;margin:0 auto}}
 .ln{{font:600 26px/1.2 Poppins;color:#fff;margin-top:10px;text-shadow:0 3px 12px rgba(0,0,0,.6)}}
@@ -343,20 +385,29 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .pt{{font:500 36px/1.25 Poppins;color:#222;margin-top:14px;white-space:nowrap;overflow:hidden}}
 .ps{{position:absolute;right:24px;top:30px;width:66px;height:66px;border-radius:50%;background:{DARK};display:flex;align-items:center;justify-content:center}}
 .pw{{position:absolute;right:30px;top:36px;width:54px;height:54px;border-radius:50%;border:5px solid #D9CFC4;border-top-color:{DARK}}}
-.tlp{{position:absolute;left:70px;right:70px;top:{TOP}px;z-index:20;height:330px;border-radius:24px;background:{INK};border:1.5px solid rgba(255,255,255,.12);
-  box-shadow:0 22px 50px rgba(0,0,0,.45);padding:16px 20px;overflow:hidden}}
-.th{{display:flex;justify-content:space-between;font:500 22px/1 'JetBrains Mono',monospace;color:#E9D9C4;margin-bottom:16px}}
-.th span:first-child{{font-family:Poppins;font-weight:600}}
-.dots{{color:#7A6658;letter-spacing:.2em}}
-.tr{{display:flex;align-items:center;gap:12px;height:72px;margin-bottom:10px}}
-.tr b{{font:600 18px/1 'JetBrains Mono',monospace;color:#9C8775;width:30px}}
-.trk{{position:relative;flex:1;height:64px;background:rgba(255,255,255,.04);border-radius:8px;overflow:hidden}}
-.vc{{position:absolute;top:2px;bottom:2px;border-radius:6px;overflow:hidden;transform-origin:0 50%;border:2px solid #C9A27E}}
-.vc img{{width:100%;height:100%;object-fit:cover;display:block}}
-.tc2{{position:absolute;top:14px;height:36px;border-radius:6px;background:{GOLD};transform-origin:0 50%}}
-.wv{{display:flex;align-items:center;gap:3px;padding:0 6px}}
-.wv i{{display:block;width:5px;border-radius:2px;background:#C9A27E}}
-.phd{{position:absolute;left:62px;top:50px;bottom:10px;width:4px;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.6)}}
+.tlp{{position:absolute;left:50px;right:50px;top:{TOP}px;z-index:20;border-radius:22px;background:{INK};border:1.5px solid rgba(255,255,255,.14);
+  box-shadow:0 26px 60px rgba(0,0,0,.5);padding:14px 18px 16px;overflow:hidden}}
+.th{{display:flex;justify-content:space-between;align-items:center;font:500 22px/1 'JetBrains Mono',monospace;color:#E9D9C4;margin-bottom:10px}}
+.th span:first-child{{color:#C9A27E;letter-spacing:.1em}}
+.ttl{{font-family:Poppins;font-weight:600;color:#F4EEE6}}
+.rul{{margin-left:42px;height:30px;position:relative;border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:8px}}
+.ruli i{{position:absolute;bottom:0;width:1px;height:8px;background:rgba(255,255,255,.35)}}
+.ruli i.lg{{height:16px}}
+.ruli em{{position:absolute;top:0;font:400 15px/1 'JetBrains Mono',monospace;color:#9C8775;font-style:normal;margin-left:4px}}
+.tr{{display:flex;align-items:center;gap:12px;height:46px;margin-bottom:7px}}
+.tr.tall{{height:78px}}
+.tr b{{font:600 17px/1 'JetBrains Mono',monospace;color:#9C8775;width:30px}}
+.trk{{position:relative;flex:1;height:100%;background:rgba(255,255,255,.04);border-radius:7px;overflow:hidden}}
+.vc{{position:absolute;top:2px;bottom:2px;border-radius:6px;overflow:hidden;transform-origin:0 50%;border:2px solid #C9A27E;display:flex}}
+.vc img{{height:100%;flex:1;min-width:0;object-fit:cover;display:block}}
+.vc.v2{{border-color:#E9C98F}}
+.tc2{{position:absolute;top:6px;bottom:6px;border-radius:6px;background:{GOLD};transform-origin:0 50%;font:600 15px/34px 'JetBrains Mono',monospace;
+  color:{INK};padding-left:8px;letter-spacing:.08em}}
+.wv{{display:flex;align-items:center;gap:2px;padding:0 4px}}
+.wv i{{display:block;flex:none;width:5px;border-radius:2px;background:#C9A27E;transform-origin:50% 50%}}
+.wv.mu i{{background:#7FA089}}
+.phd{{position:absolute;left:58px;top:58px;bottom:12px;width:3px;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.6)}}
+.phd span{{position:absolute;left:-9px;top:-8px;width:21px;height:16px;background:#fff;clip-path:polygon(0 0,100% 0,50% 100%)}}
 .sl{{position:absolute;left:0;top:0;bottom:0;width:0;z-index:15}}
 .sll{{position:absolute;left:-3px;top:0;bottom:0;width:6px;background:#fff;box-shadow:0 0 18px rgba(0,0,0,.4)}}
 .slh{{position:absolute;left:-38px;top:880px;width:76px;height:76px;border-radius:50%;background:{DARK};border:4px solid #fff;color:#fff;
@@ -422,7 +473,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 '''
 
 
-BEHIND = ('wall', 'rien', 'texte')
+BEHIND = ('wall', 'rien', 'texte', 'obbk')
 
 
 def build():
@@ -456,6 +507,7 @@ def build():
     {vid('bgl', 'assets/aroll_lilac.mp4', 1)}
     {vid('bgm', 'assets/aroll_moody.mp4', 3)}
 {nl.join(h for h in sh if any(f'id="{i}"' in h for i in BEHIND))}
+    {cutv('intro', 8)}
     {cutv('wall', 4)}
     {cutv('rien', 5)}
     {cutv('text', 6)}
