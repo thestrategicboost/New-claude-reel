@@ -6,11 +6,11 @@ import json
 import subprocess
 
 SEGS = [(1.68, 4.08, 1.0), (4.18, 6.32, 1.0), (6.58, 7.50, 1.0),   # tu vois cette vidéo... pas de CapCut... juste Claude
-        (15.74, 21.20, 1.1),                                         # je lui ai envoyé mon prompt... plus de rose, hop
-        (21.38, 23.62, 1.1), (25.80, 27.50, 1.1),                    # mur de réel derrière moi | (snap) hop, il met un mur de réel
-        (38.46, 45.52, 1.1),                                         # et franchement j'y connais rien... tout seul
-        (47.64, 51.36, 1.1), (51.44, 57.20, 1.1),                    # texte derrière, ambiance | sous-titres, plan large, serré, cuts
-        (65.30, 72.30, 1.1)]                                         # si toi aussi... commente montage... tchus
+        (15.74, 21.20, 1.0),                                         # je lui ai envoyé mon prompt... plus de rose, hop
+        (21.38, 23.62, 1.0), (25.80, 27.50, 1.0),                    # mur de réel derrière moi | (snap) hop, il met un mur de réel
+        (38.46, 45.52, 1.0),                                         # et franchement j'y connais rien... tout seul
+        (47.64, 51.36, 1.0), (51.44, 57.20, 1.0),                    # texte derrière, ambiance | sous-titres, plan large, serré, cuts
+        (65.30, 72.30, 1.0)]                                         # si toi aussi... commente montage... tchus
 
 if __name__ == '__main__':
     fc, n = [], len(SEGS)

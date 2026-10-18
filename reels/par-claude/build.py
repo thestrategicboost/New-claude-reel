@@ -20,11 +20,11 @@ BROWN, DARK, INK = '#8C5C41', '#573307', '#2A1A10'
 CREAM = '#F4EEE6'
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
 TOP = 262        # top band for the inserts (Instagram UI above 240)
-CUTS = {'intro': (0.9, 2.2), 'wall': (12.36, 1.75), 'rien': (14.81, 0.95), 'text': (21.81, 1.6)}   # cut-out windows (edit clock), see cut.py
+CUTS = {'intro': (0.9, 2.2), 'claude': (4.54, 0.95), 'wall': (13.16, 1.7), 'rien': (15.7, 1.0), 'text': (23.23, 1.85)}   # cut-out windows (edit clock), see cut.py
 
 
 def ct(t):
-    """raw-clip time -> edit time (takes kept and sped up by cut.py)"""
+    """raw-clip time -> edit time (takes kept by cut.py, normal speed)"""
     out = 0.0
     for a, b, sp in SEGS:
         if t >= b:
@@ -76,20 +76,24 @@ BIG = (ct(52.84), ct(53.72))
 
 
 def captions():
+    """her usual captions: one word at a time, Poppins white with a black shadow, lowercase"""
+    groups = []
+    for w in words():
+        t = re.sub(r'[,.!?…]', '', w['w']).lower().replace('dm', 'DM')
+        if groups and w['s'] - groups[-1]['s'] < .14:
+            groups[-1]['w'] += ' ' + t
+            groups[-1]['e'] = w['e']
+        else:
+            groups.append(dict(w, w=t))
     html, tw = [], []
-    ps = phrases(words())
-    for k, p in enumerate(ps):
-        a = p[0]['s']
-        nxt = ps[k + 1][0]['s'] if k + 1 < len(ps) else DUR
-        b = min(nxt, p[-1]['e'] + .35, DUR)
-        big = ' big' if BIG[0] - .05 <= a < BIG[1] else ''
-        spans = ' '.join(f'<span id="c{k}_{j}">{re.sub(r"[,.!?…]", "", w["w"])}</span>' for j, w in enumerate(p))
-        html.append(f'<div id="c{k}" class="cap{big}"><div class="cb">{spans}</div></div>')
-        tw += [f"gsap.set('#c{k}',{{autoAlpha:0}});", f"tl.set('#c{k}',{{autoAlpha:1}},{a:.3f});",
-               f"tl.fromTo('#c{k} .cb',{{y:14,scale:.94}},{{y:0,scale:1,duration:.14,ease:'power2.out',immediateRender:false}},{a:.3f});",
-               f"tl.set('#c{k}',{{autoAlpha:0}},{b:.3f});"]
-        for j, w in enumerate(p):
-            tw.append(f"tl.set('#c{k}_{j}',{{color:'#FFFFFF'}},{w['s']:.3f});")
+    for k, w in enumerate(groups):
+        nxt = groups[k + 1]['s'] if k + 1 < len(groups) else DUR
+        end = min(nxt if nxt - w['e'] < .5 else w['e'] + .3, nxt, DUR)
+        big = ' big' if BIG[0] - .05 <= w['s'] < BIG[1] else ''
+        html.append(f'<div id="w{k}" class="cap{big}">{w["w"]}</div>')
+        tw += [f"gsap.set('#w{k}',{{autoAlpha:0}});", f"tl.set('#w{k}',{{autoAlpha:1}},{w['s']:.3f});",
+               f"tl.fromTo('#w{k}',{{scale:.8}},{{scale:1,duration:{min(.12, end - w['s']):.3f},ease:'back.out(2.5)',immediateRender:false}},{w['s']:.3f});",
+               f"tl.set('#w{k}',{{autoAlpha:0}},{end:.3f});"]
     return html, tw
 
 
@@ -173,10 +177,14 @@ def scenes():
               f"tl.to('#lg{k}',{{y:1300,rotation:{-25 + 50 * k},duration:.55,ease:'power2.in'}},{ct(6.62):.3f});",
               f"tl.set('#lg{k}',{{autoAlpha:0}},{ct(6.62) + .55:.3f});"]
         S += [('pop', ct(at), .3), ('click', ct(hit), .45)]
-    H.append(f'<div id="cl" class="cl">{CLAUDE.format(s=96)}<div class="cn"><i>juste</i> Claude.</div></div>')
-    T += show('#cl', ct(6.66), ct(7.50) + .15, "{autoAlpha:0,scale:.7}", .25)
-    T += [f"tl.fromTo('#cl svg',{{rotation:-120}},{{rotation:0,duration:.6,ease:'power3.out',immediateRender:false}},{ct(6.66):.3f});"]
-    S += [('whoosh-short', ct(6.62), .3), ('sparkle', ct(6.66), .28)]
+    # (the icons fall away silently on "juste Claude")
+    # "juste Claude": a huge Claude logo behind her (no sound)
+    H.append(f'<div id="clbig" class="clbig">{CLAUDE.format(s=820)}</div>')
+    a, b = ct(6.62), CUTS['claude'][0] + CUTS['claude'][1] - .03
+    T += ["gsap.set('#clbig',{autoAlpha:0});",
+          f"tl.fromTo('#clbig',{{autoAlpha:0,scale:.5,rotation:-90}},{{autoAlpha:1,scale:1,rotation:0,duration:.45,ease:'power3.out',immediateRender:false}},{a:.3f});",
+          f"tl.to('#clbig',{{rotation:20,duration:{b - a:.2f},ease:'none'}},{a + .45:.3f});",
+          f"tl.set('#clbig',{{autoAlpha:0}},{b:.3f});"]
 
     # 3. the "À CLAUDE" prompt bar: typed, sent, sending
     H.append(f'<div id="pb" class="pb"><div id="pl" class="pl">À CLAUDE</div><div id="pt" class="pt"></div><div id="ps" class="ps">{SEND}</div>'
@@ -367,6 +375,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .k2{{position:relative;display:inline-block;font-size:128px}}
 .kb{{position:absolute;left:-14px;right:-14px;top:-4px;bottom:4px;background:{DARK}}}
 .tc{{position:absolute;left:0;right:0;top:290px;font:500 26px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:rgba(255,255,255,.85)}}
+.clbig{{position:absolute;left:130px;top:300px;width:820px;height:820px;z-index:2;filter:drop-shadow(0 20px 40px rgba(0,0,0,.25))}}
 .orb{{position:absolute;left:0;top:0;width:110px;height:110px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}}
 .orb.bk{{z-index:4}}
 .orb.fr{{z-index:19}}
@@ -466,14 +475,13 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .dm img{{width:78px;height:78px;border-radius:50%;object-fit:cover}}
 .dt{{font:700 28px/1.2 Poppins;color:#111}}
 .ds{{font:500 26px/1.2 Poppins;color:#555}}
-.cap{{position:absolute;left:80px;right:80px;top:1260px;z-index:25;text-align:center}}
-.cb{{display:inline-block;background:rgba(87,51,7,.92);padding:10px 20px 12px;font:600 46px/1.15 Poppins;color:rgba(243,223,178,.55);
-  box-shadow:0 8px 20px rgba(0,0,0,.25)}}
-.cap.big .cb{{font-size:84px;padding:14px 28px}}
+.cap{{position:absolute;left:80px;right:80px;top:1300px;z-index:25;text-align:center;font:700 62px/1 Poppins;color:#fff;
+  text-shadow:0 4px 0 rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.6)}}
+.cap.big{{font-size:118px;top:1260px}}
 '''
 
 
-BEHIND = ('wall', 'rien', 'texte', 'obbk')
+BEHIND = ('wall', 'rien', 'texte', 'obbk', 'clbig')
 
 
 def build():
@@ -508,6 +516,7 @@ def build():
     {vid('bgm', 'assets/aroll_moody.mp4', 3)}
 {nl.join(h for h in sh if any(f'id="{i}"' in h for i in BEHIND))}
     {cutv('intro', 8)}
+    {cutv('claude', 9)}
     {cutv('wall', 4)}
     {cutv('rien', 5)}
     {cutv('text', 6)}
