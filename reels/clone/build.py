@@ -16,18 +16,27 @@ DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error',
 PLAN = json.load(open('work/plan.json'))
 WORDS = json.load(open('work/words_tl.json'))
 SPEED = 1.12   # the composite is sped up 1.12x (more punch): every time written on the dialogue clock is divided by it
+CUTS = json.load(open('work/cuts.json'))   # silences removed from the sped-up composite (start, end), sped clock
+
+
+def ct(t):
+    """dialogue-clock time -> final clock (sped up, then the silences cut out)"""
+    t /= SPEED
+    return t - sum(min(b, max(t, a)) - a for a, b in CUTS)
+
+
 for _p in PLAN:
-    _p['start'], _p['end'] = _p['start'] / SPEED, _p['end'] / SPEED
+    _p['start'], _p['end'] = ct(_p['start']), ct(_p['end'])
 for _w in WORDS:
-    _w['s'], _w['e'] = _w['s'] / SPEED, _w['e'] / SPEED
+    _w['s'], _w['e'] = ct(_w['s']), ct(_w['e'])
 DARK = '#573307'
-RED, GREEN = '#E03E31', '#4CB73F'   # 0 followers / 10K followers (her reference capture)
+RED, GREEN = '#DC3A2F', '#54B837'   # 0 followers / 10K followers (her reference capture)
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
 X = {'f': 230, 's': 770}   # centre of each Maé (tags + captions)
-ZOOM_AT = 35.35 / SPEED           # the 100-followers Maé is out of frame: the other slides to the centre and we push in
+ZOOM_AT = ct(35.35)           # the 100-followers Maé is out of frame: the other slides to the centre and we push in
 ZOOM = (1.45, 0, 250)      # scale, x, y of the a-roll (she is centred in the plate by then)
-BLOCK = (21.25 / SPEED, 30.24 / SPEED)    # block dialog panel from the 'juge' exchange, 'Bloquer' is tapped on 'bloque'
-IG_AT = 37.50 / SPEED             # 'parce que je suis Maé de The Strategic Boost': her Instagram profile over her head
+BLOCK = (ct(21.25), ct(30.24))    # block dialog panel from the 'juge' exchange, 'Bloquer' is tapped on 'bloque'
+IG_AT = ct(37.50)             # 'parce que je suis Maé de The Strategic Boost': her Instagram profile over her head
 CAP_Y = 1180
 
 
@@ -54,13 +63,13 @@ def tags():
     for p in PLAN:
         on, off = ('#tf', '#ts') if p['who'] == 'f' else ('#ts', '#tf')
         tw += [f"tl.to('{on}',{{opacity:1,scale:1.06,duration:.2,ease:'power2.out'}},{max(p['start'], .4):.2f});",
-               f"tl.to('{off}',{{opacity:.5,scale:.94,duration:.2,ease:'power2.out'}},{max(p['start'], .4):.2f});"]
+               f"tl.to('{off}',{{opacity:.8,scale:.92,duration:.2,ease:'power2.out'}},{max(p['start'], .4):.2f});"]
     tw.append("gsap.set('.pn.s .dim',{opacity:.55});")
     for p in PLAN:   # the panel of the one listening is darkened too
         on, off = ('.pn.f .dim', '.pn.s .dim') if p['who'] == 'f' else ('.pn.s .dim', '.pn.f .dim')
         tw += [f"tl.to('{on}',{{opacity:0,duration:.2}},{max(p['start'], .4):.2f});",
                f"tl.to('{off}',{{opacity:.55,duration:.2}},{max(p['start'], .4):.2f});"]
-    tw.append(f"tl.to('#tf',{{autoAlpha:0,y:-20,duration:.35}},{35.0 / SPEED:.2f});")   # she walks out after 'j'abandonne'
+    tw.append(f"tl.to('#tf',{{autoAlpha:0,y:-20,duration:.35}},{ct(35.0):.2f});")   # she walks out after 'j'abandonne'
     # the panels, swapped at each new exchange
     for k, (left, right) in enumerate(PANELS):
         a, b = PLAN[2 * k]['start'], PLAN[2 * k + 1]['end']
