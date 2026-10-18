@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Clone reel "l'entrepreneuse qui floppe vs celle qui réussit": two Maé in one shot (assemble.py builds the
-dialogue, the success Maé is cut out and laid over the flop track, brightened grade). On top: a tag over each
+dialogue, the success Maé is cut out and laid over the flop track, brightened grade + her lilac look, lilac.py). On top: a tag over each
 head (the one speaking lights up), one-word captions under the speaker.
 
 PY build.py    writes index.html
@@ -16,6 +16,8 @@ WORDS = json.load(open('work/words_tl.json'))
 DARK = '#573307'
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
 X = {'f': 300, 's': 830}   # the success Maé is laid 130px further right (more space between them)
+ZOOM_AT = 35.35            # the flop Maé is out of frame: push in on the success Maé (she fills the screen)
+ZOOM = (1.6, -324, 300)    # scale, x, y of the a-roll; her centre lands at x ~712
 IG_AT = 37.50              # 'parce que je suis Maé de The Strategic Boost': her Instagram card over their heads          # centre of each Maé (tags + captions)
 CAP_Y = 1180
 
@@ -29,8 +31,9 @@ def tags():
         on, off = ('#tf', '#ts') if p['who'] == 'f' else ('#ts', '#tf')
         tw += [f"tl.to('{on}',{{opacity:1,scale:1.06,duration:.2,ease:'power2.out'}},{max(p['start'], .4):.2f});",
                f"tl.to('{off}',{{opacity:.5,scale:.94,duration:.2,ease:'power2.out'}},{max(p['start'], .4):.2f});"]
-    tw.append("tl.to('#tf',{autoAlpha:0,y:-20,duration:.4},35.6);")   # she walks out after 'j'abandonne'
+    tw.append("tl.to('#tf',{autoAlpha:0,y:-20,duration:.35},35.0);")   # she walks out after 'j'abandonne'
     # her Instagram card above the heads, the follow button gets tapped
+    tw.append(f"tl.fromTo('#bgv',{{scale:1,x:0,y:0}},{{scale:{ZOOM[0]},x:{ZOOM[1]},y:{ZOOM[2]},duration:.9,ease:'power2.inOut',immediateRender:false}},{ZOOM_AT:.2f});")
     # her real Instagram profile (her screenshot) above the heads
     html.append('<div id="fol"><img src="assets/profil.png"/></div>')
     tw += ["gsap.set('#fol',{autoAlpha:0});",
@@ -45,7 +48,8 @@ def captions():
     for k, w in enumerate(WORDS):
         end = WORDS[k + 1]['s'] if k + 1 < len(WORDS) and WORDS[k + 1]['s'] - w['e'] < .5 else w['e'] + .25
         end = min(end, DUR)
-        html.append(f'<div id="w{k}" class="cap" style="left:{X[w["who"]] - 300}px">{w["w"]}</div>')
+        cx = 712 if w['s'] >= ZOOM_AT + .4 else X[w['who']]
+        html.append(f'<div id="w{k}" class="cap" style="left:{cx - 300}px">{w["w"]}</div>')
         tw += [f"gsap.set('#w{k}',{{autoAlpha:0}});",
                f"tl.fromTo('#w{k}',{{autoAlpha:1,scale:.82}},{{autoAlpha:1,scale:1,duration:.12,ease:'back.out(2.5)',immediateRender:false}},{w['s']:.3f});",
                f"tl.set('#w{k}',{{autoAlpha:0}},{end:.3f});"]

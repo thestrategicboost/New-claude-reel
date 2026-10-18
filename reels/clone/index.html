@@ -24,9 +24,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="39.700" data-width="1080" data-height="1920">
-  <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="39.700" data-track-index="2" data-volume="1"></audio>
-  <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="39.700" data-track-index="0"></video>
+<div id="root" data-composition-id="main" data-start="0" data-duration="39.600" data-width="1080" data-height="1920">
+  <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="39.600" data-track-index="2" data-volume="1"></audio>
+  <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="39.600" data-track-index="0"></video>
 <div id="tf" class="tag" style="left:100px"><div class="tl">L'entrepreneuse</div><div class="tb f">QUI FLOPPE</div></div>
 <div id="ts" class="tag" style="left:630px"><div class="tl">L'entrepreneuse</div><div class="tb s">QUI RÉUSSIT</div></div>
 <div id="fol"><img src="assets/profil.png"/></div>
@@ -171,21 +171,21 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="w138" class="cap" style="left:530px">tu</div>
 <div id="w139" class="cap" style="left:530px">vois</div>
 <div id="w140" class="cap" style="left:530px">moi</div>
-<div id="w141" class="cap" style="left:530px">je</div>
-<div id="w142" class="cap" style="left:530px">reste</div>
-<div id="w143" class="cap" style="left:530px">focus</div>
-<div id="w144" class="cap" style="left:530px">je</div>
-<div id="w145" class="cap" style="left:530px">sais</div>
-<div id="w146" class="cap" style="left:530px">quoi</div>
-<div id="w147" class="cap" style="left:530px">poster</div>
-<div id="w148" class="cap" style="left:530px">parce</div>
-<div id="w149" class="cap" style="left:530px">que</div>
-<div id="w150" class="cap" style="left:530px">je</div>
-<div id="w151" class="cap" style="left:530px">suis</div>
-<div id="w152" class="cap" style="left:530px">maé</div>
-<div id="w153" class="cap" style="left:530px">de</div>
-<div id="w154" class="cap" style="left:530px">the strategic</div>
-<div id="w155" class="cap" style="left:530px">boost</div>
+<div id="w141" class="cap" style="left:412px">je</div>
+<div id="w142" class="cap" style="left:412px">reste</div>
+<div id="w143" class="cap" style="left:412px">focus</div>
+<div id="w144" class="cap" style="left:412px">je</div>
+<div id="w145" class="cap" style="left:412px">sais</div>
+<div id="w146" class="cap" style="left:412px">quoi</div>
+<div id="w147" class="cap" style="left:412px">poster</div>
+<div id="w148" class="cap" style="left:412px">parce</div>
+<div id="w149" class="cap" style="left:412px">que</div>
+<div id="w150" class="cap" style="left:412px">je</div>
+<div id="w151" class="cap" style="left:412px">suis</div>
+<div id="w152" class="cap" style="left:412px">maé</div>
+<div id="w153" class="cap" style="left:412px">de</div>
+<div id="w154" class="cap" style="left:412px">the strategic</div>
+<div id="w155" class="cap" style="left:412px">boost</div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
@@ -211,7 +211,8 @@ tl.to('#tf',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},30.93);
 tl.to('#ts',{opacity:.5,scale:.94,duration:.2,ease:'power2.out'},30.93);
 tl.to('#ts',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},34.48);
 tl.to('#tf',{opacity:.5,scale:.94,duration:.2,ease:'power2.out'},34.48);
-tl.to('#tf',{autoAlpha:0,y:-20,duration:.4},35.6);
+tl.to('#tf',{autoAlpha:0,y:-20,duration:.35},35.0);
+tl.fromTo('#bgv',{scale:1,x:0,y:0},{scale:1.6,x:-324,y:300,duration:.9,ease:'power2.inOut',immediateRender:false},35.35);
 gsap.set('#fol',{autoAlpha:0});
 tl.to('#ts',{autoAlpha:0,y:-20,duration:.2},37.30);
 tl.fromTo('#fol',{autoAlpha:0,y:-40,scale:.85},{autoAlpha:1,y:0,scale:1,duration:.4,ease:'back.out(1.7)',immediateRender:false},37.50);
@@ -683,8 +684,8 @@ tl.fromTo('#w154',{autoAlpha:1,scale:.82},{autoAlpha:1,scale:1,duration:.12,ease
 tl.set('#w154',{autoAlpha:0},39.120);
 gsap.set('#w155',{autoAlpha:0});
 tl.fromTo('#w155',{autoAlpha:1,scale:.82},{autoAlpha:1,scale:1,duration:.12,ease:'back.out(2.5)',immediateRender:false},39.120);
-tl.set('#w155',{autoAlpha:0},39.610);
-tl.set({}, {}, 39.700);
+tl.set('#w155',{autoAlpha:0},39.600);
+tl.set({}, {}, 39.600);
 window.__timelines["main"] = tl;
 </script>
 </body>
