@@ -38,6 +38,7 @@ ZOOM = (1.45, 0, 250)      # scale, x, y of the a-roll (she is centred in the pl
 BLOCK = (ct(21.25), ct(30.24))    # block dialog panel from the 'juge' exchange, 'Bloquer' is tapped on 'bloque'
 IG_AT = ct(37.50)             # 'parce que je suis Maé de The Strategic Boost': her Instagram profile over her head
 CAP_Y = 1180
+CAP_PX = 56
 
 
 CAM = ('<svg viewBox="0 0 24 24" width="74" height="74" fill="none" stroke="#111" stroke-width="1.4"><circle cx="12" cy="12" r="11"/>'
@@ -105,6 +106,8 @@ def captions():
         nxt = groups[k + 1]['s'] if k + 1 < len(groups) else DUR
         end = min(nxt if nxt - w['e'] < .5 else w['e'] + .25, nxt, DUR)
         cx = 540 if w['s'] >= ZOOM_AT + .4 else X[w['who']]
+        half = len(w['w']) * CAP_PX * .3 + 10          # rough half width of the text (Poppins bold)
+        cx = min(max(cx, 80 + half), 1000 - half)     # never out of frame (80px side margins)
         html.append(f'<div id="w{k}" class="cap" style="left:{cx - 300}px">{w["w"]}</div>')
         tw += [f"gsap.set('#w{k}',{{autoAlpha:0}});",
                f"tl.set('#w{k}',{{autoAlpha:1}},{w['s']:.3f});",
@@ -151,7 +154,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .bs{{font:500 21px/1.3 Poppins;color:#777;margin-top:8px}}
 .bb{{margin-top:18px;height:66px;border-radius:14px;background:#ED4956;color:#fff;font:700 28px/66px Poppins}}
 .bb.done{{position:absolute;left:24px;right:24px;bottom:22px;margin:0;background:#EFEFEF;color:#111}}
-.cap{{position:absolute;top:{CAP_Y}px;width:600px;text-align:center;z-index:11;font:700 70px/1 Poppins;color:#fff;
+.cap{{position:absolute;top:{CAP_Y}px;width:600px;text-align:center;z-index:11;font:700 {CAP_PX}px/1 Poppins;color:#fff;
   text-shadow:0 4px 0 rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.6);white-space:nowrap}}
 '''
 
