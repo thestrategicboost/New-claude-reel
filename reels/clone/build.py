@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Clone reel "0 followers vs 10K followers": two Maé in one shot (assemble.py builds the
-dialogue; both Maé are cut out and laid on an empty-wall plate, the 100 one 90px left, the 100 000 one 40px right,
+dialogue; both Maé are cut out and laid on an empty-wall plate, the 0-followers one 90px left, the 10K one 40px right; the 0 one is sharpened (softer focus), all sped up 1.12x,
 then centred once she is alone; brightened grade + her lilac look, lilac.py). On top: a tag over each head (the one
 speaking lights up), one-word captions under the speaker, an Instagram "block" pop-up on "je bloque", her real
 Instagram profile at the end, a few sound effects.
@@ -15,14 +15,19 @@ DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error',
                             'csv=p=0', 'assets/aroll.mp4'], capture_output=True, text=True).stdout.strip())
 PLAN = json.load(open('work/plan.json'))
 WORDS = json.load(open('work/words_tl.json'))
+SPEED = 1.12   # the composite is sped up 1.12x (more punch): every time written on the dialogue clock is divided by it
+for _p in PLAN:
+    _p['start'], _p['end'] = _p['start'] / SPEED, _p['end'] / SPEED
+for _w in WORDS:
+    _w['s'], _w['e'] = _w['s'] / SPEED, _w['e'] / SPEED
 DARK = '#573307'
-RED, GREEN = '#E5262B', '#22B83A'   # 100 followers / 100 000 followers
+RED, GREEN = '#E03E31', '#4CB73F'   # 0 followers / 10K followers (her reference capture)
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
 X = {'f': 230, 's': 770}   # centre of each Maé (tags + captions)
-ZOOM_AT = 35.35            # the 100-followers Maé is out of frame: the other slides to the centre and we push in
+ZOOM_AT = 35.35 / SPEED           # the 100-followers Maé is out of frame: the other slides to the centre and we push in
 ZOOM = (1.45, 0, 250)      # scale, x, y of the a-roll (she is centred in the plate by then)
-BLOCK = (21.25, 30.24)     # block dialog panel from the 'juge' exchange, 'Bloquer' is tapped on 'bloque'
-IG_AT = 37.50              # 'parce que je suis Maé de The Strategic Boost': her Instagram profile over her head
+BLOCK = (21.25 / SPEED, 30.24 / SPEED)    # block dialog panel from the 'juge' exchange, 'Bloquer' is tapped on 'bloque'
+IG_AT = 37.50 / SPEED             # 'parce que je suis Maé de The Strategic Boost': her Instagram profile over her head
 CAP_Y = 1180
 
 
@@ -50,23 +55,28 @@ def tags():
         on, off = ('#tf', '#ts') if p['who'] == 'f' else ('#ts', '#tf')
         tw += [f"tl.to('{on}',{{opacity:1,scale:1.06,duration:.2,ease:'power2.out'}},{max(p['start'], .4):.2f});",
                f"tl.to('{off}',{{opacity:.5,scale:.94,duration:.2,ease:'power2.out'}},{max(p['start'], .4):.2f});"]
-    tw.append("tl.to('#tf',{autoAlpha:0,y:-20,duration:.35},35.0);")   # she walks out after 'j'abandonne'
+    tw.append("gsap.set('.pn.s .dim',{opacity:.55});")
+    for p in PLAN:   # the panel of the one listening is darkened too
+        on, off = ('.pn.f .dim', '.pn.s .dim') if p['who'] == 'f' else ('.pn.s .dim', '.pn.f .dim')
+        tw += [f"tl.to('{on}',{{opacity:0,duration:.2}},{max(p['start'], .4):.2f});",
+               f"tl.to('{off}',{{opacity:.55,duration:.2}},{max(p['start'], .4):.2f});"]
+    tw.append(f"tl.to('#tf',{{autoAlpha:0,y:-20,duration:.35}},{35.0 / SPEED:.2f});")   # she walks out after 'j'abandonne'
     # the panels, swapped at each new exchange
     for k, (left, right) in enumerate(PANELS):
         a, b = PLAN[2 * k]['start'], PLAN[2 * k + 1]['end']
         for side, inner, d in (('f', left, 0), ('s', right, .08)):
             pid = f'p{side}{k}'
-            html.append(f'<div id="{pid}" class="pn" style="left:{PX[side] - 200}px">{inner}</div>')
+            html.append(f'<div id="{pid}" class="pn {side}" style="left:{PX[side] - 200}px">{inner}<div class="dim"></div></div>')
             tw += [f"gsap.set('#{pid}',{{autoAlpha:0}});",
                    f"tl.fromTo('#{pid}',{{autoAlpha:0,scale:.85,y:-20}},{{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(1.7)',immediateRender:{'true' if a + d == 0 else 'false'}}},{a + d:.2f});",
                    f"tl.to('#{pid}',{{autoAlpha:0,scale:.92,duration:.15}},{b - .15:.2f});", f"tl.set('#{pid}',{{autoAlpha:0}},{b:.2f});"]
     tw += ["gsap.set('#bd',{autoAlpha:0});", f"tl.to('#bb',{{scale:.9,duration:.08,yoyo:true,repeat:1}},{BLOCK[1]:.2f});",
            f"tl.set('#bb',{{autoAlpha:0}},{BLOCK[1] + .16:.2f});", f"tl.set('#bd',{{autoAlpha:1}},{BLOCK[1] + .16:.2f});"]
+    tw.append(f"tl.to('#ts',{{autoAlpha:0,y:-20,duration:.25}},{ZOOM_AT:.2f});")   # alone and centred: no more tag
     tw.append(f"tl.fromTo('#bgv',{{scale:1,x:0,y:0}},{{scale:{ZOOM[0]},x:{ZOOM[1]},y:{ZOOM[2]},duration:.9,ease:'power2.inOut',immediateRender:false}},{ZOOM_AT:.2f});")
     # her real Instagram profile (her screenshot) above the heads
     html.append('<div id="fol"><img src="assets/profil.png"/></div>')
     tw += ["gsap.set('#fol',{autoAlpha:0});",
-           f"tl.to('#ts',{{autoAlpha:0,y:-20,duration:.2}},{IG_AT - .2:.2f});",
            f"tl.fromTo('#fol',{{autoAlpha:0,y:-40,scale:.85}},{{autoAlpha:1,y:0,scale:1,duration:.4,ease:'back.out(1.7)',immediateRender:false}},{IG_AT:.2f});",
            f"tl.to('#fol',{{scale:1.03,duration:.5,ease:'sine.inOut',yoyo:true,repeat:1}},{IG_AT + .6:.2f});"]
     return html, tw
@@ -111,16 +121,17 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 .tag{{position:absolute;top:300px;width:400px;text-align:center;z-index:10;transform-origin:50% 100%}}
 .tl{{font:600 32px/1 Poppins;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.55);margin-bottom:10px}}
-.tb{{display:inline-block;white-space:nowrap;font:400 44px/1 Anton;letter-spacing:.03em;color:#fff;padding:12px 26px 10px;border-radius:14px;
+.tb{{display:inline-block;white-space:nowrap;font:400 54px/1 Anton;letter-spacing:.07em;color:#fff;padding:14px 30px 12px;border-radius:0;
   box-shadow:0 12px 28px rgba(0,0,0,.3)}}
 .tb.f{{background:{RED}}}
 .tb.s{{background:{GREEN}}}
 #fol{{position:absolute;z-index:15;left:190px;top:236px;width:700px;border-radius:30px;overflow:hidden;background:#fff;
   box-shadow:0 18px 44px rgba(0,0,0,.3)}}
 #fol img{{width:100%;display:block}}
-.tag{{width:420px;top:492px}}
-.pn{{position:absolute;z-index:12;top:236px;width:400px;height:236px;border-radius:24px;overflow:hidden;background:#fff;border:4px solid #fff;
+.tag{{width:420px;top:490px}}
+.pn{{position:absolute;z-index:12;top:236px;width:400px;height:236px;border-radius:0;overflow:hidden;background:#fff;border:4px solid #fff;
   box-shadow:0 16px 40px rgba(0,0,0,.3)}}
+.dim{{position:absolute;inset:0;background:#000;opacity:0}}
 .pn img{{width:100%;height:100%;object-fit:cover;display:block}}
 .vw{{padding:38px 34px}}
 .vl{{font:600 30px/1 Poppins;color:#555}}
