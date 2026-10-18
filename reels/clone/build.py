@@ -31,14 +31,12 @@ def tags():
                f"tl.to('{off}',{{opacity:.5,scale:.94,duration:.2,ease:'power2.out'}},{max(p['start'], .4):.2f});"]
     tw.append("tl.to('#tf',{autoAlpha:0,y:-20,duration:.4},35.6);")   # she walks out after 'j'abandonne'
     # her Instagram card above the heads, the follow button gets tapped
-    html.append('<div id="fol"><div class="fav"><img src="assets/avatar.png"/></div><div class="fnm">thestrategicboost.fr'
-                '<div class="fsub">Stratégie Instagram</div></div><div id="fbtn" class="fbtn">S’abonner</div><div id="fbtn2" class="fbtn on">Abonné</div></div>')
-    tw += ["gsap.set('#fol, #fbtn2',{autoAlpha:0});",
+    # her real Instagram profile (her screenshot) above the heads
+    html.append('<div id="fol"><img src="assets/profil.png"/></div>')
+    tw += ["gsap.set('#fol',{autoAlpha:0});",
            f"tl.to('#ts',{{autoAlpha:0,y:-20,duration:.2}},{IG_AT - .2:.2f});",
            f"tl.fromTo('#fol',{{autoAlpha:0,y:-40,scale:.85}},{{autoAlpha:1,y:0,scale:1,duration:.4,ease:'back.out(1.7)',immediateRender:false}},{IG_AT:.2f});",
-           f"tl.to('#fbtn',{{scale:.85,duration:.08,yoyo:true,repeat:1}},{IG_AT + .9:.2f});",
-           f"tl.set('#fbtn',{{autoAlpha:0}},{IG_AT + 1.06:.2f});",
-           f"tl.set('#fbtn2',{{autoAlpha:1}},{IG_AT + 1.06:.2f});"]
+           f"tl.to('#fol',{{scale:1.03,duration:.5,ease:'sine.inOut',yoyo:true,repeat:1}},{IG_AT + .6:.2f});"]
     return html, tw
 
 
@@ -65,14 +63,9 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   box-shadow:0 12px 28px rgba(0,0,0,.3)}}
 .tb.f{{background:{DARK}}}
 .tb.s{{background:{GOLD};text-shadow:0 2px 6px rgba(80,45,10,.45)}}
-#fol{{position:absolute;z-index:15;left:125px;top:300px;width:830px;height:150px;background:#fff;border-radius:28px;display:flex;align-items:center;
-  gap:22px;padding:0 26px;box-shadow:0 18px 44px rgba(0,0,0,.3)}}
-.fav{{width:100px;height:100px;border-radius:50%;padding:4px;background:linear-gradient(45deg,#FEDA75,#FA7E1E,#D62976,#962FBF);flex:none}}
-.fav img{{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid #fff;display:block}}
-.fnm{{flex:1;font:700 34px/1.2 Poppins;color:#111}}
-.fsub{{font:500 26px/1.2 Poppins;color:#777}}
-.fbtn{{position:absolute;right:26px;width:220px;height:74px;border-radius:16px;background:#0095F6;color:#fff;font:700 30px/74px Poppins;text-align:center}}
-.fbtn.on{{background:#EFEFEF;color:#111}}
+#fol{{position:absolute;z-index:15;left:190px;top:236px;width:700px;border-radius:30px;overflow:hidden;background:#fff;
+  box-shadow:0 18px 44px rgba(0,0,0,.3)}}
+#fol img{{width:100%;display:block}}
 .cap{{position:absolute;top:{CAP_Y}px;width:600px;text-align:center;z-index:11;font:700 70px/1 Poppins;color:#fff;
   text-shadow:0 4px 0 rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.6);white-space:nowrap}}
 '''
