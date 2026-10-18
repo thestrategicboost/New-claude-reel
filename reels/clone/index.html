@@ -14,8 +14,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .tl{font:600 32px/1 Poppins;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.55);margin-bottom:10px}
 .tb{display:inline-block;white-space:nowrap;font:400 54px/1 Anton;letter-spacing:.07em;color:#fff;padding:14px 30px 12px;border-radius:0;
   box-shadow:0 12px 28px rgba(0,0,0,.3)}
-.tb.f{background:#DC3A2F}
-.tb.s{background:#54B837}
+.tb.f{background:#EE1F1F}
+.tb.s{background:#02BB04}
 #fol{position:absolute;z-index:15;left:190px;top:236px;width:700px;border-radius:30px;overflow:hidden;background:#fff;
   box-shadow:0 18px 44px rgba(0,0,0,.3)}
 #fol img{width:100%;display:block}
@@ -181,25 +181,25 @@ const tl = gsap.timeline({ paused: true });
 tl.fromTo('#tf',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.35,ease:'back.out(1.7)',immediateRender:true},0);
 tl.fromTo('#ts',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.35,ease:'back.out(1.7)',immediateRender:true},.12);
 tl.to('#tf',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},0.40);
-tl.to('#ts',{opacity:.8,scale:.92,duration:.2,ease:'power2.out'},0.40);
+tl.to('#ts',{opacity:1,scale:.9,duration:.2,ease:'power2.out'},0.40);
 tl.to('#ts',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},2.63);
-tl.to('#tf',{opacity:.8,scale:.92,duration:.2,ease:'power2.out'},2.63);
+tl.to('#tf',{opacity:1,scale:.9,duration:.2,ease:'power2.out'},2.63);
 tl.to('#tf',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},5.77);
-tl.to('#ts',{opacity:.8,scale:.92,duration:.2,ease:'power2.out'},5.77);
+tl.to('#ts',{opacity:1,scale:.9,duration:.2,ease:'power2.out'},5.77);
 tl.to('#ts',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},8.27);
-tl.to('#tf',{opacity:.8,scale:.92,duration:.2,ease:'power2.out'},8.27);
+tl.to('#tf',{opacity:1,scale:.9,duration:.2,ease:'power2.out'},8.27);
 tl.to('#tf',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},13.34);
-tl.to('#ts',{opacity:.8,scale:.92,duration:.2,ease:'power2.out'},13.34);
+tl.to('#ts',{opacity:1,scale:.9,duration:.2,ease:'power2.out'},13.34);
 tl.to('#ts',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},14.99);
-tl.to('#tf',{opacity:.8,scale:.92,duration:.2,ease:'power2.out'},14.99);
+tl.to('#tf',{opacity:1,scale:.9,duration:.2,ease:'power2.out'},14.99);
 tl.to('#tf',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},18.18);
-tl.to('#ts',{opacity:.8,scale:.92,duration:.2,ease:'power2.out'},18.18);
+tl.to('#ts',{opacity:1,scale:.9,duration:.2,ease:'power2.out'},18.18);
 tl.to('#ts',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},21.18);
-tl.to('#tf',{opacity:.8,scale:.92,duration:.2,ease:'power2.out'},21.18);
+tl.to('#tf',{opacity:1,scale:.9,duration:.2,ease:'power2.out'},21.18);
 tl.to('#tf',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},26.24);
-tl.to('#ts',{opacity:.8,scale:.92,duration:.2,ease:'power2.out'},26.24);
+tl.to('#ts',{opacity:1,scale:.9,duration:.2,ease:'power2.out'},26.24);
 tl.to('#ts',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},29.18);
-tl.to('#tf',{opacity:.8,scale:.92,duration:.2,ease:'power2.out'},29.18);
+tl.to('#tf',{opacity:1,scale:.9,duration:.2,ease:'power2.out'},29.18);
 gsap.set('.pn.s .dim',{opacity:.55});
 tl.to('.pn.f .dim',{opacity:0,duration:.2},0.40);
 tl.to('.pn.s .dim',{opacity:.55,duration:.2},0.40);

@@ -30,7 +30,7 @@ for _p in PLAN:
 for _w in WORDS:
     _w['s'], _w['e'] = ct(_w['s']), ct(_w['e'])
 DARK = '#573307'
-RED, GREEN = '#DC3A2F', '#54B837'   # 0 followers / 10K followers (her reference capture)
+RED, GREEN = '#EE1F1F', '#02BB04'   # 0 followers / 10K followers (her reference capture)
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
 X = {'f': 230, 's': 770}   # centre of each Maé (tags + captions)
 ZOOM_AT = ct(35.35)           # the 100-followers Maé is out of frame: the other slides to the centre and we push in
@@ -63,7 +63,7 @@ def tags():
     for p in PLAN:
         on, off = ('#tf', '#ts') if p['who'] == 'f' else ('#ts', '#tf')
         tw += [f"tl.to('{on}',{{opacity:1,scale:1.06,duration:.2,ease:'power2.out'}},{max(p['start'], .4):.2f});",
-               f"tl.to('{off}',{{opacity:.8,scale:.92,duration:.2,ease:'power2.out'}},{max(p['start'], .4):.2f});"]
+               f"tl.to('{off}',{{opacity:1,scale:.9,duration:.2,ease:'power2.out'}},{max(p['start'], .4):.2f});"]
     tw.append("gsap.set('.pn.s .dim',{opacity:.55});")
     for p in PLAN:   # the panel of the one listening is darkened too
         on, off = ('.pn.f .dim', '.pn.s .dim') if p['who'] == 'f' else ('.pn.s .dim', '.pn.f .dim')
