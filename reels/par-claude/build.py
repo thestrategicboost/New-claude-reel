@@ -111,9 +111,10 @@ def scenes():
     # 1. hook on a brown wall (she is cut out in front, like the green wall of the inspiration):
     #    "tu vois cette vidéo" -> CETTE VIDÉO behind her head; "c'est Claude qui l'a montée" -> MONTÉE behind her head
     html.append('<div id="bw1" class="bwall"></div>')
-    html.append('<div id="hk1" class="bht"><div class="bs1">tu vois</div>CETTE<br/>VIDÉO</div>')
+    html.append('<div id="hk1" class="bht" style="font-size:170px"><div class="bs1">tu vois</div>CETTE VIDÉO</div>')
     html.append('<div id="hk2" class="bht"><div class="bs1">c\'est Claude qui l\'a</div>MONTÉE</div>')
-    tw += ["gsap.set('#bw1',{autoAlpha:1});",
+    tw += ["gsap.set('#hk2, #cl2',{autoAlpha:0});",
+           "tl.fromTo('#bw1',{opacity:0},{opacity:1,duration:.04,immediateRender:true},0);",
            f"tl.to('#bw1',{{clipPath:'inset(0 0 100% 0)',duration:.35,ease:'power3.inOut'}},{ct(7.50) - .35:.3f});",
            f"tl.set('#bw1',{{autoAlpha:0}},{ct(7.50):.3f});",
            "tl.fromTo('#hk1',{autoAlpha:0,scale:1.3},{autoAlpha:1,scale:1,duration:.3,ease:'expo.out',immediateRender:true},0);",
