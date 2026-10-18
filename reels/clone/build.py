@@ -37,7 +37,7 @@ ZOOM_AT = ct(35.35)           # the 100-followers Maé is out of frame: the othe
 ZOOM = (1.45, 0, 250)      # scale, x, y of the a-roll (she is centred in the plate by then)
 BLOCK = (ct(21.25), ct(30.24))    # block dialog panel from the 'juge' exchange, 'Bloquer' is tapped on 'bloque'
 IG_AT = ct(37.50)             # 'parce que je suis Maé de The Strategic Boost': her Instagram profile over her head
-CAP_Y = 1180
+CAP_Y = 1010
 CAP_PX = 56
 
 
@@ -108,7 +108,8 @@ def captions():
         cx = 540 if w['s'] >= ZOOM_AT + .4 else X[w['who']]
         half = len(w['w']) * CAP_PX * .3 + 10          # rough half width of the text (Poppins bold)
         cx = min(max(cx, 80 + half), 1000 - half)     # never out of frame (80px side margins)
-        html.append(f'<div id="w{k}" class="cap" style="left:{cx - 300}px">{w["w"]}</div>')
+        top = 1300 if w['s'] >= ZOOM_AT + .4 else CAP_Y   # zoomed in at the end: her chest is lower
+        html.append(f'<div id="w{k}" class="cap" style="left:{cx - 300}px;top:{top}px">{w["w"]}</div>')
         tw += [f"gsap.set('#w{k}',{{autoAlpha:0}});",
                f"tl.set('#w{k}',{{autoAlpha:1}},{w['s']:.3f});",
                f"tl.fromTo('#w{k}',{{scale:.82}},{{scale:1,duration:{min(.12, end - w['s']):.3f},ease:'back.out(2.5)',immediateRender:false}},{w['s']:.3f});",
