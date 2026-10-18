@@ -12,13 +12,21 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .tag{position:absolute;top:300px;width:400px;text-align:center;z-index:10;transform-origin:50% 100%}
 .tl{font:600 32px/1 Poppins;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.55);margin-bottom:10px}
-.tb{display:inline-block;font:400 54px/1 Anton;letter-spacing:.03em;color:#fff;padding:12px 26px 10px;border-radius:14px;
+.tb{display:inline-block;white-space:nowrap;font:400 44px/1 Anton;letter-spacing:.03em;color:#fff;padding:12px 26px 10px;border-radius:14px;
   box-shadow:0 12px 28px rgba(0,0,0,.3)}
 .tb.f{background:#573307}
 .tb.s{background:linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%);text-shadow:0 2px 6px rgba(80,45,10,.45)}
 #fol{position:absolute;z-index:15;left:190px;top:236px;width:700px;border-radius:30px;overflow:hidden;background:#fff;
   box-shadow:0 18px 44px rgba(0,0,0,.3)}
 #fol img{width:100%;display:block}
+.tag{width:420px}
+#blk{position:absolute;z-index:16;left:200px;top:270px;width:680px;padding:34px 34px 18px;border-radius:30px;background:#fff;text-align:center;
+  box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.bt{font:700 40px/1.2 Poppins;color:#111}
+.bs{font:500 26px/1.35 Poppins;color:#777;margin-top:12px}
+.bb{margin-top:26px;height:84px;border-radius:18px;background:#ED4956;color:#fff;font:700 32px/84px Poppins}
+.bb.done{position:absolute;left:34px;right:34px;top:auto;margin-top:0;transform:translateY(-84px);background:#EFEFEF;color:#111}
+.bc{margin-top:12px;height:64px;font:600 28px/64px Poppins;color:#111}
 .cap{position:absolute;top:1180px;width:600px;text-align:center;z-index:11;font:700 70px/1 Poppins;color:#fff;
   text-shadow:0 4px 0 rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.6);white-space:nowrap}
 </style>
@@ -27,165 +35,173 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="root" data-composition-id="main" data-start="0" data-duration="39.600" data-width="1080" data-height="1920">
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="39.600" data-track-index="2" data-volume="1"></audio>
   <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="39.600" data-track-index="0"></video>
-<div id="tf" class="tag" style="left:100px"><div class="tl">L'entrepreneuse</div><div class="tb f">QUI FLOPPE</div></div>
-<div id="ts" class="tag" style="left:630px"><div class="tl">L'entrepreneuse</div><div class="tb s">QUI RÉUSSIT</div></div>
+<audio id="sfx0" src="assets/sfx/whoosh-short.mp3" data-start="0.000" data-duration="0.570" data-track-index="10" data-volume="0.3"></audio>
+<audio id="sfx1" src="assets/sfx/pop.mp3" data-start="28.450" data-duration="0.720" data-track-index="11" data-volume="0.45"></audio>
+<audio id="sfx2" src="assets/sfx/click.mp3" data-start="30.240" data-duration="0.360" data-track-index="12" data-volume="0.6"></audio>
+<audio id="sfx3" src="assets/sfx/impact-bass-1.mp3" data-start="30.340" data-duration="2.100" data-track-index="13" data-volume="0.35"></audio>
+<audio id="sfx4" src="assets/sfx/whoosh-short.mp3" data-start="35.350" data-duration="0.570" data-track-index="14" data-volume="0.4"></audio>
+<audio id="sfx5" src="assets/sfx/pop.mp3" data-start="37.500" data-duration="0.720" data-track-index="15" data-volume="0.45"></audio>
+<audio id="sfx6" src="assets/sfx/sparkle.mp3" data-start="37.800" data-duration="1.800" data-track-index="16" data-volume="0.22"></audio>
+<div id="tf" class="tag" style="left:20px"><div class="tl">Entrepreneuse à</div><div class="tb f">100 FOLLOWERS</div></div>
+<div id="ts" class="tag" style="left:560px"><div class="tl">Entrepreneuse à</div><div class="tb s">100 000 FOLLOWERS</div></div>
+<div id="blk"><div class="bt">Bloquer ce compte ?</div><div class="bs">Cette personne ne pourra plus voir ton profil ni te contacter.</div><div id="bb" class="bb">Bloquer</div><div id="bd" class="bb done">Compte bloqué</div><div class="bc">Annuler</div></div>
 <div id="fol"><img src="assets/profil.png"/></div>
-<div id="w0" class="cap" style="left:0px">non</div>
-<div id="w1" class="cap" style="left:0px">mais</div>
-<div id="w2" class="cap" style="left:0px">de</div>
-<div id="w3" class="cap" style="left:0px">toute</div>
-<div id="w4" class="cap" style="left:0px">façon</div>
-<div id="w5" class="cap" style="left:0px">moi</div>
-<div id="w6" class="cap" style="left:0px">j'ai</div>
-<div id="w7" class="cap" style="left:0px">pas</div>
-<div id="w8" class="cap" style="left:0px">une</div>
-<div id="w9" class="cap" style="left:0px">super</div>
-<div id="w10" class="cap" style="left:0px">caméra</div>
-<div id="w11" class="cap" style="left:0px">pour</div>
-<div id="w12" class="cap" style="left:0px">filmer</div>
-<div id="w13" class="cap" style="left:530px">non</div>
-<div id="w14" class="cap" style="left:530px">mais</div>
-<div id="w15" class="cap" style="left:530px">moi</div>
-<div id="w16" class="cap" style="left:530px">non</div>
-<div id="w17" class="cap" style="left:530px">plus</div>
-<div id="w18" class="cap" style="left:530px">j'ai</div>
-<div id="w19" class="cap" style="left:530px">pas</div>
-<div id="w20" class="cap" style="left:530px">la</div>
-<div id="w21" class="cap" style="left:530px">dernière</div>
-<div id="w22" class="cap" style="left:530px">caméra</div>
-<div id="w23" class="cap" style="left:530px">mais</div>
-<div id="w24" class="cap" style="left:530px">mon</div>
-<div id="w25" class="cap" style="left:530px">téléphone</div>
-<div id="w26" class="cap" style="left:530px">fera</div>
-<div id="w27" class="cap" style="left:530px">l'affaire</div>
-<div id="w28" class="cap" style="left:0px">non</div>
-<div id="w29" class="cap" style="left:0px">mais</div>
-<div id="w30" class="cap" style="left:0px">regarde</div>
-<div id="w31" class="cap" style="left:0px">ma</div>
-<div id="w32" class="cap" style="left:0px">vidéo</div>
-<div id="w33" class="cap" style="left:0px">elle</div>
-<div id="w34" class="cap" style="left:0px">a</div>
-<div id="w35" class="cap" style="left:0px">fait</div>
-<div id="w36" class="cap" style="left:0px">que</div>
-<div id="w37" class="cap" style="left:0px">500</div>
-<div id="w38" class="cap" style="left:0px">vues</div>
-<div id="w39" class="cap" style="left:530px">mais</div>
-<div id="w40" class="cap" style="left:530px">500</div>
-<div id="w41" class="cap" style="left:530px">vues</div>
-<div id="w42" class="cap" style="left:530px">t'imagines</div>
-<div id="w43" class="cap" style="left:530px">t'avais</div>
-<div id="w44" class="cap" style="left:530px">500</div>
-<div id="w45" class="cap" style="left:530px">personnes</div>
-<div id="w46" class="cap" style="left:530px">autour</div>
-<div id="w47" class="cap" style="left:530px">de</div>
-<div id="w48" class="cap" style="left:530px">toi</div>
-<div id="w49" class="cap" style="left:530px">qui</div>
-<div id="w50" class="cap" style="left:530px">t'écoutaient</div>
-<div id="w51" class="cap" style="left:530px">non</div>
-<div id="w52" class="cap" style="left:530px">mais</div>
-<div id="w53" class="cap" style="left:530px">c'est</div>
-<div id="w54" class="cap" style="left:530px">dingue</div>
-<div id="w55" class="cap" style="left:530px">quand</div>
-<div id="w56" class="cap" style="left:530px">même</div>
-<div id="w57" class="cap" style="left:0px">non</div>
-<div id="w58" class="cap" style="left:0px">en</div>
-<div id="w59" class="cap" style="left:0px">fait</div>
-<div id="w60" class="cap" style="left:0px">moi</div>
-<div id="w61" class="cap" style="left:0px">je</div>
-<div id="w62" class="cap" style="left:0px">n'ai</div>
-<div id="w63" class="cap" style="left:0px">pas</div>
-<div id="w64" class="cap" style="left:0px">le</div>
-<div id="w65" class="cap" style="left:0px">temps</div>
-<div id="w66" class="cap" style="left:0px">de</div>
-<div id="w67" class="cap" style="left:0px">créer</div>
-<div id="w68" class="cap" style="left:0px">du</div>
-<div id="w69" class="cap" style="left:0px">contenu</div>
-<div id="w70" class="cap" style="left:530px">moi</div>
-<div id="w71" class="cap" style="left:530px">aussi</div>
-<div id="w72" class="cap" style="left:530px">je</div>
-<div id="w73" class="cap" style="left:530px">suis</div>
-<div id="w74" class="cap" style="left:530px">super</div>
-<div id="w75" class="cap" style="left:530px">occupée</div>
-<div id="w76" class="cap" style="left:530px">mais</div>
-<div id="w77" class="cap" style="left:530px">je</div>
-<div id="w78" class="cap" style="left:530px">trouve</div>
-<div id="w79" class="cap" style="left:530px">le</div>
-<div id="w80" class="cap" style="left:530px">temps</div>
-<div id="w81" class="cap" style="left:530px">parce</div>
-<div id="w82" class="cap" style="left:530px">que</div>
-<div id="w83" class="cap" style="left:530px">j'ai</div>
-<div id="w84" class="cap" style="left:530px">des</div>
-<div id="w85" class="cap" style="left:530px">priorités</div>
-<div id="w86" class="cap" style="left:0px">je</div>
-<div id="w87" class="cap" style="left:0px">trouve</div>
-<div id="w88" class="cap" style="left:0px">ça</div>
-<div id="w89" class="cap" style="left:0px">super</div>
-<div id="w90" class="cap" style="left:0px">gênant</div>
-<div id="w91" class="cap" style="left:0px">de</div>
-<div id="w92" class="cap" style="left:0px">poster</div>
-<div id="w93" class="cap" style="left:0px">en</div>
-<div id="w94" class="cap" style="left:0px">plus</div>
-<div id="w95" class="cap" style="left:0px">on</div>
-<div id="w96" class="cap" style="left:0px">va</div>
-<div id="w97" class="cap" style="left:0px">me</div>
-<div id="w98" class="cap" style="left:0px">juger</div>
-<div id="w99" class="cap" style="left:530px">non</div>
-<div id="w100" class="cap" style="left:530px">mais</div>
-<div id="w101" class="cap" style="left:530px">moi</div>
-<div id="w102" class="cap" style="left:530px">non</div>
-<div id="w103" class="cap" style="left:530px">plus</div>
-<div id="w104" class="cap" style="left:530px">je</div>
-<div id="w105" class="cap" style="left:530px">suis</div>
-<div id="w106" class="cap" style="left:530px">pas</div>
-<div id="w107" class="cap" style="left:530px">super</div>
-<div id="w108" class="cap" style="left:530px">à</div>
-<div id="w109" class="cap" style="left:530px">l'aise</div>
-<div id="w110" class="cap" style="left:530px">mais</div>
-<div id="w111" class="cap" style="left:530px">franchement</div>
-<div id="w112" class="cap" style="left:530px">si</div>
-<div id="w113" class="cap" style="left:530px">je</div>
-<div id="w114" class="cap" style="left:530px">vois</div>
-<div id="w115" class="cap" style="left:530px">qu'on</div>
-<div id="w116" class="cap" style="left:530px">me</div>
-<div id="w117" class="cap" style="left:530px">juge</div>
-<div id="w118" class="cap" style="left:530px">je</div>
-<div id="w119" class="cap" style="left:530px">bloque</div>
-<div id="w120" class="cap" style="left:0px">non</div>
-<div id="w121" class="cap" style="left:0px">mais</div>
-<div id="w122" class="cap" style="left:0px">de</div>
-<div id="w123" class="cap" style="left:0px">toute</div>
-<div id="w124" class="cap" style="left:0px">façon</div>
-<div id="w125" class="cap" style="left:0px">moi</div>
-<div id="w126" class="cap" style="left:0px">je</div>
-<div id="w127" class="cap" style="left:0px">sais</div>
-<div id="w128" class="cap" style="left:0px">pas</div>
-<div id="w129" class="cap" style="left:0px">quoi</div>
-<div id="w130" class="cap" style="left:0px">poster</div>
-<div id="w131" class="cap" style="left:0px">ça</div>
-<div id="w132" class="cap" style="left:0px">me</div>
-<div id="w133" class="cap" style="left:0px">saoule</div>
-<div id="w134" class="cap" style="left:0px">alors</div>
-<div id="w135" class="cap" style="left:0px">j'abandonne</div>
-<div id="w136" class="cap" style="left:530px">mais</div>
-<div id="w137" class="cap" style="left:530px">non</div>
-<div id="w138" class="cap" style="left:530px">tu</div>
-<div id="w139" class="cap" style="left:530px">vois</div>
-<div id="w140" class="cap" style="left:530px">moi</div>
-<div id="w141" class="cap" style="left:412px">je</div>
-<div id="w142" class="cap" style="left:412px">reste</div>
-<div id="w143" class="cap" style="left:412px">focus</div>
-<div id="w144" class="cap" style="left:412px">je</div>
-<div id="w145" class="cap" style="left:412px">sais</div>
-<div id="w146" class="cap" style="left:412px">quoi</div>
-<div id="w147" class="cap" style="left:412px">poster</div>
-<div id="w148" class="cap" style="left:412px">parce</div>
-<div id="w149" class="cap" style="left:412px">que</div>
-<div id="w150" class="cap" style="left:412px">je</div>
-<div id="w151" class="cap" style="left:412px">suis</div>
-<div id="w152" class="cap" style="left:412px">maé</div>
-<div id="w153" class="cap" style="left:412px">de</div>
-<div id="w154" class="cap" style="left:412px">the strategic</div>
-<div id="w155" class="cap" style="left:412px">boost</div>
+<div id="w0" class="cap" style="left:-70px">non</div>
+<div id="w1" class="cap" style="left:-70px">mais</div>
+<div id="w2" class="cap" style="left:-70px">de</div>
+<div id="w3" class="cap" style="left:-70px">toute</div>
+<div id="w4" class="cap" style="left:-70px">façon</div>
+<div id="w5" class="cap" style="left:-70px">moi</div>
+<div id="w6" class="cap" style="left:-70px">j'ai</div>
+<div id="w7" class="cap" style="left:-70px">pas</div>
+<div id="w8" class="cap" style="left:-70px">une</div>
+<div id="w9" class="cap" style="left:-70px">super</div>
+<div id="w10" class="cap" style="left:-70px">caméra</div>
+<div id="w11" class="cap" style="left:-70px">pour</div>
+<div id="w12" class="cap" style="left:-70px">filmer</div>
+<div id="w13" class="cap" style="left:470px">non</div>
+<div id="w14" class="cap" style="left:470px">mais</div>
+<div id="w15" class="cap" style="left:470px">moi</div>
+<div id="w16" class="cap" style="left:470px">non</div>
+<div id="w17" class="cap" style="left:470px">plus</div>
+<div id="w18" class="cap" style="left:470px">j'ai</div>
+<div id="w19" class="cap" style="left:470px">pas</div>
+<div id="w20" class="cap" style="left:470px">la</div>
+<div id="w21" class="cap" style="left:470px">dernière</div>
+<div id="w22" class="cap" style="left:470px">caméra</div>
+<div id="w23" class="cap" style="left:470px">mais</div>
+<div id="w24" class="cap" style="left:470px">mon</div>
+<div id="w25" class="cap" style="left:470px">téléphone</div>
+<div id="w26" class="cap" style="left:470px">fera</div>
+<div id="w27" class="cap" style="left:470px">l'affaire</div>
+<div id="w28" class="cap" style="left:-70px">non</div>
+<div id="w29" class="cap" style="left:-70px">mais</div>
+<div id="w30" class="cap" style="left:-70px">regarde</div>
+<div id="w31" class="cap" style="left:-70px">ma</div>
+<div id="w32" class="cap" style="left:-70px">vidéo</div>
+<div id="w33" class="cap" style="left:-70px">elle</div>
+<div id="w34" class="cap" style="left:-70px">a</div>
+<div id="w35" class="cap" style="left:-70px">fait</div>
+<div id="w36" class="cap" style="left:-70px">que</div>
+<div id="w37" class="cap" style="left:-70px">500</div>
+<div id="w38" class="cap" style="left:-70px">vues</div>
+<div id="w39" class="cap" style="left:470px">mais</div>
+<div id="w40" class="cap" style="left:470px">500</div>
+<div id="w41" class="cap" style="left:470px">vues</div>
+<div id="w42" class="cap" style="left:470px">t'imagines</div>
+<div id="w43" class="cap" style="left:470px">t'avais</div>
+<div id="w44" class="cap" style="left:470px">500</div>
+<div id="w45" class="cap" style="left:470px">personnes</div>
+<div id="w46" class="cap" style="left:470px">autour</div>
+<div id="w47" class="cap" style="left:470px">de</div>
+<div id="w48" class="cap" style="left:470px">toi</div>
+<div id="w49" class="cap" style="left:470px">qui</div>
+<div id="w50" class="cap" style="left:470px">t'écoutaient</div>
+<div id="w51" class="cap" style="left:470px">non</div>
+<div id="w52" class="cap" style="left:470px">mais</div>
+<div id="w53" class="cap" style="left:470px">c'est</div>
+<div id="w54" class="cap" style="left:470px">dingue</div>
+<div id="w55" class="cap" style="left:470px">quand</div>
+<div id="w56" class="cap" style="left:470px">même</div>
+<div id="w57" class="cap" style="left:-70px">non</div>
+<div id="w58" class="cap" style="left:-70px">en</div>
+<div id="w59" class="cap" style="left:-70px">fait</div>
+<div id="w60" class="cap" style="left:-70px">moi</div>
+<div id="w61" class="cap" style="left:-70px">je</div>
+<div id="w62" class="cap" style="left:-70px">n'ai</div>
+<div id="w63" class="cap" style="left:-70px">pas</div>
+<div id="w64" class="cap" style="left:-70px">le</div>
+<div id="w65" class="cap" style="left:-70px">temps</div>
+<div id="w66" class="cap" style="left:-70px">de</div>
+<div id="w67" class="cap" style="left:-70px">créer</div>
+<div id="w68" class="cap" style="left:-70px">du</div>
+<div id="w69" class="cap" style="left:-70px">contenu</div>
+<div id="w70" class="cap" style="left:470px">moi</div>
+<div id="w71" class="cap" style="left:470px">aussi</div>
+<div id="w72" class="cap" style="left:470px">je</div>
+<div id="w73" class="cap" style="left:470px">suis</div>
+<div id="w74" class="cap" style="left:470px">super</div>
+<div id="w75" class="cap" style="left:470px">occupée</div>
+<div id="w76" class="cap" style="left:470px">mais</div>
+<div id="w77" class="cap" style="left:470px">je</div>
+<div id="w78" class="cap" style="left:470px">trouve</div>
+<div id="w79" class="cap" style="left:470px">le</div>
+<div id="w80" class="cap" style="left:470px">temps</div>
+<div id="w81" class="cap" style="left:470px">parce</div>
+<div id="w82" class="cap" style="left:470px">que</div>
+<div id="w83" class="cap" style="left:470px">j'ai</div>
+<div id="w84" class="cap" style="left:470px">des</div>
+<div id="w85" class="cap" style="left:470px">priorités</div>
+<div id="w86" class="cap" style="left:-70px">je</div>
+<div id="w87" class="cap" style="left:-70px">trouve</div>
+<div id="w88" class="cap" style="left:-70px">ça</div>
+<div id="w89" class="cap" style="left:-70px">super</div>
+<div id="w90" class="cap" style="left:-70px">gênant</div>
+<div id="w91" class="cap" style="left:-70px">de</div>
+<div id="w92" class="cap" style="left:-70px">poster</div>
+<div id="w93" class="cap" style="left:-70px">en</div>
+<div id="w94" class="cap" style="left:-70px">plus</div>
+<div id="w95" class="cap" style="left:-70px">on</div>
+<div id="w96" class="cap" style="left:-70px">va</div>
+<div id="w97" class="cap" style="left:-70px">me</div>
+<div id="w98" class="cap" style="left:-70px">juger</div>
+<div id="w99" class="cap" style="left:470px">non</div>
+<div id="w100" class="cap" style="left:470px">mais</div>
+<div id="w101" class="cap" style="left:470px">moi</div>
+<div id="w102" class="cap" style="left:470px">non</div>
+<div id="w103" class="cap" style="left:470px">plus</div>
+<div id="w104" class="cap" style="left:470px">je</div>
+<div id="w105" class="cap" style="left:470px">suis</div>
+<div id="w106" class="cap" style="left:470px">pas</div>
+<div id="w107" class="cap" style="left:470px">super</div>
+<div id="w108" class="cap" style="left:470px">à</div>
+<div id="w109" class="cap" style="left:470px">l'aise</div>
+<div id="w110" class="cap" style="left:470px">mais</div>
+<div id="w111" class="cap" style="left:470px">franchement</div>
+<div id="w112" class="cap" style="left:470px">si</div>
+<div id="w113" class="cap" style="left:470px">je</div>
+<div id="w114" class="cap" style="left:470px">vois</div>
+<div id="w115" class="cap" style="left:470px">qu'on</div>
+<div id="w116" class="cap" style="left:470px">me</div>
+<div id="w117" class="cap" style="left:470px">juge</div>
+<div id="w118" class="cap" style="left:470px">je</div>
+<div id="w119" class="cap" style="left:470px">bloque</div>
+<div id="w120" class="cap" style="left:-70px">non</div>
+<div id="w121" class="cap" style="left:-70px">mais</div>
+<div id="w122" class="cap" style="left:-70px">de</div>
+<div id="w123" class="cap" style="left:-70px">toute</div>
+<div id="w124" class="cap" style="left:-70px">façon</div>
+<div id="w125" class="cap" style="left:-70px">moi</div>
+<div id="w126" class="cap" style="left:-70px">je</div>
+<div id="w127" class="cap" style="left:-70px">sais</div>
+<div id="w128" class="cap" style="left:-70px">pas</div>
+<div id="w129" class="cap" style="left:-70px">quoi</div>
+<div id="w130" class="cap" style="left:-70px">poster</div>
+<div id="w131" class="cap" style="left:-70px">ça</div>
+<div id="w132" class="cap" style="left:-70px">me</div>
+<div id="w133" class="cap" style="left:-70px">saoule</div>
+<div id="w134" class="cap" style="left:-70px">alors</div>
+<div id="w135" class="cap" style="left:-70px">j'abandonne</div>
+<div id="w136" class="cap" style="left:470px">mais</div>
+<div id="w137" class="cap" style="left:470px">non</div>
+<div id="w138" class="cap" style="left:470px">tu</div>
+<div id="w139" class="cap" style="left:470px">vois</div>
+<div id="w140" class="cap" style="left:470px">moi</div>
+<div id="w141" class="cap" style="left:240px">je</div>
+<div id="w142" class="cap" style="left:240px">reste</div>
+<div id="w143" class="cap" style="left:240px">focus</div>
+<div id="w144" class="cap" style="left:240px">je</div>
+<div id="w145" class="cap" style="left:240px">sais</div>
+<div id="w146" class="cap" style="left:240px">quoi</div>
+<div id="w147" class="cap" style="left:240px">poster</div>
+<div id="w148" class="cap" style="left:240px">parce</div>
+<div id="w149" class="cap" style="left:240px">que</div>
+<div id="w150" class="cap" style="left:240px">je</div>
+<div id="w151" class="cap" style="left:240px">suis</div>
+<div id="w152" class="cap" style="left:240px">maé</div>
+<div id="w153" class="cap" style="left:240px">de</div>
+<div id="w154" class="cap" style="left:240px">the strategic</div>
+<div id="w155" class="cap" style="left:240px">boost</div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
@@ -212,7 +228,13 @@ tl.to('#ts',{opacity:.5,scale:.94,duration:.2,ease:'power2.out'},30.93);
 tl.to('#ts',{opacity:1,scale:1.06,duration:.2,ease:'power2.out'},34.48);
 tl.to('#tf',{opacity:.5,scale:.94,duration:.2,ease:'power2.out'},34.48);
 tl.to('#tf',{autoAlpha:0,y:-20,duration:.35},35.0);
-tl.fromTo('#bgv',{scale:1,x:0,y:0},{scale:1.6,x:-324,y:300,duration:.9,ease:'power2.inOut',immediateRender:false},35.35);
+tl.fromTo('#bgv',{scale:1,x:0,y:0},{scale:1.45,x:0,y:250,duration:.9,ease:'power2.inOut',immediateRender:false},35.35);
+gsap.set('#blk, #bd',{autoAlpha:0});
+tl.fromTo('#blk',{autoAlpha:0,scale:.8},{autoAlpha:1,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},28.45);
+tl.to('#bb',{scale:.9,duration:.08,yoyo:true,repeat:1},30.24);
+tl.set('#bb',{autoAlpha:0},30.40);
+tl.set('#bd',{autoAlpha:1},30.40);
+tl.to('#blk',{autoAlpha:0,scale:.9,duration:.25},31.54);
 gsap.set('#fol',{autoAlpha:0});
 tl.to('#ts',{autoAlpha:0,y:-20,duration:.2},37.30);
 tl.fromTo('#fol',{autoAlpha:0,y:-40,scale:.85},{autoAlpha:1,y:0,scale:1,duration:.4,ease:'back.out(1.7)',immediateRender:false},37.50);
