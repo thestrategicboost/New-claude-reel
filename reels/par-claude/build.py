@@ -327,10 +327,14 @@ def scenes():
     T += setseq('#vch', 'textContent', ['01 · La vidéo brute', '02 · Le prompt', '03 · Les effets', '04 · Le réel fini'], ct(66.58), (b - ct(66.58)) / 4)
     S += [('whoosh-short', a, .3)]
     H.append('<div id="cta" class="cta">Commente « MONTAGE » et<br/>je t\'envoie le guide</div>'
-             f'<div id="cin" class="cin"><div class="cav"></div><div id="cit" class="cit">Ajouter un commentaire…</div><div id="cis" class="cis">{SEND}</div></div>')
+             f'<div id="cin" class="cin"><img class="cav" src="assets/avatar.png"/><div class="cwrap"><div id="cit" class="cit">Ajouter un commentaire…</div><i id="cmk" class="cmk"></i></div><div id="cis" class="cis">{SEND}</div></div>')
     T += show('#cta', ct(69.70), DUR + .2, "{autoAlpha:0,y:-20}", .22)
     T += show('#cin', ct(69.70), DUR + .2, "{autoAlpha:0,y:-20}", .22)
-    T += [f"tl.set('#cit',{{color:'#111'}},{ct(70.10):.3f});"] + typing('#cit', 'MONTAGE', ct(70.10), ct(70.45))
+    T += [f"tl.set('#cit',{{color:'#111',fontFamily:'Anton',fontWeight:400,fontSize:'46px',letterSpacing:'.05em'}},{ct(70.10):.3f});"] + typing('#cit', 'MONTAGE', ct(70.10), ct(70.45))
+    # highlight: a gold marker stroke sweeps under the word, the field gets a brown outline that pulses once
+    T += ["gsap.set('#cmk',{scaleX:0,transformOrigin:'0 50%'});",
+          f"tl.to('#cmk',{{scaleX:1,duration:.3,ease:'power2.out'}},{ct(70.48):.3f});",
+          f"tl.to('#cin',{{boxShadow:'0 0 0 6px {DARK}, 0 14px 34px rgba(0,0,0,.3)',scale:1.05,duration:.2,yoyo:true,repeat:1}},{ct(70.48):.3f});"]
     T += [f"tl.to('#cis',{{scale:.8,duration:.07,yoyo:true,repeat:1}},{ct(70.62):.3f});"]
     S += [('pop', ct(69.70), .3), ('click', ct(70.62), .45)]
     H.append('<div id="dm" class="dm"><img src="assets/avatar.png"/><div><div class="dt">thestrategicboost.fr</div>'
@@ -465,8 +469,10 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .cta{{position:absolute;left:80px;right:80px;top:{TOP}px;z-index:21;text-align:center;font:700 44px/1.2 Poppins;color:#fff;text-shadow:0 3px 14px rgba(0,0,0,.6)}}
 .cin{{position:absolute;left:110px;right:110px;top:{TOP + 135}px;z-index:21;height:96px;border-radius:48px;background:#fff;display:flex;align-items:center;gap:18px;
   padding:0 16px 0 18px;box-shadow:0 14px 34px rgba(0,0,0,.3)}}
-.cav{{width:60px;height:60px;border-radius:50%;background:linear-gradient(45deg,#FEDA75,#FA7E1E,#D62976,#962FBF);flex:none}}
-.cit{{flex:1;font:600 34px/1 Poppins;color:#9A9087}}
+.cav{{width:62px;height:62px;border-radius:50%;object-fit:cover;flex:none;border:3px solid {DARK}}}
+.cwrap{{position:relative;flex:1;isolation:isolate}}
+.cmk{{position:absolute;left:-8px;bottom:0;width:205px;height:24px;background:{GOLD};border-radius:4px;z-index:0}}
+.cit{{position:relative;z-index:1;font:600 34px/1.1 Poppins;color:#9A9087}}
 .cis{{width:64px;height:64px;border-radius:50%;background:{DARK};display:flex;align-items:center;justify-content:center}}
 .dm{{position:absolute;left:110px;right:110px;top:{TOP + 250}px;z-index:22;height:120px;border-radius:28px;background:rgba(255,255,255,.97);display:flex;
   align-items:center;gap:20px;padding:0 24px;box-shadow:0 18px 44px rgba(0,0,0,.3)}}

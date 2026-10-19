@@ -112,8 +112,10 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .cta{position:absolute;left:80px;right:80px;top:262px;z-index:21;text-align:center;font:700 44px/1.2 Poppins;color:#fff;text-shadow:0 3px 14px rgba(0,0,0,.6)}
 .cin{position:absolute;left:110px;right:110px;top:397px;z-index:21;height:96px;border-radius:48px;background:#fff;display:flex;align-items:center;gap:18px;
   padding:0 16px 0 18px;box-shadow:0 14px 34px rgba(0,0,0,.3)}
-.cav{width:60px;height:60px;border-radius:50%;background:linear-gradient(45deg,#FEDA75,#FA7E1E,#D62976,#962FBF);flex:none}
-.cit{flex:1;font:600 34px/1 Poppins;color:#9A9087}
+.cav{width:62px;height:62px;border-radius:50%;object-fit:cover;flex:none;border:3px solid #573307}
+.cwrap{position:relative;flex:1;isolation:isolate}
+.cmk{position:absolute;left:-8px;bottom:0;width:205px;height:24px;background:linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%);border-radius:4px;z-index:0}
+.cit{position:relative;z-index:1;font:600 34px/1.1 Poppins;color:#9A9087}
 .cis{width:64px;height:64px;border-radius:50%;background:#573307;display:flex;align-items:center;justify-content:center}
 .dm{position:absolute;left:110px;right:110px;top:512px;z-index:22;height:120px;border-radius:28px;background:rgba(255,255,255,.97);display:flex;
   align-items:center;gap:20px;padding:0 24px;box-shadow:0 18px 44px rgba(0,0,0,.3)}
@@ -204,7 +206,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="fls" class="fls"></div>
 <div id="f2" class="flip sm"><div class="fll">MODIFICATION</div><div id="f2v" class="flv">0:00</div></div>
 <div id="vcd" class="vcd"><div class="vimg"><img src="assets/guide.png"/><div class="play">▶</div></div><div class="vt">Monter ses réels avec Claude</div><div id="vch" class="vch">01 · La vidéo brute</div></div>
-<div id="cta" class="cta">Commente « MONTAGE » et<br/>je t'envoie le guide</div><div id="cin" class="cin"><div class="cav"></div><div id="cit" class="cit">Ajouter un commentaire…</div><div id="cis" class="cis"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+<div id="cta" class="cta">Commente « MONTAGE » et<br/>je t'envoie le guide</div><div id="cin" class="cin"><img class="cav" src="assets/avatar.png"/><div class="cwrap"><div id="cit" class="cit">Ajouter un commentaire…</div><i id="cmk" class="cmk"></i></div><div id="cis" class="cis"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 <div id="dm" class="dm"><img src="assets/avatar.png"/><div><div class="dt">thestrategicboost.fr</div><div class="ds">t'a envoyé le guide 🎁</div></div></div>
 <div id="w0" class="cap">tu</div>
 <div id="w1" class="cap">vois</div>
@@ -969,7 +971,7 @@ gsap.set('#cin',{autoAlpha:0});
 tl.fromTo('#cin',{autoAlpha:0,y:-20},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.22,ease:'back.out(1.7)',immediateRender:false},35.800);
 tl.to('#cin',{autoAlpha:0,y:-16,duration:.18},38.420);
 tl.set('#cin',{autoAlpha:0},38.600);
-tl.set('#cit',{color:'#111'},36.200);
+tl.set('#cit',{color:'#111',fontFamily:'Anton',fontWeight:400,fontSize:'46px',letterSpacing:'.05em'},36.200);
 tl.set('#cit',{textContent:''},36.190);
 tl.set('#cit',{textContent:"M"},36.250);
 tl.set('#cit',{textContent:"MO"},36.300);
@@ -978,6 +980,9 @@ tl.set('#cit',{textContent:"MONT"},36.400);
 tl.set('#cit',{textContent:"MONTA"},36.450);
 tl.set('#cit',{textContent:"MONTAG"},36.500);
 tl.set('#cit',{textContent:"MONTAGE"},36.550);
+gsap.set('#cmk',{scaleX:0,transformOrigin:'0 50%'});
+tl.to('#cmk',{scaleX:1,duration:.3,ease:'power2.out'},36.580);
+tl.to('#cin',{boxShadow:'0 0 0 6px #573307, 0 14px 34px rgba(0,0,0,.3)',scale:1.05,duration:.2,yoyo:true,repeat:1},36.580);
 tl.to('#cis',{scale:.8,duration:.07,yoyo:true,repeat:1},36.720);
 gsap.set('#dm',{autoAlpha:0});
 tl.fromTo('#dm',{autoAlpha:0,y:-60},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.3,ease:'power3.out',immediateRender:false},37.200);
