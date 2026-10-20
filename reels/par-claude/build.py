@@ -322,10 +322,10 @@ def scenes():
 
     # 10. CTA: her guide as a video card, then "Commente MONTAGE" with the comment typed, the DM
     H.append('<div id="vcd" class="vcd"><div class="vimg"><img src="assets/guide.png"/><div class="play">▶</div></div>'
-             '<div class="vt">Monter ses réels avec Claude</div><div id="vch" class="vch">01 · La vidéo brute</div></div>')
+             '<div class="vt">Guide · Monter ses réels avec Claude</div><div id="vch" class="vch">01 · Créer tes comptes</div></div>')
     a, b = ct(65.38), ct(69.66)
     T += show('#vcd', a, b, "{autoAlpha:0,y:-50,scale:.9}", .3, 'power3.out')
-    T += setseq('#vch', 'textContent', ['01 · La vidéo brute', '02 · Le prompt', '03 · Les effets', '04 · Le réel fini'], ct(66.58), (b - ct(66.58)) / 4)
+    T += setseq('#vch', 'textContent', ['01 · Créer tes comptes', '02 · Ouvrir Claude Code', '05 · Installer le skill', '07 · Lancer ton montage'], ct(66.58), (b - ct(66.58)) / 4)
     S += [('whoosh-short', a, .3)]
     H.append('<div id="cta" class="cta">Commente « MONTAGE » et<br/>je t\'envoie le guide</div>'
              f'<div id="cin" class="cin"><img class="cav" src="assets/avatar.png"/><div class="cwrap"><div id="cit" class="cit">Ajouter un commentaire…</div><i id="cmk" class="cmk"></i></div><div id="cis" class="cis">{SEND}</div></div>')
@@ -462,8 +462,8 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .fls{{position:absolute;inset:0;z-index:30;background:#fff}}
 .vcd{{position:absolute;left:150px;right:150px;top:{TOP - 10}px;z-index:20;background:{INK};border-radius:22px;overflow:hidden;box-shadow:0 22px 50px rgba(0,0,0,.45)}}
 .vimg{{position:relative;height:300px;overflow:hidden}}
-.vimg img{{width:100%;height:100%;object-fit:cover;object-position:top}}
-.play{{position:absolute;left:50%;top:50%;width:90px;height:90px;margin:-45px 0 0 -45px;border-radius:50%;background:rgba(42,26,16,.8);color:#fff;
+.vimg img{{width:100%;height:100%;object-fit:cover;object-position:center}}
+.play{{position:absolute;right:18px;bottom:18px;width:70px;height:70px;line-height:70px!important;border-radius:50%;background:rgba(42,26,16,.8);color:#fff;
   font:400 40px/90px Poppins;text-align:center}}
 .vt{{font:600 34px/1.2 Poppins;color:#F4EEE6;padding:16px 24px 4px}}
 .vch{{font:500 24px/1.2 'JetBrains Mono',monospace;color:#C9A27E;padding:0 24px 18px}}
