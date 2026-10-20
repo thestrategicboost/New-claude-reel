@@ -71,5 +71,6 @@ and typographic. Rules:
     then back to her; 1 screen every 5-10 s at most so it still feels edited, not a slideshow.
 - **Maé's label style (her charte, use it for every tag / badge / chip / "Étape" label, in reels and documents)**:
   a rounded pill (border-radius 999px) filled with her gold gradient
-  `linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)`, text in **Poppins** (600) **white with a soft dark
-  shadow** (`text-shadow:0 1px 3px rgba(60,30,5,.55)`), a light drop shadow under the pill. Not square dark-brown blocks.
+  `linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)`, text in **Poppins Bold Italic** (700 italic, lowercase / sentence case,
+  no letter-spacing) **white with a dark shadow** (`text-shadow:0 2px 4px rgba(50,25,5,.6)`), a light drop shadow under
+  the pill. Ref: her "5 TENDANCES à refaire en *octobre*" cover. Not square dark-brown blocks.

@@ -11,6 +11,8 @@
 @font-face{font-family:Poppins;font-weight:600;src:url(fonts/Poppins-600-normal.woff2)}
 @font-face{font-family:Poppins;font-weight:600;font-style:italic;src:url(fonts/Poppins-600-italic.woff2)}
 @font-face{font-family:Poppins;font-weight:700;src:url(fonts/Poppins-700-normal.woff2)}
+@font-face{font-family:Poppins;font-weight:700;font-style:italic;src:url(fonts/Poppins-700-italic.woff2)}
+@font-face{font-family:Poppins;font-weight:800;font-style:italic;src:url(fonts/Poppins-800-italic.woff2)}
 @font-face{font-family:Mono;src:url(fonts/JetBrainsMono-500-normal.woff2)}
 :root{--brown:#8C5C41;--dark:#573307;--ink:#2A1A10;--cream:#F7F1EA;--sand:#EFE4D8;--gold:#D6AE66;
   --goldg:linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)}
@@ -27,11 +29,11 @@ body{font:400 10.4pt/1.55 Poppins;color:var(--ink);background:#fff}
 .cover h1{font:400 66pt/.95 Anton;letter-spacing:.01em;margin:6mm 0 4mm}
 .cover h1 span{display:inline-block;background:var(--goldg);-webkit-background-clip:text;background-clip:text;color:transparent}
 .cover .sub{font:500 14pt/1.45 Poppins;max-width:150mm;color:#F7F1EA}
-.cover .badge{display:inline-block;align-self:flex-start;margin-top:12mm;padding:3mm 8mm;background:var(--goldg);color:#fff;border-radius:999px;text-shadow:0 1px 3px rgba(60,30,5,.55);box-shadow:0 2px 6px rgba(87,51,7,.25);font:600 13pt Poppins;letter-spacing:.04em}
+.cover .badge{display:inline-block;align-self:flex-start;margin-top:12mm;padding:3mm 8mm;background:var(--goldg);color:#fff;border-radius:999px;text-shadow:0 2px 4px rgba(50,25,5,.6);box-shadow:0 2px 6px rgba(87,51,7,.25);font:italic 700 15pt Poppins;letter-spacing:0}
 .cover .who{position:absolute;left:20mm;bottom:16mm;font:600 11pt Poppins;color:#F3DFB2}
 .cover .who b{color:#fff}
 /* headings */
-.step{display:inline-block;background:var(--goldg);color:#fff;border-radius:999px;text-shadow:0 1px 3px rgba(60,30,5,.55);box-shadow:0 2px 6px rgba(87,51,7,.25);font:600 10pt Poppins;letter-spacing:.08em;padding:1.4mm 5mm;margin-bottom:3mm}
+.step{display:inline-block;background:var(--goldg);color:#fff;border-radius:999px;text-shadow:0 2px 4px rgba(50,25,5,.6);box-shadow:0 2px 6px rgba(87,51,7,.25);font:italic 700 12pt Poppins;letter-spacing:0;padding:1.4mm 6mm;margin-bottom:3mm}
 h2{font:400 27pt/1.05 Anton;color:var(--dark);letter-spacing:.01em;margin-bottom:2mm}
 h2 em{font-style:normal;color:var(--brown)}
 .lead{font:400 11pt/1.5 Poppins;color:#5b4636;margin-bottom:6mm}
@@ -48,7 +50,7 @@ ul li::marker{color:var(--gold)}
 .tip b:first-child{color:var(--dark);font-weight:700}
 .warn{border-left:3mm solid #C0503A;background:#FBEDE8;padding:3.5mm 5mm;margin:4mm 0;font-size:10pt}
 .prompt{background:var(--ink);color:#F7F1EA;border-radius:3mm;padding:5mm 6mm 5.5mm;margin:4mm 0 5mm;font:400 9.6pt/1.6 Poppins;position:relative}
-.prompt .tag{position:absolute;top:-3.6mm;left:6mm;background:var(--goldg);color:#fff;border-radius:999px;text-shadow:0 1px 3px rgba(60,30,5,.55);box-shadow:0 2px 6px rgba(87,51,7,.25);font:600 9pt Poppins;letter-spacing:.06em;padding:1.2mm 4.5mm}
+.prompt .tag{position:absolute;top:-3.6mm;left:6mm;background:var(--goldg);color:#fff;border-radius:999px;text-shadow:0 2px 4px rgba(50,25,5,.6);box-shadow:0 2px 6px rgba(87,51,7,.25);font:italic 700 10pt Poppins;letter-spacing:0;padding:1.2mm 5mm}
 .prompt p{margin-bottom:1.6mm}
 .prompt .h{font:700 9.6pt Poppins;color:var(--gold);margin-top:2.8mm}
 .prompt .f{color:#F3DFB2;background:rgba(214,174,102,.18);padding:0 1.2mm;border-radius:1mm}
@@ -71,7 +73,7 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
 .end{background:radial-gradient(120% 80% at 50% 30%,#9C6B4E 0%,var(--brown) 50%,#4A2B10 100%);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:0 22mm}
 .end h2{color:#fff;font-size:40pt}
 .end p{font-size:12pt;color:#F7F1EA}
-.end .badge{display:inline-block;margin-top:6mm;padding:3mm 8mm;background:var(--goldg);color:#fff;border-radius:999px;text-shadow:0 1px 3px rgba(60,30,5,.55);box-shadow:0 2px 6px rgba(87,51,7,.25);font:600 14pt Poppins;letter-spacing:.04em;align-self:flex-start}
+.end .badge{display:inline-block;margin-top:6mm;padding:3mm 8mm;background:var(--goldg);color:#fff;border-radius:999px;text-shadow:0 2px 4px rgba(50,25,5,.6);box-shadow:0 2px 6px rgba(87,51,7,.25);font:italic 700 16pt Poppins;letter-spacing:0;align-self:flex-start}
 </style>
 </head>
 <body>
@@ -81,13 +83,13 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
   <div class="kick">Guide pas à pas · débutantes</div>
   <h1>MONTER SES RÉELS<br/>AVEC <span>CLAUDE</span></h1>
   <div class="sub">Sans CapCut, sans logiciel de montage, sans rien y connaître.<br/>Tu filmes, tu envoies ta vidéo, Claude te la monte dans ta charte, avec les effets et les sous-titres.</div>
-  <div class="badge">+ LES PROMPTS À COPIER-COLLER</div>
+  <div class="badge">+ les prompts à copier-coller</div>
   <div class="who">Un guide de <b>Maé</b> · @thestrategicboost.fr</div>
 </section>
 
 <!-- ============================================================ SOMMAIRE + VOCABULAIRE -->
 <section class="page">
-  <div class="step">AVANT DE COMMENCER</div>
+  <div class="step">avant de commencer</div>
   <h2>CE QUE TU VAS <em>FAIRE</em></h2>
   <p class="lead" style="margin-bottom:3mm">Lis ce guide une première fois en entier, puis suis-le étape par étape. L'installation se fait une seule fois (environ 30 minutes). Ensuite, monter un réel, c'est envoyer un message.</p>
   <ul class="toc">
@@ -117,7 +119,7 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
 
 <!-- ============================================================ 01 COMPTES -->
 <section class="page">
-  <div class="step">ÉTAPE 01</div>
+  <div class="step">étape 01</div>
   <h2>CRÉER TES <em>3 COMPTES</em></h2>
   <p class="lead">Tout se passe dans ton navigateur (Chrome, Safari…). Fais l'installation sur un ordinateur, c'est plus confortable. Ensuite, tu pourras tout faire depuis ton téléphone avec l'appli Claude.</p>
   <table>
@@ -149,14 +151,14 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
 
 <!-- ============================================================ 02 + 03 CLAUDE CODE + ENV -->
 <section class="page">
-  <div class="step">ÉTAPE 02</div>
+  <div class="step">étape 02</div>
   <h2>OUVRIR <em>CLAUDE CODE</em></h2>
   <ol>
     <li>Va sur <span class="k">claude.ai/code</span> et connecte-toi avec ton compte Claude.</li>
     <li>Claude te propose de <b>connecter GitHub</b> : clique sur le bouton, connecte-toi à GitHub et autorise l'accès. Choisis <b>« Only select repositories »</b> puis ton dépôt <span class="k">mes-reels</span>.</li>
     <li>De retour sur Claude Code, choisis le dépôt <span class="k">mes-reels</span> dans la liste. C'est là que tu travailleras à chaque fois.</li>
   </ol>
-  <div class="step" style="margin-top:6mm">ÉTAPE 03</div>
+  <div class="step" style="margin-top:6mm">étape 03</div>
   <h2>RÉGLER TON <em>ORDINATEUR CLOUD</em></h2>
   <p class="lead">Par sécurité, l'ordinateur de Claude n'a pas le droit d'aller sur tous les sites. Il faut l'autoriser à lire ton Google Drive et à trouver des photos libres de droits.</p>
   <ol>
@@ -177,7 +179,7 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
 
 <!-- ============================================================ 04 CHARTE -->
 <section class="page">
-  <div class="step">ÉTAPE 04</div>
+  <div class="step">étape 04</div>
   <h2>PRÉPARER <em>TA CHARTE</em></h2>
   <p class="lead">C'est ce qui fait que ta vidéo te ressemble au lieu de « faire IA ». Prends 10 minutes pour remplir cette fiche : tu la colleras dans le prompt n°1.</p>
   <div class="grid">
@@ -187,7 +189,7 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
     <div class="card"><div class="t">TON AMBIANCE</div>Naturelle, rosée, chaude, sombre… Le mieux : une <b>capture d'écran</b> d'un de tes réels dont tu aimes les couleurs. Une image vaut mieux qu'un mot.</div>
   </div>
   <h3>Ta fiche à remplir</h3>
-  <div class="prompt"><span class="tag">MA CHARTE</span>
+  <div class="prompt"><span class="tag">ma charte</span>
     <p>Prénom : <span class="f">…</span> · Compte Instagram : <span class="f">@…</span> · Ma niche : <span class="f">…</span></p>
     <p>Couleur principale : <span class="f">#……</span> · Couleur foncée : <span class="f">#……</span> · Couleur d'accent : <span class="f">#……</span></p>
     <p>Police des titres : <span class="f">…</span> · Police du texte et des sous-titres : <span class="f">…</span></p>
@@ -201,10 +203,10 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
 
 <!-- ============================================================ 05 INSTALL SKILL -->
 <section class="page">
-  <div class="step">ÉTAPE 05</div>
+  <div class="step">étape 05</div>
   <h2>INSTALLER LE <em>SKILL DE MONTAGE</em></h2>
   <p class="lead">À faire une seule fois. Dans Claude Code, sur ton dépôt <span class="k">mes-reels</span>, colle ce message en entier, remplace la partie « ma charte » par ta fiche de l'étape 04, et envoie. Le lien du skill est déjà dedans, ne le change pas.</p>
-  <div class="prompt"><span class="tag">PROMPT N°1 · INSTALLATION</span>
+  <div class="prompt"><span class="tag">prompt n°1 · installation</span>
     <p>Bonjour Claude ! Je suis débutante en montage et en IA : parle-moi en français simple, sans mots techniques, et explique-moi chaque chose que tu me demandes de faire.</p>
     <p class="h">1. INSTALLE LE SKILL DE MONTAGE</p>
     <p>Installe le skill de montage vidéo qui se trouve sur ce dépôt GitHub public : <span class="f">github.com/thestrategicboost/skill-montage-reels</span>. Copie son dossier « video-edit » dans « .claude/skills/ » de ce dépôt. Puis lance sa configuration (son « Step 0 ») et installe tout ce dont il a besoin.</p>
@@ -228,7 +230,7 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
 
 <!-- ============================================================ 06 FILMER + DRIVE -->
 <section class="page">
-  <div class="step">ÉTAPE 06</div>
+  <div class="step">étape 06</div>
   <h2>FILMER ET <em>ENVOYER TA VIDÉO</em></h2>
   <h3>Pour filmer</h3>
   <ul class="check">
@@ -254,10 +256,10 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
 
 <!-- ============================================================ 07 PROMPT MONTAGE -->
 <section class="page">
-  <div class="step">ÉTAPE 07</div>
+  <div class="step">étape 07</div>
   <h2>LANCER <em>TON MONTAGE</em></h2>
   <p class="lead">À chaque nouvelle vidéo : ouvre une <b>nouvelle session</b> sur ton dépôt <span class="k">mes-reels</span>, colle ce prompt, remplis les parties en doré et envoie.</p>
-  <div class="prompt"><span class="tag">PROMPT N°2 · MONTAGE</span>
+  <div class="prompt"><span class="tag">prompt n°2 · montage</span>
     <p>/video-edit</p>
     <p>Bonjour Claude, je suis débutante : parle-moi en français simple.</p>
     <p class="h">MA VIDÉO</p>
@@ -281,7 +283,7 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
 
 <!-- ============================================================ 08 RETOURS -->
 <section class="page">
-  <div class="step">ÉTAPE 08</div>
+  <div class="step">étape 08</div>
   <h2>DONNER TES RETOURS <em>& RÉCUPÉRER TA VIDÉO</em></h2>
   <h3>Le déroulé d'un montage (1 à 2 heures, retours compris)</h3>
   <ol>
@@ -294,7 +296,7 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
   </ol>
   <h3>Comment bien donner un retour</h3>
   <p>La règle d'or : <b>un retour = un moment précis + ce que tu veux</b>. Exemples à copier :</p>
-  <div class="prompt"><span class="tag">PROMPT N°3 · RETOURS</span>
+  <div class="prompt"><span class="tag">prompt n°3 · retours</span>
     <p>À <span class="f">0:12</span>, le titre cache mon visage : descends-le.</p>
     <p>Les sous-titres sont trop petits, agrandis-les un peu.</p>
     <p>Le début est trop lent : coupe le silence avant ma première phrase.</p>
@@ -314,7 +316,7 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
 
 <!-- ============================================================ EFFETS + PROBLEMES -->
 <section class="page">
-  <div class="step">BONUS</div>
+  <div class="step">bonus</div>
   <h2>LES EFFETS À <em>DEMANDER PAR LEUR NOM</em></h2>
   <p class="lead">Tu peux les demander dans ton prompt n°2 ou dans tes retours, par exemple : « mets un Kinetic hook au début ».</p>
   <table class="tight">
@@ -348,7 +350,7 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
   <h2>À TOI DE JOUER !</h2>
   <p>Ton premier montage prendra un peu plus de temps, c'est normal. Dès le deuxième, tu verras : c'est un message, un test, et ton réel est prêt.</p>
   <p>Tu as monté ton premier réel avec Claude ? Identifie-moi, je veux voir ça.</p>
-  <div class="badge">@THESTRATEGICBOOST.FR</div>
+  <div class="badge">@thestrategicboost.fr</div>
 </section>
 
 </body>
