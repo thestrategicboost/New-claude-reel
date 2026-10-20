@@ -2,7 +2,7 @@
 
 ## ① Une seule fois, dans Claude Code (claude.ai/code)
 
-Installe le skill de montage vidéo « video-edit » depuis ce lien : [LIEN DU SKILL].
+Installe le skill de montage vidéo « video-edit » depuis ce lien : https://github.com/thestrategicboost/skill-montage-reels.
 Copie le dossier `video-edit` dans `.claude/skills/` de mon projet, puis lance sa configuration.
 
 Voici ma charte pour qu'il l'enregistre :
