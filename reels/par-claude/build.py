@@ -136,10 +136,11 @@ def scenes():
     for l1, l2, blk, t1, t2, out in (('#kh1', '#kh2', '#kb1', 1.74, 2.24, 2.90), ('#kh3', '#kh4', '#kb2', 2.92, 3.30, None)):
         for sel, t in ((l1, t1), (l2, t2)):
             T.append(f"tl.fromTo('{sel}',{{y:80,scaleY:1.4,autoAlpha:0}},{{y:0,scaleY:1,autoAlpha:1,duration:.28,ease:'expo.out',immediateRender:{'true' if t == 1.74 else 'false'}}},{max(0, ct(t) - .05):.3f});")
-            S.append(('whoosh-short', max(0, ct(t) - .05), .25))
+            if sel == l1:   # one sound per line actually seen: a whoosh as the first line lands...
+                S.append(('whoosh-short', max(0, ct(t) - .05), .25))
         T += [f"gsap.set('{blk}',{{scaleX:1,transformOrigin:'100% 50%'}});",
               f"tl.to('{blk}',{{scaleX:0,duration:.25,ease:'power3.inOut'}},{ct(t2) + .15:.3f});"]
-        S.append(('pop', ct(t2) + .15, .3))
+        S.append(('pop', ct(t2) + .15, .3))       # ...and a pop when the block uncovers the second one
         if out:
             T += [f"tl.to('{l1}, {l2}',{{autoAlpha:0,y:-30,duration:.12}},{ct(out) - .12:.3f});"]
     n = int((a1 - a0) * 30)
@@ -163,7 +164,7 @@ def scenes():
             T.append(f"tl.set('#obfr{k}',{{x:{x:.0f},y:{y:.0f},scale:{sc:.2f},rotation:{i * 9 + k * 30},autoAlpha:{1 if front else 0}}},{t:.3f});")
             T.append(f"tl.set('#obbk{k}',{{x:{x:.0f},y:{y:.0f},scale:{sc:.2f},rotation:{i * 9 + k * 30},autoAlpha:{0 if front else .9}}},{t:.3f});")
     T.append(f"tl.set('.orb',{{autoAlpha:0}},{b + .05:.3f});")
-    S += [('whoosh-short', a, .35), ('sparkle', a + .1, .3)]
+    S += [('sparkle', a + .1, .3)]   # the logos appear: sparkle only (the line 3 whoosh is already there)
 
     # 2. "pas de CapCut, pas de logiciel de montage" -> app icons struck; "juste Claude" -> they fall, Claude stays
     for k, (logo, name, at, hit) in enumerate((('capcut', 'CapCut', 4.48, 4.80), ('premiere', 'Premiere', 5.46, 5.98))):
