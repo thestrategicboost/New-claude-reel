@@ -20,7 +20,7 @@ BROWN, DARK, INK = '#8C5C41', '#573307', '#2A1A10'
 CREAM = '#F4EEE6'
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
 TOP = 262        # top band for the inserts (Instagram UI above 240)
-CUTS = {'intro': (0.9, 2.2), 'claude': (4.54, 0.95), 'wall': (13.16, 1.7), 'rien': (15.7, 1.0), 'text': (23.23, 1.85)}   # cut-out windows (edit clock), see cut.py
+CUTS = {'intro': (0.9, 2.2), 'claude': (4.54, 0.95), 'wall': (13.16, 1.7), 'rien': (15.7, 1.0), 'text': (23.23, 1.85), 'guide': (31.3, 4.6)}   # cut-out windows (edit clock), see cut.py
 
 
 def ct(t):
@@ -317,25 +317,23 @@ def scenes():
     # "en deux secondes" -> flip timer 0:02
     H.append('<div id="f2" class="flip sm"><div class="fll">MODIFICATION</div><div id="f2v" class="flv">0:00</div></div>')
     a = ct(56.70)
-    T += show('#f2', a, ct(57.20) + .3, "{autoAlpha:0,scale:.8}", .18)
+    T += show('#f2', a, ct(57.20), "{autoAlpha:0,scale:.8}", .18)
     T += setseq('#f2v', 'textContent', ['0:00', '0:01', '0:02'], a + .08, .1)
 
-    # 10. CTA: her guide as a video card, then "Commente MONTAGE" with the comment typed, the DM
-    H.append('<div id="vcd" class="vcd"><div id="vwrap" class="vwrap"><div class="vimg"><img id="vgi" src="assets/guide.png"/><i id="vsh" class="vsh"></i><div class="play"><i id="vpr" class="vpr"></i>▶</div></div>'
-             '<div class="vt">Guide · Monter ses réels avec Claude</div><div id="vch" class="vch">01 · Créer tes comptes</div></div></div>')
-    a, b = ct(65.38), ct(69.66)
-    # the guide card: swings in in 3D, the cover slowly zooms, a gold shine sweeps across, the play button pulses,
-    # each guide step slides in under the title
-    T += show('#vcd', a, b, "{autoAlpha:0,y:-50,scale:.9}", .3, 'power3.out')
-    T += [f"tl.fromTo('#vwrap',{{rotationY:-35,rotationX:12}},{{rotationY:0,rotationX:0,duration:.7,ease:'power3.out',immediateRender:false}},{a:.3f});",
-          f"tl.fromTo('#vgi',{{scale:1}},{{scale:1.12,duration:{b - a:.2f},ease:'none',immediateRender:false}},{a:.3f});",
-          "gsap.set('#vsh',{xPercent:-160});"]
-    T += [f"tl.fromTo('#vsh',{{xPercent:-160}},{{xPercent:260,duration:.7,ease:'power2.inOut',immediateRender:false}},{t:.3f});" for t in (a + .5, a + 2.4)]
-    T += [f"tl.fromTo('#vpr',{{scale:1,opacity:.8}},{{scale:1.9,opacity:0,duration:.8,ease:'power2.out',immediateRender:false}},{a + .6 + k * .9:.3f});" for k in range(4)]
-    steps = ['01 · Créer tes comptes', '02 · Ouvrir Claude Code', '05 · Installer le skill', '07 · Lancer ton montage']
-    st0, dt = ct(66.58), (b - ct(66.58)) / 4
-    T += setseq('#vch', 'textContent', steps, st0, dt)
-    T += [f"tl.fromTo('#vch',{{x:40,opacity:0}},{{x:0,opacity:1,duration:.25,ease:'power2.out',immediateRender:false}},{st0 + k * dt:.3f});" for k in range(4)]
+    # 10. CTA: her guide's pages scroll behind her in two tilted columns, a gold pill on top
+    cols = ''
+    for c in range(2):
+        cols += f'<div class="gcol g{c}">' + ''.join(f'<div class="gpg"><img src="assets/gpages/p-{p:02d}.png"/></div>' for p in range(1 + c, 12, 2)) + '</div>'
+    H.append(f'<div id="gw" class="wall"><div class="wsh"></div><div class="gwin">{cols}</div></div>')
+    H.append('<div id="gpl" class="gpl">mon guide pas à pas</div>')
+    a, b = ct(65.38), CUTS['guide'][0] + CUTS['guide'][1] - .05
+    T += ["gsap.set('#gw',{autoAlpha:0});", f"tl.set('#gw',{{autoAlpha:1}},{a:.3f});",
+          f"tl.fromTo('#gw .gwin',{{rotationX:35,scale:.75}},{{rotationX:10,scale:1,duration:.6,ease:'power3.out',immediateRender:false}},{a:.3f});",
+          f"tl.fromTo('#gw .gpg',{{autoAlpha:0,z:-400}},{{autoAlpha:1,z:0,duration:.4,ease:'back.out(1.3)',stagger:.04,immediateRender:false}},{a:.3f});",
+          f"tl.fromTo('#gw .g0',{{y:0}},{{y:-2500,duration:{b - a:.2f},ease:'power1.in',immediateRender:false}},{a:.3f});",
+          f"tl.fromTo('#gw .g1',{{y:-2300}},{{y:200,duration:{b - a:.2f},ease:'power1.in',immediateRender:false}},{a:.3f});",
+          f"tl.to('#gw',{{autoAlpha:0,duration:.2}},{b - .2:.3f});", f"tl.set('#gw',{{autoAlpha:0}},{b:.3f});"]
+    T += show('#gpl', a + .2, b, "{autoAlpha:0,y:-30,scale:.85}", .3)
     S += [('whoosh-short', a, .3)]
     H.append('<div id="cta" class="cta">Commente « MONTAGE » et<br/>je t\'envoie le guide</div>'
              f'<div id="cin" class="cin"><img class="cav" src="assets/avatar.png"/><div class="cwrap"><div id="cit" class="cit">Ajouter un commentaire…</div><i id="cmk" class="cmk"></i></div><div id="cis" class="cis">{SEND}</div></div>')
@@ -470,6 +468,12 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .tiles span{{background:{DARK};color:#fff;font:400 60px/1 Anton;letter-spacing:.03em;padding:12px 20px 8px}}
 .tiles span.it{{background:{CREAM};color:{INK};font:italic 600 58px/1.1 Poppins;padding:8px 22px 12px}}
 .fls{{position:absolute;inset:0;z-index:30;background:#fff}}
+.gwin{{position:absolute;left:0;right:0;top:-100px;bottom:-3000px;display:flex;gap:40px;justify-content:center;transform-style:preserve-3d;transform-origin:50% 30%}}
+.gcol{{display:flex;flex-direction:column;gap:30px;width:480px}}
+.gpg{{width:480px;height:679px;flex:none;border-radius:14px;overflow:hidden;border:3px solid #E9C98F;box-shadow:0 20px 44px rgba(0,0,0,.5)}}
+.gpg img{{width:100%;height:100%;object-fit:cover;display:block}}
+.gpl{{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;top:{TOP + 10}px;z-index:22;white-space:nowrap;padding:14px 40px 18px;border-radius:999px;
+  background:linear-gradient(135deg,#EBCB8B 0%,#C99A55 55%,#A97A3E 100%);font:italic 700 50px/1 Poppins;color:#fff;text-shadow:0 3px 0 rgba(70,35,5,.7)}}
 .vcd{{position:absolute;left:150px;right:150px;top:{TOP - 10}px;z-index:20;background:{INK};border-radius:22px;overflow:hidden;box-shadow:0 22px 50px rgba(0,0,0,.45)}}
 .vwrap{{transform-style:preserve-3d;transform-origin:50% 0}}
 .vcd{{perspective:900px}}
@@ -501,7 +505,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 '''
 
 
-BEHIND = ('wall', 'rien', 'texte', 'obbk', 'clbig')
+BEHIND = ('gw', 'wall', 'rien', 'texte', 'obbk', 'clbig')
 
 
 def build():
@@ -540,6 +544,7 @@ def build():
     {cutv('wall', 4)}
     {cutv('rien', 5)}
     {cutv('text', 6)}
+    {cutv('guide', 13)}
   </div>
 {nl.join(h for h in sh if not any(f'id="{i}"' in h for i in BEHIND))}
 {nl.join(ch)}

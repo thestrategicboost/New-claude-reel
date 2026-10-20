@@ -102,6 +102,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .tiles span{background:#573307;color:#fff;font:400 60px/1 Anton;letter-spacing:.03em;padding:12px 20px 8px}
 .tiles span.it{background:#F4EEE6;color:#2A1A10;font:italic 600 58px/1.1 Poppins;padding:8px 22px 12px}
 .fls{position:absolute;inset:0;z-index:30;background:#fff}
+.gwin{position:absolute;left:0;right:0;top:-100px;bottom:-3000px;display:flex;gap:40px;justify-content:center;transform-style:preserve-3d;transform-origin:50% 30%}
+.gcol{display:flex;flex-direction:column;gap:30px;width:480px}
+.gpg{width:480px;height:679px;flex:none;border-radius:14px;overflow:hidden;border:3px solid #E9C98F;box-shadow:0 20px 44px rgba(0,0,0,.5)}
+.gpg img{width:100%;height:100%;object-fit:cover;display:block}
+.gpl{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;top:272px;z-index:22;white-space:nowrap;padding:14px 40px 18px;border-radius:999px;
+  background:linear-gradient(135deg,#EBCB8B 0%,#C99A55 55%,#A97A3E 100%);font:italic 700 50px/1 Poppins;color:#fff;text-shadow:0 3px 0 rgba(70,35,5,.7)}
 .vcd{position:absolute;left:150px;right:150px;top:252px;z-index:20;background:#2A1A10;border-radius:22px;overflow:hidden;box-shadow:0 22px 50px rgba(0,0,0,.45)}
 .vwrap{transform-style:preserve-3d;transform-origin:50% 0}
 .vcd{perspective:900px}
@@ -175,11 +181,13 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="wall" class="wall"><div class="wsh"></div><div class="wallin"><div class="col c0"><div class="rc"><img src="assets/reels/r1.jpg"/></div><div class="rc"><img src="assets/reels/r2.jpg"/></div><div class="rc"><img src="assets/reels/r3.jpg"/></div><div class="rc"><img src="assets/reels/r4.jpg"/></div><div class="rc"><img src="assets/reels/r5.jpg"/></div><div class="rc"><img src="assets/reels/r6.jpg"/></div></div><div class="col c1"><div class="rc"><img src="assets/reels/r5.jpg"/></div><div class="rc"><img src="assets/reels/r6.jpg"/></div><div class="rc"><img src="assets/reels/r7.jpg"/></div><div class="rc"><img src="assets/reels/r8.jpg"/></div><div class="rc"><img src="assets/reels/r9.jpg"/></div><div class="rc"><img src="assets/reels/r10.jpg"/></div></div><div class="col c2"><div class="rc"><img src="assets/reels/r9.jpg"/></div><div class="rc"><img src="assets/reels/r10.jpg"/></div><div class="rc"><img src="assets/reels/r11.jpg"/></div><div class="rc"><img src="assets/reels/r12.jpg"/></div><div class="rc"><img src="assets/reels/r13.jpg"/></div><div class="rc"><img src="assets/reels/r14.jpg"/></div></div><div class="col c3"><div class="rc"><img src="assets/reels/r13.jpg"/></div><div class="rc"><img src="assets/reels/r14.jpg"/></div><div class="rc"><img src="assets/reels/r15.jpg"/></div><div class="rc"><img src="assets/reels/r16.jpg"/></div><div class="rc"><img src="assets/reels/r1.jpg"/></div><div class="rc"><img src="assets/reels/r2.jpg"/></div></div></div></div>
 <div id="rien" class="bht"><div class="bsm">j'y connais</div>RIEN</div>
 <div id="texte" class="bht">TEXTE</div>
+<div id="gw" class="wall"><div class="wsh"></div><div class="gwin"><div class="gcol g0"><div class="gpg"><img src="assets/gpages/p-01.png"/></div><div class="gpg"><img src="assets/gpages/p-03.png"/></div><div class="gpg"><img src="assets/gpages/p-05.png"/></div><div class="gpg"><img src="assets/gpages/p-07.png"/></div><div class="gpg"><img src="assets/gpages/p-09.png"/></div><div class="gpg"><img src="assets/gpages/p-11.png"/></div></div><div class="gcol g1"><div class="gpg"><img src="assets/gpages/p-02.png"/></div><div class="gpg"><img src="assets/gpages/p-04.png"/></div><div class="gpg"><img src="assets/gpages/p-06.png"/></div><div class="gpg"><img src="assets/gpages/p-08.png"/></div><div class="gpg"><img src="assets/gpages/p-10.png"/></div></div></div></div>
     <video id="cut_intro" class="full cut" src="assets/intro_cut.webm" muted playsinline data-start="0.9" data-media-start="0" data-duration="2.2" data-track-index="8"></video>
     <video id="cut_claude" class="full cut" src="assets/claude_cut.webm" muted playsinline data-start="4.54" data-media-start="0" data-duration="0.95" data-track-index="9"></video>
     <video id="cut_wall" class="full cut" src="assets/wall_cut.webm" muted playsinline data-start="13.16" data-media-start="0" data-duration="1.7" data-track-index="4"></video>
     <video id="cut_rien" class="full cut" src="assets/rien_cut.webm" muted playsinline data-start="15.7" data-media-start="0" data-duration="1.0" data-track-index="5"></video>
     <video id="cut_text" class="full cut" src="assets/text_cut.webm" muted playsinline data-start="23.23" data-media-start="0" data-duration="1.85" data-track-index="6"></video>
+    <video id="cut_guide" class="full cut" src="assets/guide_cut.webm" muted playsinline data-start="31.3" data-media-start="0" data-duration="4.6" data-track-index="13"></video>
   </div>
 <div id="hk" class="hk"><div id="kh1" class="kl">TU VOIS</div><div id="kh2" class="kl k2"><span>CETTE VIDÉO ?</span><i id="kb1" class="kb"></i></div><div id="kh3" class="kl">C'EST CLAUDE</div><div id="kh4" class="kl k2"><span>QUI L'A MONTÉE</span><i id="kb2" class="kb"></i></div><div id="tc" class="tc">00:00:00:00</div></div>
 <div id="obbk0" class="orb bk"><svg viewBox="0 0 100 100" width="130" height="130"><g fill="#D97757"><rect x="46" y="6" width="8" height="44" rx="4" transform="rotate(0 50 50)"/><rect x="46" y="6" width="8" height="44" rx="4" transform="rotate(30 50 50)"/><rect x="46" y="6" width="8" height="44" rx="4" transform="rotate(60 50 50)"/><rect x="46" y="6" width="8" height="44" rx="4" transform="rotate(90 50 50)"/><rect x="46" y="6" width="8" height="44" rx="4" transform="rotate(120 50 50)"/><rect x="46" y="6" width="8" height="44" rx="4" transform="rotate(150 50 50)"/><rect x="46" y="6" width="8" height="44" rx="4" transform="rotate(180 50 50)"/><rect x="46" y="6" width="8" height="44" rx="4" transform="rotate(210 50 50)"/><rect x="46" y="6" width="8" height="44" rx="4" transform="rotate(240 50 50)"/><rect x="46" y="6" width="8" height="44" rx="4" transform="rotate(270 50 50)"/><rect x="46" y="6" width="8" height="44" rx="4" transform="rotate(300 50 50)"/><rect x="46" y="6" width="8" height="44" rx="4" transform="rotate(330 50 50)"/></g></svg></div>
@@ -207,7 +215,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="tiles" class="tiles"><span id="ti0">PLAN LARGE</span><span id="ti1">PLUS SERRÉ</span><span id="ti2" class="it">des cuts.</span></div>
 <div id="fls" class="fls"></div>
 <div id="f2" class="flip sm"><div class="fll">MODIFICATION</div><div id="f2v" class="flv">0:00</div></div>
-<div id="vcd" class="vcd"><div id="vwrap" class="vwrap"><div class="vimg"><img id="vgi" src="assets/guide.png"/><i id="vsh" class="vsh"></i><div class="play"><i id="vpr" class="vpr"></i>▶</div></div><div class="vt">Guide · Monter ses réels avec Claude</div><div id="vch" class="vch">01 · Créer tes comptes</div></div></div>
+<div id="gpl" class="gpl">mon guide pas à pas</div>
 <div id="cta" class="cta">Commente « MONTAGE » et<br/>je t'envoie le guide</div><div id="cin" class="cin"><img class="cav" src="assets/avatar.png"/><div class="cwrap"><div id="cit" class="cit">Ajouter un commentaire…</div><i id="cmk" class="cmk"></i></div><div id="cis" class="cis"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 <div id="dm" class="dm"><img src="assets/avatar.png"/><div><div class="dt">thestrategicboost.fr</div><div class="ds">t'a envoyé le guide 🎁</div></div></div>
 <div id="w0" class="cap">tu</div>
@@ -957,27 +965,18 @@ tl.set('#f2',{autoAlpha:0},31.700);
 tl.set('#f2v',{textContent:"0:00"},30.980);
 tl.set('#f2v',{textContent:"0:01"},31.080);
 tl.set('#f2v',{textContent:"0:02"},31.180);
-gsap.set('#vcd',{autoAlpha:0});
-tl.fromTo('#vcd',{autoAlpha:0,y:-50,scale:.9},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.3,ease:'power3.out',immediateRender:false},31.480);
-tl.to('#vcd',{autoAlpha:0,y:-16,duration:.18},35.580);
-tl.set('#vcd',{autoAlpha:0},35.760);
-tl.fromTo('#vwrap',{rotationY:-35,rotationX:12},{rotationY:0,rotationX:0,duration:.7,ease:'power3.out',immediateRender:false},31.480);
-tl.fromTo('#vgi',{scale:1},{scale:1.12,duration:4.28,ease:'none',immediateRender:false},31.480);
-gsap.set('#vsh',{xPercent:-160});
-tl.fromTo('#vsh',{xPercent:-160},{xPercent:260,duration:.7,ease:'power2.inOut',immediateRender:false},31.980);
-tl.fromTo('#vsh',{xPercent:-160},{xPercent:260,duration:.7,ease:'power2.inOut',immediateRender:false},33.880);
-tl.fromTo('#vpr',{scale:1,opacity:.8},{scale:1.9,opacity:0,duration:.8,ease:'power2.out',immediateRender:false},32.080);
-tl.fromTo('#vpr',{scale:1,opacity:.8},{scale:1.9,opacity:0,duration:.8,ease:'power2.out',immediateRender:false},32.980);
-tl.fromTo('#vpr',{scale:1,opacity:.8},{scale:1.9,opacity:0,duration:.8,ease:'power2.out',immediateRender:false},33.880);
-tl.fromTo('#vpr',{scale:1,opacity:.8},{scale:1.9,opacity:0,duration:.8,ease:'power2.out',immediateRender:false},34.780);
-tl.set('#vch',{textContent:"01 \u00b7 Cr\u00e9er tes comptes"},32.680);
-tl.set('#vch',{textContent:"02 \u00b7 Ouvrir Claude Code"},33.450);
-tl.set('#vch',{textContent:"05 \u00b7 Installer le skill"},34.220);
-tl.set('#vch',{textContent:"07 \u00b7 Lancer ton montage"},34.990);
-tl.fromTo('#vch',{x:40,opacity:0},{x:0,opacity:1,duration:.25,ease:'power2.out',immediateRender:false},32.680);
-tl.fromTo('#vch',{x:40,opacity:0},{x:0,opacity:1,duration:.25,ease:'power2.out',immediateRender:false},33.450);
-tl.fromTo('#vch',{x:40,opacity:0},{x:0,opacity:1,duration:.25,ease:'power2.out',immediateRender:false},34.220);
-tl.fromTo('#vch',{x:40,opacity:0},{x:0,opacity:1,duration:.25,ease:'power2.out',immediateRender:false},34.990);
+gsap.set('#gw',{autoAlpha:0});
+tl.set('#gw',{autoAlpha:1},31.480);
+tl.fromTo('#gw .gwin',{rotationX:35,scale:.75},{rotationX:10,scale:1,duration:.6,ease:'power3.out',immediateRender:false},31.480);
+tl.fromTo('#gw .gpg',{autoAlpha:0,z:-400},{autoAlpha:1,z:0,duration:.4,ease:'back.out(1.3)',stagger:.04,immediateRender:false},31.480);
+tl.fromTo('#gw .g0',{y:0},{y:-2500,duration:4.37,ease:'power1.in',immediateRender:false},31.480);
+tl.fromTo('#gw .g1',{y:-2300},{y:200,duration:4.37,ease:'power1.in',immediateRender:false},31.480);
+tl.to('#gw',{autoAlpha:0,duration:.2},35.650);
+tl.set('#gw',{autoAlpha:0},35.850);
+gsap.set('#gpl',{autoAlpha:0});
+tl.fromTo('#gpl',{autoAlpha:0,y:-30,scale:.85},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.3,ease:'back.out(1.7)',immediateRender:false},31.680);
+tl.to('#gpl',{autoAlpha:0,y:-16,duration:.18},35.670);
+tl.set('#gpl',{autoAlpha:0},35.850);
 gsap.set('#cta',{autoAlpha:0});
 tl.fromTo('#cta',{autoAlpha:0,y:-20},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.22,ease:'back.out(1.7)',immediateRender:false},35.800);
 tl.to('#cta',{autoAlpha:0,y:-16,duration:.18},38.420);
