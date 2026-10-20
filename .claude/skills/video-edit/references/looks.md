@@ -74,3 +74,5 @@ and typographic. Rules:
   `linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)`, text in **Poppins Bold Italic** (700 italic, lowercase / sentence case,
   no letter-spacing) **white with a dark shadow** (`text-shadow:0 2px 4px rgba(50,25,5,.6)`), a light drop shadow under
   the pill. Ref: her "5 TENDANCES à refaire en *octobre*" cover. Not square dark-brown blocks.
+  In PDFs printed with Chromium, use a sharp shadow only (`text-shadow:0 1.5px 0 rgba(70,35,5,.7)`, no box-shadow):
+  blurred shadows are rasterised into a dark rectangle in some PDF readers.
