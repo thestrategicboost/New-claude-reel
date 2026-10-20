@@ -333,7 +333,7 @@ def scenes():
           f"tl.fromTo('#gw .g0',{{y:0}},{{y:-2500,duration:{b - a:.2f},ease:'power1.in',immediateRender:false}},{a:.3f});",
           f"tl.fromTo('#gw .g1',{{y:-2300}},{{y:200,duration:{b - a:.2f},ease:'power1.in',immediateRender:false}},{a:.3f});",
           f"tl.to('#gw',{{autoAlpha:0,duration:.2}},{b - .2:.3f});", f"tl.set('#gw',{{autoAlpha:0}},{b:.3f});"]
-    T += show('#gpl', a + .2, b, "{autoAlpha:0,y:-30,scale:.85}", .3)
+    T += show('#gpl', a + .9, b, "{autoAlpha:0,y:-30,scale:.85}", .3)
     S += [('whoosh-short', a, .3)]
     H.append('<div id="cta" class="cta">Commente « MONTAGE » et<br/>je t\'envoie le guide</div>'
              f'<div id="cin" class="cin"><img class="cav" src="assets/avatar.png"/><div class="cwrap"><div id="cit" class="cit">Ajouter un commentaire…</div><i id="cmk" class="cmk"></i></div><div id="cis" class="cis">{SEND}</div></div>')
