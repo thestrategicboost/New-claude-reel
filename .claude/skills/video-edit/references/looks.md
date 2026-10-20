@@ -69,3 +69,7 @@ and typographic. Rules:
     when the shot goes back to her (`.recap` / `.recapCal` there).
   - Rhythm with the DA pro look: talking shots with the subtle editorial text, then a brown screen for each "how",
     then back to her; 1 screen every 5-10 s at most so it still feels edited, not a slideshow.
+- **Maé's label style (her charte, use it for every tag / badge / chip / "Étape" label, in reels and documents)**:
+  a rounded pill (border-radius 999px) filled with her gold gradient
+  `linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)`, text in **Poppins** (600) **white with a soft dark
+  shadow** (`text-shadow:0 1px 3px rgba(60,30,5,.55)`), a light drop shadow under the pill. Not square dark-brown blocks.
