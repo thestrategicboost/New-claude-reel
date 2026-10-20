@@ -136,6 +136,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .cap{position:absolute;left:80px;right:80px;top:1300px;z-index:25;text-align:center;font:700 62px/1 Poppins;color:#fff;
   text-shadow:0 4px 0 rgba(0,0,0,.85),0 0 18px rgba(0,0,0,.6)}
 .cap.big{font-size:118px;top:1260px}
+
+#cam video{transform:scaleX(-1) scale(1.06);filter:sepia(.6) saturate(1.35) hue-rotate(-8deg) contrast(1.1) brightness(1.03)}
 </style>
 </head>
 <body>
@@ -878,8 +880,8 @@ tl.set('#tlc',{textContent:"00:00:28:16"},7.980);
 tl.set('#tlc',{textContent:"00:00:30:00"},8.080);
 tl.set('#tlc',{textContent:"00:00:32:14"},8.180);
 tl.set('#tlc',{textContent:"00:00:34:28"},8.280);
-gsap.set('#bgl',{clipPath:'inset(0 100% 0 0)'});
-tl.to('#bgl',{clipPath:'inset(0 0% 0 0)',duration:.7,ease:'power2.inOut'},9.920);
+gsap.set('#bgl',{clipPath:'inset(0 0 0 100%)'});
+tl.to('#bgl',{clipPath:'inset(0 0 0 0%)',duration:.7,ease:'power2.inOut'},9.920);
 gsap.set('#sl, #sla, #slb',{autoAlpha:0});
 tl.set('#sl, #sla, #slb',{autoAlpha:1},9.920);
 tl.fromTo('#sl',{x:0},{x:1080,duration:.7,ease:'power2.inOut',immediateRender:false},9.920);

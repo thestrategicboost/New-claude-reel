@@ -9,6 +9,7 @@ card, comment MONTAGE. Captions in brown label boxes with the spoken word lit.
 PY build.py    writes index.html
 """
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -560,6 +561,16 @@ window.__timelines["main"] = tl;
 '''
 
 
+# ALT=1: second art direction of the same reel so Instagram does not flag a re-post as a duplicate -
+# footage mirrored, warm golden grade instead of lilac, slightly tighter framing
+ALT_CSS = '''
+#cam video{transform:scaleX(-1) scale(1.06);filter:sepia(.6) saturate(1.35) hue-rotate(-8deg) contrast(1.1) brightness(1.03)}
+'''
+_html = build()
+if os.environ.get('ALT'):
+    _html = (_html.replace('</style>', ALT_CSS + '</style>')
+             .replace("clipPath:'inset(0 100% 0 0)'", "clipPath:'inset(0 0 0 100%)'")
+             .replace("clipPath:'inset(0 0% 0 0)'", "clipPath:'inset(0 0 0 0%)'"))
 with open('index.html', 'w', encoding='utf-8', newline='\n') as _f:
-    _f.write(build())
+    _f.write(_html)
 print(f'wrote index.html {DUR:.3f}s')
