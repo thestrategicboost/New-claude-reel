@@ -321,11 +321,21 @@ def scenes():
     T += setseq('#f2v', 'textContent', ['0:00', '0:01', '0:02'], a + .08, .1)
 
     # 10. CTA: her guide as a video card, then "Commente MONTAGE" with the comment typed, the DM
-    H.append('<div id="vcd" class="vcd"><div class="vimg"><img src="assets/guide.png"/><div class="play">▶</div></div>'
-             '<div class="vt">Guide · Monter ses réels avec Claude</div><div id="vch" class="vch">01 · Créer tes comptes</div></div>')
+    H.append('<div id="vcd" class="vcd"><div id="vwrap" class="vwrap"><div class="vimg"><img id="vgi" src="assets/guide.png"/><i id="vsh" class="vsh"></i><div class="play"><i id="vpr" class="vpr"></i>▶</div></div>'
+             '<div class="vt">Guide · Monter ses réels avec Claude</div><div id="vch" class="vch">01 · Créer tes comptes</div></div></div>')
     a, b = ct(65.38), ct(69.66)
+    # the guide card: swings in in 3D, the cover slowly zooms, a gold shine sweeps across, the play button pulses,
+    # each guide step slides in under the title
     T += show('#vcd', a, b, "{autoAlpha:0,y:-50,scale:.9}", .3, 'power3.out')
-    T += setseq('#vch', 'textContent', ['01 · Créer tes comptes', '02 · Ouvrir Claude Code', '05 · Installer le skill', '07 · Lancer ton montage'], ct(66.58), (b - ct(66.58)) / 4)
+    T += [f"tl.fromTo('#vwrap',{{rotationY:-35,rotationX:12}},{{rotationY:0,rotationX:0,duration:.7,ease:'power3.out',immediateRender:false}},{a:.3f});",
+          f"tl.fromTo('#vgi',{{scale:1}},{{scale:1.12,duration:{b - a:.2f},ease:'none',immediateRender:false}},{a:.3f});",
+          "gsap.set('#vsh',{xPercent:-160});"]
+    T += [f"tl.fromTo('#vsh',{{xPercent:-160}},{{xPercent:260,duration:.7,ease:'power2.inOut',immediateRender:false}},{t:.3f});" for t in (a + .5, a + 2.4)]
+    T += [f"tl.fromTo('#vpr',{{scale:1,opacity:.8}},{{scale:1.9,opacity:0,duration:.8,ease:'power2.out',immediateRender:false}},{a + .6 + k * .9:.3f});" for k in range(4)]
+    steps = ['01 · Créer tes comptes', '02 · Ouvrir Claude Code', '05 · Installer le skill', '07 · Lancer ton montage']
+    st0, dt = ct(66.58), (b - ct(66.58)) / 4
+    T += setseq('#vch', 'textContent', steps, st0, dt)
+    T += [f"tl.fromTo('#vch',{{x:40,opacity:0}},{{x:0,opacity:1,duration:.25,ease:'power2.out',immediateRender:false}},{st0 + k * dt:.3f});" for k in range(4)]
     S += [('whoosh-short', a, .3)]
     H.append('<div id="cta" class="cta">Commente « MONTAGE » et<br/>je t\'envoie le guide</div>'
              f'<div id="cin" class="cin"><img class="cav" src="assets/avatar.png"/><div class="cwrap"><div id="cit" class="cit">Ajouter un commentaire…</div><i id="cmk" class="cmk"></i></div><div id="cis" class="cis">{SEND}</div></div>')
@@ -461,7 +471,12 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .tiles span.it{{background:{CREAM};color:{INK};font:italic 600 58px/1.1 Poppins;padding:8px 22px 12px}}
 .fls{{position:absolute;inset:0;z-index:30;background:#fff}}
 .vcd{{position:absolute;left:150px;right:150px;top:{TOP - 10}px;z-index:20;background:{INK};border-radius:22px;overflow:hidden;box-shadow:0 22px 50px rgba(0,0,0,.45)}}
+.vwrap{{transform-style:preserve-3d;transform-origin:50% 0}}
+.vcd{{perspective:900px}}
 .vimg{{position:relative;height:300px;overflow:hidden}}
+.vsh{{position:absolute;top:-20%;bottom:-20%;left:0;width:45%;transform:skewX(-20deg);
+  background:linear-gradient(90deg,rgba(243,223,178,0) 0%,rgba(243,223,178,.55) 50%,rgba(243,223,178,0) 100%)}}
+.vpr{{position:absolute;inset:0;border-radius:50%;border:3px solid #F3DFB2}}
 .vimg img{{width:100%;height:100%;object-fit:cover;object-position:center}}
 .play{{position:absolute;right:18px;bottom:18px;width:70px;height:70px;line-height:70px!important;border-radius:50%;background:rgba(42,26,16,.8);color:#fff;
   font:400 40px/90px Poppins;text-align:center}}
