@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Monter ses réels avec Claude</title>
+<style>
+@font-face{font-family:Anton;src:url(fonts/Anton-400-normal.woff2)}
+@font-face{font-family:Poppins;font-weight:400;src:url(fonts/Poppins-400-normal.woff2)}
+@font-face{font-family:Poppins;font-weight:400;font-style:italic;src:url(fonts/Poppins-400-italic.woff2)}
+@font-face{font-family:Poppins;font-weight:500;src:url(fonts/Poppins-500-normal.woff2)}
+@font-face{font-family:Poppins;font-weight:600;src:url(fonts/Poppins-600-normal.woff2)}
+@font-face{font-family:Poppins;font-weight:600;font-style:italic;src:url(fonts/Poppins-600-italic.woff2)}
+@font-face{font-family:Poppins;font-weight:700;src:url(fonts/Poppins-700-normal.woff2)}
+@font-face{font-family:Mono;src:url(fonts/JetBrainsMono-500-normal.woff2)}
+:root{--brown:#8C5C41;--dark:#573307;--ink:#2A1A10;--cream:#F7F1EA;--sand:#EFE4D8;--gold:#D6AE66;
+  --goldg:linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)}
+@page{size:A4;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:400 10.4pt/1.55 Poppins;color:var(--ink);background:#fff}
+.page{width:210mm;min-height:297mm;padding:18mm 17mm 20mm;position:relative;page-break-after:always;overflow:hidden}
+.page:last-child{page-break-after:auto}
+.foot{position:absolute;left:17mm;right:17mm;bottom:9mm;display:flex;justify-content:space-between;font:500 8pt Poppins;color:#9C8775}
+.foot b{color:var(--brown);font-weight:600}
+/* cover */
+.cover{background:radial-gradient(120% 80% at 50% 30%,#9C6B4E 0%,var(--brown) 50%,#4A2B10 100%);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:0 20mm}
+.cover .kick{font:600 11pt Poppins;letter-spacing:.3em;color:#F3DFB2;text-transform:uppercase}
+.cover h1{font:400 66pt/.95 Anton;letter-spacing:.01em;margin:6mm 0 4mm}
+.cover h1 span{background:var(--goldg);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover .sub{font:500 14pt/1.45 Poppins;max-width:150mm;color:#F7F1EA}
+.cover .badge{display:inline-block;margin-top:12mm;padding:3mm 6mm;background:var(--dark);font:400 15pt Anton;letter-spacing:.06em}
+.cover .who{position:absolute;left:20mm;bottom:16mm;font:600 11pt Poppins;color:#F3DFB2}
+.cover .who b{color:#fff}
+/* headings */
+.step{display:inline-block;background:var(--dark);color:#fff;font:400 11pt Anton;letter-spacing:.12em;padding:1.2mm 3.5mm .8mm;margin-bottom:3mm}
+h2{font:400 27pt/1.05 Anton;color:var(--dark);letter-spacing:.01em;margin-bottom:2mm}
+h2 em{font-style:normal;color:var(--brown)}
+.lead{font:400 11pt/1.5 Poppins;color:#5b4636;margin-bottom:6mm}
+h3{font:700 12pt Poppins;color:var(--brown);margin:5mm 0 2mm}
+p{margin-bottom:2.5mm}
+b{font-weight:600}
+ol,ul{margin:0 0 3mm 5.5mm}
+li{margin-bottom:1.6mm;padding-left:1mm}
+ol li::marker{font-weight:700;color:var(--brown)}
+ul li::marker{color:var(--gold)}
+.k{font:500 9pt Mono;background:var(--sand);color:var(--dark);padding:.3mm 1.6mm;border-radius:1.2mm;white-space:nowrap}
+/* boxes */
+.tip{border-left:3mm solid var(--gold);background:var(--cream);padding:3.5mm 5mm;margin:4mm 0;font-size:10pt}
+.tip b:first-child{color:var(--dark);font-weight:700}
+.warn{border-left:3mm solid #C0503A;background:#FBEDE8;padding:3.5mm 5mm;margin:4mm 0;font-size:10pt}
+.prompt{background:var(--ink);color:#F7F1EA;border-radius:3mm;padding:5mm 6mm 5.5mm;margin:4mm 0 5mm;font:400 9.6pt/1.6 Poppins;position:relative}
+.prompt .tag{position:absolute;top:-3.2mm;left:6mm;background:var(--goldg);color:var(--ink);font:400 9.5pt Anton;letter-spacing:.14em;padding:1mm 3.5mm .6mm}
+.prompt p{margin-bottom:1.6mm}
+.prompt .h{font:700 9.6pt Poppins;color:var(--gold);margin-top:2.8mm}
+.prompt .f{color:#F3DFB2;background:rgba(214,174,102,.18);padding:0 1.2mm;border-radius:1mm}
+table{width:100%;border-collapse:collapse;margin:3mm 0 5mm;font-size:9.6pt}
+th{background:var(--dark);color:#fff;font:400 10pt Anton;letter-spacing:.08em;text-align:left;padding:2.2mm 3mm}
+td{padding:2.2mm 3mm;border-bottom:1px solid #E8DCCF;vertical-align:top}
+table.tight td{padding:1.5mm 3mm}
+table.tight th{padding:1.6mm 3mm}
+tr:nth-child(even) td{background:var(--cream)}
+td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4mm;margin:3mm 0 5mm}
+.card{background:var(--cream);border-radius:3mm;padding:4mm 4.5mm;font-size:9.6pt}
+.card .t{font:400 12.5pt Anton;color:var(--dark);letter-spacing:.03em;margin-bottom:1mm}
+.check li{list-style:none;margin-left:-5mm;padding-left:7mm;position:relative}
+.check li::before{content:'';position:absolute;left:0;top:1.6mm;width:3.4mm;height:3.4mm;border:1.6px solid var(--brown);border-radius:.8mm}
+.toc{counter-reset:t;list-style:none;margin:0}
+.toc li{display:flex;gap:4mm;align-items:baseline;padding:1.5mm 0;border-bottom:1px solid #E8DCCF;margin:0}
+.toc li span{font:400 15pt Anton;color:var(--gold);width:10mm}
+.toc li b{font-weight:600}
+.end{background:radial-gradient(120% 80% at 50% 30%,#9C6B4E 0%,var(--brown) 50%,#4A2B10 100%);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:0 22mm}
+.end h2{color:#fff;font-size:40pt}
+.end p{font-size:12pt;color:#F7F1EA}
+.end .badge{display:inline-block;margin-top:6mm;padding:3mm 6mm;background:var(--dark);font:400 16pt Anton;letter-spacing:.06em;align-self:flex-start}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ COVER -->
+<section class="page cover">
+  <div class="kick">Guide pas à pas · débutantes</div>
+  <h1>MONTER SES RÉELS<br/>AVEC <span>CLAUDE</span></h1>
+  <div class="sub">Sans CapCut, sans logiciel de montage, sans rien y connaître.<br/>Tu filmes, tu envoies ta vidéo, Claude te la monte dans ta charte, avec les effets et les sous-titres.</div>
+  <div class="badge">+ LES PROMPTS À COPIER-COLLER</div>
+  <div class="who">Un guide de <b>Maé</b> · @thestrategicboost.fr</div>
+</section>
+
+<!-- ============================================================ SOMMAIRE + VOCABULAIRE -->
+<section class="page">
+  <div class="step">AVANT DE COMMENCER</div>
+  <h2>CE QUE TU VAS <em>FAIRE</em></h2>
+  <p class="lead" style="margin-bottom:3mm">Lis ce guide une première fois en entier, puis suis-le étape par étape. L'installation se fait une seule fois (environ 30 minutes). Ensuite, monter un réel, c'est envoyer un message.</p>
+  <ul class="toc">
+    <li><span>01</span><div><b>Créer tes 3 comptes</b> : Claude, GitHub et Google Drive.</div></li>
+    <li><span>02</span><div><b>Ouvrir Claude Code</b> et créer ton dossier de projets.</div></li>
+    <li><span>03</span><div><b>Régler ton petit ordinateur dans le cloud</b> pour qu'il puisse lire tes vidéos.</div></li>
+    <li><span>04</span><div><b>Préparer ta charte</b> : tes couleurs, tes polices, ton style.</div></li>
+    <li><span>05</span><div><b>Installer le skill de montage</b> avec le prompt n°1.</div></li>
+    <li><span>06</span><div><b>Filmer et envoyer ta vidéo</b> sur Google Drive.</div></li>
+    <li><span>07</span><div><b>Lancer ton montage</b> avec le prompt n°2.</div></li>
+    <li><span>08</span><div><b>Donner tes retours</b> et récupérer ta vidéo finale.</div></li>
+  </ul>
+  <h3>Les mots à connaître (promis, c'est tout)</h3>
+  <table class="tight">
+    <tr><th>Le mot</th><th>Ce que ça veut dire, simplement</th></tr>
+    <tr><td>Prompt</td><td>Le message que tu écris à Claude. Plus il est précis, meilleur est le résultat.</td></tr>
+    <tr><td>Claude Code</td><td>La version de Claude qui peut <b>travailler pour toi</b> : il ouvre un petit ordinateur dans le cloud et y fait le montage.</td></tr>
+    <tr><td>Skill</td><td>Un « savoir-faire » que tu installes dans Claude. Ici : le skill de montage vidéo. Sans lui, Claude ne sait pas monter.</td></tr>
+    <tr><td>GitHub / dépôt</td><td>Un site gratuit où Claude range tes projets. Le « dépôt », c'est ton dossier à toi.</td></tr>
+    <tr><td>Environnement</td><td>Le petit ordinateur dans le cloud où Claude travaille. Tu le règles une seule fois.</td></tr>
+    <tr><td>Lien de partage</td><td>Le lien Google Drive de ta vidéo, que tu colles dans la conversation pour que Claude la récupère.</td></tr>
+    <tr><td>Test</td><td>Quelques images fixes de ton montage que Claude te montre <b>avant</b> de tout fabriquer.</td></tr>
+    <tr><td>Rendu</td><td>La fabrication de la vidéo complète (environ 10 minutes). Claude te prévient quand c'est prêt.</td></tr>
+  </table>
+  <div class="foot"><span>Monter ses réels avec Claude</span><b>@thestrategicboost.fr</b></div>
+</section>
+
+<!-- ============================================================ 01 COMPTES -->
+<section class="page">
+  <div class="step">ÉTAPE 01</div>
+  <h2>CRÉER TES <em>3 COMPTES</em></h2>
+  <p class="lead">Tout se passe dans ton navigateur (Chrome, Safari…). Fais l'installation sur un ordinateur, c'est plus confortable. Ensuite, tu pourras tout faire depuis ton téléphone avec l'appli Claude.</p>
+  <table>
+    <tr><th>Compte</th><th>À quoi il sert</th><th>Prix</th></tr>
+    <tr><td>Claude</td><td>C'est lui qui monte ta vidéo. Il te faut l'abonnement qui donne accès à <b>Claude Code</b>.</td><td>Pro ou Max (payant)</td></tr>
+    <tr><td>GitHub</td><td>Le dossier où Claude range tes projets et tes vidéos finies.</td><td>Gratuit</td></tr>
+    <tr><td>Google Drive</td><td>Pour envoyer tes vidéos brutes et tes inspirations à Claude.</td><td>Gratuit</td></tr>
+  </table>
+  <h3>1. Claude</h3>
+  <ol>
+    <li>Va sur <span class="k">claude.ai</span> et crée ton compte (avec ton adresse mail ou ton compte Google).</li>
+    <li>Clique sur ton nom en bas à gauche, puis sur <b>« Mettre à niveau »</b>, et choisis l'abonnement <b>Pro</b> (ou Max si tu montes beaucoup de vidéos).</li>
+  </ol>
+  <h3>2. GitHub</h3>
+  <ol>
+    <li>Va sur <span class="k">github.com</span> et clique sur <b>« Sign up »</b>. Choisis un nom d'utilisateur, ton mail et un mot de passe.</li>
+    <li>Une fois connectée, clique sur le <b>« + »</b> en haut à droite, puis <b>« New repository »</b>.</li>
+    <li>Dans « Repository name », écris <span class="k">mes-reels</span>. Coche <b>« Private »</b> (privé), puis coche <b>« Add a README file »</b>.</li>
+    <li>Clique sur le bouton vert <b>« Create repository »</b>. Ton dossier est prêt.</li>
+  </ol>
+  <h3>3. Google Drive</h3>
+  <ol>
+    <li>Si tu as un compte Gmail, tu as déjà Google Drive : va sur <span class="k">drive.google.com</span>.</li>
+    <li>Crée un dossier <b>« Mes réels Claude »</b> (bouton « Nouveau », puis « Nouveau dossier »). Tu y mettras toutes tes vidéos.</li>
+  </ol>
+  <div class="tip"><b>Astuce :</b> note tes identifiants GitHub quelque part. Claude te demandera de te connecter à GitHub à l'étape suivante.</div>
+  <div class="foot"><span>Monter ses réels avec Claude</span><b>@thestrategicboost.fr</b></div>
+</section>
+
+<!-- ============================================================ 02 + 03 CLAUDE CODE + ENV -->
+<section class="page">
+  <div class="step">ÉTAPE 02</div>
+  <h2>OUVRIR <em>CLAUDE CODE</em></h2>
+  <ol>
+    <li>Va sur <span class="k">claude.ai/code</span> et connecte-toi avec ton compte Claude.</li>
+    <li>Claude te propose de <b>connecter GitHub</b> : clique sur le bouton, connecte-toi à GitHub et autorise l'accès. Choisis <b>« Only select repositories »</b> puis ton dépôt <span class="k">mes-reels</span>.</li>
+    <li>De retour sur Claude Code, choisis le dépôt <span class="k">mes-reels</span> dans la liste. C'est là que tu travailleras à chaque fois.</li>
+  </ol>
+  <div class="step" style="margin-top:6mm">ÉTAPE 03</div>
+  <h2>RÉGLER TON <em>PETIT ORDINATEUR</em></h2>
+  <p class="lead">Par sécurité, l'ordinateur de Claude n'a pas le droit d'aller sur tous les sites. Il faut l'autoriser à lire ton Google Drive et à trouver des photos libres de droits.</p>
+  <ol>
+    <li>En haut de la session Claude Code, clique sur le nom de l'<b>environnement</b> (souvent « Default »), puis sur <b>« Edit »</b> (ou l'icône engrenage).</li>
+    <li>Dans la partie <b>« Network access »</b>, choisis l'accès personnalisé (« Custom ») et laisse cochée la case <b>« Allow package managers »</b>.</li>
+    <li>Ajoute ces 4 adresses, une par ligne :
+      <ul>
+        <li><span class="k">drive.google.com</span> et <span class="k">drive.usercontent.google.com</span> : pour télécharger tes vidéos.</li>
+        <li><span class="k">images.unsplash.com</span> et <span class="k">images.pexels.com</span> : pour trouver de vraies photos libres de droits.</li>
+      </ul>
+    </li>
+    <li>Clique sur <b>« Save »</b>. C'est réglé pour toujours.</li>
+    <li><i>Facultatif mais pratique :</i> sur <span class="k">claude.ai</span>, va dans <b>Paramètres → Connecteurs → Google Drive</b> et connecte ton Drive. Claude pourra alors retrouver tes vidéos juste avec leur nom.</li>
+  </ol>
+  <div class="warn"><b>Si un jour Claude te dit « je n'arrive pas à télécharger » :</b> c'est presque toujours une adresse qui manque ici, ou un lien Drive pas partagé (voir l'étape 06).</div>
+  <div class="foot"><span>Monter ses réels avec Claude</span><b>@thestrategicboost.fr</b></div>
+</section>
+
+<!-- ============================================================ 04 CHARTE -->
+<section class="page">
+  <div class="step">ÉTAPE 04</div>
+  <h2>PRÉPARER <em>TA CHARTE</em></h2>
+  <p class="lead">C'est ce qui fait que ta vidéo te ressemble au lieu de « faire IA ». Prends 10 minutes pour remplir cette fiche : tu la colleras dans le prompt n°1.</p>
+  <div class="grid">
+    <div class="card"><div class="t">TES 3 COULEURS</div>Une <b>principale</b> (ta couleur phare), une <b>foncée</b> (pour les blocs et les fonds), une <b>d'accent</b> (pour mettre un mot en avant).<br/><i>Où trouver le code ?</i> Dans Canva : clique sur une couleur de ta charte, le code commence par <b>#</b> (ex. #8C5C41).</div>
+    <div class="card"><div class="t">TES 2 POLICES</div>Une pour les <b>titres</b> (souvent épaisse, ex. Anton, Montserrat Black) et une pour le <b>texte</b> et les sous-titres (lisible, ex. Poppins, Inter).<br/>Une police spéciale achetée ? Mets le fichier .ttf ou .otf sur ton Drive.</div>
+    <div class="card"><div class="t">TES SOUS-TITRES</div>Comment tu les veux : un mot à la fois ou une phrase, en minuscules ou majuscules, blanc avec ombre noire, dans un encadré… Regarde tes réels préférés et décris-les.</div>
+    <div class="card"><div class="t">TON AMBIANCE</div>Naturelle, rosée, chaude, sombre… Le mieux : une <b>capture d'écran</b> d'un de tes réels dont tu aimes les couleurs. Une image vaut mieux qu'un mot.</div>
+  </div>
+  <h3>Ta fiche à remplir</h3>
+  <div class="prompt"><span class="tag">MA CHARTE</span>
+    <p>Prénom : <span class="f">…</span> · Compte Instagram : <span class="f">@…</span> · Ma niche : <span class="f">…</span></p>
+    <p>Couleur principale : <span class="f">#……</span> · Couleur foncée : <span class="f">#……</span> · Couleur d'accent : <span class="f">#……</span></p>
+    <p>Police des titres : <span class="f">…</span> · Police du texte et des sous-titres : <span class="f">…</span></p>
+    <p>Mes sous-titres : <span class="f">un mot à la fois, en minuscules, blanc avec une ombre noire</span></p>
+    <p>Mon ambiance : <span class="f">naturelle / rosée / chaude / sombre</span> (+ capture si j'en ai une)</p>
+    <p>Ce que je ne veux JAMAIS : <span class="f">ex. du jaune, des émojis, des étoiles dans les sous-titres…</span></p>
+  </div>
+  <div class="tip"><b>Astuce :</b> tu n'as pas de charte ? Écris simplement tes 3 couleurs préférées et « choisis des polices modernes et lisibles ». Claude te proposera quelque chose et tu ajusteras.</div>
+  <div class="foot"><span>Monter ses réels avec Claude</span><b>@thestrategicboost.fr</b></div>
+</section>
+
+<!-- ============================================================ 05 INSTALL SKILL -->
+<section class="page">
+  <div class="step">ÉTAPE 05</div>
+  <h2>INSTALLER LE <em>SKILL DE MONTAGE</em></h2>
+  <p class="lead">À faire une seule fois. Dans Claude Code, sur ton dépôt <span class="k">mes-reels</span>, colle ce message en entier, remplace les parties en doré par tes informations, et envoie.</p>
+  <div class="prompt"><span class="tag">PROMPT N°1 · INSTALLATION</span>
+    <p>Bonjour Claude ! Je suis débutante en montage et en IA : parle-moi en français simple, sans mots techniques, et explique-moi chaque chose que tu me demandes de faire.</p>
+    <p class="h">1. INSTALLE LE SKILL DE MONTAGE</p>
+    <p>Télécharge le skill de montage vidéo depuis ce lien : <span class="f">[LIEN DU SKILL]</span>. Décompresse-le et range le dossier « video-edit » dans « .claude/skills/ » de ce dépôt. Puis lance sa configuration (son « Step 0 ») et installe tout ce dont il a besoin.</p>
+    <p class="h">2. RÉGLE-LE POUR MOI</p>
+    <p>Je suis francophone : la transcription et les sous-titres doivent être en français. Mes vidéos seront dans mon Google Drive. Garde toujours ma vitesse de parole normale.</p>
+    <p class="h">3. ENREGISTRE MA CHARTE</p>
+    <p><span class="f">[colle ici ta fiche « Ma charte » de l'étape 04]</span></p>
+    <p>Enregistre-la dans la configuration du skill pour qu'elle s'applique à toutes mes vidéos.</p>
+    <p class="h">4. QUAND C'EST FINI</p>
+    <p>Enregistre tout sur GitHub (commit + push). Puis écris-moi « PRÊT » et résume en 3 lignes comment je dois t'envoyer une vidéo à monter.</p>
+  </div>
+  <h3>Pendant l'installation</h3>
+  <ul>
+    <li>Claude installe seul les outils de montage. Ça prend <b>5 à 15 minutes</b>. Tu peux laisser l'onglet ouvert et faire autre chose.</li>
+    <li>S'il te pose une question (ton prénom, ton look préféré…), réponds simplement, comme à une amie.</li>
+    <li>S'il te demande une <b>autorisation</b> (un bouton « Allow » ou « Autoriser »), clique dessus : c'est lui qui travaille dans son ordinateur, pas dans le tien.</li>
+  </ul>
+  <div class="tip"><b>C'est réussi quand…</b> Claude t'écrit « PRÊT ». Tu n'auras plus jamais à refaire cette étape.</div>
+  <div class="foot"><span>Monter ses réels avec Claude</span><b>@thestrategicboost.fr</b></div>
+</section>
+
+<!-- ============================================================ 06 FILMER + DRIVE -->
+<section class="page">
+  <div class="step">ÉTAPE 06</div>
+  <h2>FILMER ET <em>ENVOYER TA VIDÉO</em></h2>
+  <h3>Pour filmer</h3>
+  <ul class="check">
+    <li>Filme <b>à la verticale</b> (téléphone droit), en 4K si ton téléphone le permet.</li>
+    <li>Face à une fenêtre ou une lumière douce : <b>la lumière fait 80 % du rendu</b>.</li>
+    <li>Un micro (même un petit micro-cravate) : le son compte autant que l'image.</li>
+    <li>Laisse <b>une seconde de silence</b> avant de parler et à la fin.</li>
+    <li>Tu t'es trompée ? Ne coupe pas : <b>redis la phrase</b>. Claude gardera la meilleure prise et coupera les ratés.</li>
+    <li>Tu veux un effet à un moment précis ? <b>Dis-le dans ta vidéo</b> (« un mur de réels derrière moi ») : Claude le placera pile sur tes mots.</li>
+  </ul>
+  <h3>Pour l'envoyer à Claude</h3>
+  <ol>
+    <li>Mets ta vidéo dans ton dossier Google Drive « Mes réels Claude » (depuis ton téléphone : appli Google Drive, bouton « + », « Importer »).</li>
+    <li>Donne-lui un <b>nom simple</b>, par exemple <span class="k">astuce-hook</span>.</li>
+    <li>Appuie sur les <b>3 petits points</b> à côté de la vidéo, puis <b>« Partager »</b>.</li>
+    <li>Dans « Accès général », choisis <b>« Tous les utilisateurs disposant du lien »</b>, en <b>« Lecteur »</b>.</li>
+    <li>Appuie sur <b>« Copier le lien »</b>. C'est ce lien que tu colleras dans le prompt n°2.</li>
+  </ol>
+  <div class="tip"><b>Ton inspiration :</b> tu as vu un réel dont tu adores le montage ? Fais un enregistrement d'écran, mets-le aussi sur ton Drive et partage le lien de la même façon. Claude reproduira ses effets avec TES couleurs.</div>
+  <div class="warn"><b>Le piège n°1 :</b> si le lien reste en « Limité », Claude ne peut pas ouvrir ta vidéo. Vérifie toujours « Tous les utilisateurs disposant du lien ».</div>
+  <div class="foot"><span>Monter ses réels avec Claude</span><b>@thestrategicboost.fr</b></div>
+</section>
+
+<!-- ============================================================ 07 PROMPT MONTAGE -->
+<section class="page">
+  <div class="step">ÉTAPE 07</div>
+  <h2>LANCER <em>TON MONTAGE</em></h2>
+  <p class="lead">À chaque nouvelle vidéo : ouvre une <b>nouvelle session</b> sur ton dépôt <span class="k">mes-reels</span>, colle ce prompt, remplis les parties en doré et envoie.</p>
+  <div class="prompt"><span class="tag">PROMPT N°2 · MONTAGE</span>
+    <p>/video-edit</p>
+    <p>Bonjour Claude, je suis débutante : parle-moi en français simple.</p>
+    <p class="h">MA VIDÉO</p>
+    <p>Ma vidéo brute : <span class="f">[lien Google Drive]</span></p>
+    <p>Mon inspiration (facultatif) : <span class="f">[lien Google Drive du réel dont j'aime le montage]</span>. Reproduis ses effets, mais avec MA charte.</p>
+    <p>Le sujet de ma vidéo en une phrase : <span class="f">[ex. 3 astuces pour trouver ses idées de contenu]</span></p>
+    <p class="h">CE QUE J'ATTENDS</p>
+    <p>1. Coupe les blancs, les hésitations et les prises ratées, garde la meilleure. Garde ma vitesse normale.</p>
+    <p>2. Utilise ma charte enregistrée : mes couleurs, mes polices, mes sous-titres.</p>
+    <p>3. Écoute ce que je dis et mets les effets au moment où je les dis (si je dis « mur de réels », un mur de mes réels derrière moi).</p>
+    <p>4. Une accroche forte dès la première seconde (gros titre qui apparaît).</p>
+    <p>5. Des effets modernes : widgets, vraies photos, vrais logos, mots géants derrière ma tête. Rien qui « fasse IA ».</p>
+    <p>6. Des effets sonores discrets, seulement quand quelque chose apparaît à l'écran.</p>
+    <p>7. À la fin : <span class="f">[ex. « Commente GUIDE et je te l'envoie en DM »]</span>.</p>
+    <p>8. Tout dans la zone visible d'Instagram (rien sous le texte du bas ni derrière les boutons).</p>
+    <p class="h">LA MÉTHODE</p>
+    <p>Montre-moi d'abord un TEST (quelques images fixes) et attends mon accord. Ensuite fais le rendu, envoie-moi une version téléphone, et préviens-moi quand c'est prêt. Enregistre ton travail sur GitHub à chaque étape.</p>
+  </div>
+  <div class="foot"><span>Monter ses réels avec Claude</span><b>@thestrategicboost.fr</b></div>
+</section>
+
+<!-- ============================================================ 08 RETOURS -->
+<section class="page">
+  <div class="step">ÉTAPE 08</div>
+  <h2>DONNER TES RETOURS <em>& RÉCUPÉRER TA VIDÉO</em></h2>
+  <h3>Le déroulé d'un montage (1 à 2 heures, retours compris)</h3>
+  <ol>
+    <li>Claude te pose parfois des questions : réponds simplement.</li>
+    <li>Il t'envoie un <b>test en images</b>. C'est LE moment de corriger : c'est rapide.</li>
+    <li>Tu valides : il lance le <b>rendu</b> (environ 10 minutes). Tu peux fermer l'appli, il travaille seul.</li>
+    <li>Il t'envoie la <b>version téléphone</b> : regarde-la en entier, avec le son.</li>
+    <li>Tu donnes tes retours, il corrige, et ainsi de suite jusqu'à ce que ce soit parfait.</li>
+    <li>Tu dis « c'est bon, lance la version finale » : il fabrique la version HD.</li>
+  </ol>
+  <h3>Comment bien donner un retour</h3>
+  <p>La règle d'or : <b>un retour = un moment précis + ce que tu veux</b>. Exemples à copier :</p>
+  <div class="prompt"><span class="tag">PROMPT N°3 · RETOURS</span>
+    <p>À <span class="f">0:12</span>, le titre cache mon visage : descends-le.</p>
+    <p>Les sous-titres sont trop petits, agrandis-les un peu.</p>
+    <p>Le début est trop lent : coupe le silence avant ma première phrase.</p>
+    <p>Je n'aime pas le jaune : remplace-le par ma couleur d'accent.</p>
+    <p>À <span class="f">0:25</span>, quand je dis « mon guide », mets la vraie couverture de mon guide (lien : <span class="f">[lien Drive]</span>).</p>
+    <p>Supprime l'effet sonore à <span class="f">0:08</span>, il ne sert à rien.</p>
+    <p>C'est parfait, lance la version finale et envoie-la moi.</p>
+  </div>
+  <h3>Récupérer et poster</h3>
+  <ul>
+    <li>Claude t'envoie la vidéo directement dans la conversation : appuie dessus pour la <b>télécharger</b> sur ton téléphone.</li>
+    <li>Tu peux aussi lui demander : « dépose la version finale dans mon Google Drive ».</li>
+    <li>Ajoute ta <b>musique tendance dans Instagram</b>, au moment de poster.</li>
+  </ul>
+  <div class="foot"><span>Monter ses réels avec Claude</span><b>@thestrategicboost.fr</b></div>
+</section>
+
+<!-- ============================================================ EFFETS + PROBLEMES -->
+<section class="page">
+  <div class="step">BONUS</div>
+  <h2>LES EFFETS À <em>DEMANDER PAR LEUR NOM</em></h2>
+  <p class="lead">Tu peux les demander dans ton prompt n°2 ou dans tes retours, par exemple : « mets un Kinetic hook au début ».</p>
+  <table class="tight">
+    <tr><th>L'effet</th><th>Ce que ça donne</th></tr>
+    <tr><td>Kinetic hook</td><td>Ton titre d'accroche claque en gros, ligne par ligne.</td></tr>
+    <tr><td>Mot derrière la tête</td><td>Un mot géant derrière toi, tu restes devant.</td></tr>
+    <tr><td>Mur de réels</td><td>Tes réels défilent en 3D derrière toi.</td></tr>
+    <tr><td>Orbit</td><td>Des logos ou des images tournent autour de toi.</td></tr>
+    <tr><td>Prompt bar</td><td>Une barre de message où ta demande s'écrit toute seule.</td></tr>
+    <tr><td>NLE timeline</td><td>Un faux logiciel de montage qui se remplit.</td></tr>
+    <tr><td>Icon strike</td><td>Des logos d'applis barrés d'un trait rouge.</td></tr>
+    <tr><td>Avant / après</td><td>Une barre qui balaie l'image pour montrer la différence.</td></tr>
+    <tr><td>Digital zoom</td><td>Un zoom rapide sur ton visage sur un mot clé.</td></tr>
+    <tr><td>Comment CTA</td><td>Le mot-clé s'écrit dans un commentaire, puis la réponse en DM.</td></tr>
+    <tr><td>Écran explicatif</td><td>Plein écran à ta couleur avec un tableau, un calendrier, des photos.</td></tr>
+  </table>
+  <h3>Problèmes fréquents</h3>
+  <table class="tight">
+    <tr><th>Le problème</th><th>La solution</th></tr>
+    <tr><td>« Je n'arrive pas à ouvrir ta vidéo »</td><td>Ton lien Drive est en « Limité » : passe-le en « Tous les utilisateurs disposant du lien ».</td></tr>
+    <tr><td>« Accès refusé » à un site</td><td>Ajoute l'adresse dans « Network access » de ton environnement (étape 03).</td></tr>
+    <tr><td>Ma police n'apparaît pas</td><td>Mets le fichier .ttf ou .otf sur ton Drive et envoie le lien à Claude.</td></tr>
+    <tr><td>Ça « fait IA »</td><td>Envoie une inspiration ou des captures de tes réels : une image vaut mieux qu'un long texte.</td></tr>
+    <tr><td>J'ai perdu ma conversation</td><td>Tout est enregistré dans ton dépôt GitHub : ouvre une nouvelle session et dis « reprends mon réel [nom] ».</td></tr>
+  </table>
+  <div class="foot"><span>Monter ses réels avec Claude</span><b>@thestrategicboost.fr</b></div>
+</section>
+
+<!-- ============================================================ END -->
+<section class="page end">
+  <h2>À TOI DE JOUER !</h2>
+  <p>Ton premier montage prendra un peu plus de temps, c'est normal. Dès le deuxième, tu verras : c'est un message, un test, et ton réel est prêt.</p>
+  <p>Tu as monté ton premier réel avec Claude ? Identifie-moi, je veux voir ça.</p>
+  <div class="badge">@THESTRATEGICBOOST.FR</div>
+</section>
+
+</body>
+</html>
