@@ -145,7 +145,7 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
     <li>Si tu as un compte Gmail, tu as déjà Google Drive : va sur <span class="k">drive.google.com</span>.</li>
     <li>Crée un dossier <b>« Mes réels Claude »</b> (bouton « Nouveau », puis « Nouveau dossier »). Tu y mettras toutes tes vidéos.</li>
   </ol>
-  <div class="tip"><b>Astuce :</b> note tes identifiants GitHub quelque part. Claude te demandera de te connecter à GitHub à l'étape suivante.</div>
+  <div class="tip"><b>Astuce :</b> note tes identifiants GitHub quelque part : tu en auras besoin à l'étape suivante pour relier GitHub à Claude.</div>
   <div class="foot"><span>Monter ses réels avec Claude</span><b>@thestrategicboost.fr</b></div>
 </section>
 
@@ -153,12 +153,29 @@ td:first-child{font-weight:600;color:var(--dark);white-space:nowrap}
 <section class="page">
   <div class="step">étape 02</div>
   <h2>OUVRIR <em>CLAUDE CODE</em></h2>
+  <p>Claude ne propose pas toujours tout seul de connecter GitHub : fais ces 3 manipulations dans l'ordre.</p>
+  <h3>A. Relier ton compte GitHub à Claude</h3>
   <ol>
-    <li>Va sur <span class="k">claude.ai/code</span> et connecte-toi avec ton compte Claude.</li>
-    <li>Claude te propose de <b>connecter GitHub</b> : clique sur le bouton, connecte-toi à GitHub et autorise l'accès. Choisis <b>« Only select repositories »</b> puis ton dépôt <span class="k">mes-reels</span>.</li>
-    <li>De retour sur Claude Code, choisis le dépôt <span class="k">mes-reels</span> dans la liste. C'est là que tu travailleras à chaque fois.</li>
+    <li>Connectée à Claude, va sur <span class="k">claude.ai/connect-github</span>.</li>
+    <li>Clique sur le bouton pour connecter GitHub, connecte-toi à GitHub si on te le demande, puis clique sur <b>« Authorize »</b> (autoriser).</li>
   </ol>
-  <div class="step" style="margin-top:6mm">étape 03</div>
+  <h3>B. Donner à Claude l'accès à ton dossier « mes-reels »</h3>
+  <ol>
+    <li>Va sur <span class="k">github.com/apps/claude/installations/select_target</span>.</li>
+    <li>Choisis ton compte, puis coche <b>« Only select repositories »</b> et sélectionne <span class="k">mes-reels</span>.</li>
+    <li>Clique sur <b>« Install »</b> (ou « Save » si c'est déjà installé).</li>
+  </ol>
+  <h3>C. Ouvrir ta session de travail</h3>
+  <ol>
+    <li>Va sur <span class="k">claude.ai/code</span>.</li>
+    <li>Dans la zone de message, clique sur le menu des dépôts (le petit sélecteur à côté du champ) et choisis <span class="k">mes-reels</span>.</li>
+    <li>Tu ne vois pas <span class="k">mes-reels</span> dans la liste ? Recharge la page. Toujours rien ? Refais l'étape B : le dépôt n'a pas été coché.</li>
+  </ol>
+  <div class="foot"><span>Monter ses réels avec Claude</span><b>@thestrategicboost.fr</b></div>
+</section>
+
+<section class="page">
+  <div class="step">étape 03</div>
   <h2>RÉGLER TON <em>ORDINATEUR CLOUD</em></h2>
   <p class="lead">Par sécurité, l'ordinateur de Claude n'a pas le droit d'aller sur tous les sites. Il faut l'autoriser à lire ton Google Drive et à trouver des photos libres de droits.</p>
   <ol>
