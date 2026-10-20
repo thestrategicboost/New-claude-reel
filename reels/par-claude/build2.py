@@ -242,7 +242,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #cam{{position:absolute;inset:0;transform-origin:50% 40%}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 .cut{{z-index:5}}
-#cam video{{transform:scaleX(-1) scale(1.06);filter:sepia(.6) saturate(1.35) hue-rotate(-8deg) contrast(1.1) brightness(1.03)}}
+#cam video{{transform:scaleX(-1) scale(1.06);filter:sepia(.1) saturate(1.05) contrast(1.08) brightness(1.05)}}
 .cap2{{position:absolute;left:60px;right:60px;top:1320px;z-index:25;text-align:center;font:800 60px/1.3 Poppins;color:#fff;
   text-shadow:0 3px 0 rgba(40,20,5,.75)}}
 .cap2 span{{display:inline-block;padding:2px 14px 6px;border-radius:999px;margin:0 2px}}
@@ -300,7 +300,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .rp video{{width:312px;height:420px;object-fit:cover;display:block}}
 .rpl{{position:absolute;left:0;right:0;bottom:14px;text-align:center;font:italic 700 32px/1 Poppins;color:{DARK}}}
 .scl{{position:absolute;left:14px;right:14px;height:0}}
-.scl i{{position:absolute;left:0;right:0;top:-2px;border-top:5px dashed #fff;transform-origin:0 50%;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}}
+.scl i{{position:absolute;left:0;right:0;top:-2px;border-top:5px dashed #fff;transform-origin:0 50%;filter:sepia(.1) saturate(1.05) contrast(1.08) brightness(1.05)}}
 .scl b{{position:absolute;left:0;top:-34px;font:400 60px/1 Poppins;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6)}}
 .du{{position:absolute;left:110px;right:110px;top:{TOP}px;z-index:20;background:{INK};border-radius:28px;padding:26px 30px;box-shadow:0 22px 50px rgba(0,0,0,.45)}}
 .dur{{display:flex;align-items:center;gap:20px;height:80px;font:italic 700 34px/1 Poppins;color:#E9C98F}}
@@ -328,7 +328,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .vfl{{position:absolute;right:40px;top:26px;padding:10px 26px 14px;border-radius:999px;background:{PILL};font:italic 700 40px/1 Poppins;color:#fff;
   text-shadow:0 2px 0 rgba(70,35,5,.7);transform-origin:100% 0}}
 .sw{{position:absolute;left:430px;top:{TOP}px;width:220px;height:220px;z-index:20}}
-.sw svg{{transform:rotate(-90deg);filter:drop-shadow(0 10px 22px rgba(0,0,0,.4))}}
+.sw svg{{transform:rotate(-90deg);filter:sepia(.1) saturate(1.05) contrast(1.08) brightness(1.05)}}
 .swb{{fill:rgba(42,26,16,.9);stroke:rgba(255,255,255,.15);stroke-width:10}}
 .swr{{fill:none;stroke:#E9C98F;stroke-width:10;stroke-linecap:round}}
 .swt{{position:absolute;inset:0;text-align:center;font:400 84px/220px Anton;color:{CREAM}}}
