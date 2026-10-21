@@ -1,0 +1,306 @@
+<title>Studio Montage Maé</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@500&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,600;1,700&display=swap">
+<style>
+/* layout: an editing suite, deliberately dark like a real NLE: top bar, player | inspector, full-width timeline under them */
+:root{
+  --bg:#140D08; --panel:#1E140D; --panel2:#2A1C12; --line:#3A2919; --fg:#F4EEE6; --muted:#A99282;
+  --brown:#8C5C41; --dark:#573307; --gold:#D6AE66; --gold-hi:#EBCB8B; --play:#F4EEE6;
+  --pill:linear-gradient(135deg,#EBCB8B 0%,#C99A55 55%,#A97A3E 100%);
+  --display:'Anton',Impact,'Arial Narrow',sans-serif;
+  --body:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:var(--body);font-size:14px;line-height:1.45}
+.app{max-width:1280px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px 28px;display:flex;flex-direction:column;gap:12px}
+.bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{font-family:var(--display);font-size:26px;letter-spacing:.04em;line-height:1}
+.logo em{font-style:normal;background:var(--pill);-webkit-background-clip:text;background-clip:text;color:transparent}
+.proj{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.proj b{color:var(--fg);font-weight:600}
+.sp{flex:1}
+.btn{font:600 13.5px var(--body);color:var(--fg);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer}
+.btn:hover{border-color:var(--gold)}
+.btn:focus-visible,.chip:focus-visible,.fx:focus-visible,.wd:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
+.btn.gold{background:var(--pill);border:0;color:#fff;font-style:italic;font-weight:700;text-shadow:0 1.5px 0 rgba(70,35,5,.7)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.top{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:12px}
+@media (max-width:820px){.top{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;min-width:0}
+.ph{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font:600 12px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.ph .tc{margin-left:auto;font-family:var(--mono);letter-spacing:0;color:var(--gold-hi);font-size:13px}
+.player{padding:12px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.screen{width:100%;max-width:300px;aspect-ratio:9/16;border-radius:12px;overflow:hidden;background:#000;position:relative}
+.screen video{width:100%;height:100%;object-fit:cover;display:block}
+.screen .empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--muted)}
+.transport{display:flex;gap:8px;align-items:center}
+.inspector{display:flex;flex-direction:column}
+.sel{padding:12px 14px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.sel .w{font:italic 700 22px var(--body)}
+.sel .w span{background:var(--pill);border-radius:999px;padding:2px 14px 4px;color:#fff;text-shadow:0 1.5px 0 rgba(70,35,5,.7)}
+.muted{color:var(--muted)}
+.lib{padding:12px 14px;display:flex;flex-direction:column;gap:10px;min-height:0}
+.search{width:100%;font:500 14px var(--body);color:var(--fg);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:600 12.5px var(--body);color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.fxgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px;max-height:300px;overflow:auto;padding-right:4px}
+.fx{display:flex;gap:8px;align-items:flex-start;text-align:left;font:500 13px var(--body);color:var(--fg);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:grab}
+.fx:hover{border-color:var(--gold)}
+.fx b{font-family:var(--display);font-weight:400;color:var(--gold);font-size:15px;min-width:22px}
+.fx small{display:block;color:var(--muted);font-size:11.5px}
+.looks{display:flex;gap:6px;flex-wrap:wrap}
+.tlp .scroll{overflow-x:auto;position:relative}
+.tl{position:relative;padding:6px 0 10px}
+.ruler{height:22px;position:relative;border-bottom:1px solid var(--line)}
+.ruler i{position:absolute;bottom:0;width:1px;height:8px;background:var(--line)}
+.ruler em{position:absolute;top:2px;font:500 11px var(--mono);font-style:normal;color:var(--muted);transform:translateX(3px)}
+.track{position:relative;height:40px;margin-top:6px}
+.track.words{height:44px}
+.lab{position:sticky;left:0;z-index:3;display:inline-block;font:600 10.5px var(--body);letter-spacing:.12em;color:var(--muted);background:var(--panel);padding:2px 8px;border-radius:0 6px 6px 0}
+.blk{position:absolute;top:16px;height:22px;border-radius:6px;background:var(--brown);font:600 11px/22px var(--body);color:#fff;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;border:1px solid rgba(255,255,255,.12)}
+.blk.new{background:var(--pill);color:#fff;text-shadow:0 1px 0 rgba(70,35,5,.6)}
+.wd{position:absolute;top:16px;height:26px;border-radius:6px;background:var(--panel2);border:1px solid var(--line);font:500 12px/24px var(--body);color:var(--fg);padding:0 5px;white-space:nowrap;cursor:pointer;overflow:hidden}
+.wd:hover,.wd.drop{border-color:var(--gold-hi)}
+.wd.on{background:var(--fg);color:var(--bg)}
+.wd.sel{background:var(--pill);color:#fff;border-color:transparent}
+.head{position:absolute;top:0;bottom:0;width:2px;background:var(--play);z-index:4;pointer-events:none}
+.head:before{content:'';position:absolute;top:0;left:-6px;border:7px solid transparent;border-top:9px solid var(--play)}
+.changes{padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.ch{display:flex;gap:10px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.ch .t{font:500 12px var(--mono);color:var(--gold-hi);min-width:52px}
+.ch .x{margin-left:auto;background:none;border:0;color:var(--muted);font-size:18px;cursor:pointer;padding:0 4px}
+.note{width:100%;min-height:54px;font:500 14px var(--body);color:var(--fg);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 12px;resize:vertical}
+.send{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.status{font-size:13px;color:var(--muted)}
+.empty-ch{color:var(--muted);font-size:13px}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+
+<div class="app">
+  <div class="bar">
+    <div class="logo">STUDIO <em>MONTAGE</em></div>
+    <div class="proj">Projet : <b>Vidéo par Claude</b></div>
+    <div class="sp"></div>
+    <button class="btn" type="button" data-quick="Envoie-moi un test en images de la vidéo en cours.">🧪 Test</button>
+    <button class="btn" type="button" data-quick="Envoie-moi la vidéo finale en haute qualité, prête à poster.">📤 Vidéo finale</button>
+  </div>
+
+  <div class="top">
+    <div class="panel">
+      <div class="ph">Aperçu <span class="tc" id="tc">00:00.0</span></div>
+      <div class="player">
+        <div class="screen" id="screen">
+          <video id="vid" playsinline preload="metadata"></video>
+          <div class="empty" id="novid" hidden>La vidéo se charge ici.</div>
+        </div>
+        <div class="transport">
+          <button class="btn" type="button" id="back" aria-label="Reculer de 2 secondes">⟲ 2 s</button>
+          <button class="btn gold" type="button" id="play">▶ Lecture</button>
+          <button class="btn" type="button" id="fwd" aria-label="Avancer de 2 secondes">2 s ⟳</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel inspector">
+      <div class="ph">Effets</div>
+      <div class="sel" id="selbox">
+        <div class="muted">1. Clique un mot dans la timeline (ou mets la vidéo en pause sur le bon moment).</div>
+        <div class="muted">2. Choisis un effet ci-dessous, ou glisse-le sur un mot.</div>
+      </div>
+      <div class="lib">
+        <input class="search" id="q" type="search" placeholder="Chercher un effet (néon, compteur, derrière…)" aria-label="Chercher un effet">
+        <div class="chips" id="cats"></div>
+        <div class="fxgrid" id="fxgrid"></div>
+        <div class="muted" style="font-size:12px">Couleur de toute la vidéo :</div>
+        <div class="looks" id="looks"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel tlp">
+    <div class="ph">Timeline <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:500">marron = déjà dans la vidéo · doré = tes ajouts</span></div>
+    <div class="scroll" id="scroll">
+      <div class="tl" id="tl">
+        <div class="ruler" id="ruler"></div>
+        <div class="track" id="trk-fx"><span class="lab">EFFETS</span></div>
+        <div class="track words" id="trk-w"><span class="lab">MOTS</span></div>
+        <div class="head" id="head"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="ph">Mes changements</div>
+    <div class="changes">
+      <div id="chlist"></div>
+      <textarea class="note" id="note" placeholder="Autre chose à changer ? Écris-le ici (ex. : plus de zoom au début)"></textarea>
+      <div class="send">
+        <button class="btn gold" type="button" id="send">Envoyer à Claude</button>
+        <button class="btn" type="button" id="copy">Copier la demande</button>
+        <span class="status" id="status" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA = __DATA__;
+const VIDEO = "__VIDEO__";
+const FX = [
+  ['Textes', [[1,'Kinetic hook','accroche en gros blocs'],[2,'Gravity drop','lettres qui tombent'],[3,'Giant captions','mot géant'],[13,'Title card','carte titre'],[53,'Depth scatter','mots en profondeur'],[54,'Stat stack','gros chiffre'],[39,'Odometer','compteur qui défile'],[48,'Scene text','mots sur le mur'],[49,'Neon sign','néon derrière moi'],[32,'Glass type','mot en verre'],[31,'Cover story','couverture magazine'],[46,'Word pile','mots empilés'],[56,'Chip row','pastilles sous les sous-titres'],[55,'Dot counter','points 1/3']]],
+  ['Interfaces', [[4,'Prompt bar','barre de prompt'],[5,'Storyboard deck','éventail de réels'],[6,'Icon strike','logo barré'],[7,'File drop','dépôt de fichier'],[8,'NLE timeline','timeline de montage'],[9,'Jiggle delete','appli supprimée'],[42,'Timeline burn','timeline qui brûle'],[58,'Phone mockup','téléphone 3D'],[21,'UI world','fond appli'],[45,'Code scan','image en code'],[57,'Serif flow','étapes du process'],[34,'The stack','cartes de stats'],[50,'Spatial glass','panneaux en verre']]],
+  ['Réseaux', [[14,'Playing grid','grille de réels'],[15,'Reel feed','fil de réels'],[16,'Video card','carte vidéo'],[17,'Comment CTA','commente MOT'],[18,'Comment drop','commentaires qui tombent'],[59,'Comment bubble','commentaire + réponse'],[20,'Couch wall','mur de réels'],[24,'Headline wall','articles au mur']]],
+  ['Derrière moi', [[19,'Orbit','logos en orbite'],[33,'Clone','mes clones'],[36,'Spotlight','projecteur'],[52,'God rays','rayons de lumière'],[43,'Knockout tiles','tuiles qui tombent'],[47,'Inside out','fenêtre dans ma silhouette'],[27,'Green screen','fond remplacé'],[30,'Vertigo','effet vertige'],[22,'Frame break','je sors du cadre'],[26,'Chart grow','courbe qui monte']]],
+  ['Image & cuts', [[10,'Grade slider','avant / après'],[11,'Eyedropper grade','pipette couleur'],[12,'Film look','look film'],[23,'Digital zoom','zoom sur moi'],[25,'Zoom-through cut','transition zoom'],[41,'Blackout','écran noir'],[44,'Shatter 3D','image qui éclate'],[51,'Rack focus','mise au point']]],
+  ['Fun', [[28,'Paper cut','collage papier'],[29,'Doodle boil','dessins à la main'],[35,'Sticky text','sticker sur moi'],[37,'Freeze and label','arrêt sur image + flèches'],[38,'Pointer callout','cartes reliées à moi'],[40,'Freeze sticker','moi en sticker']]],
+];
+const LOOKS = [['Lilas / rosé','mon look lilas rosé habituel'],['Naturel','un look naturel, sans filtre fort'],['Moody','un look moody, plus sombre'],['Doré doux','un look doré légèrement chaud']];
+const PX = 70, $ = id => document.getElementById(id);
+const fmt = t => { const m = Math.floor(t / 60), s = t - m * 60; return String(m).padStart(2,'0') + ':' + s.toFixed(1).padStart(4,'0'); };
+const vid = $('vid');
+let sel = null;            // selected word index
+let changes = [];          // {t, word, fx, num} | {look}
+try { changes = JSON.parse(localStorage.getItem('studio-changes') || '[]'); } catch (e) {}
+const save = () => { try { localStorage.setItem('studio-changes', JSON.stringify(changes)); } catch (e) {} };
+
+// player
+if (VIDEO && !VIDEO.startsWith('__')) vid.src = VIDEO; else { $('novid').hidden = false; }
+$('play').onclick = () => vid.paused ? vid.play().catch(() => {}) : vid.pause();
+vid.onplay = () => $('play').textContent = '❚❚ Pause';
+vid.onpause = () => $('play').textContent = '▶ Lecture';
+$('back').onclick = () => vid.currentTime = Math.max(0, vid.currentTime - 2);
+$('fwd').onclick = () => vid.currentTime = Math.min(DATA.dur, vid.currentTime + 2);
+
+// timeline
+const W = Math.ceil(DATA.dur * PX) + 40;
+$('tl').style.width = W + 'px';
+for (let s = 0; s <= DATA.dur; s += 1) {
+  const i = document.createElement('i'); i.style.left = s * PX + 'px'; if (s % 5 === 0) i.style.height = '14px'; $('ruler').append(i);
+  if (s % 5 === 0) { const e = document.createElement('em'); e.style.left = s * PX + 'px'; e.textContent = fmt(s).slice(0, 5); $('ruler').append(e); }
+}
+const wordEls = DATA.words.map((w, i) => {
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'wd'; b.textContent = w.w;
+  b.style.left = w.s * PX + 'px'; b.style.width = Math.max(18, (w.e - w.s) * PX - 2) + 'px'; b.title = w.w + ' · ' + fmt(w.s);
+  b.onclick = () => select(i, true);
+  b.ondragover = e => { e.preventDefault(); b.classList.add('drop'); };
+  b.ondragleave = () => b.classList.remove('drop');
+  b.ondrop = e => { e.preventDefault(); b.classList.remove('drop'); const d = e.dataTransfer.getData('text/plain'); if (d) { select(i, true); addFx(JSON.parse(d)); } };
+  $('trk-w').append(b); return b;
+});
+function drawFxTrack() {
+  [...$('trk-fx').querySelectorAll('.blk')].forEach(n => n.remove());
+  DATA.fx.forEach(f => {
+    const d = document.createElement('div'); d.className = 'blk'; d.textContent = f.n; d.title = f.n + ' · ' + fmt(f.a);
+    d.style.left = f.a * PX + 'px'; d.style.width = Math.max(30, (f.b - f.a) * PX - 2) + 'px';
+    d.onclick = () => { vid.currentTime = f.a; }; $('trk-fx').append(d);
+  });
+  changes.filter(c => c.fx).forEach(c => {
+    const d = document.createElement('div'); d.className = 'blk new'; d.textContent = c.fx; d.title = c.fx + ' sur « ' + c.word + ' »';
+    d.style.left = c.t * PX + 'px'; d.style.width = 1.2 * PX + 'px'; d.style.top = '0px';
+    d.onclick = () => { vid.currentTime = c.t; }; $('trk-fx').append(d);
+  });
+}
+function select(i, seek) {
+  sel = i; wordEls.forEach((el, j) => el.classList.toggle('sel', j === i));
+  const w = DATA.words[i];
+  $('selbox').innerHTML = '<div class="muted">Mot choisi · <span style="font-family:var(--mono);color:var(--gold-hi)">' + fmt(w.s) + '</span></div><div class="w"><span></span></div><div class="muted">Choisis un effet ci-dessous.</div>';
+  $('selbox').querySelector('.w span').textContent = w.w.replace(/[,.!?…]/g, '');
+  if (seek) { vid.currentTime = w.s; }
+}
+let raf;
+function tick() {
+  const t = vid.currentTime || 0;
+  $('tc').textContent = fmt(t); $('head').style.left = t * PX + 'px';
+  const k = DATA.words.findIndex(w => t >= w.s && t < w.e + .05);
+  wordEls.forEach((el, j) => el.classList.toggle('on', j === k && j !== sel));
+  if (!vid.paused) { const sc = $('scroll'); const x = t * PX; if (x < sc.scrollLeft + 40 || x > sc.scrollLeft + sc.clientWidth - 80) sc.scrollLeft = x - 80; }
+  raf = requestAnimationFrame(tick);
+}
+tick();
+vid.onpause = () => { $('play').textContent = '▶ Lecture'; const t = vid.currentTime; const k = DATA.words.findIndex(w => t >= w.s - .05 && t < w.e + .1); if (k >= 0) select(k, false); };
+
+// library
+let cat = -1;
+['Tous', ...FX.map(f => f[0])].forEach((n, i) => {
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = n; b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+  b.onclick = () => { cat = i - 1; [...$('cats').children].forEach((c, j) => c.setAttribute('aria-pressed', j === i ? 'true' : 'false')); drawLib(); };
+  $('cats').append(b);
+});
+const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+function drawLib() {
+  $('fxgrid').replaceChildren(); const s = norm($('q').value.trim());
+  FX.forEach(([g, list], i) => {
+    if (cat >= 0 && cat !== i) return;
+    list.filter(([n, en, fr]) => !s || norm(en + ' ' + fr + ' ' + g).includes(s)).forEach(([n, en, fr]) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'fx'; b.draggable = true;
+      b.innerHTML = '<b></b><span><span class="n"></span><small></small></span>';
+      b.querySelector('b').textContent = String(n).padStart(2, '0'); b.querySelector('.n').textContent = en; b.querySelector('small').textContent = fr;
+      b.onclick = () => addFx({ num: n, fx: en });
+      b.ondragstart = e => e.dataTransfer.setData('text/plain', JSON.stringify({ num: n, fx: en }));
+      $('fxgrid').append(b);
+    });
+  });
+}
+$('q').oninput = drawLib; drawLib();
+LOOKS.forEach(([n, d]) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = n; b.onclick = () => { changes = changes.filter(c => !c.look); changes.push({ look: n, desc: d }); save(); drawChanges(); }; $('looks').append(b); });
+
+function addFx(f) {
+  let w, t;
+  if (sel !== null) { w = DATA.words[sel]; t = w.s; }
+  else { t = vid.currentTime || 0; w = DATA.words.find(x => t >= x.s - .05 && t < x.e + .1) || DATA.words.reduce((a, x) => Math.abs(x.s - t) < Math.abs(a.s - t) ? x : a); t = w.s; }
+  changes.push({ t, word: w.w.replace(/[,.!?…]/g, ''), fx: f.fx, num: f.num }); save(); drawChanges(); drawFxTrack();
+  status('Ajouté : ' + f.fx + ' sur « ' + w.w.replace(/[,.!?…]/g, '') + ' »');
+}
+function drawChanges() {
+  const l = $('chlist'); l.replaceChildren();
+  if (!changes.length) { const p = document.createElement('div'); p.className = 'empty-ch'; p.textContent = 'Aucun changement pour l’instant. Choisis un mot, puis un effet.'; l.append(p); }
+  changes.sort((a, b) => (a.t ?? 999) - (b.t ?? 999)).forEach((c, i) => {
+    const r = document.createElement('div'); r.className = 'ch';
+    r.innerHTML = '<span class="t"></span><span class="d"></span><button class="x" type="button" aria-label="Retirer">×</button>';
+    r.querySelector('.t').textContent = c.look ? 'look' : fmt(c.t);
+    r.querySelector('.d').textContent = c.look ? 'Couleur : ' + c.look : c.fx + ' (n°' + c.num + ') sur « ' + c.word + ' »';
+    r.querySelector('.x').onclick = () => { changes.splice(i, 1); save(); drawChanges(); drawFxTrack(); };
+    l.append(r);
+  });
+  $('send').disabled = !changes.length && !$('note').value.trim();
+}
+$('note').oninput = drawChanges;
+drawChanges(); drawFxTrack();
+
+function request() {
+  const lines = ['Studio montage · projet « Vidéo par Claude » (reels/par-claude).', 'Fais ces changements, puis envoie-moi un test en images :'];
+  changes.forEach(c => lines.push(c.look ? '- Couleur de toute la vidéo : ' + c.desc + '.' : '- À ' + fmt(c.t) + ', sur le mot « ' + c.word + ' » : ajoute l’effet ' + c.fx + ' (n°' + c.num + ').'));
+  const n = $('note').value.trim(); if (n) lines.push('- ' + n);
+  return lines.join('\n');
+}
+function status(t) { $('status').textContent = t; }
+async function copyText(t) {
+  try { await navigator.clipboard.writeText(t); status('Demande copiée : colle-la dans ta conversation avec Claude.'); }
+  catch (e) { status('Copie impossible ici. La demande est dans la zone de texte.'); $('note').value = t; }
+}
+$('copy').onclick = () => copyText(request());
+
+let comments = null;
+(async () => {
+  try { comments = await claude.use('comments'); } catch (e) { comments = null; }
+  if (!comments) return;
+  try { const s = await comments.canSendToClaude(); if (s !== 'available') status(s === 'no_session' ? 'Claude n’est pas à l’écoute en ce moment : utilise « Copier la demande ».' : ''); } catch (e) {}
+})();
+async function sendToClaude(text, el) {
+  if (!comments) { await copyText(text); return false; }
+  try {
+    const s = await comments.canSendToClaude();
+    if (s !== 'available') { await copyText(text); return false; }
+    status('Envoi à Claude…');
+    await comments.sendToClaude({ anchor: await comments.anchorFor(el), text });
+    status('Envoyé ✓ Claude s’en occupe, sa réponse arrive dans ta conversation.');
+    return true;
+  } catch (e) { await copyText(text); return false; }
+}
+$('send').onclick = async e => { const ok = await sendToClaude(request(), e.currentTarget); if (ok) { changes = []; $('note').value = ''; save(); drawChanges(); drawFxTrack(); } };
+document.querySelectorAll('[data-quick]').forEach(b => b.onclick = e => sendToClaude(b.dataset.quick, e.currentTarget));
+</script>
