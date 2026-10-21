@@ -64,8 +64,7 @@ const send = ($: any, text: string) => $.prompt.submit({ text })
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     await $.command.register({ name: 'studio', description: 'Ouvre le panneau Studio montage' })
-    void $.ui.open({ id: PANE, title: TITLE })
-    $.ui.status('🎬 Studio montage')
+    $.ui.status('🎬 Studio montage · claude.ai/artifact/7q1vQWhsMpfhFBbWs7TVpD')
 
     return next(e)
   })
