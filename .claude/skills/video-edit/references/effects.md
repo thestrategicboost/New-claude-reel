@@ -1,4 +1,4 @@
-# Effects library (32 named effects + recipes)
+# Effects library (59 named effects + recipes)
 
 Source: the "Les effets Claude" reel (Drive, 20 s, 18 effects named on screen in a running checklist). Each effect
 below says what it looks like, when to use it, and how to build it in HyperFrames/GSAP. Ask for an effect by its
@@ -252,3 +252,12 @@ through them. Use for one brand word ("CONTENU", "STRATÉGIE").
   (empty circle → gold check) on the words. Good for 3-step tips.
 - **Pull-back reveal (variant of Video card)**: the video pulls back into an app window with a side panel "En cours"
   ticking tasks and a progress bar. For "voici comment je fais".
+
+# Third batch (sales page "Let Claude edit my reels", 40 effects listed by name)
+
+Already in this library under another name: COUCH WALL = 20, UI WORLD = 21, CHART GROW = 26, GREEN SCREEN = 27,
+PAPER CUT = 28, DOODLE BOIL = 29, VERTIGO = 30, COVER STORY = 31, GLASS TYPE = 32, BEFORE AND AFTER = 10 Grade
+slider (a wipe line turns the raw clip into the edit), PROMPT BOX = 04 Prompt bar (typed into a frosted glass box
+instead of a white card), CHECKLIST = the running checklist / its variant, PULL-BACK REVEAL = the Video card variant.
+The 27 new ones below (33-59) were each built and tested on Maé's footage in reels/demo-effets (fxa/fxb/fxc.py hold
+the working code: copy the function, keep the id prefix `k`). Ask for them by name ("mets un Odometer sur 10 000").
