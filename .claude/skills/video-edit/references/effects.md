@@ -261,3 +261,177 @@ slider (a wipe line turns the raw clip into the edit), PROMPT BOX = 04 Prompt ba
 instead of a white card), CHECKLIST = the running checklist / its variant, PULL-BACK REVEAL = the Video card variant.
 The 27 new ones below (33-59) were each built and tested on Maé's footage in reels/demo-effets (fxa/fxb/fxc.py hold
 the working code: copy the function, keep the id prefix `k`). Ask for them by name ("mets un Odometer sur 10 000").
+
+### 33 Clone
+More copies of her pop out beside her on a word. Use on "un tournage = plusieurs réels".
+- Behind: two wrapper divs (transform-origin 50% 100%, brightness .86) each holding a full-frame <video> of her cut-out
+  with data-start = data-media-start = the slot start, so they stay in sync with her. Tween the wrappers, never the videos.
+- Wrappers from {autoAlpha:0,x:0,scale:.55} to {x:±400,scale:.8} in .32 s back.out(1.6), .12 s apart, then drift 4% out.
+  Optional Anton title on top ("1 tournage = 3 réels").
+
+### 34 The stack
+Dark data cards with racing gold bars stack above her. Use for stats or results.
+- Cards 700×112, rgba(42,26,16,.92), radius 22, thin gold border, at y 302/430/558: label Poppins 600 28px cream, track
+  rgba(244,238,230,.12), gold bar scaleX 0→1 (.6 s power3.out), number Anton 60px gold counting up (textContent + snap).
+- Bottom card lands first, the others .09 s apart (from y -70, scale .9, .28 s back.out(1.8)).
+
+### 35 Sticky text
+A tag sticker slaps onto her chest and sways as if stuck to her. Use for her handle or a key word.
+- Cream sticker (white 5px border, radius 14, soft shadow) around (150,1290): Anton 74px ink + handle Poppins 700 24px brown.
+- Slap-in from scale 1.7, rotation -22 to scale 1, rotation -7 in .28 s back.out(2.2); then a yoyo wobble (x 10, y -8,
+  rotation -4, .5 s sine.inOut) until the end.
+
+### 36 Spotlight
+The room goes dark, she stays lit, key words land big. Use on a punchline.
+- Behind the cut-out: a #0d0805 layer at .78 + a warm radial glow on her (ellipse 520×760, rgba(244,226,200,.6)), in .18 s.
+- Front: 1-2 Anton words above her head (gold gradient 120px + cream 190px) landing from scale 1.9 expo.out, .14 s apart.
+
+### 37 Freeze and label
+White flash, the picture freezes, labels point at her with thin drawn lines. Use to break down a setup.
+- Freeze = <img> of frame(t) full screen with a slow push 1→1.035; flash = white div .9→0 in .22 s; "II ARRÊT SUR IMAGE"
+  chip (JetBrains Mono) top-left.
+- 2-3 cream pill labels (Poppins 700 italic 36px ink, brown border) .08 s apart; one SVG with 4px cream lines drawn by
+  strokeDashoffset (.25 s), each ending in a brown dot with a cream ring. Place the points by hand on the frozen frame.
+
+### 38 Pointer callout
+Cards in the side columns tied to her by curved lines that follow her. Use for a two-step tip.
+- Cards 310px cream, radius 24, 8px brown top border: kicker JetBrains Mono 22px ("ÉTAPE 1/2"), text Poppins 800 38px ink.
+- SVG quadratic paths 5px cream drawn in .3 s, ending on her hair / mic; cards pop back.out(1.8) .12 s apart then drift ±12px.
+
+### 39 Odometer
+A number rolls up digit by digit like a mileage counter. Use for a big number ("10 000 vues").
+- Ink card; one 118×200 window per digit (overflow hidden, shaded edges); each column holds 0-9 twice in Anton 170px cream
+  and slides to y = -(10+digit)*200, .75 s + .08 s per digit power3.out, rightmost digit first.
+- Caption under it: Poppins 700 italic 38px cream led by a short gold bar.
+
+### 40 Freeze sticker
+The frame freezes and dims, she becomes a white die-cut sticker with handwritten notes. Use for a playful aside.
+- Background: frame(t) blurred 6px, desaturated, under rgba(42,26,16,.62), after a white flash.
+- Sticker built once with PIL from cutframe(t): crop to the bust, outline = alpha dilated (MaxFilter 9 ×3) filled white +
+  soft shadow; pops from scale 1.35, rotation 9 to rotation -5 (.34 s back.out(1.7)).
+- Notes in Caveat 600 64px (cream / gold) with SVG arrows drawn in, arrowheads appearing at the end of the line.
+
+### 41 Blackout
+The lights cut on her line and snap back. Use on a dramatic pause.
+- Full black div with hard tl.set cuts (no fades), ~.5 s; one centred line in Poppins 600/800 italic 76px white
+  ("et là… coupez.") fading in from scale 1.12.
+- On return, one flicker: black back at .55 for one frame.
+
+### 42 Timeline burn
+An editing timeline builds in front of her, then a glowing ember edge burns it away on her word. Use for "oublie le
+montage à la main".
+- Ink card 940×344 (radius 24) above her head: mono header + gold timecode, ruler, V2 text clips, V1 clips from real
+  thumbs, A1 gold waveform, cream playhead. Clips grow scaleX 0→1 stagger .018.
+- Burn: the card's clip-path is a jagged tilted 14-point polygon sweeping left→right (power1.in); three blurred bands ride
+  the same edge (char rgba(14,7,2,.82) 74px, ember #D9803A 40px, hot #FFE3C2 11px), flickering steps(2), ~14 ember dots
+  rising 90-200px.
+
+### 43 Knockout tiles
+Software-name tiles slam onto the wall behind her head, then get knocked off one by one. Use for "plus de CapCut...".
+- Behind the cut-out: 5 Anton 84px tiles (radius 20, brand colour pairs, ±1.5-4°) in rows at y 300/446/590.
+- Slam: scale 1.9→1 + over-rotation ±9°, .15 s power3.in, stagger .045, then a 7px landing bump.
+- Knock-out one at a time: a small hop (y -34, ±10°, .08 s) then fall to x ±520, y +1500, ±80° power2.in, behind her body.
+
+### 44 Shatter 3D
+The frame freezes, cracks into floating glass shards, then they fly off to reveal her live. Use as a hard "on casse
+la routine" beat (best on a continuous shot so the freeze is seamless).
+- frame(t) as 12 shards in a perspective 1700px container: full-frame divs with the still as background + clip-path
+  polygons (6 inner triangles around the face, 6 outer wedges), each with a cream SVG outline; dark vignette at z -400.
+- Cream radial flash; float (drift 26-56px, z 15-120, rotationX/Y ±7°); set filter brightness(1) first.
+- Fly: outward 1100-1500px, z 300-700, rotationX/Y ±140°, alpha 0, power2.in, small stagger.
+
+### 45 Code scan
+A gold scan line turns the picture into code made from her own frame, then a second sweep brings it back. Use for
+"Claude le fait en code".
+- ASCII built with PIL from frame(t) (112×100 cells, characters from a JS-like snippet), two <pre> layers in JetBrains
+  Mono (gold for mid tones, cream with glow for highlights) over an ink background + sepia frame at .55 + CRT lines;
+  terminal chip "$ claude --montage reel.mp4".
+- Sweep in: clip-path inset(0 0 100% 0)→inset(0) with a 60px gold scan bar moving in sync; sweep out the same way.
+
+### 46 Word pile
+The things she names drop as solid blocks and pile up on a line. Use while she lists what Claude handles.
+- Gold shelf 840×9 at y 600 (scaleX in .18 s); Anton 64px blocks 90px tall, radius 16, brand colours, two rows + one on top.
+- Each block drops from above, rotated 5× its final angle, .42 s bounce.out, .065 s apart, bottom row first.
+
+### 47 Inside out
+Her silhouette becomes a window onto another clip (her raw footage), then that clip grows until it fills the screen.
+Use for "rushs bruts → réel monté".
+- Pre-render with ffmpeg: the other clip cover-scaled to 1080×1920, alphamerged with the cut-out's alpha
+  (`[0:v]alphaextract[m];[c][m]alphamerge`), VP9 yuva420p webm; play it over her with a cream 3px + gold 16px drop-shadow rim.
+- Expand: a full-screen copy of the clip grows with clip-path circle 0→2200px over ~.5 s power2.inOut, a gold layer
+  14px wider makes the ring. Use a cut-out with the mic fixed (fixmask.py).
+
+### 48 Scene text
+A line types across her real wall, then two huge words slam in behind her head. Use for a headline moment.
+- Behind the cut-out: JetBrains Mono 27px cream line typed with typing() + blinking gold caret.
+- Two Anton words (250px cream, then gold gradient text lower so her head covers half of it) slam from scale 1.75 + y -30
+  in .15 s power4.in, squash scaleY .93, cream ellipse shock ring .55→1.35 fading.
+
+### 49 Neon sign
+Her phrase lights up as a warm-white neon sign on the wall behind her. Use for a signature / brand moment.
+- Behind the cut-out: Caveat 600 132-220px rotated -4° + a neon swoosh SVG underline; an unlit tube copy (cream .24) first.
+- Lit copy #FFF6EA with a 6-layer text-shadow (white 2px → warm gold 110px rgba(168,106,46,.7)), a wall glow (radial,
+  screen blend). Flicker on with tl.set steps 1/0/1/.25/1/.45/1 over .22 s, one letter catching late, two mains dips.
+
+### 50 Spatial glass
+Three frosted glass panels float in 3D around her, one per step. Use for a quick 1-2-3 process.
+- Perspective 1300px; panels rgba(255,255,255,.15) + backdrop-filter blur(20px) saturate(1.25), 1.5px white border,
+  radius 34, gold Anton number badge, Poppins 700 title + 600 subtitle; placed top / left / lower right with rotationX/Y.
+- Enter from z -420 with 2.2× rotation, .28 s power3.out, stagger .055; hold bobbing ±12px, badges pulsing in order.
+
+### 51 Rack focus
+Focus pulls from her to a big title like a real lens, then back. Use on the hook or a key statement.
+- #cam `filter:blur(12px)`, scale 1.035 over .3 s 'power2.inOut'; front title (Anton, "monté" 196px cream + "avec claude" 150px
+  gold gradient as background-clip text, y 300) from blur(22px) scale 1.14 to sharp in .34 s 'power3.out', drifts to 1.03.
+- At b-.4 the title blurs out (blur 20, scale .94) while #cam comes back to blur(0); hard reset of #cam at b.
+
+### 52 God rays
+The room dims and warm gold light breaks out from behind her head. Use for a reveal, "le secret".
+- Behind the cut-out, centred on her head (560,700): dark radial overlay (rgba(26,16,9,.72) → .86 at the edges), two 2200px
+  conic-gradient ray discs (seeded irregular rays, rgba(235,203,139,a), mix-blend-mode screen, radial mask, blur 5/10px)
+  and a warm radial core glow.
+- In: overlay .25 s, glow scale .4→1, rays scale .55→1 + rotation -14°→0 in .45 s; hold: rays rotate slowly in opposite
+  directions, glow breathes to 1.08; fade .2 s before the end.
+
+### 53 Depth scatter
+Her opening words land one by one at scattered sizes and fall out of focus like depth of field. Use on the hook line.
+- 3-5 words in her caption style (Poppins 800 white lowercase, black shadow) scattered in y 330-560, 118-196px, last word gold.
+- Each lands every .22 s from scale 1.9 + blur 16 to sharp in .2 s; the previous one recedes (alpha .55→.32, scale .8→.72,
+  blur 6→10) or flies past the camera (scale 2.8, blur 22, alpha 0). The last word stays sharp and creeps to 1.06.
+
+### 54 Stat stack
+The number she says lands huge, counts up, with a gold underline and a tiny line under it.
+- "+300%" Anton 260px cream (soft brown shadow) at y 290, a 540×14 gold bar, "de temps gagné" Poppins 600 italic 44px.
+- Counts 0→300 with ~8 textContent sets over .3 s while popping in (y 50, scale .82→1, back.out); underline scaleX 0→1 at
+  +.22 s, small line at +.38 s, then the number drifts to 1.04. Real numbers only.
+
+### 55 Dot counter
+A gold dot pops in for each thing she is about to cover, then the first opens into a "1/3" pill. Use before a list.
+- Three 70px gold dots at y 330, scale 0→1 .1 s apart (back.out(2.6)); "3 choses à savoir" Poppins 600 italic under them.
+- First dot opens into a 380px pill with clip-path `inset(0 310px 0 0 round 35px)` → `inset(0 round 35px)`: "1/3 les coupes"
+  (Anton number + Poppins 700 italic white, sharp dark shadow); the other dots slide right and dim to .55.
+
+### 56 Chip row
+A pill pops in under her caption for each thing she lists. Use on a spoken list of 2-4 items.
+- Her caption word swaps one at a time (Poppins 800 84px white, black shadow) at y 1230; under it a centred flex row at
+  y 1360 of her gold pills (Poppins 700 italic 44px white, sharp dark shadow), one per item.
+- Each pill pops from scale .3, y 34 in .26 s (back.out(2.2)) on its word; hidden pills keep their space so the row never reflows.
+
+### 57 Serif flow
+A dark card draws her process step by step in serif type. Use for a 3-step method.
+- Ink card 940×270 at y 296 (rgba(42,26,16,.94), radius 34, thin gold border), kicker "le process" DM Serif italic gold.
+- A 3px gold line draws (scaleX) left to right; each node (24px gold dot + halo) pops as the line reaches it and its label
+  (DM Serif Display 64px cream, the last one gold italic: filmer → envoyer → poster) fades up from y 18 + blur 6.
+
+### 58 Phone mockup
+A 3D phone flies in beside her playing a screen (her raw footage, a reel). Use to show a "before" or an app.
+- 290×600 phone (dark bezel, brown rim, radius 48, dynamic island, gloss) in a perspective 1400px wrapper, side column;
+  screen = a <video> (rawclip) + an IG-style footer (gold "avant montage" tag, her avatar and handle).
+- Flies in from x -560, rotationY 75, rotationZ -28, scale .85 to rotationY 25, rotationZ -5 in .42 s 'power3.out', then
+  floats (y -16, sine.inOut). Watch her hair when she is framed wide.
+
+### 59 Comment bubble
+The comment types itself, posts, and her reply with the link lands under it. Use for "commente MONTAGE".
+- Cream sheet card 940×356 at y 290 with an Instagram-like input (avatar, placeholder, typed text + caret, "Publier").
+- "MONTAGE" types (typing()), "Publier" taps, the input clears, the comment row pops in (y 60, back.out); then her reply
+  row lands indented (avatar.png, thestrategicboost.fr + gold "auteur" tag, "je t'envoie le lien 🔗").
