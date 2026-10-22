@@ -64,7 +64,7 @@ def scenes():
         a, b = L[k] + .18, J[k] + .02
         H.append(f'<div id="sp{k}" class="sp"><i class="ic">{NOTE}</i><div class="st"><b>{sound}</b><small>{dur} · CapCut</small>'
                  f'<div class="pr"><i id="pb{k}"></i></div></div><span class="ac">♡</span><span class="ac">＋</span></div>')
-        H.append(f'<div id="tt{k}" class="tt"><div class="ti"><img src="assets/tiles/{key}.jpg"/><em>✦</em></div><span>{tile}</span></div>')
+        H.append(f'<div id="tt{k}" class="tt"><div class="ti"><img src="assets/tiles/{key}.jpg"/></div><span>{tile}</span></div>')
         T += show(f'#tt{k}', a, b, "{autoAlpha:0,scale:.6,y:-10}", .3, 'back.out(2)')
         T += show(f'#sp{k}', a + .45, b, "{autoAlpha:0,x:-60}", .3, 'power3.out')
         T += [f"gsap.set('#pb{k}',{{scaleX:0,transformOrigin:'0 50%'}});",
