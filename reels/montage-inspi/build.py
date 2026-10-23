@@ -43,7 +43,7 @@ def captions():
             out[-1]['w'] += t
             out[-1]['e'] = w['e']
             continue
-        out.append(dict(w, w=t.replace('tchüss', 'tchüss')))
+        out.append(dict(w, w=t.replace('tchüss', 'tchus').replace('tchuss', 'tchus')))
     out[0]['s'] = max(out[0]['s'], .08)
     for k, w in enumerate(out):
         nxt = out[k + 1]['s'] if k + 1 < len(out) else DUR
