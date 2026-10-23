@@ -63,3 +63,4 @@
   (the cutout loads the same library); antivirus can make ffmpeg fail once with `spawn EBUSY`. Retry once, then
   tell the user what Windows blocked.
 - Windows on ARM (Snapdragon): the transcription engine has no ARM build; setup.py asks for the x64 Python.
+- Maé ends with "tchus": always spell it **tchus** in captions (no umlaut, one s), whatever Whisper writes ("Tchüss", "tchuss").
