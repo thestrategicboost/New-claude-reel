@@ -87,8 +87,8 @@ def scenes():
         for k in ICONS:
             if k == fmt:      # one frame squeezed, then pops a bit bigger and settles
                 T += [f"tl.set('#ic-{k}',{{scale:.86}},{a:.3f});",
-                      f"tl.to('#ic-{k}',{{scale:1.42,duration:.08,ease:'power2.out'}},{a + .034:.3f});",
-                      f"tl.to('#ic-{k}',{{scale:1.32,duration:.2,ease:'power1.out'}},{a + .12:.3f});",
+                      f"tl.to('#ic-{k}',{{scale:1.3,duration:.08,ease:'power2.out'}},{a + .034:.3f});",
+                      f"tl.to('#ic-{k}',{{scale:1.22,duration:.2,ease:'power1.out'}},{a + .12:.3f});",
                       f"tl.set('#ic-{k} span',{{opacity:1}},{a + .034:.3f});"]
                 S.append(('pop', a, .5))
             elif k == last:
@@ -150,12 +150,12 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
 #cam{{position:absolute;inset:0;transform-origin:50% 42%}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
-.row{{position:absolute;left:50px;right:50px;top:{TOP}px;z-index:20;display:flex;justify-content:space-between;align-items:flex-start}}
-.ic{{width:250px;text-align:center;transform-origin:50% 0%}}
-.ig{{height:132px;display:flex;justify-content:center;filter:drop-shadow(0 0 5px rgba(240,255,170,.5)) drop-shadow(0 3px 8px rgba(0,0,0,.25))}}
-.ig svg{{height:132px;width:auto}}
-.ic span{{display:block;margin-top:10px;font:800 40px/1 Poppins;letter-spacing:.01em;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.6)}}
-.vs{{margin-top:50px;font:800 38px/1 Poppins;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.6)}}
+.row{{position:absolute;left:24px;right:24px;top:{TOP}px;z-index:20;display:flex;justify-content:space-between;align-items:flex-start}}
+.ic{{width:300px;text-align:center;transform-origin:50% 0%}}
+.ig{{height:176px;display:flex;justify-content:center;filter:drop-shadow(0 0 5px rgba(240,255,170,.5)) drop-shadow(0 3px 8px rgba(0,0,0,.25))}}
+.ig svg{{height:176px;width:auto}}
+.ic span{{display:block;margin-top:10px;font:800 50px/1 Poppins;letter-spacing:.01em;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.6)}}
+.vs{{margin-top:66px;font:800 40px/1 Poppins;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.6)}}
 .cap{{position:absolute;left:40px;right:40px;top:1235px;z-index:25;text-align:center;font:700 104px/1 Poppins;letter-spacing:-.01em;color:#fff;
   text-shadow:0 3px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.55)}}
 .cap.un{{top:1385px;font-size:62px}}
