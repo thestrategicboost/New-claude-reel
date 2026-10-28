@@ -86,9 +86,10 @@ def scenes():
         for k in ICONS:
             if k == fmt:      # one frame squeezed, then pops a bit bigger and settles
                 T += [f"tl.set('#ic-{k}',{{scale:.86}},{a:.3f});",
-                      f"tl.to('#ic-{k}',{{scale:1.14,duration:.07,ease:'power2.out'}},{a + .034:.3f});",
-                      f"tl.to('#ic-{k}',{{scale:1.08,duration:.2,ease:'power1.out'}},{a + .1:.3f});",
+                      f"tl.to('#ic-{k}',{{scale:1.42,duration:.08,ease:'power2.out'}},{a + .034:.3f});",
+                      f"tl.to('#ic-{k}',{{scale:1.32,duration:.2,ease:'power1.out'}},{a + .12:.3f});",
                       f"tl.set('#ic-{k} span',{{opacity:1}},{a + .034:.3f});"]
+                S.append(('pop', a, .5))
             elif k == last:
                 T += [f"tl.to('#ic-{k}',{{scale:1,duration:.12,ease:'power2.out'}},{a:.3f});",
                       f"tl.set('#ic-{k} span',{{opacity:.6}},{a:.3f});"]
@@ -129,10 +130,10 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #cam{{position:absolute;inset:0;transform-origin:50% 42%}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 .row{{position:absolute;left:50px;right:50px;top:{TOP}px;z-index:20;display:flex;justify-content:space-between;align-items:flex-start}}
-.ic{{width:270px;text-align:center;transform-origin:50% 45%}}
+.ic{{width:250px;text-align:center;transform-origin:50% 0%}}
 .ig{{height:132px;display:flex;justify-content:center;filter:drop-shadow(0 0 5px rgba(240,255,170,.5)) drop-shadow(0 3px 8px rgba(0,0,0,.25))}}
 .ig svg{{height:132px;width:auto}}
-.ic span{{display:block;margin-top:10px;font:800 46px/1 Poppins;letter-spacing:.01em;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.6)}}
+.ic span{{display:block;margin-top:10px;font:800 40px/1 Poppins;letter-spacing:.01em;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.6)}}
 .vs{{margin-top:50px;font:800 38px/1 Poppins;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.6)}}
 .card{{position:absolute;left:60px;right:60px;top:1250px;z-index:25;text-align:center}}
 .ld{{font:700 44px/1.2 Poppins;color:#fff;text-shadow:0 3px 0 #000,0 0 16px rgba(0,0,0,.4)}}
@@ -158,6 +159,7 @@ def build():
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR:.3f}" data-width="1080" data-height="1920">
   <audio id="voice" src="assets/voice.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
+{nl.join(f'<audio id="sfx{k}" src="assets/sfx/{n}.mp3" data-start="{t:.3f}" data-duration=".7" data-track-index="{10 + k % 2}" data-volume="{v:.2f}"></audio>' for k, (n, t, v) in enumerate(S))}
   <div id="cam"><video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video></div>
 {nl.join(H)}
 </div>

@@ -12,10 +12,10 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 #cam{position:absolute;inset:0;transform-origin:50% 42%}
 .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .row{position:absolute;left:50px;right:50px;top:250px;z-index:20;display:flex;justify-content:space-between;align-items:flex-start}
-.ic{width:270px;text-align:center;transform-origin:50% 45%}
+.ic{width:250px;text-align:center;transform-origin:50% 0%}
 .ig{height:132px;display:flex;justify-content:center;filter:drop-shadow(0 0 5px rgba(240,255,170,.5)) drop-shadow(0 3px 8px rgba(0,0,0,.25))}
 .ig svg{height:132px;width:auto}
-.ic span{display:block;margin-top:10px;font:800 46px/1 Poppins;letter-spacing:.01em;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.6)}
+.ic span{display:block;margin-top:10px;font:800 40px/1 Poppins;letter-spacing:.01em;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.6)}
 .vs{margin-top:50px;font:800 38px/1 Poppins;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.6)}
 .card{position:absolute;left:60px;right:60px;top:1250px;z-index:25;text-align:center}
 .ld{font:700 44px/1.2 Poppins;color:#fff;text-shadow:0 3px 0 #000,0 0 16px rgba(0,0,0,.4)}
@@ -28,6 +28,18 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="37.467" data-width="1080" data-height="1920">
   <audio id="voice" src="assets/voice.mp4" data-start="0" data-media-start="0" data-duration="37.467" data-track-index="2" data-volume="1"></audio>
+<audio id="sfx0" src="assets/sfx/pop.mp3" data-start="0.510" data-duration=".7" data-track-index="10" data-volume="0.50"></audio>
+<audio id="sfx1" src="assets/sfx/pop.mp3" data-start="9.290" data-duration=".7" data-track-index="11" data-volume="0.50"></audio>
+<audio id="sfx2" src="assets/sfx/pop.mp3" data-start="12.430" data-duration=".7" data-track-index="10" data-volume="0.50"></audio>
+<audio id="sfx3" src="assets/sfx/pop.mp3" data-start="13.980" data-duration=".7" data-track-index="11" data-volume="0.50"></audio>
+<audio id="sfx4" src="assets/sfx/pop.mp3" data-start="15.900" data-duration=".7" data-track-index="10" data-volume="0.50"></audio>
+<audio id="sfx5" src="assets/sfx/pop.mp3" data-start="18.200" data-duration=".7" data-track-index="11" data-volume="0.50"></audio>
+<audio id="sfx6" src="assets/sfx/pop.mp3" data-start="19.910" data-duration=".7" data-track-index="10" data-volume="0.50"></audio>
+<audio id="sfx7" src="assets/sfx/pop.mp3" data-start="21.970" data-duration=".7" data-track-index="11" data-volume="0.50"></audio>
+<audio id="sfx8" src="assets/sfx/pop.mp3" data-start="23.950" data-duration=".7" data-track-index="10" data-volume="0.50"></audio>
+<audio id="sfx9" src="assets/sfx/pop.mp3" data-start="27.090" data-duration=".7" data-track-index="11" data-volume="0.50"></audio>
+<audio id="sfx10" src="assets/sfx/pop.mp3" data-start="30.870" data-duration=".7" data-track-index="10" data-volume="0.50"></audio>
+<audio id="sfx11" src="assets/sfx/pop.mp3" data-start="33.630" data-duration=".7" data-track-index="11" data-volume="0.50"></audio>
   <div id="cam"><video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="37.467" data-track-index="0"></video></div>
 <div id="row" class="row"><div id="ic-reels" class="ic"><div class="ig"><svg viewBox="0 0 48 48"><defs><linearGradient id="gr" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#C72A9C"/><stop offset=".5" stop-color="#F0335C"/><stop offset="1" stop-color="#FA8F2C"/></linearGradient><linearGradient id="gs" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FBB13C"/><stop offset=".45" stop-color="#F2365E"/><stop offset="1" stop-color="#9B33C9"/></linearGradient></defs><g fill="none" stroke="url(#gr)" stroke-width="3.8" stroke-linejoin="round" stroke-linecap="round"><rect x="4.5" y="4.5" width="39" height="39" rx="11"/><path d="M5 16h38M16.5 5l6 11M28.5 5l6 11"/></g><path d="M19.5 22.5v13l11-6.5z" fill="#F0353B" stroke="#F0353B" stroke-width="1.5" stroke-linejoin="round"/></svg></div><span>RÉELS</span></div><b class="vs">vs</b><div id="ic-carrousel" class="ic"><div class="ig"><svg viewBox="0 0 76 48"><g fill="none" stroke-linejoin="miter"><path id="cb" d="M24 6H16V42H24M16 10H9V38H16M52 6H60V42H52M60 10H67V38H60" stroke="#D4FF3A" stroke-width="4.4"/><path d="M24 6H16V42H24M16 10H9V38H16M52 6H60V42H52M60 10H67V38H60" stroke="#fff" stroke-width="1.6"/></g><rect x="25" y="3" width="26" height="42" fill="#fff"/></svg></div><span>CARROUSEL</span></div><b class="vs">vs</b><div id="ic-story" class="ic"><div class="ig"><svg viewBox="0 0 48 48"><defs><linearGradient id="gr" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#C72A9C"/><stop offset=".5" stop-color="#F0335C"/><stop offset="1" stop-color="#FA8F2C"/></linearGradient><linearGradient id="gs" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FBB13C"/><stop offset=".45" stop-color="#F2365E"/><stop offset="1" stop-color="#9B33C9"/></linearGradient></defs><circle cx="24" cy="24" r="20.5" fill="none" stroke="url(#gs)" stroke-width="3.2"/><circle cx="24" cy="24" r="18" fill="#fff"/></svg></div><span>STORY</span></div></div>
 <div id="c0" class="card"><div class="ld"><span id="c0w0">les</span> <span id="c0w1">réels</span> <span id="c0w2">sont</span> <span id="c0w3">montrés</span> <span id="c0w4">à</span> </div><div id="c0b" class="big">TES ABONNÉS</div></div>
@@ -54,74 +66,74 @@ const tl = gsap.timeline({ paused: true });
 gsap.set('.ic',{scale:1});
 gsap.set('.ic span',{opacity:.6});
 tl.set('#ic-reels',{scale:.86},0.510);
-tl.to('#ic-reels',{scale:1.14,duration:.07,ease:'power2.out'},0.544);
-tl.to('#ic-reels',{scale:1.08,duration:.2,ease:'power1.out'},0.610);
+tl.to('#ic-reels',{scale:1.42,duration:.08,ease:'power2.out'},0.544);
+tl.to('#ic-reels',{scale:1.32,duration:.2,ease:'power1.out'},0.630);
 tl.set('#ic-reels span',{opacity:1},0.544);
 tl.to('#ic-reels',{scale:1,duration:.12,ease:'power2.out'},9.290);
 tl.set('#ic-reels span',{opacity:.6},9.290);
 tl.set('#ic-carrousel',{scale:.86},9.290);
-tl.to('#ic-carrousel',{scale:1.14,duration:.07,ease:'power2.out'},9.324);
-tl.to('#ic-carrousel',{scale:1.08,duration:.2,ease:'power1.out'},9.390);
+tl.to('#ic-carrousel',{scale:1.42,duration:.08,ease:'power2.out'},9.324);
+tl.to('#ic-carrousel',{scale:1.32,duration:.2,ease:'power1.out'},9.410);
 tl.set('#ic-carrousel span',{opacity:1},9.324);
 tl.to('#ic-carrousel',{scale:1,duration:.12,ease:'power2.out'},12.430);
 tl.set('#ic-carrousel span',{opacity:.6},12.430);
 tl.set('#ic-story',{scale:.86},12.430);
-tl.to('#ic-story',{scale:1.14,duration:.07,ease:'power2.out'},12.464);
-tl.to('#ic-story',{scale:1.08,duration:.2,ease:'power1.out'},12.530);
+tl.to('#ic-story',{scale:1.42,duration:.08,ease:'power2.out'},12.464);
+tl.to('#ic-story',{scale:1.32,duration:.2,ease:'power1.out'},12.550);
 tl.set('#ic-story span',{opacity:1},12.464);
 tl.set('#ic-reels',{scale:.86},13.980);
-tl.to('#ic-reels',{scale:1.14,duration:.07,ease:'power2.out'},14.014);
-tl.to('#ic-reels',{scale:1.08,duration:.2,ease:'power1.out'},14.080);
+tl.to('#ic-reels',{scale:1.42,duration:.08,ease:'power2.out'},14.014);
+tl.to('#ic-reels',{scale:1.32,duration:.2,ease:'power1.out'},14.100);
 tl.set('#ic-reels span',{opacity:1},14.014);
 tl.to('#ic-story',{scale:1,duration:.12,ease:'power2.out'},13.980);
 tl.set('#ic-story span',{opacity:.6},13.980);
 tl.to('#ic-reels',{scale:1,duration:.12,ease:'power2.out'},15.900);
 tl.set('#ic-reels span',{opacity:.6},15.900);
 tl.set('#ic-carrousel',{scale:.86},15.900);
-tl.to('#ic-carrousel',{scale:1.14,duration:.07,ease:'power2.out'},15.934);
-tl.to('#ic-carrousel',{scale:1.08,duration:.2,ease:'power1.out'},16.000);
+tl.to('#ic-carrousel',{scale:1.42,duration:.08,ease:'power2.out'},15.934);
+tl.to('#ic-carrousel',{scale:1.32,duration:.2,ease:'power1.out'},16.020);
 tl.set('#ic-carrousel span',{opacity:1},15.934);
 tl.to('#ic-carrousel',{scale:1,duration:.12,ease:'power2.out'},18.200);
 tl.set('#ic-carrousel span',{opacity:.6},18.200);
 tl.set('#ic-story',{scale:.86},18.200);
-tl.to('#ic-story',{scale:1.14,duration:.07,ease:'power2.out'},18.234);
-tl.to('#ic-story',{scale:1.08,duration:.2,ease:'power1.out'},18.300);
+tl.to('#ic-story',{scale:1.42,duration:.08,ease:'power2.out'},18.234);
+tl.to('#ic-story',{scale:1.32,duration:.2,ease:'power1.out'},18.320);
 tl.set('#ic-story span',{opacity:1},18.234);
 tl.set('#ic-reels',{scale:.86},19.910);
-tl.to('#ic-reels',{scale:1.14,duration:.07,ease:'power2.out'},19.944);
-tl.to('#ic-reels',{scale:1.08,duration:.2,ease:'power1.out'},20.010);
+tl.to('#ic-reels',{scale:1.42,duration:.08,ease:'power2.out'},19.944);
+tl.to('#ic-reels',{scale:1.32,duration:.2,ease:'power1.out'},20.030);
 tl.set('#ic-reels span',{opacity:1},19.944);
 tl.to('#ic-story',{scale:1,duration:.12,ease:'power2.out'},19.910);
 tl.set('#ic-story span',{opacity:.6},19.910);
 tl.to('#ic-reels',{scale:1,duration:.12,ease:'power2.out'},21.970);
 tl.set('#ic-reels span',{opacity:.6},21.970);
 tl.set('#ic-carrousel',{scale:.86},21.970);
-tl.to('#ic-carrousel',{scale:1.14,duration:.07,ease:'power2.out'},22.004);
-tl.to('#ic-carrousel',{scale:1.08,duration:.2,ease:'power1.out'},22.070);
+tl.to('#ic-carrousel',{scale:1.42,duration:.08,ease:'power2.out'},22.004);
+tl.to('#ic-carrousel',{scale:1.32,duration:.2,ease:'power1.out'},22.090);
 tl.set('#ic-carrousel span',{opacity:1},22.004);
 tl.to('#ic-carrousel',{scale:1,duration:.12,ease:'power2.out'},23.950);
 tl.set('#ic-carrousel span',{opacity:.6},23.950);
 tl.set('#ic-story',{scale:.86},23.950);
-tl.to('#ic-story',{scale:1.14,duration:.07,ease:'power2.out'},23.984);
-tl.to('#ic-story',{scale:1.08,duration:.2,ease:'power1.out'},24.050);
+tl.to('#ic-story',{scale:1.42,duration:.08,ease:'power2.out'},23.984);
+tl.to('#ic-story',{scale:1.32,duration:.2,ease:'power1.out'},24.070);
 tl.set('#ic-story span',{opacity:1},23.984);
 tl.set('#ic-reels',{scale:.86},27.090);
-tl.to('#ic-reels',{scale:1.14,duration:.07,ease:'power2.out'},27.124);
-tl.to('#ic-reels',{scale:1.08,duration:.2,ease:'power1.out'},27.190);
+tl.to('#ic-reels',{scale:1.42,duration:.08,ease:'power2.out'},27.124);
+tl.to('#ic-reels',{scale:1.32,duration:.2,ease:'power1.out'},27.210);
 tl.set('#ic-reels span',{opacity:1},27.124);
 tl.to('#ic-story',{scale:1,duration:.12,ease:'power2.out'},27.090);
 tl.set('#ic-story span',{opacity:.6},27.090);
 tl.to('#ic-reels',{scale:1,duration:.12,ease:'power2.out'},30.870);
 tl.set('#ic-reels span',{opacity:.6},30.870);
 tl.set('#ic-carrousel',{scale:.86},30.870);
-tl.to('#ic-carrousel',{scale:1.14,duration:.07,ease:'power2.out'},30.904);
-tl.to('#ic-carrousel',{scale:1.08,duration:.2,ease:'power1.out'},30.970);
+tl.to('#ic-carrousel',{scale:1.42,duration:.08,ease:'power2.out'},30.904);
+tl.to('#ic-carrousel',{scale:1.32,duration:.2,ease:'power1.out'},30.990);
 tl.set('#ic-carrousel span',{opacity:1},30.904);
 tl.to('#ic-carrousel',{scale:1,duration:.12,ease:'power2.out'},33.630);
 tl.set('#ic-carrousel span',{opacity:.6},33.630);
 tl.set('#ic-story',{scale:.86},33.630);
-tl.to('#ic-story',{scale:1.14,duration:.07,ease:'power2.out'},33.664);
-tl.to('#ic-story',{scale:1.08,duration:.2,ease:'power1.out'},33.730);
+tl.to('#ic-story',{scale:1.42,duration:.08,ease:'power2.out'},33.664);
+tl.to('#ic-story',{scale:1.32,duration:.2,ease:'power1.out'},33.750);
 tl.set('#ic-story span',{opacity:1},33.664);
 tl.to('#row',{autoAlpha:0,y:-30,duration:.25},34.710);
 gsap.set('#c0',{autoAlpha:0});
