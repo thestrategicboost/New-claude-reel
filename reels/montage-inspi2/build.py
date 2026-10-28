@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Reel "réels vs carrousels vs stories", edited after the "Reels get followers, carousels get engagement" inspiration:
-a fixed row of the three Instagram formats on top (Réels / Carrousel / Story) where the one she talks about lights
-up in gold, and under it one card per clause: a small lead line that builds word by word, the key word landing huge
-(Anton, gold) on its spoken word, sometimes a small line under it. Lilac look, alternate punch-ins hide the jump cuts.
+a fixed row of the inspiration's three icons on top (Reels / carousel / Story, "vs" between them), the one she names
+popping on the word itself, and under it one card per clause in her caption style (Poppins white, black shadow): a
+small lead line that builds word by word, the key word landing huge on its spoken word, sometimes a small line under it. Lilac look, alternate punch-ins hide the jump cuts.
 
 PY build.py    writes index.html
 """
@@ -13,7 +13,6 @@ import subprocess
 DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of',
                             'csv=p=0', 'assets/aroll.mp4'], capture_output=True, text=True).stdout.strip())
 SEGS = json.load(open('work/segs.json'))
-PILL = 'linear-gradient(135deg,#F3DFB2 0%,#D6AE66 50%,#A97A3E 100%)'
 TOP = 250
 
 
@@ -50,30 +49,49 @@ CARDS = [
     (160.30, None, 'commente', 'CHIRAC', 160.84, 'pour avoir mon kit du créateur au complet', 161.10),
 ]
 
+# the three icons of the inspiration, redrawn as vectors: Instagram's gradient Reels icon, the neon carousel, the
+# white Story disc in its gradient ring
+IGG = ('<defs><linearGradient id="gr" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#C72A9C"/>'
+       '<stop offset=".5" stop-color="#F0335C"/><stop offset="1" stop-color="#FA8F2C"/></linearGradient>'
+       '<linearGradient id="gs" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FBB13C"/><stop offset=".45" stop-color="#F2365E"/>'
+       '<stop offset="1" stop-color="#9B33C9"/></linearGradient></defs>')
 ICONS = {
-    'reels': '<svg viewBox="0 0 48 48"><rect x="5" y="5" width="38" height="38" rx="11"/><path d="M5 16h38M17 5l6 11M29 5l6 11"/>'
-             '<path d="M20 22.5v12l10-6z" class="f"/></svg>',
-    'carrousel': '<svg viewBox="0 0 48 48"><rect x="12" y="7" width="24" height="34" rx="4"/><path d="M7 12v24M41 12v24"/></svg>',
-    'story': '<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" stroke-dasharray="6 4.5"/><circle cx="24" cy="24" r="11"/></svg>',
+    'reels': '<svg viewBox="0 0 48 48">' + IGG + '<g fill="none" stroke="url(#gr)" stroke-width="3.8" stroke-linejoin="round" stroke-linecap="round">'
+             '<rect x="4.5" y="4.5" width="39" height="39" rx="11"/><path d="M5 16h38M16.5 5l6 11M28.5 5l6 11"/></g>'
+             '<path d="M19.5 22.5v13l11-6.5z" fill="#F0353B" stroke="#F0353B" stroke-width="1.5" stroke-linejoin="round"/></svg>',
+    'carrousel': '<svg viewBox="0 0 76 48"><g fill="none" stroke-linejoin="miter"><path id="cb" d="M24 6H16V42H24M16 10H9V38H16M52 6H60V42H52M60 10H67V38H60" stroke="#D4FF3A" stroke-width="4.4"/>'
+                 '<path d="M24 6H16V42H24M16 10H9V38H16M52 6H60V42H52M60 10H67V38H60" stroke="#fff" stroke-width="1.6"/></g>'
+                 '<rect x="25" y="3" width="26" height="42" fill="#fff"/></svg>',
+    'story': '<svg viewBox="0 0 48 48">' + IGG + '<circle cx="24" cy="24" r="20.5" fill="none" stroke="url(#gs)" stroke-width="3.2"/>'
+             '<circle cx="24" cy="24" r="18" fill="#fff"/></svg>',
 }
 NAMES = {'reels': 'RÉELS', 'carrousel': 'CARROUSEL', 'story': 'STORY'}
 
 
 def scenes():
     H, T, S = [], [], []
-    # format row: the active one in gold, the others white and dimmed
+    # format row: the one she names pops (as in the inspiration), its label at full white
     H.append('<div id="row" class="row">' + ''.join(
-        f'<div id="ic-{k}" class="ic"><div class="ig">{ICONS[k]}</div><span>{NAMES[k]}</span></div>' for k in ICONS) + '</div>')
-    T += ["gsap.set('.ic',{opacity:.55,scale:.9,color:'#FFFFFF'});"]
+        ('<b class="vs">vs</b>' if j else '') + f'<div id="ic-{k}" class="ic"><div class="ig">{ICONS[k]}</div><span>{NAMES[k]}</span></div>'
+        for j, k in enumerate(ICONS)) + '</div>')
+    T += ["gsap.set('.ic',{scale:1});", "gsap.set('.ic span',{opacity:.6});"]
+    raw = json.load(open('work/take3_words.json'))
+    key = {'reels': 'réel', 'carrousel': 'carousel', 'story': 'stor'}
     last = None
     for i, (t, fmt, *_rest) in enumerate(CARDS):
-        if fmt == last:
+        if fmt is None or fmt == last:
             continue
-        a = ct(t) - .04
+        hit = next((w['s'] for w in raw if w['s'] >= t - .05 and key[fmt] in w['w'].lower()), t)
+        a = ct(hit)
         for k in ICONS:
-            on = k == fmt
-            col = '#EBCB8B' if on else '#FFFFFF'
-            T.append(f"tl.to('#ic-{k}',{{opacity:{1 if on else .55},scale:{1.12 if on else .9},color:'{col}',duration:.18,ease:'power2.out'}},{a:.3f});")
+            if k == fmt:      # one frame squeezed, then pops a bit bigger and settles
+                T += [f"tl.set('#ic-{k}',{{scale:.86}},{a:.3f});",
+                      f"tl.to('#ic-{k}',{{scale:1.14,duration:.07,ease:'power2.out'}},{a + .034:.3f});",
+                      f"tl.to('#ic-{k}',{{scale:1.08,duration:.2,ease:'power1.out'}},{a + .1:.3f});",
+                      f"tl.set('#ic-{k} span',{{opacity:1}},{a + .034:.3f});"]
+            elif k == last:
+                T += [f"tl.to('#ic-{k}',{{scale:1,duration:.12,ease:'power2.out'}},{a:.3f});",
+                      f"tl.set('#ic-{k} span',{{opacity:.6}},{a:.3f});"]
         last = fmt
     T += [f"tl.to('#row',{{autoAlpha:0,y:-30,duration:.25}},{ct(160.30) - .1:.3f});"]
 
@@ -110,19 +128,18 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
 #cam{{position:absolute;inset:0;transform-origin:50% 42%}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
-.row{{position:absolute;left:150px;right:150px;top:{TOP}px;z-index:20;display:flex;justify-content:space-between}}
-.ic{{width:200px;text-align:center;transform-origin:50% 40%}}
-.ig{{width:96px;height:96px;margin:0 auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}}
-.ic{{color:#fff}}
-.ig svg{{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}}
-.ig svg .f{{fill:currentColor;stroke:none}}
-.ic span{{display:block;margin-top:8px;font:800 28px/1 Poppins;letter-spacing:.06em;color:inherit;text-shadow:0 2px 6px rgba(0,0,0,.45)}}
+.row{{position:absolute;left:50px;right:50px;top:{TOP}px;z-index:20;display:flex;justify-content:space-between;align-items:flex-start}}
+.ic{{width:270px;text-align:center;transform-origin:50% 45%}}
+.ig{{height:132px;display:flex;justify-content:center;filter:drop-shadow(0 0 5px rgba(240,255,170,.5)) drop-shadow(0 3px 8px rgba(0,0,0,.25))}}
+.ig svg{{height:132px;width:auto}}
+.ic span{{display:block;margin-top:10px;font:800 46px/1 Poppins;letter-spacing:.01em;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.6)}}
+.vs{{margin-top:50px;font:800 38px/1 Poppins;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.6)}}
 .card{{position:absolute;left:60px;right:60px;top:1250px;z-index:25;text-align:center}}
-.ld{{font:700 42px/1.2 Poppins;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.55),0 0 16px rgba(0,0,0,.35)}}
-.big{{display:inline-block;margin-top:4px;font:400 124px/1 Anton;letter-spacing:.01em;background:{PILL};-webkit-background-clip:text;
-  background-clip:text;color:transparent;filter:drop-shadow(0 5px 0 rgba(60,30,5,.75)) drop-shadow(0 0 18px rgba(0,0,0,.3));white-space:nowrap}}
-.big.s{{font-size:96px}}
-.sm{{margin-top:6px;font:italic 600 36px/1.2 Poppins;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.55)}}
+.ld{{font:700 44px/1.2 Poppins;color:#fff;text-shadow:0 3px 0 #000,0 0 16px rgba(0,0,0,.4)}}
+.big{{display:inline-block;margin-top:2px;font:800 104px/1.05 Poppins;color:#fff;white-space:nowrap;
+  text-shadow:0 5px 0 #000,0 0 22px rgba(0,0,0,.45)}}
+.big.s{{font-size:78px}}
+.sm{{margin-top:6px;font:600 36px/1.2 Poppins;color:#fff;text-shadow:0 3px 0 #000}}
 '''
 
 
