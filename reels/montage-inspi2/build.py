@@ -116,20 +116,24 @@ def scenes():
         card_end = ct(t_next) - .02 if i + 1 < len(CARDS) else DUR + .1
         a_big = ct(ws[kb]['s'])
         if fmt is None:
-            # the CTA keyword pops out of her head in a speech bubble, sparkles burst around it, then it floats
-            H.append(f'<div id="bub" class="bub"><small>commente</small><b>{big}</b><i class="tail"></i></div>'
-                     + ''.join(f'<i id="sk{q}" class="sk">✦</i>' for q in range(6)))
-            T += ["gsap.set('#bub',{autoAlpha:0,transformOrigin:'30% 120%'});",
-                  f"tl.fromTo('#bub',{{autoAlpha:0,scale:0,rotation:-14,y:60}},{{autoAlpha:1,scale:1,rotation:-4,y:0,duration:.42,ease:'back.out(2.4)',immediateRender:false}},{a_big - .06:.3f});",
-                  f"tl.to('#bub',{{y:-14,rotation:2,duration:.9,ease:'sine.inOut',yoyo:true,repeat:{int((DUR - a_big) / .9)}}},{a_big + .4:.3f});",
-                  f"tl.fromTo('#bub b',{{scale:1}},{{scale:1.12,duration:.12,yoyo:true,repeat:1,ease:'power2.out',immediateRender:false}},{a_big + .36:.3f});",
-                  "gsap.set('.sk',{autoAlpha:0});"]
-            for q in range(6):
-                ang = -150 + q * 24
-                import math
-                dx, dy = 230 * math.cos(math.radians(ang)), 150 * math.sin(math.radians(ang))
-                T.append(f"tl.fromTo('#sk{q}',{{autoAlpha:1,x:0,y:0,scale:.4,rotation:0}},{{autoAlpha:0,x:{dx:.0f},y:{dy:.0f},scale:1.2,rotation:90,duration:.6,ease:'power2.out',immediateRender:false}},{a_big + .12:.3f});")
-            S += [('pop', a_big - .04, .55), ('sparkle', a_big + .12, .3)]
+            # the CTA as an Instagram comment bar above her head: it slides in on "commente", CHIRAC types itself on the
+            # word, the send button is tapped, the bar pulses
+            send = ('<svg viewBox="0 0 24 24" width="34" height="34"><path d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="2.6" '
+                    'fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+            H.append(f'<div id="cb" class="cb"><img class="cav" src="assets/avatar.png"/><div class="cw"><span id="cph" class="cph">Ajouter un commentaire…</span>'
+                     f'<span id="cty" class="cty"></span><i id="ccr" class="ccr"></i></div><div id="csd" class="csd">{send}</div></div>')
+            a_in = ct(t)
+            T += ["gsap.set('#cb',{autoAlpha:0});",
+                  f"tl.fromTo('#cb',{{autoAlpha:0,y:-50,scale:.9}},{{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false}},{a_in:.3f});",
+                  "gsap.set('#cty',{textContent:''});", "gsap.set('#cph',{display:'inline'});",
+                  f"tl.set('#cty',{{textContent:''}},{a_in:.3f});", f"tl.set('#cph',{{display:'inline'}},{a_in:.3f});",
+                  f"tl.set('#cph',{{display:'none'}},{a_big:.3f});"]
+            T += [f"tl.set('#cty',{{textContent:{json.dumps(big[:q])}}},{a_big + (q - 1) * .07:.3f});" for q in range(1, len(big) + 1)]
+            ts_ = a_big + len(big) * .07 + .15
+            T += ["gsap.set('#ccr',{opacity:1});"] + [f"tl.set('#ccr',{{opacity:{q % 2}}},{a_in + .3 + q * .25:.3f});" for q in range(int((DUR - a_in) / .25))]
+            T += [f"tl.to('#csd',{{scale:.78,duration:.07,yoyo:true,repeat:1}},{ts_:.3f});",
+                  f"tl.to('#cb',{{boxShadow:'0 0 0 7px #573307, 0 16px 36px rgba(0,0,0,.3)',scale:1.05,duration:.18,yoyo:true,repeat:1}},{ts_ + .1:.3f});"]
+            S += [('pop', a_in, .45), ('click', ts_, .6)]
             singles = [(w, False) for w in ws[:kb]] + [(w, False) for w in ws[kb + nb:]]
         else:
             H.append(f'<div id="b{i}" class="big{" s" if len(big) > 14 else ""}">{big}</div>')
@@ -179,13 +183,14 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .big{{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;top:1235px;z-index:26;font:800 108px/1.05 Poppins;color:#fff;white-space:nowrap;
   text-shadow:0 3px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.55)}}
 .big.s{{font-size:78px;top:1262px}}
-.bub{{position:absolute;left:200px;top:420px;z-index:30;padding:22px 54px 26px;border-radius:60px;background:#fff;text-align:center;
-  box-shadow:0 18px 40px rgba(0,0,0,.28)}}
-.bub small{{display:block;font:italic 700 40px/1 Poppins;color:#8C5C41}}
-.bub b{{display:block;margin-top:6px;font:400 120px/1 Anton;letter-spacing:.03em;color:#573307}}
-.bub .tail{{position:absolute;left:150px;bottom:-34px;width:0;height:0;border-left:26px solid transparent;border-right:26px solid transparent;
-  border-top:42px solid #fff;transform:rotate(14deg)}}
-.sk{{position:absolute;left:400px;top:520px;z-index:29;font:400 54px/1 Poppins;font-style:normal;color:#E9C98F;text-shadow:0 2px 6px rgba(0,0,0,.35)}}
+.cb{{position:absolute;left:90px;right:90px;top:470px;z-index:30;height:118px;border-radius:59px;background:#fff;display:flex;align-items:center;gap:20px;
+  padding:0 18px 0 18px;box-shadow:0 16px 36px rgba(0,0,0,.3)}}
+.cav{{width:80px;height:80px;border-radius:50%;object-fit:cover;flex:none;border:3px solid #573307}}
+.cw{{flex:1;display:flex;align-items:center;min-width:0}}
+.cph{{font:500 36px/1 Poppins;color:#9A9087}}
+.cty{{font:400 66px/1 Anton;letter-spacing:.06em;color:#2A1A10}}
+.ccr{{width:4px;height:56px;background:#573307;margin-left:6px}}
+.csd{{width:84px;height:84px;border-radius:50%;background:#573307;display:flex;align-items:center;justify-content:center;flex:none}}
 '''
 
 
