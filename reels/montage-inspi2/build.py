@@ -156,9 +156,9 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .ig svg{{height:176px;width:auto}}
 .ic span{{display:block;margin-top:10px;font:800 50px/1 Poppins;letter-spacing:.01em;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.6)}}
 .vs{{margin-top:66px;font:800 40px/1 Poppins;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.6)}}
-.cap{{position:absolute;left:40px;right:40px;top:1235px;z-index:25;text-align:center;font:700 104px/1 Poppins;letter-spacing:-.01em;color:#fff;
+.cap{{position:absolute;left:40px;right:40px;top:1270px;z-index:25;text-align:center;font:700 66px/1 Poppins;letter-spacing:-.01em;color:#fff;
   text-shadow:0 3px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.55)}}
-.cap.un{{top:1385px;font-size:62px}}
+.cap.un{{top:1370px;font-size:52px}}
 .big{{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;top:1235px;z-index:26;font:800 108px/1.05 Poppins;color:#fff;white-space:nowrap;
   text-shadow:0 3px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.55)}}
 .big.s{{font-size:78px;top:1262px}}
