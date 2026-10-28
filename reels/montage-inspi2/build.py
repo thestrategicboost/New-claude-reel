@@ -115,11 +115,28 @@ def scenes():
         nb = len(big.replace(',', '').replace('!', '').split())
         card_end = ct(t_next) - .02 if i + 1 < len(CARDS) else DUR + .1
         a_big = ct(ws[kb]['s'])
-        H.append(f'<div id="b{i}" class="big{" s" if len(big) > 14 else ""}">{big}</div>')
-        T += [f"gsap.set('#b{i}',{{autoAlpha:0}});",
-              f"tl.fromTo('#b{i}',{{autoAlpha:0,scale:1.35,y:10}},{{autoAlpha:1,scale:1,y:0,duration:.16,ease:'back.out(2.2)',immediateRender:false}},{a_big:.3f});",
-              f"tl.set('#b{i}',{{autoAlpha:0}},{card_end:.3f});"]
-        singles = [(w, False) for w in ws[:kb]] + [(w, True) for w in ws[kb + nb:]]
+        if fmt is None:
+            # the CTA keyword pops out of her head in a speech bubble, sparkles burst around it, then it floats
+            H.append(f'<div id="bub" class="bub"><small>commente</small><b>{big}</b><i class="tail"></i></div>'
+                     + ''.join(f'<i id="sk{q}" class="sk">✦</i>' for q in range(6)))
+            T += ["gsap.set('#bub',{autoAlpha:0,transformOrigin:'30% 120%'});",
+                  f"tl.fromTo('#bub',{{autoAlpha:0,scale:0,rotation:-14,y:60}},{{autoAlpha:1,scale:1,rotation:-4,y:0,duration:.42,ease:'back.out(2.4)',immediateRender:false}},{a_big - .06:.3f});",
+                  f"tl.to('#bub',{{y:-14,rotation:2,duration:.9,ease:'sine.inOut',yoyo:true,repeat:{int((DUR - a_big) / .9)}}},{a_big + .4:.3f});",
+                  f"tl.fromTo('#bub b',{{scale:1}},{{scale:1.12,duration:.12,yoyo:true,repeat:1,ease:'power2.out',immediateRender:false}},{a_big + .36:.3f});",
+                  "gsap.set('.sk',{autoAlpha:0});"]
+            for q in range(6):
+                ang = -150 + q * 24
+                import math
+                dx, dy = 230 * math.cos(math.radians(ang)), 150 * math.sin(math.radians(ang))
+                T.append(f"tl.fromTo('#sk{q}',{{autoAlpha:1,x:0,y:0,scale:.4,rotation:0}},{{autoAlpha:0,x:{dx:.0f},y:{dy:.0f},scale:1.2,rotation:90,duration:.6,ease:'power2.out',immediateRender:false}},{a_big + .12:.3f});")
+            S += [('pop', a_big - .04, .55), ('sparkle', a_big + .12, .3)]
+            singles = [(w, False) for w in ws[:kb]] + [(w, False) for w in ws[kb + nb:]]
+        else:
+            H.append(f'<div id="b{i}" class="big{" s" if len(big) > 14 else ""}">{big}</div>')
+            T += [f"gsap.set('#b{i}',{{autoAlpha:0}});",
+                  f"tl.fromTo('#b{i}',{{autoAlpha:0,scale:1.35,y:10}},{{autoAlpha:1,scale:1,y:0,duration:.16,ease:'back.out(2.2)',immediateRender:false}},{a_big:.3f});",
+                  f"tl.set('#b{i}',{{autoAlpha:0}},{card_end:.3f});"]
+            singles = [(w, False) for w in ws[:kb]] + [(w, True) for w in ws[kb + nb:]]
         for k, (w, under) in enumerate(singles):
             txt = re.sub(r'[,.!?…]', '', w['w']).lower().replace('carousel', 'carrousel')
             if not txt:
@@ -127,7 +144,7 @@ def scenes():
             a = ct(w['s'])
             nxt = singles[k + 1][0]['s'] if k + 1 < len(singles) and singles[k + 1][1] == under else None
             end = ct(nxt) if nxt is not None and nxt - w['e'] < .5 else ct(w['e']) + .3
-            end = min(end, a_big if not under else card_end, card_end)
+            end = min(end, a_big if w['s'] < ws[kb]['s'] else card_end, card_end)
             if end <= a:
                 continue
             H.append(f'<div id="w{n}" class="cap{" un" if under else ""}">{txt}</div>')
@@ -162,6 +179,13 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .big{{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;top:1235px;z-index:26;font:800 108px/1.05 Poppins;color:#fff;white-space:nowrap;
   text-shadow:0 3px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.55)}}
 .big.s{{font-size:78px;top:1262px}}
+.bub{{position:absolute;left:200px;top:420px;z-index:30;padding:22px 54px 26px;border-radius:60px;background:#fff;text-align:center;
+  box-shadow:0 18px 40px rgba(0,0,0,.28)}}
+.bub small{{display:block;font:italic 700 40px/1 Poppins;color:#8C5C41}}
+.bub b{{display:block;margin-top:6px;font:400 120px/1 Anton;letter-spacing:.03em;color:#573307}}
+.bub .tail{{position:absolute;left:150px;bottom:-34px;width:0;height:0;border-left:26px solid transparent;border-right:26px solid transparent;
+  border-top:42px solid #fff;transform:rotate(14deg)}}
+.sk{{position:absolute;left:400px;top:520px;z-index:29;font:400 54px/1 Poppins;font-style:normal;color:#E9C98F;text-shadow:0 2px 6px rgba(0,0,0,.35)}}
 '''
 
 
