@@ -4,7 +4,7 @@ work/segs.json holds the kept (start, end) so build.py maps raw times to the edi
 import json
 import subprocess
 
-SEGS = [(112.05, 125.78), (129.03, 134.74), (138.75, 146.0), (150.30, 151.76), (152.12, 158.72), (160.24, 162.95)]
+SEGS = [(112.05, 125.78), (129.03, 134.74), (138.75, 146.0), (152.26, 158.72), (160.24, 163.66)]
 
 if __name__ == '__main__':
     fc, n = [], len(SEGS)

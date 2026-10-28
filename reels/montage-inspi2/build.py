@@ -43,7 +43,7 @@ CARDS = [
     (141.12, 'carrousel', "les carrousels te permettent d'", 'ÉDUQUER', 142.18, '', 0),
     (143.08, 'story', 'et les stories te permettent de', 'VENDRE', 144.20, '', 0),
     (144.64, 'story', '', 'MONEY, MONEY, MONEY !', 144.64, '', 0),
-    (150.36, 'reels', 'pour les réels, publie', '4 À 7 FOIS', 151.44, 'par semaine', 153.74),
+    (152.30, 'reels', 'pour les réels, publie', '4 À 7 FOIS', 153.12, 'par semaine', 153.74),
     (154.56, 'carrousel', 'pour les carrousels', '1 À 2 FOIS', 155.26, 'par semaine', 155.74),
     (156.18, 'carrousel', 'ou alors', 'PAS DU TOUT', 156.60, '', 0),
     (157.34, 'story', 'et les stories', '1 À 2 FOIS', 158.06, 'par jour', 158.44),
