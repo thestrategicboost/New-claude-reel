@@ -7,6 +7,7 @@ small lead line that builds word by word, the key word landing huge on its spoke
 PY build.py    writes index.html
 """
 import json
+import re
 import shutil
 import subprocess
 
@@ -34,13 +35,13 @@ CARDS = [
     (115.44, 'reels', "n'oublie pas l'option", "RÉEL D'ESSAI", 116.72, "c'est un banger", 117.54),
     (118.48, 'reels', 'pour pousser tes réels vers des', 'NON-ABONNÉS', 120.30, '', 0),
     (121.16, 'carrousel', 'les carrousels sont montrés à', 'TES ABONNÉS', 122.42, '+ quelques non-abonnés', 123.18),
-    (124.14, 'story', 'et les stories uniquement à', 'TES ABONNÉS', 125.30, '', 0),
-    (129.10, 'reels', 'les réels génèrent des', 'ABONNEMENTS', 129.86, '', 0),
+    (124.14, 'story', 'et les stories uniquement à', 'TES ABONNÉS', 125.42, '', 0),
+    (129.10, 'reels', 'les réels génèrent des', 'ABONNEMENTS', 130.30, '', 0),
     (131.08, 'carrousel', "les carrousels génèrent de l'", 'ENREGISTREMENT', 132.26, '', 0),
-    (132.98, 'story', "et les stories de l'", 'ENGAGEMENT', 134.22, '', 0),
+    (132.98, 'story', "et les stories de l'", 'ENGAGEMENT', 134.34, '', 0),
     (138.82, 'reels', "les réels te permettent d'être", 'VISIBLE', 140.34, '', 0),
     (141.12, 'carrousel', "les carrousels te permettent d'", 'ÉDUQUER', 142.18, '', 0),
-    (143.08, 'story', 'et les stories te permettent de', 'VENDRE', 144.00, '', 0),
+    (143.08, 'story', 'et les stories te permettent de', 'VENDRE', 144.20, '', 0),
     (144.64, 'story', '', 'MONEY, MONEY, MONEY !', 144.64, '', 0),
     (150.36, 'reels', 'pour les réels, publie', '4 À 7 FOIS', 151.44, 'par semaine', 153.74),
     (154.56, 'carrousel', 'pour les carrousels', '1 À 2 FOIS', 155.26, 'par semaine', 155.74),
@@ -96,24 +97,44 @@ def scenes():
         last = fmt
     T += [f"tl.to('#row',{{autoAlpha:0,y:-30,duration:.25}},{ct(160.30) - .1:.3f});"]
 
-    # one card per clause
+    # captions: her usual one word at a time (Poppins white, black shadow, lowercase); the key words of each clause
+    # land together, huge, and stay until the next clause; the words said after them show one at a time under them
+    raw = []
+    for w in json.load(open('work/take3_words.json')):
+        t = w['w'].strip()
+        if (t.startswith("'") or t.startswith('-')) and raw:
+            raw[-1]['w'] += t
+            raw[-1]['e'] = w['e']
+        else:
+            raw.append(dict(w, w=t))
+    n = 0
     for i, (t, fmt, lead, big, tb, small, ts) in enumerate(CARDS):
-        a = ct(t)
-        b = ct(CARDS[i + 1][0]) - .02 if i + 1 < len(CARDS) else DUR + .1
-        words = lead.split()
-        spans = ''.join(f'<span id="c{i}w{j}">{w}</span> ' for j, w in enumerate(words))
-        H.append(f'<div id="c{i}" class="card"><div class="ld">{spans}</div><div id="c{i}b" class="big{' s' if len(big) > 14 else ''}">{big}</div>'
-                 + (f'<div id="c{i}s" class="sm">{small}</div>' if small else '') + '</div>')
-        T += [f"gsap.set('#c{i}',{{autoAlpha:0}});", f"tl.set('#c{i}',{{autoAlpha:1}},{a:.3f});", f"tl.set('#c{i}',{{autoAlpha:0}},{b:.3f});"]
-        tb_ = max(a, ct(tb))
-        step = (tb_ - a) / max(1, len(words))
-        for j in range(len(words)):
-            T += [f"gsap.set('#c{i}w{j}',{{opacity:0}});", f"tl.set('#c{i}w{j}',{{opacity:1}},{a + j * step:.3f});"]
-        T += [f"gsap.set('#c{i}b',{{autoAlpha:0}});",
-              f"tl.fromTo('#c{i}b',{{autoAlpha:0,scale:1.35,y:10}},{{autoAlpha:1,scale:1,y:0,duration:.16,ease:'back.out(2.2)',immediateRender:false}},{tb_:.3f});"]
-        if small:
-            T += [f"gsap.set('#c{i}s',{{autoAlpha:0}});",
-                  f"tl.fromTo('#c{i}s',{{autoAlpha:0,y:12}},{{autoAlpha:1,y:0,duration:.18,ease:'power2.out',immediateRender:false}},{max(tb_ + .1, ct(ts)):.3f});"]
+        t_next = CARDS[i + 1][0] if i + 1 < len(CARDS) else 1e9
+        ws = [w for w in raw if t - .05 <= w['s'] < t_next - .05]
+        kb = next(k for k, w in enumerate(ws) if w['s'] >= tb - .05)
+        nb = len(big.replace(',', '').replace('!', '').split())
+        card_end = ct(t_next) - .02 if i + 1 < len(CARDS) else DUR + .1
+        a_big = ct(ws[kb]['s'])
+        H.append(f'<div id="b{i}" class="big{" s" if len(big) > 14 else ""}">{big}</div>')
+        T += [f"gsap.set('#b{i}',{{autoAlpha:0}});",
+              f"tl.fromTo('#b{i}',{{autoAlpha:0,scale:1.35,y:10}},{{autoAlpha:1,scale:1,y:0,duration:.16,ease:'back.out(2.2)',immediateRender:false}},{a_big:.3f});",
+              f"tl.set('#b{i}',{{autoAlpha:0}},{card_end:.3f});"]
+        singles = [(w, False) for w in ws[:kb]] + [(w, True) for w in ws[kb + nb:]]
+        for k, (w, under) in enumerate(singles):
+            txt = re.sub(r'[,.!?…]', '', w['w']).lower().replace('carousel', 'carrousel')
+            if not txt:
+                continue
+            a = ct(w['s'])
+            nxt = singles[k + 1][0]['s'] if k + 1 < len(singles) and singles[k + 1][1] == under else None
+            end = ct(nxt) if nxt is not None and nxt - w['e'] < .5 else ct(w['e']) + .3
+            end = min(end, a_big if not under else card_end, card_end)
+            if end <= a:
+                continue
+            H.append(f'<div id="w{n}" class="cap{" un" if under else ""}">{txt}</div>')
+            T += [f"gsap.set('#w{n}',{{autoAlpha:0}});", f"tl.set('#w{n}',{{autoAlpha:1}},{a:.3f});",
+                  f"tl.fromTo('#w{n}',{{scale:.8}},{{scale:1,duration:{min(.12, end - a):.3f},ease:'back.out(2.5)',immediateRender:false}},{a:.3f});",
+                  f"tl.set('#w{n}',{{autoAlpha:0}},{end:.3f});"]
+            n += 1
 
     # alternate punch-ins hide the jump cuts between the kept pieces
     edge = 0.0
@@ -135,12 +156,12 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .ig svg{{height:132px;width:auto}}
 .ic span{{display:block;margin-top:10px;font:800 40px/1 Poppins;letter-spacing:.01em;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.6)}}
 .vs{{margin-top:50px;font:800 38px/1 Poppins;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.6)}}
-.card{{position:absolute;left:60px;right:60px;top:1250px;z-index:25;text-align:center}}
-.ld{{font:700 44px/1.2 Poppins;color:#fff;text-shadow:0 3px 0 #000,0 0 16px rgba(0,0,0,.4)}}
-.big{{display:inline-block;margin-top:2px;font:800 104px/1.05 Poppins;color:#fff;white-space:nowrap;
+.cap{{position:absolute;left:60px;right:60px;top:1270px;z-index:25;text-align:center;font:700 66px/1 Poppins;color:#fff;
+  text-shadow:0 4px 0 #000,0 0 18px rgba(0,0,0,.45)}}
+.cap.un{{top:1385px;font-size:54px}}
+.big{{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;top:1250px;z-index:26;font:800 104px/1.05 Poppins;color:#fff;white-space:nowrap;
   text-shadow:0 5px 0 #000,0 0 22px rgba(0,0,0,.45)}}
-.big.s{{font-size:78px}}
-.sm{{margin-top:6px;font:600 36px/1.2 Poppins;color:#fff;text-shadow:0 3px 0 #000}}
+.big.s{{font-size:78px;top:1262px}}
 '''
 
 
