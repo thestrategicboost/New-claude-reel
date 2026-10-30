@@ -64,3 +64,4 @@
   tell the user what Windows blocked.
 - Windows on ARM (Snapdragon): the transcription engine has no ARM build; setup.py asks for the x64 Python.
 - Maé ends with "tchus": always spell it **tchus** in captions (no umlaut, one s), whatever Whisper writes ("Tchüss", "tchuss").
+- Sound design (Maé): vary the sounds and make each one mean what is shown or said: a new follower = notification ding, a reply/DM = message bloop, money = till ka-ching, a toggle/save/send = click, things rising = soft whoosh. Cards and inserts come in silently; never chain two sounds less than ~0.6 s apart unless the picture does two things. Synth ones live in reels/formats-v2/assets/sfx (ding, bloop, kaching).
