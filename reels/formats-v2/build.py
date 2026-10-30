@@ -90,7 +90,7 @@ def scenes():
                       f"tl.to('#ic-{k}',{{scale:1.3,duration:.08,ease:'power2.out'}},{a + .034:.3f});",
                       f"tl.to('#ic-{k}',{{scale:1.22,duration:.2,ease:'power1.out'}},{a + .12:.3f});",
                       f"tl.set('#ic-{k} span',{{opacity:1}},{a + .034:.3f});"]
-                S.append(('pop', a, .5))
+                S.append(('pop', a, .38))
             elif k == last:
                 T += [f"tl.to('#ic-{k}',{{scale:1,duration:.12,ease:'power2.out'}},{a:.3f});",
                       f"tl.set('#ic-{k} span',{{opacity:.6}},{a:.3f});"]
@@ -161,8 +161,7 @@ def scenes():
         b = ct(CARDS[i1 + 1][0]) - .03 if i1 + 1 < len(CARDS) else DUR
         return a, b
 
-    def shw(sel, a, b):
-        S.append(('pop', a, .28))
+    def shw(sel, a, b):        # cards come in silently: only the actions on them make a sound
         return [f"gsap.set('{sel}',{{autoAlpha:0}});",
                 f"tl.fromTo('{sel}',{{autoAlpha:0,y:40,scale:.9}},{{autoAlpha:1,y:0,scale:1,duration:.25,ease:'back.out(1.8)',immediateRender:false}},{a:.3f});",
                 f"tl.to('{sel}',{{autoAlpha:0,duration:.12}},{b - .12:.3f});", f"tl.set('{sel}',{{autoAlpha:0}},{b:.3f});"]
@@ -206,6 +205,7 @@ def scenes():
     a, b = win(6, 6)
     H.append('<div id="ui4" class="ui fl"><i class="ico">👤＋</i><div><b>Abonnés en plus</b><small>grâce à ce réel</small></div><em id="ar4">↑</em></div>')
     T += shw('#ui4', a, b) + [f"tl.fromTo('#ar4',{{y:20,autoAlpha:0}},{{y:0,autoAlpha:1,duration:.3,ease:'back.out(2)',immediateRender:false}},{ct(130.30):.3f});"]
+    S.append(('ding', ct(130.30), .45))          # a new follower: the notification ding
     # 7 carrousels -> saves
     a, b = win(7, 7)
     H.append('<div id="ui5" class="ui sv"><svg viewBox="0 0 24 24" width="74" height="74"><path id="bk5" d="M6 3h12v18l-6-5-6 5z" fill="none" stroke="#111" '
@@ -219,17 +219,21 @@ def scenes():
     T += shw('#ui6', a, b) + ["gsap.set('#rp6a, #rp6b',{autoAlpha:0});",
                                f"tl.fromTo('#rp6a',{{autoAlpha:0,x:-30}},{{autoAlpha:1,x:0,duration:.2,immediateRender:false}},{ct(134.34):.3f});",
                                f"tl.fromTo('#rp6b',{{autoAlpha:0,x:30}},{{autoAlpha:1,x:0,duration:.2,immediateRender:false}},{ct(134.34) + .35:.3f});"]
+    S += [('bloop', ct(134.34), .4), ('bloop', ct(134.34) + .35, .35)]   # each reply lands like a message
     # 9 réels -> visible: reach
     a, b = win(9, 9)
     H.append('<div id="ui7" class="ui rc"><span><small>Vues</small><b>↑</b></span><span><small>Comptes touchés</small><b>↑</b></span></div>')
+    S.append(('whoosh-short', ct(140.34), .22))   # the reach arrows shoot up
     T += shw('#ui7', a, b) + [f"tl.fromTo('#ui7 b',{{y:16,autoAlpha:0}},{{y:0,autoAlpha:1,duration:.25,stagger:.12,ease:'back.out(2)',immediateRender:false}},{ct(140.34):.3f});"]
     # 10 carrousels -> educate: her guide pages as carousel slides
     a, b = win(10, 10)
     H.append('<div id="ui8" class="fan">' + ''.join(f'<img src="assets/gpages/p-0{p}.png"/>' for p in (1, 3, 5)) + '</div>')
+    S.append(('whoosh-short', ct(142.18), .18))   # the slides fan out
     T += shw('#ui8', a, b) + [f"tl.fromTo('#ui8 img',{{rotation:0,x:0}},{{rotation:(i)=>[-12,0,12][i],x:(i)=>[-120,0,120][i],duration:.35,ease:'back.out(1.6)',immediateRender:false}},{ct(142.18):.3f});"]
     # 11-12 stories -> sell: money
     a, b = win(11, 12)
     H.append('<div id="ui9" class="mny">💰</div>')
+    S.append(('kaching', ct(144.20), .45))        # money: the till
     T += shw('#ui9', ct(144.20), b) + [f"tl.to('#ui9',{{y:-18,duration:.18,yoyo:true,repeat:5,ease:'sine.inOut'}},{ct(144.64):.3f});"]
     # 13 réels 4-7 / week
     a, b = win(13, 13)
@@ -327,7 +331,7 @@ def build():
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR:.3f}" data-width="1080" data-height="1920">
   <audio id="voice" src="assets/voice.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
-{nl.join(f'<audio id="sfx{k}" src="assets/sfx/{n}.mp3" data-start="{t:.3f}" data-duration=".7" data-track-index="{10 + k % 2}" data-volume="{v:.2f}"></audio>' for k, (n, t, v) in enumerate(S))}
+{nl.join(f'<audio id="sfx{k}" src="assets/sfx/{n}.mp3" data-start="{t:.3f}" data-duration="{ {'kaching': .9, 'ding': .75, 'bloop': .3}.get(n, .7) }" data-track-index="{10 + k % 3}" data-volume="{v:.2f}"></audio>' for k, (n, t, v) in enumerate(sorted(S, key=lambda x: x[1])))}
   <div id="cam"><video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video></div>
 {nl.join(H)}
 </div>
