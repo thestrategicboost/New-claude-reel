@@ -42,7 +42,6 @@ CARDS = [
     (138.82, 'reels', "les réels te permettent d'être", 'VISIBLE', 140.34, '', 0),
     (141.12, 'carrousel', "les carrousels te permettent d'", 'ÉDUQUER', 142.18, '', 0),
     (143.08, 'story', 'et les stories te permettent de', 'VENDRE', 144.20, '', 0),
-    (144.64, 'story', '', 'MONEY, MONEY, MONEY !', 144.64, '', 0),
     (152.30, 'reels', 'pour les réels, publie', '4 À 7 FOIS', 153.12, 'par semaine', 153.74),
     (154.56, 'carrousel', 'pour les carrousels', '1 À 2 FOIS', 155.26, 'par semaine', 155.74),
     (156.18, 'carrousel', 'ou alors', 'PAS DU TOUT', 156.60, '', 0),
@@ -231,21 +230,27 @@ def scenes():
     S.append(('whoosh-short', ct(142.18), .18))   # the slides fan out
     T += shw('#ui8', a, b) + [f"tl.fromTo('#ui8 img',{{rotation:0,x:0}},{{rotation:(i)=>[-12,0,12][i],x:(i)=>[-120,0,120][i],duration:.35,ease:'back.out(1.6)',immediateRender:false}},{ct(142.18):.3f});"]
     # 11-12 stories -> sell: money
-    a, b = win(11, 12)
+    a, b = win(11, 11)
     H.append('<div id="ui9" class="mny">💰</div>')
     S.append(('kaching', ct(144.20), .45))        # money: the till
-    T += shw('#ui9', ct(144.20), b) + [f"tl.to('#ui9',{{y:-18,duration:.18,yoyo:true,repeat:5,ease:'sine.inOut'}},{ct(144.64):.3f});"]
+    T += shw('#ui9', ct(144.20), b) + [f"tl.to('#ui9',{{y:-18,duration:.18,yoyo:true,repeat:3,ease:'sine.inOut'}},{ct(144.30):.3f});"]
     # 13 réels 4-7 / week
-    a, b = win(13, 13)
+    a, b = win(12, 12)
     H.append(week(10, [1, 0, 1, 2, 1, 2, 1], 'Réels · 4 à 7 / semaine')); T += shw('#ui10', a, b)
     T += [f"tl.fromTo('#ui10 .wc i',{{scale:0}},{{scale:1,duration:.15,stagger:.05,ease:'back.out(3)',immediateRender:false}},{ct(153.12):.3f});"]
     # 14-15 carrousels 1-2 / week, or not at all
-    a, b = win(14, 15)
+    a, b = win(13, 14)
     H.append(week(11, [0, 1, 0, 0, 2, 0, 0], 'Carrousels · 1 à 2 / semaine')); T += shw('#ui11', a, b)
     T += [f"tl.fromTo('#ui11 .wc i',{{scale:0}},{{scale:1,duration:.15,stagger:.05,ease:'back.out(3)',immediateRender:false}},{ct(155.26):.3f});",
-          f"tl.to('#ui11 .wc i',{{autoAlpha:0,scale:.4,duration:.2}},{ct(156.60):.3f});"]
+          f"tl.to('#ui11 .wc i',{{autoAlpha:.25,duration:.2}},{ct(156.60):.3f});"]
+    # "ou alors pas du tout": a big red cross stamps the carrousel week
+    H.append('<div id="nx" class="nx"><i></i><i></i></div>')
+    T += ["gsap.set('#nx',{autoAlpha:0});",
+          f"tl.fromTo('#nx',{{autoAlpha:0,scale:2.2,rotation:-12}},{{autoAlpha:1,scale:1,rotation:0,duration:.18,ease:'power3.in',immediateRender:false}},{ct(156.60):.3f});",
+          f"tl.set('#nx',{{autoAlpha:0}},{b:.3f});"]
+    S.append(('nope', ct(156.60), .35))
     # 16 stories 1-2 / day
-    a, b = win(16, 16)
+    a, b = win(15, 15)
     H.append(week(12, [1, 1, 1, 1, 1, 1, 1], 'Stories · 1 à 2 / jour')); T += shw('#ui12', a, b)
     T += [f"tl.fromTo('#ui12 .wc i',{{scale:0}},{{scale:1,duration:.12,stagger:.04,ease:'back.out(3)',immediateRender:false}},{ct(158.06):.3f});"]
 
@@ -313,6 +318,9 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .wc{{height:66px;border-radius:10px;background:#F2F2F2;display:flex;align-items:center;justify-content:center}}
 .wc i{{font:800 40px/1 Poppins;font-style:normal;color:#573307}}
 .wc i.lt{{color:#C9B8A6}}
+.nx{{position:absolute;left:0;right:0;margin:0 auto;width:220px;height:220px;top:1235px;z-index:26}}
+.nx i{{position:absolute;left:-10px;top:95px;width:240px;height:30px;border-radius:15px;background:#E5262B;box-shadow:0 4px 14px rgba(0,0,0,.3)}}
+.nx i:first-child{{transform:rotate(45deg)}} .nx i:last-child{{transform:rotate(-45deg)}}
 '''
 
 
@@ -331,7 +339,7 @@ def build():
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR:.3f}" data-width="1080" data-height="1920">
   <audio id="voice" src="assets/voice.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
-{nl.join(f'<audio id="sfx{k}" src="assets/sfx/{n}.mp3" data-start="{t:.3f}" data-duration="{ {'kaching': .9, 'ding': .75, 'bloop': .3}.get(n, .7) }" data-track-index="{10 + k % 3}" data-volume="{v:.2f}"></audio>' for k, (n, t, v) in enumerate(sorted(S, key=lambda x: x[1])))}
+{nl.join(f'<audio id="sfx{k}" src="assets/sfx/{n}.mp3" data-start="{t:.3f}" data-duration="{ {'kaching': .9, 'ding': .75, 'bloop': .3, 'nope': .35}.get(n, .7) }" data-track-index="{10 + k % 3}" data-volume="{v:.2f}"></audio>' for k, (n, t, v) in enumerate(sorted(S, key=lambda x: x[1])))}
   <div id="cam"><video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video></div>
 {nl.join(H)}
 </div>
