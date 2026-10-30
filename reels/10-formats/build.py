@@ -73,7 +73,7 @@ def scenes():
     T += ["gsap.set('#hk',{autoAlpha:0});", "tl.set('#hk',{autoAlpha:1},0.04);",
           "tl.fromTo('#hk .hk1',{y:80,scaleY:1.4,autoAlpha:0},{y:0,scaleY:1,autoAlpha:1,duration:.28,ease:'expo.out',immediateRender:true},0.04);",
           "tl.fromTo('#hk2',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.3,ease:'back.out(2)',immediateRender:false},1.26);",
-          f"tl.to('#hk',{{autoAlpha:0,y:-30,duration:.2}},{edges[1] - .2:.3f});"]
+          f"tl.to('#hk',{{autoAlpha:0,y:-30,duration:.2}},{edges[11] - .2:.3f});"]
     S += [('whoosh-short', 0.04, .3), ('pop', 1.26, .3)]
 
     # each format: her old example clip (same videos as her first "10 formats" reel) pops in on her chest under a
