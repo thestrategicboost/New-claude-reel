@@ -173,7 +173,7 @@ def scenes():
         out = []
         for q, (_, pct, t) in enumerate(rows):
             out += [f"gsap.set('#bf{k}_{q}',{{scaleX:0,transformOrigin:'0 50%'}});",
-                    f"tl.to('#bf{k}_{q}',{{scaleX:{pct / 100:.2f},duration:.45,ease:'power2.out'}},{ct(t):.3f});"]
+                    f"tl.to('#bf{k}_{q}',{{scaleX:{pct / 100:.2f},duration:.28,ease:'power2.out'}},{ct(t):.3f});"]
         return out
 
     def week(k, marks, label):
@@ -184,7 +184,7 @@ def scenes():
 
     # 0-1 réels: seen by followers, mostly by non-followers
     a, b = win(0, 1)
-    rows = [('Abonnés', 30, 113.28), ('Non-abonnés', 92, 114.68)]
+    rows = [('Abonnés', 30, 113.18), ('Non-abonnés', 92, 114.58)]
     H.append(bars(0, 'Qui a vu ton réel', rows)); T += shw('#ui0', a, b) + bar_tw(0, rows)
     # 2-3 the trial-reel switch
     a, b = win(2, 3)
@@ -194,11 +194,11 @@ def scenes():
     S.append(('click', ct(116.72), .45))
     # 4 carrousels: followers + some non-followers
     a, b = win(4, 4)
-    rows = [('Abonnés', 85, 122.42), ('Non-abonnés', 22, 123.30)]
+    rows = [('Abonnés', 85, 122.32), ('Non-abonnés', 22, 123.20)]
     H.append(bars(2, 'Qui a vu ton carrousel', rows)); T += shw('#ui2', a, b) + bar_tw(2, rows)
     # 5 stories: followers only
     a, b = win(5, 5)
-    rows = [('Abonnés', 100, 125.42), ('Non-abonnés', 0, 125.42)]
+    rows = [('Abonnés', 100, 124.70), ('Non-abonnés', 0, 124.70)]
     H.append(bars(3, 'Qui a vu ta story', rows)); T += shw('#ui3', a, b) + bar_tw(3, rows)
     # 6 réels -> follows
     a, b = win(6, 6)
