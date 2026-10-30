@@ -69,7 +69,7 @@ def scenes():
     win = [(edges[k + 1], edges[k + 2] if k + 2 < len(edges) else DUR) for k in range(10)]   # format k lives in segment k+1
 
     # hook title over the first line
-    H.append('<div id="hk" class="hk"><div class="hk1"><span>LES 10 FORMATS</span></div><div id="hk2" class="hk2">viraux</div></div>')
+    H.append('<div id="hk" class="hk"><div class="hk1"><span>LES FORMATS 10/10</span></div><div id="hk2" class="hk2">que tu dois faire pour<br/>augmenter tes vues</div></div>')
     T += ["gsap.set('#hk',{autoAlpha:0});", "tl.set('#hk',{autoAlpha:1},0.04);",
           "tl.fromTo('#hk .hk1',{y:80,scaleY:1.4,autoAlpha:0},{y:0,scaleY:1,autoAlpha:1,duration:.28,ease:'expo.out',immediateRender:true},0.04);",
           "tl.fromTo('#hk2',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.3,ease:'back.out(2)',immediateRender:false},1.26);",
@@ -126,7 +126,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #cutv{{z-index:3}}
 .hk{{position:absolute;left:0;right:0;top:{TOP + 40}px;z-index:20;text-align:center}}
 .hk1 span{{display:inline-block;background:{DARK};color:#fff;font:400 112px/1.05 Anton;letter-spacing:.03em;padding:10px 30px 6px}}
-.hk2{{display:inline-block;margin-top:-6px;padding:10px 46px 16px;border-radius:999px;background:#fff;font:italic 800 66px/1 Poppins;
+.hk2{{display:inline-block;margin-top:-6px;padding:12px 40px 16px;border-radius:36px;background:#fff;font:italic 800 46px/1.15 Poppins;
   letter-spacing:-.02em;color:{DARK};box-shadow:0 8px 20px rgba(0,0,0,.18)}}
 .cnt{{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;top:{TOP}px;z-index:22;padding:8px 34px 10px;border-radius:999px;background:{PILL};
   font:italic 700 46px/1 Poppins;color:#fff;text-shadow:0 2px 0 rgba(70,35,5,.7)}}
