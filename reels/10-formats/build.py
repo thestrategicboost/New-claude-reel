@@ -126,8 +126,8 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #cutv{{z-index:3}}
 .hk{{position:absolute;left:0;right:0;top:{TOP + 40}px;z-index:20;text-align:center}}
 .hk1 span{{display:inline-block;background:{DARK};color:#fff;font:400 112px/1.05 Anton;letter-spacing:.03em;padding:10px 30px 6px}}
-.hk2{{display:inline-block;margin-top:-6px;padding:10px 46px 16px;border-radius:999px;background:{PILL};font:italic 700 66px/1 Poppins;color:#fff;
-  text-shadow:0 3px 0 rgba(70,35,5,.7)}}
+.hk2{{display:inline-block;margin-top:-6px;padding:10px 46px 16px;border-radius:999px;background:#fff;font:italic 800 66px/1 Poppins;
+  letter-spacing:-.02em;color:{DARK};box-shadow:0 8px 20px rgba(0,0,0,.18)}}
 .cnt{{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;top:{TOP}px;z-index:22;padding:8px 34px 10px;border-radius:999px;background:{PILL};
   font:italic 700 46px/1 Poppins;color:#fff;text-shadow:0 2px 0 rgba(70,35,5,.7)}}
 .cnt b{{font:400 62px/1 Anton;font-style:normal;margin-right:2px}}
