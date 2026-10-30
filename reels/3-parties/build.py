@@ -143,8 +143,10 @@ def scenes():
     # MOFU
     add(1, funnel(1, 1, 'MOFU'), pop('#fn1', at(56.0), EDGES[6] + .5, '{autoAlpha:0,y:-30,scale:.8}'))
     S.append(('whoosh-short', at(56.0), .25))
-    add(1, '<div id="pf1" class="prof"><img src="assets/avatar.png"/><div><b>thestrategicboost.fr</b><small>Stratégie Instagram</small></div></div>',
-        pop('#pf1', at(58.42), EDGES[7]))
+    # "une base d'abonnés solide": her real profile header (9 218 followers, from her own reel), the count circled
+    add(1, '<div id="pf1" class="prof2"><img src="assets/still/profil.png"/><i id="pf1h" class="hl"></i></div>',
+        pop('#pf1', at(58.42), EDGES[7]) + ["gsap.set('#pf1h',{autoAlpha:0});",
+                                            f"tl.fromTo('#pf1h',{{autoAlpha:0,scale:1.4}},{{autoAlpha:1,scale:1,duration:.25,ease:'back.out(2)',immediateRender:false}},{at(58.74):.3f});"])
     S.append(('pop', at(58.42), .3))
     add(1, '<div id="cm1" class="comm"><img class="me" src="assets/avatar.png"/>' + ''.join(f'<i class="h h{q}">♥</i>' for q in range(4)) + '</div>',
         pop('#cm1', at(65.54), at(67.5)) + [f"tl.fromTo('#cm1 .h',{{scale:0}},{{scale:1,duration:.2,stagger:.1,ease:'back.out(3)',immediateRender:false}},{at(65.8):.3f});"])
@@ -232,6 +234,9 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .ring small{{display:block;margin-top:12px;font:500 24px/1 Poppins;color:#bbb}}
 .ex{{position:absolute;top:150px;width:140px;height:250px;border-radius:12px;overflow:hidden;border:4px solid #fff;box-shadow:0 12px 26px rgba(0,0,0,.4)}}
 .ex img{{width:100%;height:100%;object-fit:cover;display:block}}
+.prof2{{position:absolute;left:30px;top:180px;width:560px;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.35)}}
+.prof2 img{{width:100%;display:block}}
+.prof2 .hl{{position:absolute;left:248px;top:57px;width:100px;height:30px;border:4px solid {GOLD};border-radius:18px}}
 .note{{position:absolute;top:170px;width:170px;height:210px;border-radius:16px;background:#fff;text-align:center;padding-top:22px;box-shadow:0 12px 26px rgba(0,0,0,.35)}}
 .note small{{display:block;font:600 22px/1 Poppins;color:#777}} .note b{{display:block;font:400 74px/1.1 Anton;color:{DARK}}}
 .note span{{font:400 30px/1 sans-serif;color:{GOLD}}}
