@@ -229,11 +229,6 @@ def scenes():
     H.append('<div id="ui8" class="fan">' + ''.join(f'<img src="assets/gpages/p-0{p}.png"/>' for p in (1, 3, 5)) + '</div>')
     S.append(('whoosh-short', ct(142.18), .18))   # the slides fan out
     T += shw('#ui8', a, b) + [f"tl.fromTo('#ui8 img',{{rotation:0,x:0}},{{rotation:(i)=>[-12,0,12][i],x:(i)=>[-120,0,120][i],duration:.35,ease:'back.out(1.6)',immediateRender:false}},{ct(142.18):.3f});"]
-    # 11-12 stories -> sell: money
-    a, b = win(11, 11)
-    H.append('<div id="ui9" class="mny">💰</div>')
-    S.append(('kaching', ct(144.20), .45))        # money: the till
-    T += shw('#ui9', ct(144.20), b) + [f"tl.to('#ui9',{{y:-18,duration:.18,yoyo:true,repeat:3,ease:'sine.inOut'}},{ct(144.30):.3f});"]
     # 13 réels 4-7 / week
     a, b = win(12, 12)
     H.append(week(10, [1, 0, 1, 2, 1, 2, 1], 'Réels · 4 à 7 / semaine')); T += shw('#ui10', a, b)
