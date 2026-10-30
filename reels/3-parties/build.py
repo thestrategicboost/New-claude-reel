@@ -64,7 +64,7 @@ def at(raw):
 
 
 # which band is lit, from when (edit time)
-ACTIVE = [(0.0, 0), (at(7.88), 1), (at(8.52), 2), (EDGES[1], 0), (EDGES[6], 1), (EDGES[13], 2), (EDGES[16], 0)]
+ACTIVE = [(0.0, 0), (at(7.88), 1), (at(8.52), 2), (EDGES[1], 0), (EDGES[5], 1), (EDGES[11], 2), (EDGES[14], 0)]
 
 
 def band_of(t):
@@ -96,10 +96,9 @@ def scenes():
     H, T, S = [], [], []
     # the three bands
     for k in range(3):
-        idle = f'assets/idleS{k}.mp4'
         H.append(f'<div id="bd{k}" class="band" style="top:{k * BAND}px">'
                  f'<video id="mv{k}" class="bv" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="{k}"></video>'
-                 f'<video id="iv{k}" class="bv" src="{idle}" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="{3 + k}"></video>'
+                 f'<img id="iv{k}" class="bv" src="assets/still/b{k}.jpg"/>'     # the bands not talking are frozen
                  f'<i id="dm{k}" class="dim"></i><div id="gx{k}" class="gx"></div></div>')
     T += [f"gsap.set('#dm{q}',{{opacity:{0 if q == 0 else 1}}});" for q in range(3)]
     last = None
@@ -127,45 +126,57 @@ def scenes():
     S.append(('whoosh-short', at(16.66), .25))
     add(0, '<div id="vw0" class="views">' + ''.join(f'<span>{EYE}{v}</span>' for v in ('806K', '414K', '614K', '599K')) + '</div>',
         pop('#vw0', at(24.76), EDGES[3]) + [f"tl.fromTo('#vw0 span',{{scale:0}},{{scale:1,duration:.18,stagger:.08,ease:'back.out(2.5)',immediateRender:false}},{at(24.76):.3f});"])
+    S.append(('pop', at(24.76), .3))
     add(0, '<div id="rg0" class="ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" class="rb"/><circle id="rgc" cx="60" cy="60" r="48" class="rf"/></svg>'
            '<b id="rgn">0</b><small>comptes touchés</small></div>',
         pop('#rg0', at(33.66), EDGES[4]) + ["gsap.set('#rgc',{strokeDasharray:302,strokeDashoffset:302});",
                                             f"tl.to('#rgc',{{strokeDashoffset:40,duration:1.1,ease:'power2.out'}},{at(33.9):.3f});"]
         + [f"tl.set('#rgn',{{textContent:'{int(722218 * (q + 1) / 16):,}'.replace(',', ' ')}},{at(33.9) + q * .07:.3f});" for q in range(16)])
-    S.append(('ding', at(35.7), .3))
-    for k, (clip, t, end) in enumerate((('f5', 46.9, 47.38), ('f6', 47.64, 48.34), ('f2', 48.58, 49.42))):
-        add(0, f'<div id="ex0{k}" class="ex" style="left:{60 + k * 150}px"><img src="assets/clips/{clip}.jpg"/></div>',
-            pop(f'#ex0{k}', at(t), EDGES[6], '{autoAlpha:0,y:40,scale:.7}'))
-        S.append(('pop', at(t), .25))
+    S.append(('ding', at(33.66), .3))
+    # "les vidéos de type liste / de notation / de storytelling": her tier-list reel, a rating card, her storytelling reel
+    add(0, '<div id="ex00" class="ex" style="left:60px"><img src="assets/clips/f5.jpg"/></div>', pop('#ex00', at(46.92), EDGES[5], '{autoAlpha:0,y:40,scale:.7}'))
+    add(0, '<div id="ex01" class="note" style="left:210px"><small>ma note</small><b>8/10</b><span>★★★★☆</span></div>',
+        pop('#ex01', at(47.80), EDGES[5], '{autoAlpha:0,y:40,scale:.7}'))
+    add(0, '<div id="ex02" class="ex" style="left:400px"><img src="assets/clips/f2.jpg"/></div>', pop('#ex02', at(48.58), EDGES[5], '{autoAlpha:0,y:40,scale:.7}'))
+    S += [('pop', at(46.92), .25), ('click', at(47.80), .35), ('pop', at(48.58), .25)]
 
     # MOFU
-    add(1, funnel(1, 1, 'MOFU'), pop('#fn1', at(56.0), EDGES[7] + .5, '{autoAlpha:0,y:-30,scale:.8}'))
+    add(1, funnel(1, 1, 'MOFU'), pop('#fn1', at(56.0), EDGES[6] + .5, '{autoAlpha:0,y:-30,scale:.8}'))
     S.append(('whoosh-short', at(56.0), .25))
     add(1, '<div id="pf1" class="prof"><img src="assets/avatar.png"/><div><b>thestrategicboost.fr</b><small>Stratégie Instagram</small></div></div>',
-        pop('#pf1', at(58.42), EDGES[8]))
+        pop('#pf1', at(58.42), EDGES[7]))
+    S.append(('pop', at(58.42), .3))
     add(1, '<div id="cm1" class="comm"><img class="me" src="assets/avatar.png"/>' + ''.join(f'<i class="h h{q}">♥</i>' for q in range(4)) + '</div>',
         pop('#cm1', at(65.54), at(67.5)) + [f"tl.fromTo('#cm1 .h',{{scale:0}},{{scale:1,duration:.2,stagger:.1,ease:'back.out(3)',immediateRender:false}},{at(65.8):.3f});"])
-    S.append(('bloop', at(65.72), .3))
-    add(1, '<div id="sh1" class="shield">🛡️</div>', pop('#sh1', at(67.58), EDGES[9]))
-    for k, (src, t, b) in enumerate((('assets/p-01.png', 76.78, EDGES[10]), ('assets/p-03.png', 90.04, EDGES[11]))):
-        add(1, f'<div id="pg1{k}" class="pg"><img src="{src}"/></div>', pop(f'#pg1{k}', at(t), b))
-    add(1, f'<div id="st1" class="ex" style="left:60px"><img src="assets/clips/f2.jpg"/></div>',
-        pop('#st1', at(107.0), EDGES[13], '{autoAlpha:0,y:40,scale:.7}'))
+    S.append(('bloop', at(65.54), .3))
+    add(1, '<div id="sh1" class="shield">🛡️</div>', pop('#sh1', at(67.58), EDGES[8]))
+    S.append(('pop', at(67.58), .3))
+    add(1, '<div id="pg10" class="pg"><img src="assets/p-01.png"/></div>', pop('#pg10', at(76.80), EDGES[9]))
+    add(1, '<div id="pg11" class="pg"><img src="assets/p-03.png"/></div>', pop('#pg11', at(90.04), EDGES[10]))
+    S += [('whoosh-short', at(76.80), .2), ('whoosh-short', at(90.04), .2)]
+    add(1, '<div id="st1" class="ex" style="left:60px"><img src="assets/clips/f2.jpg"/></div>', pop('#st1', at(110.42), EDGES[11], '{autoAlpha:0,y:40,scale:.7}'))
+    S.append(('pop', at(110.42), .25))
 
     # BOFU
-    add(2, funnel(2, 2, 'BOFU'), pop('#fn2', at(126.12), EDGES[15], '{autoAlpha:0,y:-30,scale:.8}'))
-    S.append(('whoosh-short', at(126.12), .25))
     add(2, '<div id="cr2" class="comm"><img class="me" src="assets/avatar.png"/><i class="crown">👑</i>' + ''.join(f'<i class="h h{q}">♥</i>' for q in range(4)) + '</div>',
-        pop('#cr2', at(122.08), at(126.0)))
-    S.append(('sparkle', at(122.08), .22))
-    add(2, f'<div id="ba2" class="ex wide" style="left:60px"><img src="assets/clips/f4.jpg"/><span class="tag">avant / après</span></div>',
-        pop('#ba2', at(133.14), at(137.6), '{autoAlpha:0,y:40,scale:.7}'))
-    add(2, '<div id="vq2" class="quote">« voici ce que je ferais<br/>dans telle situation »</div>', pop('#vq2', at(138.96), EDGES[16]))
+        pop('#cr2', at(122.05), at(126.0)))
+    S.append(('sparkle', at(122.05), .22))
+    add(2, funnel(2, 2, 'BOFU'), pop('#fn2', at(126.14), EDGES[13], '{autoAlpha:0,y:-30,scale:.8}'))
+    S.append(('whoosh-short', at(126.14), .25))
+    # "avant / après": her own shot, before (grey, flat) and after (her lilac look), a line sweeps the after in
+    add(2, '<div id="ba2" class="ba"><img src="assets/still/avant.jpg"/><img id="ba2a" class="ap" src="assets/still/apres.jpg"/><i id="ba2l" class="bl"></i>'
+           '<span class="l">avant</span><span class="r">après</span></div>',
+        pop('#ba2', at(133.17), at(137.6), '{autoAlpha:0,y:40,scale:.7}')
+        + ["gsap.set('#ba2a',{clipPath:'inset(0 0 0 100%)'});", f"tl.to('#ba2a',{{clipPath:'inset(0 0 0 50%)',duration:.5,ease:'power2.inOut'}},{at(133.65):.3f});",
+           "gsap.set('#ba2l',{x:392});", f"tl.to('#ba2l',{{x:196,duration:.5,ease:'power2.inOut'}},{at(133.65):.3f});"])
+    S += [('pop', at(133.17), .25), ('whoosh-short', at(133.65), .22)]
+    add(2, '<div id="vq2" class="quote">« voici ce que je ferais<br/>dans telle situation »</div>', pop('#vq2', at(138.95), EDGES[14]))
+    S.append(('bloop', at(138.95), .3))
 
     # the mix of the three: all tiers lit in the top band
     add(0, '<div id="fmix" class="fun mix"><div class="ft on" style="width:380px"><b>TOFU</b></div><div class="ft on" style="width:290px"><b>MOFU</b></div>'
            '<div class="ft on" style="width:200px"><b>BOFU</b></div></div>',
-        pop('#fmix', at(153.66), EDGES[17] + .2, '{autoAlpha:0,y:-30,scale:.8}'))
+        pop('#fmix', at(153.66), EDGES[15] + .2, '{autoAlpha:0,y:-30,scale:.8}'))
     S.append(('sparkle', at(153.66), .22))
 
     # CTA: her profile follow card
@@ -221,6 +232,14 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .ring small{{display:block;margin-top:12px;font:500 24px/1 Poppins;color:#bbb}}
 .ex{{position:absolute;top:150px;width:140px;height:250px;border-radius:12px;overflow:hidden;border:4px solid #fff;box-shadow:0 12px 26px rgba(0,0,0,.4)}}
 .ex img{{width:100%;height:100%;object-fit:cover;display:block}}
+.note{{position:absolute;top:170px;width:170px;height:210px;border-radius:16px;background:#fff;text-align:center;padding-top:22px;box-shadow:0 12px 26px rgba(0,0,0,.35)}}
+.note small{{display:block;font:600 22px/1 Poppins;color:#777}} .note b{{display:block;font:400 74px/1.1 Anton;color:{DARK}}}
+.note span{{font:400 30px/1 sans-serif;color:{GOLD}}}
+.ba{{position:absolute;left:60px;top:150px;width:400px;height:300px;border-radius:16px;overflow:hidden;border:4px solid #fff;box-shadow:0 12px 26px rgba(0,0,0,.4)}}
+.ba img{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
+.ba .bl{{position:absolute;left:0;top:0;bottom:0;width:6px;margin-left:-3px;background:#fff}}
+.ba span{{position:absolute;bottom:10px;padding:4px 14px;border-radius:999px;background:#fff;font:italic 800 24px/1 Poppins;color:{DARK}}}
+.ba .l{{left:10px}} .ba .r{{right:10px}}
 .ex.wide{{width:220px;height:390px;top:110px}}
 .ex .tag{{position:absolute;left:0;right:0;bottom:8px;margin:0 auto;width:fit-content;padding:4px 12px;border-radius:999px;background:#fff;font:italic 800 22px/1 Poppins;color:{DARK}}}
 .prof{{position:absolute;left:50px;top:220px;width:520px;display:flex;align-items:center;gap:18px;padding:18px 22px;border-radius:22px;background:#fff;box-shadow:0 14px 30px rgba(0,0,0,.3)}}
