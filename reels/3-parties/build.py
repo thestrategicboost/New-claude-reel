@@ -64,7 +64,7 @@ def at(raw):
 
 
 # which band is lit, from when (edit time)
-ACTIVE = [(0.0, 0), (at(7.88), 1), (at(8.52), 2), (EDGES[1], 0), (EDGES[6], 1), (EDGES[13], 2), (EDGES[17], 0)]
+ACTIVE = [(0.0, 0), (at(7.88), 1), (at(8.52), 2), (EDGES[1], 0), (EDGES[6], 1), (EDGES[13], 2), (EDGES[16], 0)]
 
 
 def band_of(t):
@@ -96,10 +96,10 @@ def scenes():
     H, T, S = [], [], []
     # the three bands
     for k in range(3):
-        idle = 'assets/idleL1.mp4' if k != 1 else 'assets/idleL2.mp4'
+        idle = f'assets/idleS{k}.mp4'
         H.append(f'<div id="bd{k}" class="band" style="top:{k * BAND}px">'
                  f'<video id="mv{k}" class="bv" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="{k}"></video>'
-                 f'<video id="iv{k}" class="bv" src="{idle}" muted playsinline data-start="0" data-media-start="{k * 2}" data-duration="{DUR:.3f}" data-track-index="{3 + k}"></video>'
+                 f'<video id="iv{k}" class="bv" src="{idle}" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="{3 + k}"></video>'
                  f'<i id="dm{k}" class="dim"></i><div id="gx{k}" class="gx"></div></div>')
     T += [f"gsap.set('#dm{q}',{{opacity:{0 if q == 0 else 1}}});" for q in range(3)]
     last = None
@@ -153,19 +153,19 @@ def scenes():
         pop('#st1', at(107.0), EDGES[13], '{autoAlpha:0,y:40,scale:.7}'))
 
     # BOFU
-    add(2, funnel(2, 2, 'BOFU'), pop('#fn2', at(126.12), EDGES[16], '{autoAlpha:0,y:-30,scale:.8}'))
+    add(2, funnel(2, 2, 'BOFU'), pop('#fn2', at(126.12), EDGES[15], '{autoAlpha:0,y:-30,scale:.8}'))
     S.append(('whoosh-short', at(126.12), .25))
     add(2, '<div id="cr2" class="comm"><img class="me" src="assets/avatar.png"/><i class="crown">👑</i>' + ''.join(f'<i class="h h{q}">♥</i>' for q in range(4)) + '</div>',
         pop('#cr2', at(122.08), at(126.0)))
     S.append(('sparkle', at(122.08), .22))
     add(2, f'<div id="ba2" class="ex wide" style="left:60px"><img src="assets/clips/f4.jpg"/><span class="tag">avant / après</span></div>',
         pop('#ba2', at(133.14), at(137.6), '{autoAlpha:0,y:40,scale:.7}'))
-    add(2, '<div id="vq2" class="quote">« voici ce que je ferais<br/>dans telle situation »</div>', pop('#vq2', at(138.96), EDGES[17]))
+    add(2, '<div id="vq2" class="quote">« voici ce que je ferais<br/>dans telle situation »</div>', pop('#vq2', at(138.96), EDGES[16]))
 
     # the mix of the three: all tiers lit in the top band
     add(0, '<div id="fmix" class="fun mix"><div class="ft on" style="width:380px"><b>TOFU</b></div><div class="ft on" style="width:290px"><b>MOFU</b></div>'
            '<div class="ft on" style="width:200px"><b>BOFU</b></div></div>',
-        pop('#fmix', at(153.66), EDGES[18] + .2, '{autoAlpha:0,y:-30,scale:.8}'))
+        pop('#fmix', at(153.66), EDGES[17] + .2, '{autoAlpha:0,y:-30,scale:.8}'))
     S.append(('sparkle', at(153.66), .22))
 
     # CTA: her profile follow card
