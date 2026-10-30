@@ -67,10 +67,18 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .pip{position:absolute;right:70px;top:340px;width:380px;height:380px;border-radius:50%;overflow:hidden;border:8px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.4)}
 .pv{position:absolute;left:-14px;top:-150px;width:400px;height:711px;object-fit:cover}
 .fcard{position:absolute;left:0;right:0;top:1165px;z-index:24;text-align:center}
-.fl{display:inline-block;padding:10px 34px 14px;border-radius:999px;background:linear-gradient(135deg,#EBCB8B 0%,#C99A55 55%,#A97A3E 100%);font:italic 700 46px/1 Poppins;color:#fff;
-  text-shadow:0 2px 0 rgba(70,35,5,.7);position:relative;z-index:2}
+.fl{display:inline-block;padding:10px 34px 14px;border-radius:999px;background:#fff;font:italic 800 46px/1 Poppins;letter-spacing:-.02em;
+  color:#573307;box-shadow:0 8px 20px rgba(0,0,0,.18);position:relative;z-index:2}
 .fv{width:252px;height:448px;margin:-6px auto 0;border-radius:18px;overflow:hidden;border:5px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.35)}
 .fv video{width:100%;height:100%;object-fit:cover;display:block}
+ #fol{position:absolute;z-index:22;left:110px;top:340px;width:860px;height:150px;background:#fff;border-radius:28px;display:flex;align-items:center;
+  gap:22px;padding:0 26px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.fav{width:100px;height:100px;border-radius:50%;padding:4px;background:linear-gradient(45deg,#FEDA75,#FA7E1E,#D62976,#962FBF);flex:none}
+.fav img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid #fff;display:block}
+.fnm{flex:1;font:700 34px/1.2 Poppins;color:#111}
+.fsub{font:500 26px/1.2 Poppins;color:#777}
+.fbtn{position:absolute;right:26px;width:220px;height:74px;border-radius:16px;background:#0095F6;color:#fff;font:700 30px/74px Poppins;text-align:center}
+.fbtn.on{background:#EFEFEF;color:#111}
 .pill{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;top:290px;z-index:22;padding:16px 46px 20px;border-radius:999px;
   background:linear-gradient(135deg,#EBCB8B 0%,#C99A55 55%,#A97A3E 100%);font:italic 700 54px/1 Poppins;color:#fff;text-shadow:0 3px 0 rgba(70,35,5,.7)}
 </style>
@@ -90,7 +98,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="sfx9" src="assets/sfx/pop.mp3" data-start="8.830" data-duration="0.720" data-track-index="11" data-volume="0.32"></audio>
 <audio id="sfx10" src="assets/sfx/pop.mp3" data-start="9.570" data-duration="0.720" data-track-index="10" data-volume="0.32"></audio>
 <audio id="sfx11" src="assets/sfx/pop.mp3" data-start="10.420" data-duration="0.720" data-track-index="11" data-volume="0.32"></audio>
-<audio id="sfx12" src="assets/sfx/pop.mp3" data-start="11.390" data-duration="0.720" data-track-index="10" data-volume="0.35"></audio>
+<audio id="sfx12" src="assets/sfx/pop.mp3" data-start="11.470" data-duration="0.720" data-track-index="10" data-volume="0.35"></audio>
+<audio id="sfx13" src="assets/sfx/click.mp3" data-start="11.970" data-duration="0.360" data-track-index="11" data-volume="0.60"></audio>
   <div id="cam"><video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="13.330" data-track-index="0"></video>
 
   </div>
@@ -105,7 +114,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="fc7" class="fcard"><div class="fl">8. LA SÉRIE</div><div class="fv"><video id="fv7" src="assets/clips/f7.mp4" muted playsinline data-start="8.830" data-media-start="0" data-duration="0.740" data-track-index="27"></video></div></div>
 <div id="fc8" class="fcard"><div class="fl">9. LA FAQ</div><div class="fv"><video id="fv8" src="assets/clips/f8.mp4" muted playsinline data-start="9.570" data-media-start="0" data-duration="0.850" data-track-index="28"></video></div></div>
 <div id="fc9" class="fcard"><div class="fl">10. LA RÉACTION</div><div class="fv"><video id="fv9" src="assets/clips/f9.mp4" muted playsinline data-start="10.420" data-media-start="0" data-duration="0.850" data-track-index="29"></video></div></div>
-<div id="cta" class="pill">abonne-toi pour plus de conseils</div>
+<div id="fol"><div class="fav"><img src="assets/avatar.png"/></div><div class="fnm">thestrategicboost.fr<div class="fsub">Stratégie Instagram</div></div><div id="fbtn" class="fbtn">S’abonner</div><div id="fbtn2" class="fbtn on">Abonné</div></div>
 <div id="w0" class="cap">les</div>
 <div id="w1" class="cap">10</div>
 <div id="w2" class="cap">formats</div>
@@ -165,8 +174,11 @@ tl.set('#fc8',{autoAlpha:0},10.420);
 gsap.set('#fc9',{autoAlpha:0});
 tl.fromTo('#fc9',{autoAlpha:0,scale:.6,y:40},{autoAlpha:1,scale:1,y:0,duration:.22,ease:'back.out(2)',immediateRender:false},10.420);
 tl.set('#fc9',{autoAlpha:0},11.270);
-gsap.set('#cta',{autoAlpha:0});
-tl.fromTo('#cta',{autoAlpha:0,scale:.6,y:20},{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(2)',immediateRender:false},11.390);
+gsap.set('#fol, #fbtn2',{autoAlpha:0});
+tl.fromTo('#fol',{autoAlpha:0,scale:.6,y:30},{autoAlpha:1,scale:1,y:0,duration:.35,ease:'back.out(1.8)',immediateRender:false},11.470);
+tl.to('#fbtn',{scale:.85,duration:.08,yoyo:true,repeat:1},11.970);
+tl.set('#fbtn',{autoAlpha:0},12.130);
+tl.fromTo('#fbtn2',{autoAlpha:0,scale:.8},{autoAlpha:1,scale:1,duration:.15,ease:'back.out(2)',immediateRender:false},12.130);
 gsap.set('#w0',{autoAlpha:0});
 tl.set('#w0',{autoAlpha:1},0.040);
 tl.fromTo('#w0',{scale:.8},{scale:1,duration:0.120,ease:'back.out(2.5)',immediateRender:false},0.040);

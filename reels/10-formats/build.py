@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Reel "les 10 formats viraux": she counts the ten formats on her fingers; as she names each one, the same example
 clip as in her first "10 formats" reel (cut out of src/old.mp4 into assets/clips) pops in on her chest under a
-numbered gold pill, with a soft pop. Hook title, her usual one-word captions on the hook and the CTA, lilac look.
+numbered white pill (dark brown text, as in her first reel), with a soft pop. Hook title, her profile follow card on the CTA, her usual one-word captions on the hook and the CTA, lilac look.
 
 PY build.py    writes index.html
 """
@@ -88,12 +88,18 @@ def scenes():
               f"tl.set('#fc{k}',{{autoAlpha:0}},{b:.3f});"]
         S.append(('pop', a, .32))
 
-    # CTA
-    H.append('<div id="cta" class="pill">abonne-toi pour plus de conseils</div>')
+    # CTA: her profile follow card (as in her earlier reels): it pops in on "abonne-toi", "S'abonner" is tapped and
+    # turns into "Abonné"
     a_cta = edges[11]
-    T += ["gsap.set('#cta',{autoAlpha:0});",
-          f"tl.fromTo('#cta',{{autoAlpha:0,scale:.6,y:20}},{{autoAlpha:1,scale:1,y:0,duration:.3,ease:'back.out(2)',immediateRender:false}},{a_cta + .12:.3f});"]
-    S.append(('pop', a_cta + .12, .35))
+    t_ab = next(w['s'] for w in ws if w['s'] >= a_cta - .05 and w['t'].startswith('abonne'))
+    H.append('<div id="fol"><div class="fav"><img src="assets/avatar.png"/></div><div class="fnm">thestrategicboost.fr'
+             '<div class="fsub">Stratégie Instagram</div></div><div id="fbtn" class="fbtn">S’abonner</div><div id="fbtn2" class="fbtn on">Abonné</div></div>')
+    T += ["gsap.set('#fol, #fbtn2',{autoAlpha:0});",
+          f"tl.fromTo('#fol',{{autoAlpha:0,scale:.6,y:30}},{{autoAlpha:1,scale:1,y:0,duration:.35,ease:'back.out(1.8)',immediateRender:false}},{t_ab - .05:.3f});",
+          f"tl.to('#fbtn',{{scale:.85,duration:.08,yoyo:true,repeat:1}},{t_ab + .45:.3f});",
+          f"tl.set('#fbtn',{{autoAlpha:0}},{t_ab + .61:.3f});",
+          f"tl.fromTo('#fbtn2',{{autoAlpha:0,scale:.8}},{{autoAlpha:1,scale:1,duration:.15,ease:'back.out(2)',immediateRender:false}},{t_ab + .61:.3f});"]
+    S += [('pop', t_ab - .05, .35), ('click', t_ab + .45, .6)]
 
     # her one-word captions on the hook and the CTA (the formats are named by their pills)
     small = [w for w in ws if not (win[0][0] - .05 <= w['s'] < win[9][1] - .02)]
@@ -173,15 +179,23 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .pip{{position:absolute;right:70px;top:340px;width:380px;height:380px;border-radius:50%;overflow:hidden;border:8px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.4)}}
 .pv{{position:absolute;left:-14px;top:-150px;width:400px;height:711px;object-fit:cover}}
 .fcard{{position:absolute;left:0;right:0;top:1165px;z-index:24;text-align:center}}
-.fl{{display:inline-block;padding:10px 34px 14px;border-radius:999px;background:{PILL};font:italic 700 46px/1 Poppins;color:#fff;
-  text-shadow:0 2px 0 rgba(70,35,5,.7);position:relative;z-index:2}}
+.fl{{display:inline-block;padding:10px 34px 14px;border-radius:999px;background:#fff;font:italic 800 46px/1 Poppins;letter-spacing:-.02em;
+  color:{DARK};box-shadow:0 8px 20px rgba(0,0,0,.18);position:relative;z-index:2}}
 .fv{{width:252px;height:448px;margin:-6px auto 0;border-radius:18px;overflow:hidden;border:5px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.35)}}
 .fv video{{width:100%;height:100%;object-fit:cover;display:block}}
+ #fol{{position:absolute;z-index:22;left:110px;top:{TOP + 90}px;width:860px;height:150px;background:#fff;border-radius:28px;display:flex;align-items:center;
+  gap:22px;padding:0 26px;box-shadow:0 18px 50px rgba(0,0,0,.3)}}
+.fav{{width:100px;height:100px;border-radius:50%;padding:4px;background:linear-gradient(45deg,#FEDA75,#FA7E1E,#D62976,#962FBF);flex:none}}
+.fav img{{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid #fff;display:block}}
+.fnm{{flex:1;font:700 34px/1.2 Poppins;color:#111}}
+.fsub{{font:500 26px/1.2 Poppins;color:#777}}
+.fbtn{{position:absolute;right:26px;width:220px;height:74px;border-radius:16px;background:#0095F6;color:#fff;font:700 30px/74px Poppins;text-align:center}}
+.fbtn.on{{background:#EFEFEF;color:#111}}
 .pill{{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;top:{TOP + 40}px;z-index:22;padding:16px 46px 20px;border-radius:999px;
   background:{PILL};font:italic 700 54px/1 Poppins;color:#fff;text-shadow:0 3px 0 rgba(70,35,5,.7)}}
 '''
 
-SFX_LEN = {'pop': .72, 'whoosh-short': .57}
+SFX_LEN = {'pop': .72, 'whoosh-short': .57, 'click': .36}
 
 
 def build():
