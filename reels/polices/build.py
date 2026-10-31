@@ -18,7 +18,7 @@ ROW_Y = 250 + (235 if HEAD == 'A' else 145)      # chips under the header; the k
 SEG = json.load(open(f'work/{V}/segs.json'))
 SEGS, DURS = SEG['segs'], SEG['durs']
 DUR = round(sum(DURS), 3)
-WORDS = {'base': json.load(open('work/base_words.json')), 'hook2': json.load(open('work/hook2_words.json'))}
+WORDS = {k: json.load(open(f'work/{k}_words.json')) for k in ('base', 'hook2', 'hook3')}
 DARK, GOLD = '#573307', '#C99A55'
 PILL = 'linear-gradient(135deg,#EBCB8B 0%,#C99A55 55%,#A97A3E 100%)'
 TOP = 250
@@ -88,7 +88,7 @@ def scenes():
     nh = len(SEGS) - 8                      # pieces before the body (the hook)
     body0 = EDGES[nh]
     if nh:
-        H.append('<div id="hk" class="hk"><div class="hk1"><span>QUELLE POLICE</span></div><div class="hk2">utiliser sur tes réels ?</div></div>')
+        H.append(f'<div id="hk" class="hk"><div class="hk1"><span>QUELLE POLICE</span></div><div class="hk2">utiliser {"pour" if V == "v3" else "sur"} tes réels ?</div></div>')
         T += show('#hk', .1, body0, '{autoAlpha:0,y:-30,scale:.9}', .3, 'power3.out')
         S.append(('whoosh-short', .1, .3))
     end_cats = EDGES[nh + 7]
