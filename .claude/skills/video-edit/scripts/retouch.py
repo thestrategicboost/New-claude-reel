@@ -4,7 +4,7 @@ A-roll after the look and before the overlays:
   1. brightness: her tone curve (mids +15 to +18 on 0-255, shadows +5, highlights kept), which also lowers the
      saturation a little (about -10 %); the per-channel curve is in retouch_curve.json next to this script
   2. face: a soft face light (about +7 on 0-255 over the face, a touch more under the eyes), skin a hair less red and
-     a hair warmer, and a very light slimming of the lower face (each jaw side pulled ~0.6 % of the face width toward
+     a hair warmer, and a very light slimming of the lower face (each jaw side pulled ~1.6 % of the face width toward
      the centre), following her face frame by frame.
 No skin smoothing: her edit keeps the skin texture (measured: same fine detail before and after).
 
@@ -18,7 +18,7 @@ import sys
 import cv2
 import numpy as np
 
-SLIM = .0065          # jaw pull, as a share of the face width (her edit: ~2 px on a 330 px face)
+SLIM = .016           # jaw pull, as a share of the face width (her edit ~2 px on a 330 px face; she asked for a bit more: ~5 px)
 FACE_L, EYES_L, FACE_A, FACE_B = 7.0, 1.5, -1.0, 2.3     # face light and skin tint, in Lab units (her edit)
 
 
