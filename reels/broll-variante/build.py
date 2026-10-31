@@ -29,7 +29,6 @@ def build():
          "tl.set('#tx',{textContent:''},0);"]
     T += [f"tl.set('#tx',{{textContent:{json.dumps(line[:i])}}},{TYPE_A + (TYPE_B - TYPE_A) * i / n:.3f});" for i in range(1, n + 1)]
     T += ["gsap.set('#ds',{autoAlpha:0});", f"tl.fromTo('#ds',{{autoAlpha:0,y:12}},{{autoAlpha:1,y:0,duration:.2,ease:'power2.out',immediateRender:false}},{DESC:.3f});"]
-    size = 92 if len(big) <= 20 else (76 if len(big) <= 28 else 64)
     sfx = [('pop', .02, .5, .72), ('typing', TYPE_A, .55, 1.9), ('pop', DESC, .4, .72)]
     audio = '\n'.join(f'<audio id="s{k}" src="assets/sfx/{s}.mp3" data-start="{t:.3f}" data-duration="{d:.3f}" data-track-index="{10 + k}" data-volume="{v}"></audio>'
                       for k, (s, t, v, d) in enumerate(sfx))
@@ -46,9 +45,11 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 .hk{{position:absolute;left:0;right:0;top:300px;z-index:20;text-align:center}}
-#blk{{display:inline-block;background:{DARK};color:#fff;font:400 {size}px/1.08 Anton;letter-spacing:.03em;padding:10px 26px 6px}}
-#pl{{width:860px;height:62px;margin:-4px auto 0;border-radius:31px;background:#fff;text-align:left;padding:0 30px;transform-origin:0 50%}}
-#tx{{font:italic 800 38px/62px Poppins;letter-spacing:-.02em;color:{DARK};white-space:nowrap}}
+#blk{{display:inline-block;max-width:820px;background:{DARK};color:#fff;font:400 76px/1.08 Anton;letter-spacing:.03em;padding:10px 26px 6px}}
+#pl{{position:relative;display:inline-block;max-width:820px;height:62px;margin-top:-4px;border-radius:31px;background:#fff;padding:0 30px;transform-origin:50% 50%}}
+.gh{{visibility:hidden}}
+#tx,.gh{{font:italic 800 38px/62px Poppins;letter-spacing:-.02em;color:{DARK};white-space:nowrap}}
+#tx{{position:absolute;left:30px;top:0}}
 #ds{{margin-top:16px;font:italic 700 34px/1 Poppins;color:#fff;text-shadow:0 2px 2px rgba(0,0,0,.35),0 4px 14px rgba(0,0,0,.45)}}
 </style>
 </head>
@@ -57,7 +58,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   <audio id="amb" src="assets/ref_audio.m4a" data-start="0" data-media-start="0" data-duration="{DUR}" data-track-index="2" data-volume="1"></audio>
 {audio}
   <video id="bgv" class="full" src="assets/v{N}.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR}" data-track-index="0"></video>
-  <div class="hk"><div id="blk">{big}</div><div id="pl"><span id="tx"></span></div><div id="ds">Lis la description</div></div>
+  <div class="hk"><div id="blk">{big}</div><br/><div id="pl"><span class="gh">{line}</span><span id="tx"></span></div><div id="ds">Lis la description</div></div>
 </div>
 <script>
 const tl = gsap.timeline({{ paused: true }});
