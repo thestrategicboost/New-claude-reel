@@ -66,3 +66,4 @@
 - Maé ends with "tchus": always spell it **tchus** in captions (no umlaut, one s), whatever Whisper writes ("Tchüss", "tchuss").
 - Sound design (Maé): vary the sounds and make each one mean what is shown or said: a new follower = notification ding, a reply/DM = message bloop, money = till ka-ching, a toggle/save/send = click, things rising = soft whoosh. Cards and inserts come in silently; never chain two sounds less than ~0.6 s apart unless the picture does two things. Synth ones live in reels/formats-v2/assets/sfx (ding, bloop, kaching).
 - Retouch: every reel of Maé goes through scripts/retouch.py after the look (her brightness + face light + light slimming, learned from "POLICE retouchée"). Never add skin smoothing: she keeps her skin texture.
+- Maé: never put "ma girl" in on-screen titles/hooks (fine in her caption only).

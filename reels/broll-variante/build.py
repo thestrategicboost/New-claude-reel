@@ -15,7 +15,7 @@ DARK = '#573307'
 HOOKS = {        # angles taken from her caption (the 4 settings that stop Instagram hiding her content)
     1: ('COMMENT FORCER INSTA', 'à montrer tes réels à des non abonnés'),
     2: ('INSTAGRAM CACHE TES RÉELS ?', '4 réglages pour inverser la tendance'),
-    3: ('ZÉRO VISIBILITÉ SUR INSTA ?', "ce n'est pas irréversible, ma girl"),
+    3: ('ZÉRO VISIBILITÉ SUR INSTA ?', "mais ce n'est pas irréversible"),
     4: ('4 RÉGLAGES À FAIRE CETTE SEMAINE', 'pour toucher enfin des non abonnés'),
 }
 TYPE_A, TYPE_B, DESC = .15, 1.95, 2.05       # same rhythm as the original

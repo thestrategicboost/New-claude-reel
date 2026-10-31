@@ -25,8 +25,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="s0" src="assets/sfx/pop.mp3" data-start="0.020" data-duration="0.720" data-track-index="10" data-volume="0.5"></audio>
 <audio id="s1" src="assets/sfx/typing.mp3" data-start="0.150" data-duration="1.900" data-track-index="11" data-volume="0.55"></audio>
 <audio id="s2" src="assets/sfx/pop.mp3" data-start="2.050" data-duration="0.720" data-track-index="12" data-volume="0.4"></audio>
-  <video id="bgv" class="full" src="assets/v4.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="5.3" data-track-index="0"></video>
-  <div class="hk"><div id="blk">4 RÉGLAGES À FAIRE CETTE SEMAINE</div><br/><div id="pl"><span class="gh">pour toucher enfin des non abonnés</span><span id="tx"></span></div><div id="ds">Lis la description</div></div>
+  <video id="bgv" class="full" src="assets/v3.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="5.3" data-track-index="0"></video>
+  <div class="hk"><div id="blk">ZÉRO VISIBILITÉ SUR INSTA ?</div><br/><div id="pl"><span class="gh">mais ce n'est pas irréversible</span><span id="tx"></span></div><div id="ds">Lis la description</div></div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
@@ -35,40 +35,36 @@ tl.fromTo('#blk',{autoAlpha:0,scale:.8},{autoAlpha:1,scale:1,duration:.22,ease:'
 gsap.set('#pl',{autoAlpha:0});
 tl.fromTo('#pl',{autoAlpha:0,scaleX:.3},{autoAlpha:1,scaleX:1,duration:.18,ease:'power3.out',immediateRender:false},.08);
 tl.set('#tx',{textContent:''},0);
-tl.set('#tx',{textContent:"p"},0.203);
-tl.set('#tx',{textContent:"po"},0.256);
-tl.set('#tx',{textContent:"pou"},0.309);
-tl.set('#tx',{textContent:"pour"},0.362);
-tl.set('#tx',{textContent:"pour "},0.415);
-tl.set('#tx',{textContent:"pour t"},0.468);
-tl.set('#tx',{textContent:"pour to"},0.521);
-tl.set('#tx',{textContent:"pour tou"},0.574);
-tl.set('#tx',{textContent:"pour touc"},0.626);
-tl.set('#tx',{textContent:"pour touch"},0.679);
-tl.set('#tx',{textContent:"pour touche"},0.732);
-tl.set('#tx',{textContent:"pour toucher"},0.785);
-tl.set('#tx',{textContent:"pour toucher "},0.838);
-tl.set('#tx',{textContent:"pour toucher e"},0.891);
-tl.set('#tx',{textContent:"pour toucher en"},0.944);
-tl.set('#tx',{textContent:"pour toucher enf"},0.997);
-tl.set('#tx',{textContent:"pour toucher enfi"},1.050);
-tl.set('#tx',{textContent:"pour toucher enfin"},1.103);
-tl.set('#tx',{textContent:"pour toucher enfin "},1.156);
-tl.set('#tx',{textContent:"pour toucher enfin d"},1.209);
-tl.set('#tx',{textContent:"pour toucher enfin de"},1.262);
-tl.set('#tx',{textContent:"pour toucher enfin des"},1.315);
-tl.set('#tx',{textContent:"pour toucher enfin des "},1.368);
-tl.set('#tx',{textContent:"pour toucher enfin des n"},1.421);
-tl.set('#tx',{textContent:"pour toucher enfin des no"},1.474);
-tl.set('#tx',{textContent:"pour toucher enfin des non"},1.526);
-tl.set('#tx',{textContent:"pour toucher enfin des non "},1.579);
-tl.set('#tx',{textContent:"pour toucher enfin des non a"},1.632);
-tl.set('#tx',{textContent:"pour toucher enfin des non ab"},1.685);
-tl.set('#tx',{textContent:"pour toucher enfin des non abo"},1.738);
-tl.set('#tx',{textContent:"pour toucher enfin des non abon"},1.791);
-tl.set('#tx',{textContent:"pour toucher enfin des non abonn"},1.844);
-tl.set('#tx',{textContent:"pour toucher enfin des non abonn\u00e9"},1.897);
-tl.set('#tx',{textContent:"pour toucher enfin des non abonn\u00e9s"},1.950);
+tl.set('#tx',{textContent:"m"},0.210);
+tl.set('#tx',{textContent:"ma"},0.270);
+tl.set('#tx',{textContent:"mai"},0.330);
+tl.set('#tx',{textContent:"mais"},0.390);
+tl.set('#tx',{textContent:"mais "},0.450);
+tl.set('#tx',{textContent:"mais c"},0.510);
+tl.set('#tx',{textContent:"mais ce"},0.570);
+tl.set('#tx',{textContent:"mais ce "},0.630);
+tl.set('#tx',{textContent:"mais ce n"},0.690);
+tl.set('#tx',{textContent:"mais ce n'"},0.750);
+tl.set('#tx',{textContent:"mais ce n'e"},0.810);
+tl.set('#tx',{textContent:"mais ce n'es"},0.870);
+tl.set('#tx',{textContent:"mais ce n'est"},0.930);
+tl.set('#tx',{textContent:"mais ce n'est "},0.990);
+tl.set('#tx',{textContent:"mais ce n'est p"},1.050);
+tl.set('#tx',{textContent:"mais ce n'est pa"},1.110);
+tl.set('#tx',{textContent:"mais ce n'est pas"},1.170);
+tl.set('#tx',{textContent:"mais ce n'est pas "},1.230);
+tl.set('#tx',{textContent:"mais ce n'est pas i"},1.290);
+tl.set('#tx',{textContent:"mais ce n'est pas ir"},1.350);
+tl.set('#tx',{textContent:"mais ce n'est pas irr"},1.410);
+tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9"},1.470);
+tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9v"},1.530);
+tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9ve"},1.590);
+tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9ver"},1.650);
+tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9vers"},1.710);
+tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9versi"},1.770);
+tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9versib"},1.830);
+tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9versibl"},1.890);
+tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9versible"},1.950);
 gsap.set('#ds',{autoAlpha:0});
 tl.fromTo('#ds',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,ease:'power2.out',immediateRender:false},2.050);
 tl.set({}, {}, 5.3);
