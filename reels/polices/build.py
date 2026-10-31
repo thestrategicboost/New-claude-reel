@@ -37,7 +37,7 @@ def at(src, t):
     raise ValueError((src, t))
 
 
-FIX = {'tchüss': 'tchus', 'tchuss': 'tchus', 'c-police': 'ces polices', 'bireaux': 'b-roll', 'story-telling': 'storytelling', 'réels': 'réels'}
+FIX = {'celle-là': 'celles-là', 'tchüss': 'tchus', 'tchuss': 'tchus', 'c-police': 'ces polices', 'bireaux': 'b-roll', 'story-telling': 'storytelling', 'réels': 'réels'}
 
 
 def words():
