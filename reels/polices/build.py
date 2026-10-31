@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Reel "les polices", edited after the "Use these fonts for..." inspiration: a fixed header "Utilise ces polices
-pour" on top; on each line four white chips pop in, each written in the font it names (real Google Fonts, in
-assets/gf), and the kind of video lands under them in her gold pill. Her one-word captions, her lilac look, her
+"""Reel "les polices", edited after the "Use these fonts for..." inspiration: a fixed header "Utilise ces polices"
+on top; on each line four white chips pop in, each written in the font it names (real Google Fonts, in assets/gf),
+and "pour les vidéos ..." lands under them in her gold pill. Her one-word captions, her lilac look, her
 profile follow card on "abonne-toi". v2 opens with hook 2 under a hook title.
 
 PY cut.py v1|v2      then      PY build.py v1|v2      writes index.html
@@ -13,8 +13,8 @@ import subprocess
 import sys
 
 V = sys.argv[1] if len(sys.argv) > 1 else 'v1'
-HEAD = sys.argv[2] if len(sys.argv) > 2 else 'A'
-ROW_Y = 250 + (285 if HEAD == 'A' else 145)      # chips under the header; the kind of video lands 125px lower
+HEAD = sys.argv[2] if len(sys.argv) > 2 else 'B'      # her choice: the one-line brown header
+ROW_Y = 250 + (235 if HEAD == 'A' else 145)      # chips under the header; the kind of video lands 125px lower
 SEG = json.load(open(f'work/{V}/segs.json'))
 SEGS, DURS = SEG['segs'], SEG['durs']
 DUR = round(sum(DURS), 3)
@@ -64,15 +64,15 @@ def words():
 # (body piece, fonts [(name, family, css extra)], label, word that names it)
 CATS = [
     (0, [('Anton', 'Anton', ''), ('BEBAS NEUE', 'BebasNeue', ''), ('Archivo Black', 'ArchivoBlack', ''), ('Dancing', 'DancingScript', '')],
-     'vidéos facecam', 10.04),
+     'pour les vidéos facecam', 10.04),
     (1, [('Playfair Display', 'PlayfairDisplay', ''), ('Garamond', 'EBGaramond', ''), ('Inter', 'Inter', ''), ('Fraunces', 'Fraunces', '')],
-     'vidéos storytelling', 15.02),
+     'pour les vidéos storytelling', 15.02),
     (2, [('Montserrat', 'Montserrat', ''), ('Instrument Serif', 'InstrumentSerif', 'font-style:italic;'), ('Outfit', 'Outfit', ''),
-         ('Poppins', 'Poppins', '')], 'vidéos éducatives', 19.96),
+         ('Poppins', 'Poppins', '')], 'pour les vidéos éducatives', 19.96),
     (3, [('CINZEL', 'Cinzel', ''), ('UNBOUNDED', 'Unbounded', ''), ('Bodoni', 'BodoniModa', ''), ('Great Vibes', 'GreatVibes', '')],
-     'vidéos avec des b-roll', 32.86),
+     'pour les vidéos avec des b-roll', 32.86),
     (4, [('Montserrat', 'Montserrat', ''), ('Poppins', 'Poppins', ''), ('Outfit', 'Outfit', ''), ('Jost', 'Jost', '')],
-     'tes sous-titres', 37.78),
+     'pour tes sous-titres', 37.78),
 ]
 POLICE = [9.26, 13.78, 18.56, 31.54, 36.90]       # "polices" / "celle-là": the chips land here
 
@@ -92,10 +92,10 @@ def scenes():
         T += show('#hk', .1, body0, '{autoAlpha:0,y:-30,scale:.9}', .3, 'power3.out')
         S.append(('whoosh-short', .1, .3))
     end_cats = EDGES[nh + 5]
-    if HEAD == 'A':      # small white "utilise" above, "CES POLICES" in the brown block, small white "pour" under
-        H.append('<div id="hd" class="hd"><div class="hds">utilise</div><div class="hd1"><span>CES POLICES</span></div><div class="hds">pour</div></div>')
+    if HEAD == 'A':      # small white "utilise" above, "CES POLICES" in the brown block
+        H.append('<div id="hd" class="hd"><div class="hds">utilise</div><div class="hd1"><span>CES POLICES</span></div></div>')
     else:                # the whole line in the brown block
-        H.append('<div id="hd" class="hd"><div class="hd1 one"><span>UTILISE CES POLICES POUR</span></div></div>')
+        H.append('<div id="hd" class="hd"><div class="hd1 one"><span>UTILISE CES POLICES</span></div></div>')
     T += show('#hd', body0 + .05, end_cats, '{autoAlpha:0,y:-30}', .25, 'power3.out')
     for k, (piece, fonts, label, tw) in enumerate(CATS):
         a, b = EDGES[nh + piece], EDGES[nh + piece + 1] if nh + piece + 1 < len(EDGES) else DUR
