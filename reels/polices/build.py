@@ -13,6 +13,8 @@ import subprocess
 import sys
 
 V = sys.argv[1] if len(sys.argv) > 1 else 'v1'
+HEAD = sys.argv[2] if len(sys.argv) > 2 else 'A'
+ROW_Y = 250 + (285 if HEAD == 'A' else 145)      # chips under the header; the kind of video lands 125px lower
 SEG = json.load(open(f'work/{V}/segs.json'))
 SEGS, DURS = SEG['segs'], SEG['durs']
 DUR = round(sum(DURS), 3)
@@ -90,7 +92,10 @@ def scenes():
         T += show('#hk', .1, body0, '{autoAlpha:0,y:-30,scale:.9}', .3, 'power3.out')
         S.append(('whoosh-short', .1, .3))
     end_cats = EDGES[nh + 5]
-    H.append('<div id="hd" class="hd"><div class="hd1"><span>UTILISE CES</span></div><div class="hd2">polices pour</div></div>')
+    if HEAD == 'A':      # small white "utilise" above, "CES POLICES" in the brown block, small white "pour" under
+        H.append('<div id="hd" class="hd"><div class="hds">utilise</div><div class="hd1"><span>CES POLICES</span></div><div class="hds">pour</div></div>')
+    else:                # the whole line in the brown block
+        H.append('<div id="hd" class="hd"><div class="hd1 one"><span>UTILISE CES POLICES POUR</span></div></div>')
     T += show('#hd', body0 + .05, end_cats, '{autoAlpha:0,y:-30}', .25, 'power3.out')
     for k, (piece, fonts, label, tw) in enumerate(CATS):
         a, b = EDGES[nh + piece], EDGES[nh + piece + 1] if nh + piece + 1 < len(EDGES) else DUR
@@ -138,12 +143,12 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   box-shadow:0 8px 20px rgba(0,0,0,.18)}}
 .hd{{position:absolute;left:0;right:0;top:{TOP + 10}px;z-index:20;text-align:center}}
 .hd1 span{{display:inline-block;background:{DARK};color:#fff;font:400 96px/1.05 Anton;letter-spacing:.03em;padding:8px 28px 4px}}
-.hd2{{display:inline-block;margin-top:-6px;padding:10px 40px 14px;border-radius:999px;background:#fff;font:italic 800 52px/1 Poppins;color:{DARK};
-  box-shadow:0 8px 20px rgba(0,0,0,.18)}}
-.row{{position:absolute;left:40px;right:40px;top:{TOP + 205}px;z-index:20;display:flex;justify-content:center;align-items:center;gap:10px}}
+.hds{{font:700 46px/1.1 Poppins;color:#fff;text-shadow:0 3px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.5);margin:2px 0}}
+.hd1.one span{{font-size:78px;padding:10px 26px 6px}}
+.row{{position:absolute;left:40px;right:40px;top:{ROW_Y}px;z-index:20;display:flex;justify-content:center;align-items:center;gap:10px}}
 .row.sm .ch{{font-size:36px}}
 .ch{{background:#fff;color:#111;border-radius:12px;padding:10px 14px 8px;font-size:42px;line-height:1.1;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.25)}}
-.lb{{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;top:{TOP + 300}px;z-index:21;padding:12px 40px 16px;border-radius:999px;background:{PILL};
+.lb{{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;top:{ROW_Y + 125}px;z-index:21;padding:12px 40px 16px;border-radius:999px;background:{PILL};
   font:italic 700 50px/1 Poppins;color:#fff;text-shadow:0 3px 0 rgba(70,35,5,.7)}}
 #fol{{position:absolute;z-index:22;left:110px;top:{TOP + 120}px;width:860px;height:150px;background:#fff;border-radius:28px;display:flex;align-items:center;
   gap:22px;padding:0 26px;box-shadow:0 18px 50px rgba(0,0,0,.3)}}
