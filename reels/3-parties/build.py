@@ -125,7 +125,7 @@ def scenes():
         """one of her own example reels, cut out of her old 3-band edit (assets/ex), playing in a white frame"""
         vid = f'ex_{name}'
         add(band, f'<div id="{vid}" class="exv"><video id="{vid}v" src="assets/ex/{name}.mp4" muted playsinline data-start="{a:.3f}" '
-                  f'data-media-start="0" data-duration="{b - a:.3f}" data-track-index="{30 + len(S) % 60}"></video></div>',
+                  f'data-media-start="0" data-duration="{b - a + .4:.3f}" data-track-index="{30 + len(S) % 60}"></video></div>',   # outlives its frame
             pop(f'#{vid}', a, b, '{autoAlpha:0,y:40,scale:.7}', .24))
         S.append(('pop', a, .26))
 
@@ -157,7 +157,11 @@ def scenes():
     add(1, '<div id="cm1" class="comm"><img class="me" src="assets/avatar.png"/>' + ''.join(f'<i class="h h{q}">♥</i>' for q in range(4)) + '</div>',
         pop('#cm1', at(65.54), at(67.5)) + [f"tl.fromTo('#cm1 .h',{{scale:0}},{{scale:1,duration:.2,stagger:.1,ease:'back.out(3)',immediateRender:false}},{at(65.8):.3f});"])
     S.append(('bloop', at(65.54), .3))
-    add(1, '<div id="sh1" class="shield">🛡️</div>', pop('#sh1', at(67.58), EDGES[8]))
+    add(1, '<div id="sh1" class="shield"><svg viewBox="0 0 100 116"><defs><linearGradient id="shg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3DFB2"/>'
+           '<stop offset=".5" stop-color="#D6AE66"/><stop offset="1" stop-color="#9E6E33"/></linearGradient></defs>'
+           '<path d="M50 4 L92 18 V54 C92 82 74 102 50 112 C26 102 8 82 8 54 V18 Z" fill="url(#shg)" stroke="#fff" stroke-width="4"/>'
+           '<path d="M30 58 L45 73 L72 44" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>',
+        pop('#sh1', at(67.58), EDGES[8]))
     S.append(('pop', at(67.58), .3))
     clip(1, 'educatif', at(76.80), EDGES[9])
     clip(1, 'tutoriels', at(90.04), EDGES[10])
@@ -174,19 +178,17 @@ def scenes():
     # note, client messages (same reels as in her old edit)
     clip(2, 'avantapres', at(133.17), at(134.61))
     clip(2, 'temoignage', at(134.61), at(136.79))
-    clip(2, 'messages', at(136.79), at(138.6))
-    add(2, '<div id="vq2" class="quote">« voici ce que je ferais<br/>dans telle situation »</div>', pop('#vq2', at(138.75), EDGES[14]))
-    S.append(('bloop', at(138.75), .3))
+    clip(2, 'messages', at(136.79), EDGES[14])
 
-    # the mix of the three: all tiers lit in the top band
-    add(0, '<div id="fmix" class="fun mix"><div class="ft on" style="width:380px"><b>TOFU</b></div><div class="ft on" style="width:290px"><b>MOFU</b></div>'
+    # the mix of the three: all tiers lit, in the middle band
+    add(1, '<div id="fmix" class="fun mix"><div class="ft on" style="width:380px"><b>TOFU</b></div><div class="ft on" style="width:290px"><b>MOFU</b></div>'
            '<div class="ft on" style="width:200px"><b>BOFU</b></div></div>',
-        pop('#fmix', at(153.66), EDGES[15] + .2, '{autoAlpha:0,y:-30,scale:.8}'))
+        pop('#fmix', at(153.66), at(162.22) - .05, '{autoAlpha:0,y:-30,scale:.8}'))
     S.append(('sparkle', at(153.66), .22))
 
     # CTA: her profile follow card
     t_ab = at(162.22)
-    add(0, '<div id="fol"><div class="fav"><img src="assets/avatar.png"/></div><div class="fnm">thestrategicboost.fr<div class="fsub">Stratégie Instagram</div></div>'
+    add(1, '<div id="fol"><div class="fav"><img src="assets/avatar.png"/></div><div class="fnm">thestrategicboost.fr<div class="fsub">Stratégie Instagram</div></div>'
            '<div id="fbtn" class="fbtn">S’abonner</div><div id="fbtn2" class="fbtn on">Abonné</div></div>',
         ["gsap.set('#fol, #fbtn2',{autoAlpha:0});",
          f"tl.fromTo('#fol',{{autoAlpha:0,scale:.6,y:30}},{{autoAlpha:1,scale:1,y:0,duration:.35,ease:'back.out(1.8)',immediateRender:false}},{t_ab - .05:.3f});",
@@ -263,7 +265,8 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   box-shadow:0 8px 18px rgba(0,0,0,.3)}}
 .comm .h0{{left:10px;top:20px}} .comm .h1{{left:280px;top:30px}} .comm .h2{{left:20px;top:270px}} .comm .h3{{left:280px;top:260px}}
 .comm .crown{{position:absolute;left:135px;top:40px;font:400 80px/1 sans-serif;font-style:normal}}
-.shield{{position:absolute;left:170px;top:150px;font:400 220px/1 sans-serif;filter:drop-shadow(0 12px 20px rgba(0,0,0,.35))}}
+.shield{{position:absolute;left:180px;top:130px;width:220px;height:255px;filter:drop-shadow(0 12px 20px rgba(0,0,0,.35))}}
+.shield svg{{width:100%;height:100%}}
 .pg{{position:absolute;left:150px;top:110px;width:250px;height:354px;border-radius:12px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.4)}}
 .pg img{{width:100%;height:100%;object-fit:cover}}
 .quote{{position:absolute;left:50px;top:220px;width:540px;padding:22px 28px;border-radius:24px;background:#fff;font:italic 700 36px/1.3 Poppins;color:{DARK};

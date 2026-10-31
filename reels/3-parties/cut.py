@@ -8,9 +8,9 @@ import sys
 
 SEGS = [(4.88, 8.78), (14.32, 17.92), (23.53, 25.68), (33.03, 36.08), (44.68, 49.42), (55.0, 56.40), (56.62, 60.38),
         (64.25, 68.48), (74.44, 77.85), (89.83, 90.98), (109.80, 112.40), (120.73, 124.20), (124.48, 127.76),
-        (131.99, 140.72), (146.60, 154.08), (160.62, 163.62)]
+        (131.99, 137.45), (146.60, 154.08), (160.62, 163.62)]
 # left out on purpose: 41.32-43.66 (false start of "les types de contenus tofu..."), 106.40-108.65 (first try of the
-# storytelling line, redone right after), 116.34-116.84 (head turned to her notes), 91.0-91.1 ("des vidéos..." cut off)
+# storytelling line, redone right after), 137.45-140.72 ("mais aussi des vidéos de type voici ce que je ferais...", cut on her ask), 116.34-116.84 (head turned to her notes), 91.0-91.1 ("des vidéos..." cut off)
 GRADE = 'null'
 
 if __name__ == '__main__':
