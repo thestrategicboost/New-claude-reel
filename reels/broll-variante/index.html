@@ -11,7 +11,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 #root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
 .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hk{position:absolute;left:0;right:0;top:300px;z-index:20;text-align:center}
-#blk{display:inline-block;max-width:820px;background:#573307;color:#fff;font:400 84px/1.08 Anton;letter-spacing:.03em;padding:10px 26px 6px}
+#blk{display:inline-block;max-width:820px;background:#573307;color:#fff;font:400 76px/1.08 Anton;letter-spacing:.03em;padding:10px 26px 6px}
 #pl{position:relative;display:inline-block;max-width:820px;height:62px;margin-top:-4px;border-radius:31px;background:#fff;padding:0 30px;transform-origin:50% 50%}
 .gh{visibility:hidden}
 #tx,.gh{font:italic 800 38px/62px Poppins;letter-spacing:-.02em;color:#573307;white-space:nowrap}
@@ -26,7 +26,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="s1" src="assets/sfx/typing.mp3" data-start="0.150" data-duration="1.900" data-track-index="11" data-volume="0.55"></audio>
 <audio id="s2" src="assets/sfx/pop.mp3" data-start="2.050" data-duration="0.720" data-track-index="12" data-volume="0.4"></audio>
   <video id="bgv" class="full" src="assets/v4.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="5.3" data-track-index="0"></video>
-  <div class="hk"><div id="blk">ARRÊTE DE PUBLIER POUR TES ABONNÉS</div><br/><div id="pl"><span class="gh">fais voir tes réels à des inconnus</span><span id="tx"></span></div><div id="ds">Lis la description</div></div>
+  <div class="hk"><div id="blk">4 RÉGLAGES À FAIRE CETTE SEMAINE</div><br/><div id="pl"><span class="gh">pour toucher enfin des non abonnés</span><span id="tx"></span></div><div id="ds">Lis la description</div></div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
@@ -35,40 +35,40 @@ tl.fromTo('#blk',{autoAlpha:0,scale:.8},{autoAlpha:1,scale:1,duration:.22,ease:'
 gsap.set('#pl',{autoAlpha:0});
 tl.fromTo('#pl',{autoAlpha:0,scaleX:.3},{autoAlpha:1,scaleX:1,duration:.18,ease:'power3.out',immediateRender:false},.08);
 tl.set('#tx',{textContent:''},0);
-tl.set('#tx',{textContent:"f"},0.203);
-tl.set('#tx',{textContent:"fa"},0.256);
-tl.set('#tx',{textContent:"fai"},0.309);
-tl.set('#tx',{textContent:"fais"},0.362);
-tl.set('#tx',{textContent:"fais "},0.415);
-tl.set('#tx',{textContent:"fais v"},0.468);
-tl.set('#tx',{textContent:"fais vo"},0.521);
-tl.set('#tx',{textContent:"fais voi"},0.574);
-tl.set('#tx',{textContent:"fais voir"},0.626);
-tl.set('#tx',{textContent:"fais voir "},0.679);
-tl.set('#tx',{textContent:"fais voir t"},0.732);
-tl.set('#tx',{textContent:"fais voir te"},0.785);
-tl.set('#tx',{textContent:"fais voir tes"},0.838);
-tl.set('#tx',{textContent:"fais voir tes "},0.891);
-tl.set('#tx',{textContent:"fais voir tes r"},0.944);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9"},0.997);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9e"},1.050);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9el"},1.103);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els"},1.156);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els "},1.209);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0"},1.262);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0 "},1.315);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0 d"},1.368);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0 de"},1.421);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0 des"},1.474);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0 des "},1.526);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0 des i"},1.579);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0 des in"},1.632);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0 des inc"},1.685);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0 des inco"},1.738);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0 des incon"},1.791);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0 des inconn"},1.844);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0 des inconnu"},1.897);
-tl.set('#tx',{textContent:"fais voir tes r\u00e9els \u00e0 des inconnus"},1.950);
+tl.set('#tx',{textContent:"p"},0.203);
+tl.set('#tx',{textContent:"po"},0.256);
+tl.set('#tx',{textContent:"pou"},0.309);
+tl.set('#tx',{textContent:"pour"},0.362);
+tl.set('#tx',{textContent:"pour "},0.415);
+tl.set('#tx',{textContent:"pour t"},0.468);
+tl.set('#tx',{textContent:"pour to"},0.521);
+tl.set('#tx',{textContent:"pour tou"},0.574);
+tl.set('#tx',{textContent:"pour touc"},0.626);
+tl.set('#tx',{textContent:"pour touch"},0.679);
+tl.set('#tx',{textContent:"pour touche"},0.732);
+tl.set('#tx',{textContent:"pour toucher"},0.785);
+tl.set('#tx',{textContent:"pour toucher "},0.838);
+tl.set('#tx',{textContent:"pour toucher e"},0.891);
+tl.set('#tx',{textContent:"pour toucher en"},0.944);
+tl.set('#tx',{textContent:"pour toucher enf"},0.997);
+tl.set('#tx',{textContent:"pour toucher enfi"},1.050);
+tl.set('#tx',{textContent:"pour toucher enfin"},1.103);
+tl.set('#tx',{textContent:"pour toucher enfin "},1.156);
+tl.set('#tx',{textContent:"pour toucher enfin d"},1.209);
+tl.set('#tx',{textContent:"pour toucher enfin de"},1.262);
+tl.set('#tx',{textContent:"pour toucher enfin des"},1.315);
+tl.set('#tx',{textContent:"pour toucher enfin des "},1.368);
+tl.set('#tx',{textContent:"pour toucher enfin des n"},1.421);
+tl.set('#tx',{textContent:"pour toucher enfin des no"},1.474);
+tl.set('#tx',{textContent:"pour toucher enfin des non"},1.526);
+tl.set('#tx',{textContent:"pour toucher enfin des non "},1.579);
+tl.set('#tx',{textContent:"pour toucher enfin des non a"},1.632);
+tl.set('#tx',{textContent:"pour toucher enfin des non ab"},1.685);
+tl.set('#tx',{textContent:"pour toucher enfin des non abo"},1.738);
+tl.set('#tx',{textContent:"pour toucher enfin des non abon"},1.791);
+tl.set('#tx',{textContent:"pour toucher enfin des non abonn"},1.844);
+tl.set('#tx',{textContent:"pour toucher enfin des non abonn\u00e9"},1.897);
+tl.set('#tx',{textContent:"pour toucher enfin des non abonn\u00e9s"},1.950);
 gsap.set('#ds',{autoAlpha:0});
 tl.fromTo('#ds',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,ease:'power2.out',immediateRender:false},2.050);
 tl.set({}, {}, 5.3);

@@ -12,11 +12,11 @@ import sys
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 1
 DUR = 5.3
 DARK = '#573307'
-HOOKS = {
+HOOKS = {        # angles taken from her caption (the 4 settings that stop Instagram hiding her content)
     1: ('COMMENT FORCER INSTA', 'à montrer tes réels à des non abonnés'),
-    2: ('TES RÉELS BLOQUENT À 200 VUES ?', 'voici comment toucher des non abonnés'),
-    3: ("L'OPTION CACHÉE D'INSTAGRAM", 'pour montrer tes réels à des non abonnés'),
-    4: ('ARRÊTE DE PUBLIER POUR TES ABONNÉS', 'fais voir tes réels à des inconnus'),
+    2: ('INSTAGRAM CACHE TES RÉELS ?', '4 réglages pour inverser la tendance'),
+    3: ('ZÉRO VISIBILITÉ SUR INSTA ?', "ce n'est pas irréversible, ma girl"),
+    4: ('4 RÉGLAGES À FAIRE CETTE SEMAINE', 'pour toucher enfin des non abonnés'),
 }
 TYPE_A, TYPE_B, DESC = .15, 1.95, 2.05       # same rhythm as the original
 
