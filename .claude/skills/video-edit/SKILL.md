@@ -129,6 +129,12 @@ PY SK/scripts/headpos.py <project>                  # after the cutout: head/bod
 ```
 One cutout at a time (about 1.5 GB of RAM). It prints a progress line every 30 seconds.
 
+**Maé's retouch (every reel)**: after her look (lilac.py) and before the overlays, run
+`PY SK/scripts/retouch.py <graded.mp4> <retouched.mp4>`: her brightness curve (mids +15 to +18), a soft face light
+(+7 on the face, a touch more under the eyes, skin a hair warmer) and a very light slimming of the lower face, all
+learned from her own CapCut edit "POLICE retouchée". No skin smoothing. Use the retouched file as the A-roll, and cut
+the cut-out from it so both match. `--no-face` keeps only the brightness (for b-roll or other people).
+
 ### 5. Inserts in parallel (as soon as the EDL is locked)
 For each animated insert the script calls for (an app on screen, the profile follow on the CTA, a file scroll),
 spawn a sub-agent in the background with the brief template in `references/overlays.md`: fixed size, fixed
