@@ -12,7 +12,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hk{position:absolute;left:0;right:0;top:300px;z-index:20;text-align:center}
 #blk{display:inline-block;max-width:820px;background:#573307;color:#fff;font:400 76px/1.08 Anton;letter-spacing:.03em;padding:10px 26px 6px}
-#pl{position:relative;display:inline-block;max-width:820px;height:62px;margin-top:-4px;border-radius:31px;background:#fff;padding:0 30px;transform-origin:50% 50%}
+#pl{position:relative;display:inline-block;max-width:820px;height:62px;margin-top:-4px;border-radius:31px;background:#fff;padding:0 30px;box-shadow:0 4px 16px rgba(0,0,0,.22);transform-origin:50% 50%}
 .gh{visibility:hidden}
 #tx,.gh{font:italic 800 38px/62px Poppins;letter-spacing:-.02em;color:#573307;white-space:nowrap}
 #tx{position:absolute;left:30px;top:0}
@@ -25,8 +25,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="s0" src="assets/sfx/pop.mp3" data-start="0.020" data-duration="0.720" data-track-index="10" data-volume="0.5"></audio>
 <audio id="s1" src="assets/sfx/typing.mp3" data-start="0.150" data-duration="1.900" data-track-index="11" data-volume="0.55"></audio>
 <audio id="s2" src="assets/sfx/pop.mp3" data-start="2.050" data-duration="0.720" data-track-index="12" data-volume="0.4"></audio>
-  <video id="bgv" class="full" src="assets/v3.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="5.3" data-track-index="0"></video>
-  <div class="hk"><div id="blk">ZÉRO VISIBILITÉ SUR INSTA ?</div><br/><div id="pl"><span class="gh">mais ce n'est pas irréversible</span><span id="tx"></span></div><div id="ds">Lis la description</div></div>
+  <video id="bgv" class="full" src="assets/v9.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="5.3" data-track-index="0"></video>
+  <div class="hk"><div id="blk">COMMENT FORCER INSTA</div><br/><div id="pl"><span class="gh">à montrer tes réels à des non abonnés</span><span id="tx"></span></div><div id="ds">Lis la description</div></div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
@@ -35,36 +35,43 @@ tl.fromTo('#blk',{autoAlpha:0,scale:.8},{autoAlpha:1,scale:1,duration:.22,ease:'
 gsap.set('#pl',{autoAlpha:0});
 tl.fromTo('#pl',{autoAlpha:0,scaleX:.3},{autoAlpha:1,scaleX:1,duration:.18,ease:'power3.out',immediateRender:false},.08);
 tl.set('#tx',{textContent:''},0);
-tl.set('#tx',{textContent:"m"},0.210);
-tl.set('#tx',{textContent:"ma"},0.270);
-tl.set('#tx',{textContent:"mai"},0.330);
-tl.set('#tx',{textContent:"mais"},0.390);
-tl.set('#tx',{textContent:"mais "},0.450);
-tl.set('#tx',{textContent:"mais c"},0.510);
-tl.set('#tx',{textContent:"mais ce"},0.570);
-tl.set('#tx',{textContent:"mais ce "},0.630);
-tl.set('#tx',{textContent:"mais ce n"},0.690);
-tl.set('#tx',{textContent:"mais ce n'"},0.750);
-tl.set('#tx',{textContent:"mais ce n'e"},0.810);
-tl.set('#tx',{textContent:"mais ce n'es"},0.870);
-tl.set('#tx',{textContent:"mais ce n'est"},0.930);
-tl.set('#tx',{textContent:"mais ce n'est "},0.990);
-tl.set('#tx',{textContent:"mais ce n'est p"},1.050);
-tl.set('#tx',{textContent:"mais ce n'est pa"},1.110);
-tl.set('#tx',{textContent:"mais ce n'est pas"},1.170);
-tl.set('#tx',{textContent:"mais ce n'est pas "},1.230);
-tl.set('#tx',{textContent:"mais ce n'est pas i"},1.290);
-tl.set('#tx',{textContent:"mais ce n'est pas ir"},1.350);
-tl.set('#tx',{textContent:"mais ce n'est pas irr"},1.410);
-tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9"},1.470);
-tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9v"},1.530);
-tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9ve"},1.590);
-tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9ver"},1.650);
-tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9vers"},1.710);
-tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9versi"},1.770);
-tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9versib"},1.830);
-tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9versibl"},1.890);
-tl.set('#tx',{textContent:"mais ce n'est pas irr\u00e9versible"},1.950);
+tl.set('#tx',{textContent:"\u00e0"},0.199);
+tl.set('#tx',{textContent:"\u00e0 "},0.247);
+tl.set('#tx',{textContent:"\u00e0 m"},0.296);
+tl.set('#tx',{textContent:"\u00e0 mo"},0.345);
+tl.set('#tx',{textContent:"\u00e0 mon"},0.393);
+tl.set('#tx',{textContent:"\u00e0 mont"},0.442);
+tl.set('#tx',{textContent:"\u00e0 montr"},0.491);
+tl.set('#tx',{textContent:"\u00e0 montre"},0.539);
+tl.set('#tx',{textContent:"\u00e0 montrer"},0.588);
+tl.set('#tx',{textContent:"\u00e0 montrer "},0.636);
+tl.set('#tx',{textContent:"\u00e0 montrer t"},0.685);
+tl.set('#tx',{textContent:"\u00e0 montrer te"},0.734);
+tl.set('#tx',{textContent:"\u00e0 montrer tes"},0.782);
+tl.set('#tx',{textContent:"\u00e0 montrer tes "},0.831);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r"},0.880);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9"},0.928);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9e"},0.977);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9el"},1.026);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els"},1.074);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els "},1.123);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0"},1.172);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 "},1.220);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 d"},1.269);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 de"},1.318);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des"},1.366);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des "},1.415);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des n"},1.464);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des no"},1.512);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non"},1.561);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non "},1.609);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non a"},1.658);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non ab"},1.707);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non abo"},1.755);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non abon"},1.804);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non abonn"},1.853);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non abonn\u00e9"},1.901);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non abonn\u00e9s"},1.950);
 gsap.set('#ds',{autoAlpha:0});
 tl.fromTo('#ds',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,ease:'power2.out',immediateRender:false},2.050);
 tl.set({}, {}, 5.3);

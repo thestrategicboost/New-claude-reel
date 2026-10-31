@@ -4,7 +4,7 @@ hook, a white rounded pill under it where the second line types itself letter by
 in small white italic. Same ambient sound as the original, a soft keyboard sound while the line types, a pop on the
 block and on "Lis la description". Four variants, each with its own B-roll and its own angle on the same topic.
 
-PY build.py <1-4>      writes index.html
+PY build.py <1-9>      writes index.html
 """
 import json
 import sys
@@ -17,6 +17,7 @@ HOOKS = {        # angles taken from her caption (the 4 settings that stop Insta
     2: ('INSTAGRAM CACHE TES RÉELS ?', '4 réglages pour inverser la tendance'),
     3: ('ZÉRO VISIBILITÉ SUR INSTA ?', "mais ce n'est pas irréversible"),
     4: ('4 RÉGLAGES À FAIRE CETTE SEMAINE', 'pour toucher enfin des non abonnés'),
+    **{k: ('COMMENT FORCER INSTA', 'à montrer tes réels à des non abonnés') for k in (5, 6, 7, 8, 9)},   # original hook, other B-roll
 }
 TYPE_A, TYPE_B, DESC = .15, 1.95, 2.05       # same rhythm as the original
 
@@ -46,7 +47,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 .hk{{position:absolute;left:0;right:0;top:300px;z-index:20;text-align:center}}
 #blk{{display:inline-block;max-width:820px;background:{DARK};color:#fff;font:400 76px/1.08 Anton;letter-spacing:.03em;padding:10px 26px 6px}}
-#pl{{position:relative;display:inline-block;max-width:820px;height:62px;margin-top:-4px;border-radius:31px;background:#fff;padding:0 30px;transform-origin:50% 50%}}
+#pl{{position:relative;display:inline-block;max-width:820px;height:62px;margin-top:-4px;border-radius:31px;background:#fff;padding:0 30px;box-shadow:0 4px 16px rgba(0,0,0,.22);transform-origin:50% 50%}}
 .gh{{visibility:hidden}}
 #tx,.gh{{font:italic 800 38px/62px Poppins;letter-spacing:-.02em;color:{DARK};white-space:nowrap}}
 #tx{{position:absolute;left:30px;top:0}}
