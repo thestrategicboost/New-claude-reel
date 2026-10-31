@@ -7,9 +7,13 @@ import os
 import subprocess
 import sys
 
-BODY = [('base', 8.35, 10.46), ('base', 12.86, 15.57), ('base', 17.78, 20.44), ('base', 30.86, 33.10), ('base', 35.45, 38.11),
-        ('base', 38.82, 41.25)]
-# left out: first facecam take 4.34-6.44, first b-roll take 25.9-29.2 (both redone right after)
+BODY = [('base', 8.50, 10.46),                                 # facecam
+        ('base', 12.90, 13.38), ('base', 13.60, 15.57),         # storytelling (pause after "utilise" cut)
+        ('base', 17.76, 18.24), ('base', 18.54, 20.44),         # éducatives (pause after "utilise" cut)
+        ('base', 30.86, 33.10),                                 # b-roll
+        ('base', 35.60, 38.11),                                 # sous-titres
+        ('base', 38.86, 41.00)]                                 # abonne-toi + tchus
+# left out: first facecam take 4.34-6.44, first b-roll take 25.9-29.2 (both redone right after), the pauses
 HOOKS = {'v1': [], 'v2': [('hook2', 1.80, 5.42)], 'v3': [('hook3', 0.0, 0.0)]}
 
 if __name__ == '__main__':

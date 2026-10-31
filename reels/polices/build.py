@@ -74,7 +74,7 @@ CATS = [
     (4, [('Montserrat', 'Montserrat', ''), ('Poppins', 'Poppins', ''), ('Outfit', 'Outfit', ''), ('Jost', 'Jost', '')],
      'pour tes sous-titres', 37.78),
 ]
-POLICE = [9.26, 13.78, 18.56, 31.54, 36.90]       # "polices" / "celle-là": the chips land here
+CAT_START = [0, 1, 3, 5, 6, 7]                    # first body piece of each line (cut.py BODY), then the CTA piece
 
 
 def show(sel, a, b, frm='{autoAlpha:0,scale:.6}', d=.26, ease='back.out(2)'):
@@ -85,21 +85,21 @@ def show(sel, a, b, frm='{autoAlpha:0,scale:.6}', d=.26, ease='back.out(2)'):
 
 def scenes():
     H, T, S = [], [], []
-    nh = len(SEGS) - 6                      # pieces before the body (the hook)
+    nh = len(SEGS) - 8                      # pieces before the body (the hook)
     body0 = EDGES[nh]
     if nh:
         H.append('<div id="hk" class="hk"><div class="hk1"><span>QUELLE POLICE</span></div><div class="hk2">utiliser sur tes réels ?</div></div>')
         T += show('#hk', .1, body0, '{autoAlpha:0,y:-30,scale:.9}', .3, 'power3.out')
         S.append(('whoosh-short', .1, .3))
-    end_cats = EDGES[nh + 5]
+    end_cats = EDGES[nh + 7]
     if HEAD == 'A':      # small white "utilise" above, "CES POLICES" in the brown block
         H.append('<div id="hd" class="hd"><div class="hds">utilise</div><div class="hd1"><span>CES POLICES</span></div></div>')
     else:                # the whole line in the brown block
         H.append('<div id="hd" class="hd"><div class="hd1 one"><span>UTILISE CES POLICES</span></div></div>')
     T += show('#hd', body0 + .05, end_cats, '{autoAlpha:0,y:-30}', .25, 'power3.out')
     for k, (piece, fonts, label, tw) in enumerate(CATS):
-        a, b = EDGES[nh + piece], EDGES[nh + piece + 1] if nh + piece + 1 < len(EDGES) else DUR
-        tc = at('base', POLICE[k])
+        a, b = EDGES[nh + CAT_START[k]], EDGES[nh + CAT_START[k + 1]]
+        tc = a + .05                         # the fonts are up as soon as she starts the line
         chips = ''.join(f'<span class="ch" style="font-family:\'{fam}\';{extra}">{name}</span>' for name, fam, extra in fonts)
         H.append(f'<div id="row{k}" class="row{" sm" if k in (1, 3) else ""}">{chips}</div><div id="lb{k}" class="lb">{label}</div>')
         T += [f"gsap.set('#row{k} .ch',{{autoAlpha:0}});", f"gsap.set('#row{k}',{{autoAlpha:1}});",
