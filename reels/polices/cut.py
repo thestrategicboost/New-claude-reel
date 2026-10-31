@@ -14,7 +14,7 @@ BODY = [('base', 8.50, 10.46),                                 # facecam
         ('base', 35.60, 38.11),                                 # sous-titres
         ('base', 38.86, 41.00)]                                 # abonne-toi + tchus
 # left out: first facecam take 4.34-6.44, first b-roll take 25.9-29.2 (both redone right after), the pauses
-HOOKS = {'v1': [], 'v2': [('hook2', 1.80, 5.42)], 'v3': [('hook3', 1.34, 4.42)]}
+HOOKS = {'v1': [], 'v2': [('hook2', 1.80, 5.42)], 'v3': [('hook3', 1.34, 4.22)]}
 
 if __name__ == '__main__':
     v = sys.argv[1]

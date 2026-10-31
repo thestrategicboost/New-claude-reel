@@ -105,8 +105,9 @@ def scenes():
         T += [f"gsap.set('#row{k} .ch',{{autoAlpha:0}});", f"gsap.set('#row{k}',{{autoAlpha:1}});",
               f"tl.fromTo('#row{k} .ch',{{autoAlpha:0,scale:.5,y:20}},{{autoAlpha:1,scale:1,y:0,duration:.22,stagger:.07,ease:'back.out(2.2)',immediateRender:false}},{tc:.3f});",
               f"tl.to('#row{k} .ch',{{autoAlpha:0,duration:.12}},{b - .12:.3f});", f"tl.set('#row{k} .ch',{{autoAlpha:0}},{b:.3f});"]
-        T += show(f'#lb{k}', at('base', tw), b, '{autoAlpha:0,scale:.6,y:14}', .24)
-        S += [('pop', tc, .3), ('click-soft', at('base', tw), .4)]
+        tl_ = min(tc + .45, at('base', tw))      # "pour les vidéos ..." lands right after the fonts, not on its spoken word
+        T += show(f'#lb{k}', tl_, b, '{autoAlpha:0,scale:.6,y:14}', .24)
+        S += [('pop', tc, .3), ('click-soft', tl_, .4)]
     # CTA: her profile follow card
     t_ab = at('base', 39.2)
     H.append('<div id="fol"><div class="fav"><img src="assets/avatar.png"/></div><div class="fnm">thestrategicboost.fr<div class="fsub">Stratégie Instagram</div></div>'
