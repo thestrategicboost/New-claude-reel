@@ -38,7 +38,7 @@ for _d in PARTS:
     EDGES.append(_e)
     _e += _d
 
-FIX = {'bouffou': 'bofu', "d'étroits": 'des trois', 'list': 'liste'}
+FIX = {'bouffou': 'bofu', "d'étroits": 'des trois', 'list': 'liste', 'tchuss': 'tchus', 'tchüss': 'tchus'}
 
 
 def words():
@@ -64,7 +64,7 @@ def at(raw):
 
 
 # which band is lit, from when (edit time)
-ACTIVE = [(0.0, 0), (at(7.88), 1), (at(8.52), 2), (EDGES[1], 0), (EDGES[5], 1), (EDGES[11], 2), (EDGES[14], 0)]
+ACTIVE = [(0.0, 0), (at(7.88), 1), (at(8.52), 2), (EDGES[1], 0), (EDGES[5], 1), (EDGES[11], 2), (EDGES[14], 3)]   # 3 = all three bands
 
 
 def band_of(t):
@@ -104,7 +104,7 @@ def scenes():
     last = None
     for a, k in ACTIVE:
         for q in range(3):
-            on = q == k
+            on = q == k or k == 3
             T += [f"tl.set('#mv{q}',{{opacity:{1 if on else 0}}},{a:.3f});", f"tl.set('#iv{q}',{{opacity:{0 if on else 1}}},{a:.3f});",
                   f"tl.to('#dm{q}',{{opacity:{0 if on else 1},duration:.12}},{a:.3f});"]
         last = k
@@ -121,6 +121,14 @@ def scenes():
         add(k, f'<div id="hb{k}" class="badge"><b>{name}</b><span>{EYE}{views}</span></div>', pop(f'#hb{k}', at(t), EDGES[1]))
         S.append(('pop', at(t), .3))
 
+    def clip(band, name, a, b):
+        """one of her own example reels, cut out of her old 3-band edit (assets/ex), playing in a white frame"""
+        vid = f'ex_{name}'
+        add(band, f'<div id="{vid}" class="exv"><video id="{vid}v" src="assets/ex/{name}.mp4" muted playsinline data-start="{a:.3f}" '
+                  f'data-media-start="0" data-duration="{b - a:.3f}" data-track-index="{30 + len(S) % 60}"></video></div>',
+            pop(f'#{vid}', a, b, '{autoAlpha:0,y:40,scale:.7}', .24))
+        S.append(('pop', a, .26))
+
     # TOFU
     add(0, funnel(0, 0, 'TOFU'), pop('#fn0', at(16.66), EDGES[2], '{autoAlpha:0,y:-30,scale:.8}'))
     S.append(('whoosh-short', at(16.66), .25))
@@ -133,12 +141,10 @@ def scenes():
                                             f"tl.to('#rgc',{{strokeDashoffset:40,duration:1.1,ease:'power2.out'}},{at(33.9):.3f});"]
         + [f"tl.set('#rgn',{{textContent:'{int(722218 * (q + 1) / 16):,}'.replace(',', ' ')}},{at(33.9) + q * .07:.3f});" for q in range(16)])
     S.append(('ding', at(33.66), .3))
-    # "les vidéos de type liste / de notation / de storytelling": her tier-list reel, a rating card, her storytelling reel
-    add(0, '<div id="ex00" class="ex" style="left:60px"><img src="assets/clips/f5.jpg"/></div>', pop('#ex00', at(46.92), EDGES[5], '{autoAlpha:0,y:40,scale:.7}'))
-    add(0, '<div id="ex01" class="note" style="left:210px"><small>ma note</small><b>8/10</b><span>★★★★☆</span></div>',
-        pop('#ex01', at(47.80), EDGES[5], '{autoAlpha:0,y:40,scale:.7}'))
-    add(0, '<div id="ex02" class="ex" style="left:400px"><img src="assets/clips/f2.jpg"/></div>', pop('#ex02', at(48.58), EDGES[5], '{autoAlpha:0,y:40,scale:.7}'))
-    S += [('pop', at(46.92), .25), ('click', at(47.80), .35), ('pop', at(48.58), .25)]
+    # "les vidéos de type liste / de notation / de storytelling": the same example reels as in her old edit
+    clip(0, 'liste', at(46.92), at(47.80))
+    clip(0, 'notation', at(47.80), at(48.58))
+    clip(0, 'story', at(48.58), EDGES[5])
 
     # MOFU
     add(1, funnel(1, 1, 'MOFU'), pop('#fn1', at(56.0), EDGES[6] + .5, '{autoAlpha:0,y:-30,scale:.8}'))
@@ -153,11 +159,10 @@ def scenes():
     S.append(('bloop', at(65.54), .3))
     add(1, '<div id="sh1" class="shield">🛡️</div>', pop('#sh1', at(67.58), EDGES[8]))
     S.append(('pop', at(67.58), .3))
-    add(1, '<div id="pg10" class="pg"><img src="assets/p-01.png"/></div>', pop('#pg10', at(76.80), EDGES[9]))
-    add(1, '<div id="pg11" class="pg"><img src="assets/p-03.png"/></div>', pop('#pg11', at(90.04), EDGES[10]))
-    S += [('whoosh-short', at(76.80), .2), ('whoosh-short', at(90.04), .2)]
-    add(1, '<div id="st1" class="ex" style="left:60px"><img src="assets/clips/f2.jpg"/></div>', pop('#st1', at(110.42), EDGES[11], '{autoAlpha:0,y:40,scale:.7}'))
-    S.append(('pop', at(110.42), .25))
+    clip(1, 'educatif', at(76.80), EDGES[9])
+    clip(1, 'tutoriels', at(90.04), EDGES[10])
+    clip(1, 'reussites', at(110.42), at(112.10))
+    clip(1, 'echecs', at(112.10), EDGES[11])
 
     # BOFU
     add(2, '<div id="cr2" class="comm"><img class="me" src="assets/avatar.png"/><i class="crown">👑</i>' + ''.join(f'<i class="h h{q}">♥</i>' for q in range(4)) + '</div>',
@@ -165,15 +170,13 @@ def scenes():
     S.append(('sparkle', at(122.05), .22))
     add(2, funnel(2, 2, 'BOFU'), pop('#fn2', at(126.14), EDGES[13], '{autoAlpha:0,y:-30,scale:.8}'))
     S.append(('whoosh-short', at(126.14), .25))
-    # "avant / après": her own shot, before (grey, flat) and after (her lilac look), a line sweeps the after in
-    add(2, '<div id="ba2" class="ba"><img src="assets/still/avant.jpg"/><img id="ba2a" class="ap" src="assets/still/apres.jpg"/><i id="ba2l" class="bl"></i>'
-           '<span class="l">avant</span><span class="r">après</span></div>',
-        pop('#ba2', at(133.17), at(137.6), '{autoAlpha:0,y:40,scale:.7}')
-        + ["gsap.set('#ba2a',{clipPath:'inset(0 0 0 100%)'});", f"tl.to('#ba2a',{{clipPath:'inset(0 0 0 50%)',duration:.5,ease:'power2.inOut'}},{at(133.65):.3f});",
-           "gsap.set('#ba2l',{x:392});", f"tl.to('#ba2l',{{x:196,duration:.5,ease:'power2.inOut'}},{at(133.65):.3f});"])
-    S += [('pop', at(133.17), .25), ('whoosh-short', at(133.65), .22)]
-    add(2, '<div id="vq2" class="quote">« voici ce que je ferais<br/>dans telle situation »</div>', pop('#vq2', at(138.95), EDGES[14]))
-    S.append(('bloop', at(138.95), .3))
+    # "avant-après / transformations personnelles ou celles de tes clients": her stats before/after, a client's voice
+    # note, client messages (same reels as in her old edit)
+    clip(2, 'avantapres', at(133.17), at(134.61))
+    clip(2, 'temoignage', at(134.61), at(136.79))
+    clip(2, 'messages', at(136.79), at(138.6))
+    add(2, '<div id="vq2" class="quote">« voici ce que je ferais<br/>dans telle situation »</div>', pop('#vq2', at(138.75), EDGES[14]))
+    S.append(('bloop', at(138.75), .3))
 
     # the mix of the three: all tiers lit in the top band
     add(0, '<div id="fmix" class="fun mix"><div class="ft on" style="width:380px"><b>TOFU</b></div><div class="ft on" style="width:290px"><b>MOFU</b></div>'
@@ -202,6 +205,7 @@ def scenes():
         if end <= w['s']:
             continue
         k = band_of(w['s'] + .01)
+        k = 1 if k == 3 else k
         H.append(f'<div id="w{n}" class="cap" style="top:{k * BAND + 470}px">{w["t"]}</div>')
         T += [f"gsap.set('#w{n}',{{autoAlpha:0}});", f"tl.set('#w{n}',{{autoAlpha:1}},{w['s']:.3f});",
               f"tl.fromTo('#w{n}',{{scale:.8}},{{scale:1,duration:{min(.12, end - w['s']):.3f},ease:'back.out(2.5)',immediateRender:false}},{w['s']:.3f});",
@@ -237,6 +241,9 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .prof2{{position:absolute;left:30px;top:180px;width:560px;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.35)}}
 .prof2 img{{width:100%;display:block}}
 .prof2 .hl{{position:absolute;left:248px;top:57px;width:100px;height:30px;border:4px solid {GOLD};border-radius:18px}}
+.exv{{position:absolute;left:150px;top:100px;width:250px;height:440px;border-radius:14px;overflow:hidden;border:4px solid #fff;
+  box-shadow:0 14px 30px rgba(0,0,0,.4);background:#000}}
+.exv video{{width:100%;height:100%;object-fit:cover;transform:scale(1.04);display:block}}
 .note{{position:absolute;top:170px;width:170px;height:210px;border-radius:16px;background:#fff;text-align:center;padding-top:22px;box-shadow:0 12px 26px rgba(0,0,0,.35)}}
 .note small{{display:block;font:600 22px/1 Poppins;color:#777}} .note b{{display:block;font:400 74px/1.1 Anton;color:{DARK}}}
 .note span{{font:400 30px/1 sans-serif;color:{GOLD}}}

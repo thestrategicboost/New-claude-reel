@@ -33,6 +33,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .prof2{position:absolute;left:30px;top:180px;width:560px;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px rgba(0,0,0,.35)}
 .prof2 img{width:100%;display:block}
 .prof2 .hl{position:absolute;left:248px;top:57px;width:100px;height:30px;border:4px solid #C99A55;border-radius:18px}
+.exv{position:absolute;left:150px;top:100px;width:250px;height:440px;border-radius:14px;overflow:hidden;border:4px solid #fff;
+  box-shadow:0 14px 30px rgba(0,0,0,.4);background:#000}
+.exv video{width:100%;height:100%;object-fit:cover;transform:scale(1.04);display:block}
 .note{position:absolute;top:170px;width:170px;height:210px;border-radius:16px;background:#fff;text-align:center;padding-top:22px;box-shadow:0 12px 26px rgba(0,0,0,.35)}
 .note small{display:block;font:600 22px/1 Poppins;color:#777} .note b{display:block;font:400 74px/1.1 Anton;color:#573307}
 .note span{font:400 30px/1 sans-serif;color:#C99A55}
@@ -77,27 +80,29 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="sfx3" src="assets/sfx/whoosh-short.mp3" data-start="6.273" data-duration="0.570" data-track-index="20" data-volume="0.25"></audio>
 <audio id="sfx4" src="assets/sfx/pop.mp3" data-start="8.763" data-duration="0.720" data-track-index="21" data-volume="0.30"></audio>
 <audio id="sfx5" src="assets/sfx/ding.mp3" data-start="10.330" data-duration="0.750" data-track-index="22" data-volume="0.30"></audio>
-<audio id="sfx6" src="assets/sfx/pop.mp3" data-start="15.007" data-duration="0.720" data-track-index="20" data-volume="0.25"></audio>
-<audio id="sfx7" src="assets/sfx/click.mp3" data-start="15.887" data-duration="0.360" data-track-index="21" data-volume="0.35"></audio>
-<audio id="sfx8" src="assets/sfx/pop.mp3" data-start="16.667" data-duration="0.720" data-track-index="22" data-volume="0.25"></audio>
+<audio id="sfx6" src="assets/sfx/pop.mp3" data-start="15.007" data-duration="0.720" data-track-index="20" data-volume="0.26"></audio>
+<audio id="sfx7" src="assets/sfx/pop.mp3" data-start="15.887" data-duration="0.720" data-track-index="21" data-volume="0.26"></audio>
+<audio id="sfx8" src="assets/sfx/pop.mp3" data-start="16.667" data-duration="0.720" data-track-index="22" data-volume="0.26"></audio>
 <audio id="sfx9" src="assets/sfx/whoosh-short.mp3" data-start="18.567" data-duration="0.570" data-track-index="20" data-volume="0.25"></audio>
 <audio id="sfx10" src="assets/sfx/pop.mp3" data-start="20.767" data-duration="0.720" data-track-index="21" data-volume="0.30"></audio>
 <audio id="sfx11" src="assets/sfx/bloop.mp3" data-start="24.023" data-duration="0.300" data-track-index="22" data-volume="0.30"></audio>
 <audio id="sfx12" src="assets/sfx/pop.mp3" data-start="26.063" data-duration="0.720" data-track-index="20" data-volume="0.30"></audio>
-<audio id="sfx13" src="assets/sfx/whoosh-short.mp3" data-start="29.360" data-duration="0.570" data-track-index="21" data-volume="0.20"></audio>
-<audio id="sfx14" src="assets/sfx/whoosh-short.mp3" data-start="30.677" data-duration="0.570" data-track-index="22" data-volume="0.20"></audio>
-<audio id="sfx15" src="assets/sfx/pop.mp3" data-start="32.253" data-duration="0.720" data-track-index="20" data-volume="0.25"></audio>
-<audio id="sfx16" src="assets/sfx/sparkle.mp3" data-start="35.553" data-duration="1.000" data-track-index="21" data-volume="0.22"></audio>
-<audio id="sfx17" src="assets/sfx/whoosh-short.mp3" data-start="39.393" data-duration="0.570" data-track-index="22" data-volume="0.25"></audio>
-<audio id="sfx18" src="assets/sfx/pop.mp3" data-start="42.247" data-duration="0.720" data-track-index="20" data-volume="0.25"></audio>
-<audio id="sfx19" src="assets/sfx/whoosh-short.mp3" data-start="42.727" data-duration="0.570" data-track-index="21" data-volume="0.22"></audio>
-<audio id="sfx20" src="assets/sfx/bloop.mp3" data-start="48.027" data-duration="0.300" data-track-index="22" data-volume="0.30"></audio>
-<audio id="sfx21" src="assets/sfx/sparkle.mp3" data-start="56.860" data-duration="1.000" data-track-index="20" data-volume="0.22"></audio>
-<audio id="sfx22" src="assets/sfx/pop.mp3" data-start="58.850" data-duration="0.720" data-track-index="21" data-volume="0.35"></audio>
-<audio id="sfx23" src="assets/sfx/click.mp3" data-start="59.350" data-duration="0.360" data-track-index="22" data-volume="0.50"></audio>
-<div id="bd0" class="band" style="top:0px"><video id="mv0" class="bv" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="60.321" data-track-index="0"></video><img id="iv0" class="bv" src="assets/still/b0.jpg"/><i id="dm0" class="dim"></i><div id="gx0" class="gx"><div id="hb0" class="badge"><b>TOFU</b><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>1M</span></div><div id="fn0" class="fun"><div class="ft on" style="width:380px"><b>TOFU</b></div><div class="ft" style="width:290px"></div><div class="ft" style="width:200px"></div></div><div id="vw0" class="views"><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>806K</span><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>414K</span><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>614K</span><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>599K</span></div><div id="rg0" class="ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" class="rb"/><circle id="rgc" cx="60" cy="60" r="48" class="rf"/></svg><b id="rgn">0</b><small>comptes touchés</small></div><div id="ex00" class="ex" style="left:60px"><img src="assets/clips/f5.jpg"/></div><div id="ex01" class="note" style="left:210px"><small>ma note</small><b>8/10</b><span>★★★★☆</span></div><div id="ex02" class="ex" style="left:400px"><img src="assets/clips/f2.jpg"/></div><div id="fmix" class="fun mix"><div class="ft on" style="width:380px"><b>TOFU</b></div><div class="ft on" style="width:290px"><b>MOFU</b></div><div class="ft on" style="width:200px"><b>BOFU</b></div></div><div id="fol"><div class="fav"><img src="assets/avatar.png"/></div><div class="fnm">thestrategicboost.fr<div class="fsub">Stratégie Instagram</div></div><div id="fbtn" class="fbtn">S’abonner</div><div id="fbtn2" class="fbtn on">Abonné</div></div></div></div>
-<div id="bd1" class="band" style="top:640px"><video id="mv1" class="bv" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="60.321" data-track-index="1"></video><img id="iv1" class="bv" src="assets/still/b1.jpg"/><i id="dm1" class="dim"></i><div id="gx1" class="gx"><div id="hb1" class="badge"><b>MOFU</b><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>100K</span></div><div id="fn1" class="fun"><div class="ft" style="width:380px"></div><div class="ft on" style="width:290px"><b>MOFU</b></div><div class="ft" style="width:200px"></div></div><div id="pf1" class="prof2"><img src="assets/still/profil.png"/><i id="pf1h" class="hl"></i></div><div id="cm1" class="comm"><img class="me" src="assets/avatar.png"/><i class="h h0">♥</i><i class="h h1">♥</i><i class="h h2">♥</i><i class="h h3">♥</i></div><div id="sh1" class="shield">🛡️</div><div id="pg10" class="pg"><img src="assets/p-01.png"/></div><div id="pg11" class="pg"><img src="assets/p-03.png"/></div><div id="st1" class="ex" style="left:60px"><img src="assets/clips/f2.jpg"/></div></div></div>
-<div id="bd2" class="band" style="top:1280px"><video id="mv2" class="bv" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="60.321" data-track-index="2"></video><img id="iv2" class="bv" src="assets/still/b2.jpg"/><i id="dm2" class="dim"></i><div id="gx2" class="gx"><div id="hb2" class="badge"><b>BOFU</b><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>10K</span></div><div id="cr2" class="comm"><img class="me" src="assets/avatar.png"/><i class="crown">👑</i><i class="h h0">♥</i><i class="h h1">♥</i><i class="h h2">♥</i><i class="h h3">♥</i></div><div id="fn2" class="fun"><div class="ft" style="width:380px"></div><div class="ft" style="width:290px"></div><div class="ft on" style="width:200px"><b>BOFU</b></div></div><div id="ba2" class="ba"><img src="assets/still/avant.jpg"/><img id="ba2a" class="ap" src="assets/still/apres.jpg"/><i id="ba2l" class="bl"></i><span class="l">avant</span><span class="r">après</span></div><div id="vq2" class="quote">« voici ce que je ferais<br/>dans telle situation »</div></div></div>
+<audio id="sfx13" src="assets/sfx/pop.mp3" data-start="29.360" data-duration="0.720" data-track-index="21" data-volume="0.26"></audio>
+<audio id="sfx14" src="assets/sfx/pop.mp3" data-start="30.677" data-duration="0.720" data-track-index="22" data-volume="0.26"></audio>
+<audio id="sfx15" src="assets/sfx/pop.mp3" data-start="32.253" data-duration="0.720" data-track-index="20" data-volume="0.26"></audio>
+<audio id="sfx16" src="assets/sfx/pop.mp3" data-start="33.933" data-duration="0.720" data-track-index="21" data-volume="0.26"></audio>
+<audio id="sfx17" src="assets/sfx/sparkle.mp3" data-start="35.553" data-duration="1.000" data-track-index="22" data-volume="0.22"></audio>
+<audio id="sfx18" src="assets/sfx/whoosh-short.mp3" data-start="39.393" data-duration="0.570" data-track-index="20" data-volume="0.25"></audio>
+<audio id="sfx19" src="assets/sfx/pop.mp3" data-start="42.247" data-duration="0.720" data-track-index="21" data-volume="0.26"></audio>
+<audio id="sfx20" src="assets/sfx/pop.mp3" data-start="43.687" data-duration="0.720" data-track-index="22" data-volume="0.26"></audio>
+<audio id="sfx21" src="assets/sfx/pop.mp3" data-start="45.867" data-duration="0.720" data-track-index="20" data-volume="0.26"></audio>
+<audio id="sfx22" src="assets/sfx/bloop.mp3" data-start="47.827" data-duration="0.300" data-track-index="21" data-volume="0.30"></audio>
+<audio id="sfx23" src="assets/sfx/sparkle.mp3" data-start="56.860" data-duration="1.000" data-track-index="22" data-volume="0.22"></audio>
+<audio id="sfx24" src="assets/sfx/pop.mp3" data-start="58.850" data-duration="0.720" data-track-index="20" data-volume="0.35"></audio>
+<audio id="sfx25" src="assets/sfx/click.mp3" data-start="59.350" data-duration="0.360" data-track-index="21" data-volume="0.50"></audio>
+<div id="bd0" class="band" style="top:0px"><video id="mv0" class="bv" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="60.321" data-track-index="0"></video><img id="iv0" class="bv" src="assets/still/b0.jpg"/><i id="dm0" class="dim"></i><div id="gx0" class="gx"><div id="hb0" class="badge"><b>TOFU</b><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>1M</span></div><div id="fn0" class="fun"><div class="ft on" style="width:380px"><b>TOFU</b></div><div class="ft" style="width:290px"></div><div class="ft" style="width:200px"></div></div><div id="vw0" class="views"><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>806K</span><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>414K</span><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>614K</span><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>599K</span></div><div id="rg0" class="ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" class="rb"/><circle id="rgc" cx="60" cy="60" r="48" class="rf"/></svg><b id="rgn">0</b><small>comptes touchés</small></div><div id="ex_liste" class="exv"><video id="ex_listev" src="assets/ex/liste.mp4" muted playsinline data-start="15.007" data-media-start="0" data-duration="0.880" data-track-index="36"></video></div><div id="ex_notation" class="exv"><video id="ex_notationv" src="assets/ex/notation.mp4" muted playsinline data-start="15.887" data-media-start="0" data-duration="0.780" data-track-index="37"></video></div><div id="ex_story" class="exv"><video id="ex_storyv" src="assets/ex/story.mp4" muted playsinline data-start="16.667" data-media-start="0" data-duration="0.900" data-track-index="38"></video></div><div id="fmix" class="fun mix"><div class="ft on" style="width:380px"><b>TOFU</b></div><div class="ft on" style="width:290px"><b>MOFU</b></div><div class="ft on" style="width:200px"><b>BOFU</b></div></div><div id="fol"><div class="fav"><img src="assets/avatar.png"/></div><div class="fnm">thestrategicboost.fr<div class="fsub">Stratégie Instagram</div></div><div id="fbtn" class="fbtn">S’abonner</div><div id="fbtn2" class="fbtn on">Abonné</div></div></div></div>
+<div id="bd1" class="band" style="top:640px"><video id="mv1" class="bv" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="60.321" data-track-index="1"></video><img id="iv1" class="bv" src="assets/still/b1.jpg"/><i id="dm1" class="dim"></i><div id="gx1" class="gx"><div id="hb1" class="badge"><b>MOFU</b><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>100K</span></div><div id="fn1" class="fun"><div class="ft" style="width:380px"></div><div class="ft on" style="width:290px"><b>MOFU</b></div><div class="ft" style="width:200px"></div></div><div id="pf1" class="prof2"><img src="assets/still/profil.png"/><i id="pf1h" class="hl"></i></div><div id="cm1" class="comm"><img class="me" src="assets/avatar.png"/><i class="h h0">♥</i><i class="h h1">♥</i><i class="h h2">♥</i><i class="h h3">♥</i></div><div id="sh1" class="shield">🛡️</div><div id="ex_educatif" class="exv"><video id="ex_educatifv" src="assets/ex/educatif.mp4" muted playsinline data-start="29.360" data-media-start="0" data-duration="1.107" data-track-index="43"></video></div><div id="ex_tutoriels" class="exv"><video id="ex_tutorielsv" src="assets/ex/tutoriels.mp4" muted playsinline data-start="30.677" data-media-start="0" data-duration="0.957" data-track-index="44"></video></div><div id="ex_reussites" class="exv"><video id="ex_reussitesv" src="assets/ex/reussites.mp4" muted playsinline data-start="32.253" data-media-start="0" data-duration="1.680" data-track-index="45"></video></div><div id="ex_echecs" class="exv"><video id="ex_echecsv" src="assets/ex/echecs.mp4" muted playsinline data-start="33.933" data-media-start="0" data-duration="0.300" data-track-index="46"></video></div></div></div>
+<div id="bd2" class="band" style="top:1280px"><video id="mv2" class="bv" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="60.321" data-track-index="2"></video><img id="iv2" class="bv" src="assets/still/b2.jpg"/><i id="dm2" class="dim"></i><div id="gx2" class="gx"><div id="hb2" class="badge"><b>BOFU</b><span><svg viewBox="0 0 24 24" width="26" height="26"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>10K</span></div><div id="cr2" class="comm"><img class="me" src="assets/avatar.png"/><i class="crown">👑</i><i class="h h0">♥</i><i class="h h1">♥</i><i class="h h2">♥</i><i class="h h3">♥</i></div><div id="fn2" class="fun"><div class="ft" style="width:380px"></div><div class="ft" style="width:290px"></div><div class="ft on" style="width:200px"><b>BOFU</b></div></div><div id="ex_avantapres" class="exv"><video id="ex_avantapresv" src="assets/ex/avantapres.mp4" muted playsinline data-start="42.247" data-media-start="0" data-duration="1.440" data-track-index="49"></video></div><div id="ex_temoignage" class="exv"><video id="ex_temoignagev" src="assets/ex/temoignage.mp4" muted playsinline data-start="43.687" data-media-start="0" data-duration="2.180" data-track-index="50"></video></div><div id="ex_messages" class="exv"><video id="ex_messagesv" src="assets/ex/messages.mp4" muted playsinline data-start="45.867" data-media-start="0" data-duration="1.810" data-track-index="51"></video></div><div id="vq2" class="quote">« voici ce que je ferais<br/>dans telle situation »</div></div></div>
 <div id="w0" class="cap" style="top:470px">trois</div>
 <div id="w1" class="cap" style="top:470px">types</div>
 <div id="w2" class="cap" style="top:470px">de</div>
@@ -275,42 +280,42 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="w177" class="cap" style="top:1750px">dans</div>
 <div id="w178" class="cap" style="top:1750px">telle</div>
 <div id="w179" class="cap" style="top:1750px">situation</div>
-<div id="w180" class="cap" style="top:470px">ton</div>
-<div id="w181" class="cap" style="top:470px">objectif</div>
-<div id="w182" class="cap" style="top:470px">stratégique</div>
-<div id="w183" class="cap" style="top:470px">va</div>
-<div id="w184" class="cap" style="top:470px">venir</div>
-<div id="w185" class="cap" style="top:470px">déterminer</div>
-<div id="w186" class="cap" style="top:470px">le</div>
-<div id="w187" class="cap" style="top:470px">type</div>
-<div id="w188" class="cap" style="top:470px">de</div>
-<div id="w189" class="cap" style="top:470px">contenu</div>
-<div id="w190" class="cap" style="top:470px">que</div>
-<div id="w191" class="cap" style="top:470px">tu</div>
-<div id="w192" class="cap" style="top:470px">veux</div>
-<div id="w193" class="cap" style="top:470px">faire</div>
-<div id="w194" class="cap" style="top:470px">mais</div>
-<div id="w195" class="cap" style="top:470px">dans</div>
-<div id="w196" class="cap" style="top:470px">la</div>
-<div id="w197" class="cap" style="top:470px">majorité</div>
-<div id="w198" class="cap" style="top:470px">des</div>
-<div id="w199" class="cap" style="top:470px">cas</div>
-<div id="w200" class="cap" style="top:470px">la</div>
-<div id="w201" class="cap" style="top:470px">plupart</div>
-<div id="w202" class="cap" style="top:470px">des</div>
-<div id="w203" class="cap" style="top:470px">créateurs</div>
-<div id="w204" class="cap" style="top:470px">font</div>
-<div id="w205" class="cap" style="top:470px">un</div>
-<div id="w206" class="cap" style="top:470px">mix</div>
-<div id="w207" class="cap" style="top:470px">des trois</div>
-<div id="w208" class="cap" style="top:470px">à</div>
-<div id="w209" class="cap" style="top:470px">toi</div>
-<div id="w210" class="cap" style="top:470px">de</div>
-<div id="w211" class="cap" style="top:470px">jouer</div>
-<div id="w212" class="cap" style="top:470px">maintenant</div>
-<div id="w213" class="cap" style="top:470px">et</div>
-<div id="w214" class="cap" style="top:470px">abonne-toi</div>
-<div id="w215" class="cap" style="top:470px">tchuss</div>
+<div id="w180" class="cap" style="top:1110px">ton</div>
+<div id="w181" class="cap" style="top:1110px">objectif</div>
+<div id="w182" class="cap" style="top:1110px">stratégique</div>
+<div id="w183" class="cap" style="top:1110px">va</div>
+<div id="w184" class="cap" style="top:1110px">venir</div>
+<div id="w185" class="cap" style="top:1110px">déterminer</div>
+<div id="w186" class="cap" style="top:1110px">le</div>
+<div id="w187" class="cap" style="top:1110px">type</div>
+<div id="w188" class="cap" style="top:1110px">de</div>
+<div id="w189" class="cap" style="top:1110px">contenu</div>
+<div id="w190" class="cap" style="top:1110px">que</div>
+<div id="w191" class="cap" style="top:1110px">tu</div>
+<div id="w192" class="cap" style="top:1110px">veux</div>
+<div id="w193" class="cap" style="top:1110px">faire</div>
+<div id="w194" class="cap" style="top:1110px">mais</div>
+<div id="w195" class="cap" style="top:1110px">dans</div>
+<div id="w196" class="cap" style="top:1110px">la</div>
+<div id="w197" class="cap" style="top:1110px">majorité</div>
+<div id="w198" class="cap" style="top:1110px">des</div>
+<div id="w199" class="cap" style="top:1110px">cas</div>
+<div id="w200" class="cap" style="top:1110px">la</div>
+<div id="w201" class="cap" style="top:1110px">plupart</div>
+<div id="w202" class="cap" style="top:1110px">des</div>
+<div id="w203" class="cap" style="top:1110px">créateurs</div>
+<div id="w204" class="cap" style="top:1110px">font</div>
+<div id="w205" class="cap" style="top:1110px">un</div>
+<div id="w206" class="cap" style="top:1110px">mix</div>
+<div id="w207" class="cap" style="top:1110px">des trois</div>
+<div id="w208" class="cap" style="top:1110px">à</div>
+<div id="w209" class="cap" style="top:1110px">toi</div>
+<div id="w210" class="cap" style="top:1110px">de</div>
+<div id="w211" class="cap" style="top:1110px">jouer</div>
+<div id="w212" class="cap" style="top:1110px">maintenant</div>
+<div id="w213" class="cap" style="top:1110px">et</div>
+<div id="w214" class="cap" style="top:1110px">abonne-toi</div>
+<div id="w215" class="cap" style="top:1110px">tchuss</div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
@@ -374,12 +379,12 @@ tl.to('#dm2',{opacity:0,duration:.12},34.233);
 tl.set('#mv0',{opacity:1},49.800);
 tl.set('#iv0',{opacity:0},49.800);
 tl.to('#dm0',{opacity:0,duration:.12},49.800);
-tl.set('#mv1',{opacity:0},49.800);
-tl.set('#iv1',{opacity:1},49.800);
-tl.to('#dm1',{opacity:1,duration:.12},49.800);
-tl.set('#mv2',{opacity:0},49.800);
-tl.set('#iv2',{opacity:1},49.800);
-tl.to('#dm2',{opacity:1,duration:.12},49.800);
+tl.set('#mv1',{opacity:1},49.800);
+tl.set('#iv1',{opacity:0},49.800);
+tl.to('#dm1',{opacity:0,duration:.12},49.800);
+tl.set('#mv2',{opacity:1},49.800);
+tl.set('#iv2',{opacity:0},49.800);
+tl.to('#dm2',{opacity:0,duration:.12},49.800);
 gsap.set('#hb0',{autoAlpha:0});
 tl.fromTo('#hb0',{autoAlpha:0,scale:.6},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},2.340);
 tl.to('#hb0',{autoAlpha:0,duration:.15},3.783);
@@ -423,18 +428,18 @@ tl.set('#rgn',{textContent:'586,802'.replace(',', ' ')},11.410);
 tl.set('#rgn',{textContent:'631,940'.replace(',', ' ')},11.480);
 tl.set('#rgn',{textContent:'677,079'.replace(',', ' ')},11.550);
 tl.set('#rgn',{textContent:'722,218'.replace(',', ' ')},11.620);
-gsap.set('#ex00',{autoAlpha:0});
-tl.fromTo('#ex00',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},15.007);
-tl.to('#ex00',{autoAlpha:0,duration:.15},17.417);
-tl.set('#ex00',{autoAlpha:0},17.567);
-gsap.set('#ex01',{autoAlpha:0});
-tl.fromTo('#ex01',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},15.887);
-tl.to('#ex01',{autoAlpha:0,duration:.15},17.417);
-tl.set('#ex01',{autoAlpha:0},17.567);
-gsap.set('#ex02',{autoAlpha:0});
-tl.fromTo('#ex02',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},16.667);
-tl.to('#ex02',{autoAlpha:0,duration:.15},17.417);
-tl.set('#ex02',{autoAlpha:0},17.567);
+gsap.set('#ex_liste',{autoAlpha:0});
+tl.fromTo('#ex_liste',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.24,ease:'back.out(2)',immediateRender:false},15.007);
+tl.to('#ex_liste',{autoAlpha:0,duration:.15},15.737);
+tl.set('#ex_liste',{autoAlpha:0},15.887);
+gsap.set('#ex_notation',{autoAlpha:0});
+tl.fromTo('#ex_notation',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.24,ease:'back.out(2)',immediateRender:false},15.887);
+tl.to('#ex_notation',{autoAlpha:0,duration:.15},16.517);
+tl.set('#ex_notation',{autoAlpha:0},16.667);
+gsap.set('#ex_story',{autoAlpha:0});
+tl.fromTo('#ex_story',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.24,ease:'back.out(2)',immediateRender:false},16.667);
+tl.to('#ex_story',{autoAlpha:0,duration:.15},17.417);
+tl.set('#ex_story',{autoAlpha:0},17.567);
 gsap.set('#fn1',{autoAlpha:0});
 tl.fromTo('#fn1',{autoAlpha:0,y:-30,scale:.8},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},18.567);
 tl.to('#fn1',{autoAlpha:0,duration:.15},19.317);
@@ -454,18 +459,22 @@ gsap.set('#sh1',{autoAlpha:0});
 tl.fromTo('#sh1',{autoAlpha:0,scale:.6},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},26.063);
 tl.to('#sh1',{autoAlpha:0,duration:.15},26.850);
 tl.set('#sh1',{autoAlpha:0},27.000);
-gsap.set('#pg10',{autoAlpha:0});
-tl.fromTo('#pg10',{autoAlpha:0,scale:.6},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},29.360);
-tl.to('#pg10',{autoAlpha:0,duration:.15},30.317);
-tl.set('#pg10',{autoAlpha:0},30.467);
-gsap.set('#pg11',{autoAlpha:0});
-tl.fromTo('#pg11',{autoAlpha:0,scale:.6},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},30.677);
-tl.to('#pg11',{autoAlpha:0,duration:.15},31.483);
-tl.set('#pg11',{autoAlpha:0},31.633);
-gsap.set('#st1',{autoAlpha:0});
-tl.fromTo('#st1',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},32.253);
-tl.to('#st1',{autoAlpha:0,duration:.15},34.083);
-tl.set('#st1',{autoAlpha:0},34.233);
+gsap.set('#ex_educatif',{autoAlpha:0});
+tl.fromTo('#ex_educatif',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.24,ease:'back.out(2)',immediateRender:false},29.360);
+tl.to('#ex_educatif',{autoAlpha:0,duration:.15},30.317);
+tl.set('#ex_educatif',{autoAlpha:0},30.467);
+gsap.set('#ex_tutoriels',{autoAlpha:0});
+tl.fromTo('#ex_tutoriels',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.24,ease:'back.out(2)',immediateRender:false},30.677);
+tl.to('#ex_tutoriels',{autoAlpha:0,duration:.15},31.483);
+tl.set('#ex_tutoriels',{autoAlpha:0},31.633);
+gsap.set('#ex_reussites',{autoAlpha:0});
+tl.fromTo('#ex_reussites',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.24,ease:'back.out(2)',immediateRender:false},32.253);
+tl.to('#ex_reussites',{autoAlpha:0,duration:.15},33.783);
+tl.set('#ex_reussites',{autoAlpha:0},33.933);
+gsap.set('#ex_echecs',{autoAlpha:0});
+tl.fromTo('#ex_echecs',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.24,ease:'back.out(2)',immediateRender:false},33.933);
+tl.to('#ex_echecs',{autoAlpha:0,duration:.15},34.083);
+tl.set('#ex_echecs',{autoAlpha:0},34.233);
 gsap.set('#cr2',{autoAlpha:0});
 tl.fromTo('#cr2',{autoAlpha:0,scale:.6},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},35.553);
 tl.to('#cr2',{autoAlpha:0,duration:.15},39.103);
@@ -474,16 +483,20 @@ gsap.set('#fn2',{autoAlpha:0});
 tl.fromTo('#fn2',{autoAlpha:0,y:-30,scale:.8},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},39.393);
 tl.to('#fn2',{autoAlpha:0,duration:.15},40.917);
 tl.set('#fn2',{autoAlpha:0},41.067);
-gsap.set('#ba2',{autoAlpha:0});
-tl.fromTo('#ba2',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},42.247);
-tl.to('#ba2',{autoAlpha:0,duration:.15},46.527);
-tl.set('#ba2',{autoAlpha:0},46.677);
-gsap.set('#ba2a',{clipPath:'inset(0 0 0 100%)'});
-tl.to('#ba2a',{clipPath:'inset(0 0 0 50%)',duration:.5,ease:'power2.inOut'},42.727);
-gsap.set('#ba2l',{x:392});
-tl.to('#ba2l',{x:196,duration:.5,ease:'power2.inOut'},42.727);
+gsap.set('#ex_avantapres',{autoAlpha:0});
+tl.fromTo('#ex_avantapres',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.24,ease:'back.out(2)',immediateRender:false},42.247);
+tl.to('#ex_avantapres',{autoAlpha:0,duration:.15},43.537);
+tl.set('#ex_avantapres',{autoAlpha:0},43.687);
+gsap.set('#ex_temoignage',{autoAlpha:0});
+tl.fromTo('#ex_temoignage',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.24,ease:'back.out(2)',immediateRender:false},43.687);
+tl.to('#ex_temoignage',{autoAlpha:0,duration:.15},45.717);
+tl.set('#ex_temoignage',{autoAlpha:0},45.867);
+gsap.set('#ex_messages',{autoAlpha:0});
+tl.fromTo('#ex_messages',{autoAlpha:0,y:40,scale:.7},{autoAlpha:1,scale:1,x:0,y:0,duration:0.24,ease:'back.out(2)',immediateRender:false},45.867);
+tl.to('#ex_messages',{autoAlpha:0,duration:.15},47.527);
+tl.set('#ex_messages',{autoAlpha:0},47.677);
 gsap.set('#vq2',{autoAlpha:0});
-tl.fromTo('#vq2',{autoAlpha:0,scale:.6},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},48.027);
+tl.fromTo('#vq2',{autoAlpha:0,scale:.6},{autoAlpha:1,scale:1,x:0,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},47.827);
 tl.to('#vq2',{autoAlpha:0,duration:.15},49.650);
 tl.set('#vq2',{autoAlpha:0},49.800);
 gsap.set('#fmix',{autoAlpha:0});
