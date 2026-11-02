@@ -43,19 +43,17 @@ def scenes():
                      f'<div id="hp" class="pill hp"><span class="gh">{text}</span><span id="tx"></span></div></div>')
             T += show('#hd', .02, end, '{autoAlpha:0,scale:.8}', .26)
             T += ["gsap.set('#hp',{autoAlpha:0});",
-                  "tl.fromTo('#hp',{autoAlpha:0,scaleX:.3},{autoAlpha:1,scaleX:1,duration:.18,ease:'power3.out',immediateRender:false},.5);",
+                  "tl.fromTo('#hp',{autoAlpha:0,scaleX:.3},{autoAlpha:1,scaleX:1,duration:.18,ease:'power3.out',immediateRender:false},.3);",
                   "tl.set('#tx',{textContent:''},0);"]
-            ws = [w for w in WORDS if w['s'] < end and w['w'].strip().lower().startswith('qui')]
-            ta = ws[0]['s'] if ws else .7
-            tb = min(end - .25, ta + .9)
+            ta, tb = .45, min(end - .12, 1.75)          # same keyboard sound as her B-roll reels, the text typed over it
             T += [f"tl.set('#tx',{{textContent:{json.dumps(text[:k])}}},{ta + (tb - ta) * k / len(text):.3f});" for k in range(1, len(text) + 1)]
-            S += [('pop', .02, .5), ('typing', ta, .45, tb - ta + .1)]
+            S += [('pop', .02, .5), ('typing', ta, .55, min(1.776, end - ta))]
         elif kind == 'hook':
             # the numbered list: 1 to 10 with dotted lines, each hook revealed in its row as she says it, and kept
             k = len([p for p in PIECES[:i] if p[2] == 'hook'])
             if k == 0:
                 list_end = EDGES[next(j for j, p in enumerate(PIECES) if p[2] == 'cta')]
-                rows = ''.join(f'<div class="lr"><span id="n{q}" class="ln">{q + 1}</span>' + ('' if BLUR else '<span class="ld"></span>') +
+                rows = ''.join(f'<div class="lr"><span id="n{q}" class="ln">{q + 1}</span>' + ('' if BLUR else f'<span id="d{q}" class="ld"></span>') +
                                (f'<span class="lp bl">{HOOKS[q]}</span>' if BLUR else '') + f'<span id="r{q}" class="lp">{HOOKS[q]}</span></div>' for q in range(len(HOOKS)))
                 H.append(f'<div id="lst" class="lst">{rows}</div>')
                 T += ["gsap.set('#lst',{autoAlpha:0});", "gsap.set('#lst .lr',{autoAlpha:0});",
@@ -67,6 +65,8 @@ def scenes():
             T += [f"gsap.set('#r{k}',{{autoAlpha:0}});",
                   f"tl.fromTo('#r{k}',{{autoAlpha:0,scaleX:.2}},{{autoAlpha:1,scaleX:1,duration:.22,ease:'back.out(1.6)',immediateRender:false}},{ta:.3f});",
                   f"tl.fromTo('#n{k}',{{scale:1}},{{scale:1.3,duration:.12,yoyo:true,repeat:1,immediateRender:false}},{ta:.3f});"]
+            if not BLUR:      # the dots leave once the hook is written
+                T += [f"gsap.set('#d{k}',{{autoAlpha:1}});", f"tl.to('#d{k}',{{autoAlpha:0,duration:.12}},{ta + .1:.3f});"]
             S.append(('click-soft', ta, .4))
         elif kind == 'cta':
             last = DUR
