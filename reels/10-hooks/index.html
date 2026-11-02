@@ -50,8 +50,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="16.576" data-width="1080" data-height="1920">
-  <audio id="voice" src="work/v2m/voice.m4a" data-start="0" data-media-start="0" data-duration="16.576" data-track-index="2" data-volume="1"></audio>
+<div id="root" data-composition-id="main" data-start="0" data-duration="17.424" data-width="1080" data-height="1920">
+  <audio id="voice" src="work/v2m/voice.m4a" data-start="0" data-media-start="0" data-duration="17.424" data-track-index="2" data-volume="1"></audio>
 <audio id="sfx0" src="assets/sfx/pop.mp3" data-start="0.020" data-duration="0.720" data-track-index="10" data-volume="0.50"></audio>
 <audio id="sfx1" src="assets/sfx/typing-ref.mp3" data-start="0.450" data-duration="1.095" data-track-index="11" data-volume="1.00"></audio>
 <audio id="sfx2" src="assets/sfx/whoosh-short.mp3" data-start="1.405" data-duration="0.570" data-track-index="12" data-volume="0.35"></audio>
@@ -66,8 +66,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="sfx11" src="assets/sfx/click-soft.mp3" data-start="12.747" data-duration="0.360" data-track-index="12" data-volume="0.40"></audio>
 <audio id="sfx12" src="assets/sfx/click-soft.mp3" data-start="13.928" data-duration="0.360" data-track-index="10" data-volume="0.40"></audio>
 <audio id="sfx13" src="assets/sfx/pop.mp3" data-start="15.682" data-duration="0.720" data-track-index="11" data-volume="0.45"></audio>
-<audio id="sfx14" src="assets/sfx/click.mp3" data-start="16.232" data-duration="0.344" data-track-index="12" data-volume="0.60"></audio>
-  <video id="bgv" class="full" src="work/v2m/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="16.576" data-track-index="0"></video>
+<audio id="sfx14" src="assets/sfx/click.mp3" data-start="16.232" data-duration="0.360" data-track-index="12" data-volume="0.60"></audio>
+  <video id="bgv" class="full" src="work/v2m/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="17.424" data-track-index="0"></video>
 <div id="hd" class="hd col"><div class="hrow"><span class="ten">10</span><span class="hblk">HOOKS</span></div><div id="hp" class="pill hp"><span class="gh">qui arrêtent le scroll</span><span id="tx"></span></div></div>
 <div id="lst" class="lst"><div class="lr"><span id="n0" class="ln">1</span><span class="lp bl">tu vas sûrement pas être d'accord mais</span><span id="r0" class="lp">tu vas sûrement pas être d'accord mais</span></div><div class="lr"><span id="n1" class="ln">2</span><span class="lp bl">personne ne parle de ça</span><span id="r1" class="lp">personne ne parle de ça</span></div><div class="lr"><span id="n2" class="ln">3</span><span class="lp bl">j'aurais aimé savoir ça plus tôt</span><span id="r2" class="lp">j'aurais aimé savoir ça plus tôt</span></div><div class="lr"><span id="n3" class="ln">4</span><span class="lp bl">arrête de scroller et écoute ça</span><span id="r3" class="lp">arrête de scroller et écoute ça</span></div><div class="lr"><span id="n4" class="ln">5</span><span class="lp bl">est-ce que t'as déjà remarqué que</span><span id="r4" class="lp">est-ce que t'as déjà remarqué que</span></div><div class="lr"><span id="n5" class="ln">6</span><span class="lp bl">la vérité dérangeante à propos de…</span><span id="r5" class="lp">la vérité dérangeante à propos de…</span></div><div class="lr"><span id="n6" class="ln">7</span><span class="lp bl">laisse-moi te faire gagner du temps sur…</span><span id="r6" class="lp">laisse-moi te faire gagner du temps sur…</span></div><div class="lr"><span id="n7" class="ln">8</span><span class="lp bl">ça va te surprendre mais</span><span id="r7" class="lp">ça va te surprendre mais</span></div><div class="lr"><span id="n8" class="ln">9</span><span class="lp bl">t'as besoin d'entendre ça aujourd'hui</span><span id="r8" class="lp">t'as besoin d'entendre ça aujourd'hui</span></div><div class="lr"><span id="n9" class="ln">10</span><span class="lp bl">je viens juste de réaliser quelque chose</span><span id="r9" class="lp">je viens juste de réaliser quelque chose</span></div></div>
 <div id="fol"><div class="fav"><img src="assets/avatar.png"/></div><div class="fnm">thestrategicboost.fr<div class="fsub">Stratégie Instagram</div></div><div id="fbtn" class="fbtn">S’abonner</div><div id="fbtn2" class="fbtn on">Abonné(e)</div></div>
@@ -77,6 +77,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="w3" class="cap">plus</div>
 <div id="w4" class="cap">de</div>
 <div id="w5" class="cap">conseils</div>
+<div id="w6" class="cap">tchus</div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
@@ -176,17 +177,22 @@ tl.fromTo('#w2',{scale:.8},{scale:1,duration:0.120,ease:'back.out(2.5)',immediat
 tl.set('#w2',{autoAlpha:0},16.073);
 gsap.set('#w3',{autoAlpha:0});
 tl.set('#w3',{autoAlpha:1},16.073);
-tl.fromTo('#w3',{scale:.8},{scale:1,duration:0.120,ease:'back.out(2.5)',immediateRender:false},16.073);
-tl.set('#w3',{autoAlpha:0},16.200);
+tl.fromTo('#w3',{scale:.8},{scale:1,duration:0.109,ease:'back.out(2.5)',immediateRender:false},16.073);
+tl.set('#w3',{autoAlpha:0},16.182);
 gsap.set('#w4',{autoAlpha:0});
-tl.set('#w4',{autoAlpha:1},16.200);
-tl.fromTo('#w4',{scale:.8},{scale:1,duration:0.120,ease:'back.out(2.5)',immediateRender:false},16.200);
+tl.set('#w4',{autoAlpha:1},16.182);
+tl.fromTo('#w4',{scale:.8},{scale:1,duration:0.120,ease:'back.out(2.5)',immediateRender:false},16.182);
 tl.set('#w4',{autoAlpha:0},16.345);
 gsap.set('#w5',{autoAlpha:0});
 tl.set('#w5',{autoAlpha:1},16.345);
 tl.fromTo('#w5',{scale:.8},{scale:1,duration:0.120,ease:'back.out(2.5)',immediateRender:false},16.345);
-tl.set('#w5',{autoAlpha:0},16.576);
-tl.set({}, {}, 16.576);
+tl.set('#w5',{autoAlpha:0},17.073);
+gsap.set('#w6',{autoAlpha:0});
+tl.set('#w6',{autoAlpha:1},17.073);
+tl.fromTo('#w6',{scale:.8},{scale:1,duration:0.120,ease:'back.out(2.5)',immediateRender:false},17.073);
+tl.set('#w6',{autoAlpha:0},17.424);
+tl.set('#bgv',{scale:1.0},16.576);
+tl.set({}, {}, 17.424);
 window.__timelines["main"] = tl;
 </script>
 </body>

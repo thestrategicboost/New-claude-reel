@@ -37,7 +37,8 @@ PIECES = {
         (16.44, 17.88, 'hook', 'ça va te surprendre mais'),
         (18.38, 19.62, 'hook', "t'as besoin d'entendre ça aujourd'hui"),
         (20.16, 21.96, 'hook', 'je viens juste de réaliser quelque chose'),
-        (22.30, 23.50, 'cta', 'pour plus de conseils'),
+        (22.30, 23.48, 'cta', 'pour plus de conseils'),
+        (23.82, 24.75, 'bye', ''),                     # her signature "tchus": never cut it
     ]),
 }
 PY = sys.executable
