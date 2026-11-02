@@ -12,6 +12,7 @@ import re
 import sys
 
 V = sys.argv[1] if len(sys.argv) > 1 else 'v1'
+BLUR = 'blur' in sys.argv[2:]        # test: the hooks already on screen, blurred, each one coming sharp as she says it
 SEG = json.load(open(f'work/{V}/segs.json'))
 PIECES, DURS = SEG['pieces'], SEG['durs']
 DUR = round(sum(DURS), 3)
@@ -54,8 +55,8 @@ def scenes():
             k = len([p for p in PIECES[:i] if p[2] == 'hook'])
             if k == 0:
                 list_end = EDGES[next(j for j, p in enumerate(PIECES) if p[2] == 'cta')]
-                rows = ''.join(f'<div class="lr"><span id="n{q}" class="ln">{q + 1}</span><span class="ld"></span>'
-                               f'<span id="r{q}" class="lp">{HOOKS[q]}</span></div>' for q in range(len(HOOKS)))
+                rows = ''.join(f'<div class="lr"><span id="n{q}" class="ln">{q + 1}</span>' + ('' if BLUR else '<span class="ld"></span>') +
+                               (f'<span class="lp bl">{HOOKS[q]}</span>' if BLUR else '') + f'<span id="r{q}" class="lp">{HOOKS[q]}</span></div>' for q in range(len(HOOKS)))
                 H.append(f'<div id="lst" class="lst">{rows}</div>')
                 T += ["gsap.set('#lst',{autoAlpha:0});", "gsap.set('#lst .lr',{autoAlpha:0});",
                       f"tl.set('#lst',{{autoAlpha:1}},{e - .12:.3f});",
@@ -141,6 +142,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .lr{{position:relative;height:55px;display:flex;align-items:center}}
 .ln{{flex:none;width:46px;height:46px;border-radius:50%;background:{DARK};color:#fff;font:400 28px/46px Anton;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.25)}}
 .ld{{position:absolute;left:64px;width:600px;top:33px;border-bottom:5px dotted rgba(255,255,255,.95);filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}}
+.lp.bl{{filter:blur(9px);opacity:.9}}
 .lp{{position:absolute;left:58px;top:4px;white-space:nowrap;background:#fff;border-radius:24px;color:{DARK};font:italic 800 31px/46px Poppins;letter-spacing:-.03em;
   padding:0 18px;box-shadow:0 3px 10px rgba(0,0,0,.22);transform-origin:0 50%}}
 .cb{{position:absolute;left:90px;right:90px;top:330px;z-index:30;height:118px;border-radius:59px;background:#fff;display:flex;align-items:center;gap:20px;
