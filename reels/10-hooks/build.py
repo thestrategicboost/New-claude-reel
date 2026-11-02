@@ -45,9 +45,9 @@ def scenes():
             T += ["gsap.set('#hp',{autoAlpha:0});",
                   "tl.fromTo('#hp',{autoAlpha:0,scaleX:.3},{autoAlpha:1,scaleX:1,duration:.18,ease:'power3.out',immediateRender:false},.3);",
                   "tl.set('#tx',{textContent:''},0);"]
-            ta, tb = .45, min(end - .12, 1.75)          # same keyboard sound as her B-roll reels, the text typed over it
+            ta, tb = .45, min(end - .12, 1.75)          # the keyboard sound of her own viral reel (typing-ref), the text typed over it
             T += [f"tl.set('#tx',{{textContent:{json.dumps(text[:k])}}},{ta + (tb - ta) * k / len(text):.3f});" for k in range(1, len(text) + 1)]
-            S += [('pop', .02, .5), ('typing', ta, .55, min(1.776, end - ta))]
+            S += [('pop', .02, .5), ('typing-ref', ta, 1.0, min(1.8, end - ta))]
         elif kind == 'hook':
             # the numbered list: 1 to 10 with dotted lines, each hook revealed in its row as she says it, and kept
             k = len([p for p in PIECES[:i] if p[2] == 'hook'])
@@ -94,9 +94,14 @@ def scenes():
                       f"tl.to('#cb',{{boxShadow:'0 0 0 7px {DARK}, 0 16px 36px rgba(0,0,0,.3)',scale:1.05,duration:.18,yoyo:true,repeat:1}},{ts_ + .1:.3f});"]
                 S += [('pop', a_in, .45), ('click', ts_, .6)]
             else:
-                H.append(f'<div id="cta" class="hd cta"><div class="hblk big">{CTA_BIG}</div><br/><div class="pill cp">{text}</div></div>')
-                T += show('#cta', t0 - .05, DUR, '{autoAlpha:0,scale:.7,y:-20}', .28)
-                S += [('pop', t0 - .05, .45), ('ding', t0 + .3, .45)]
+                # her profile follow card: slides in on "abonne-toi", the button is tapped and turns "Abonné(e)"
+                H.append('<div id="fol"><div class="fav"><img src="assets/avatar.png"/></div><div class="fnm">thestrategicboost.fr<div class="fsub">Stratégie Instagram</div></div>'
+                         '<div id="fbtn" class="fbtn">S’abonner</div><div id="fbtn2" class="fbtn on">Abonné(e)</div></div>')
+                T += ["gsap.set('#fol, #fbtn2',{autoAlpha:0});",
+                      f"tl.fromTo('#fol',{{autoAlpha:0,scale:.6,y:30}},{{autoAlpha:1,scale:1,y:0,duration:.35,ease:'back.out(1.8)',immediateRender:false}},{t0 - .1:.3f});",
+                      f"tl.to('#fbtn',{{scale:.85,duration:.08,yoyo:true,repeat:1}},{t0 + .45:.3f});", f"tl.set('#fbtn',{{autoAlpha:0}},{t0 + .61:.3f});",
+                      f"tl.fromTo('#fbtn2',{{autoAlpha:0,scale:.8}},{{autoAlpha:1,scale:1,duration:.15,ease:'back.out(2)',immediateRender:false}},{t0 + .61:.3f});"]
+                S += [('pop', t0 - .1, .45), ('click', t0 + .45, .6)]
             # her one-word captions, CTA and goodbye only (as in her reel)
             cw = []
             for w in ws:
@@ -153,11 +158,18 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .cty{{font:400 66px/1 Anton;letter-spacing:.06em;color:#2A1A10}}
 .ccr{{width:4px;height:56px;background:{DARK};margin-left:6px}}
 .csd{{width:84px;height:84px;border-radius:50%;background:{DARK};display:flex;align-items:center;justify-content:center;flex:none}}
+.fav{{width:100px;height:100px;border-radius:50%;padding:4px;background:linear-gradient(45deg,#FEDA75,#FA7E1E,#D62976,#962FBF);flex:none}}
+.fav img{{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid #fff;display:block}}
+#fol{{position:absolute;z-index:22;left:130px;top:330px;width:820px;height:150px;background:#fff;border-radius:28px;display:flex;align-items:center;
+  gap:22px;padding:0 26px;box-shadow:0 18px 50px rgba(0,0,0,.3)}}
+.fnm{{flex:1;font:700 34px/1.2 Poppins;color:#111}} .fsub{{font:500 26px/1.2 Poppins;color:#777}}
+.fbtn{{position:absolute;right:26px;width:220px;height:74px;border-radius:16px;background:#0095F6;color:#fff;font:700 30px/74px Poppins;text-align:center}}
+.fbtn.on{{background:#EFEFEF;color:#111}}
 .cp{{margin-top:-8px;font-size:56px;padding:6px 46px}}
 .cap{{position:absolute;left:40px;right:40px;top:1400px;z-index:25;text-align:center;font:700 66px/1 Poppins;color:#fff;
   text-shadow:0 3px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.55)}}
 '''
-SFX_LEN = {'pop': .72, 'click-soft': .36, 'click': .36, 'ding': 1.2, 'whoosh-short': .57}
+SFX_LEN = {'pop': .72, 'click-soft': .36, 'click': .36, 'ding': 1.2, 'whoosh-short': .57, 'typing-ref': 1.8}
 
 
 def build():

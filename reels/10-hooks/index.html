@@ -37,6 +37,13 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .cty{font:400 66px/1 Anton;letter-spacing:.06em;color:#2A1A10}
 .ccr{width:4px;height:56px;background:#573307;margin-left:6px}
 .csd{width:84px;height:84px;border-radius:50%;background:#573307;display:flex;align-items:center;justify-content:center;flex:none}
+.fav{width:100px;height:100px;border-radius:50%;padding:4px;background:linear-gradient(45deg,#FEDA75,#FA7E1E,#D62976,#962FBF);flex:none}
+.fav img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid #fff;display:block}
+#fol{position:absolute;z-index:22;left:130px;top:330px;width:820px;height:150px;background:#fff;border-radius:28px;display:flex;align-items:center;
+  gap:22px;padding:0 26px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.fnm{flex:1;font:700 34px/1.2 Poppins;color:#111} .fsub{font:500 26px/1.2 Poppins;color:#777}
+.fbtn{position:absolute;right:26px;width:220px;height:74px;border-radius:16px;background:#0095F6;color:#fff;font:700 30px/74px Poppins;text-align:center}
+.fbtn.on{background:#EFEFEF;color:#111}
 .cp{margin-top:-8px;font-size:56px;padding:6px 46px}
 .cap{position:absolute;left:40px;right:40px;top:1400px;z-index:25;text-align:center;font:700 66px/1 Poppins;color:#fff;
   text-shadow:0 3px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.55)}
@@ -46,7 +53,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="root" data-composition-id="main" data-start="0" data-duration="18.233" data-width="1080" data-height="1920">
   <audio id="voice" src="work/v2/voice.m4a" data-start="0" data-media-start="0" data-duration="18.233" data-track-index="2" data-volume="1"></audio>
 <audio id="sfx0" src="assets/sfx/pop.mp3" data-start="0.020" data-duration="0.720" data-track-index="10" data-volume="0.50"></audio>
-<audio id="sfx1" src="assets/sfx/typing.mp3" data-start="0.450" data-duration="1.250" data-track-index="11" data-volume="0.55"></audio>
+<audio id="sfx1" src="assets/sfx/typing-ref.mp3" data-start="0.450" data-duration="1.250" data-track-index="11" data-volume="1.00"></audio>
 <audio id="sfx2" src="assets/sfx/whoosh-short.mp3" data-start="1.560" data-duration="0.570" data-track-index="12" data-volume="0.35"></audio>
 <audio id="sfx3" src="assets/sfx/click-soft.mp3" data-start="1.950" data-duration="0.360" data-track-index="10" data-volume="0.40"></audio>
 <audio id="sfx4" src="assets/sfx/click-soft.mp3" data-start="3.347" data-duration="0.360" data-track-index="11" data-volume="0.40"></audio>
@@ -58,12 +65,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="sfx10" src="assets/sfx/click-soft.mp3" data-start="12.513" data-duration="0.360" data-track-index="11" data-volume="0.40"></audio>
 <audio id="sfx11" src="assets/sfx/click-soft.mp3" data-start="14.013" data-duration="0.360" data-track-index="12" data-volume="0.40"></audio>
 <audio id="sfx12" src="assets/sfx/click-soft.mp3" data-start="15.313" data-duration="0.360" data-track-index="10" data-volume="0.40"></audio>
-<audio id="sfx13" src="assets/sfx/pop.mp3" data-start="17.310" data-duration="0.720" data-track-index="11" data-volume="0.45"></audio>
-<audio id="sfx14" src="assets/sfx/ding.mp3" data-start="17.660" data-duration="0.573" data-track-index="12" data-volume="0.45"></audio>
+<audio id="sfx13" src="assets/sfx/pop.mp3" data-start="17.260" data-duration="0.720" data-track-index="11" data-volume="0.45"></audio>
+<audio id="sfx14" src="assets/sfx/click.mp3" data-start="17.810" data-duration="0.360" data-track-index="12" data-volume="0.60"></audio>
   <video id="bgv" class="full" src="work/v2/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="18.233" data-track-index="0"></video>
 <div id="hd" class="hd col"><div class="hrow"><span class="ten">10</span><span class="hblk">HOOKS</span></div><div id="hp" class="pill hp"><span class="gh">qui arrêtent le scroll</span><span id="tx"></span></div></div>
 <div id="lst" class="lst"><div class="lr"><span id="n0" class="ln">1</span><span id="d0" class="ld"></span><span id="r0" class="lp">tu vas sûrement pas être d'accord mais</span></div><div class="lr"><span id="n1" class="ln">2</span><span id="d1" class="ld"></span><span id="r1" class="lp">personne ne parle de ça</span></div><div class="lr"><span id="n2" class="ln">3</span><span id="d2" class="ld"></span><span id="r2" class="lp">j'aurais aimé savoir ça plus tôt</span></div><div class="lr"><span id="n3" class="ln">4</span><span id="d3" class="ld"></span><span id="r3" class="lp">arrête de scroller et écoute ça</span></div><div class="lr"><span id="n4" class="ln">5</span><span id="d4" class="ld"></span><span id="r4" class="lp">est-ce que t'as déjà remarqué que</span></div><div class="lr"><span id="n5" class="ln">6</span><span id="d5" class="ld"></span><span id="r5" class="lp">la vérité dérangeante à propos de…</span></div><div class="lr"><span id="n6" class="ln">7</span><span id="d6" class="ld"></span><span id="r6" class="lp">laisse-moi te faire gagner du temps sur…</span></div><div class="lr"><span id="n7" class="ln">8</span><span id="d7" class="ld"></span><span id="r7" class="lp">ça va te surprendre mais</span></div><div class="lr"><span id="n8" class="ln">9</span><span id="d8" class="ld"></span><span id="r8" class="lp">t'as besoin d'entendre ça aujourd'hui</span></div><div class="lr"><span id="n9" class="ln">10</span><span id="d9" class="ld"></span><span id="r9" class="lp">je viens juste de réaliser quelque chose</span></div></div>
-<div id="cta" class="hd cta"><div class="hblk big">ABONNE-TOI</div><br/><div class="pill cp">pour plus de conseils</div></div>
+<div id="fol"><div class="fav"><img src="assets/avatar.png"/></div><div class="fnm">thestrategicboost.fr<div class="fsub">Stratégie Instagram</div></div><div id="fbtn" class="fbtn">S’abonner</div><div id="fbtn2" class="fbtn on">Abonné(e)</div></div>
 <div id="w0" class="cap">et</div>
 <div id="w1" class="cap">abonne-toi</div>
 <div id="w2" class="cap">pour</div>
@@ -170,10 +177,11 @@ tl.fromTo('#n9',{scale:1},{scale:1.3,duration:.12,yoyo:true,repeat:1,immediateRe
 gsap.set('#d9',{autoAlpha:1});
 tl.to('#d9',{autoAlpha:0,duration:.12},15.413);
 tl.set('#bgv',{scale:1.08},17.033);
-gsap.set('#cta',{autoAlpha:0});
-tl.fromTo('#cta',{autoAlpha:0,scale:.7,y:-20},{autoAlpha:1,scale:1,y:0,duration:0.28,ease:'back.out(2)',immediateRender:false},17.310);
-tl.to('#cta',{autoAlpha:0,duration:.1},18.133);
-tl.set('#cta',{autoAlpha:0},18.233);
+gsap.set('#fol, #fbtn2',{autoAlpha:0});
+tl.fromTo('#fol',{autoAlpha:0,scale:.6,y:30},{autoAlpha:1,scale:1,y:0,duration:.35,ease:'back.out(1.8)',immediateRender:false},17.260);
+tl.to('#fbtn',{scale:.85,duration:.08,yoyo:true,repeat:1},17.810);
+tl.set('#fbtn',{autoAlpha:0},17.970);
+tl.fromTo('#fbtn2',{autoAlpha:0,scale:.8},{autoAlpha:1,scale:1,duration:.15,ease:'back.out(2)',immediateRender:false},17.970);
 gsap.set('#w0',{autoAlpha:0});
 tl.set('#w0',{autoAlpha:1},17.220);
 tl.fromTo('#w0',{scale:.8},{scale:1,duration:0.120,ease:'back.out(2.5)',immediateRender:false},17.220);
