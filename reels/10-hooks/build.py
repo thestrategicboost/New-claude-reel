@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """10 hooks qui arrêtent le scroll, after her published "10 hooks" reel (src/modele.mp4): a big white "10" with "HOOKS"
-in the brown block and a white pill that types "qui arrêtent le scroll"; then each hook in a white pill at the top
-while she says it; the CTA as a brown block + white pill, with her one-word captions under it. Lilac look + her
+in the brown block and a white pill that types "qui arrêtent le scroll"; then a numbered list 1-10 with dotted
+lines, each hook revealed in its row as she says it (and kept); the CTA as her Instagram comment banner (v1, "20" types
+itself) or a brown block + white pill (v2), with her one-word captions under it. Lilac look + her
 retouch (cut.py), alternate punch-ins hide the cuts.
 
 PY cut.py v1|v2      then      PY build.py v1|v2      writes index.html
@@ -17,7 +18,7 @@ DUR = round(sum(DURS), 3)
 WORDS = json.load(open(f'work/{V}/words.json'))
 DARK = '#573307'
 CTA_BIG = {'v1': 'COMMENTE', 'v2': 'ABONNE-TOI'}[V]
-CTA_SFX = {'v1': 'bloop', 'v2': 'ding'}[V]          # a comment = message bloop, a follow = notification ding
+HOOKS = [p[3] for p in PIECES if p[2] == 'hook']
 EDGES, _e = [], 0.0
 for _d in DURS:
     EDGES.append(_e)
@@ -49,17 +50,52 @@ def scenes():
             T += [f"tl.set('#tx',{{textContent:{json.dumps(text[:k])}}},{ta + (tb - ta) * k / len(text):.3f});" for k in range(1, len(text) + 1)]
             S += [('pop', .02, .5), ('typing', ta, .45, tb - ta + .1)]
         elif kind == 'hook':
-            H.append(f'<div id="h{i}" class="hkw"><div class="pill hk">{text}</div></div>')
-            T += show(f'#h{i}', e + .02, end, '{autoAlpha:0,scale:.7,y:-10}', .2)
-            S.append(('click-soft', e + .02, .35))
+            # the numbered list: 1 to 10 with dotted lines, each hook revealed in its row as she says it, and kept
+            k = len([p for p in PIECES[:i] if p[2] == 'hook'])
+            if k == 0:
+                list_end = EDGES[next(j for j, p in enumerate(PIECES) if p[2] == 'cta')]
+                rows = ''.join(f'<div class="lr"><span id="n{q}" class="ln">{q + 1}</span><span class="ld"></span>'
+                               f'<span id="r{q}" class="lp">{HOOKS[q]}</span></div>' for q in range(len(HOOKS)))
+                H.append(f'<div id="lst" class="lst">{rows}</div>')
+                T += ["gsap.set('#lst',{autoAlpha:0});", "gsap.set('#lst .lr',{autoAlpha:0});",
+                      f"tl.set('#lst',{{autoAlpha:1}},{e - .12:.3f});",
+                      f"tl.fromTo('#lst .lr',{{autoAlpha:0,x:-40}},{{autoAlpha:1,x:0,duration:.16,stagger:.03,ease:'power3.out',immediateRender:false}},{e - .12:.3f});",
+                      f"tl.to('#lst',{{autoAlpha:0,duration:.12}},{list_end - .12:.3f});", f"tl.set('#lst',{{autoAlpha:0}},{list_end:.3f});"]
+                S.append(('whoosh-short', e - .14, .35))
+            ta = e + (.08 if k else .25)
+            T += [f"gsap.set('#r{k}',{{autoAlpha:0}});",
+                  f"tl.fromTo('#r{k}',{{autoAlpha:0,scaleX:.2}},{{autoAlpha:1,scaleX:1,duration:.22,ease:'back.out(1.6)',immediateRender:false}},{ta:.3f});",
+                  f"tl.fromTo('#n{k}',{{scale:1}},{{scale:1.3,duration:.12,yoyo:true,repeat:1,immediateRender:false}},{ta:.3f});"]
+            S.append(('click-soft', ta, .4))
         elif kind == 'cta':
             last = DUR
-            H.append(f'<div id="cta" class="hd cta"><div class="hblk big">{CTA_BIG}</div><br/><div class="pill cp">{text}</div></div>')
             ws = [w for w in WORDS if w['s'] >= e - .05]
             key = 'commente' if V == 'v1' else 'abonne'
             t0 = next((w['s'] for w in ws if w['w'].strip().lower().startswith(key)), e + .1)
-            T += show('#cta', t0 - .05, last, '{autoAlpha:0,scale:.7,y:-20}', .28)
-            S += [('pop', t0 - .05, .45), (CTA_SFX, t0 + .3, .45)]
+            if V == 'v1':
+                # her Instagram comment banner: slides in on "commente", 20 types itself on the word, send is tapped
+                big = text
+                tb = next((w['s'] for w in ws if w['w'].strip() == big), t0 + .4)
+                send = ('<svg viewBox="0 0 24 24" width="34" height="34"><path d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="2.6" '
+                        'fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+                H.append(f'<div id="cb" class="cb"><img class="cav" src="assets/avatar.png"/><div class="cw"><span id="cph" class="cph">Ajouter un commentaire…</span>'
+                         f'<span id="cty" class="cty"></span><i id="ccr" class="ccr"></i></div><div id="csd" class="csd">{send}</div></div>')
+                a_in = t0 - .1
+                T += ["gsap.set('#cb',{autoAlpha:0});",
+                      f"tl.fromTo('#cb',{{autoAlpha:0,y:-50,scale:.9}},{{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false}},{a_in:.3f});",
+                      "gsap.set('#cty',{textContent:''});", "gsap.set('#cph',{display:'inline'});",
+                      f"tl.set('#cty',{{textContent:''}},{a_in:.3f});", f"tl.set('#cph',{{display:'inline'}},{a_in:.3f});",
+                      f"tl.set('#cph',{{display:'none'}},{tb:.3f});"]
+                T += [f"tl.set('#cty',{{textContent:{json.dumps(big[:q])}}},{tb + (q - 1) * .08:.3f});" for q in range(1, len(big) + 1)]
+                ts_ = tb + len(big) * .08 + .2
+                T += ["gsap.set('#ccr',{opacity:1});"] + [f"tl.set('#ccr',{{opacity:{q % 2}}},{a_in + .3 + q * .25:.3f});" for q in range(int((DUR - a_in) / .25))]
+                T += [f"tl.to('#csd',{{scale:.78,duration:.07,yoyo:true,repeat:1}},{ts_:.3f});",
+                      f"tl.to('#cb',{{boxShadow:'0 0 0 7px {DARK}, 0 16px 36px rgba(0,0,0,.3)',scale:1.05,duration:.18,yoyo:true,repeat:1}},{ts_ + .1:.3f});"]
+                S += [('pop', a_in, .45), ('click', ts_, .6)]
+            else:
+                H.append(f'<div id="cta" class="hd cta"><div class="hblk big">{CTA_BIG}</div><br/><div class="pill cp">{text}</div></div>')
+                T += show('#cta', t0 - .05, DUR, '{autoAlpha:0,scale:.7,y:-20}', .28)
+                S += [('pop', t0 - .05, .45), ('ding', t0 + .3, .45)]
             # her one-word captions, CTA and goodbye only (as in her reel)
             cw = []
             for w in ws:
@@ -101,13 +137,25 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .hp{{position:relative;margin-top:-30px;white-space:nowrap;z-index:3}}
 .gh{{visibility:hidden}}
 #tx{{position:absolute;left:32px;top:10px}}
-.hkw{{position:absolute;left:0;right:0;top:330px;z-index:20;text-align:center}}
-.hk{{white-space:nowrap;font-size:36px;letter-spacing:-.03em;padding:12px 28px}}
+.lst{{position:absolute;left:180px;width:720px;top:195px;z-index:20}}
+.lr{{position:relative;height:55px;display:flex;align-items:center}}
+.ln{{flex:none;width:46px;height:46px;border-radius:50%;background:{DARK};color:#fff;font:400 28px/46px Anton;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.25)}}
+.ld{{position:absolute;left:64px;width:600px;top:33px;border-bottom:5px dotted rgba(255,255,255,.95);filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}}
+.lp{{position:absolute;left:58px;top:4px;white-space:nowrap;background:#fff;border-radius:24px;color:{DARK};font:italic 800 31px/46px Poppins;letter-spacing:-.03em;
+  padding:0 18px;box-shadow:0 3px 10px rgba(0,0,0,.22);transform-origin:0 50%}}
+.cb{{position:absolute;left:90px;right:90px;top:330px;z-index:30;height:118px;border-radius:59px;background:#fff;display:flex;align-items:center;gap:20px;
+  padding:0 18px;box-shadow:0 16px 36px rgba(0,0,0,.3)}}
+.cav{{width:80px;height:80px;border-radius:50%;object-fit:cover;flex:none;border:3px solid {DARK}}}
+.cw{{flex:1;display:flex;align-items:center;min-width:0}}
+.cph{{font:500 36px/1 Poppins;color:#9A9087}}
+.cty{{font:400 66px/1 Anton;letter-spacing:.06em;color:#2A1A10}}
+.ccr{{width:4px;height:56px;background:{DARK};margin-left:6px}}
+.csd{{width:84px;height:84px;border-radius:50%;background:{DARK};display:flex;align-items:center;justify-content:center;flex:none}}
 .cp{{margin-top:-8px;font-size:56px;padding:6px 46px}}
 .cap{{position:absolute;left:40px;right:40px;top:1400px;z-index:25;text-align:center;font:700 66px/1 Poppins;color:#fff;
   text-shadow:0 3px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.55)}}
 '''
-SFX_LEN = {'pop': .72, 'click-soft': .36, 'bloop': .6, 'ding': 1.2}
+SFX_LEN = {'pop': .72, 'click-soft': .36, 'click': .36, 'ding': 1.2, 'whoosh-short': .57}
 
 
 def build():
