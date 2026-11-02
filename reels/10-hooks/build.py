@@ -12,11 +12,12 @@ import re
 import sys
 
 V = sys.argv[1] if len(sys.argv) > 1 else 'v1'
-BLUR = 'blur' in sys.argv[2:]        # test: the hooks already on screen, blurred, each one coming sharp as she says it
-SEG = json.load(open(f'work/{V}/segs.json'))
+BLUR = 'blur' in sys.argv[2:]
+WD = f'work/{V}m' if 'mirror' in sys.argv[2:] else f'work/{V}'      # mirror.py output: flipped, 1.1x        # test: the hooks already on screen, blurred, each one coming sharp as she says it
+SEG = json.load(open(f'{WD}/segs.json'))
 PIECES, DURS = SEG['pieces'], SEG['durs']
 DUR = round(sum(DURS), 3)
-WORDS = json.load(open(f'work/{V}/words.json'))
+WORDS = json.load(open(f'{WD}/words.json'))
 DARK = '#573307'
 CTA_BIG = {'v1': 'COMMENTE', 'v2': 'ABONNE-TOI'}[V]
 HOOKS = [p[3] for p in PIECES if p[2] == 'hook']
@@ -191,9 +192,9 @@ def build():
 </head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR:.3f}" data-width="1080" data-height="1920">
-  <audio id="voice" src="work/{V}/voice.m4a" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
+  <audio id="voice" src="{WD}/voice.m4a" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
 {nl.join(sfx)}
-  <video id="bgv" class="full" src="work/{V}/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
+  <video id="bgv" class="full" src="{WD}/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
 {nl.join(H)}
 </div>
 <script>
