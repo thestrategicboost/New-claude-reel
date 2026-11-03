@@ -24,6 +24,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .tblock{position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;color:#fff}
 .clab{font:600 44px/1 Poppins;letter-spacing:-.02em;align-self:flex-start;margin-left:4px}
 .ctit{font-family:Anton;line-height:1.02;white-space:nowrap;letter-spacing:.045em}
+.lt{display:inline-block}
 .subs{position:relative;height:44px}
 .csub{position:absolute;right:2px;top:0;font:600 38px/1 Poppins;letter-spacing:-.02em;white-space:nowrap}
 .cardv{position:absolute;z-index:11;overflow:hidden}
@@ -82,35 +83,35 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="sfx30" src="assets/sfx/sparkle.mp3" data-start="56.820" data-duration="1.380" data-track-index="40" data-volume="0.120"></audio>
 <audio id="sfx31" src="assets/sfx/click.mp3" data-start="57.020" data-duration="0.360" data-track-index="41" data-volume="0.450"></audio>
   <div id="stage">
-    <video id="bgv" class="full" src="assets/aroll_graded.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="58.200" data-track-index="0"></video>
+    <video id="bgv" class="full" src="assets/aroll_r.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="58.200" data-track-index="0"></video>
 <div id="hk1" class="anton hook" style="left:108px;top:318px;font-size:226px">TOFU</div>
     <div id="cutwrap"><video id="cut" class="full" src="assets/subject_hook_g.webm" muted playsinline data-start="0" data-media-start="0" data-duration="0.898" data-track-index="1"></video></div>
 <div id="hk2" class="anton hook" style="left:578px;top:932px;font-size:226px">MOFU</div>
 <div id="hk3" class="anton hook" style="left:84px;top:1382px;font-size:226px">BOFU</div>
-<div id="wide"><div id="wd0" class="anton hook" style="left:-16px;width:400px;text-align:center;top:398px;font-size:151px">TOFU</div><div class="badge" style="left:104px;top:596px;width:172px;height:68px;font-size:44px"><svg width="42" height="42" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span>1M</span></div><div id="wd1" class="anton hook" style="left:324px;width:400px;text-align:center;top:398px;font-size:151px">MOFU</div><div class="badge" style="left:438px;top:596px;width:201px;height:68px;font-size:44px"><svg width="42" height="42" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span>100K</span></div><div id="wd2" class="anton hook" style="left:694px;width:400px;text-align:center;top:398px;font-size:151px">BOFU</div><div class="badge" style="left:782px;top:596px;width:233px;height:68px;font-size:44px"><svg width="42" height="42" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span>10K</span></div></div>
+<div id="wide"><div id="wd0" class="anton hook" style="left:-16px;width:400px;text-align:center;top:398px;font-size:151px">TOFU</div><div class="badge" style="left:104px;top:596px;width:172px;height:68px;font-size:44px"><svg width="42" height="42" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span id="wo0">1M</span></div><div id="wd1" class="anton hook" style="left:324px;width:400px;text-align:center;top:398px;font-size:151px">MOFU</div><div class="badge" style="left:438px;top:596px;width:201px;height:68px;font-size:44px"><svg width="42" height="42" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span id="wo1">100K</span></div><div id="wd2" class="anton hook" style="left:694px;width:400px;text-align:center;top:398px;font-size:151px">BOFU</div><div class="badge" style="left:782px;top:596px;width:233px;height:68px;font-size:44px"><svg width="42" height="42" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span id="wo2">10K</span></div></div>
   </div>
-<div id="fun1" class="screen"><svg class="full" viewBox="0 0 1080 1920"><polygon points="270,683 810,683 734,896 346,896" fill="#EFE6D7" stroke="#EFE6D7" stroke-width="22" stroke-linejoin="round"/><polygon points="346,918 734,918 659,1074 421,1074" fill="#DEBCA0" stroke="#DEBCA0" stroke-width="18" stroke-linejoin="round"/><polygon points="415,1097 665,1097 600,1199 600,1296 540,1339 480,1296 480,1199" fill="#BF9067" stroke="#BF9067" stroke-width="14" stroke-linejoin="round"/><g id="fun1a1"><path d="M330 630 C318 545 368 494 440 492" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><polyline points="414 470 443 492 416 512" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></svg><div class="badge" style="left:432px;top:730px;width:216px;height:97px;font-size:56px"><svg width="60" height="60" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span>1M</span></div><div id="fun1l1"><div class="flab" style="left:316px;top:411px">TOFU</div><div class="fsub" style="left:316px;top:558px">Top of Funnel</div></div></div>
-<div id="fun2" class="screen"><svg class="full" viewBox="0 0 1080 1920"><polygon points="270,683 810,683 734,896 346,896" fill="#EFE6D7" stroke="#EFE6D7" stroke-width="22" stroke-linejoin="round"/><polygon points="346,918 734,918 659,1074 421,1074" fill="#DEBCA0" stroke="#DEBCA0" stroke-width="18" stroke-linejoin="round"/><polygon points="415,1097 665,1097 600,1199 600,1296 540,1339 480,1296 480,1199" fill="#BF9067" stroke="#BF9067" stroke-width="14" stroke-linejoin="round"/><g id="fun2a1"><path d="M330 630 C318 545 368 494 440 492" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><polyline points="414 470 443 492 416 512" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g><g id="fun2a2"><path d="M360 938 C292 922 222 948 192 1010" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><polyline points="176 980 190 1013 222 1004" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></svg><div class="badge" style="left:432px;top:730px;width:216px;height:97px;font-size:56px"><svg width="60" height="60" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span>1M</span></div><div id="fun2b2"><div class="badge" style="left:443px;top:950px;width:194px;height:76px;font-size:46px"><svg width="47" height="47" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span>100K</span></div></div><div id="fun2l1"><div class="flab" style="left:316px;top:411px">TOFU</div><div class="fsub" style="left:316px;top:558px">Top of Funnel</div></div><div id="fun2l2"><div class="flab" style="left:-87px;top:1038px">MOFU</div><div class="fsub" style="left:-87px;top:1169px">Middle of Funnel</div></div></div>
-<div id="fun3" class="screen"><svg class="full" viewBox="0 0 1080 1920"><polygon points="270,683 810,683 734,896 346,896" fill="#EFE6D7" stroke="#EFE6D7" stroke-width="22" stroke-linejoin="round"/><polygon points="346,918 734,918 659,1074 421,1074" fill="#DEBCA0" stroke="#DEBCA0" stroke-width="18" stroke-linejoin="round"/><polygon points="415,1097 665,1097 600,1199 600,1296 540,1339 480,1296 480,1199" fill="#BF9067" stroke="#BF9067" stroke-width="14" stroke-linejoin="round"/><g id="fun3a1"><path d="M330 630 C318 545 368 494 440 492" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><polyline points="414 470 443 492 416 512" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g><g id="fun3a2"><path d="M360 938 C292 922 222 948 192 1010" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><polyline points="176 980 190 1013 222 1004" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g><g id="fun3a3"><path d="M646 1200 C700 1206 730 1250 733 1306" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><polyline points="712 1285 733 1310 752 1284" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></svg><div class="badge" style="left:432px;top:730px;width:216px;height:97px;font-size:56px"><svg width="60" height="60" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span>1M</span></div><div id="fun3b2"><div class="badge" style="left:443px;top:950px;width:194px;height:76px;font-size:46px"><svg width="47" height="47" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span>100K</span></div></div><div id="fun3b3"><div class="badge" style="left:458px;top:1112px;width:190px;height:72px;font-size:44px"><svg width="45" height="45" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span>10K</span></div></div><div id="fun3l1"><div class="flab" style="left:316px;top:411px">TOFU</div><div class="fsub" style="left:316px;top:558px">Top of Funnel</div></div><div id="fun3l2"><div class="flab" style="left:-87px;top:1038px">MOFU</div><div class="fsub" style="left:-87px;top:1169px">Middle of Funnel</div></div><div id="fun3l3"><div class="flab" style="left:388px;top:1351px">BOFU</div><div class="fsub" style="left:388px;top:1482px">Bottom of Funnel</div></div></div>
-<div id="cs0" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos de</div><div class="ctit" style="font-size:134px">CLASSEMENT</div><div class="subs"></div></div></div>
+<div id="fun1" class="screen"><svg class="full" viewBox="0 0 1080 1920"><polygon id="fun1t1" points="270,683 810,683 734,896 346,896" fill="#EFE6D7" stroke="#EFE6D7" stroke-width="22" stroke-linejoin="round"/><polygon id="fun1t2" points="346,918 734,918 659,1074 421,1074" fill="#DEBCA0" stroke="#DEBCA0" stroke-width="18" stroke-linejoin="round"/><polygon id="fun1t3" points="415,1097 665,1097 600,1199 600,1296 540,1339 480,1296 480,1199" fill="#BF9067" stroke="#BF9067" stroke-width="14" stroke-linejoin="round"/><g id="fun1a1"><path d="M330 630 C318 545 368 494 440 492" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><polyline points="414 470 443 492 416 512" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></svg><div class="badge" style="left:432px;top:730px;width:216px;height:97px;font-size:56px"><svg width="60" height="60" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span id="fun1o1">1M</span></div><div id="fun1l1"><div class="flab" style="left:316px;top:411px">TOFU</div><div class="fsub" style="left:316px;top:558px">Top of Funnel</div></div></div>
+<div id="fun2" class="screen"><svg class="full" viewBox="0 0 1080 1920"><polygon id="fun2t1" points="270,683 810,683 734,896 346,896" fill="#EFE6D7" stroke="#EFE6D7" stroke-width="22" stroke-linejoin="round"/><polygon id="fun2t2" points="346,918 734,918 659,1074 421,1074" fill="#DEBCA0" stroke="#DEBCA0" stroke-width="18" stroke-linejoin="round"/><polygon id="fun2t3" points="415,1097 665,1097 600,1199 600,1296 540,1339 480,1296 480,1199" fill="#BF9067" stroke="#BF9067" stroke-width="14" stroke-linejoin="round"/><g id="fun2a1"><path d="M330 630 C318 545 368 494 440 492" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><polyline points="414 470 443 492 416 512" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g><g id="fun2a2"><path d="M360 938 C292 922 222 948 192 1010" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><polyline points="176 980 190 1013 222 1004" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></svg><div class="badge" style="left:432px;top:730px;width:216px;height:97px;font-size:56px"><svg width="60" height="60" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span id="fun2o1">1M</span></div><div id="fun2b2"><div class="badge" style="left:443px;top:950px;width:194px;height:76px;font-size:46px"><svg width="47" height="47" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span id="fun2o2">100K</span></div></div><div id="fun2l1"><div class="flab" style="left:316px;top:411px">TOFU</div><div class="fsub" style="left:316px;top:558px">Top of Funnel</div></div><div id="fun2l2"><div class="flab" style="left:-87px;top:1038px">MOFU</div><div class="fsub" style="left:-87px;top:1169px">Middle of Funnel</div></div></div>
+<div id="fun3" class="screen"><svg class="full" viewBox="0 0 1080 1920"><polygon id="fun3t1" points="270,683 810,683 734,896 346,896" fill="#EFE6D7" stroke="#EFE6D7" stroke-width="22" stroke-linejoin="round"/><polygon id="fun3t2" points="346,918 734,918 659,1074 421,1074" fill="#DEBCA0" stroke="#DEBCA0" stroke-width="18" stroke-linejoin="round"/><polygon id="fun3t3" points="415,1097 665,1097 600,1199 600,1296 540,1339 480,1296 480,1199" fill="#BF9067" stroke="#BF9067" stroke-width="14" stroke-linejoin="round"/><g id="fun3a1"><path d="M330 630 C318 545 368 494 440 492" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><polyline points="414 470 443 492 416 512" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g><g id="fun3a2"><path d="M360 938 C292 922 222 948 192 1010" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><polyline points="176 980 190 1013 222 1004" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g><g id="fun3a3"><path d="M646 1200 C700 1206 730 1250 733 1306" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><polyline points="712 1285 733 1310 752 1284" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></svg><div class="badge" style="left:432px;top:730px;width:216px;height:97px;font-size:56px"><svg width="60" height="60" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span id="fun3o1">1M</span></div><div id="fun3b2"><div class="badge" style="left:443px;top:950px;width:194px;height:76px;font-size:46px"><svg width="47" height="47" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span id="fun3o2">100K</span></div></div><div id="fun3b3"><div class="badge" style="left:458px;top:1112px;width:190px;height:72px;font-size:44px"><svg width="45" height="45" viewBox="0 0 24 24"><path d="M2 12c3-5 6.5-7 10-7s7 2 10 7c-3 5-6.5 7-10 7s-7-2-10-7z" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg><span id="fun3o3">10K</span></div></div><div id="fun3l1"><div class="flab" style="left:316px;top:411px">TOFU</div><div class="fsub" style="left:316px;top:558px">Top of Funnel</div></div><div id="fun3l2"><div class="flab" style="left:-87px;top:1038px">MOFU</div><div class="fsub" style="left:-87px;top:1169px">Middle of Funnel</div></div><div id="fun3l3"><div class="flab" style="left:388px;top:1351px">BOFU</div><div class="fsub" style="left:388px;top:1482px">Bottom of Funnel</div></div></div>
+<div id="cs0" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos de</div><div class="ctit" style="font-size:134px"><span class="lt">C</span><span class="lt">L</span><span class="lt">A</span><span class="lt">S</span><span class="lt">S</span><span class="lt">E</span><span class="lt">M</span><span class="lt">E</span><span class="lt">N</span><span class="lt">T</span></div><div class="subs"></div></div></div>
 <div id="wc1" class="cardv" style="left:271px;top:621px;width:538px;height:954px"><video id="c1" src="assets/cards/c1.mp4" muted playsinline data-start="12.833" data-media-start="0" data-duration="3.334" data-track-index="21"></video></div>
-<div id="cs1" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos de</div><div class="ctit" style="font-size:134px">NOTATION</div><div class="subs"></div></div></div>
-<div id="cs2" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos de</div><div class="ctit" style="font-size:134px">TYPE LISTE</div><div class="subs"></div></div></div>
+<div id="cs1" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos de</div><div class="ctit" style="font-size:134px"><span class="lt">N</span><span class="lt">O</span><span class="lt">T</span><span class="lt">A</span><span class="lt">T</span><span class="lt">I</span><span class="lt">O</span><span class="lt">N</span></div><div class="subs"></div></div></div>
+<div id="cs2" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos de</div><div class="ctit" style="font-size:134px"><span class="lt">T</span><span class="lt">Y</span><span class="lt">P</span><span class="lt">E</span> <span class="lt">L</span><span class="lt">I</span><span class="lt">S</span><span class="lt">T</span><span class="lt">E</span></div><div class="subs"></div></div></div>
 <div id="wc2" class="cardv" style="left:274px;top:640px;width:532px;height:948px"><video id="c2" src="assets/cards/c2.mp4" muted playsinline data-start="16.167" data-media-start="0" data-duration="0.966" data-track-index="22"></video></div>
-<div id="cs3" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos</div><div class="ctit" style="font-size:134px">STORYTELLING</div><div class="subs"></div></div></div>
+<div id="cs3" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos</div><div class="ctit" style="font-size:134px"><span class="lt">S</span><span class="lt">T</span><span class="lt">O</span><span class="lt">R</span><span class="lt">Y</span><span class="lt">T</span><span class="lt">E</span><span class="lt">L</span><span class="lt">L</span><span class="lt">I</span><span class="lt">N</span><span class="lt">G</span></div><div class="subs"></div></div></div>
 <div id="wc3" class="cardv" style="left:257px;top:610px;width:566px;height:1004px"><video id="c3" src="assets/cards/c3.mp4" muted playsinline data-start="17.133" data-media-start="0" data-duration="0.900" data-track-index="23"></video></div>
-<div id="cs4" class="screen"><div class="tblock" style="top:352px"><div class="clab">Contenu</div><div class="ctit" style="font-size:134px">ÉDUCATIF</div><div class="subs"><div id="cs4s0" class="csub">approfondi</div></div></div></div>
+<div id="cs4" class="screen"><div class="tblock" style="top:352px"><div class="clab">Contenu</div><div class="ctit" style="font-size:134px"><span class="lt">É</span><span class="lt">D</span><span class="lt">U</span><span class="lt">C</span><span class="lt">A</span><span class="lt">T</span><span class="lt">I</span><span class="lt">F</span></div><div class="subs"><div id="cs4s0" class="csub">approfondi</div></div></div></div>
 <div id="wc4" class="cardv" style="left:289px;top:662px;width:502px;height:890px"><video id="c4" src="assets/cards/c4.mp4" muted playsinline data-start="26.367" data-media-start="0" data-duration="2.900" data-track-index="24"></video></div>
-<div id="cs5" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos</div><div class="ctit" style="font-size:134px">TUTORIEL</div><div class="subs"><div id="cs5s0" class="csub">pas à pas</div></div></div></div>
+<div id="cs5" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos</div><div class="ctit" style="font-size:134px"><span class="lt">T</span><span class="lt">U</span><span class="lt">T</span><span class="lt">O</span><span class="lt">R</span><span class="lt">I</span><span class="lt">E</span><span class="lt">L</span></div><div class="subs"><div id="cs5s0" class="csub">pas à pas</div></div></div></div>
 <div id="wc5" class="cardv" style="left:288px;top:675px;width:506px;height:898px"><video id="c5" src="assets/cards/c5.mp4" muted playsinline data-start="29.267" data-media-start="0" data-duration="1.400" data-track-index="25"></video></div>
-<div id="cs6" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos</div><div class="ctit" style="font-size:134px">STORYTELLING</div><div class="subs"><div id="cs6s0" class="csub">sur tes réussites</div><div id="cs6s1" class="csub">sur tes échecs</div><div id="cs6s2" class="csub">sur tes expériences personnelles</div></div></div></div>
+<div id="cs6" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos</div><div class="ctit" style="font-size:134px"><span class="lt">S</span><span class="lt">T</span><span class="lt">O</span><span class="lt">R</span><span class="lt">Y</span><span class="lt">T</span><span class="lt">E</span><span class="lt">L</span><span class="lt">L</span><span class="lt">I</span><span class="lt">N</span><span class="lt">G</span></div><div class="subs"><div id="cs6s0" class="csub">sur tes réussites</div><div id="cs6s1" class="csub">sur tes échecs</div><div id="cs6s2" class="csub">sur tes expériences personnelles</div></div></div></div>
 <div id="wc6" class="cardv" style="left:293px;top:679px;width:494px;height:878px"><video id="c6" src="assets/cards/c6.mp4" muted playsinline data-start="30.667" data-media-start="0" data-duration="2.733" data-track-index="26"></video></div>
 <div id="wc7" class="cardv" style="left:288px;top:667px;width:504px;height:894px"><video id="c7" src="assets/cards/c7.mp4" muted playsinline data-start="33.400" data-media-start="0" data-duration="0.667" data-track-index="27"></video></div>
-<div id="cs7" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos</div><div class="ctit" style="font-size:134px">AVANT/APRÈS</div><div class="subs"><div id="cs7s0" class="csub">personnelles</div><div id="cs7s1" class="csub">de tes clients</div></div></div></div>
+<div id="cs7" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos</div><div class="ctit" style="font-size:134px"><span class="lt">A</span><span class="lt">V</span><span class="lt">A</span><span class="lt">N</span><span class="lt">T</span><span class="lt">/</span><span class="lt">A</span><span class="lt">P</span><span class="lt">R</span><span class="lt">È</span><span class="lt">S</span></div><div class="subs"><div id="cs7s0" class="csub">personnelles</div><div id="cs7s1" class="csub">de tes clients</div></div></div></div>
 <div id="wc8" class="cardv" style="left:218px;top:746px;width:644px;height:696px"><video id="c8" src="assets/cards/c8.mp4" muted playsinline data-start="40.900" data-media-start="0" data-duration="1.300" data-track-index="28"></video></div>
 <div id="wc9" class="cardv" style="left:304px;top:712px;width:474px;height:850px"><video id="c9" src="assets/cards/c9.mp4" muted playsinline data-start="42.200" data-media-start="0" data-duration="1.200" data-track-index="29"></video></div>
 <div id="wc10" class="cardv" style="left:302px;top:700px;width:476px;height:846px"><video id="c10" src="assets/cards/c10.mp4" muted playsinline data-start="43.400" data-media-start="0" data-duration="2.000" data-track-index="30"></video></div>
-<div id="cs8" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos</div><div class="ctit" style="font-size:91px">VOICI CE QUE JE FERAIS</div><div class="subs"></div></div></div>
+<div id="cs8" class="screen"><div class="tblock" style="top:352px"><div class="clab">Vidéos</div><div class="ctit" style="font-size:91px"><span class="lt">V</span><span class="lt">O</span><span class="lt">I</span><span class="lt">C</span><span class="lt">I</span> <span class="lt">C</span><span class="lt">E</span> <span class="lt">Q</span><span class="lt">U</span><span class="lt">E</span> <span class="lt">J</span><span class="lt">E</span> <span class="lt">F</span><span class="lt">E</span><span class="lt">R</span><span class="lt">A</span><span class="lt">I</span><span class="lt">S</span></div><div class="subs"></div></div></div>
 <div id="wc11" class="cardv" style="left:272px;top:662px;width:538px;height:958px"><video id="c11" src="assets/cards/c11.mp4" muted playsinline data-start="45.400" data-media-start="0" data-duration="3.233" data-track-index="31"></video></div>
 <div id="ig"><div class="igcard"><div class="igav"><img src="assets/avatar.png"/></div><div class="igname">Instagram</div><div id="ighandle" class="ighandle"><span>@thestrategicboost.fr</span></div><div id="igver" class="igver"><svg width="42" height="42" viewBox="0 0 24 24"><path fill="#1C96F0" d="M12 1.5l2.4 1.8 3-.3 1.2 2.8 2.8 1.2-.3 3 1.8 2.4-1.8 2.4.3 3-2.8 1.2-1.2 2.8-3-.3L12 22.5l-2.4-1.8-3 .3-1.2-2.8-2.8-1.2.3-3L1.1 12l1.8-2.4-.3-3 2.8-1.2 1.2-2.8 3 .3z"/><path d="M7.6 12.3l3 3 5.8-6" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div id="igfollow" class="igbtn follow">Follow</div><div id="igfollowing" class="igbtn following">Following</div></div><div id="igcur" class="igcur"><svg width="52" height="70" viewBox="0 0 26 35"><path d="M2 2v26l7-6 5 11 4-2-5-10h9z" fill="#fff" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/></svg></div></div>
 <div id="cp3" class="cap" style="top:1340px">trois</div>
@@ -333,6 +334,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="cp247" class="cap" style="top:470px">de</div>
 <div id="cp248" class="cap" style="top:470px">conseils</div>
 <div id="cp249" class="cap" style="top:470px">tchuss</div>
+  <div id="flash" style="position:absolute;inset:0;z-index:30;background:#fff;opacity:0;pointer-events:none"></div>
 
 </div>
 <script>
@@ -341,18 +343,49 @@ tl.set('#stage',{scale:1.3},9.265);
 tl.set('#stage',{scale:1},10.031);
 tl.set('#stage',{scale:1.3},53.798);
 tl.set('#stage',{scale:1},54.865);
+tl.to('#stage',{scale:1.22,duration:.14,ease:'power2.out'},21.690);
+tl.set('#stage',{scale:1},22.550);
+tl.to('#stage',{scale:1.22,duration:.14,ease:'power2.out'},35.230);
+tl.set('#stage',{scale:1},36.050);
+tl.to('#stage',{scale:1.22,duration:.14,ease:'power2.out'},36.650);
+tl.set('#stage',{scale:1},37.450);
+tl.to('#stage',{scale:1.22,duration:.14,ease:'power2.out'},48.930);
+tl.set('#stage',{scale:1},49.700);
+tl.to('#stage',{scale:1.55,duration:.2,ease:'power3.in'},5.733);
+tl.set('#stage',{scale:1},5.933);
+tl.to('#stage',{scale:1.55,duration:.2,ease:'power3.in'},12.633);
+tl.set('#stage',{scale:1},12.833);
+tl.to('#stage',{scale:1.55,duration:.2,ease:'power3.in'},18.267);
+tl.set('#stage',{scale:1},18.467);
+tl.to('#stage',{scale:1.55,duration:.2,ease:'power3.in'},26.167);
+tl.set('#stage',{scale:1},26.367);
+tl.to('#stage',{scale:1.55,duration:.2,ease:'power3.in'},38.100);
+tl.set('#stage',{scale:1},38.300);
+tl.to('#stage',{scale:1.55,duration:.2,ease:'power3.in'},40.700);
+tl.set('#stage',{scale:1},40.900);
+tl.fromTo('#stage',{scale:1.2},{scale:1,duration:.2,ease:'power3.out',immediateRender:false},8.033);
+tl.fromTo('#stage',{scale:1.2},{scale:1,duration:.2,ease:'power3.out',immediateRender:false},18.033);
+tl.fromTo('#stage',{scale:1.2},{scale:1,duration:.2,ease:'power3.out',immediateRender:false},20.167);
+tl.fromTo('#stage',{scale:1.2},{scale:1,duration:.2,ease:'power3.out',immediateRender:false},34.067);
+tl.fromTo('#stage',{scale:1.2},{scale:1,duration:.2,ease:'power3.out',immediateRender:false},48.633);
 gsap.set('#hk1',{autoAlpha:0});
 tl.set('#hk1',{autoAlpha:1},0.000);
 tl.set('#hk1',{autoAlpha:0},0.898);
-tl.fromTo('#hk1',{scale:1.25},{scale:1,duration:.16,ease:'power3.out',immediateRender:false},0.000);
+tl.fromTo('#hk1',{y:70,scaleY:1.45,scaleX:1.1},{y:0,scaleY:1,scaleX:1,duration:.2,ease:'expo.out',immediateRender:false},0.000);
+tl.fromTo('#flash',{autoAlpha:.4},{autoAlpha:0,duration:.14,immediateRender:false},0.000);
+tl.fromTo('#stage',{x:-14},{x:0,duration:.18,ease:'elastic.out(1,.4)',immediateRender:false},0.000);
 gsap.set('#hk2',{autoAlpha:0});
 tl.set('#hk2',{autoAlpha:1},0.330);
 tl.set('#hk2',{autoAlpha:0},0.898);
-tl.fromTo('#hk2',{scale:1.25},{scale:1,duration:.16,ease:'power3.out',immediateRender:false},0.330);
+tl.fromTo('#hk2',{y:70,scaleY:1.45,scaleX:1.1},{y:0,scaleY:1,scaleX:1,duration:.2,ease:'expo.out',immediateRender:false},0.330);
+tl.fromTo('#flash',{autoAlpha:.4},{autoAlpha:0,duration:.14,immediateRender:false},0.330);
+tl.fromTo('#stage',{x:12},{x:0,duration:.18,ease:'elastic.out(1,.4)',immediateRender:false},0.330);
 gsap.set('#hk3',{autoAlpha:0});
 tl.set('#hk3',{autoAlpha:1},0.600);
 tl.set('#hk3',{autoAlpha:0},0.898);
-tl.fromTo('#hk3',{scale:1.25},{scale:1,duration:.16,ease:'power3.out',immediateRender:false},0.600);
+tl.fromTo('#hk3',{y:70,scaleY:1.45,scaleX:1.1},{y:0,scaleY:1,scaleX:1,duration:.2,ease:'expo.out',immediateRender:false},0.600);
+tl.fromTo('#flash',{autoAlpha:.4},{autoAlpha:0,duration:.14,immediateRender:false},0.600);
+tl.fromTo('#stage',{x:-10},{x:0,duration:.18,ease:'elastic.out(1,.4)',immediateRender:false},0.600);
 gsap.set('#wide',{autoAlpha:0});
 tl.set('#wide',{autoAlpha:1},0.898);
 tl.set('#wide',{autoAlpha:0},4.133);
@@ -365,6 +398,7 @@ tl.set('#fun1',{autoAlpha:0},8.033);
 tl.fromTo('#fun1l1',{autoAlpha:0,scale:.8},{autoAlpha:1,scale:1,duration:.25,ease:'back.out(2)',immediateRender:false},5.933);
 gsap.set('#fun1a1',{autoAlpha:0});
 tl.to('#fun1a1',{autoAlpha:1,duration:.2},6.433);
+tl.fromTo('#fun1t1, #fun1t2, #fun1t3',{scaleY:0,autoAlpha:0},{scaleY:1,autoAlpha:1,transformOrigin:'50% 0%',duration:.28,stagger:.09,ease:'back.out(1.6)',immediateRender:true},5.953);
 gsap.set('#fun2',{autoAlpha:0});
 tl.set('#fun2',{autoAlpha:1},18.467);
 tl.set('#fun2',{autoAlpha:0},20.167);
@@ -384,45 +418,62 @@ tl.fromTo('#fun3b3',{autoAlpha:0,scale:.6},{autoAlpha:1,scale:1,duration:.25,eas
 gsap.set('#cs0',{autoAlpha:0});
 tl.set('#cs0',{autoAlpha:1},12.833);
 tl.set('#cs0',{autoAlpha:0},15.233);
+tl.fromTo('#cs0 .lt',{y:-240,rotation:(i)=>[-10,8,-6,11,-8,6][i % 6],autoAlpha:0},{y:0,rotation:0,autoAlpha:1,duration:.45,ease:'bounce.out',stagger:0.030,immediateRender:true},12.853);
 gsap.set('#wc1',{autoAlpha:0});
 tl.set('#wc1',{autoAlpha:1},12.833);
 tl.set('#wc1',{autoAlpha:0},16.167);
+tl.fromTo('#wc1',{y:160,rotation:-6,scale:.82},{y:0,rotation:0,scale:1,duration:.38,ease:'back.out(1.5)',immediateRender:true},12.853);
+tl.to('#wc1',{y:-14,rotation:1.2,duration:2.884,ease:'sine.inOut'},13.253);
 gsap.set('#cs1',{autoAlpha:0});
 tl.set('#cs1',{autoAlpha:1},15.233);
 tl.set('#cs1',{autoAlpha:0},16.167);
+tl.fromTo('#cs1 .lt',{y:-240,rotation:(i)=>[-10,8,-6,11,-8,6][i % 6],autoAlpha:0},{y:0,rotation:0,autoAlpha:1,duration:.45,ease:'bounce.out',stagger:0.037,immediateRender:true},15.253);
 gsap.set('#cs2',{autoAlpha:0});
 tl.set('#cs2',{autoAlpha:1},16.167);
 tl.set('#cs2',{autoAlpha:0},17.133);
+tl.fromTo('#cs2 .lt',{y:-240,rotation:(i)=>[-10,8,-6,11,-8,6][i % 6],autoAlpha:0},{y:0,rotation:0,autoAlpha:1,duration:.45,ease:'bounce.out',stagger:0.030,immediateRender:true},16.187);
 gsap.set('#wc2',{autoAlpha:0});
 tl.set('#wc2',{autoAlpha:1},16.167);
 tl.set('#wc2',{autoAlpha:0},17.133);
+tl.fromTo('#wc2',{y:160,rotation:-6,scale:.82},{y:0,rotation:0,scale:1,duration:.38,ease:'back.out(1.5)',immediateRender:true},16.187);
+tl.to('#wc2',{y:-14,rotation:1.2,duration:0.516,ease:'sine.inOut'},16.587);
 gsap.set('#cs3',{autoAlpha:0});
 tl.set('#cs3',{autoAlpha:1},17.133);
 tl.set('#cs3',{autoAlpha:0},18.033);
+tl.fromTo('#cs3 .lt',{y:-240,rotation:(i)=>[-10,8,-6,11,-8,6][i % 6],autoAlpha:0},{y:0,rotation:0,autoAlpha:1,duration:.45,ease:'bounce.out',stagger:0.025,immediateRender:true},17.153);
 gsap.set('#wc3',{autoAlpha:0});
 tl.set('#wc3',{autoAlpha:1},17.133);
 tl.set('#wc3',{autoAlpha:0},18.033);
+tl.fromTo('#wc3',{y:160,rotation:-6,scale:.82},{y:0,rotation:0,scale:1,duration:.38,ease:'back.out(1.5)',immediateRender:true},17.153);
+tl.to('#wc3',{y:-14,rotation:1.2,duration:0.450,ease:'sine.inOut'},17.553);
 gsap.set('#cs4',{autoAlpha:0});
 tl.set('#cs4',{autoAlpha:1},26.367);
 tl.set('#cs4',{autoAlpha:0},29.267);
+tl.fromTo('#cs4 .lt',{y:-240,rotation:(i)=>[-10,8,-6,11,-8,6][i % 6],autoAlpha:0},{y:0,rotation:0,autoAlpha:1,duration:.45,ease:'bounce.out',stagger:0.037,immediateRender:true},26.387);
 gsap.set('#cs4s0',{autoAlpha:0});
 tl.set('#cs4s0',{autoAlpha:1},26.367);
 tl.set('#cs4s0',{autoAlpha:0},29.267);
 gsap.set('#wc4',{autoAlpha:0});
 tl.set('#wc4',{autoAlpha:1},26.367);
 tl.set('#wc4',{autoAlpha:0},29.267);
+tl.fromTo('#wc4',{y:160,rotation:-6,scale:.82},{y:0,rotation:0,scale:1,duration:.38,ease:'back.out(1.5)',immediateRender:true},26.387);
+tl.to('#wc4',{y:-14,rotation:1.2,duration:2.450,ease:'sine.inOut'},26.787);
 gsap.set('#cs5',{autoAlpha:0});
 tl.set('#cs5',{autoAlpha:1},29.267);
 tl.set('#cs5',{autoAlpha:0},30.667);
+tl.fromTo('#cs5 .lt',{y:-240,rotation:(i)=>[-10,8,-6,11,-8,6][i % 6],autoAlpha:0},{y:0,rotation:0,autoAlpha:1,duration:.45,ease:'bounce.out',stagger:0.037,immediateRender:true},29.287);
 gsap.set('#cs5s0',{autoAlpha:0});
 tl.set('#cs5s0',{autoAlpha:1},29.267);
 tl.set('#cs5s0',{autoAlpha:0},30.667);
 gsap.set('#wc5',{autoAlpha:0});
 tl.set('#wc5',{autoAlpha:1},29.267);
 tl.set('#wc5',{autoAlpha:0},30.667);
+tl.fromTo('#wc5',{y:160,rotation:-6,scale:.82},{y:0,rotation:0,scale:1,duration:.38,ease:'back.out(1.5)',immediateRender:true},29.287);
+tl.to('#wc5',{y:-14,rotation:1.2,duration:0.950,ease:'sine.inOut'},29.687);
 gsap.set('#cs6',{autoAlpha:0});
 tl.set('#cs6',{autoAlpha:1},30.667);
 tl.set('#cs6',{autoAlpha:0},34.067);
+tl.fromTo('#cs6 .lt',{y:-240,rotation:(i)=>[-10,8,-6,11,-8,6][i % 6],autoAlpha:0},{y:0,rotation:0,autoAlpha:1,duration:.45,ease:'bounce.out',stagger:0.025,immediateRender:true},30.687);
 gsap.set('#cs6s0',{autoAlpha:0});
 tl.set('#cs6s0',{autoAlpha:1},30.667);
 tl.set('#cs6s0',{autoAlpha:0},32.650);
@@ -435,12 +486,16 @@ tl.set('#cs6s2',{autoAlpha:0},34.067);
 gsap.set('#wc6',{autoAlpha:0});
 tl.set('#wc6',{autoAlpha:1},30.667);
 tl.set('#wc6',{autoAlpha:0},33.400);
+tl.fromTo('#wc6',{y:160,rotation:-6,scale:.82},{y:0,rotation:0,scale:1,duration:.38,ease:'back.out(1.5)',immediateRender:true},30.687);
+tl.to('#wc6',{y:-14,rotation:1.2,duration:2.283,ease:'sine.inOut'},31.087);
 gsap.set('#wc7',{autoAlpha:0});
 tl.set('#wc7',{autoAlpha:1},33.400);
 tl.set('#wc7',{autoAlpha:0},34.067);
+tl.fromTo('#wc7',{y:160,rotation:-6,scale:.82},{y:0,rotation:0,scale:1,duration:.38,ease:'back.out(1.5)',immediateRender:true},33.420);
 gsap.set('#cs7',{autoAlpha:0});
 tl.set('#cs7',{autoAlpha:1},40.900);
 tl.set('#cs7',{autoAlpha:0},45.400);
+tl.fromTo('#cs7 .lt',{y:-240,rotation:(i)=>[-10,8,-6,11,-8,6][i % 6],autoAlpha:0},{y:0,rotation:0,autoAlpha:1,duration:.45,ease:'bounce.out',stagger:0.027,immediateRender:true},40.920);
 gsap.set('#cs7s0',{autoAlpha:0});
 tl.set('#cs7s0',{autoAlpha:1},40.900);
 tl.set('#cs7s0',{autoAlpha:0},44.730);
@@ -450,18 +505,75 @@ tl.set('#cs7s1',{autoAlpha:0},45.400);
 gsap.set('#wc8',{autoAlpha:0});
 tl.set('#wc8',{autoAlpha:1},40.900);
 tl.set('#wc8',{autoAlpha:0},42.200);
+tl.fromTo('#wc8',{y:160,rotation:-6,scale:.82},{y:0,rotation:0,scale:1,duration:.38,ease:'back.out(1.5)',immediateRender:true},40.920);
+tl.to('#wc8',{y:-14,rotation:1.2,duration:0.850,ease:'sine.inOut'},41.320);
 gsap.set('#wc9',{autoAlpha:0});
 tl.set('#wc9',{autoAlpha:1},42.200);
 tl.set('#wc9',{autoAlpha:0},43.400);
+tl.fromTo('#wc9',{y:160,rotation:-6,scale:.82},{y:0,rotation:0,scale:1,duration:.38,ease:'back.out(1.5)',immediateRender:true},42.220);
+tl.to('#wc9',{y:-14,rotation:1.2,duration:0.750,ease:'sine.inOut'},42.620);
 gsap.set('#wc10',{autoAlpha:0});
 tl.set('#wc10',{autoAlpha:1},43.400);
 tl.set('#wc10',{autoAlpha:0},45.400);
+tl.fromTo('#wc10',{y:160,rotation:-6,scale:.82},{y:0,rotation:0,scale:1,duration:.38,ease:'back.out(1.5)',immediateRender:true},43.420);
+tl.to('#wc10',{y:-14,rotation:1.2,duration:1.550,ease:'sine.inOut'},43.820);
 gsap.set('#cs8',{autoAlpha:0});
 tl.set('#cs8',{autoAlpha:1},45.400);
 tl.set('#cs8',{autoAlpha:0},48.633);
+tl.fromTo('#cs8 .lt',{y:-240,rotation:(i)=>[-10,8,-6,11,-8,6][i % 6],autoAlpha:0},{y:0,rotation:0,autoAlpha:1,duration:.45,ease:'bounce.out',stagger:0.014,immediateRender:true},45.420);
 gsap.set('#wc11',{autoAlpha:0});
 tl.set('#wc11',{autoAlpha:1},45.400);
 tl.set('#wc11',{autoAlpha:0},48.633);
+tl.fromTo('#wc11',{y:160,rotation:-6,scale:.82},{y:0,rotation:0,scale:1,duration:.38,ease:'back.out(1.5)',immediateRender:true},45.420);
+tl.to('#wc11',{y:-14,rotation:1.2,duration:2.783,ease:'sine.inOut'},45.820);
+tl.fromTo('#fun1',{scale:1.25},{scale:1,duration:.25,ease:'power3.out',immediateRender:false},5.933);
+tl.fromTo('#fun2',{scale:1.25},{scale:1,duration:.25,ease:'power3.out',immediateRender:false},18.467);
+tl.fromTo('#fun3',{scale:1.25},{scale:1,duration:.25,ease:'power3.out',immediateRender:false},38.300);
+tl.fromTo('#cs0',{scale:1.25},{scale:1,duration:.25,ease:'power3.out',immediateRender:false},12.833);
+tl.fromTo('#cs4',{scale:1.25},{scale:1,duration:.25,ease:'power3.out',immediateRender:false},26.367);
+tl.fromTo('#cs7',{scale:1.25},{scale:1,duration:.25,ease:'power3.out',immediateRender:false},40.900);
+gsap.set('#wo0',{textContent:'0'});
+tl.set('#wo0',{textContent:"0"},0.978);
+tl.set('#wo0',{textContent:"120K"},1.048);
+tl.set('#wo0',{textContent:"380K"},1.118);
+tl.set('#wo0',{textContent:"650K"},1.188);
+tl.set('#wo0',{textContent:"870K"},1.258);
+tl.set('#wo0',{textContent:"1M"},1.328);
+gsap.set('#wo1',{textContent:'0'});
+tl.set('#wo1',{textContent:"0"},1.058);
+tl.set('#wo1',{textContent:"12K"},1.128);
+tl.set('#wo1',{textContent:"38K"},1.198);
+tl.set('#wo1',{textContent:"65K"},1.268);
+tl.set('#wo1',{textContent:"87K"},1.338);
+tl.set('#wo1',{textContent:"100K"},1.408);
+gsap.set('#wo2',{textContent:'0'});
+tl.set('#wo2',{textContent:"0"},1.138);
+tl.set('#wo2',{textContent:"1K"},1.208);
+tl.set('#wo2',{textContent:"4K"},1.278);
+tl.set('#wo2',{textContent:"6K"},1.348);
+tl.set('#wo2',{textContent:"9K"},1.418);
+tl.set('#wo2',{textContent:"10K"},1.488);
+gsap.set('#fun1o1',{textContent:'0'});
+tl.set('#fun1o1',{textContent:"0"},6.033);
+tl.set('#fun1o1',{textContent:"120K"},6.103);
+tl.set('#fun1o1',{textContent:"380K"},6.173);
+tl.set('#fun1o1',{textContent:"650K"},6.243);
+tl.set('#fun1o1',{textContent:"870K"},6.313);
+tl.set('#fun1o1',{textContent:"1M"},6.383);
+gsap.set('#fun2o2',{textContent:'0'});
+tl.set('#fun2o2',{textContent:"0"},19.067);
+tl.set('#fun2o2',{textContent:"12K"},19.137);
+tl.set('#fun2o2',{textContent:"38K"},19.207);
+tl.set('#fun2o2',{textContent:"65K"},19.277);
+tl.set('#fun2o2',{textContent:"87K"},19.347);
+tl.set('#fun2o2',{textContent:"100K"},19.417);
+gsap.set('#fun3o3',{textContent:'0'});
+tl.set('#fun3o3',{textContent:"0"},38.900);
+tl.set('#fun3o3',{textContent:"1K"},38.970);
+tl.set('#fun3o3',{textContent:"4K"},39.040);
+tl.set('#fun3o3',{textContent:"6K"},39.110);
+tl.set('#fun3o3',{textContent:"9K"},39.180);
+tl.set('#fun3o3',{textContent:"10K"},39.250);
 gsap.set('#cp3',{autoAlpha:0});
 tl.set('#cp3',{autoAlpha:1},1.190);
 tl.set('#cp3',{autoAlpha:0},1.390);
