@@ -69,3 +69,4 @@
 - Maé: never put "ma girl" in on-screen titles/hooks (fine in her caption only).
 - Maé: deliver the phone copy by default (format téléphone: scale=720:-2, crf 24, ~1-2 MB); 1080p only if she asks.
 - Maé: her "tchus" at the very end is her signature: always keep it, even when it comes after the CTA and Whisper misses it (check the audio tail).
+- Maé: no punch-in zooms on her face (23 Digital zoom) — she finds them unflattering. Retouch every visible frame of her, frozen/dimmed stills included.

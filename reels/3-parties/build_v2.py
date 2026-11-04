@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """v2: the v1 edit made modern and dynamic with effects from the library (references/effects.md), her retouch on the
 A-roll (assets/aroll_r.mp4):  01 Kinetic hook (TOFU/MOFU/BOFU badges slam in, flash + shake of their band),
-39 Odometer (view counts roll up), 23 Digital zoom (punch-ins on her key words in the lit band), 26 Chart grow (funnel
+39 Odometer (view counts roll up), 26 Chart grow (funnel
 tiers grow in), 02 Gravity drop (the lit funnel label falls letter by letter), 16 Video card (her example reels fly in
 tilted, settle, float).   TEST=23 PY build_v2.py  -> only the first 23 s (test)
 
@@ -25,7 +25,7 @@ DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error',
                             'csv=p=0', 'assets/aroll.mp4'], capture_output=True, text=True).stdout.strip())
 if os.environ.get('TEST'):
     DUR = min(DUR, float(os.environ['TEST']))
-PUNCH = [(12.37, 12.77), (21.55, 22.73), (26.54, 27.0), (44.0, 46.53)]     # 23 Digital zoom: key word -> next cut (edit time)
+PUNCH = []      # 23 Digital zoom removed: she does not like zooms on her face
 SEGS = json.load(open('work/segs.json'))
 PARTS = json.load(open('work/partdurs.json'))         # real length of each kept piece in assets/aroll.mp4
 DARK, BROWN, GOLD = '#573307', '#8C5C41', '#C99A55'
@@ -128,7 +128,7 @@ def scenes():
     for k in range(3):
         H.append(f'<div id="bd{k}" class="band" style="top:{k * BAND}px">'
                  f'<video id="mv{k}" class="bv" src="assets/aroll_r.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="{k}"></video>'
-                 f'<img id="iv{k}" class="bv" src="assets/still/b{k}.jpg"/>'     # the bands not talking are frozen
+                 f'<img id="iv{k}" class="bv" src="assets/still/b{k}r.jpg"/>'     # the bands not talking are frozen
                  f'<i id="dm{k}" class="dim"></i><div id="gx{k}" class="gx"></div><i id="fl{k}" class="flash"></i></div>')
     T += [f"gsap.set('#dm{q}',{{opacity:{0 if q == 0 else 1}}});" for q in range(3)]
     last = None
