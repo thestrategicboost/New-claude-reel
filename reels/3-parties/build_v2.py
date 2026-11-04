@@ -86,6 +86,7 @@ def band_of(t):
 
 
 def pop(sel, a, b, frm='{autoAlpha:0,scale:.6}', d=.28):
+    d = min(d, max(.08, b - a - .2))      # the entrance must end before the fade-out starts
     return [f"gsap.set('{sel}',{{autoAlpha:0}});",
             f"tl.fromTo('{sel}',{frm},{{autoAlpha:1,scale:1,x:0,y:0,rotation:0,duration:{d},ease:'back.out(2)',immediateRender:false}},{a:.3f});",
             f"tl.to('{sel}',{{autoAlpha:0,duration:.15}},{b - .15:.3f});", f"tl.set('{sel}',{{autoAlpha:0}},{b:.3f});"]
