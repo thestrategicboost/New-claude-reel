@@ -33,6 +33,8 @@ import shutil
 import subprocess
 import sys
 
+MIRROR = '--mirror' in sys.argv
+ROSE = '--rose' in sys.argv          # rosé background (rose.py on the retouched A-roll, hook cut-out re-coloured to match)      # mirror variant: only her footage is flipped (text stays readable); speed is applied on the final file
 SAFE = '--safe' in sys.argv or bool(os.environ.get('SAFE'))
 DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries',
                             'stream=duration', '-of', 'csv=p=0', 'assets/aroll.mp4'],
@@ -440,16 +442,16 @@ def build():
 <meta name="viewport" content="width=1080, height=1920" />
 <link rel="stylesheet" href="assets/fonts/fonts.css" />
 <script src="assets/vendor/gsap.min.js"></script>
-<style>{CSS}</style>
+<style>{CSS}{'#bgv,#cut{{transform:scaleX(-1)}}' if MIRROR else ''}</style>
 </head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR:.3f}" data-width="1080" data-height="1920">
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
 {nl.join(audio())}
   <div id="stage">
-    <video id="bgv" class="full" src="assets/aroll_r.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
+    <video id="bgv" class="full" src="{'assets/aroll_rose.mp4' if ROSE else 'assets/aroll_r.mp4'}" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
 {nl.join(hb)}
-    <div id="cutwrap"><video id="cut" class="full" src="assets/subject_hook_g.webm" muted playsinline data-start="0" data-media-start="0" data-duration="{HOOK_END:.3f}" data-track-index="1"></video></div>
+    <div id="cutwrap"><video id="cut" class="full" src="{'assets/subject_hook_rose.webm' if ROSE else 'assets/subject_hook_g.webm'}" muted playsinline data-start="0" data-media-start="0" data-duration="{HOOK_END:.3f}" data-track-index="1"></video></div>
 {nl.join(hf)}
   </div>
 {nl.join(f_html)}
