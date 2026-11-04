@@ -3,8 +3,7 @@
 screens, her retouch on the A-roll (assets/aroll_r.mp4), plus effects from the library (references/effects.md):
   01 Kinetic hook   TOFU / MOFU / BOFU slam in (scaleY 1.4 -> 1), white flash + small camera shake on each word
   39 Odometer       the view badges (1M / 100K / 10K) count up when they appear
-  23 Digital zoom   punch-ins on her key words (solides, connexion, autorité, objectif)
-  25 Zoom-through   the camera pushes into her before each brown screen, the screen lands from 1.25x, the A-roll comes back from 1.2x
+  25 Zoom-through   (screen half only) each brown screen lands from 1.25x; no zoom on her face (her ask)
   26 Chart grow     the funnel tiers grow in, top to bottom, on the first funnel
   02 Gravity drop   the card titles (CLASSEMENT, NOTATION...) fall letter by letter
   16 Video card     her example reels fly in tilted and settle, then float
@@ -303,18 +302,9 @@ def ig_card():
 
 
 def zooms():
-    tw = []
-    for a, b in ZOOMS:
-        tw += [f"tl.set('#stage',{{scale:1.3}},{a - .002:.3f});", f"tl.set('#stage',{{scale:1}},{b - .002:.3f});"]
-    for a, b in PUNCH:          # 23 Digital zoom on the key word
-        tw += [f"tl.to('#stage',{{scale:1.22,duration:.14,ease:'power2.out'}},{a - .03:.3f});", f"tl.set('#stage',{{scale:1}},{b:.3f});"]
-    starts = sorted({a for a, _ in BROWN_SPANS})
-    ends = sorted({b for _, b in BROWN_SPANS} - set(starts))
-    for a in starts:            # 25 Zoom-through: push into her, the brown screen lands from 1.25x
-        tw += [f"tl.to('#stage',{{scale:1.55,duration:.2,ease:'power3.in'}},{a - .2:.3f});", f"tl.set('#stage',{{scale:1}},{a:.3f});"]
-    for b in ends:              # ... and the A-roll comes back from 1.2x
-        tw.append(f"tl.fromTo('#stage',{{scale:1.2}},{{scale:1,duration:.2,ease:'power3.out',immediateRender:false}},{b:.3f});")
-    return tw
+    """no zoom on her face at all (her ask): the 1.3x punch-ins, the 23 Digital zooms and the zoom-through push are off;
+    the brown screens still land from 1.25x (screen_in)"""
+    return []
 
 
 def screen_in():
@@ -355,7 +345,6 @@ def sfx_list():
             out.append(('pop', a + .6, .2))
     for a, b, label, title, subs, vids in CARDS:                              # subtitle changes
         out += [('click-soft', t, .45) for t, _ in subs[1:]]
-    out += [('whoosh-short', a, .18) for a, _ in ZOOMS]
     out += [('pop', IG_IN, .3), ('sparkle', IG_IN + .85, .16), ('click', IG_IN + 1.05, .6)]
     return out
 
