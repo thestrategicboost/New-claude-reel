@@ -21,6 +21,13 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .big small{font:400 66px/1 Anton;letter-spacing:.04em}
 .big.t0{background:#E0322C} .big.t1{background:#F7C51E;color:#2A1A10;text-shadow:0 5px 0 rgba(255,255,255,.35)} .big.t2{background:#23A94B}   /* her ask for this reel: red / yellow / green */
 .rays{position:absolute;width:760px;height:760px;left:50%;top:50%;margin:-380px 0 0 -380px;z-index:-1}
+.row{position:absolute;left:0;right:0;top:350px;z-index:19;display:flex;justify-content:center;align-items:flex-start;gap:16px}
+.plate{position:relative;display:flex;flex-direction:column;align-items:center;padding:8px 18px 6px;border-radius:18px;color:#fff;
+  box-shadow:0 12px 28px rgba(0,0,0,.3);transform-origin:50% 0%}
+.plate b{display:block;font:400 92px/1 Anton;letter-spacing:.01em;white-space:nowrap;text-shadow:0 4px 0 rgba(0,0,0,.25)}
+.plate small{font:800 26px/1.1 Poppins;letter-spacing:.06em;text-transform:uppercase}
+.plate.t0{background:#E0322C} .plate.t1{background:#F7C51E;color:#2A1A10} .plate.t1 b{text-shadow:0 4px 0 rgba(255,255,255,.35)} .plate.t2{background:#23A94B}
+.plate .rays{position:absolute;width:640px;height:640px;left:50%;top:50%;margin:-320px 0 0 -320px;z-index:-1}
 .pill{display:inline-flex;align-items:center;gap:12px;margin-top:-4px;padding:6px 30px 6px 22px;border-radius:40px;background:#fff;color:#573307;
   font:italic 800 44px/1.2 Poppins;letter-spacing:-.02em;box-shadow:0 4px 16px rgba(0,0,0,.22);transform-origin:50% 50%}
 .chip{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;z-index:21;display:flex;align-items:center;gap:14px;padding:10px 30px 12px 20px;
@@ -44,41 +51,40 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="36.503" data-width="1080" data-height="1920">
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="36.503" data-track-index="2" data-volume="1"></audio>
-<audio id="sfx0" src="assets/sfx/whoosh-short.mp3" data-start="2.210" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
-<audio id="sfx1" src="assets/sfx/nope.mp3" data-start="2.540" data-duration="0.800" data-track-index="11" data-volume="0.40"></audio>
-<audio id="sfx2" src="assets/sfx/whoosh-short.mp3" data-start="3.180" data-duration="0.570" data-track-index="10" data-volume="0.30"></audio>
-<audio id="sfx3" src="assets/sfx/whoosh-short.mp3" data-start="5.170" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
-<audio id="sfx4" src="assets/sfx/kaching.mp3" data-start="5.500" data-duration="1.200" data-track-index="11" data-volume="0.50"></audio>
-<audio id="sfx5" src="assets/sfx/click-soft.mp3" data-start="7.080" data-duration="0.360" data-track-index="10" data-volume="0.45"></audio>
-<audio id="sfx6" src="assets/sfx/click-soft.mp3" data-start="9.040" data-duration="0.360" data-track-index="10" data-volume="0.45"></audio>
-<audio id="sfx7" src="assets/sfx/whoosh-short.mp3" data-start="10.353" data-duration="0.570" data-track-index="10" data-volume="0.30"></audio>
-<audio id="sfx8" src="assets/sfx/whoosh-short.mp3" data-start="12.330" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
-<audio id="sfx9" src="assets/sfx/ding.mp3" data-start="12.660" data-duration="1.200" data-track-index="11" data-volume="0.45"></audio>
-<audio id="sfx10" src="assets/sfx/whoosh-short.mp3" data-start="13.300" data-duration="0.570" data-track-index="10" data-volume="0.30"></audio>
-<audio id="sfx11" src="assets/sfx/whoosh-short.mp3" data-start="15.010" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
-<audio id="sfx12" src="assets/sfx/kaching.mp3" data-start="15.340" data-duration="1.200" data-track-index="11" data-volume="0.50"></audio>
-<audio id="sfx13" src="assets/sfx/whoosh-short.mp3" data-start="18.353" data-duration="0.570" data-track-index="10" data-volume="0.30"></audio>
-<audio id="sfx14" src="assets/sfx/whoosh-short.mp3" data-start="20.210" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
-<audio id="sfx15" src="assets/sfx/nope.mp3" data-start="20.540" data-duration="0.800" data-track-index="11" data-volume="0.40"></audio>
-<audio id="sfx16" src="assets/sfx/whoosh-short.mp3" data-start="23.853" data-duration="0.570" data-track-index="10" data-volume="0.30"></audio>
-<audio id="sfx17" src="assets/sfx/whoosh-short.mp3" data-start="25.950" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
-<audio id="sfx18" src="assets/sfx/kaching.mp3" data-start="26.280" data-duration="1.200" data-track-index="11" data-volume="0.50"></audio>
-<audio id="sfx19" src="assets/sfx/impact-bass-1.mp3" data-start="27.540" data-duration="2.100" data-track-index="10" data-volume="0.35"></audio>
-<audio id="sfx20" src="assets/sfx/pop.mp3" data-start="30.220" data-duration="0.720" data-track-index="10" data-volume="0.45"></audio>
-<audio id="sfx21" src="assets/sfx/click.mp3" data-start="31.410" data-duration="0.360" data-track-index="10" data-volume="0.60"></audio>
+<audio id="sfx0" src="assets/sfx/impact-bass-1.mp3" data-start="0.020" data-duration="2.100" data-track-index="10" data-volume="0.30"></audio>
+<audio id="sfx1" src="assets/sfx/pop.mp3" data-start="0.020" data-duration="0.720" data-track-index="11" data-volume="0.30"></audio>
+<audio id="sfx2" src="assets/sfx/pop.mp3" data-start="0.140" data-duration="0.720" data-track-index="12" data-volume="0.30"></audio>
+<audio id="sfx3" src="assets/sfx/pop.mp3" data-start="0.260" data-duration="0.720" data-track-index="13" data-volume="0.30"></audio>
+<audio id="sfx4" src="assets/sfx/whoosh-short.mp3" data-start="2.210" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
+<audio id="sfx5" src="assets/sfx/nope.mp3" data-start="2.510" data-duration="0.800" data-track-index="11" data-volume="0.40"></audio>
+<audio id="sfx6" src="assets/sfx/whoosh-short.mp3" data-start="3.180" data-duration="0.570" data-track-index="10" data-volume="0.30"></audio>
+<audio id="sfx7" src="assets/sfx/whoosh-short.mp3" data-start="5.170" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
+<audio id="sfx8" src="assets/sfx/kaching.mp3" data-start="5.470" data-duration="1.200" data-track-index="11" data-volume="0.50"></audio>
+<audio id="sfx9" src="assets/sfx/click-soft.mp3" data-start="7.080" data-duration="0.360" data-track-index="10" data-volume="0.45"></audio>
+<audio id="sfx10" src="assets/sfx/click-soft.mp3" data-start="9.040" data-duration="0.360" data-track-index="10" data-volume="0.45"></audio>
+<audio id="sfx11" src="assets/sfx/whoosh-short.mp3" data-start="10.353" data-duration="0.570" data-track-index="10" data-volume="0.30"></audio>
+<audio id="sfx12" src="assets/sfx/whoosh-short.mp3" data-start="12.330" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
+<audio id="sfx13" src="assets/sfx/ding.mp3" data-start="12.630" data-duration="1.200" data-track-index="11" data-volume="0.45"></audio>
+<audio id="sfx14" src="assets/sfx/whoosh-short.mp3" data-start="13.300" data-duration="0.570" data-track-index="10" data-volume="0.30"></audio>
+<audio id="sfx15" src="assets/sfx/whoosh-short.mp3" data-start="15.010" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
+<audio id="sfx16" src="assets/sfx/kaching.mp3" data-start="15.310" data-duration="1.200" data-track-index="11" data-volume="0.50"></audio>
+<audio id="sfx17" src="assets/sfx/whoosh-short.mp3" data-start="18.353" data-duration="0.570" data-track-index="10" data-volume="0.30"></audio>
+<audio id="sfx18" src="assets/sfx/whoosh-short.mp3" data-start="20.210" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
+<audio id="sfx19" src="assets/sfx/nope.mp3" data-start="20.510" data-duration="0.800" data-track-index="11" data-volume="0.40"></audio>
+<audio id="sfx20" src="assets/sfx/whoosh-short.mp3" data-start="23.853" data-duration="0.570" data-track-index="10" data-volume="0.30"></audio>
+<audio id="sfx21" src="assets/sfx/whoosh-short.mp3" data-start="25.950" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
+<audio id="sfx22" src="assets/sfx/kaching.mp3" data-start="26.250" data-duration="1.200" data-track-index="11" data-volume="0.50"></audio>
+<audio id="sfx23" src="assets/sfx/impact-bass-1.mp3" data-start="27.540" data-duration="2.100" data-track-index="10" data-volume="0.35"></audio>
+<audio id="sfx24" src="assets/sfx/pop.mp3" data-start="30.220" data-duration="0.720" data-track-index="10" data-volume="0.45"></audio>
+<audio id="sfx25" src="assets/sfx/click.mp3" data-start="31.410" data-duration="0.360" data-track-index="10" data-volume="0.60"></audio>
   <video id="bgv" class="full" src="assets/aroll_r.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="36.503" data-track-index="0"></video>
+<div id="row" class="row"><div id="pl0" class="plate t0"><b>100</b><small>vues</small></div><div id="pl1" class="plate t1"><b>10 000</b><small>vues</small></div><div id="pl2" class="plate t2"><svg class="rays" viewBox="-100 -100 200 200"><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(0)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(30)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(60)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(90)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(120)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(150)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(180)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(210)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(240)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(270)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(300)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(330)" fill="rgba(255,255,255,.4)"/></svg><b>100 000</b><small>vues</small></div></div>
 <div id="tp0" class="top"><div class="blk"><span class="no">1</span>POSTER À UNE HEURE PRÉCISE</div></div>
-<div id="bn0" class="bigw"><div class="big t0"><span id="bnn0">0</span><small>VUES</small></div></div>
 <div id="tp1" class="top"><div class="blk"><span class="no">2</span>VIDÉOS COURTES (5 S)</div></div>
-<div id="bn1" class="bigw"><svg class="rays" viewBox="-100 -100 200 200"><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(0)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(30)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(60)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(90)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(120)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(150)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(180)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(210)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(240)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(270)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(300)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(330)" fill="rgba(255,255,255,.35)"/></svg><div class="big t2"><span id="bnn1">0</span><small>VUES</small></div></div>
 <div id="tp2" class="top"><div class="blk"><span class="no">3</span>VIDÉOS ÉDUCATIVES LONGUES</div></div>
-<div id="bn2" class="bigw"><div class="big t1"><span id="bnn2">0</span><small>VUES</small></div></div>
 <div id="tp3" class="top"><div class="blk"><span class="no">4</span>REPRENDRE DES REELS VIRAUX</div></div>
-<div id="bn3" class="bigw"><svg class="rays" viewBox="-100 -100 200 200"><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(0)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(30)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(60)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(90)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(120)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(150)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(180)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(210)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(240)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(270)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(300)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(330)" fill="rgba(255,255,255,.35)"/></svg><div class="big t2"><span id="bnn3">0</span><small>VUES</small></div></div>
 <div id="tp4" class="top"><div class="blk"><span class="no">5</span>AUDIO TENDANCE</div></div>
-<div id="bn4" class="bigw"><div class="big t0"><span id="bnn4">0</span><small>VUES</small></div></div>
 <div id="tp5" class="top"><div class="blk"><span class="no">6</span>AJOUTER MANYCHAT</div></div>
-<div id="bn5" class="bigw"><svg class="rays" viewBox="-100 -100 200 200"><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(0)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(30)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(60)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(90)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(120)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(150)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(180)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(210)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(240)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(270)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(300)" fill="rgba(255,255,255,.35)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(330)" fill="rgba(255,255,255,.35)"/></svg><div class="big t2"><span id="bnn5">0</span><small>VUES</small></div></div>
 <div id="ch0" class="chip" style="top:1150px"><b>✓</b>hook textuel banger</div>
 <div id="ch1" class="chip" style="top:1242px"><b>✓</b>redirection en légende</div>
 <div id="stamp" class="stamp">NON NÉGOCIABLE</div>
@@ -182,107 +188,64 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
+gsap.set('#row .plate',{autoAlpha:0});
+tl.fromTo('#row .plate',{autoAlpha:0,y:-80,scaleY:1.5},{autoAlpha:1,y:0,scaleY:1,duration:.24,stagger:.12,ease:'expo.out',immediateRender:false},0.02);
+tl.to('#row',{autoAlpha:0,duration:.2},29.920);
+tl.set('#row',{autoAlpha:0},30.120);
+gsap.set('#pl2 .rays',{autoAlpha:0});
 gsap.set('#tp0',{autoAlpha:0});
 tl.fromTo('#tp0',{autoAlpha:0,x:-120},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'power3.out',immediateRender:false},0.020);
 tl.to('#tp0',{autoAlpha:0,duration:.12},3.040);
 tl.set('#tp0',{autoAlpha:0},3.160);
-gsap.set('#bn0',{autoAlpha:0});
-tl.fromTo('#bn0',{autoAlpha:0,scale:1.8},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'expo.out',immediateRender:false},2.240);
-tl.to('#bn0',{autoAlpha:0,duration:.12},3.040);
-tl.set('#bn0',{autoAlpha:0},3.160);
-gsap.set('#bnn0',{textContent:'0'});
-tl.set('#bnn0',{textContent:'10'},2.260);
-tl.set('#bnn0',{textContent:'30'},2.310);
-tl.set('#bnn0',{textContent:'55'},2.360);
-tl.set('#bnn0',{textContent:'80'},2.410);
-tl.set('#bnn0',{textContent:'95'},2.460);
-tl.set('#bnn0',{textContent:'100'},2.510);
-tl.fromTo('#bn0 .big',{rotation:0},{rotation:-4,duration:.08,yoyo:true,repeat:3,ease:'sine.inOut',immediateRender:false},2.560);
+tl.to('#pl0',{scale:1.3,duration:.24,ease:'back.out(2.6)'},2.240);
+tl.to('#pl1, #pl2',{opacity:.28,scale:.9,duration:.18},2.240);
+tl.to('#row .plate',{opacity:1,scale:1,duration:.2,ease:'power2.out'},2.960);
+tl.to('#pl0 b',{rotation:-6,duration:.07,yoyo:true,repeat:3,ease:'sine.inOut'},2.560);
 gsap.set('#tp1',{autoAlpha:0});
 tl.fromTo('#tp1',{autoAlpha:0,x:-120},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'power3.out',immediateRender:false},3.180);
 tl.to('#tp1',{autoAlpha:0,duration:.12},10.213);
 tl.set('#tp1',{autoAlpha:0},10.333);
-gsap.set('#bn1',{autoAlpha:0});
-tl.fromTo('#bn1',{autoAlpha:0,scale:1.8},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'expo.out',immediateRender:false},5.200);
-tl.to('#bn1',{autoAlpha:0,duration:.12},10.213);
-tl.set('#bn1',{autoAlpha:0},10.333);
-gsap.set('#bnn1',{textContent:'0'});
-tl.set('#bnn1',{textContent:'10 000'},5.220);
-tl.set('#bnn1',{textContent:'30 000'},5.270);
-tl.set('#bnn1',{textContent:'55 000'},5.320);
-tl.set('#bnn1',{textContent:'80 000'},5.370);
-tl.set('#bnn1',{textContent:'95 000'},5.420);
-tl.set('#bnn1',{textContent:'100 000'},5.470);
-tl.fromTo('#flash',{autoAlpha:.5},{autoAlpha:0,duration:.22,immediateRender:false},5.500);
-tl.fromTo('#bn1 .rays',{rotation:0,scale:.6},{rotation:40,scale:1,duration:5.013,ease:'power1.out',immediateRender:false},5.220);
-tl.fromTo('#bn1 .big',{scale:1},{scale:1.08,duration:.16,yoyo:true,repeat:1,immediateRender:false},5.520);
+tl.to('#pl2',{scale:1.3,duration:.24,ease:'back.out(2.6)'},5.200);
+tl.to('#pl0, #pl1',{opacity:.28,scale:.9,duration:.18},5.200);
+tl.to('#row .plate',{opacity:1,scale:1,duration:.2,ease:'power2.out'},10.133);
+tl.fromTo('#flash',{autoAlpha:.5},{autoAlpha:0,duration:.22,immediateRender:false},5.470);
+tl.fromTo('#pl2 .rays',{autoAlpha:0,rotation:0,scale:.5},{autoAlpha:1,rotation:45,scale:1,duration:4.863,ease:'power1.out',immediateRender:false},5.220);
+tl.set('#pl2 .rays',{autoAlpha:0},10.133);
 gsap.set('#tp2',{autoAlpha:0});
 tl.fromTo('#tp2',{autoAlpha:0,x:-120},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'power3.out',immediateRender:false},10.353);
 tl.to('#tp2',{autoAlpha:0,duration:.12},13.160);
 tl.set('#tp2',{autoAlpha:0},13.280);
-gsap.set('#bn2',{autoAlpha:0});
-tl.fromTo('#bn2',{autoAlpha:0,scale:1.8},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'expo.out',immediateRender:false},12.360);
-tl.to('#bn2',{autoAlpha:0,duration:.12},13.160);
-tl.set('#bn2',{autoAlpha:0},13.280);
-gsap.set('#bnn2',{textContent:'0'});
-tl.set('#bnn2',{textContent:'1 000'},12.380);
-tl.set('#bnn2',{textContent:'3 000'},12.430);
-tl.set('#bnn2',{textContent:'5 500'},12.480);
-tl.set('#bnn2',{textContent:'8 000'},12.530);
-tl.set('#bnn2',{textContent:'9 500'},12.580);
-tl.set('#bnn2',{textContent:'10 000'},12.630);
+tl.to('#pl1',{scale:1.3,duration:.24,ease:'back.out(2.6)'},12.360);
+tl.to('#pl0, #pl2',{opacity:.28,scale:.9,duration:.18},12.360);
+tl.to('#row .plate',{opacity:1,scale:1,duration:.2,ease:'power2.out'},13.080);
 gsap.set('#tp3',{autoAlpha:0});
 tl.fromTo('#tp3',{autoAlpha:0,x:-120},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'power3.out',immediateRender:false},13.300);
 tl.to('#tp3',{autoAlpha:0,duration:.12},18.213);
 tl.set('#tp3',{autoAlpha:0},18.333);
-gsap.set('#bn3',{autoAlpha:0});
-tl.fromTo('#bn3',{autoAlpha:0,scale:1.8},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'expo.out',immediateRender:false},15.040);
-tl.to('#bn3',{autoAlpha:0,duration:.12},18.213);
-tl.set('#bn3',{autoAlpha:0},18.333);
-gsap.set('#bnn3',{textContent:'0'});
-tl.set('#bnn3',{textContent:'10 000'},15.060);
-tl.set('#bnn3',{textContent:'30 000'},15.110);
-tl.set('#bnn3',{textContent:'55 000'},15.160);
-tl.set('#bnn3',{textContent:'80 000'},15.210);
-tl.set('#bnn3',{textContent:'95 000'},15.260);
-tl.set('#bnn3',{textContent:'100 000'},15.310);
-tl.fromTo('#flash',{autoAlpha:.5},{autoAlpha:0,duration:.22,immediateRender:false},15.340);
-tl.fromTo('#bn3 .rays',{rotation:0,scale:.6},{rotation:40,scale:1,duration:3.173,ease:'power1.out',immediateRender:false},15.060);
-tl.fromTo('#bn3 .big',{scale:1},{scale:1.08,duration:.16,yoyo:true,repeat:1,immediateRender:false},15.360);
+tl.to('#pl2',{scale:1.3,duration:.24,ease:'back.out(2.6)'},15.040);
+tl.to('#pl0, #pl1',{opacity:.28,scale:.9,duration:.18},15.040);
+tl.to('#row .plate',{opacity:1,scale:1,duration:.2,ease:'power2.out'},18.133);
+tl.fromTo('#flash',{autoAlpha:.5},{autoAlpha:0,duration:.22,immediateRender:false},15.310);
+tl.fromTo('#pl2 .rays',{autoAlpha:0,rotation:0,scale:.5},{autoAlpha:1,rotation:45,scale:1,duration:3.023,ease:'power1.out',immediateRender:false},15.060);
+tl.set('#pl2 .rays',{autoAlpha:0},18.133);
 gsap.set('#tp4',{autoAlpha:0});
 tl.fromTo('#tp4',{autoAlpha:0,x:-120},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'power3.out',immediateRender:false},18.353);
 tl.to('#tp4',{autoAlpha:0,duration:.12},23.713);
 tl.set('#tp4',{autoAlpha:0},23.833);
-gsap.set('#bn4',{autoAlpha:0});
-tl.fromTo('#bn4',{autoAlpha:0,scale:1.8},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'expo.out',immediateRender:false},20.240);
-tl.to('#bn4',{autoAlpha:0,duration:.12},23.713);
-tl.set('#bn4',{autoAlpha:0},23.833);
-gsap.set('#bnn4',{textContent:'0'});
-tl.set('#bnn4',{textContent:'10'},20.260);
-tl.set('#bnn4',{textContent:'30'},20.310);
-tl.set('#bnn4',{textContent:'55'},20.360);
-tl.set('#bnn4',{textContent:'80'},20.410);
-tl.set('#bnn4',{textContent:'95'},20.460);
-tl.set('#bnn4',{textContent:'100'},20.510);
-tl.fromTo('#bn4 .big',{rotation:0},{rotation:-4,duration:.08,yoyo:true,repeat:3,ease:'sine.inOut',immediateRender:false},20.560);
+tl.to('#pl0',{scale:1.3,duration:.24,ease:'back.out(2.6)'},20.240);
+tl.to('#pl1, #pl2',{opacity:.28,scale:.9,duration:.18},20.240);
+tl.to('#row .plate',{opacity:1,scale:1,duration:.2,ease:'power2.out'},23.633);
+tl.to('#pl0 b',{rotation:-6,duration:.07,yoyo:true,repeat:3,ease:'sine.inOut'},20.560);
 gsap.set('#tp5',{autoAlpha:0});
 tl.fromTo('#tp5',{autoAlpha:0,x:-120},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'power3.out',immediateRender:false},23.853);
 tl.to('#tp5',{autoAlpha:0,duration:.12},30.000);
 tl.set('#tp5',{autoAlpha:0},30.120);
-gsap.set('#bn5',{autoAlpha:0});
-tl.fromTo('#bn5',{autoAlpha:0,scale:1.8},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'expo.out',immediateRender:false},25.980);
-tl.to('#bn5',{autoAlpha:0,duration:.12},30.000);
-tl.set('#bn5',{autoAlpha:0},30.120);
-gsap.set('#bnn5',{textContent:'0'});
-tl.set('#bnn5',{textContent:'10 000'},26.000);
-tl.set('#bnn5',{textContent:'30 000'},26.050);
-tl.set('#bnn5',{textContent:'55 000'},26.100);
-tl.set('#bnn5',{textContent:'80 000'},26.150);
-tl.set('#bnn5',{textContent:'95 000'},26.200);
-tl.set('#bnn5',{textContent:'100 000'},26.250);
-tl.fromTo('#flash',{autoAlpha:.5},{autoAlpha:0,duration:.22,immediateRender:false},26.280);
-tl.fromTo('#bn5 .rays',{rotation:0,scale:.6},{rotation:40,scale:1,duration:4.020,ease:'power1.out',immediateRender:false},26.000);
-tl.fromTo('#bn5 .big',{scale:1},{scale:1.08,duration:.16,yoyo:true,repeat:1,immediateRender:false},26.300);
+tl.to('#pl2',{scale:1.3,duration:.24,ease:'back.out(2.6)'},25.980);
+tl.to('#pl0, #pl1',{opacity:.28,scale:.9,duration:.18},25.980);
+tl.to('#row .plate',{opacity:1,scale:1,duration:.2,ease:'power2.out'},29.920);
+tl.fromTo('#flash',{autoAlpha:.5},{autoAlpha:0,duration:.22,immediateRender:false},26.250);
+tl.fromTo('#pl2 .rays',{autoAlpha:0,rotation:0,scale:.5},{autoAlpha:1,rotation:45,scale:1,duration:3.870,ease:'power1.out',immediateRender:false},26.000);
+tl.set('#pl2 .rays',{autoAlpha:0},29.920);
 gsap.set('#ch0',{autoAlpha:0});
 tl.fromTo('#ch0',{autoAlpha:0,scale:.3,y:34},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'back.out(2.2)',immediateRender:false},7.080);
 tl.to('#ch0',{autoAlpha:0,duration:.12},10.213);
