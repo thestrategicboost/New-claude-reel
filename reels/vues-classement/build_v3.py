@@ -75,8 +75,12 @@ def gauge():
 
 def scenes():
     H, T, S = [], [], []
+    # each verdict stays at least .9 s; the next title waits until it has gone, so a number never sits under the wrong tip
+    ENDS = [min(max(TIPS[k + 1][1] if k + 1 < len(TIPS) else CTA, tv + .9), TIPS[k + 1][2] - .1 if k + 1 < len(TIPS) else CTA)
+            for k, (_, _, tv, _) in enumerate(TIPS)]
     for k, (title, a, tv, z) in enumerate(TIPS):
-        b = TIPS[k + 1][1] if k + 1 < len(TIPS) else CTA
+        b = ENDS[k]
+        a = max(a, ENDS[k - 1]) if k else a
         # title block (with its number)
         H.append(f'<div id="tp{k}" class="top"><div class="blk"><span class="no">{k + 1}</span>{title}</div></div>')
         T += show(f'#tp{k}', a + .02, b, '{autoAlpha:0,x:-120}', .26, 'power3.out')
@@ -88,7 +92,7 @@ def scenes():
         rays = ('<svg class="rays" viewBox="-100 -100 200 200">' + ''.join(
             f'<path d="M0 0 L{-9} -100 L9 -100Z" transform="rotate({q * 30})" fill="rgba(255,255,255,.35)"/>' for q in range(12)) + '</svg>') if z == 2 else ''
         H.append(f'<div id="bn{k}" class="bigw">{rays}<div class="big t{z}"><span id="bnn{k}">0</span><small>VUES</small></div></div>')
-        nb = min(max(b, tv + .9), TIPS[k + 1][2] - .1 if k + 1 < len(TIPS) else CTA)    # stays at least .9 s
+        nb = b
         T += show(f'#bn{k}', tv - .02, nb, '{autoAlpha:0,scale:1.8}', .26, 'expo.out')
         T += [f"gsap.set('#bnn{k}',{{textContent:'0'}});"] + [f"tl.set('#bnn{k}',{{textContent:'{v}'}},{tv + i * .05:.3f});" for i, v in enumerate(steps)]
         if z == 2:     # 100K: white flash, the rays turn, the plate pulses
