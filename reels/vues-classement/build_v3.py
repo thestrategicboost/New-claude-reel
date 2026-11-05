@@ -88,11 +88,12 @@ def scenes():
         rays = ('<svg class="rays" viewBox="-100 -100 200 200">' + ''.join(
             f'<path d="M0 0 L{-9} -100 L9 -100Z" transform="rotate({q * 30})" fill="rgba(255,255,255,.35)"/>' for q in range(12)) + '</svg>') if z == 2 else ''
         H.append(f'<div id="bn{k}" class="bigw">{rays}<div class="big t{z}"><span id="bnn{k}">0</span><small>VUES</small></div></div>')
-        T += show(f'#bn{k}', tv - .02, b, '{autoAlpha:0,scale:1.8}', .26, 'expo.out')
+        nb = min(max(b, tv + .9), TIPS[k + 1][2] - .1 if k + 1 < len(TIPS) else CTA)    # stays at least .9 s
+        T += show(f'#bn{k}', tv - .02, nb, '{autoAlpha:0,scale:1.8}', .26, 'expo.out')
         T += [f"gsap.set('#bnn{k}',{{textContent:'0'}});"] + [f"tl.set('#bnn{k}',{{textContent:'{v}'}},{tv + i * .05:.3f});" for i, v in enumerate(steps)]
         if z == 2:     # 100K: white flash, the rays turn, the plate pulses
             T += [f"tl.fromTo('#flash',{{autoAlpha:.5}},{{autoAlpha:0,duration:.22,immediateRender:false}},{tv + .28:.3f});",
-                  f"tl.fromTo('#bn{k} .rays',{{rotation:0,scale:.6}},{{rotation:40,scale:1,duration:{b - tv - .1:.3f},ease:'power1.out',immediateRender:false}},{tv:.3f});",
+                  f"tl.fromTo('#bn{k} .rays',{{rotation:0,scale:.6}},{{rotation:40,scale:1,duration:{nb - tv - .1:.3f},ease:'power1.out',immediateRender:false}},{tv:.3f});",
                   f"tl.fromTo('#bn{k} .big',{{scale:1}},{{scale:1.08,duration:.16,yoyo:true,repeat:1,immediateRender:false}},{tv + .3:.3f});"]
         elif z == 0:   # 100: a little "dud" wobble
             T.append(f"tl.fromTo('#bn{k} .big',{{rotation:0}},{{rotation:-4,duration:.08,yoyo:true,repeat:3,ease:'sine.inOut',immediateRender:false}},{tv + .3:.3f});")
