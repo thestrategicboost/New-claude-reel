@@ -179,7 +179,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .big{{position:relative;display:inline-flex;align-items:baseline;gap:18px;padding:6px 34px 0;border-radius:22px;color:#fff;font:400 176px/1 Anton;
   letter-spacing:.01em;text-shadow:0 6px 0 rgba(40,22,6,.45);box-shadow:0 18px 40px rgba(0,0,0,.35);white-space:nowrap}}
 .big small{{font:400 66px/1 Anton;letter-spacing:.04em}}
-.big.t0{{background:#3a2615}} .big.t1{{background:{BROWN}}} .big.t2{{background:linear-gradient(135deg,#E6C681,{GOLD} 50%,#9E6E33)}}
+.big.t0{{background:#E0322C}} .big.t1{{background:#F7C51E;color:#2A1A10;text-shadow:0 5px 0 rgba(255,255,255,.35)}} .big.t2{{background:#23A94B}}   /* her ask for this reel: red / yellow / green */
 .rays{{position:absolute;width:760px;height:760px;left:50%;top:50%;margin:-380px 0 0 -380px;z-index:-1}}
 .pill{{display:inline-flex;align-items:center;gap:12px;margin-top:-4px;padding:6px 30px 6px 22px;border-radius:40px;background:#fff;color:{DARK};
   font:italic 800 44px/1.2 Poppins;letter-spacing:-.02em;box-shadow:0 4px 16px rgba(0,0,0,.22);transform-origin:50% 50%}}
