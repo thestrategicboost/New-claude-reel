@@ -84,11 +84,9 @@ def scenes():
     H.append('<div id="row" class="row">' + ''.join(
         f'<div id="pl{z}" class="plate t{z}">{rays if z == 2 else ""}<b>{lab}</b><small>vues</small></div>'
         for z, lab in enumerate(('100', '10 000', '100 000'))) + '</div>')
-    T += ["gsap.set('#row .plate',{autoAlpha:0});",
-          "tl.fromTo('#row .plate',{autoAlpha:0,y:-80,scaleY:1.5},{autoAlpha:1,y:0,scaleY:1,duration:.24,stagger:.12,ease:'expo.out',immediateRender:false},0.02);",
+    T += [      # no entrance (her ask): the three numbers are there from the very first frame
           f"tl.to('#row',{{autoAlpha:0,duration:.2}},{CTA - .2:.3f});", f"tl.set('#row',{{autoAlpha:0}},{CTA:.3f});",
           "gsap.set('#pl2 .rays',{autoAlpha:0});"]
-    S += [('impact-bass-1', 0.02, .3)] + [('pop', .02 + q * .12, .3) for q in range(3)]
     # each verdict is held at least .9 s; the next title waits for it, so a lit number never sits under the wrong tip
     ENDS = [min(max(TIPS[k + 1][1] if k + 1 < len(TIPS) else CTA, tv + .9), TIPS[k + 1][2] - .25 if k + 1 < len(TIPS) else CTA)
             for k, (_, _, tv, _) in enumerate(TIPS)]
@@ -96,7 +94,10 @@ def scenes():
         b = ENDS[k]
         a = max(a, ENDS[k - 1]) if k else a
         H.append(f'<div id="tp{k}" class="top"><div class="blk"><span class="no">{k + 1}</span>{title}</div></div>')
-        T += show(f'#tp{k}', a + .02, b, '{autoAlpha:0,x:-120}', .26, 'power3.out')
+        if k == 0:        # the first title is there at once too
+            T += [f"tl.to('#tp0',{{autoAlpha:0,duration:.12}},{b - .12:.3f});", f"tl.set('#tp0',{{autoAlpha:0}},{b:.3f});"]
+        else:
+            T += show(f'#tp{k}', a + .02, b, '{autoAlpha:0,x:-120}', .26, 'power3.out')
         if k:
             S.append(('whoosh-short', a + .02, .3))
         # THE VERDICT: its number grows and lights up, the two others fade back
