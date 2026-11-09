@@ -39,7 +39,7 @@ TIPS = [
 ]
 CTA = 30.12
 ZONES = [('100', -58, '100 vues'), ('10K', 0, '10 000 vues'), ('100K', 58, '100 000 vues')]
-ZSFX = ['nope', 'ding', 'kaching']
+ZSFX = ['fail', 'ding', 'kaching']      # 100 views: a descending "wah wah waah" (her ask: more negative than nope)
 CHIPS = [(7.08, 'hook textuel banger'), (9.04, 'redirection en légende')]
 STAMP = 27.54
 GX, GY, GR = 540, 588, 122          # gauge centre and radius (sits above her head)
@@ -108,7 +108,7 @@ def scenes():
             T += [f"tl.fromTo('#pl2',{{boxShadow:'0 0 0 0px rgba(35,169,75,.0), 0 12px 28px rgba(0,0,0,.3)'}},{{boxShadow:'0 0 0 12px rgba(35,169,75,.45), 0 12px 28px rgba(0,0,0,.3)',duration:.2,yoyo:true,repeat:3,ease:'sine.inOut',immediateRender:false}},{tv + .25:.3f});"]
         elif z == 0:   # 100: a little "dud" wobble
             T.append(f"tl.to('#pl0 b',{{rotation:-6,duration:.07,yoyo:true,repeat:3,ease:'sine.inOut'}},{tv + .3:.3f});")
-        S += [('whoosh-short', tv - .05, .2), (ZSFX[z], tv + .25, [.4, .45, .5][z])]
+        S += [('whoosh-short', tv - .05, .2), (ZSFX[z], tv + .25, [.55, .45, .5][z])]
     # 56 Chip row: the two conditions of tip 2
     for k, (t, txt) in enumerate(CHIPS):
         H.append(f'<div id="ch{k}" class="chip" style="top:{1150 + k * 92}px"><b>✓</b>{txt}</div>')
@@ -219,7 +219,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   text-shadow:0 3px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.55)}}
 .cap.key{{font-size:88px;font-weight:800}}
 '''
-SFX_LEN = {'pop': .72, 'whoosh-short': .57, 'click': .36, 'click-soft': .36, 'ding': 1.2, 'nope': .8, 'kaching': 1.2, 'impact-bass-1': 2.1, 'stamp': .45}
+SFX_LEN = {'pop': .72, 'whoosh-short': .57, 'click': .36, 'click-soft': .36, 'ding': 1.2, 'nope': .8, 'kaching': 1.2, 'impact-bass-1': 2.1, 'stamp': .45, 'fail': 1.2}
 
 
 def build():
