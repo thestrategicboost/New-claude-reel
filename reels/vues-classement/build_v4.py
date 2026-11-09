@@ -39,7 +39,7 @@ TIPS = [
 ]
 CTA = 30.12
 ZONES = [('100', -58, '100 vues'), ('10K', 0, '10 000 vues'), ('100K', 58, '100 000 vues')]
-ZSFX = ['fail', 'ding', 'kaching']      # 100 views: a short descending "wah-wah" fail sound (her ask: negative, short)
+ZSFX = ['fail', 'ding', 'kaching']      # 100 views: her own "son négatif" buzzer (Drive pour Claude)
 CHIPS = [(7.08, 'hook textuel banger'), (9.04, 'redirection en légende')]
 STAMP = 27.54
 GX, GY, GR = 540, 588, 122          # gauge centre and radius (sits above her head)
