@@ -49,8 +49,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="36.503" data-width="1080" data-height="1920">
-  <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="36.503" data-track-index="2" data-volume="1"></audio>
+<div id="root" data-composition-id="main" data-start="0" data-duration="37.100" data-width="1080" data-height="1920">
+  <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="37.100" data-track-index="2" data-volume="1"></audio>
 <audio id="sfx0" src="assets/sfx/whoosh-short.mp3" data-start="2.210" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
 <audio id="sfx1" src="assets/sfx/nope.mp3" data-start="2.510" data-duration="0.800" data-track-index="11" data-volume="0.40"></audio>
 <audio id="sfx2" src="assets/sfx/whoosh-short.mp3" data-start="3.180" data-duration="0.570" data-track-index="10" data-volume="0.30"></audio>
@@ -70,11 +70,11 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="sfx16" src="assets/sfx/whoosh-short.mp3" data-start="23.853" data-duration="0.570" data-track-index="10" data-volume="0.30"></audio>
 <audio id="sfx17" src="assets/sfx/whoosh-short.mp3" data-start="25.950" data-duration="0.570" data-track-index="10" data-volume="0.20"></audio>
 <audio id="sfx18" src="assets/sfx/kaching.mp3" data-start="26.250" data-duration="1.200" data-track-index="11" data-volume="0.50"></audio>
-<audio id="sfx19" src="assets/sfx/impact-bass-1.mp3" data-start="27.540" data-duration="2.100" data-track-index="10" data-volume="0.35"></audio>
+<audio id="sfx19" src="assets/sfx/stamp.mp3" data-start="27.540" data-duration="0.450" data-track-index="10" data-volume="0.70"></audio>
 <audio id="sfx20" src="assets/sfx/pop.mp3" data-start="30.220" data-duration="0.720" data-track-index="10" data-volume="0.45"></audio>
 <audio id="sfx21" src="assets/sfx/click.mp3" data-start="31.410" data-duration="0.360" data-track-index="10" data-volume="0.60"></audio>
-  <video id="bgv" class="full" src="assets/aroll_r.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="36.503" data-track-index="0"></video>
-<div id="row" class="row"><div id="pl0" class="plate t0"><b>100</b><small>vues</small></div><div id="pl1" class="plate t1"><b>10 000</b><small>vues</small></div><div id="pl2" class="plate t2"><svg class="rays" viewBox="-100 -100 200 200"><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(0)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(30)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(60)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(90)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(120)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(150)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(180)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(210)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(240)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(270)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(300)" fill="rgba(255,255,255,.4)"/><path d="M0 0 L-9 -100 L9 -100Z" transform="rotate(330)" fill="rgba(255,255,255,.4)"/></svg><b>100 000</b><small>vues</small></div></div>
+  <video id="bgv" class="full" src="assets/aroll_r.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="37.100" data-track-index="0"></video>
+<div id="row" class="row"><div id="pl0" class="plate t0"><b>100</b><small>vues</small></div><div id="pl1" class="plate t1"><b>10 000</b><small>vues</small></div><div id="pl2" class="plate t2"><b>100 000</b><small>vues</small></div></div>
 <div id="tp0" class="top"><div class="blk"><span class="no">1</span>POSTER À UNE HEURE PRÉCISE</div></div>
 <div id="tp1" class="top"><div class="blk"><span class="no">2</span>VIDÉOS COURTES (5 S)</div></div>
 <div id="tp2" class="top"><div class="blk"><span class="no">3</span>VIDÉOS ÉDUCATIVES LONGUES</div></div>
@@ -186,7 +186,6 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 const tl = gsap.timeline({ paused: true });
 tl.to('#row',{autoAlpha:0,duration:.2},29.920);
 tl.set('#row',{autoAlpha:0},30.120);
-gsap.set('#pl2 .rays',{autoAlpha:0});
 tl.to('#tp0',{autoAlpha:0,duration:.12},3.040);
 tl.set('#tp0',{autoAlpha:0},3.160);
 tl.to('#pl0',{scale:1.3,duration:.24,ease:'back.out(2.6)'},2.240);
@@ -200,9 +199,7 @@ tl.set('#tp1',{autoAlpha:0},10.333);
 tl.to('#pl2',{scale:1.3,duration:.24,ease:'back.out(2.6)'},5.200);
 tl.to('#pl0, #pl1',{opacity:.28,scale:.9,duration:.18},5.200);
 tl.to('#row .plate',{opacity:1,scale:1,duration:.2,ease:'power2.out'},10.133);
-tl.fromTo('#flash',{autoAlpha:.5},{autoAlpha:0,duration:.22,immediateRender:false},5.470);
-tl.fromTo('#pl2 .rays',{autoAlpha:0,rotation:0,scale:.5},{autoAlpha:1,rotation:45,scale:1,duration:4.863,ease:'power1.out',immediateRender:false},5.220);
-tl.set('#pl2 .rays',{autoAlpha:0},10.133);
+tl.fromTo('#pl2',{boxShadow:'0 0 0 0px rgba(35,169,75,.0), 0 12px 28px rgba(0,0,0,.3)'},{boxShadow:'0 0 0 12px rgba(35,169,75,.45), 0 12px 28px rgba(0,0,0,.3)',duration:.2,yoyo:true,repeat:3,ease:'sine.inOut',immediateRender:false},5.470);
 gsap.set('#tp2',{autoAlpha:0});
 tl.fromTo('#tp2',{autoAlpha:0,x:-120},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'power3.out',immediateRender:false},10.353);
 tl.to('#tp2',{autoAlpha:0,duration:.12},13.160);
@@ -217,9 +214,7 @@ tl.set('#tp3',{autoAlpha:0},18.333);
 tl.to('#pl2',{scale:1.3,duration:.24,ease:'back.out(2.6)'},15.040);
 tl.to('#pl0, #pl1',{opacity:.28,scale:.9,duration:.18},15.040);
 tl.to('#row .plate',{opacity:1,scale:1,duration:.2,ease:'power2.out'},18.133);
-tl.fromTo('#flash',{autoAlpha:.5},{autoAlpha:0,duration:.22,immediateRender:false},15.310);
-tl.fromTo('#pl2 .rays',{autoAlpha:0,rotation:0,scale:.5},{autoAlpha:1,rotation:45,scale:1,duration:3.023,ease:'power1.out',immediateRender:false},15.060);
-tl.set('#pl2 .rays',{autoAlpha:0},18.133);
+tl.fromTo('#pl2',{boxShadow:'0 0 0 0px rgba(35,169,75,.0), 0 12px 28px rgba(0,0,0,.3)'},{boxShadow:'0 0 0 12px rgba(35,169,75,.45), 0 12px 28px rgba(0,0,0,.3)',duration:.2,yoyo:true,repeat:3,ease:'sine.inOut',immediateRender:false},15.310);
 gsap.set('#tp4',{autoAlpha:0});
 tl.fromTo('#tp4',{autoAlpha:0,x:-120},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'power3.out',immediateRender:false},18.353);
 tl.to('#tp4',{autoAlpha:0,duration:.12},23.713);
@@ -235,9 +230,7 @@ tl.set('#tp5',{autoAlpha:0},30.120);
 tl.to('#pl2',{scale:1.3,duration:.24,ease:'back.out(2.6)'},25.980);
 tl.to('#pl0, #pl1',{opacity:.28,scale:.9,duration:.18},25.980);
 tl.to('#row .plate',{opacity:1,scale:1,duration:.2,ease:'power2.out'},29.920);
-tl.fromTo('#flash',{autoAlpha:.5},{autoAlpha:0,duration:.22,immediateRender:false},26.250);
-tl.fromTo('#pl2 .rays',{autoAlpha:0,rotation:0,scale:.5},{autoAlpha:1,rotation:45,scale:1,duration:3.870,ease:'power1.out',immediateRender:false},26.000);
-tl.set('#pl2 .rays',{autoAlpha:0},29.920);
+tl.fromTo('#pl2',{boxShadow:'0 0 0 0px rgba(35,169,75,.0), 0 12px 28px rgba(0,0,0,.3)'},{boxShadow:'0 0 0 12px rgba(35,169,75,.45), 0 12px 28px rgba(0,0,0,.3)',duration:.2,yoyo:true,repeat:3,ease:'sine.inOut',immediateRender:false},26.250);
 gsap.set('#ch0',{autoAlpha:0});
 tl.fromTo('#ch0',{autoAlpha:0,scale:.3,y:34},{autoAlpha:1,y:0,x:0,scale:1,rotation:0,duration:0.26,ease:'back.out(2.2)',immediateRender:false},7.080);
 tl.to('#ch0',{autoAlpha:0,duration:.12},10.213);
@@ -290,6 +283,8 @@ tl.set('#ccr',{opacity:1},35.770);
 tl.set('#ccr',{opacity:0},36.020);
 tl.set('#ccr',{opacity:1},36.270);
 tl.set('#ccr',{opacity:0},36.520);
+tl.set('#ccr',{opacity:1},36.770);
+tl.set('#ccr',{opacity:0},37.020);
 tl.to('#csd',{scale:.78,duration:.07,yoyo:true,repeat:1},31.410);
 tl.to('#cb',{boxShadow:'0 0 0 7px #573307, 0 16px 36px rgba(0,0,0,.3)',scale:1.05,duration:.18,yoyo:true,repeat:1},31.510);
 gsap.set('#w0',{autoAlpha:0});
@@ -667,12 +662,12 @@ tl.set('#w106',{autoAlpha:0},34.200);
 gsap.set('#w107',{autoAlpha:0});
 tl.set('#w107',{autoAlpha:1},34.200);
 tl.fromTo('#w107',{scale:.8},{scale:1,duration:0.120,ease:'back.out(2.5)',immediateRender:false},34.200);
-tl.set('#w107',{autoAlpha:0},35.003);
+tl.set('#w107',{autoAlpha:0},34.960);
 gsap.set('#w108',{autoAlpha:0});
-tl.set('#w108',{autoAlpha:1},35.003);
-tl.fromTo('#w108',{scale:.8},{scale:1,duration:0.120,ease:'back.out(2.5)',immediateRender:false},35.003);
-tl.set('#w108',{autoAlpha:0},35.883);
-tl.set({}, {}, 36.503);
+tl.set('#w108',{autoAlpha:1},35.643);
+tl.fromTo('#w108',{scale:.8},{scale:1,duration:0.120,ease:'back.out(2.5)',immediateRender:false},35.643);
+tl.set('#w108',{autoAlpha:0},36.533);
+tl.set({}, {}, 37.100);
 window.__timelines["main"] = tl;
 </script>
 </body>

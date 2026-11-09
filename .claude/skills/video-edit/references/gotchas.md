@@ -71,3 +71,4 @@
 - Maé: her "tchus" at the very end is her signature: always keep it, even when it comes after the CTA and Whisper misses it (check the audio tail).
 - Maé: no punch-in zooms on her face (23 Digital zoom) — she finds them unflattering. Retouch every visible frame of her, frozen/dimmed stills included.
 - Maé: never darken her footage unless she asks (she does want it dark, almost black, for serious "femme forte" text reels), never grey. On the lilac-wall B-rolls the natural footage + retouch.py IS her usual lilac look (as in broll-variante): do not add lilac.py on top, it washes it out.
+- Maé: her ending is a finger kiss then "tchus": keep both (look at the frames before the tchus, the kiss is silent). No rays / full-screen flash over her face.

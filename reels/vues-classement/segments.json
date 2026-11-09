@@ -86,13 +86,13 @@
  {
   "id": "bye",
   "clip": "c1",
-  "in": 74.13,
+  "in": 73.55,
   "out": 75.8,
   "zoom": 1.0,
-  "line": "Tch\u00fcss !",
-  "src_in": 74.13,
+  "line": "bisou avec les doigts (sa signature) + Tch\u00fcss !",
+  "src_in": 73.55,
   "src_out": 75.8,
   "frame": 1045,
-  "frames": 50
+  "frames": 68
  }
 ]

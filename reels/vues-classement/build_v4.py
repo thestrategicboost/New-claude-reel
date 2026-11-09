@@ -82,11 +82,10 @@ def scenes():
     rays = ('<svg class="rays" viewBox="-100 -100 200 200">' + ''.join(
         f'<path d="M0 0 L-9 -100 L9 -100Z" transform="rotate({q * 30})" fill="rgba(255,255,255,.4)"/>' for q in range(12)) + '</svg>')
     H.append('<div id="row" class="row">' + ''.join(
-        f'<div id="pl{z}" class="plate t{z}">{rays if z == 2 else ""}<b>{lab}</b><small>vues</small></div>'
+        f'<div id="pl{z}" class="plate t{z}"><b>{lab}</b><small>vues</small></div>'
         for z, lab in enumerate(('100', '10 000', '100 000'))) + '</div>')
     T += [      # no entrance (her ask): the three numbers are there from the very first frame
-          f"tl.to('#row',{{autoAlpha:0,duration:.2}},{CTA - .2:.3f});", f"tl.set('#row',{{autoAlpha:0}},{CTA:.3f});",
-          "gsap.set('#pl2 .rays',{autoAlpha:0});"]
+          f"tl.to('#row',{{autoAlpha:0,duration:.2}},{CTA - .2:.3f});", f"tl.set('#row',{{autoAlpha:0}},{CTA:.3f});"]
     # each verdict is held at least .9 s; the next title waits for it, so a lit number never sits under the wrong tip
     ENDS = [min(max(TIPS[k + 1][1] if k + 1 < len(TIPS) else CTA, tv + .9), TIPS[k + 1][2] - .25 if k + 1 < len(TIPS) else CTA)
             for k, (_, _, tv, _) in enumerate(TIPS)]
@@ -105,10 +104,8 @@ def scenes():
         T += [f"tl.to('#pl{z}',{{scale:1.3,duration:.24,ease:'back.out(2.6)'}},{tv - .02:.3f});",
               f"tl.to('{others}',{{opacity:.28,scale:.9,duration:.18}},{tv - .02:.3f});",
               f"tl.to('#row .plate',{{opacity:1,scale:1,duration:.2,ease:'power2.out'}},{b - .2:.3f});"]
-        if z == 2:     # 100 000: white flash, rays turn behind it
-            T += [f"tl.fromTo('#flash',{{autoAlpha:.5}},{{autoAlpha:0,duration:.22,immediateRender:false}},{tv + .25:.3f});",
-                  f"tl.fromTo('#pl2 .rays',{{autoAlpha:0,rotation:0,scale:.5}},{{autoAlpha:1,rotation:45,scale:1,duration:{b - tv - .25:.3f},ease:'power1.out',immediateRender:false}},{tv:.3f});",
-                  f"tl.set('#pl2 .rays',{{autoAlpha:0}},{b - .2:.3f});"]
+        if z == 2:     # 100 000: a green glow pulses around the plate only (no rays / flash over her face, her ask)
+            T += [f"tl.fromTo('#pl2',{{boxShadow:'0 0 0 0px rgba(35,169,75,.0), 0 12px 28px rgba(0,0,0,.3)'}},{{boxShadow:'0 0 0 12px rgba(35,169,75,.45), 0 12px 28px rgba(0,0,0,.3)',duration:.2,yoyo:true,repeat:3,ease:'sine.inOut',immediateRender:false}},{tv + .25:.3f});"]
         elif z == 0:   # 100: a little "dud" wobble
             T.append(f"tl.to('#pl0 b',{{rotation:-6,duration:.07,yoyo:true,repeat:3,ease:'sine.inOut'}},{tv + .3:.3f});")
         S += [('whoosh-short', tv - .05, .2), (ZSFX[z], tv + .25, [.4, .45, .5][z])]
@@ -122,7 +119,7 @@ def scenes():
     T += ["gsap.set('#stamp',{autoAlpha:0});",
           f"tl.fromTo('#stamp',{{autoAlpha:0,scale:2.2,rotation:-20}},{{autoAlpha:1,scale:1,rotation:-7,duration:.22,ease:'expo.out',immediateRender:false}},{STAMP:.3f});",
           f"tl.to('#stamp',{{autoAlpha:0,duration:.15}},{CTA - .15:.3f});", f"tl.set('#stamp',{{autoAlpha:0}},{CTA:.3f});"]
-    S.append(('impact-bass-1', STAMP, .35))
+    S.append(('stamp', STAMP, .7))          # a rubber-stamp thud (her ask: not the bass impact)
     # CTA: her comment banner, AVOCADO types itself, send is tapped
     a_in, tb, word = CTA + .1, 30.72, 'AVOCADO'
     send = ('<svg viewBox="0 0 24 24" width="34" height="34"><path d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="2.6" '
@@ -163,7 +160,7 @@ def captions():
             continue
         k = {'off': 'of'}.get(k, k)
         ws.append({'t': k, 's': w['start'], 'e': w['end']})
-    ws.append({'t': 'tchus', 's': SEG['bye'] + .17, 'e': SEG['bye'] + .75})       # her signature
+    ws.append({'t': 'tchus', 's': SEG['bye'] + .81, 'e': SEG['bye'] + 1.4})   # after her finger kiss (kept: her signature)       # her signature
     H, T = [], []
     for n, w in enumerate(ws):
         nxt = ws[n + 1]['s'] if n + 1 < len(ws) else DUR
@@ -222,7 +219,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   text-shadow:0 3px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.55)}}
 .cap.key{{font-size:88px;font-weight:800}}
 '''
-SFX_LEN = {'pop': .72, 'whoosh-short': .57, 'click': .36, 'click-soft': .36, 'ding': 1.2, 'nope': .8, 'kaching': 1.2, 'impact-bass-1': 2.1}
+SFX_LEN = {'pop': .72, 'whoosh-short': .57, 'click': .36, 'click-soft': .36, 'ding': 1.2, 'nope': .8, 'kaching': 1.2, 'impact-bass-1': 2.1, 'stamp': .45}
 
 
 def build():
