@@ -108,7 +108,7 @@ def scenes():
             T += [f"tl.fromTo('#pl2',{{boxShadow:'0 0 0 0px rgba(35,169,75,.0), 0 12px 28px rgba(0,0,0,.3)'}},{{boxShadow:'0 0 0 12px rgba(35,169,75,.45), 0 12px 28px rgba(0,0,0,.3)',duration:.2,yoyo:true,repeat:3,ease:'sine.inOut',immediateRender:false}},{tv + .25:.3f});"]
         elif z == 0:   # 100: a little "dud" wobble
             T.append(f"tl.to('#pl0 b',{{rotation:-6,duration:.07,yoyo:true,repeat:3,ease:'sine.inOut'}},{tv + .3:.3f});")
-        S += [('whoosh-short', tv - .05, .2), (ZSFX[z], tv + .25, [.2, .45, .5][z])      # her buzzer is loud: kept low under her voice]
+        S += [('whoosh-short', tv - .05, .2), (ZSFX[z], tv + .25, [.2, .45, .5][z])]      # her buzzer is loud: kept low under her voice
     # 56 Chip row: the two conditions of tip 2
     for k, (t, txt) in enumerate(CHIPS):
         H.append(f'<div id="ch{k}" class="chip" style="top:{1150 + k * 92}px"><b>✓</b>{txt}</div>')
