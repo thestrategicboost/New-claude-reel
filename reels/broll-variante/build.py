@@ -17,6 +17,9 @@ HOOKS = {        # angles taken from her caption (the 4 settings that stop Insta
     2: ('INSTAGRAM CACHE TES RÉELS ?', '4 réglages pour inverser la tendance'),
     3: ('ZÉRO VISIBILITÉ SUR INSTA ?', "mais ce n'est pas irréversible"),
     4: ('4 RÉGLAGES À FAIRE CETTE SEMAINE', 'pour toucher enfin des non abonnés'),
+    **{k: ('INSTAGRAM CACHE TES RÉELS ?', '4 réglages pour inverser la tendance') for k in (10, 11, 12, 13)},   # her winning hook (variante 2), other B-roll moments
+    14: ('INSTA NE MONTRE PLUS TES RÉELS ?', '4 réglages pour inverser la tendance'),
+    15: ('TES VUES ONT CHUTÉ ?', '4 réglages pour inverser la tendance'),
     **{k: ('COMMENT FORCER INSTA', 'à montrer tes réels à des non abonnés') for k in (5, 6, 7, 8, 9)},   # original hook, other B-roll
 }
 TYPE_A, TYPE_B, DESC = .15, 1.95, 2.05       # same rhythm as the original
