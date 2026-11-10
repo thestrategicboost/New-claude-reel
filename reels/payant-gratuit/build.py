@@ -16,10 +16,10 @@ RED, GREEN = '#E5262B', '#22B83A'      # payant / gratuit: red and green catch t
 GOLD = 'linear-gradient(150deg,#F3DFB2 0%,#D6AE66 45%,#9E6E33 100%)'
 
 # when she says "payant" / "gratuit" (raw trimmed from 3.3 s)
-P = [1.71, 4.85, 8.32, 12.89, 17.57]
-G = [2.28, 5.66, 8.94, 13.46, 18.08]
+P = [1.74, 5.2, 8.64, 11.82, 16.38]      # measured on the retouched A-roll (raw trimmed from 3.3 s)
+G = [2.22, 5.72, 9.12, 12.42, 16.92]
 # her own voice reading each topic (cut from her first edit, assets/vo/t*.wav), placed in the pause before 'payant'
-VO = [(0.33, 1.30), (3.58, 1.18), (7.04, 1.18), (11.72, 1.06), (15.97, 1.50)]
+VO = [(0.34, 1.3), (3.92, 1.18), (7.36, 1.18), (10.66, 1.06), (14.78, 1.5)]
 # topic, (paid tool, monogram, tile colours), (free tool, monogram, tile colours)
 ROUNDS = [   # topic as she says it, paid (name, logo, show name?), free (name, logo(s), show name?) - exactly as in her first edit
     ('Trouver tes idées de contenu', ('AnswerThePublic', 'answerthepublic', False), ('Google Trends', 'googletrends', False)),
