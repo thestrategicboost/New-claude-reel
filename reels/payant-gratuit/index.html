@@ -11,18 +11,17 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 #root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
 .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .topic{position:absolute;left:0;right:0;top:250px;z-index:12;text-align:center}
-.tb{display:inline-block;max-width:860px;background:#573307;color:#fff;font:400 62px/1.08 Anton;letter-spacing:.03em;text-transform:uppercase;padding:10px 26px 6px;white-space:nowrap}
-.duel{position:absolute;top:372px;width:380px;height:250px;z-index:11;border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 18px 40px rgba(0,0,0,.3)}
-.band{height:66px;font:400 44px/66px Anton;letter-spacing:.06em;color:#fff;text-align:center}
-.band.p{background:#E5262B} .band.g{background:#22B83A}
-.body{height:184px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-.logo{max-width:300px;height:120px;display:flex;align-items:center;justify-content:center}
-.logo.two{flex-direction:row;gap:14px}
-.logo.two img{max-height:100px!important;max-width:130px!important}
-.logo img{max-width:300px;max-height:120px;object-fit:contain;border-radius:16px;display:block}
-.nm{font:700 26px/1.1 Poppins;color:#2A1A10;white-space:nowrap}
-.vs{position:absolute;left:490px;top:447px;width:100px;height:100px;z-index:13;border-radius:50%;background:#573307;color:#fff;border:5px solid #fff;
-  font:400 46px/90px Anton;text-align:center;box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.tb{display:inline-block;max-width:860px;background:#573307;color:#fff;font:400 58px/1.08 Anton;letter-spacing:.03em;text-transform:uppercase;padding:10px 24px 6px;white-space:nowrap}
+.col{position:absolute;top:350px;width:260px;z-index:11}
+.hd{height:84px;border-radius:20px;font:400 56px/84px Anton;letter-spacing:.05em;color:#fff;text-align:center;box-shadow:0 10px 24px rgba(0,0,0,.3)}
+.hd.p{background:#E5262B} .hd.g{background:#22B83A}
+.row{position:absolute;width:260px;height:106px;z-index:11;border-radius:18px;background:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 22px rgba(0,0,0,.25)}
+.row.p{border:4px solid #E5262B} .row.g{border:4px solid #22B83A}
+.logo{max-width:220px;height:84px;display:flex;align-items:center;justify-content:center}
+.logo.two{flex-direction:row;gap:10px}
+.logo.two img{max-height:70px!important;max-width:100px!important}
+.logo img{max-width:220px;max-height:84px;object-fit:contain;border-radius:12px;display:block}
 </style>
 </head>
 <body>
@@ -36,111 +35,81 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="sfx0" src="assets/sfx/whoosh-short.mp3" data-start="0.340" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
 <audio id="sfx1" src="assets/sfx/pop.mp3" data-start="1.700" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
 <audio id="sfx2" src="assets/sfx/pop.mp3" data-start="2.180" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx3" src="assets/sfx/click-soft.mp3" data-start="2.320" data-duration="0.360" data-track-index="12" data-volume="0.300"></audio>
-<audio id="sfx4" src="assets/sfx/whoosh-short.mp3" data-start="2.770" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
-<audio id="sfx5" src="assets/sfx/pop.mp3" data-start="3.990" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx6" src="assets/sfx/pop.mp3" data-start="4.510" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx7" src="assets/sfx/click-soft.mp3" data-start="4.650" data-duration="0.360" data-track-index="12" data-volume="0.300"></audio>
-<audio id="sfx8" src="assets/sfx/whoosh-short.mp3" data-start="5.300" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
-<audio id="sfx9" src="assets/sfx/pop.mp3" data-start="6.520" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx10" src="assets/sfx/pop.mp3" data-start="7.000" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx11" src="assets/sfx/click-soft.mp3" data-start="7.140" data-duration="0.360" data-track-index="12" data-volume="0.300"></audio>
-<audio id="sfx12" src="assets/sfx/whoosh-short.mp3" data-start="7.630" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
-<audio id="sfx13" src="assets/sfx/pop.mp3" data-start="8.730" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx14" src="assets/sfx/pop.mp3" data-start="9.330" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx15" src="assets/sfx/click-soft.mp3" data-start="9.470" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
-<audio id="sfx16" src="assets/sfx/whoosh-short.mp3" data-start="10.130" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
-<audio id="sfx17" src="assets/sfx/pop.mp3" data-start="11.670" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
-<audio id="sfx18" src="assets/sfx/pop.mp3" data-start="12.210" data-duration="0.644" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx19" src="assets/sfx/click-soft.mp3" data-start="12.350" data-duration="0.360" data-track-index="12" data-volume="0.300"></audio>
+<audio id="sfx3" src="assets/sfx/whoosh-short.mp3" data-start="2.770" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
+<audio id="sfx4" src="assets/sfx/pop.mp3" data-start="3.990" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx5" src="assets/sfx/pop.mp3" data-start="4.510" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
+<audio id="sfx6" src="assets/sfx/whoosh-short.mp3" data-start="5.300" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
+<audio id="sfx7" src="assets/sfx/pop.mp3" data-start="6.520" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx8" src="assets/sfx/pop.mp3" data-start="7.000" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
+<audio id="sfx9" src="assets/sfx/whoosh-short.mp3" data-start="7.630" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
+<audio id="sfx10" src="assets/sfx/pop.mp3" data-start="8.730" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx11" src="assets/sfx/pop.mp3" data-start="9.330" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
+<audio id="sfx12" src="assets/sfx/whoosh-short.mp3" data-start="10.130" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
+<audio id="sfx13" src="assets/sfx/pop.mp3" data-start="11.670" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
+<audio id="sfx14" src="assets/sfx/pop.mp3" data-start="12.210" data-duration="0.644" data-track-index="11" data-volume="0.220"></audio>
   <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="12.854" data-track-index="0"></video>
-<div id="vs" class="vs">VS</div>
+<div class="col p" style="left:70px"><div class="hd p">PAYANT</div></div><div class="col g" style="left:750px"><div class="hd g">GRATUIT</div></div>
 <div id="t0" class="topic"><span class="tb">Trouver tes idées de contenu</span></div>
-<div id="cp0" class="duel p" style="left:130px"><div class="band p">PAYANT</div><div class="body"><div class="logo"><img src="assets/logos/answerthepublic.png"/></div></div></div>
-<div id="cg0" class="duel g" style="left:570px"><div class="band g">GRATUIT</div><div class="body"><div class="logo"><img src="assets/logos/googletrends.png"/></div></div></div>
+<div id="rp0" class="row p" style="left:70px;top:460px"><div class="logo"><img src="assets/logos/answerthepublic.png"/></div></div>
+<div id="rg0" class="row g" style="left:750px;top:460px"><div class="logo"><img src="assets/logos/googletrends.png"/></div></div>
 <div id="t1" class="topic"><span class="tb">Faire ton montage vidéo</span></div>
-<div id="cp1" class="duel p" style="left:130px"><div class="band p">PAYANT</div><div class="body"><div class="logo"><img src="assets/logos/premiere.png"/></div><div class=nm>Premiere Pro</div></div></div>
-<div id="cg1" class="duel g" style="left:570px"><div class="band g">GRATUIT</div><div class="body"><div class="logo two"><img src="assets/logos/edits.png"/><img src="assets/logos/capcut.png"/></div></div></div>
+<div id="rp1" class="row p" style="left:70px;top:582px"><div class="logo"><img src="assets/logos/premiere.png"/></div></div>
+<div id="rg1" class="row g" style="left:750px;top:582px"><div class="logo two"><img src="assets/logos/edits.png"/><img src="assets/logos/capcut.png"/></div></div>
 <div id="t2" class="topic"><span class="tb">Pour programmer ton contenu</span></div>
-<div id="cp2" class="duel p" style="left:130px"><div class="band p">PAYANT</div><div class="body"><div class="logo"><img src="assets/logos/metricool.png"/></div></div></div>
-<div id="cg2" class="duel g" style="left:570px"><div class="band g">GRATUIT</div><div class="body"><div class="logo"><img src="assets/logos/meta.png"/></div></div></div>
+<div id="rp2" class="row p" style="left:70px;top:704px"><div class="logo"><img src="assets/logos/metricool.png"/></div></div>
+<div id="rg2" class="row g" style="left:750px;top:704px"><div class="logo"><img src="assets/logos/meta.png"/></div></div>
 <div id="t3" class="topic"><span class="tb">Pour créer tes visuels</span></div>
-<div id="cp3" class="duel p" style="left:130px"><div class="band p">PAYANT</div><div class="body"><div class="logo"><img src="assets/logos/photoshop.png"/></div><div class=nm>Photoshop</div></div></div>
-<div id="cg3" class="duel g" style="left:570px"><div class="band g">GRATUIT</div><div class="body"><div class="logo"><img src="assets/logos/canva.png"/></div></div></div>
+<div id="rp3" class="row p" style="left:70px;top:826px"><div class="logo"><img src="assets/logos/photoshop.png"/></div></div>
+<div id="rg3" class="row g" style="left:750px;top:826px"><div class="logo"><img src="assets/logos/canva.png"/></div></div>
 <div id="t4" class="topic"><span class="tb">Pour étudier ta concurrence</span></div>
-<div id="cp4" class="duel p" style="left:130px"><div class="band p">PAYANT</div><div class="body"><div class="logo"><img src="assets/logos/sortfeed.png"/></div></div></div>
-<div id="cg4" class="duel g" style="left:570px"><div class="band g">GRATUIT</div><div class="body"><div class="logo"><img src="assets/logos/socialblade.png"/></div></div></div>
+<div id="rp4" class="row p" style="left:70px;top:948px"><div class="logo"><img src="assets/logos/sortfeed.png"/></div></div>
+<div id="rg4" class="row g" style="left:750px;top:948px"><div class="logo"><img src="assets/logos/socialblade.png"/></div></div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
-gsap.set('#vs',{autoAlpha:0});
-gsap.set('#t0',{autoAlpha:0});
-tl.fromTo('#t0',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},0.340);
-gsap.set('#cp0',{autoAlpha:0});
-tl.fromTo('#cp0',{autoAlpha:0,x:-520,rotation:-8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},1.680);
-tl.to('#cp0',{autoAlpha:0,x:-174,duration:.14},2.630);
-tl.set('#cp0',{autoAlpha:0},2.770);
-gsap.set('#cg0',{autoAlpha:0});
-tl.fromTo('#cg0',{autoAlpha:0,x:520,rotation:8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},2.160);
-tl.to('#cg0',{autoAlpha:0,x:173,duration:.14},2.630);
-tl.set('#cg0',{autoAlpha:0},2.770);
-tl.fromTo('#vs',{autoAlpha:0,scale:2.2,rotation:-20},{autoAlpha:1,scale:1,rotation:0,duration:.22,ease:'expo.out',immediateRender:false},2.320);
-tl.to('#t0',{autoAlpha:0,duration:.12},2.650);
+gsap.set('#t0',{autoAlpha:1});
 tl.set('#t0',{autoAlpha:0},2.770);
-tl.to('#vs',{autoAlpha:0,duration:.12},2.650);
-tl.set('#vs',{autoAlpha:0},2.770);
+gsap.set('#rp0',{autoAlpha:0});
+tl.fromTo('#rp0',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},1.700);
+tl.to('#rp0',{scale:1,duration:.2},2.040);
+gsap.set('#rg0',{autoAlpha:0});
+tl.fromTo('#rg0',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},2.180);
+tl.to('#rg0',{scale:1,duration:.2},2.520);
 gsap.set('#t1',{autoAlpha:0});
-tl.fromTo('#t1',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},2.770);
-gsap.set('#cp1',{autoAlpha:0});
-tl.fromTo('#cp1',{autoAlpha:0,x:-520,rotation:-8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},3.970);
-tl.to('#cp1',{autoAlpha:0,x:-174,duration:.14},5.160);
-tl.set('#cp1',{autoAlpha:0},5.300);
-gsap.set('#cg1',{autoAlpha:0});
-tl.fromTo('#cg1',{autoAlpha:0,x:520,rotation:8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},4.490);
-tl.to('#cg1',{autoAlpha:0,x:173,duration:.14},5.160);
-tl.set('#cg1',{autoAlpha:0},5.300);
-tl.fromTo('#vs',{autoAlpha:0,scale:2.2,rotation:-20},{autoAlpha:1,scale:1,rotation:0,duration:.22,ease:'expo.out',immediateRender:false},4.650);
-tl.to('#t1',{autoAlpha:0,duration:.12},5.180);
+tl.fromTo('#t1',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.2,ease:'back.out(2)',immediateRender:false},2.770);
 tl.set('#t1',{autoAlpha:0},5.300);
-tl.to('#vs',{autoAlpha:0,duration:.12},5.180);
-tl.set('#vs',{autoAlpha:0},5.300);
+gsap.set('#rp1',{autoAlpha:0});
+tl.fromTo('#rp1',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},3.990);
+tl.to('#rp1',{scale:1,duration:.2},4.330);
+gsap.set('#rg1',{autoAlpha:0});
+tl.fromTo('#rg1',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},4.510);
+tl.to('#rg1',{scale:1,duration:.2},4.850);
 gsap.set('#t2',{autoAlpha:0});
-tl.fromTo('#t2',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},5.300);
-gsap.set('#cp2',{autoAlpha:0});
-tl.fromTo('#cp2',{autoAlpha:0,x:-520,rotation:-8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},6.500);
-tl.to('#cp2',{autoAlpha:0,x:-174,duration:.14},7.490);
-tl.set('#cp2',{autoAlpha:0},7.630);
-gsap.set('#cg2',{autoAlpha:0});
-tl.fromTo('#cg2',{autoAlpha:0,x:520,rotation:8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},6.980);
-tl.to('#cg2',{autoAlpha:0,x:173,duration:.14},7.490);
-tl.set('#cg2',{autoAlpha:0},7.630);
-tl.fromTo('#vs',{autoAlpha:0,scale:2.2,rotation:-20},{autoAlpha:1,scale:1,rotation:0,duration:.22,ease:'expo.out',immediateRender:false},7.140);
-tl.to('#t2',{autoAlpha:0,duration:.12},7.510);
+tl.fromTo('#t2',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.2,ease:'back.out(2)',immediateRender:false},5.300);
 tl.set('#t2',{autoAlpha:0},7.630);
-tl.to('#vs',{autoAlpha:0,duration:.12},7.510);
-tl.set('#vs',{autoAlpha:0},7.630);
+gsap.set('#rp2',{autoAlpha:0});
+tl.fromTo('#rp2',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},6.520);
+tl.to('#rp2',{scale:1,duration:.2},6.860);
+gsap.set('#rg2',{autoAlpha:0});
+tl.fromTo('#rg2',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},7.000);
+tl.to('#rg2',{scale:1,duration:.2},7.340);
 gsap.set('#t3',{autoAlpha:0});
-tl.fromTo('#t3',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},7.630);
-gsap.set('#cp3',{autoAlpha:0});
-tl.fromTo('#cp3',{autoAlpha:0,x:-520,rotation:-8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},8.710);
-tl.to('#cp3',{autoAlpha:0,x:-174,duration:.14},9.990);
-tl.set('#cp3',{autoAlpha:0},10.130);
-gsap.set('#cg3',{autoAlpha:0});
-tl.fromTo('#cg3',{autoAlpha:0,x:520,rotation:8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},9.310);
-tl.to('#cg3',{autoAlpha:0,x:173,duration:.14},9.990);
-tl.set('#cg3',{autoAlpha:0},10.130);
-tl.fromTo('#vs',{autoAlpha:0,scale:2.2,rotation:-20},{autoAlpha:1,scale:1,rotation:0,duration:.22,ease:'expo.out',immediateRender:false},9.470);
-tl.to('#t3',{autoAlpha:0,duration:.12},10.010);
+tl.fromTo('#t3',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.2,ease:'back.out(2)',immediateRender:false},7.630);
 tl.set('#t3',{autoAlpha:0},10.130);
-tl.to('#vs',{autoAlpha:0,duration:.12},10.010);
-tl.set('#vs',{autoAlpha:0},10.130);
+gsap.set('#rp3',{autoAlpha:0});
+tl.fromTo('#rp3',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},8.730);
+tl.to('#rp3',{scale:1,duration:.2},9.070);
+gsap.set('#rg3',{autoAlpha:0});
+tl.fromTo('#rg3',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},9.330);
+tl.to('#rg3',{scale:1,duration:.2},9.670);
 gsap.set('#t4',{autoAlpha:0});
-tl.fromTo('#t4',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},10.130);
-gsap.set('#cp4',{autoAlpha:0});
-tl.fromTo('#cp4',{autoAlpha:0,x:-520,rotation:-8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},11.650);
-gsap.set('#cg4',{autoAlpha:0});
-tl.fromTo('#cg4',{autoAlpha:0,x:520,rotation:8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},12.190);
-tl.fromTo('#vs',{autoAlpha:0,scale:2.2,rotation:-20},{autoAlpha:1,scale:1,rotation:0,duration:.22,ease:'expo.out',immediateRender:false},12.350);
+tl.fromTo('#t4',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.2,ease:'back.out(2)',immediateRender:false},10.130);
+gsap.set('#rp4',{autoAlpha:0});
+tl.fromTo('#rp4',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},11.670);
+tl.to('#rp4',{scale:1,duration:.2},12.010);
+gsap.set('#rg4',{autoAlpha:0});
+tl.fromTo('#rg4',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},12.210);
+tl.to('#rg4',{scale:1,duration:.2},12.550);
 tl.set({}, {}, 12.854);
 window.__timelines["main"] = tl;
 </script>
