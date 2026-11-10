@@ -8,32 +8,21 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
-#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000;perspective:1400px}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
 .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .topic{position:absolute;left:0;right:0;top:250px;z-index:12;text-align:center}
-.tb{display:inline-block;font:400 76px/1 Anton;letter-spacing:.02em;color:#fff;text-transform:uppercase;
-  text-shadow:0 4px 0 #000,0 0 22px rgba(0,0,0,.75),0 6px 18px rgba(0,0,0,.6)}
-#hdr{position:absolute;left:0;right:0;top:352px;z-index:12}
-.hc{position:absolute;width:400px;text-align:center}
-.hb{display:inline-block;font:400 54px/1 Anton;letter-spacing:.04em;padding:8px 26px 6px;transform-origin:50% 50%;color:#fff;box-shadow:0 10px 24px rgba(0,0,0,.3)}
-.hb.pay{background:#E5262B}
-.hb.free{background:#22B83A}
-.card.p{border-color:#E5262B!important;box-shadow:0 22px 50px rgba(0,0,0,.35),0 0 0 3px #E5262B,0 0 34px rgba(229,38,43,.45)!important}
-.card.g{border-color:#22B83A!important;box-shadow:0 22px 50px rgba(0,0,0,.35),0 0 0 3px #22B83A,0 0 34px rgba(34,184,58,.45)!important}
-.card{position:absolute;z-index:11;top:448px;width:340px;height:200px;border-radius:36px;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:12px;background:rgba(58,38,26,.55);-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
-  border:1.5px solid rgba(255,255,255,.35);box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25);color:#fff;transform-style:preserve-3d}
-.tile{width:104px;height:104px;border-radius:28px;display:flex;align-items:center;justify-content:center;font-family:Poppins;font-weight:800;
-  letter-spacing:-.03em;box-shadow:0 10px 22px rgba(0,0,0,.3),inset 0 0 0 2px rgba(255,255,255,.18)}
-.logo{max-width:290px;height:130px;display:flex;align-items:center;justify-content:center}
-.logo.two{flex-direction:column;gap:6px;height:150px}
-.logo.two img{max-height:70px!important}
-.logo img{max-width:290px;max-height:130px;object-fit:contain;border-radius:16px;display:block;box-shadow:0 8px 20px rgba(0,0,0,.3)}
-.nm{font:700 28px/1.1 Poppins;text-align:center;padding:0 14px;white-space:nowrap}
-.tag{position:absolute;top:-18px;right:-14px;min-width:84px;height:56px;padding:0 14px;border-radius:28px;font:800 28px/56px Poppins;text-align:center;
-  box-shadow:0 8px 18px rgba(0,0,0,.3)}
-.tag.p{background:#E5262B;color:#fff;border:2px solid #fff}
-.tag.g{background:#22B83A;color:#fff;border:2px solid #fff}
+.tb{display:inline-block;max-width:860px;background:#573307;color:#fff;font:400 62px/1.08 Anton;letter-spacing:.03em;text-transform:uppercase;padding:10px 26px 6px;white-space:nowrap}
+.duel{position:absolute;top:372px;width:380px;height:250px;z-index:11;border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 18px 40px rgba(0,0,0,.3)}
+.band{height:66px;font:400 44px/66px Anton;letter-spacing:.06em;color:#fff;text-align:center}
+.band.p{background:#E5262B} .band.g{background:#22B83A}
+.body{height:184px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.logo{max-width:300px;height:120px;display:flex;align-items:center;justify-content:center}
+.logo.two{flex-direction:row;gap:14px}
+.logo.two img{max-height:100px!important;max-width:130px!important}
+.logo img{max-width:300px;max-height:120px;object-fit:contain;border-radius:16px;display:block}
+.nm{font:700 26px/1.1 Poppins;color:#2A1A10;white-space:nowrap}
+.vs{position:absolute;left:490px;top:447px;width:100px;height:100px;z-index:13;border-radius:50%;background:#573307;color:#fff;border:5px solid #fff;
+  font:400 46px/90px Anton;text-align:center;box-shadow:0 10px 24px rgba(0,0,0,.35)}
 </style>
 </head>
 <body>
@@ -47,130 +36,111 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="sfx0" src="assets/sfx/whoosh-short.mp3" data-start="0.340" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
 <audio id="sfx1" src="assets/sfx/pop.mp3" data-start="1.700" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
 <audio id="sfx2" src="assets/sfx/pop.mp3" data-start="2.180" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx3" src="assets/sfx/click-soft.mp3" data-start="2.420" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
-<audio id="sfx4" src="assets/sfx/whoosh-short.mp3" data-start="2.770" data-duration="0.570" data-track-index="12" data-volume="0.120"></audio>
+<audio id="sfx3" src="assets/sfx/click-soft.mp3" data-start="2.320" data-duration="0.360" data-track-index="12" data-volume="0.300"></audio>
+<audio id="sfx4" src="assets/sfx/whoosh-short.mp3" data-start="2.770" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
 <audio id="sfx5" src="assets/sfx/pop.mp3" data-start="3.990" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
 <audio id="sfx6" src="assets/sfx/pop.mp3" data-start="4.510" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx7" src="assets/sfx/click-soft.mp3" data-start="4.750" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
+<audio id="sfx7" src="assets/sfx/click-soft.mp3" data-start="4.650" data-duration="0.360" data-track-index="12" data-volume="0.300"></audio>
 <audio id="sfx8" src="assets/sfx/whoosh-short.mp3" data-start="5.300" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
 <audio id="sfx9" src="assets/sfx/pop.mp3" data-start="6.520" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
 <audio id="sfx10" src="assets/sfx/pop.mp3" data-start="7.000" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx11" src="assets/sfx/click-soft.mp3" data-start="7.240" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
+<audio id="sfx11" src="assets/sfx/click-soft.mp3" data-start="7.140" data-duration="0.360" data-track-index="12" data-volume="0.300"></audio>
 <audio id="sfx12" src="assets/sfx/whoosh-short.mp3" data-start="7.630" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
 <audio id="sfx13" src="assets/sfx/pop.mp3" data-start="8.730" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
 <audio id="sfx14" src="assets/sfx/pop.mp3" data-start="9.330" data-duration="0.720" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx15" src="assets/sfx/click-soft.mp3" data-start="9.570" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
+<audio id="sfx15" src="assets/sfx/click-soft.mp3" data-start="9.470" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
 <audio id="sfx16" src="assets/sfx/whoosh-short.mp3" data-start="10.130" data-duration="0.570" data-track-index="10" data-volume="0.120"></audio>
 <audio id="sfx17" src="assets/sfx/pop.mp3" data-start="11.670" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
 <audio id="sfx18" src="assets/sfx/pop.mp3" data-start="12.210" data-duration="0.644" data-track-index="11" data-volume="0.220"></audio>
-<audio id="sfx19" src="assets/sfx/click-soft.mp3" data-start="12.450" data-duration="0.360" data-track-index="10" data-volume="0.300"></audio>
+<audio id="sfx19" src="assets/sfx/click-soft.mp3" data-start="12.350" data-duration="0.360" data-track-index="12" data-volume="0.300"></audio>
   <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="12.854" data-track-index="0"></video>
-<div id="hdr"><div class="hc" style="left:100px"><span id="hP" class="hb pay">PAYANT</span></div><div class="hc" style="left:580px"><span id="hG" class="hb free">GRATUIT</span></div></div>
+<div id="vs" class="vs">VS</div>
 <div id="t0" class="topic"><span class="tb">Trouver tes idées de contenu</span></div>
-<div id="cp0" class="card p" style="left:130px"><div class="logo"><img src="assets/logos/answerthepublic.png"/></div><div class="tag p">€</div></div>
-<div id="cg0" class="card g" style="left:610px"><div class="logo"><img src="assets/logos/googletrends.png"/></div><div class="tag g">0 €</div></div>
+<div id="cp0" class="duel p" style="left:130px"><div class="band p">PAYANT</div><div class="body"><div class="logo"><img src="assets/logos/answerthepublic.png"/></div></div></div>
+<div id="cg0" class="duel g" style="left:570px"><div class="band g">GRATUIT</div><div class="body"><div class="logo"><img src="assets/logos/googletrends.png"/></div></div></div>
 <div id="t1" class="topic"><span class="tb">Faire ton montage vidéo</span></div>
-<div id="cp1" class="card p" style="left:130px"><div class="logo"><img src="assets/logos/premiere.png"/></div><div class="nm">Premiere Pro</div><div class="tag p">€</div></div>
-<div id="cg1" class="card g" style="left:610px"><div class="logo two"><img src="assets/logos/edits.png"/><img src="assets/logos/capcut.png"/></div><div class="tag g">0 €</div></div>
+<div id="cp1" class="duel p" style="left:130px"><div class="band p">PAYANT</div><div class="body"><div class="logo"><img src="assets/logos/premiere.png"/></div><div class=nm>Premiere Pro</div></div></div>
+<div id="cg1" class="duel g" style="left:570px"><div class="band g">GRATUIT</div><div class="body"><div class="logo two"><img src="assets/logos/edits.png"/><img src="assets/logos/capcut.png"/></div></div></div>
 <div id="t2" class="topic"><span class="tb">Pour programmer ton contenu</span></div>
-<div id="cp2" class="card p" style="left:130px"><div class="logo"><img src="assets/logos/metricool.png"/></div><div class="tag p">€</div></div>
-<div id="cg2" class="card g" style="left:610px"><div class="logo"><img src="assets/logos/meta.png"/></div><div class="tag g">0 €</div></div>
+<div id="cp2" class="duel p" style="left:130px"><div class="band p">PAYANT</div><div class="body"><div class="logo"><img src="assets/logos/metricool.png"/></div></div></div>
+<div id="cg2" class="duel g" style="left:570px"><div class="band g">GRATUIT</div><div class="body"><div class="logo"><img src="assets/logos/meta.png"/></div></div></div>
 <div id="t3" class="topic"><span class="tb">Pour créer tes visuels</span></div>
-<div id="cp3" class="card p" style="left:130px"><div class="logo"><img src="assets/logos/photoshop.png"/></div><div class="nm">Photoshop</div><div class="tag p">€</div></div>
-<div id="cg3" class="card g" style="left:610px"><div class="logo"><img src="assets/logos/canva.png"/></div><div class="tag g">0 €</div></div>
+<div id="cp3" class="duel p" style="left:130px"><div class="band p">PAYANT</div><div class="body"><div class="logo"><img src="assets/logos/photoshop.png"/></div><div class=nm>Photoshop</div></div></div>
+<div id="cg3" class="duel g" style="left:570px"><div class="band g">GRATUIT</div><div class="body"><div class="logo"><img src="assets/logos/canva.png"/></div></div></div>
 <div id="t4" class="topic"><span class="tb">Pour étudier ta concurrence</span></div>
-<div id="cp4" class="card p" style="left:130px"><div class="logo"><img src="assets/logos/sortfeed.png"/></div><div class="tag p">€</div></div>
-<div id="cg4" class="card g" style="left:610px"><div class="logo"><img src="assets/logos/socialblade.png"/></div><div class="tag g">0 €</div></div>
+<div id="cp4" class="duel p" style="left:130px"><div class="band p">PAYANT</div><div class="body"><div class="logo"><img src="assets/logos/sortfeed.png"/></div></div></div>
+<div id="cg4" class="duel g" style="left:570px"><div class="band g">GRATUIT</div><div class="body"><div class="logo"><img src="assets/logos/socialblade.png"/></div></div></div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
-gsap.set('#hdr',{autoAlpha:1});
-tl.fromTo('#hdr',{y:-40},{y:0,duration:.35,ease:'power3.out',immediateRender:true},0);
-gsap.set('#hP, #hG',{opacity:.6});
+gsap.set('#vs',{autoAlpha:0});
 gsap.set('#t0',{autoAlpha:0});
-tl.fromTo('#t0',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},0.340);
+tl.fromTo('#t0',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},0.340);
 gsap.set('#cp0',{autoAlpha:0});
-tl.fromTo('#cp0',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},1.700);
-tl.fromTo('#cp0 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},1.940);
-tl.to('#hP',{opacity:1,scale:1.1,duration:.15},1.700);
-tl.to('#hP',{opacity:.6,scale:1,duration:.2},2.190);
-tl.to('#cp0',{autoAlpha:0,rotationY:90,duration:.18},2.590);
+tl.fromTo('#cp0',{autoAlpha:0,x:-520,rotation:-8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},1.680);
+tl.to('#cp0',{autoAlpha:0,x:-174,duration:.14},2.630);
 tl.set('#cp0',{autoAlpha:0},2.770);
 gsap.set('#cg0',{autoAlpha:0});
-tl.fromTo('#cg0',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},2.180);
-tl.fromTo('#cg0 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},2.420);
-tl.to('#hG',{opacity:1,scale:1.1,duration:.15},2.180);
-tl.to('#hG',{opacity:.6,scale:1,duration:.2},2.670);
-tl.to('#cg0',{autoAlpha:0,rotationY:90,duration:.18},2.590);
+tl.fromTo('#cg0',{autoAlpha:0,x:520,rotation:8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},2.160);
+tl.to('#cg0',{autoAlpha:0,x:173,duration:.14},2.630);
 tl.set('#cg0',{autoAlpha:0},2.770);
-tl.to('#t0',{autoAlpha:0,y:-16,duration:.15},2.620);
+tl.fromTo('#vs',{autoAlpha:0,scale:2.2,rotation:-20},{autoAlpha:1,scale:1,rotation:0,duration:.22,ease:'expo.out',immediateRender:false},2.320);
+tl.to('#t0',{autoAlpha:0,duration:.12},2.650);
 tl.set('#t0',{autoAlpha:0},2.770);
+tl.to('#vs',{autoAlpha:0,duration:.12},2.650);
+tl.set('#vs',{autoAlpha:0},2.770);
 gsap.set('#t1',{autoAlpha:0});
-tl.fromTo('#t1',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},2.770);
+tl.fromTo('#t1',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},2.770);
 gsap.set('#cp1',{autoAlpha:0});
-tl.fromTo('#cp1',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},3.990);
-tl.fromTo('#cp1 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},4.230);
-tl.to('#hP',{opacity:1,scale:1.1,duration:.15},3.990);
-tl.to('#hP',{opacity:.6,scale:1,duration:.2},4.480);
-tl.to('#cp1',{autoAlpha:0,rotationY:90,duration:.18},5.120);
+tl.fromTo('#cp1',{autoAlpha:0,x:-520,rotation:-8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},3.970);
+tl.to('#cp1',{autoAlpha:0,x:-174,duration:.14},5.160);
 tl.set('#cp1',{autoAlpha:0},5.300);
 gsap.set('#cg1',{autoAlpha:0});
-tl.fromTo('#cg1',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},4.510);
-tl.fromTo('#cg1 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},4.750);
-tl.to('#hG',{opacity:1,scale:1.1,duration:.15},4.510);
-tl.to('#hG',{opacity:.6,scale:1,duration:.2},5.000);
-tl.to('#cg1',{autoAlpha:0,rotationY:90,duration:.18},5.120);
+tl.fromTo('#cg1',{autoAlpha:0,x:520,rotation:8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},4.490);
+tl.to('#cg1',{autoAlpha:0,x:173,duration:.14},5.160);
 tl.set('#cg1',{autoAlpha:0},5.300);
-tl.to('#t1',{autoAlpha:0,y:-16,duration:.15},5.150);
+tl.fromTo('#vs',{autoAlpha:0,scale:2.2,rotation:-20},{autoAlpha:1,scale:1,rotation:0,duration:.22,ease:'expo.out',immediateRender:false},4.650);
+tl.to('#t1',{autoAlpha:0,duration:.12},5.180);
 tl.set('#t1',{autoAlpha:0},5.300);
+tl.to('#vs',{autoAlpha:0,duration:.12},5.180);
+tl.set('#vs',{autoAlpha:0},5.300);
 gsap.set('#t2',{autoAlpha:0});
-tl.fromTo('#t2',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},5.300);
+tl.fromTo('#t2',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},5.300);
 gsap.set('#cp2',{autoAlpha:0});
-tl.fromTo('#cp2',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},6.520);
-tl.fromTo('#cp2 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},6.760);
-tl.to('#hP',{opacity:1,scale:1.1,duration:.15},6.520);
-tl.to('#hP',{opacity:.6,scale:1,duration:.2},7.010);
-tl.to('#cp2',{autoAlpha:0,rotationY:90,duration:.18},7.450);
+tl.fromTo('#cp2',{autoAlpha:0,x:-520,rotation:-8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},6.500);
+tl.to('#cp2',{autoAlpha:0,x:-174,duration:.14},7.490);
 tl.set('#cp2',{autoAlpha:0},7.630);
 gsap.set('#cg2',{autoAlpha:0});
-tl.fromTo('#cg2',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},7.000);
-tl.fromTo('#cg2 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},7.240);
-tl.to('#hG',{opacity:1,scale:1.1,duration:.15},7.000);
-tl.to('#hG',{opacity:.6,scale:1,duration:.2},7.490);
-tl.to('#cg2',{autoAlpha:0,rotationY:90,duration:.18},7.450);
+tl.fromTo('#cg2',{autoAlpha:0,x:520,rotation:8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},6.980);
+tl.to('#cg2',{autoAlpha:0,x:173,duration:.14},7.490);
 tl.set('#cg2',{autoAlpha:0},7.630);
-tl.to('#t2',{autoAlpha:0,y:-16,duration:.15},7.480);
+tl.fromTo('#vs',{autoAlpha:0,scale:2.2,rotation:-20},{autoAlpha:1,scale:1,rotation:0,duration:.22,ease:'expo.out',immediateRender:false},7.140);
+tl.to('#t2',{autoAlpha:0,duration:.12},7.510);
 tl.set('#t2',{autoAlpha:0},7.630);
+tl.to('#vs',{autoAlpha:0,duration:.12},7.510);
+tl.set('#vs',{autoAlpha:0},7.630);
 gsap.set('#t3',{autoAlpha:0});
-tl.fromTo('#t3',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},7.630);
+tl.fromTo('#t3',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},7.630);
 gsap.set('#cp3',{autoAlpha:0});
-tl.fromTo('#cp3',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},8.730);
-tl.fromTo('#cp3 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},8.970);
-tl.to('#hP',{opacity:1,scale:1.1,duration:.15},8.730);
-tl.to('#hP',{opacity:.6,scale:1,duration:.2},9.220);
-tl.to('#cp3',{autoAlpha:0,rotationY:90,duration:.18},9.950);
+tl.fromTo('#cp3',{autoAlpha:0,x:-520,rotation:-8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},8.710);
+tl.to('#cp3',{autoAlpha:0,x:-174,duration:.14},9.990);
 tl.set('#cp3',{autoAlpha:0},10.130);
 gsap.set('#cg3',{autoAlpha:0});
-tl.fromTo('#cg3',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},9.330);
-tl.fromTo('#cg3 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},9.570);
-tl.to('#hG',{opacity:1,scale:1.1,duration:.15},9.330);
-tl.to('#hG',{opacity:.6,scale:1,duration:.2},9.820);
-tl.to('#cg3',{autoAlpha:0,rotationY:90,duration:.18},9.950);
+tl.fromTo('#cg3',{autoAlpha:0,x:520,rotation:8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},9.310);
+tl.to('#cg3',{autoAlpha:0,x:173,duration:.14},9.990);
 tl.set('#cg3',{autoAlpha:0},10.130);
-tl.to('#t3',{autoAlpha:0,y:-16,duration:.15},9.980);
+tl.fromTo('#vs',{autoAlpha:0,scale:2.2,rotation:-20},{autoAlpha:1,scale:1,rotation:0,duration:.22,ease:'expo.out',immediateRender:false},9.470);
+tl.to('#t3',{autoAlpha:0,duration:.12},10.010);
 tl.set('#t3',{autoAlpha:0},10.130);
+tl.to('#vs',{autoAlpha:0,duration:.12},10.010);
+tl.set('#vs',{autoAlpha:0},10.130);
 gsap.set('#t4',{autoAlpha:0});
-tl.fromTo('#t4',{autoAlpha:0,y:-24,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},10.130);
+tl.fromTo('#t4',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},10.130);
 gsap.set('#cp4',{autoAlpha:0});
-tl.fromTo('#cp4',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},11.670);
-tl.fromTo('#cp4 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},11.910);
-tl.to('#hP',{opacity:1,scale:1.1,duration:.15},11.670);
-tl.to('#hP',{opacity:.6,scale:1,duration:.2},12.160);
+tl.fromTo('#cp4',{autoAlpha:0,x:-520,rotation:-8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},11.650);
 gsap.set('#cg4',{autoAlpha:0});
-tl.fromTo('#cg4',{autoAlpha:0,rotationY:-90,scale:.8},{autoAlpha:1,rotationY:0,scale:1,duration:.35,ease:'back.out(1.6)',immediateRender:false},12.210);
-tl.fromTo('#cg4 .tag',{scale:0},{scale:1,duration:.25,ease:'back.out(3)',immediateRender:false},12.450);
-tl.to('#hG',{opacity:1,scale:1.1,duration:.15},12.210);
-tl.to('#hG',{opacity:.6,scale:1,duration:.2},12.700);
+tl.fromTo('#cg4',{autoAlpha:0,x:520,rotation:8},{autoAlpha:1,x:0,rotation:0,duration:.32,ease:'back.out(1.5)',immediateRender:false},12.190);
+tl.fromTo('#vs',{autoAlpha:0,scale:2.2,rotation:-20},{autoAlpha:1,scale:1,rotation:0,duration:.22,ease:'expo.out',immediateRender:false},12.350);
 tl.set({}, {}, 12.854);
 window.__timelines["main"] = tl;
 </script>
