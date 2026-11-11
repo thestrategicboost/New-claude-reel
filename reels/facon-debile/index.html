@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<link rel="stylesheet" href="assets/fonts/fonts.css" />
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hk{position:absolute;left:0;right:0;top:277px;z-index:20;text-align:center}
+.blk{display:inline-block;background:#573307;color:#fff;font:400 80px/1.22 Anton;letter-spacing:.05em;padding:4px 26px 0}
+.pill{position:relative;display:inline-block;height:72px;margin-top:-8px;border-radius:36px;background:#fff;padding:0 26px;
+  font:italic 800 46px/72px Poppins;letter-spacing:-.04em;color:#573307;white-space:nowrap}
+.gh{visibility:hidden}
+#tx{position:absolute;left:26px;top:0}
+.pw{position:absolute;left:0;right:0;z-index:20;text-align:center}
+.pw .pill{margin:0}
+.crop{position:absolute;z-index:19;object-fit:cover}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="6.267" data-width="1080" data-height="1920">
+  <audio id="amb" src="assets/ref_audio.m4a" data-start="0" data-media-start="0" data-duration="6.267" data-track-index="2" data-volume="1"></audio>
+  <video id="bgv" class="full" src="assets/v4.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="6.267" data-track-index="0"></video>
+<div class="hk"><div class="blk">LA FAÇON LA PLUS DÉBILE</div><br/><div id="p1" class="pill"><span class="gh">de passer de ça…</span><span id="tx"></span></div></div>
+<img id="b0" class="crop" src="assets/crops/v261.png" style="left:185px;top:510px;width:177px;height:79px"/>
+<img id="b1" class="crop" src="assets/crops/v337.png" style="left:426px;top:515px;width:227px;height:79px"/>
+<img id="b2" class="crop" src="assets/crops/v409.png" style="left:713px;top:511px;width:185px;height:73px"/>
+<img id="a0" class="crop" src="assets/crops/v290k.png" style="left:162px;top:759px;width:231px;height:77px"/>
+<img id="a1" class="crop" src="assets/crops/v352k.png" style="left:443px;top:752px;width:194px;height:82px"/>
+<img id="a2" class="crop" src="assets/crops/v629k.png" style="left:695px;top:747px;width:223px;height:97px"/>
+<div id="p2" class="pw" style="top:640px"><span class="pill">à ça…</span></div>
+<div id="p3" class="pw" style="top:900px"><span class="pill">lis la description</span></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+gsap.set('#p1',{autoAlpha:1});
+tl.set('#tx',{textContent:''},0);
+tl.set('#tx',{textContent:"d"},0.064);
+tl.set('#tx',{textContent:"de"},0.077);
+tl.set('#tx',{textContent:"de "},0.091);
+tl.set('#tx',{textContent:"de p"},0.105);
+tl.set('#tx',{textContent:"de pa"},0.119);
+tl.set('#tx',{textContent:"de pas"},0.133);
+tl.set('#tx',{textContent:"de pass"},0.146);
+tl.set('#tx',{textContent:"de passe"},0.160);
+tl.set('#tx',{textContent:"de passer"},0.174);
+tl.set('#tx',{textContent:"de passer "},0.188);
+tl.set('#tx',{textContent:"de passer d"},0.201);
+tl.set('#tx',{textContent:"de passer de"},0.215);
+tl.set('#tx',{textContent:"de passer de "},0.229);
+tl.set('#tx',{textContent:"de passer de \u00e7"},0.242);
+tl.set('#tx',{textContent:"de passer de \u00e7a"},0.256);
+tl.set('#tx',{textContent:"de passer de \u00e7a\u2026"},0.270);
+gsap.set('#b0',{autoAlpha:0});
+tl.fromTo('#b0',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.18,ease:'back.out(2.2)',immediateRender:false},0.500);
+gsap.set('#b1',{autoAlpha:0});
+tl.fromTo('#b1',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.18,ease:'back.out(2.2)',immediateRender:false},0.770);
+gsap.set('#b2',{autoAlpha:0});
+tl.fromTo('#b2',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.18,ease:'back.out(2.2)',immediateRender:false},1.030);
+gsap.set('#a0',{autoAlpha:0});
+tl.fromTo('#a0',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.18,ease:'back.out(2.2)',immediateRender:false},2.300);
+gsap.set('#a1',{autoAlpha:0});
+tl.fromTo('#a1',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.18,ease:'back.out(2.2)',immediateRender:false},2.670);
+gsap.set('#a2',{autoAlpha:0});
+tl.fromTo('#a2',{autoAlpha:0,scale:.5},{autoAlpha:1,scale:1,duration:.18,ease:'back.out(2.2)',immediateRender:false},3.030);
+gsap.set('#p2',{autoAlpha:0});
+tl.fromTo('#p2',{autoAlpha:0,scale:.6},{autoAlpha:1,scale:1,duration:.18,ease:'back.out(2)',immediateRender:false},1.770);
+gsap.set('#p3',{autoAlpha:0});
+tl.fromTo('#p3',{autoAlpha:0,scale:.6},{autoAlpha:1,scale:1,duration:.18,ease:'back.out(2)',immediateRender:false},4.270);
+tl.set({}, {}, 6.267);
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>
