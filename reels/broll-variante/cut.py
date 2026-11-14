@@ -6,6 +6,9 @@ import subprocess
 import sys
 
 VARIANTS = {
+            # round 3: « COMMENT FORCER INSTA » on B-rolls / moments not used for it yet
+            16: ('bvoit', 0.5), 17: ('b09', 8.0), 18: ('b06', 2.8), 19: ('b05', 14.0), 20: ('b11', 20.0), 21: ('b08', 22.0),
+            
             # round 2, after variante 2 worked (4 025 views, 75 saves): same hook, other moments / other lilac B-rolls
             10: ('b08', 13.0), 11: ('b06', 5.0), 12: ('b01', 5.5), 13: ('b05', 6.0), 14: ('b08', 18.0), 15: ('b08', 8.0),
             1: ('b06', 0.3), 2: ('b08', 3.0), 3: ('b10', 3.0), 4: ('b01', 1.0),
