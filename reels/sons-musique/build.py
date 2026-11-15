@@ -22,7 +22,7 @@ SOUNDS = [('Now or Never', 'Motivant', 0.0, 4.3), ('Good Man With a<br/>Broken H
           ('Runaway', 'Dramatique', 7.9, 11.9), ('Timeless', 'Puissant', 11.9, DUR)]
 PX = 175          # timeline pixels per second
 PLAY_X = 390      # fixed playhead
-STRIP_Y = 770
+STRIP_Y = 590      # raised (her ask): the bar sits under the title, above her head
 CLIP_H = 92
 HEAD_H = 26
 GAP = 14
@@ -56,6 +56,11 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 #shade{{position:absolute;left:0;right:0;top:0;height:1000px;z-index:5;
   background:linear-gradient(180deg,rgba(25,14,6,.35) 0%,rgba(25,14,6,.4) 60%,rgba(25,14,6,0) 100%)}}
+.ttl{{position:absolute;left:0;right:0;top:250px;z-index:12;text-align:center}}
+.tblk{{display:inline-block;background:{DARK};color:#fff;font:400 66px/1.12 Anton;letter-spacing:.04em;padding:6px 24px 2px;white-space:nowrap;
+  box-shadow:0 8px 20px rgba(0,0,0,.25)}}
+.tpill{{display:inline-block;margin-top:-10px;padding:2px 30px 6px;border-radius:40px;background:#fff;color:#2A1A10;font:italic 800 44px/1.25 Poppins;
+  letter-spacing:-.04em;box-shadow:0 6px 16px rgba(0,0,0,.2)}}
 #strip{{position:absolute;left:0;top:{STRIP_Y - 112}px;height:{CLIP_H + 112}px;z-index:10;will-change:transform}}
 .clip{{position:absolute;top:112px;height:{CLIP_H}px;border-radius:5px;background:{BROWN};overflow:hidden;
   box-shadow:0 8px 22px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.14)}}
@@ -100,6 +105,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   <audio id="music" src="assets/music.m4a" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
   <video id="bgv" class="full" src="assets/broll{N}.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
   <div id="shade"></div>
+  <div class="ttl"><div class="tblk">LES SONS VIRAUX QUE J'UTILISE</div><br/><div class="tpill">classés par vibes</div></div>
   <div id="strip">{strip}</div>
   <div id="ph"></div>
 </div>
