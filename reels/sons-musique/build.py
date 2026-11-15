@@ -8,6 +8,9 @@ PY build.py    writes index.html
 import json
 import shutil
 import subprocess
+import sys
+
+N = sys.argv[1] if len(sys.argv) > 1 else ''      # variant: assets/broll<N>.mp4
 
 DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of',
                             'csv=p=0', 'assets/music.m4a'], capture_output=True, text=True).stdout.strip())
@@ -77,9 +80,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   border-top:18px solid #fff}}
 '''
     # zooms on her (origin on her face): slow push / punch-in on each new sound / zoom out
-    zoom = [(0.0, 1.0, 1.12, 4.25, 'sine.inOut'), (4.3, 1.28, 1.28, .01, 'none'), (4.32, 1.28, 1.05, 3.5, 'power2.out'),
-            (7.9, 1.05, 1.0, .01, 'none'), (7.92, 1.0, 1.18, 3.9, 'sine.inOut'), (11.9, 1.34, 1.34, .01, 'none'),
-            (11.92, 1.34, 1.0, DUR - 11.92, 'power1.inOut')]
+    zoom = []      # no zoom on her face (her ask): the B-roll stays still, the timeline does the moving
     tw = ["gsap.set('#bgv',{transformOrigin:'42% 34%'});"]
     tw += [f"tl.fromTo('#bgv',{{scale:{a}}},{{scale:{b},duration:{d:.2f},ease:'{e}',immediateRender:{'true' if t == 0 else 'false'}}},{t:.2f});"
            for t, a, b, d, e in zoom]
@@ -97,7 +98,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR:.3f}" data-width="1080" data-height="1920">
   <audio id="music" src="assets/music.m4a" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
-  <video id="bgv" class="full" src="assets/broll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
+  <video id="bgv" class="full" src="assets/broll{N}.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
   <div id="shade"></div>
   <div id="strip">{strip}</div>
   <div id="ph"></div>
