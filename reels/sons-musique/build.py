@@ -15,6 +15,7 @@ N = sys.argv[1] if len(sys.argv) > 1 else ''      # variant: assets/broll<N>.mp4
 DUR = float(subprocess.run([shutil.which('ffprobe') or 'ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of',
                             'csv=p=0', 'assets/music.m4a'], capture_output=True, text=True).stdout.strip())
 BROWN, DARK = '#8C5C41', '#573307'
+TITLE = '#523301'      # her brown, measured on her published version
 WAVE = '#D9AF88'      # caramel waveform on the brown clip
 HEAD = '#5C3A25'      # darker header band
 # (song, vibe, start, end) on the music clock (cut from the inspi's audio)
@@ -57,9 +58,10 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #shade{{position:absolute;left:0;right:0;top:0;height:1000px;z-index:5;
   background:linear-gradient(180deg,rgba(25,14,6,.35) 0%,rgba(25,14,6,.4) 60%,rgba(25,14,6,0) 100%)}}
 .ttl{{position:absolute;left:0;right:0;top:250px;z-index:12;text-align:center}}
-.tblk{{display:inline-block;background:{DARK};color:#fff;font:400 66px/1.12 Anton;letter-spacing:.04em;padding:6px 24px 2px;white-space:nowrap;
+.tblk{{display:inline-block;background:{TITLE};color:#fff;font:400 64px/1.12 Anton;letter-spacing:.05em;padding:14px 44px 8px;white-space:nowrap;
   box-shadow:0 8px 20px rgba(0,0,0,.25)}}
-.tpill{{display:inline-block;margin-top:-10px;padding:2px 30px 6px;border-radius:40px;background:#fff;color:#2A1A10;font:italic 800 44px/1.25 Poppins;
+.gh{{visibility:hidden}} #tx{{position:absolute;left:34px;top:4px}}
+.tpill{{position:relative;display:inline-block;margin-top:16px;padding:4px 34px 8px;border-radius:40px;background:#fff;color:{TITLE};font:italic 800 44px/1.25 Poppins;
   letter-spacing:-.04em;box-shadow:0 6px 16px rgba(0,0,0,.2)}}
 #strip{{position:absolute;left:0;top:{STRIP_Y - 112}px;height:{CLIP_H + 112}px;z-index:10;will-change:transform}}
 .clip{{position:absolute;top:112px;height:{CLIP_H}px;border-radius:5px;background:{BROWN};overflow:hidden;
@@ -90,6 +92,24 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
     tw += [f"tl.fromTo('#bgv',{{scale:{a}}},{{scale:{b},duration:{d:.2f},ease:'{e}',immediateRender:{'true' if t == 0 else 'false'}}},{t:.2f});"
            for t, a, b, d, e in zoom]
     tw += [          f"tl.fromTo('#strip',{{x:{PLAY_X}}},{{x:{PLAY_X - DUR * PX:.1f},duration:{DUR:.3f},ease:'none',immediateRender:true}},0);",
+          "tl.set('#tx',{textContent:''},0);",
+          "tl.set('#tx',{textContent:\"c\"},0.324);",
+          "tl.set('#tx',{textContent:\"cl\"},0.397);",
+          "tl.set('#tx',{textContent:\"cla\"},0.471);",
+          "tl.set('#tx',{textContent:\"clas\"},0.544);",
+          "tl.set('#tx',{textContent:\"class\"},0.618);",
+          "tl.set('#tx',{textContent:\"class\\u00e9\"},0.691);",
+          "tl.set('#tx',{textContent:\"class\\u00e9s\"},0.765);",
+          "tl.set('#tx',{textContent:\"class\\u00e9s \"},0.838);",
+          "tl.set('#tx',{textContent:\"class\\u00e9s p\"},0.912);",
+          "tl.set('#tx',{textContent:\"class\\u00e9s pa\"},0.985);",
+          "tl.set('#tx',{textContent:\"class\\u00e9s par\"},1.059);",
+          "tl.set('#tx',{textContent:\"class\\u00e9s par \"},1.132);",
+          "tl.set('#tx',{textContent:\"class\\u00e9s par v\"},1.206);",
+          "tl.set('#tx',{textContent:\"class\\u00e9s par vi\"},1.279);",
+          "tl.set('#tx',{textContent:\"class\\u00e9s par vib\"},1.353);",
+          "tl.set('#tx',{textContent:\"class\\u00e9s par vibe\"},1.426);",
+          "tl.set('#tx',{textContent:\"class\\u00e9s par vibes\"},1.500);",
           "tl.fromTo('#ph',{scaleY:0,transformOrigin:'50% 0%'},{scaleY:1,duration:.3,ease:'power2.out',immediateRender:true},0);"]
     return f'''<!doctype html>
 <html lang="fr" data-resolution="portrait">
@@ -103,9 +123,10 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR:.3f}" data-width="1080" data-height="1920">
   <audio id="music" src="assets/music.m4a" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
+  <audio id="typ" src="assets/sfx/typing.mp3" data-start="0.250" data-duration="1.500" data-track-index="3" data-volume="0.6"></audio>
   <video id="bgv" class="full" src="assets/broll{N}.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
   <div id="shade"></div>
-  <div class="ttl"><div class="tblk">LES SONS VIRAUX QUE J'UTILISE</div><br/><div class="tpill">classés par vibes</div></div>
+  <div class="ttl"><div class="tblk">LES SONS VIRAUX QUE J'UTILISE</div><br/><div class="tpill"><span class="gh">classés par vibes</span><span id="tx"></span></div></div>
   <div id="strip">{strip}</div>
   <div id="ph"></div>
 </div>
