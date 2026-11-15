@@ -48,7 +48,7 @@ def build():
 html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #root{{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
-.hk{{position:absolute;left:0;right:0;top:300px;z-index:20;text-align:center}}
+.hk{{position:absolute;left:0;right:0;top:350px;z-index:20;text-align:center}}
 #blk{{display:inline-block;max-width:820px;background:{DARK};color:#fff;font:400 76px/1.08 Anton;letter-spacing:.03em;padding:10px 26px 6px}}
 #pl{{position:relative;display:inline-block;max-width:820px;height:62px;margin-top:-4px;border-radius:31px;background:#fff;padding:0 30px;box-shadow:0 4px 16px rgba(0,0,0,.22);transform-origin:50% 50%}}
 .gh{{visibility:hidden}}

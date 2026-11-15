@@ -23,7 +23,7 @@ SOUNDS = [('Now or Never', 'Motivant', 0.0, 4.3), ('Good Man With a<br/>Broken H
           ('Runaway', 'Dramatique', 7.9, 11.9), ('Timeless', 'Puissant', 11.9, DUR)]
 PX = 175          # timeline pixels per second
 PLAY_X = 390      # fixed playhead
-STRIP_Y = 590      # raised (her ask): the bar sits under the title, above her head
+STRIP_Y = 680      # raised (her ask): the bar sits under the title, above her head
 CLIP_H = 92
 HEAD_H = 26
 GAP = 14
@@ -57,7 +57,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .full{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
 #shade{{position:absolute;left:0;right:0;top:0;height:1000px;z-index:5;
   background:linear-gradient(180deg,rgba(25,14,6,.35) 0%,rgba(25,14,6,.4) 60%,rgba(25,14,6,0) 100%)}}
-.ttl{{position:absolute;left:0;right:0;top:250px;z-index:12;text-align:center}}
+.ttl{{position:absolute;left:0;right:0;top:340px;z-index:12;text-align:center}}
 .tblk{{display:inline-block;background:{TITLE};color:#fff;font:400 64px/1.12 Anton;letter-spacing:.05em;padding:14px 44px 30px;white-space:nowrap;
   box-shadow:0 8px 20px rgba(0,0,0,.25)}}
 .gh{{visibility:hidden}} #tx{{position:absolute;left:34px;top:4px}}
