@@ -58,10 +58,10 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 #shade{{position:absolute;left:0;right:0;top:0;height:1000px;z-index:5;
   background:linear-gradient(180deg,rgba(25,14,6,.35) 0%,rgba(25,14,6,.4) 60%,rgba(25,14,6,0) 100%)}}
 .ttl{{position:absolute;left:0;right:0;top:250px;z-index:12;text-align:center}}
-.tblk{{display:inline-block;background:{TITLE};color:#fff;font:400 64px/1.12 Anton;letter-spacing:.05em;padding:14px 44px 8px;white-space:nowrap;
+.tblk{{display:inline-block;background:{TITLE};color:#fff;font:400 64px/1.12 Anton;letter-spacing:.05em;padding:14px 44px 30px;white-space:nowrap;
   box-shadow:0 8px 20px rgba(0,0,0,.25)}}
 .gh{{visibility:hidden}} #tx{{position:absolute;left:34px;top:4px}}
-.tpill{{position:relative;display:inline-block;margin-top:16px;padding:4px 34px 8px;border-radius:40px;background:#fff;color:{TITLE};font:italic 800 44px/1.25 Poppins;
+.tpill{{position:relative;display:inline-block;margin-top:-26px;padding:4px 34px 8px;border-radius:40px;background:#fff;color:{TITLE};font:italic 800 44px/1.25 Poppins;
   letter-spacing:-.04em;box-shadow:0 6px 16px rgba(0,0,0,.2)}}
 #strip{{position:absolute;left:0;top:{STRIP_Y - 112}px;height:{CLIP_H + 112}px;z-index:10;will-change:transform}}
 .clip{{position:absolute;top:112px;height:{CLIP_H}px;border-radius:5px;background:{BROWN};overflow:hidden;
