@@ -29,8 +29,8 @@ ROUNDS = [   # topic as she says it, paid (name, logo, show name?), free (name, 
     ('Pour étudier ta concurrence', ('Sort Feed', 'sortfeed', False), ('Social Blade', 'socialblade', False)),
 ]
 LEFT, RIGHT = 300, 780      # card centres
-CX = [40, 810]                # column left edges (280 px wide panels, beside her face)
-ROW0, ROWH = 548, 116         # first logo row, row step
+CX = [150, 690]      # pulled in (her ask): Instagram crops the edges                # column left edges (280 px wide panels, beside her face)
+ROW0, ROWH = 566, 116         # first logo row, row step
 
 
 def starts():
@@ -107,10 +107,10 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .tb{{display:inline-block;max-width:900px;background:{BLOCK};color:#fff;font:400 54px/1.1 Anton;letter-spacing:.04em;text-transform:uppercase;
   padding:12px 28px 8px;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.25)}}
 .cnt{{position:absolute;left:50%;top:-36px;transform:translateX(-50%);background:#fff;color:{BLOCK};font:italic 800 30px/40px Poppins;padding:0 16px;border-radius:20px}}
-.panel{{position:absolute;top:450px;width:230px;z-index:10}}
-.hd{{height:82px;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:12px;color:#fff;box-shadow:0 8px 18px rgba(0,0,0,.25)}}
-.hd span{{font:400 46px/1 Anton;letter-spacing:.05em;padding-top:4px}}
-.hd i{{font:800 22px/1 Poppins;font-style:normal;background:#fff;border-radius:14px;padding:6px 10px}}
+.panel{{position:absolute;top:446px;width:230px;z-index:10}}
+.hd{{height:100px;margin:0 -25px;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:12px;color:#fff;box-shadow:0 8px 18px rgba(0,0,0,.25)}}
+.hd span{{font:400 60px/1 Anton;letter-spacing:.05em;padding-top:4px}}
+.hd i{{font:800 26px/1 Poppins;font-style:normal;background:#fff;border-radius:14px;padding:6px 10px}}
 .hd.p{{background:{RED}}} .hd.p i{{color:{RED}}}
 .hd.g{{background:{GREEN}}} .hd.g i{{color:{GREEN}}}
 .row{{position:absolute;width:230px;height:104px;z-index:11;border-radius:18px;background:#fff;display:flex;align-items:center;justify-content:center;
