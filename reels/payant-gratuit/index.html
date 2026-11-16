@@ -10,18 +10,22 @@
 html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 #root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
 .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.topic{position:absolute;left:0;right:0;top:250px;z-index:12;text-align:center}
-.tb{display:inline-block;max-width:860px;background:#573307;color:#fff;font:400 58px/1.08 Anton;letter-spacing:.03em;text-transform:uppercase;padding:10px 24px 6px;white-space:nowrap}
-.col{position:absolute;top:350px;width:260px;z-index:11}
-.hd{height:84px;border-radius:20px;font:400 56px/84px Anton;letter-spacing:.05em;color:#fff;text-align:center;box-shadow:0 10px 24px rgba(0,0,0,.3)}
-.hd.p{background:#E5262B} .hd.g{background:#22B83A}
-.row{position:absolute;width:260px;height:106px;z-index:11;border-radius:18px;background:#fff;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 10px 22px rgba(0,0,0,.25)}
-.row.p{border:4px solid #E5262B} .row.g{border:4px solid #22B83A}
-.logo{max-width:220px;height:84px;display:flex;align-items:center;justify-content:center}
+.topic{position:absolute;left:0;right:0;top:350px;z-index:12;text-align:center}
+.tb{display:inline-block;max-width:900px;background:#523301;color:#fff;font:400 54px/1.1 Anton;letter-spacing:.04em;text-transform:uppercase;
+  padding:12px 28px 8px;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.cnt{position:absolute;left:50%;top:-36px;transform:translateX(-50%);background:#fff;color:#523301;font:italic 800 30px/40px Poppins;padding:0 16px;border-radius:20px}
+.panel{position:absolute;top:450px;width:230px;z-index:10}
+.hd{height:82px;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:12px;color:#fff;box-shadow:0 8px 18px rgba(0,0,0,.25)}
+.hd span{font:400 46px/1 Anton;letter-spacing:.05em;padding-top:4px}
+.hd i{font:800 22px/1 Poppins;font-style:normal;background:#fff;border-radius:14px;padding:6px 10px}
+.hd.p{background:#E5262B} .hd.p i{color:#E5262B}
+.hd.g{background:#22B83A} .hd.g i{color:#22B83A}
+.row{position:absolute;width:230px;height:104px;z-index:11;border-radius:18px;background:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 14px rgba(0,0,0,.25)}
+.logo{max-width:200px;height:80px;display:flex;align-items:center;justify-content:center}
 .logo.two{flex-direction:row;gap:10px}
-.logo.two img{max-height:70px!important;max-width:100px!important}
-.logo img{max-width:220px;max-height:84px;object-fit:contain;border-radius:12px;display:block}
+.logo.two img{max-height:66px!important;max-width:100px!important}
+.logo img{max-width:200px;max-height:80px;object-fit:contain;border-radius:12px;display:block}
 </style>
 </head>
 <body>
@@ -48,68 +52,69 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <audio id="sfx13" src="assets/sfx/pop.mp3" data-start="11.670" data-duration="0.720" data-track-index="10" data-volume="0.220"></audio>
 <audio id="sfx14" src="assets/sfx/pop.mp3" data-start="12.210" data-duration="0.644" data-track-index="11" data-volume="0.220"></audio>
   <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="12.854" data-track-index="0"></video>
-<div class="col p" style="left:70px"><div class="hd p">PAYANT</div></div><div class="col g" style="left:750px"><div class="hd g">GRATUIT</div></div>
-<div id="t0" class="topic"><span class="tb">Trouver tes idées de contenu</span></div>
-<div id="rp0" class="row p" style="left:70px;top:460px"><div class="logo"><img src="assets/logos/answerthepublic.png"/></div></div>
-<div id="rg0" class="row g" style="left:750px;top:460px"><div class="logo"><img src="assets/logos/googletrends.png"/></div></div>
-<div id="t1" class="topic"><span class="tb">Faire ton montage vidéo</span></div>
-<div id="rp1" class="row p" style="left:70px;top:582px"><div class="logo"><img src="assets/logos/premiere.png"/></div></div>
-<div id="rg1" class="row g" style="left:750px;top:582px"><div class="logo two"><img src="assets/logos/edits.png"/><img src="assets/logos/capcut.png"/></div></div>
-<div id="t2" class="topic"><span class="tb">Pour programmer ton contenu</span></div>
-<div id="rp2" class="row p" style="left:70px;top:704px"><div class="logo"><img src="assets/logos/metricool.png"/></div></div>
-<div id="rg2" class="row g" style="left:750px;top:704px"><div class="logo"><img src="assets/logos/meta.png"/></div></div>
-<div id="t3" class="topic"><span class="tb">Pour créer tes visuels</span></div>
-<div id="rp3" class="row p" style="left:70px;top:826px"><div class="logo"><img src="assets/logos/photoshop.png"/></div></div>
-<div id="rg3" class="row g" style="left:750px;top:826px"><div class="logo"><img src="assets/logos/canva.png"/></div></div>
-<div id="t4" class="topic"><span class="tb">Pour étudier ta concurrence</span></div>
-<div id="rp4" class="row p" style="left:70px;top:948px"><div class="logo"><img src="assets/logos/sortfeed.png"/></div></div>
-<div id="rg4" class="row g" style="left:750px;top:948px"><div class="logo"><img src="assets/logos/socialblade.png"/></div></div>
+<div class="panel p" style="left:40px"><div class="hd p"><span>PAYANT</span><i>€</i></div></div>
+<div class="panel g" style="left:810px"><div class="hd g"><span>GRATUIT</span><i>0 €</i></div></div>
+<div id="t0" class="topic"><span class="cnt">1/5</span><span class="tb">Trouver tes idées de contenu</span></div>
+<div id="rp0" class="row p" style="left:40px;top:548px"><div class="logo"><img src="assets/logos/answerthepublic.png"/></div></div>
+<div id="rg0" class="row g" style="left:810px;top:548px"><div class="logo"><img src="assets/logos/googletrends.png"/></div></div>
+<div id="t1" class="topic"><span class="cnt">2/5</span><span class="tb">Faire ton montage vidéo</span></div>
+<div id="rp1" class="row p" style="left:40px;top:664px"><div class="logo"><img src="assets/logos/premiere.png"/></div></div>
+<div id="rg1" class="row g" style="left:810px;top:664px"><div class="logo two"><img src="assets/logos/edits.png"/><img src="assets/logos/capcut.png"/></div></div>
+<div id="t2" class="topic"><span class="cnt">3/5</span><span class="tb">Pour programmer ton contenu</span></div>
+<div id="rp2" class="row p" style="left:40px;top:780px"><div class="logo"><img src="assets/logos/metricool.png"/></div></div>
+<div id="rg2" class="row g" style="left:810px;top:780px"><div class="logo"><img src="assets/logos/meta.png"/></div></div>
+<div id="t3" class="topic"><span class="cnt">4/5</span><span class="tb">Pour créer tes visuels</span></div>
+<div id="rp3" class="row p" style="left:40px;top:896px"><div class="logo"><img src="assets/logos/photoshop.png"/></div></div>
+<div id="rg3" class="row g" style="left:810px;top:896px"><div class="logo"><img src="assets/logos/canva.png"/></div></div>
+<div id="t4" class="topic"><span class="cnt">5/5</span><span class="tb">Pour étudier ta concurrence</span></div>
+<div id="rp4" class="row p" style="left:40px;top:1012px"><div class="logo"><img src="assets/logos/sortfeed.png"/></div></div>
+<div id="rg4" class="row g" style="left:810px;top:1012px"><div class="logo"><img src="assets/logos/socialblade.png"/></div></div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
 gsap.set('#t0',{autoAlpha:1});
 tl.set('#t0',{autoAlpha:0},2.770);
 gsap.set('#rp0',{autoAlpha:0});
-tl.fromTo('#rp0',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},1.700);
-tl.to('#rp0',{scale:1,duration:.2},2.040);
+tl.fromTo('#rp0',{autoAlpha:0,x:-60,scale:.8},{autoAlpha:1,x:0,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},1.700);
+tl.fromTo('#rp0',{boxShadow:'0 0 0 4px #E5262B, 0 0 26px #E5262B'},{boxShadow:'0 0 0 0px rgba(0,0,0,0), 0 6px 14px rgba(0,0,0,.25)',duration:.9,immediateRender:false},1.940);
 gsap.set('#rg0',{autoAlpha:0});
-tl.fromTo('#rg0',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},2.180);
-tl.to('#rg0',{scale:1,duration:.2},2.520);
+tl.fromTo('#rg0',{autoAlpha:0,x:60,scale:.8},{autoAlpha:1,x:0,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},2.180);
+tl.fromTo('#rg0',{boxShadow:'0 0 0 4px #22B83A, 0 0 26px #22B83A'},{boxShadow:'0 0 0 0px rgba(0,0,0,0), 0 6px 14px rgba(0,0,0,.25)',duration:.9,immediateRender:false},2.420);
 gsap.set('#t1',{autoAlpha:0});
-tl.fromTo('#t1',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.2,ease:'back.out(2)',immediateRender:false},2.770);
+tl.fromTo('#t1',{autoAlpha:0,y:-16},{autoAlpha:1,y:0,duration:.2,ease:'power3.out',immediateRender:false},2.770);
 tl.set('#t1',{autoAlpha:0},5.300);
 gsap.set('#rp1',{autoAlpha:0});
-tl.fromTo('#rp1',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},3.990);
-tl.to('#rp1',{scale:1,duration:.2},4.330);
+tl.fromTo('#rp1',{autoAlpha:0,x:-60,scale:.8},{autoAlpha:1,x:0,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},3.990);
+tl.fromTo('#rp1',{boxShadow:'0 0 0 4px #E5262B, 0 0 26px #E5262B'},{boxShadow:'0 0 0 0px rgba(0,0,0,0), 0 6px 14px rgba(0,0,0,.25)',duration:.9,immediateRender:false},4.230);
 gsap.set('#rg1',{autoAlpha:0});
-tl.fromTo('#rg1',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},4.510);
-tl.to('#rg1',{scale:1,duration:.2},4.850);
+tl.fromTo('#rg1',{autoAlpha:0,x:60,scale:.8},{autoAlpha:1,x:0,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},4.510);
+tl.fromTo('#rg1',{boxShadow:'0 0 0 4px #22B83A, 0 0 26px #22B83A'},{boxShadow:'0 0 0 0px rgba(0,0,0,0), 0 6px 14px rgba(0,0,0,.25)',duration:.9,immediateRender:false},4.750);
 gsap.set('#t2',{autoAlpha:0});
-tl.fromTo('#t2',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.2,ease:'back.out(2)',immediateRender:false},5.300);
+tl.fromTo('#t2',{autoAlpha:0,y:-16},{autoAlpha:1,y:0,duration:.2,ease:'power3.out',immediateRender:false},5.300);
 tl.set('#t2',{autoAlpha:0},7.630);
 gsap.set('#rp2',{autoAlpha:0});
-tl.fromTo('#rp2',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},6.520);
-tl.to('#rp2',{scale:1,duration:.2},6.860);
+tl.fromTo('#rp2',{autoAlpha:0,x:-60,scale:.8},{autoAlpha:1,x:0,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},6.520);
+tl.fromTo('#rp2',{boxShadow:'0 0 0 4px #E5262B, 0 0 26px #E5262B'},{boxShadow:'0 0 0 0px rgba(0,0,0,0), 0 6px 14px rgba(0,0,0,.25)',duration:.9,immediateRender:false},6.760);
 gsap.set('#rg2',{autoAlpha:0});
-tl.fromTo('#rg2',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},7.000);
-tl.to('#rg2',{scale:1,duration:.2},7.340);
+tl.fromTo('#rg2',{autoAlpha:0,x:60,scale:.8},{autoAlpha:1,x:0,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},7.000);
+tl.fromTo('#rg2',{boxShadow:'0 0 0 4px #22B83A, 0 0 26px #22B83A'},{boxShadow:'0 0 0 0px rgba(0,0,0,0), 0 6px 14px rgba(0,0,0,.25)',duration:.9,immediateRender:false},7.240);
 gsap.set('#t3',{autoAlpha:0});
-tl.fromTo('#t3',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.2,ease:'back.out(2)',immediateRender:false},7.630);
+tl.fromTo('#t3',{autoAlpha:0,y:-16},{autoAlpha:1,y:0,duration:.2,ease:'power3.out',immediateRender:false},7.630);
 tl.set('#t3',{autoAlpha:0},10.130);
 gsap.set('#rp3',{autoAlpha:0});
-tl.fromTo('#rp3',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},8.730);
-tl.to('#rp3',{scale:1,duration:.2},9.070);
+tl.fromTo('#rp3',{autoAlpha:0,x:-60,scale:.8},{autoAlpha:1,x:0,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},8.730);
+tl.fromTo('#rp3',{boxShadow:'0 0 0 4px #E5262B, 0 0 26px #E5262B'},{boxShadow:'0 0 0 0px rgba(0,0,0,0), 0 6px 14px rgba(0,0,0,.25)',duration:.9,immediateRender:false},8.970);
 gsap.set('#rg3',{autoAlpha:0});
-tl.fromTo('#rg3',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},9.330);
-tl.to('#rg3',{scale:1,duration:.2},9.670);
+tl.fromTo('#rg3',{autoAlpha:0,x:60,scale:.8},{autoAlpha:1,x:0,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},9.330);
+tl.fromTo('#rg3',{boxShadow:'0 0 0 4px #22B83A, 0 0 26px #22B83A'},{boxShadow:'0 0 0 0px rgba(0,0,0,0), 0 6px 14px rgba(0,0,0,.25)',duration:.9,immediateRender:false},9.570);
 gsap.set('#t4',{autoAlpha:0});
-tl.fromTo('#t4',{autoAlpha:0,scale:.85},{autoAlpha:1,scale:1,duration:.2,ease:'back.out(2)',immediateRender:false},10.130);
+tl.fromTo('#t4',{autoAlpha:0,y:-16},{autoAlpha:1,y:0,duration:.2,ease:'power3.out',immediateRender:false},10.130);
 gsap.set('#rp4',{autoAlpha:0});
-tl.fromTo('#rp4',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},11.670);
-tl.to('#rp4',{scale:1,duration:.2},12.010);
+tl.fromTo('#rp4',{autoAlpha:0,x:-60,scale:.8},{autoAlpha:1,x:0,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},11.670);
+tl.fromTo('#rp4',{boxShadow:'0 0 0 4px #E5262B, 0 0 26px #E5262B'},{boxShadow:'0 0 0 0px rgba(0,0,0,0), 0 6px 14px rgba(0,0,0,.25)',duration:.9,immediateRender:false},11.910);
 gsap.set('#rg4',{autoAlpha:0});
-tl.fromTo('#rg4',{autoAlpha:0,scale:.3},{autoAlpha:1,scale:1.08,duration:.22,ease:'back.out(2.4)',immediateRender:false},12.210);
-tl.to('#rg4',{scale:1,duration:.2},12.550);
+tl.fromTo('#rg4',{autoAlpha:0,x:60,scale:.8},{autoAlpha:1,x:0,scale:1,duration:.24,ease:'back.out(2)',immediateRender:false},12.210);
+tl.fromTo('#rg4',{boxShadow:'0 0 0 4px #22B83A, 0 0 26px #22B83A'},{boxShadow:'0 0 0 0px rgba(0,0,0,0), 0 6px 14px rgba(0,0,0,.25)',duration:.9,immediateRender:false},12.450);
 tl.set({}, {}, 12.854);
 window.__timelines["main"] = tl;
 </script>
