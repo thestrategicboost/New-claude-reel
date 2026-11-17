@@ -2,7 +2,8 @@
 """10 ans de marketing: one take, dead air cut (audio envelope), normal speed, her lilac (lilac2.py, warm wall) + retouch.
 PY cut.py -> assets/aroll.mp4, assets/voice.m4a, work/segs.json"""
 import json, subprocess, sys
-SEGS = [(0.62, 24.18), (24.36, 27.60), (27.72, 36.46), (36.62, 44.40)]
+SEGS = [(0.62, 5.47), (5.66, 24.18),   # 5.47-5.66: a clipped « pr(emièrement) » cut out
+        (24.36, 27.60), (27.72, 36.46), (36.62, 44.40)]
 parts = []
 for i, (a, b) in enumerate(SEGS):
     p = f'work/p{i}.mp4'

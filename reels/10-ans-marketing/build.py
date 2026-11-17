@@ -108,6 +108,12 @@ def build():
               f"tl.fromTo('#lap',{{autoAlpha:0}},{{autoAlpha:1,duration:.12,immediateRender:false}},{a:.3f});"]
         S.append(('click-soft', a, .5))
     # CTA: her Instagram comment banner, LEVEL UP types itself, send is tapped
+    # her e-book « LEVEL UP TON BIZ » scrolls in a tilted frame under the banner (pages from her Drive PDF)
+    H.append('<div id="eb" class="eb"><img id="ebs" src="assets/ebook_strip.jpg"/></div>')
+    T += ["gsap.set('#eb',{autoAlpha:0});",
+          f"tl.fromTo('#eb',{{autoAlpha:0,x:220,rotation:14}},{{autoAlpha:1,x:0,rotation:6,duration:.4,ease:'back.out(1.5)',immediateRender:false}},{T_CTA + .15:.3f});",
+          f"tl.fromTo('#ebs',{{y:0}},{{y:-{6262 - 520},duration:{DUR - T_CTA - .3:.3f},ease:'power1.inOut',immediateRender:false}},{T_CTA + .35:.3f});"]
+    S.append(('whoosh-short', T_CTA + .15, .35))
     word = 'LEVEL UP'
     send = ('<svg viewBox="0 0 24 24" width="34" height="34"><path d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="2.6" '
             'fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>')
@@ -147,7 +153,7 @@ def build():
         T += [f"gsap.set('#w{n}',{{autoAlpha:0}});", f"tl.set('#w{n}',{{autoAlpha:1}},{w['s']:.3f});",
               f"tl.fromTo('#w{n}',{{scale:.8}},{{scale:1,duration:{min(.12, end - w['s']):.3f},ease:'back.out(2.5)',immediateRender:false}},{w['s']:.3f});",
               f"tl.set('#w{n}',{{autoAlpha:0}},{end:.3f});"]
-    SL = {'pop': .72, 'click': .36, 'click-soft': .36, 'typing': 1.8}
+    SL = {'whoosh-short': .57, 'pop': .72, 'click': .36, 'click-soft': .36, 'typing': 1.8}
     sfx = []
     for k, (n, t, v, *d) in enumerate(sorted(S, key=lambda x: x[1])):
         sfx.append(f'<audio id="sfx{k}" src="assets/sfx/{n}.mp3" data-start="{t:.3f}" data-duration="{min(d[0] if d else SL[n], DUR - t):.3f}" '
@@ -186,6 +192,9 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .ls .n{{display:inline-block;width:62px;height:62px;border-radius:50%;background:{DARK};color:#fff;font:400 38px/62px Anton;vertical-align:middle;margin-right:-14px;position:relative;z-index:2;box-shadow:0 0 0 4px #fff}}
 .ls .lt{{display:inline-block;vertical-align:middle;background:#fff;color:{DARK};font:italic 800 40px/1.25 Poppins;letter-spacing:-.04em;padding:8px 30px 10px 34px;border-radius:40px;
   white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.2)}}
+.eb{{position:absolute;left:560px;top:520px;width:380px;height:540px;z-index:24;overflow:hidden;border-radius:18px;border:10px solid #fff;
+  box-shadow:0 20px 50px rgba(0,0,0,.35);background:#F5EEE6}}
+.eb img{{display:block;width:360px}}
 .cb{{position:absolute;left:130px;width:820px;top:380px;z-index:30;height:118px;border-radius:59px;background:#fff;display:flex;align-items:center;gap:20px;
   padding:0 18px;box-shadow:0 16px 36px rgba(0,0,0,.3)}}
 .cav{{width:80px;height:80px;border-radius:50%;object-fit:cover;flex:none;border:3px solid {DARK}}}
