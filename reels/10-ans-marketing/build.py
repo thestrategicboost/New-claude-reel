@@ -178,7 +178,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .pill{{position:relative;display:inline-block;margin-top:-22px;height:70px;border-radius:35px;background:#fff;padding:0 32px;
   font:italic 800 44px/70px Poppins;letter-spacing:-.04em;color:{DARK};white-space:nowrap}}
 .gh{{visibility:hidden}} #tx{{position:absolute;left:32px;top:0}}
-.cd{{position:absolute;left:440px;top:540px;width:200px;height:200px;z-index:22;border-radius:50%;background:{DARK};color:#fff;
+.cd{{position:absolute;left:440px;top:1500px;width:200px;height:200px;z-index:22;border-radius:50%;background:{DARK};color:#fff;
   font:400 130px/206px Anton;text-align:center;box-shadow:0 0 0 8px #fff,0 18px 40px rgba(0,0,0,.3)}}
 .flag{{position:absolute;top:1170px;z-index:22;padding:8px;background:#fff;border-radius:12px;box-shadow:0 12px 28px rgba(0,0,0,.3);line-height:0}}
 .sw{{position:absolute;left:190px;width:700px;top:345px;z-index:21;border-radius:44px;background:rgba(0,0,0,.88);padding:22px 34px 26px;
