@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr" data-resolution="portrait"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
+<link rel="stylesheet" href="assets/fonts/fonts.css" /><script src="assets/vendor/gsap.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box} html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000} .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#w{position:absolute;left:0;right:0;top:340px;z-index:20;text-align:center}
+.row{display:inline-flex;align-items:flex-end}
+.five{font:400 380px/.78 Anton;color:#fff;margin-right:-30px;position:relative;z-index:2;text-shadow:0 6px 24px rgba(0,0,0,.18)}
+.blk{background:#523301;color:#fff;font:400 74px/1.14 Anton;letter-spacing:.05em;padding:14px 26px 8px 50px;text-align:left;margin-bottom:6px}
+.pill{position:relative;z-index:3;display:inline-block;margin-top:-26px;background:#fff;border-radius:44px;padding:4px 34px 10px;
+ font:italic 800 46px/1.25 Poppins;letter-spacing:-.05em;color:#523301;white-space:nowrap}
+.gh{visibility:hidden} #tx{position:absolute;left:34px;top:4px}
+#ds{margin-top:44px;font:italic 800 40px/1 Poppins;letter-spacing:-.05em;color:#fff;text-shadow:0 3px 3px rgba(0,0,0,.3),0 6px 16px rgba(0,0,0,.35)}
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="6.0" data-width="1080" data-height="1920">
+  <audio id="typ" src="assets/sfx/typing.mp3" data-start="0.15" data-duration="1.8" data-track-index="2" data-volume="0.6"></audio>
+  <video id="bgv" class="full" src="assets/v4.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="6.0" data-track-index="0"></video>
+  <div id="w"><div class="row"><span class="five">5</span><div class="blk">HABITUDES POUR<br/>FORCER INSTA</div></div><br/>
+  <div class="pill"><span class="gh">à montrer tes réels à des non-abonnés</span><span id="tx"></span></div><div id="ds">Lis la description</div></div>
+</div>
+<script>const tl = gsap.timeline({ paused: true });
+tl.set('#tx',{textContent:''},0);
+tl.set('#tx',{textContent:"\u00e0"},0.199);
+tl.set('#tx',{textContent:"\u00e0 "},0.247);
+tl.set('#tx',{textContent:"\u00e0 m"},0.296);
+tl.set('#tx',{textContent:"\u00e0 mo"},0.345);
+tl.set('#tx',{textContent:"\u00e0 mon"},0.393);
+tl.set('#tx',{textContent:"\u00e0 mont"},0.442);
+tl.set('#tx',{textContent:"\u00e0 montr"},0.491);
+tl.set('#tx',{textContent:"\u00e0 montre"},0.539);
+tl.set('#tx',{textContent:"\u00e0 montrer"},0.588);
+tl.set('#tx',{textContent:"\u00e0 montrer "},0.636);
+tl.set('#tx',{textContent:"\u00e0 montrer t"},0.685);
+tl.set('#tx',{textContent:"\u00e0 montrer te"},0.734);
+tl.set('#tx',{textContent:"\u00e0 montrer tes"},0.782);
+tl.set('#tx',{textContent:"\u00e0 montrer tes "},0.831);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r"},0.880);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9"},0.928);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9e"},0.977);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9el"},1.026);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els"},1.074);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els "},1.123);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0"},1.172);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 "},1.220);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 d"},1.269);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 de"},1.318);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des"},1.366);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des "},1.415);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des n"},1.464);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des no"},1.512);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non"},1.561);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non-"},1.609);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non-a"},1.658);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non-ab"},1.707);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non-abo"},1.755);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non-abon"},1.804);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non-abonn"},1.853);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non-abonn\u00e9"},1.901);
+tl.set('#tx',{textContent:"\u00e0 montrer tes r\u00e9els \u00e0 des non-abonn\u00e9s"},1.950);
+gsap.set('#ds',{autoAlpha:0});
+tl.fromTo('#ds',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,ease:'power2.out',immediateRender:false},2.05);
+tl.set({}, {}, 6.0);
+window.__timelines["main"] = tl;</script></body></html>
