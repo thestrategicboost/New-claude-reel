@@ -70,14 +70,6 @@ def build():
     t0, t1 = first('résumé', 0) - .05, first('secondes', 0) + .35
     T += [f"tl.set('#tx',{{textContent:{json.dumps(pill[:i])}}},{t0 + (t1 - t0) * i / len(pill):.3f});" for i in range(1, len(pill) + 1)]
     S += [('typing', t0, .55, t1 - t0 + .1)]
-    # 3, 2, 1… into « Let's go » (the stopwatch starts on go)
-    for i, n in enumerate((3, 2, 1)):
-        t = T_GO - 1.2 + i * .4
-        H.append(f'<div id="cd{n}" class="cd">{n}</div>')
-        T += ["gsap.set('#cd%d',{autoAlpha:0});" % n,
-              f"tl.fromTo('#cd{n}',{{autoAlpha:1,scale:1.8}},{{autoAlpha:1,scale:1,duration:.18,ease:'back.out(2)',immediateRender:false}},{t:.3f});",
-              f"tl.set('#cd{n}',{{autoAlpha:0}},{t + .38:.3f});"]
-        S.append(('click-soft', t, .55))
     # the two flags on « États-Unis » and « France »
     US = ('<svg viewBox="0 0 190 100" width="190" height="100"><rect width="190" height="100" fill="#B22234"/>'
           + ''.join(f'<rect y="{i * 100 / 13 * 2 + 100 / 13:.2f}" width="190" height="{100 / 13:.2f}" fill="#fff"/>' for i in range(6))
@@ -105,7 +97,7 @@ def build():
           f"tl.fromTo('#bs',{{scale:.8}},{{scale:1,duration:.15,immediateRender:false}},{T_STOP:.3f});",
           f"tl.fromTo('#dig',{{opacity:1}},{{opacity:.35,duration:.12,yoyo:true,repeat:3,immediateRender:false}},{T_STOP + .05:.3f});",
           f"tl.to('#sw',{{autoAlpha:0,duration:.2}},{T_CTA - .25:.3f});", f"tl.set('#sw',{{autoAlpha:0}},{T_CTA - .05:.3f});"]
-    S += [('click', T_GO, .6), ('click', T_STOP, .6)]
+    S += [('click', T_STOP, .6)]      # no click at the start (her ask)
     # each lesson: a lap on the stopwatch + the lesson in a white pill under it
     for k, (raw, txt) in enumerate(LESSONS):
         a = ct(raw)
