@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr" data-resolution="portrait"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
+<link rel="stylesheet" href="assets/fonts/fonts.css" /><script src="assets/vendor/gsap.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box} html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000} .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#w{position:absolute;left:0;right:0;top:360px;z-index:20;text-align:center}
+.blk{display:inline-block;background:#523301;color:#fff;font:400 76px/1.2 Anton;letter-spacing:.06em;padding:10px 30px 4px}
+.pill{position:relative;z-index:3;display:inline-block;margin-top:-14px;background:#fff;border-radius:44px;padding:4px 40px 10px;
+ font:italic 800 56px/1.25 Poppins;letter-spacing:-.05em;color:#523301;white-space:nowrap}
+.gh{visibility:hidden} #tx{position:absolute;left:40px;top:4px}
+#ds{margin-top:44px;font:italic 800 40px/1 Poppins;letter-spacing:-.05em;color:#fff;text-shadow:0 3px 3px rgba(0,0,0,.3),0 6px 16px rgba(0,0,0,.35)}
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="6.0" data-width="1080" data-height="1920">
+  <audio id="cling" src="assets/sfx/cling.mp3" data-start="1.720" data-duration="1.0" data-track-index="3" data-volume="1"></audio>
+  <audio id="typ" src="assets/sfx/typing.mp3" data-start="0.15" data-duration="0.95" data-track-index="2" data-volume="0.6"></audio>
+  <video id="bgv" class="full" src="assets/v4.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="6.0" data-track-index="0"></video>
+  <div id="w"><div class="blk">TU PERDS DES VENTES</div><br/>
+  <div class="pill"><span class="gh">à cause de ta bio</span><span id="tx"></span></div><div id="ds">Lis la description</div></div>
+</div>
+<script>const tl = gsap.timeline({ paused: true });
+tl.set('#tx',{textContent:''},0);
+tl.set('#tx',{textContent:"\u00e0"},0.203);
+tl.set('#tx',{textContent:"\u00e0 "},0.256);
+tl.set('#tx',{textContent:"\u00e0 c"},0.309);
+tl.set('#tx',{textContent:"\u00e0 ca"},0.362);
+tl.set('#tx',{textContent:"\u00e0 cau"},0.415);
+tl.set('#tx',{textContent:"\u00e0 caus"},0.468);
+tl.set('#tx',{textContent:"\u00e0 cause"},0.521);
+tl.set('#tx',{textContent:"\u00e0 cause "},0.574);
+tl.set('#tx',{textContent:"\u00e0 cause d"},0.626);
+tl.set('#tx',{textContent:"\u00e0 cause de"},0.679);
+tl.set('#tx',{textContent:"\u00e0 cause de "},0.732);
+tl.set('#tx',{textContent:"\u00e0 cause de t"},0.785);
+tl.set('#tx',{textContent:"\u00e0 cause de ta"},0.838);
+tl.set('#tx',{textContent:"\u00e0 cause de ta "},0.891);
+tl.set('#tx',{textContent:"\u00e0 cause de ta b"},0.944);
+tl.set('#tx',{textContent:"\u00e0 cause de ta bi"},0.997);
+tl.set('#tx',{textContent:"\u00e0 cause de ta bio"},1.050);
+gsap.set('#ds',{autoAlpha:0});
+tl.fromTo('#ds',{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.2,ease:'power2.out',immediateRender:false},1.75);
+tl.set({}, {}, 6.0);
+window.__timelines["main"] = tl;</script></body></html>
