@@ -50,7 +50,7 @@ T_STOP = first('girl', 39.0) + .35            # after « Pas le marketing, ma gi
 T_CTA = first('commente', 40.0)
 T_LVL = first('level', 40.0)
 KEY = {'transformation', 'bénéfice', 'problème', 'clarté', 'créativité', 'cible', 'preuve', 'sociale', 'stratégie', 'offre', 'résultats'}
-FIX = {'tchüss': 'tchus', 'tchuss': 'tchus', "let's": "let’s"}
+FIX = {'etats-unis': 'États-Unis', 'états-unis': 'États-Unis', 'france': 'France', 'tchüss': 'tchus', 'tchuss': 'tchus', "let's": "let’s"}
 
 
 def show(sel, a, b, frm='{autoAlpha:0,y:-18,scale:.9}', d=.24, ease='back.out(1.9)'):
@@ -70,6 +70,28 @@ def build():
     t0, t1 = first('résumé', 0) - .05, first('secondes', 0) + .35
     T += [f"tl.set('#tx',{{textContent:{json.dumps(pill[:i])}}},{t0 + (t1 - t0) * i / len(pill):.3f});" for i in range(1, len(pill) + 1)]
     S += [('typing', t0, .55, t1 - t0 + .1)]
+    # 3, 2, 1… into « Let's go » (the stopwatch starts on go)
+    for i, n in enumerate((3, 2, 1)):
+        t = T_GO - 1.2 + i * .4
+        H.append(f'<div id="cd{n}" class="cd">{n}</div>')
+        T += ["gsap.set('#cd%d',{autoAlpha:0});" % n,
+              f"tl.fromTo('#cd{n}',{{autoAlpha:1,scale:1.8}},{{autoAlpha:1,scale:1,duration:.18,ease:'back.out(2)',immediateRender:false}},{t:.3f});",
+              f"tl.set('#cd{n}',{{autoAlpha:0}},{t + .38:.3f});"]
+        S.append(('click-soft', t, .55))
+    # the two flags on « États-Unis » and « France »
+    US = ('<svg viewBox="0 0 190 100" width="190" height="100"><rect width="190" height="100" fill="#B22234"/>'
+          + ''.join(f'<rect y="{i * 100 / 13 * 2 + 100 / 13:.2f}" width="190" height="{100 / 13:.2f}" fill="#fff"/>' for i in range(6))
+          + '<rect width="76" height="53.85" fill="#3C3B6E"/>'
+          + ''.join(f'<circle cx="{8 + c * 12 + (6 if r % 2 else 0)}" cy="{6 + r * 10.5}" r="2.2" fill="#fff"/>' for r in range(5) for c in range(6 if r % 2 == 0 else 5))
+          + '</svg>')
+    FR = '<svg viewBox="0 0 150 100" width="150" height="100"><rect width="50" height="100" fill="#0055A4"/><rect x="50" width="50" height="100" fill="#fff"/><rect x="100" width="50" height="100" fill="#EF4135"/></svg>'
+    for fid, svg, raw, x, rot in (('fus', US, 4.16, 110, -8), ('ffr', FR, 4.90, 800, 8)):
+        a = ct(raw)
+        H.append(f'<div id="{fid}" class="flag" style="left:{x}px">{svg}</div>')
+        T += [f"gsap.set('#{fid}',{{autoAlpha:0}});",
+              f"tl.fromTo('#{fid}',{{autoAlpha:0,scale:.3,rotation:{rot * 3}}},{{autoAlpha:1,scale:1,rotation:{rot},duration:.3,ease:'back.out(2.2)',immediateRender:false}},{a - .05:.3f});",
+              f"tl.to('#{fid}',{{autoAlpha:0,scale:.8,duration:.15}},{T_GO + .25:.3f});", f"tl.set('#{fid}',{{autoAlpha:0}},{T_GO + .4:.3f});"]
+        S.append(('pop', a - .05, .4))
     # the iPhone stopwatch
     H.append('<div id="sw" class="sw"><div id="dig" class="dig">00:00,00</div><div class="btns"><span id="bt" class="b tour">Tour</span>'
              '<span id="lap" class="lap">Tour 1</span><span id="bs" class="b go">Démarrer</span></div></div>')
@@ -129,7 +151,7 @@ def build():
         if end - w['s'] < .05:
             continue
         cls = 'cap key' if w['t'] in KEY else 'cap'
-        H.append(f'<div id="w{n}" class="{cls}">{w["t"]}</div>')
+        H.append(f'<div id="w{n}" class="{cls}">{FIX.get(w["t"].lower(), w["t"])}</div>')
         T += [f"gsap.set('#w{n}',{{autoAlpha:0}});", f"tl.set('#w{n}',{{autoAlpha:1}},{w['s']:.3f});",
               f"tl.fromTo('#w{n}',{{scale:.8}},{{scale:1,duration:{min(.12, end - w['s']):.3f},ease:'back.out(2.5)',immediateRender:false}},{w['s']:.3f});",
               f"tl.set('#w{n}',{{autoAlpha:0}},{end:.3f});"]
@@ -156,6 +178,9 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .pill{{position:relative;display:inline-block;margin-top:-22px;height:70px;border-radius:35px;background:#fff;padding:0 32px;
   font:italic 800 44px/70px Poppins;letter-spacing:-.04em;color:{DARK};white-space:nowrap}}
 .gh{{visibility:hidden}} #tx{{position:absolute;left:32px;top:0}}
+.cd{{position:absolute;left:440px;top:540px;width:200px;height:200px;z-index:22;border-radius:50%;background:{DARK};color:#fff;
+  font:400 130px/206px Anton;text-align:center;box-shadow:0 0 0 8px #fff,0 18px 40px rgba(0,0,0,.3)}}
+.flag{{position:absolute;top:1170px;z-index:22;padding:8px;background:#fff;border-radius:12px;box-shadow:0 12px 28px rgba(0,0,0,.3);line-height:0}}
 .sw{{position:absolute;left:190px;width:700px;top:345px;z-index:21;border-radius:44px;background:rgba(0,0,0,.88);padding:22px 34px 26px;
   box-shadow:0 20px 50px rgba(0,0,0,.35);text-align:center}}
 .dig{{font:500 128px/1 Inter;color:#fff;letter-spacing:-.02em;font-variant-numeric:tabular-nums}}
