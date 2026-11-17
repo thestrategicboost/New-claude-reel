@@ -6,7 +6,7 @@ import json, sys
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 1
 DUR, DARK = 6.0, '#523301'
 PILL = 'à montrer tes réels à des non-abonnés'
-TA, TB, DESC = .15, 1.95, 2.05
+TA, TB, DESC = .15, 1.95, 2.6      # « Lis la description » a beat after the pill (her ask)
 T = ["tl.set('#tx',{textContent:''},0);"] + [f"tl.set('#tx',{{textContent:{json.dumps(PILL[:i])}}},{TA + (TB - TA) * i / len(PILL):.3f});" for i in range(1, len(PILL) + 1)]
 T += ["gsap.set('#ds',{autoAlpha:0});", f"tl.fromTo('#ds',{{autoAlpha:0,y:12}},{{autoAlpha:1,y:0,duration:.2,ease:'power2.out',immediateRender:false}},{DESC});"]
 html = f'''<!doctype html>
