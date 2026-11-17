@@ -74,3 +74,4 @@
 - Maé: her ending is a finger kiss then "tchus": keep both (look at the frames before the tchus, the kiss is silent). No rays / full-screen flash over her face.
 - Maé hooks: speak to the pain of her target (women creators/entrepreneurs who post and get no views, no followers, no clients) in their own words, plainly: "Tu ne fais pas de vues ?" beats "Tes vues ont chuté ?" (that assumes they once had views).
 - Maé posts as trial reels (« Reels d'essai »): Instagram's header bar covers the top ~300 px of the 1080x1920 frame. Keep every title / text below y 330.
+- Maé « Lis la description » sound = her cling, cut from her viral reel audio (broll-variante/assets/ref_audio.m4a 1.97-2.97 s), saved as reels/5-habitudes/assets/sfx/cling.mp3. Not the library ding.

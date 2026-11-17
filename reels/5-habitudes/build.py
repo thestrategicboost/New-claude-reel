@@ -25,7 +25,7 @@ html = f'''<!doctype html>
 #ds{{margin-top:44px;font:italic 800 40px/1 Poppins;letter-spacing:-.05em;color:#fff;text-shadow:0 3px 3px rgba(0,0,0,.3),0 6px 16px rgba(0,0,0,.35)}}
 </style></head><body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR}" data-width="1080" data-height="1920">
-  <audio id="cling" src="assets/sfx/cling.mp3" data-start="{DESC}" data-duration="0.78" data-track-index="3" data-volume="0.8"></audio>
+  <audio id="cling" src="assets/sfx/cling.mp3" data-start="{DESC - .03:.3f}" data-duration="1.0" data-track-index="3" data-volume="1"></audio>
   <audio id="typ" src="assets/sfx/typing.mp3" data-start="{TA}" data-duration="1.8" data-track-index="2" data-volume="0.6"></audio>
   <video id="bgv" class="full" src="assets/v{N}.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR}" data-track-index="0"></video>
   <div id="w"><div class="row"><span class="five">5</span><div class="blk">HABITUDES POUR<br/>FORCER INSTA</div></div><br/>
