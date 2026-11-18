@@ -78,9 +78,16 @@
 - DRIVE DELIVERY (her rule, 18 Nov): every finished video also goes to Google Drive « Pour Claude » (id 16laMR3nZ_M51DQ6LAf0ala5z_pgCpAVW)
   > <video title folder, UPPERCASE> > FINAL. If the title folder or its FINAL subfolder does not exist, create it. Upload the phone
   copy with Google_Drive create_file (base64Content = "sha256:<hex>:<abs path>", disableConversionToGoogleType true).
-  Limit: ~3.1 MB per file from this session (larger files are refused): say which ones could not go up.
+  Limit: ~3.1 MB per file from this session. Her choice (18 Nov): if bigger, make a lighter copy for Drive (720p, 2-pass
+  libx264 at (2.8 MB*8/duration - 96k) video bitrate, aac 96k) and upload that. Upload ALL variants she validated.
   Known FINAL ids: 10 ANS DE MARKETING 1Egqo9VgHhBFZNGku8LqYfoJOWhPSGi5A · TU PERDS DES VENTES 1KXv9nPUhawURlsIfRn01f3f6Qn-L-D6r ·
   5 HABITUDES POUR FORCER INSTA 1JjVCV0SJeSi6-MwZtkRVXliY12N9QwV4 · FAÇON LA PLUS DÉBILE 16xY-ebnUWz3wBUut79XZ7SvwvRwmSLUF ·
   HOOKS DE LA SEMAINE 1eVRIBI0dtvGypJj-KYyT6G-9VYBn0sPQ · PAYANT / GRATUIT 1sZfKG7HecSz3hiS-ey81kId-Qn7QwxzC ·
   SONS VIRAUX 1qvtk_SogXevOTWftONvFqHbclBTtOrum · AU CAS OÙ TA MÈRE 1njv7vWJ6Ftnynu38AP_RJhOo0wKdOADs ·
-  10 HOOKS QUI ARRÊTENT LE SCROLL 1LdI8T-ZE1Y2vk9egXaFNakdL4yhbdNzp · TOFU MOFU BOFU 13yHu4y3Z-M5ya8DYedm6tcOFnaX8A63C
+  10 HOOKS QUI ARRÊTENT LE SCROLL 1LdI8T-ZE1Y2vk9egXaFNakdL4yhbdNzp · TOFU MOFU BOFU 13yHu4y3Z-M5ya8DYedm6tcOFnaX8A63C ·
+  10 FORMATS VIRAUX 11AtsLoRxxvDr_fPCT0d4hRJUAgfyk83_ · CLONE 0/10K 16LZYxmpo1WZmI_6293XNpRNZRCztLpqQ ·
+  EFFETS SONORES 1dJEYjE9FckWPlJ50EoWsGa_XJF5pjWG6 · TRANSITION 11qtv5zyc_5VzDhZL89D17-PStIWxuCcX ·
+  PLANIFIER TON CONTENU EN 45MIN 1l8hyRl43GVA2mHoXf1Y8Zqk4y45yCaT- · VIDÉO PAR CLAUDE 1dPa4y5bgfSf8Q2UW9GxrhGize4SUBbvx ·
+  3 FOIS PAR JOUR 1CcgKYHz3njRR0Mmq2bz1j92JHbi363wG · 100 VUES VS 10K VS 100K 1R-d64i_dnMjniQYsLHNvh4ORPzIu5WUH ·
+  ZONE 1AANChH-rOKrHfSxpOKrK7qAmIVcimVAF · TEMPS QUI PASSE 1CDNdvHS_EdaZB0vLAmQKXMMH0F9cRSHa ·
+  CARROUSEL REEL STORY 1rk72bgo4ntjsVT3gIvQmHgZCREeRwbRr · Comment forcer insta variants (BROLL subfolder, no FINAL) 1BTeg8gBxeSZTdxblWUJHtLi-xnVRjDXt
