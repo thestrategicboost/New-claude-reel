@@ -75,3 +75,12 @@
 - Maé hooks: speak to the pain of her target (women creators/entrepreneurs who post and get no views, no followers, no clients) in their own words, plainly: "Tu ne fais pas de vues ?" beats "Tes vues ont chuté ?" (that assumes they once had views).
 - Maé posts as trial reels (« Reels d'essai »): Instagram's header bar covers the top ~300 px of the 1080x1920 frame. Keep every title / text below y 330.
 - Maé « Lis la description » sound = her cling, cut from her viral reel audio (broll-variante/assets/ref_audio.m4a 1.97-2.97 s), saved as reels/5-habitudes/assets/sfx/cling.mp3. Not the library ding.
+- DRIVE DELIVERY (her rule, 18 Nov): every finished video also goes to Google Drive « Pour Claude » (id 16laMR3nZ_M51DQ6LAf0ala5z_pgCpAVW)
+  > <video title folder, UPPERCASE> > FINAL. If the title folder or its FINAL subfolder does not exist, create it. Upload the phone
+  copy with Google_Drive create_file (base64Content = "sha256:<hex>:<abs path>", disableConversionToGoogleType true).
+  Limit: ~3.1 MB per file from this session (larger files are refused): say which ones could not go up.
+  Known FINAL ids: 10 ANS DE MARKETING 1Egqo9VgHhBFZNGku8LqYfoJOWhPSGi5A · TU PERDS DES VENTES 1KXv9nPUhawURlsIfRn01f3f6Qn-L-D6r ·
+  5 HABITUDES POUR FORCER INSTA 1JjVCV0SJeSi6-MwZtkRVXliY12N9QwV4 · FAÇON LA PLUS DÉBILE 16xY-ebnUWz3wBUut79XZ7SvwvRwmSLUF ·
+  HOOKS DE LA SEMAINE 1eVRIBI0dtvGypJj-KYyT6G-9VYBn0sPQ · PAYANT / GRATUIT 1sZfKG7HecSz3hiS-ey81kId-Qn7QwxzC ·
+  SONS VIRAUX 1qvtk_SogXevOTWftONvFqHbclBTtOrum · AU CAS OÙ TA MÈRE 1njv7vWJ6Ftnynu38AP_RJhOo0wKdOADs ·
+  10 HOOKS QUI ARRÊTENT LE SCROLL 1LdI8T-ZE1Y2vk9egXaFNakdL4yhbdNzp · TOFU MOFU BOFU 13yHu4y3Z-M5ya8DYedm6tcOFnaX8A63C
