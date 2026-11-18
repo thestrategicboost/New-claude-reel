@@ -31,9 +31,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .ls .n{display:inline-block;width:62px;height:62px;border-radius:50%;background:#523301;color:#fff;font:400 38px/62px Anton;vertical-align:middle;margin-right:-14px;position:relative;z-index:2;box-shadow:0 0 0 4px #fff}
 .ls .lt{display:inline-block;vertical-align:middle;background:#fff;color:#523301;font:italic 800 40px/1.25 Poppins;letter-spacing:-.04em;padding:8px 30px 10px 34px;border-radius:40px;
   white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.2)}
-.eb{position:absolute;left:160px;top:500px;width:760px;height:700px;z-index:23;overflow:hidden;border-radius:18px;border:10px solid #fff;
-  box-shadow:0 20px 50px rgba(0,0,0,.35);background:#F5EEE6}
-.eb img{display:block;width:740px}
+.wt{position:absolute;width:230px;z-index:23;border:5px solid #fff;border-radius:10px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.28);line-height:0}
+.wt img{width:100%;display:block}
 #subj{z-index:24}
 .cb{position:absolute;left:130px;width:820px;top:380px;z-index:30;height:118px;border-radius:59px;background:#fff;display:flex;align-items:center;gap:20px;
   padding:0 18px;box-shadow:0 16px 36px rgba(0,0,0,.3)}
@@ -78,7 +77,18 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="ls4" class="ls"><span class="n">5</span><span class="lt">La preuve sociale déclenche l’achat</span></div>
 <div id="ls5" class="ls"><span class="n">6</span><span class="lt">Sans stratégie, c’est épuisant</span></div>
 <div id="ls6" class="ls"><span class="n">7</span><span class="lt">Le marketing ne sauve pas une offre</span></div>
-<div id="eb" class="eb"><img id="ebs" src="assets/ebook_wide.jpg"/></div>
+<div class="wt" style="left:40px;top:515px;transform:rotate(-3deg)"><img src="assets/wall/p01.jpg"/></div>
+<div class="wt" style="left:300px;top:515px;transform:rotate(2deg)"><img src="assets/wall/p03.jpg"/></div>
+<div class="wt" style="left:560px;top:515px;transform:rotate(-2deg)"><img src="assets/wall/p04.jpg"/></div>
+<div class="wt" style="left:820px;top:515px;transform:rotate(3deg)"><img src="assets/wall/p02.jpg"/></div>
+<div class="wt" style="left:40px;top:865px;transform:rotate(2deg)"><img src="assets/wall/p06.jpg"/></div>
+<div class="wt" style="left:300px;top:865px;transform:rotate(-3deg)"><img src="assets/wall/p07.jpg"/></div>
+<div class="wt" style="left:560px;top:865px;transform:rotate(3deg)"><img src="assets/wall/p05.jpg"/></div>
+<div class="wt" style="left:820px;top:865px;transform:rotate(-2deg)"><img src="assets/wall/p13.jpg"/></div>
+<div class="wt" style="left:40px;top:1215px;transform:rotate(-2deg)"><img src="assets/wall/p10.jpg"/></div>
+<div class="wt" style="left:300px;top:1215px;transform:rotate(3deg)"><img src="assets/wall/p15.jpg"/></div>
+<div class="wt" style="left:560px;top:1215px;transform:rotate(-3deg)"><img src="assets/wall/p19.jpg"/></div>
+<div class="wt" style="left:820px;top:1215px;transform:rotate(2deg)"><img src="assets/wall/p20.jpg"/></div>
 <div id="cb" class="cb"><img class="cav" src="assets/avatar.png"/><div class="cw"><span id="cph" class="cph">Ajouter un commentaire…</span><span id="cty" class="cty"></span><i id="ccr" class="ccr"></i></div><div id="csd" class="csd"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 <div id="w0" class="cap">10</div>
 <div id="w1" class="cap">ans</div>
@@ -352,9 +362,8 @@ tl.set('#ls6',{autoAlpha:0},39.613);
 tl.set('#lap',{textContent:'Tour 7'},33.457);
 tl.fromTo('#bt',{scale:.82},{scale:1,duration:.14,immediateRender:false},33.457);
 tl.fromTo('#lap',{autoAlpha:0},{autoAlpha:1,duration:.12,immediateRender:false},33.457);
-gsap.set('#eb',{autoAlpha:0});
-tl.fromTo('#eb',{autoAlpha:0,y:120,scale:.85,rotation:-8},{autoAlpha:1,y:0,scale:1,rotation:-3,duration:.4,ease:'back.out(1.5)',immediateRender:false},41.553);
-tl.fromTo('#ebs',{y:0},{y:-12038,duration:1.500,ease:'power1.inOut',immediateRender:false},41.753);
+gsap.set('.wt',{autoAlpha:0});
+tl.fromTo('.wt',{autoAlpha:0,scale:.4},{autoAlpha:1,scale:1,duration:.28,ease:'back.out(1.8)',stagger:{each:.06,from:'center'},immediateRender:false},41.503);
 gsap.set('#cb',{autoAlpha:0});
 tl.fromTo('#cb',{autoAlpha:0,y:-50,scale:.9},{autoAlpha:1,y:0,scale:1,duration:.3,ease:'back.out(1.8)',immediateRender:false},41.353);
 gsap.set('#cty',{textContent:''});
