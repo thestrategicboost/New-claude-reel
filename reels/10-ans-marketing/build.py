@@ -108,11 +108,12 @@ def build():
               f"tl.fromTo('#lap',{{autoAlpha:0}},{{autoAlpha:1,duration:.12,immediateRender:false}},{a:.3f});"]
         S.append(('click-soft', a, .5))
     # CTA: her Instagram comment banner, LEVEL UP types itself, send is tapped
-    # her e-book « LEVEL UP TON BIZ » scrolls in a tilted frame under the banner (pages from her Drive PDF)
-    H.append('<div id="eb" class="eb"><img id="ebs" src="assets/ebook_strip.jpg"/></div>')
+    # her e-book « LEVEL UP TON BIZ » scrolls BEHIND her (her ask): big frame on the wall, her cut-out (subject_cta.webm,
+    # cut from aroll frame 1230 = 41.0 s) on top of it, captions and banner above
+    H.append('<div id="eb" class="eb"><img id="ebs" src="assets/ebook_wide.jpg"/></div>')
     T += ["gsap.set('#eb',{autoAlpha:0});",
-          f"tl.fromTo('#eb',{{autoAlpha:0,x:220,rotation:14}},{{autoAlpha:1,x:0,rotation:6,duration:.4,ease:'back.out(1.5)',immediateRender:false}},{T_CTA + .15:.3f});",
-          f"tl.fromTo('#ebs',{{y:0}},{{y:-{6262 - 520},duration:{DUR - T_CTA - .3:.3f},ease:'power1.inOut',immediateRender:false}},{T_CTA + .35:.3f});"]
+          f"tl.fromTo('#eb',{{autoAlpha:0,y:120,scale:.85,rotation:-8}},{{autoAlpha:1,y:0,scale:1,rotation:-3,duration:.4,ease:'back.out(1.5)',immediateRender:false}},{T_CTA + .15:.3f});",
+          f"tl.fromTo('#ebs',{{y:0}},{{y:-{12718 - 680},duration:{DUR - T_CTA - .3:.3f},ease:'power1.inOut',immediateRender:false}},{T_CTA + .35:.3f});"]
     S.append(('whoosh-short', T_CTA + .15, .35))
     word = 'LEVEL UP'
     send = ('<svg viewBox="0 0 24 24" width="34" height="34"><path d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="2.6" '
@@ -188,13 +189,14 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .tour{{background:#3a3a3c;color:#fff}}
 .go{{background:#0d3b1a;color:#34C759}} .stop{{background:#4a1310;color:#FF453A}}
 .lap{{font:500 32px/1 Inter;color:#8e8e93}}
-.ls{{position:absolute;left:0;right:0;top:648px;z-index:20;text-align:center}}
+.ls{{position:absolute;left:0;right:0;top:618px;z-index:23;text-align:center}}
 .ls .n{{display:inline-block;width:62px;height:62px;border-radius:50%;background:{DARK};color:#fff;font:400 38px/62px Anton;vertical-align:middle;margin-right:-14px;position:relative;z-index:2;box-shadow:0 0 0 4px #fff}}
 .ls .lt{{display:inline-block;vertical-align:middle;background:#fff;color:{DARK};font:italic 800 40px/1.25 Poppins;letter-spacing:-.04em;padding:8px 30px 10px 34px;border-radius:40px;
   white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.2)}}
-.eb{{position:absolute;left:560px;top:520px;width:380px;height:540px;z-index:24;overflow:hidden;border-radius:18px;border:10px solid #fff;
+.eb{{position:absolute;left:160px;top:500px;width:760px;height:700px;z-index:23;overflow:hidden;border-radius:18px;border:10px solid #fff;
   box-shadow:0 20px 50px rgba(0,0,0,.35);background:#F5EEE6}}
-.eb img{{display:block;width:360px}}
+.eb img{{display:block;width:740px}}
+#subj{{z-index:24}}
 .cb{{position:absolute;left:130px;width:820px;top:380px;z-index:30;height:118px;border-radius:59px;background:#fff;display:flex;align-items:center;gap:20px;
   padding:0 18px;box-shadow:0 16px 36px rgba(0,0,0,.3)}}
 .cav{{width:80px;height:80px;border-radius:50%;object-fit:cover;flex:none;border:3px solid {DARK}}}
@@ -203,7 +205,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .cty{{font:400 66px/1 Anton;letter-spacing:.06em;color:#2A1A10}}
 .ccr{{width:4px;height:56px;background:{DARK};margin-left:6px}}
 .csd{{width:84px;height:84px;border-radius:50%;background:{DARK};display:flex;align-items:center;justify-content:center;flex:none}}
-.cap{{position:absolute;left:40px;right:40px;top:1400px;z-index:25;text-align:center;font:700 66px/1 Poppins;color:#fff;
+.cap{{position:absolute;left:40px;right:40px;top:1400px;z-index:25;text-align:center;font:700 66px/1 Poppins;letter-spacing:-.03em;color:#fff;
   text-shadow:0 3px 2px rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.55)}}
 .cap.key{{font-size:86px;font-weight:800}}
 </style>
@@ -213,6 +215,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   <audio id="voice" src="assets/voice.m4a" data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="2" data-volume="1"></audio>
 {nl.join(sfx)}
   <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR:.3f}" data-track-index="0"></video>
+  <video id="subj" class="full" src="assets/subject_cta.webm" muted playsinline data-start="41.000" data-media-start="0" data-duration="{DUR - 41.0:.3f}" data-track-index="1"></video>
 {nl.join(H)}
 </div>
 <script>
