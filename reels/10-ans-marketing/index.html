@@ -31,7 +31,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 .ls .n{display:inline-block;width:62px;height:62px;border-radius:50%;background:#523301;color:#fff;font:400 38px/62px Anton;vertical-align:middle;margin-right:-14px;position:relative;z-index:2;box-shadow:0 0 0 4px #fff}
 .ls .lt{display:inline-block;vertical-align:middle;background:#fff;color:#523301;font:italic 800 40px/1.25 Poppins;letter-spacing:-.04em;padding:8px 30px 10px 34px;border-radius:40px;
   white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.2)}
-.wt{position:absolute;width:230px;z-index:23;border:5px solid #fff;border-radius:10px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.28);line-height:0}
+.wt{position:absolute;transform-style:preserve-3d;width:230px;z-index:23;border-radius:6px;overflow:hidden;box-shadow:0 24px 40px rgba(0,0,0,.38),0 6px 12px rgba(0,0,0,.25);line-height:0}
+.wt::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.28),rgba(255,255,255,0) 42%,rgba(0,0,0,.14))}
 .wt img{width:100%;display:block}
 #subj{z-index:24}
 .cb{position:absolute;left:130px;width:820px;top:380px;z-index:30;height:118px;border-radius:59px;background:#fff;display:flex;align-items:center;gap:20px;
@@ -77,18 +78,18 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <div id="ls4" class="ls"><span class="n">5</span><span class="lt">La preuve sociale déclenche l’achat</span></div>
 <div id="ls5" class="ls"><span class="n">6</span><span class="lt">Sans stratégie, c’est épuisant</span></div>
 <div id="ls6" class="ls"><span class="n">7</span><span class="lt">Le marketing ne sauve pas une offre</span></div>
-<div class="wt" style="left:40px;top:515px;transform:rotate(-3deg)"><img src="assets/wall/p01.jpg"/></div>
-<div class="wt" style="left:300px;top:515px;transform:rotate(2deg)"><img src="assets/wall/p03.jpg"/></div>
-<div class="wt" style="left:560px;top:515px;transform:rotate(-2deg)"><img src="assets/wall/p04.jpg"/></div>
-<div class="wt" style="left:820px;top:515px;transform:rotate(3deg)"><img src="assets/wall/p02.jpg"/></div>
-<div class="wt" style="left:40px;top:865px;transform:rotate(2deg)"><img src="assets/wall/p06.jpg"/></div>
-<div class="wt" style="left:300px;top:865px;transform:rotate(-3deg)"><img src="assets/wall/p07.jpg"/></div>
-<div class="wt" style="left:560px;top:865px;transform:rotate(3deg)"><img src="assets/wall/p05.jpg"/></div>
-<div class="wt" style="left:820px;top:865px;transform:rotate(-2deg)"><img src="assets/wall/p13.jpg"/></div>
-<div class="wt" style="left:40px;top:1215px;transform:rotate(-2deg)"><img src="assets/wall/p10.jpg"/></div>
-<div class="wt" style="left:300px;top:1215px;transform:rotate(3deg)"><img src="assets/wall/p15.jpg"/></div>
-<div class="wt" style="left:560px;top:1215px;transform:rotate(-3deg)"><img src="assets/wall/p19.jpg"/></div>
-<div class="wt" style="left:820px;top:1215px;transform:rotate(2deg)"><img src="assets/wall/p20.jpg"/></div>
+<div id="wt0" class="wt" style="left:40px;top:515px"><img src="assets/wall/p01.jpg"/></div>
+<div id="wt1" class="wt" style="left:300px;top:515px"><img src="assets/wall/p03.jpg"/></div>
+<div id="wt2" class="wt" style="left:560px;top:515px"><img src="assets/wall/p04.jpg"/></div>
+<div id="wt3" class="wt" style="left:820px;top:515px"><img src="assets/wall/p02.jpg"/></div>
+<div id="wt4" class="wt" style="left:40px;top:865px"><img src="assets/wall/p06.jpg"/></div>
+<div id="wt5" class="wt" style="left:300px;top:865px"><img src="assets/wall/p07.jpg"/></div>
+<div id="wt6" class="wt" style="left:560px;top:865px"><img src="assets/wall/p05.jpg"/></div>
+<div id="wt7" class="wt" style="left:820px;top:865px"><img src="assets/wall/p13.jpg"/></div>
+<div id="wt8" class="wt" style="left:40px;top:1215px"><img src="assets/wall/p10.jpg"/></div>
+<div id="wt9" class="wt" style="left:300px;top:1215px"><img src="assets/wall/p15.jpg"/></div>
+<div id="wt10" class="wt" style="left:560px;top:1215px"><img src="assets/wall/p19.jpg"/></div>
+<div id="wt11" class="wt" style="left:820px;top:1215px"><img src="assets/wall/p20.jpg"/></div>
 <div id="cb" class="cb"><img class="cav" src="assets/avatar.png"/><div class="cw"><span id="cph" class="cph">Ajouter un commentaire…</span><span id="cty" class="cty"></span><i id="ccr" class="ccr"></i></div><div id="csd" class="csd"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 <div id="w0" class="cap">10</div>
 <div id="w1" class="cap">ans</div>
@@ -362,6 +363,18 @@ tl.set('#ls6',{autoAlpha:0},39.613);
 tl.set('#lap',{textContent:'Tour 7'},33.457);
 tl.fromTo('#bt',{scale:.82},{scale:1,duration:.14,immediateRender:false},33.457);
 tl.fromTo('#lap',{autoAlpha:0},{autoAlpha:1,duration:.12,immediateRender:false},33.457);
+gsap.set('#wt0',{transformPerspective:900,rotationY:18,rotationX:6,rotation:-1.8});
+gsap.set('#wt1',{transformPerspective:900,rotationY:9,rotationX:6,rotation:1.2});
+gsap.set('#wt2',{transformPerspective:900,rotationY:-9,rotationX:6,rotation:-1.2});
+gsap.set('#wt3',{transformPerspective:900,rotationY:-18,rotationX:6,rotation:1.8});
+gsap.set('#wt4',{transformPerspective:900,rotationY:18,rotationX:0,rotation:1.2});
+gsap.set('#wt5',{transformPerspective:900,rotationY:9,rotationX:0,rotation:-1.8});
+gsap.set('#wt6',{transformPerspective:900,rotationY:-9,rotationX:0,rotation:1.8});
+gsap.set('#wt7',{transformPerspective:900,rotationY:-18,rotationX:0,rotation:-1.2});
+gsap.set('#wt8',{transformPerspective:900,rotationY:18,rotationX:-6,rotation:-1.2});
+gsap.set('#wt9',{transformPerspective:900,rotationY:9,rotationX:-6,rotation:1.8});
+gsap.set('#wt10',{transformPerspective:900,rotationY:-9,rotationX:-6,rotation:-1.8});
+gsap.set('#wt11',{transformPerspective:900,rotationY:-18,rotationX:-6,rotation:1.2});
 gsap.set('.wt',{autoAlpha:0});
 tl.fromTo('.wt',{autoAlpha:0,scale:.4},{autoAlpha:1,scale:1,duration:.28,ease:'back.out(1.8)',stagger:{each:.06,from:'center'},immediateRender:false},41.503);
 gsap.set('#cb',{autoAlpha:0});

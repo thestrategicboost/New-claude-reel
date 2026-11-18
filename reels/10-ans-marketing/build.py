@@ -113,8 +113,10 @@ def build():
     PAGES = [1, 3, 4, 2, 6, 7, 5, 13, 10, 15, 19, 20]      # cover top-left (never behind her head)
     ROT = [-3, 2, -2, 3, 2, -3, 3, -2, -2, 3, -3, 2]
     for k, (pg, r) in enumerate(zip(PAGES, ROT)):
-        H.append(f'<div class="wt" style="left:{40 + (k % 4) * 260}px;top:{515 + (k // 4) * 350}px;transform:rotate({r}deg)">'
+        ry = (18, 9, -9, -18)[k % 4]                       # 3D: the pages turn toward her, like a curved wall
+        H.append(f'<div id="wt{k}" class="wt" style="left:{40 + (k % 4) * 260}px;top:{515 + (k // 4) * 350}px">'
                  f'<img src="assets/wall/p{pg:02d}.jpg"/></div>')
+        T.append(f"gsap.set('#wt{k}',{{transformPerspective:900,rotationY:{ry},rotationX:{6 - (k // 4) * 6},rotation:{r * .6:.1f}}});")
     T += ["gsap.set('.wt',{autoAlpha:0});",
           f"tl.fromTo('.wt',{{autoAlpha:0,scale:.4}},{{autoAlpha:1,scale:1,duration:.28,ease:'back.out(1.8)',stagger:{{each:.06,from:'center'}},immediateRender:false}},{T_CTA + .1:.3f});"]
     S.append(('whoosh-short', T_CTA + .15, .35))
@@ -196,7 +198,8 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
 .ls .n{{display:inline-block;width:62px;height:62px;border-radius:50%;background:{DARK};color:#fff;font:400 38px/62px Anton;vertical-align:middle;margin-right:-14px;position:relative;z-index:2;box-shadow:0 0 0 4px #fff}}
 .ls .lt{{display:inline-block;vertical-align:middle;background:#fff;color:{DARK};font:italic 800 40px/1.25 Poppins;letter-spacing:-.04em;padding:8px 30px 10px 34px;border-radius:40px;
   white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.2)}}
-.wt{{position:absolute;width:230px;z-index:23;border:5px solid #fff;border-radius:10px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.28);line-height:0}}
+.wt{{position:absolute;transform-style:preserve-3d;width:230px;z-index:23;border-radius:6px;overflow:hidden;box-shadow:0 24px 40px rgba(0,0,0,.38),0 6px 12px rgba(0,0,0,.25);line-height:0}}
+.wt::after{{content:'';position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.28),rgba(255,255,255,0) 42%,rgba(0,0,0,.14))}}
 .wt img{{width:100%;display:block}}
 #subj{{z-index:24}}
 .cb{{position:absolute;left:130px;width:820px;top:380px;z-index:30;height:118px;border-radius:59px;background:#fff;display:flex;align-items:center;gap:20px;
