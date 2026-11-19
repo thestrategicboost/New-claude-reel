@@ -91,3 +91,4 @@
   3 FOIS PAR JOUR 1CcgKYHz3njRR0Mmq2bz1j92JHbi363wG · 100 VUES VS 10K VS 100K 1R-d64i_dnMjniQYsLHNvh4ORPzIu5WUH ·
   ZONE 1AANChH-rOKrHfSxpOKrK7qAmIVcimVAF · TEMPS QUI PASSE 1CDNdvHS_EdaZB0vLAmQKXMMH0F9cRSHa ·
   CARROUSEL REEL STORY 1rk72bgo4ntjsVT3gIvQmHgZCREeRwbRr · Comment forcer insta variants (BROLL subfolder, no FINAL) 1BTeg8gBxeSZTdxblWUJHtLi-xnVRjDXt
+- RETOUCH STRENGTH (19 Nov): she found the original retouch invisible -> retouch.py now defaults to --strength=1.8 (face light/tint x1.8, jaw slim x1.4). Keep it.

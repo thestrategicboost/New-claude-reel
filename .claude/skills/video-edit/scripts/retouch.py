@@ -8,7 +8,8 @@ A-roll after the look and before the overlays:
      the centre), following her face frame by frame.
 No skin smoothing: her edit keeps the skin texture (measured: same fine detail before and after).
 
-PY retouch.py in.mp4 out.mp4 [--no-face]
+PY retouch.py in.mp4 out.mp4 [--no-face] [--strength=1.8]   (strength scales the face light/tint/slim; she asked for a
+more visible retouch on 19 Nov: use 1.8 by default from now on)
 """
 import json
 import os
@@ -25,6 +26,8 @@ FACE_L, EYES_L, FACE_A, FACE_B = 7.0, 1.5, -1.0, 2.3     # face light and skin t
 def main():
     src, dst = sys.argv[1], sys.argv[2]
     face = '--no-face' not in sys.argv
+    st = next((float(a.split('=')[1]) for a in sys.argv if a.startswith('--strength=')), 1.8)
+    fl, el, fa, fb, slim = FACE_L * st, EYES_L * st, FACE_A * st, FACE_B * st, SLIM * min(st, 1.4)
     cur = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'retouch_curve.json')))['bgr']
     lut = np.stack([np.clip(np.array(c), 0, 255).astype(np.uint8) for c in cur], -1).reshape(256, 1, 3)
     W, H = [int(v) for v in subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height',
@@ -58,7 +61,7 @@ def main():
                 u = (gx - cx) / (w * .55)
                 v = (gy - (cy + w * .28)) / (w * .45)
                 fall = np.exp(-(v ** 2)) * np.clip(1.6 - np.abs(u), 0, 1)
-                mapx = gx + SLIM * w * np.clip(u, -1.2, 1.2) * fall
+                mapx = gx + slim * w * np.clip(u, -1.2, 1.2) * fall
                 f = cv2.remap(f, mapx, gy, cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
                 # face light + skin tint, inside a soft ellipse over the face (worked in Lab, on the face crop only)
                 x0, x1 = int(max(0, cx - w * .75)), int(min(W, cx + w * .75))
@@ -69,9 +72,9 @@ def main():
                 m = np.exp(-(ux ** 2 + uy ** 2) ** 2 * 1.6)
                 e = sum(np.exp(-(((gx[y0:y1, x0:x1] - (cx + sd * w * .2)) / (w * .1)) ** 2 + ((gy[y0:y1, x0:x1] - (cy + w * .08)) / (w * .06)) ** 2))
                         for sd in (-1, 1))
-                crop[..., 0] += (FACE_L * m + EYES_L * e)
-                crop[..., 1] += FACE_A * m
-                crop[..., 2] += FACE_B * m
+                crop[..., 0] += (fl * m + el * e)
+                crop[..., 1] += fa * m
+                crop[..., 2] += fb * m
                 f = f.copy()
                 f[y0:y1, x0:x1] = cv2.cvtColor(np.clip(crop, 0, 255).astype(np.uint8), cv2.COLOR_LAB2BGR)
         enc.stdin.write(f.tobytes())
