@@ -123,9 +123,6 @@ def build():
     T += ["gsap.set('#trial',{autoAlpha:0});",
           f"tl.fromTo('#trial',{{autoAlpha:0,scale:.6}},{{autoAlpha:1,scale:1,duration:.22,ease:'back.out(2.4)',immediateRender:false}},{tt:.3f});",
           f"tl.to('#trial',{{autoAlpha:0,duration:.15}},{ct(121.2):.3f});"]
-    # money money money: the VENDRE card shakes
-    tm = ct(T_MONEY)
-    T.append(f"tl.to('#c22',{{rotation:4,duration:.08,yoyo:true,repeat:9,ease:'sine.inOut'}},{tm:.3f});")
     # table leaves before the CTA
     tc = ct(T_CTA)
     T += [f"tl.to(['#qp','#h0','#h1','#h2'],{{autoAlpha:0,duration:.2}},{tc - .25:.3f});"]

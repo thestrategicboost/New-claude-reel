@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Last complete take of src/base.mp4 (same takes as her validated versions, « money money money » kept), dead air
+"""Last complete take of src/base.mp4 (same takes as her validated versions, « money money money » removed (her ask)), dead air
 removed, normal speed -> lilac look -> face retouch -> assets/aroll.mp4 + assets/voice.m4a; work/segs.json for ct()."""
 import json
 import subprocess
 import sys
 
-SEGS = [(112.05, 125.78), (129.03, 134.74), (138.75, 146.0), (152.20, 158.72), (160.24, 163.66)]
+SEGS = [(112.05, 125.78), (129.03, 134.74), (138.75, 144.45), (152.20, 158.72), (160.24, 163.66)]
 PY = sys.executable
 
 if __name__ == '__main__':
