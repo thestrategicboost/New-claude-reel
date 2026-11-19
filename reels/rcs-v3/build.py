@@ -118,11 +118,29 @@ def build():
         T += [f"tl.fromTo('#h{k}',{{scale:1}},{{scale:1.1,duration:.12,yoyo:true,repeat:1,immediateRender:false}},{t:.3f});",
               f"tl.to('#u{k}',{{scaleX:1,duration:.2}},{t:.3f});", f"tl.to('#u{k}',{{scaleX:0,duration:.2}},{t + 1.4:.3f});"]
     # réels d'essai tag under the réels card
-    H.append('<div id="trial" class="tag">+ option réels d’essai</div>')
-    tt = ct(T_TRIAL)
-    T += ["gsap.set('#trial',{autoAlpha:0});",
-          f"tl.fromTo('#trial',{{autoAlpha:0,scale:.6}},{{autoAlpha:1,scale:1,duration:.22,ease:'back.out(2.4)',immediateRender:false}},{tt:.3f});",
-          f"tl.to('#trial',{{autoAlpha:0,duration:.15}},{ct(121.2):.3f});"]
+    # RÉELS D'ESSAI — her key tip, put forward (her ask): the table steps aside, a big brown/gold title lands on « réels
+    # d'essai », an Instagram-style setting card under it whose switch flips ON, a gold BANGER stamp on « banger », then the
+    # payoff pill types itself (keyboard) on « pousser tes réels vers des non-abonnés »; the table comes back for carrousels
+    t_out, t_in = ct(115.35), ct(120.95)
+    tt, t_sw, t_bg, t_py = ct(T_TRIAL), ct(117.30), ct(117.80), ct(118.80)
+    T += [f"tl.to(['#qp','#h0','#h1','#h2','#c00'],{{autoAlpha:0,duration:.18}},{t_out:.3f});",
+          f"tl.to(['#qp','#h0','#h1','#h2','#c00'],{{autoAlpha:1,duration:.2}},{t_in:.3f});"]
+    H.append('<div id="tr" class="tr"><div id="trt" class="trt">RÉELS D’ESSAI</div>'
+             '<div id="trc" class="trc"><div class="trx"><b>Réels d’essai</b><span>Montré d’abord aux non-abonnés</span></div>'
+             '<div id="sw" class="sw"><i id="knob"></i></div><div id="bang" class="bang">BANGER</div></div>'
+             '<div id="trp" class="trp"><span class="gh">pousse tes réels vers des non-abonnés</span><span id="trx"></span></div></div>')
+    pay = 'pousse tes réels vers des non-abonnés'
+    T += ["gsap.set('#tr',{autoAlpha:0});", "gsap.set(['#trt','#trc','#bang','#trp'],{autoAlpha:0});", "gsap.set('#trx',{textContent:''});",
+          f"tl.set('#tr',{{autoAlpha:1}},{t_out:.3f});",
+          f"tl.fromTo('#trt',{{autoAlpha:0,scale:1.6}},{{autoAlpha:1,scale:1,duration:.3,ease:'back.out(1.7)',immediateRender:false}},{tt - .05:.3f});",
+          f"tl.fromTo('#trc',{{autoAlpha:0,y:30}},{{autoAlpha:1,y:0,duration:.25,ease:'power2.out',immediateRender:false}},{tt + .25:.3f});",
+          f"tl.to('#knob',{{x:52,duration:.18,ease:'power2.out'}},{t_sw:.3f});",
+          f"tl.to('#sw',{{backgroundColor:'{GOLD}',duration:.18}},{t_sw:.3f});",
+          f"tl.fromTo('#bang',{{autoAlpha:0,scale:2.2,rotation:-24}},{{autoAlpha:1,scale:1,rotation:-12,duration:.22,ease:'back.out(2)',immediateRender:false}},{t_bg:.3f});",
+          f"tl.set('#trp',{{autoAlpha:1}},{t_py:.3f});"]
+    T += [f"tl.set('#trx',{{textContent:{json.dumps(pay[:i])}}},{t_py + .05 + .9 * i / len(pay):.3f});" for i in range(1, len(pay) + 1)]
+    T += [f"tl.to('#tr',{{autoAlpha:0,duration:.2}},{t_in - .2:.3f});"]
+    S += [('pop', tt - .05, .4, .72), ('click', t_sw, .4, .36), ('typing', t_py + .05, .5, .95)]
     # table leaves before the CTA
     tc = ct(T_CTA)
     T += [f"tl.to(['#qp','#h0','#h1','#h2'],{{autoAlpha:0,duration:.2}},{tc - .25:.3f});"]
@@ -184,8 +202,18 @@ def build():
 .cd b{{font:italic 800 1em/1.05 Poppins;letter-spacing:-.04em}}
 .cd span{{font:600 23px/1.12 Poppins;color:#7a6a5c}}
 .g{{width:190px;height:12px;border-radius:6px;background:#EFE6DC;overflow:hidden;margin-top:4px}} .g i{{display:block;height:100%;background:{DARK};border-radius:6px}}
-.tag{{position:absolute;left:{COLX[0] + 20}px;top:616px;z-index:21;background:{GOLD};color:#fff;font:700 22px/1 Poppins;padding:9px 16px;border-radius:20px;
-  box-shadow:0 6px 14px rgba(0,0,0,.2)}}
+.tr{{position:absolute;left:0;right:0;top:345px;z-index:22;text-align:center}}
+.trt{{display:inline-block;background:{DARK};color:#fff;font:400 92px/1.05 Anton;letter-spacing:.05em;padding:14px 40px 8px;box-shadow:0 0 0 6px {GOLD},0 14px 30px rgba(0,0,0,.25)}}
+.trc{{position:relative;margin:30px auto 0;width:760px;height:110px;background:#fff;border-radius:26px;display:flex;align-items:center;padding:0 30px;
+  box-shadow:0 12px 28px rgba(0,0,0,.2);text-align:left}}
+.trx{{flex:1;display:flex;flex-direction:column}} .trx b{{font:700 36px/1.1 Poppins;color:#2A1A10}} .trx span{{font:500 24px/1.2 Poppins;color:#8a7d72}}
+.sw{{width:112px;height:60px;border-radius:30px;background:#D9D2CA;position:relative}}
+.sw i{{position:absolute;left:4px;top:4px;width:52px;height:52px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25)}}
+.bang{{position:absolute;right:-26px;top:-34px;background:{GOLD};color:#fff;font:400 40px/1 Anton;letter-spacing:.06em;padding:10px 18px 6px;border-radius:10px;
+  box-shadow:0 8px 18px rgba(0,0,0,.25)}}
+.trp{{position:relative;display:inline-block;margin-top:22px;height:64px;border-radius:32px;background:#fff;padding:0 28px;
+  font:italic 800 38px/64px Poppins;letter-spacing:-.04em;color:{DARK};white-space:nowrap}}
+#trx{{position:absolute;left:28px;top:0}}
 .cb{{position:absolute;left:130px;width:820px;top:380px;z-index:30;height:118px;border-radius:59px;background:#fff;display:flex;align-items:center;gap:20px;
   padding:0 18px;box-shadow:0 16px 36px rgba(0,0,0,.3)}}
 .cav{{width:80px;height:80px;border-radius:50%;object-fit:cover;flex:none;border:3px solid {DARK}}}

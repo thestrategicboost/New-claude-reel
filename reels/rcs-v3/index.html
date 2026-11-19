@@ -14,8 +14,18 @@
 .cd b{font:italic 800 1em/1.05 Poppins;letter-spacing:-.04em}
 .cd span{font:600 23px/1.12 Poppins;color:#7a6a5c}
 .g{width:190px;height:12px;border-radius:6px;background:#EFE6DC;overflow:hidden;margin-top:4px} .g i{display:block;height:100%;background:#523301;border-radius:6px}
-.tag{position:absolute;left:150px;top:616px;z-index:21;background:#C9A15B;color:#fff;font:700 22px/1 Poppins;padding:9px 16px;border-radius:20px;
-  box-shadow:0 6px 14px rgba(0,0,0,.2)}
+.tr{position:absolute;left:0;right:0;top:345px;z-index:22;text-align:center}
+.trt{display:inline-block;background:#523301;color:#fff;font:400 92px/1.05 Anton;letter-spacing:.05em;padding:14px 40px 8px;box-shadow:0 0 0 6px #C9A15B,0 14px 30px rgba(0,0,0,.25)}
+.trc{position:relative;margin:30px auto 0;width:760px;height:110px;background:#fff;border-radius:26px;display:flex;align-items:center;padding:0 30px;
+  box-shadow:0 12px 28px rgba(0,0,0,.2);text-align:left}
+.trx{flex:1;display:flex;flex-direction:column} .trx b{font:700 36px/1.1 Poppins;color:#2A1A10} .trx span{font:500 24px/1.2 Poppins;color:#8a7d72}
+.sw{width:112px;height:60px;border-radius:30px;background:#D9D2CA;position:relative}
+.sw i{position:absolute;left:4px;top:4px;width:52px;height:52px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.bang{position:absolute;right:-26px;top:-34px;background:#C9A15B;color:#fff;font:400 40px/1 Anton;letter-spacing:.06em;padding:10px 18px 6px;border-radius:10px;
+  box-shadow:0 8px 18px rgba(0,0,0,.25)}
+.trp{position:relative;display:inline-block;margin-top:22px;height:64px;border-radius:32px;background:#fff;padding:0 28px;
+  font:italic 800 38px/64px Poppins;letter-spacing:-.04em;color:#523301;white-space:nowrap}
+#trx{position:absolute;left:28px;top:0}
 .cb{position:absolute;left:130px;width:820px;top:380px;z-index:30;height:118px;border-radius:59px;background:#fff;display:flex;align-items:center;gap:20px;
   padding:0 18px;box-shadow:0 16px 36px rgba(0,0,0,.3)}
 .cav{width:80px;height:80px;border-radius:50%;object-fit:cover;flex:none;border:3px solid #523301}
@@ -32,21 +42,24 @@
   <audio id="voice" src="assets/voice.m4a" data-start="0" data-media-start="0" data-duration="35.100" data-track-index="2" data-volume="1"></audio>
 <audio id="s0" src="assets/sfx/typing.mp3" data-start="0.050" data-duration="0.650" data-track-index="10" data-volume="0.5"></audio>
 <audio id="s1" src="assets/sfx/click-soft.mp3" data-start="1.350" data-duration="0.360" data-track-index="11" data-volume="0.28"></audio>
-<audio id="s2" src="assets/sfx/click-soft.mp3" data-start="10.550" data-duration="0.360" data-track-index="12" data-volume="0.28"></audio>
-<audio id="s3" src="assets/sfx/click-soft.mp3" data-start="13.250" data-duration="0.360" data-track-index="10" data-volume="0.28"></audio>
-<audio id="s4" src="assets/sfx/typing.mp3" data-start="13.780" data-duration="0.650" data-track-index="11" data-volume="0.5"></audio>
-<audio id="s5" src="assets/sfx/click-soft.mp3" data-start="15.000" data-duration="0.360" data-track-index="12" data-volume="0.28"></audio>
-<audio id="s6" src="assets/sfx/click-soft.mp3" data-start="17.100" data-duration="0.360" data-track-index="10" data-volume="0.28"></audio>
-<audio id="s7" src="assets/sfx/click-soft.mp3" data-start="19.100" data-duration="0.360" data-track-index="11" data-volume="0.28"></audio>
-<audio id="s8" src="assets/sfx/typing.mp3" data-start="19.490" data-duration="0.650" data-track-index="12" data-volume="0.5"></audio>
-<audio id="s9" src="assets/sfx/click-soft.mp3" data-start="20.990" data-duration="0.360" data-track-index="10" data-volume="0.28"></audio>
-<audio id="s10" src="assets/sfx/click-soft.mp3" data-start="23.090" data-duration="0.360" data-track-index="11" data-volume="0.28"></audio>
-<audio id="s11" src="assets/sfx/click-soft.mp3" data-start="24.890" data-duration="0.360" data-track-index="12" data-volume="0.28"></audio>
-<audio id="s12" src="assets/sfx/typing.mp3" data-start="25.190" data-duration="0.650" data-track-index="10" data-volume="0.5"></audio>
-<audio id="s13" src="assets/sfx/click-soft.mp3" data-start="26.240" data-duration="0.360" data-track-index="11" data-volume="0.28"></audio>
-<audio id="s14" src="assets/sfx/click-soft.mp3" data-start="28.240" data-duration="0.360" data-track-index="12" data-volume="0.28"></audio>
-<audio id="s15" src="assets/sfx/click-soft.mp3" data-start="30.940" data-duration="0.360" data-track-index="10" data-volume="0.28"></audio>
-<audio id="s16" src="assets/sfx/click.mp3" data-start="32.770" data-duration="0.360" data-track-index="11" data-volume="0.45"></audio>
+<audio id="s2" src="assets/sfx/pop.mp3" data-start="4.600" data-duration="0.720" data-track-index="12" data-volume="0.4"></audio>
+<audio id="s3" src="assets/sfx/click.mp3" data-start="5.250" data-duration="0.360" data-track-index="10" data-volume="0.4"></audio>
+<audio id="s4" src="assets/sfx/typing.mp3" data-start="6.800" data-duration="0.950" data-track-index="11" data-volume="0.5"></audio>
+<audio id="s5" src="assets/sfx/click-soft.mp3" data-start="10.550" data-duration="0.360" data-track-index="12" data-volume="0.28"></audio>
+<audio id="s6" src="assets/sfx/click-soft.mp3" data-start="13.250" data-duration="0.360" data-track-index="10" data-volume="0.28"></audio>
+<audio id="s7" src="assets/sfx/typing.mp3" data-start="13.780" data-duration="0.650" data-track-index="11" data-volume="0.5"></audio>
+<audio id="s8" src="assets/sfx/click-soft.mp3" data-start="15.000" data-duration="0.360" data-track-index="12" data-volume="0.28"></audio>
+<audio id="s9" src="assets/sfx/click-soft.mp3" data-start="17.100" data-duration="0.360" data-track-index="10" data-volume="0.28"></audio>
+<audio id="s10" src="assets/sfx/click-soft.mp3" data-start="19.100" data-duration="0.360" data-track-index="11" data-volume="0.28"></audio>
+<audio id="s11" src="assets/sfx/typing.mp3" data-start="19.490" data-duration="0.650" data-track-index="12" data-volume="0.5"></audio>
+<audio id="s12" src="assets/sfx/click-soft.mp3" data-start="20.990" data-duration="0.360" data-track-index="10" data-volume="0.28"></audio>
+<audio id="s13" src="assets/sfx/click-soft.mp3" data-start="23.090" data-duration="0.360" data-track-index="11" data-volume="0.28"></audio>
+<audio id="s14" src="assets/sfx/click-soft.mp3" data-start="24.890" data-duration="0.360" data-track-index="12" data-volume="0.28"></audio>
+<audio id="s15" src="assets/sfx/typing.mp3" data-start="25.190" data-duration="0.650" data-track-index="10" data-volume="0.5"></audio>
+<audio id="s16" src="assets/sfx/click-soft.mp3" data-start="26.240" data-duration="0.360" data-track-index="11" data-volume="0.28"></audio>
+<audio id="s17" src="assets/sfx/click-soft.mp3" data-start="28.240" data-duration="0.360" data-track-index="12" data-volume="0.28"></audio>
+<audio id="s18" src="assets/sfx/click-soft.mp3" data-start="30.940" data-duration="0.360" data-track-index="10" data-volume="0.28"></audio>
+<audio id="s19" src="assets/sfx/click.mp3" data-start="32.770" data-duration="0.360" data-track-index="11" data-volume="0.45"></audio>
   <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="35.100" data-track-index="0"></video>
 <div id="qp" class="qp"><span id="qgh" class="gh"></span><span id="qtx"></span></div>
 <div id="h0" class="hd" style="left:130px">RÉELS<i id="u0"></i></div>
@@ -64,7 +77,7 @@
 <div id="c30" class="cd" style="left:130px;font-size:36px"><b>4 à 7 fois</b><span>par semaine</span></div>
 <div id="c31" class="cd" style="left:410px;font-size:36px"><b>1 à 2 fois</b><span>par semaine (ou pas)</span></div>
 <div id="c32" class="cd" style="left:690px;font-size:36px"><b>1 à 2 fois</b><span>par jour</span></div>
-<div id="trial" class="tag">+ option réels d’essai</div>
+<div id="tr" class="tr"><div id="trt" class="trt">RÉELS D’ESSAI</div><div id="trc" class="trc"><div class="trx"><b>Réels d’essai</b><span>Montré d’abord aux non-abonnés</span></div><div id="sw" class="sw"><i id="knob"></i></div><div id="bang" class="bang">BANGER</div></div><div id="trp" class="trp"><span class="gh">pousse tes réels vers des non-abonnés</span><span id="trx"></span></div></div>
 <div id="cb" class="cb"><img class="cav" src="assets/avatar.png"/><div class="cw"><span id="cph" class="cph">Ajouter un commentaire…</span><span id="cty" class="cty"></span><i class="ccr"></i></div><div id="csd" class="csd"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 <div id="kit" class="kit">pour recevoir mon kit du créateur</div>
 <div id="w0" class="cap">les</div>
@@ -387,9 +400,56 @@ tl.to('#u1',{scaleX:0,duration:.2},29.240);
 tl.fromTo('#h2',{scale:1},{scale:1.1,duration:.12,yoyo:true,repeat:1,immediateRender:false},30.540);
 tl.to('#u2',{scaleX:1,duration:.2},30.540);
 tl.to('#u2',{scaleX:0,duration:.2},31.940);
-gsap.set('#trial',{autoAlpha:0});
-tl.fromTo('#trial',{autoAlpha:0,scale:.6},{autoAlpha:1,scale:1,duration:.22,ease:'back.out(2.4)',immediateRender:false},4.650);
-tl.to('#trial',{autoAlpha:0,duration:.15},9.150);
+tl.to(['#qp','#h0','#h1','#h2','#c00'],{autoAlpha:0,duration:.18},3.300);
+tl.to(['#qp','#h0','#h1','#h2','#c00'],{autoAlpha:1,duration:.2},8.900);
+gsap.set('#tr',{autoAlpha:0});
+gsap.set(['#trt','#trc','#bang','#trp'],{autoAlpha:0});
+gsap.set('#trx',{textContent:''});
+tl.set('#tr',{autoAlpha:1},3.300);
+tl.fromTo('#trt',{autoAlpha:0,scale:1.6},{autoAlpha:1,scale:1,duration:.3,ease:'back.out(1.7)',immediateRender:false},4.600);
+tl.fromTo('#trc',{autoAlpha:0,y:30},{autoAlpha:1,y:0,duration:.25,ease:'power2.out',immediateRender:false},4.900);
+tl.to('#knob',{x:52,duration:.18,ease:'power2.out'},5.250);
+tl.to('#sw',{backgroundColor:'#C9A15B',duration:.18},5.250);
+tl.fromTo('#bang',{autoAlpha:0,scale:2.2,rotation:-24},{autoAlpha:1,scale:1,rotation:-12,duration:.22,ease:'back.out(2)',immediateRender:false},5.750);
+tl.set('#trp',{autoAlpha:1},6.750);
+tl.set('#trx',{textContent:"p"},6.824);
+tl.set('#trx',{textContent:"po"},6.849);
+tl.set('#trx',{textContent:"pou"},6.873);
+tl.set('#trx',{textContent:"pous"},6.897);
+tl.set('#trx',{textContent:"pouss"},6.922);
+tl.set('#trx',{textContent:"pousse"},6.946);
+tl.set('#trx',{textContent:"pousse "},6.970);
+tl.set('#trx',{textContent:"pousse t"},6.995);
+tl.set('#trx',{textContent:"pousse te"},7.019);
+tl.set('#trx',{textContent:"pousse tes"},7.043);
+tl.set('#trx',{textContent:"pousse tes "},7.068);
+tl.set('#trx',{textContent:"pousse tes r"},7.092);
+tl.set('#trx',{textContent:"pousse tes r\u00e9"},7.116);
+tl.set('#trx',{textContent:"pousse tes r\u00e9e"},7.141);
+tl.set('#trx',{textContent:"pousse tes r\u00e9el"},7.165);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els"},7.189);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els "},7.214);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els v"},7.238);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els ve"},7.262);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els ver"},7.286);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers"},7.311);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers "},7.335);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers d"},7.359);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers de"},7.384);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers des"},7.408);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers des "},7.432);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers des n"},7.457);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers des no"},7.481);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers des non"},7.505);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers des non-"},7.530);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers des non-a"},7.554);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers des non-ab"},7.578);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers des non-abo"},7.603);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers des non-abon"},7.627);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers des non-abonn"},7.651);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers des non-abonn\u00e9"},7.676);
+tl.set('#trx',{textContent:"pousse tes r\u00e9els vers des non-abonn\u00e9s"},7.700);
+tl.to('#tr',{autoAlpha:0,duration:.2},8.700);
 tl.to(['#qp','#h0','#h1','#h2'],{autoAlpha:0,duration:.2},31.470);
 gsap.set(['#cb','#kit'],{autoAlpha:0});
 gsap.set('#cty',{textContent:''});
