@@ -93,3 +93,4 @@
   CARROUSEL REEL STORY 1rk72bgo4ntjsVT3gIvQmHgZCREeRwbRr · Comment forcer insta variants (BROLL subfolder, no FINAL) 1BTeg8gBxeSZTdxblWUJHtLi-xnVRjDXt
 - RETOUCH STRENGTH (19 Nov): she found the original retouch invisible -> retouch.py now defaults to --strength=1.8 (face light/tint x1.8, jaw slim x1.4). Keep it.
 - WEEKLY HOOKS (22 Nov): hooks must be GENERIC fill-in templates usable in any métier (coiffeuse, nutritionniste, photographe…), NOT about Instagram / views / followers / clients — she is the Instagram coach, her audience is not.
+- HOOK LIBRARY (22 Nov): she now ALLOWS her Notion « Hook library » (FAM PLAYBOOK, database 3652c779-ea24-80ab-80b1-ca852ddbec9d, data source collection://3652c779-ea24-810d-a849-000b8e96dac0) as INSPIRATION for the weekly hooks: adapt, keep them generic (any métier), never copy one already in hooks_used.json.
