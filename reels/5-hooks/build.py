@@ -11,12 +11,13 @@ DUR = 5.16
 DARK = '#523301'
 PILL = 'vole ces 5 hooks pour ta semaine :'
 # this week's hooks (fill-in templates, like hers)
-DAYS = [      # this week's hooks (her choice: written for her, not the Hook library) — week of 2026-11-23
-    ('LUNDI :', 46, 770, ['Pourquoi tes [contenus] font zéro vue', '(et ce que je changerais dès demain).']),
-    ('MARDI :', 46, 945, ['Tu postes tous les jours mais personne', 'n’achète ton [offre] ? Voici pourquoi.']),
-    ('MERCREDI :', 34, 1110, ['J’avais [X] abonnés et zéro cliente.', 'Voici ce qui a tout débloqué.']),
-    ('JEUDI :', 40, 1290, ['Arrête de poster des [type de contenu]', 'si tu veux vraiment [résultat].']),
-    ('VENDREDI :', 34, 1475, ['La phrase à mettre dans ta bio', 'pour que tes [clientes] te trouvent.']),
+DAYS = [      # this week's hooks — generic fill-in templates any creator can use in HER OWN niche (her rule, 22 Nov:
+    # not about Instagram / views / clients, she is the Instagram coach, her audience works in every kind of métier)
+    ('LUNDI :', 46, 770, ['Tu fais sûrement cette erreur', 'quand tu [action du quotidien].']),
+    ('MARDI :', 46, 945, ['Le mythe sur [sujet] que tout', 'le monde croit encore.']),
+    ('MERCREDI :', 34, 1110, ['Ce que je ne ferai plus jamais', 'après [X] ans en tant que [métier].']),
+    ('JEUDI :', 40, 1290, ['Si tu veux [résultat], commence', 'par arrêter de [mauvaise habitude].']),
+    ('VENDREDI :', 34, 1475, ['La question qu’on me pose', 'tous les jours : [question].']),
 ]
 
 
