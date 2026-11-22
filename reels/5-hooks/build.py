@@ -11,12 +11,12 @@ DUR = 5.16
 DARK = '#523301'
 PILL = 'vole ces 5 hooks pour ta semaine :'
 # this week's hooks (fill-in templates, like hers)
-DAYS = [      # this week's hooks (her choice: the ones written for her, not the Hook library)
-    ('LUNDI :', 46, 770, ['L’erreur que je vois chez toutes', 'les [métier] qui débutent.']),
-    ('MARDI :', 46, 945, ['Ce que personne ne te dit avant de', 'te lancer en tant que [métier].']),
-    ('MERCREDI :', 34, 1110, ['3 signes que tu es prête à [résultat],', 'même si tu doutes encore.']),
-    ('JEUDI :', 40, 1290, ['Ce que je ferais si je devais recommencer', '[activité] à zéro aujourd’hui.']),
-    ('VENDREDI :', 34, 1475, ['Le jour où une cliente m’a dit [phrase],', 'j’ai compris [leçon].']),
+DAYS = [      # this week's hooks (her choice: written for her, not the Hook library) — week of 2026-11-23
+    ('LUNDI :', 46, 770, ['Pourquoi tes [contenus] font zéro vue', '(et ce que je changerais dès demain).']),
+    ('MARDI :', 46, 945, ['Tu postes tous les jours mais personne', 'n’achète ton [offre] ? Voici pourquoi.']),
+    ('MERCREDI :', 34, 1110, ['J’avais [X] abonnés et zéro cliente.', 'Voici ce qui a tout débloqué.']),
+    ('JEUDI :', 40, 1290, ['Arrête de poster des [type de contenu]', 'si tu veux vraiment [résultat].']),
+    ('VENDREDI :', 34, 1475, ['La phrase à mettre dans ta bio', 'pour que tes [clientes] te trouvent.']),
 ]
 
 
