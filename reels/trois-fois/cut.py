@@ -11,5 +11,5 @@ fc.append(''.join(f'[v{i}][a{i}]' for i in range(len(SEGS))) + f'concat=n={len(S
 fc += [f'[vc]setpts=PTS/{SPEED},fps=30[v]', f'[ac]atempo={SPEED}[a]']
 subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', 'src/raw.mov', '-filter_complex', ';'.join(fc), '-map', '[v]', '-map', '[a]',
                 '-c:v', 'libx264', '-crf', '15', '-preset', 'fast', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '256k', 'work/nat.mp4'], check=True)
-subprocess.run([PY, 'lilac.py', 'work/nat.mp4', 'work/lil.mp4'], check=True)
-subprocess.run([PY, '../../.claude/skills/video-edit/scripts/retouch.py', 'work/lil.mp4', 'assets/aroll.mp4', '--no-face'], check=True)   # no face retouch here (her ask, 23 Nov: too retouched)
+subprocess.run([PY, 'lilac.py', 'work/nat.mp4', 'assets/aroll.mp4'], check=True)   # lilac with her face protected (no forehead shine)
+# NO retouch at all on this video (her ask, 23 Nov: no face retouch, no shine)
