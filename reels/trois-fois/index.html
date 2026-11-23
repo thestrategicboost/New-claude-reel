@@ -3,162 +3,70 @@
 <link rel="stylesheet" href="assets/fonts/fonts.css" /><script src="assets/vendor/gsap.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box} html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
-#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000} .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.row{position:absolute;left:110px;width:860px;height:100px;z-index:20;filter:drop-shadow(0 10px 18px rgba(0,0,0,.18))}
-.lab{position:absolute;left:0;top:0;width:290px;height:100px;background:#523301;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.lab small{font:600 20px/1 Poppins;letter-spacing:.18em;opacity:.85;margin-bottom:4px}
-.lab b{font:400 46px/1 Anton;letter-spacing:.04em}
-.lab i{position:absolute;left:-14px;top:10px;bottom:10px;width:7px;border-radius:4px;background:#fff;transform-origin:50% 50%}
-.pill{position:absolute;left:304px;top:9px;width:556px;height:82px;border-radius:41px;background:#fff;display:flex;align-items:center;padding:0 24px 0 100px}
-.ph{flex:1;font:italic 800 36px/1 Poppins;color:#C9BBAE}
-.dots{position:absolute;right:24px;top:50%;transform:translateY(-50%);display:flex;gap:8px}
-.dots i{width:13px;height:13px;border-radius:50%;background:#E8DFD5}
-.hab{position:absolute;left:422px;height:100px;z-index:21;display:flex;align-items:center;gap:16px;transform-origin:0 50%}
-.hab .ic{width:66px;height:66px;border-radius:50%;background:#523301;display:flex;align-items:center;justify-content:center;margin-left:-4px}
-.hab b{font:italic 800 37px/1 Poppins;letter-spacing:-.04em;color:#523301;white-space:nowrap}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000;perspective:1400px} .full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bind{position:absolute;left:220px;width:640px;top:345px;height:34px;z-index:60;background:#523301;border-radius:10px;display:flex;justify-content:space-around;align-items:center;
+  box-shadow:0 8px 18px rgba(0,0,0,.2)}
+.bind i{width:16px;height:46px;border-radius:8px;background:#fff;border:4px solid #523301;margin-top:22px}
+.pg{position:absolute;left:240px;width:600px;top:368px;height:310px;background:#fff;border-radius:0 0 22px 22px;overflow:hidden;transform-origin:50% 0;
+  box-shadow:0 14px 30px rgba(0,0,0,.22)}
+.band{height:104px;background:#523301;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:10px}
+.band small{font:600 20px/1 Poppins;letter-spacing:.2em;opacity:.85;margin-bottom:5px}
+.band b{font:400 58px/1 Anton;letter-spacing:.05em}
+.pb{position:relative;height:206px;display:flex;align-items:center;gap:24px;padding:0 40px}
+.pb .ic{flex:none;width:100px;height:100px;border-radius:50%;background:#523301;display:flex;align-items:center;justify-content:center}
+.pb b{font:italic 800 46px/1.05 Poppins;letter-spacing:-.04em;color:#523301}
+.pb em{position:absolute;right:22px;bottom:16px;font:700 22px/1 Poppins;font-style:normal;color:#B9A897}
 </style></head><body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="8.733" data-width="1080" data-height="1920">
   <audio id="bga" src="assets/aroll.mp4" data-start="0" data-media-start="0" data-duration="8.733" data-track-index="2" data-volume="1"></audio>
   <video id="bgv" class="full" src="assets/aroll.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="8.733" data-track-index="0"></video>
-<div id="rj" class="row" style="top:345px"><div class="lab"><small>UNE FOIS</small><b>PAR JOUR</b><i id="gj"></i></div><div class="pill"><span id="phj" class="ph">…</span><div class="dots"><i id="dj0"></i><i id="dj1"></i><i id="dj2"></i></div></div></div>
-<div id="rs" class="row" style="top:462px"><div class="lab"><small>UNE FOIS</small><b>PAR SEMAINE</b><i id="gs"></i></div><div class="pill"><span id="phs" class="ph">…</span><div class="dots"><i id="ds0"></i><i id="ds1"></i><i id="ds2"></i></div></div></div>
-<div id="rm" class="row" style="top:579px"><div class="lab"><small>UNE FOIS</small><b>PAR MOIS</b><i id="gm"></i></div><div class="pill"><span id="phm" class="ph">…</span><div class="dots"><i id="dm0"></i><i id="dm1"></i><i id="dm2"></i></div></div></div>
-<div id="h0" class="hab" style="top:345px"><span class="ic"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5" stroke-dasharray="4 2.2"/><path d="M12 8.5v7M8.5 12h7"/></svg></span><b>Poster une story</b></div>
-<div id="h1" class="hab" style="top:462px"><span class="ic"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L16 5l3 3L8 19z"/></svg></span><b>Écrire tes scripts</b></div>
-<div id="h2" class="hab" style="top:579px"><span class="ic"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span><b>Planifier ton mois</b></div>
-<div id="h3" class="hab" style="top:345px"><span class="ic"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></span><b>Répondre à tes DM</b></div>
-<div id="h4" class="hab" style="top:462px"><span class="ic"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19V12M10 19V8M15 19v-5M20 19V5"/></svg></span><b>Analyser tes stats</b></div>
-<div id="h5" class="hab" style="top:579px"><span class="ic"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8"/></svg></span><b>Fixer tes objectifs</b></div>
-<div id="h6" class="hab" style="top:345px"><span class="ic"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0-3.6 10.8c.8.6 1.1 1.3 1.1 2.2h5c0-.9.3-1.6 1.1-2.2A6 6 0 0 0 12 3zM9.5 19.5h5"/></svg></span><b>Noter tes idées</b></div>
-<div id="h7" class="hab" style="top:462px"><span class="ic"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="13" height="10" rx="2"/><path d="M16 11l5-3v8l-5-3z"/></svg></span><b>Filmer en batch</b></div>
-<div id="h8" class="hab" style="top:579px"><span class="ic"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.5"/><path d="M3.5 19c0-3.3 2.9-5.5 6.5-5.5M14.5 17l2 2 4-4.5"/></svg></span><b>Auditer ton profil</b></div>
+<div id="bind" class="bind"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div id="p0" class="pg" style="z-index:40"><div class="band"><small>UNE FOIS</small><b>PAR JOUR</b></div><div class="pb"><span class="ic"><svg viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5" stroke-dasharray="4 2.2"/><path d="M12 8.5v7M8.5 12h7"/></svg></span><b>Poster une story</b><em>1/3</em></div></div>
+<div id="p1" class="pg" style="z-index:39"><div class="band"><small>UNE FOIS</small><b>PAR SEMAINE</b></div><div class="pb"><span class="ic"><svg viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L16 5l3 3L8 19z"/></svg></span><b>Écrire tes scripts</b><em>1/3</em></div></div>
+<div id="p2" class="pg" style="z-index:38"><div class="band"><small>UNE FOIS</small><b>PAR MOIS</b></div><div class="pb"><span class="ic"><svg viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span><b>Planifier ton mois</b><em>1/3</em></div></div>
+<div id="p3" class="pg" style="z-index:37"><div class="band"><small>UNE FOIS</small><b>PAR JOUR</b></div><div class="pb"><span class="ic"><svg viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></span><b>Répondre à tes DM</b><em>2/3</em></div></div>
+<div id="p4" class="pg" style="z-index:36"><div class="band"><small>UNE FOIS</small><b>PAR SEMAINE</b></div><div class="pb"><span class="ic"><svg viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19V12M10 19V8M15 19v-5M20 19V5"/></svg></span><b>Analyser tes stats</b><em>2/3</em></div></div>
+<div id="p5" class="pg" style="z-index:35"><div class="band"><small>UNE FOIS</small><b>PAR MOIS</b></div><div class="pb"><span class="ic"><svg viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8"/></svg></span><b>Fixer tes objectifs</b><em>2/3</em></div></div>
+<div id="p6" class="pg" style="z-index:34"><div class="band"><small>UNE FOIS</small><b>PAR JOUR</b></div><div class="pb"><span class="ic"><svg viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0-3.6 10.8c.8.6 1.1 1.3 1.1 2.2h5c0-.9.3-1.6 1.1-2.2A6 6 0 0 0 12 3zM9.5 19.5h5"/></svg></span><b>Noter tes idées</b><em>3/3</em></div></div>
+<div id="p7" class="pg" style="z-index:33"><div class="band"><small>UNE FOIS</small><b>PAR SEMAINE</b></div><div class="pb"><span class="ic"><svg viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="13" height="10" rx="2"/><path d="M16 11l5-3v8l-5-3z"/></svg></span><b>Filmer en batch</b><em>3/3</em></div></div>
+<div id="p8" class="pg" style="z-index:32"><div class="band"><small>UNE FOIS</small><b>PAR MOIS</b></div><div class="pb"><span class="ic"><svg viewBox="0 0 24 24" width="58" height="58" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.5"/><path d="M3.5 19c0-3.3 2.9-5.5 6.5-5.5M14.5 17l2 2 4-4.5"/></svg></span><b>Auditer ton profil</b><em>3/3</em></div></div>
 </div>
 <script>const tl = gsap.timeline({ paused: true });
-gsap.set('#rj',{autoAlpha:0});
-gsap.set('#gj',{scaleY:0});
-gsap.set('#rs',{autoAlpha:0});
-gsap.set('#gs',{scaleY:0});
-gsap.set('#rm',{autoAlpha:0});
-gsap.set('#gm',{scaleY:0});
-tl.fromTo('#rj',{autoAlpha:0,x:-40},{autoAlpha:1,x:0,duration:.25,ease:'power3.out',immediateRender:false},0.000);
-tl.fromTo('#rs',{autoAlpha:0,x:-40},{autoAlpha:1,x:0,duration:.25,ease:'power3.out',immediateRender:false},0.060);
-tl.fromTo('#rm',{autoAlpha:0,x:-40},{autoAlpha:1,x:0,duration:.25,ease:'power3.out',immediateRender:false},0.120);
-gsap.set('#h0',{autoAlpha:0});
-tl.fromTo('#h0',{autoAlpha:0,scale:.7,x:30},{autoAlpha:1,scale:1,x:0,duration:.24,ease:'back.out(2)',immediateRender:false},0.020);
-tl.set('#phj',{autoAlpha:0},0.020);
-tl.to('#h0',{autoAlpha:0,scale:.9,duration:.12},2.757);
-tl.to('#rj',{opacity:1,duration:.15},0.000);
-tl.to('#rs',{opacity:0.5,duration:.15},0.000);
-tl.to('#rm',{opacity:0.5,duration:.15},0.000);
-tl.fromTo('#gj',{scaleY:0},{scaleY:1,duration:.2},0.000);
-tl.to('#gj',{scaleY:0,duration:.2},1.325);
-tl.fromTo('#dj0',{scale:.4,backgroundColor:'#E8DFD5'},{scale:1,backgroundColor:'#523301',duration:.25,ease:'back.out(3)',immediateRender:false},0.100);
-gsap.set('#h1',{autoAlpha:0});
-tl.fromTo('#h1',{autoAlpha:0,scale:.7,x:30},{autoAlpha:1,scale:1,x:0,duration:.24,ease:'back.out(2)',immediateRender:false},1.395);
-tl.set('#phs',{autoAlpha:0},1.395);
-tl.to('#h1',{autoAlpha:0,scale:.9,duration:.12},3.864);
-tl.to('#rj',{opacity:0.5,duration:.15},1.375);
-tl.to('#rs',{opacity:1,duration:.15},1.375);
-tl.to('#rm',{opacity:0.5,duration:.15},1.375);
-tl.fromTo('#gs',{scaleY:0},{scaleY:1,duration:.2},1.375);
-tl.to('#gs',{scaleY:0,duration:.2},2.325);
-tl.fromTo('#ds0',{scale:.4,backgroundColor:'#E8DFD5'},{scale:1,backgroundColor:'#523301',duration:.25,ease:'back.out(3)',immediateRender:false},1.475);
-gsap.set('#h2',{autoAlpha:0});
-tl.fromTo('#h2',{autoAlpha:0,scale:.7,x:30},{autoAlpha:1,scale:1,x:0,duration:.24,ease:'back.out(2)',immediateRender:false},2.395);
-tl.set('#phm',{autoAlpha:0},2.395);
-tl.to('#h2',{autoAlpha:0,scale:.9,duration:.12},4.882);
-tl.to('#rj',{opacity:0.5,duration:.15},2.375);
-tl.to('#rs',{opacity:0.5,duration:.15},2.375);
-tl.to('#rm',{opacity:1,duration:.15},2.375);
-tl.fromTo('#gm',{scaleY:0},{scaleY:1,duration:.2},2.375);
-tl.to('#gm',{scaleY:0,duration:.2},2.807);
-tl.fromTo('#dm0',{scale:.4,backgroundColor:'#E8DFD5'},{scale:1,backgroundColor:'#523301',duration:.25,ease:'back.out(3)',immediateRender:false},2.475);
-gsap.set('#h3',{autoAlpha:0});
-tl.fromTo('#h3',{autoAlpha:0,scale:.7,x:30},{autoAlpha:1,scale:1,x:0,duration:.24,ease:'back.out(2)',immediateRender:false},2.877);
-tl.to('#h3',{autoAlpha:0,scale:.9,duration:.12},5.811);
-tl.to('#rj',{opacity:1,duration:.15},2.857);
-tl.to('#rs',{opacity:0.5,duration:.15},2.857);
-tl.to('#rm',{opacity:0.5,duration:.15},2.857);
-tl.fromTo('#gj',{scaleY:0},{scaleY:1,duration:.2},2.857);
-tl.to('#gj',{scaleY:0,duration:.2},3.914);
-tl.fromTo('#dj1',{scale:.4,backgroundColor:'#E8DFD5'},{scale:1,backgroundColor:'#523301',duration:.25,ease:'back.out(3)',immediateRender:false},2.957);
-gsap.set('#h4',{autoAlpha:0});
-tl.fromTo('#h4',{autoAlpha:0,scale:.7,x:30},{autoAlpha:1,scale:1,x:0,duration:.24,ease:'back.out(2)',immediateRender:false},3.984);
-tl.to('#h4',{autoAlpha:0,scale:.9,duration:.12},6.507);
-tl.to('#rj',{opacity:0.5,duration:.15},3.964);
-tl.to('#rs',{opacity:1,duration:.15},3.964);
-tl.to('#rm',{opacity:0.5,duration:.15},3.964);
-tl.fromTo('#gs',{scaleY:0},{scaleY:1,duration:.2},3.964);
-tl.to('#gs',{scaleY:0,duration:.2},4.932);
-tl.fromTo('#ds1',{scale:.4,backgroundColor:'#E8DFD5'},{scale:1,backgroundColor:'#523301',duration:.25,ease:'back.out(3)',immediateRender:false},4.064);
-gsap.set('#h5',{autoAlpha:0});
-tl.fromTo('#h5',{autoAlpha:0,scale:.7,x:30},{autoAlpha:1,scale:1,x:0,duration:.24,ease:'back.out(2)',immediateRender:false},5.002);
-tl.to('#h5',{autoAlpha:0,scale:.9,duration:.12},7.534);
-tl.to('#rj',{opacity:0.5,duration:.15},4.982);
-tl.to('#rs',{opacity:0.5,duration:.15},4.982);
-tl.to('#rm',{opacity:1,duration:.15},4.982);
-tl.fromTo('#gm',{scaleY:0},{scaleY:1,duration:.2},4.982);
-tl.to('#gm',{scaleY:0,duration:.2},5.861);
-tl.fromTo('#dm1',{scale:.4,backgroundColor:'#E8DFD5'},{scale:1,backgroundColor:'#523301',duration:.25,ease:'back.out(3)',immediateRender:false},5.082);
-gsap.set('#h6',{autoAlpha:0});
-tl.fromTo('#h6',{autoAlpha:0,scale:.7,x:30},{autoAlpha:1,scale:1,x:0,duration:.24,ease:'back.out(2)',immediateRender:false},5.931);
-tl.to('#rj',{opacity:1,duration:.15},5.911);
-tl.to('#rs',{opacity:0.5,duration:.15},5.911);
-tl.to('#rm',{opacity:0.5,duration:.15},5.911);
-tl.fromTo('#gj',{scaleY:0},{scaleY:1,duration:.2},5.911);
-tl.to('#gj',{scaleY:0,duration:.2},6.557);
-tl.fromTo('#dj2',{scale:.4,backgroundColor:'#E8DFD5'},{scale:1,backgroundColor:'#523301',duration:.25,ease:'back.out(3)',immediateRender:false},6.011);
-gsap.set('#h7',{autoAlpha:0});
-tl.fromTo('#h7',{autoAlpha:0,scale:.7,x:30},{autoAlpha:1,scale:1,x:0,duration:.24,ease:'back.out(2)',immediateRender:false},6.627);
-tl.to('#rj',{opacity:0.5,duration:.15},6.607);
-tl.to('#rs',{opacity:1,duration:.15},6.607);
-tl.to('#rm',{opacity:0.5,duration:.15},6.607);
-tl.fromTo('#gs',{scaleY:0},{scaleY:1,duration:.2},6.607);
-tl.to('#gs',{scaleY:0,duration:.2},7.584);
-tl.fromTo('#ds2',{scale:.4,backgroundColor:'#E8DFD5'},{scale:1,backgroundColor:'#523301',duration:.25,ease:'back.out(3)',immediateRender:false},6.707);
-gsap.set('#h8',{autoAlpha:0});
-tl.fromTo('#h8',{autoAlpha:0,scale:.7,x:30},{autoAlpha:1,scale:1,x:0,duration:.24,ease:'back.out(2)',immediateRender:false},7.654);
-tl.to('#rj',{opacity:0.5,duration:.15},7.634);
-tl.to('#rs',{opacity:0.5,duration:.15},7.634);
-tl.to('#rm',{opacity:1,duration:.15},7.634);
-tl.fromTo('#gm',{scaleY:0},{scaleY:1,duration:.2},7.634);
-tl.to('#gm',{scaleY:0,duration:.2},8.683);
-tl.fromTo('#dm2',{scale:.4,backgroundColor:'#E8DFD5'},{scale:1,backgroundColor:'#523301',duration:.25,ease:'back.out(3)',immediateRender:false},7.734);
-tl.to('#h0',{opacity:0.5,duration:.15},1.375);
-tl.to('#h0',{opacity:0.5,duration:.15},2.375);
-tl.to('#h0',{opacity:1,duration:.15},2.857);
-tl.to('#h0',{opacity:0.5,duration:.15},3.964);
-tl.to('#h0',{opacity:0.5,duration:.15},4.982);
-tl.to('#h0',{opacity:1,duration:.15},5.911);
-tl.to('#h0',{opacity:0.5,duration:.15},6.607);
-tl.to('#h0',{opacity:0.5,duration:.15},7.634);
-tl.to('#h1',{opacity:0.5,duration:.15},2.375);
-tl.to('#h1',{opacity:0.5,duration:.15},2.857);
-tl.to('#h1',{opacity:1,duration:.15},3.964);
-tl.to('#h1',{opacity:0.5,duration:.15},4.982);
-tl.to('#h1',{opacity:0.5,duration:.15},5.911);
-tl.to('#h1',{opacity:1,duration:.15},6.607);
-tl.to('#h1',{opacity:0.5,duration:.15},7.634);
-tl.to('#h2',{opacity:0.5,duration:.15},2.857);
-tl.to('#h2',{opacity:0.5,duration:.15},3.964);
-tl.to('#h2',{opacity:1,duration:.15},4.982);
-tl.to('#h2',{opacity:0.5,duration:.15},5.911);
-tl.to('#h2',{opacity:0.5,duration:.15},6.607);
-tl.to('#h2',{opacity:1,duration:.15},7.634);
-tl.to('#h3',{opacity:0.5,duration:.15},3.964);
-tl.to('#h3',{opacity:0.5,duration:.15},4.982);
-tl.to('#h3',{opacity:1,duration:.15},5.911);
-tl.to('#h3',{opacity:0.5,duration:.15},6.607);
-tl.to('#h3',{opacity:0.5,duration:.15},7.634);
-tl.to('#h4',{opacity:0.5,duration:.15},4.982);
-tl.to('#h4',{opacity:0.5,duration:.15},5.911);
-tl.to('#h4',{opacity:1,duration:.15},6.607);
-tl.to('#h4',{opacity:0.5,duration:.15},7.634);
-tl.to('#h5',{opacity:0.5,duration:.15},5.911);
-tl.to('#h5',{opacity:0.5,duration:.15},6.607);
-tl.to('#h5',{opacity:1,duration:.15},7.634);
-tl.to('#h6',{opacity:0.5,duration:.15},6.607);
-tl.to('#h6',{opacity:0.5,duration:.15},7.634);
-tl.to('#h7',{opacity:0.5,duration:.15},7.634);
+gsap.set('#bind',{autoAlpha:0});
+tl.fromTo('#bind',{autoAlpha:0,y:-30},{autoAlpha:1,y:0,duration:.25,ease:'power3.out',immediateRender:false},0);
+gsap.set('#p0',{autoAlpha:0});
+tl.fromTo('#p0',{autoAlpha:0,y:-20,rotationX:-30},{autoAlpha:1,y:0,rotationX:0,duration:.3,ease:'back.out(1.6)',immediateRender:false},.05);
+tl.to('#p0',{rotationX:80,y:300,rotation:6,duration:.34,ease:'power2.in'},1.295);
+tl.to('#p0',{autoAlpha:0,duration:.1},1.535);
+gsap.set('#p1',{autoAlpha:0});
+tl.set('#p1',{autoAlpha:1},1.075);
+tl.to('#p1',{rotationX:80,y:300,rotation:-6,duration:.34,ease:'power2.in'},2.295);
+tl.to('#p1',{autoAlpha:0,duration:.1},2.535);
+gsap.set('#p2',{autoAlpha:0});
+tl.set('#p2',{autoAlpha:1},2.075);
+tl.to('#p2',{rotationX:80,y:300,rotation:6,duration:.34,ease:'power2.in'},2.777);
+tl.to('#p2',{autoAlpha:0,duration:.1},3.017);
+gsap.set('#p3',{autoAlpha:0});
+tl.set('#p3',{autoAlpha:1},2.557);
+tl.to('#p3',{rotationX:80,y:300,rotation:-6,duration:.34,ease:'power2.in'},3.884);
+tl.to('#p3',{autoAlpha:0,duration:.1},4.124);
+gsap.set('#p4',{autoAlpha:0});
+tl.set('#p4',{autoAlpha:1},3.664);
+tl.to('#p4',{rotationX:80,y:300,rotation:6,duration:.34,ease:'power2.in'},4.902);
+tl.to('#p4',{autoAlpha:0,duration:.1},5.142);
+gsap.set('#p5',{autoAlpha:0});
+tl.set('#p5',{autoAlpha:1},4.682);
+tl.to('#p5',{rotationX:80,y:300,rotation:-6,duration:.34,ease:'power2.in'},5.831);
+tl.to('#p5',{autoAlpha:0,duration:.1},6.071);
+gsap.set('#p6',{autoAlpha:0});
+tl.set('#p6',{autoAlpha:1},5.611);
+tl.to('#p6',{rotationX:80,y:300,rotation:6,duration:.34,ease:'power2.in'},6.527);
+tl.to('#p6',{autoAlpha:0,duration:.1},6.767);
+gsap.set('#p7',{autoAlpha:0});
+tl.set('#p7',{autoAlpha:1},6.307);
+tl.to('#p7',{rotationX:80,y:300,rotation:-6,duration:.34,ease:'power2.in'},7.554);
+tl.to('#p7',{autoAlpha:0,duration:.1},7.794);
+gsap.set('#p8',{autoAlpha:0});
+tl.set('#p8',{autoAlpha:1},7.334);
 tl.set({}, {}, 8.733);
 window.__timelines["main"] = tl;</script></body></html>
