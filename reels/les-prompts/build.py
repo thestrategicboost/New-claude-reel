@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """« Les prompts » — her own video (src/v.mp4); only the text changed to her charter: the burned-in white text is
 removed by inpaint.py (work/clean.mp4) and rewritten here, same place, whole video: the first sentence in her brown block
-(Anton, white), the rest in her white pills (Poppins italic 800, brown).      PY build.py"""
+(Anton, white), the rest in her white pills (Poppins italic 800, brown); « Utilise ces prompts… » lands 0.8 s after the title (her ask).      PY build.py"""
 DUR, DARK = 7.59, '#523301'
 html = f'''<!doctype html>
 <html lang="fr" data-resolution="portrait"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
@@ -20,10 +20,12 @@ html = f'''<!doctype html>
   <audio id="aud" src="assets/audio.m4a" data-start="0" data-media-start="0" data-duration="{DUR}" data-track-index="2" data-volume="1"></audio>
   <video id="bgv" class="full" src="assets/clean.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR}" data-track-index="0"></video>
   <div id="t"><div class="blk"><span>ARRÊTE DE COPIER-COLLER</span><br/><span>LES RÉPONSES DE CHATGPT !</span></div>
-  <div class="pw"><span>On voit que c’est pas toi qui as écrit.</span></div><div class="gap"></div>
-  <div class="pw"><span>Utilise ces prompts à la place</span><br/><span>pour humaniser ton compte.</span></div></div>
+  <div class="pw"><span>On voit que c’est pas toi qui as écrit…</span></div><div class="gap"></div>
+  <div id="p2" class="pw"><span>Utilise ces prompts à la place</span><br/><span>pour humaniser ton compte.</span></div></div>
 </div>
 <script>const tl = gsap.timeline({{ paused: true }});
+gsap.set('#p2',{{autoAlpha:0}});
+tl.fromTo('#p2',{{autoAlpha:0,y:12}},{{autoAlpha:1,y:0,duration:.25,ease:'power2.out',immediateRender:false}},0.8);
 tl.set({{}}, {{}}, {DUR});
 window.__timelines["main"] = tl;</script></body></html>
 '''
