@@ -8,10 +8,6 @@ import subprocess
 import sys
 
 import numpy as np
-import cv2
-FC = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-BOX = [None]
-GY, GX = np.mgrid[0:1920, 0:1080].astype(np.float32)
 from PIL import Image, ImageFilter
 
 W, H = 1080, 1920
@@ -28,18 +24,6 @@ def grade(rgb):
     r, g, b = f[..., 0], f[..., 1], f[..., 2]
     m = np.clip((b - r + 1) / 12, 0, 1)
     m = np.asarray(Image.fromarray((m * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(6)), np.float32)[..., None] / 255
-    # never take her face for the wall (the purple light on her forehead is « blue above red »: it got lifted into a
-    # bright lilac patch — her ask 23 Nov): the face ellipse (forehead included) is kept as subject
-    small = cv2.cvtColor(cv2.resize(rgb, (360, 640)), cv2.COLOR_RGB2GRAY)
-    d = FC.detectMultiScale(small, 1.1, 5, minSize=(40, 40))
-    if len(d):
-        x, y, w, h = [v * 3 for v in max(d, key=lambda q: q[2] * q[3])]
-        nb = np.array([x + w / 2, y + h / 2, w], np.float32)
-        BOX[0] = nb if BOX[0] is None else BOX[0] * .6 + nb * .4
-    if BOX[0] is not None:
-        cx, cy, w = BOX[0]
-        e = ((GX - cx) / (w * .66)) ** 2 + ((GY - (cy - w * .12)) / (w * .92)) ** 2
-        m = m * np.clip(e - .75, 0, 1)[..., None] ** .5
     luma_s = None  # (soft key: no blocky edges on the compressed wall)           # wall = blue above red (this wall is greyer: wider key); skin / hair / cream top are warm
     luma = np.asarray(Image.fromarray(np.clip(0.299 * r + 0.587 * g + 0.114 * b, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(1.2)), np.float32)[..., None]
     wall = np.clip(luma * LIFT, 0, 245) * TINT
