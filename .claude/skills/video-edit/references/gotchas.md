@@ -96,3 +96,4 @@
 - HOOK LIBRARY (22 Nov): she now ALLOWS her Notion « Hook library » (FAM PLAYBOOK, database 3652c779-ea24-80ab-80b1-ca852ddbec9d, data source collection://3652c779-ea24-810d-a849-000b8e96dac0) as INSPIRATION for the weekly hooks: adapt, keep them generic (any métier), never copy one already in hooks_used.json.
 - NO GOLD CARDS (23 Nov): she rejected gold cards/accents on « 3 fois » — use her brown + white only for cards/badges (gold only if she asks).
 - FACE RETOUCH (23 Nov): on « 3 fois » she found strength 1.8 too much and asked for NO face retouch (cut.py uses --no-face). Strength 1.8 was asked on rcs-v3 (19 Nov); when unsure, ask or stay lighter.
+- LILAC SHINE (23 Nov): lilac.py took the purple light on her forehead for wall (« blue above red ») and lifted it into an ugly bright patch. reels/trois-fois/lilac.py now protects the face ellipse (Haar box, forehead included) — copy that version for every new lilac project.
