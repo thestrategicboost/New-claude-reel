@@ -11,7 +11,7 @@ import subprocess
 
 DUR = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', 'assets/aroll.mp4'],
                            capture_output=True, text=True).stdout)
-DARK, GOLD = '#523301', '#C9A15B'
+DARK, GOLD = '#523301', '#523301'      # no gold at all (her ask: « pas des cartes gold »)
 SPEED = 1.12
 CUTS_1X = [(3.20, 3.66), (6.62, 7.25)]
 MOMENTS_1X = [(0.00, 'j', 'story', 'Poster une story'), (1.54, 's', 'script', 'Écrire tes scripts'), (2.66, 'm', 'month', 'Planifier ton mois'),
@@ -92,7 +92,7 @@ def build():
 .lab{{position:absolute;left:0;top:0;width:290px;height:100px;background:{DARK};color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}}
 .lab small{{font:600 20px/1 Poppins;letter-spacing:.18em;opacity:.85;margin-bottom:4px}}
 .lab b{{font:400 46px/1 Anton;letter-spacing:.04em}}
-.lab i{{position:absolute;left:-14px;top:10px;bottom:10px;width:7px;border-radius:4px;background:{GOLD};transform-origin:50% 50%}}
+.lab i{{position:absolute;left:-14px;top:10px;bottom:10px;width:7px;border-radius:4px;background:#fff;transform-origin:50% 50%}}
 .pill{{position:absolute;left:304px;top:9px;width:556px;height:82px;border-radius:41px;background:#fff;display:flex;align-items:center;padding:0 24px 0 100px}}
 .ph{{flex:1;font:italic 800 36px/1 Poppins;color:#C9BBAE}}
 .dots{{position:absolute;right:24px;top:50%;transform:translateY(-50%);display:flex;gap:8px}}
