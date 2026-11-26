@@ -6,6 +6,7 @@ removed by inpaint.py (work/clean.mp4) and rewritten here, same place, whole vid
 (Anton, white), the rest in her white pills (Poppins italic 800, brown); « Utilise ces prompts… » lands 0.8 s after the title (her ask).      PY build.py"""
 import sys
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 1
+SHADE = float(sys.argv[2]) if len(sys.argv) > 2 else 0.0   # darken the B-roll (her ask 26 Nov on 9-12: the white text did not stand out)
 DUR, DARK = 7.59, '#523301'
 html = f'''<!doctype html>
 <html lang="fr" data-resolution="portrait"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
@@ -23,6 +24,7 @@ html = f'''<!doctype html>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{DUR}" data-width="1080" data-height="1920">
   <audio id="aud" src="assets/audio.m4a" data-start="0" data-media-start="0" data-duration="{DUR}" data-track-index="2" data-volume="1"></audio>
   <video id="bgv" class="full" src="assets/v{N}.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR}" data-track-index="0"></video>
+  <div style="position:absolute;inset:0;z-index:5;background:rgba(0,0,0,{SHADE})"></div>
   <div id="t"><div class="blk"><span>ARRÊTE DE COPIER-COLLER</span><br/><span>LES RÉPONSES DE CHATGPT !</span></div>
   <div class="pw"><span>On voit que c’est pas toi qui as écrit…</span></div><div class="gap"></div>
   <div id="p2" class="pw"><span>Utilise ces prompts à la place</span><br/><span>pour humaniser ton compte.</span></div></div>
