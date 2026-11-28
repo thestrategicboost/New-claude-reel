@@ -20,6 +20,8 @@ HOOKS = {        # angles taken from her caption (the 4 settings that stop Insta
     **{k: ('INSTAGRAM CACHE TES RÉELS ?', '4 réglages pour inverser la tendance') for k in (10, 11, 12, 13)},   # her winning hook (variante 2), other B-roll moments
     14: ('INSTA NE MONTRE PLUS TES RÉELS ?', '4 réglages pour inverser la tendance'),
     15: ('TU NE FAIS PAS DE VUES ?', '4 réglages pour inverser la tendance'),
+    22: ('INSTAGRAM CACHE TES RÉELS ?', '4 réglages pour inverser la tendance'),   # 28 Nov: blazer B-roll
+    23: ('INSTAGRAM CACHE TES RÉELS ?', '4 réglages pour inverser la tendance'),   # 28 Nov: blue door B-roll
     **{k: ('COMMENT FORCER INSTA', 'à montrer tes réels à des non abonnés') for k in (5, 6, 7, 8, 9, 16, 17, 18, 19, 20, 21)},   # original hook, other B-roll
 }
 TYPE_A, TYPE_B, DESC = .15, 1.95, 2.05       # same rhythm as the original
@@ -33,7 +35,8 @@ def build():
          "tl.set('#tx',{textContent:''},0);"]
     T += [f"tl.set('#tx',{{textContent:{json.dumps(line[:i])}}},{TYPE_A + (TYPE_B - TYPE_A) * i / n:.3f});" for i in range(1, n + 1)]
     T += ["gsap.set('#ds',{autoAlpha:0});", f"tl.fromTo('#ds',{{autoAlpha:0,y:12}},{{autoAlpha:1,y:0,duration:.2,ease:'power2.out',immediateRender:false}},{DESC:.3f});"]
-    sfx = [('pop', .02, .5, .72), ('typing', TYPE_A, .55, 1.9), ('pop', DESC, .4, .72)]
+    # from v22: her own cling on « Lis la description » (not the library pop), and a light shade on bright B-rolls
+    sfx = [('pop', .02, .5, .72), ('typing', TYPE_A, .55, 1.9), ('pop', DESC, .4, .72) if N < 22 else ('cling', DESC - .03, 1, 1.0)]
     audio = '\n'.join(f'<audio id="s{k}" src="assets/sfx/{s}.mp3" data-start="{t:.3f}" data-duration="{d:.3f}" data-track-index="{10 + k}" data-volume="{v}"></audio>'
                       for k, (s, t, v, d) in enumerate(sfx))
     return f'''<!doctype html>
@@ -62,6 +65,7 @@ html,body{{width:1080px;height:1920px;overflow:hidden;background:#000}}
   <audio id="amb" src="assets/ref_audio.m4a" data-start="0" data-media-start="0" data-duration="{DUR}" data-track-index="2" data-volume="1"></audio>
 {audio}
   <video id="bgv" class="full" src="assets/v{N}.mp4" muted playsinline data-start="0" data-media-start="0" data-duration="{DUR}" data-track-index="0"></video>
+  <div style="position:absolute;inset:0;z-index:5;background:rgba(0,0,0,{.25 if N >= 22 else 0})"></div>
   <div class="hk"><div id="blk">{big}</div><br/><div id="pl"><span class="gh">{line}</span><span id="tx"></span></div><div id="ds">Lis la description</div></div>
 </div>
 <script>
